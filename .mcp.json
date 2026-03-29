@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "google-ads": {
+      "type": "stdio",
+      "command": "/Users/user/projects/genactiv-klaviyo/google-ads-mcp/google-ads-mcp-server/venv/bin/fastmcp",
+      "args": [
+        "run",
+        "/Users/user/projects/genactiv-klaviyo/google-ads-mcp/google-ads-mcp-server/server.py"
+      ],
+      "cwd": "/Users/user/projects/genactiv-klaviyo/google-ads-mcp/google-ads-mcp-server",
+      "env": {
+        "GOOGLE_ADS_DEVELOPER_TOKEN": "uA8Vjo2J4B-3qVdH4LcEXQ",
+        "GOOGLE_ADS_OAUTH_CONFIG_PATH": "/Users/user/projects/genactiv-klaviyo/google-ads-mcp/google-ads-mcp-server/client_secret.json",
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "2538328866"
+      }
+    },
+    "ga4": {
+      "type": "stdio",
+      "command": "/Users/user/.local/bin/analytics-mcp",
+      "env": {
+        "GA_PROPERTY_ID": "279858535",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Users/user/.config/gcloud/application_default_credentials.json"
+      }
+    }
+  }
+}

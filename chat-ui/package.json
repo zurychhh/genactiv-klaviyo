@@ -1,0 +1,15 @@
+{
+  "name": "genactiv-chat-ui",
+  "version": "1.0.0",
+  "description": "Beautiful chat interface for Claude Code with MCP integrations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
+    "express": "^4.18.2",
+    "ws": "^8.16.0"
+  }
+}

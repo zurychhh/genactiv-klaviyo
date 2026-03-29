@@ -1,0 +1,156 @@
+<!--
+================================================================================
+GENACTIV - PRODUCT CARD SNIPPET
+Abandoned Cart / Checkout Started Email
+================================================================================
+
+OPIS:
+Reużywalny snippet karty produktu dla emaili abandoned cart.
+Wyświetla produkt z obrazkiem, nazwą, kategorią, ilością i ceną.
+Obsługuje logikę cen przekreślonych (CompareAtPrice) i oszczędności.
+
+WYMAGANE ZMIENNE Z EVENTU:
+- event.ImageURL           - URL obrazka produktu
+- event.URL                - Link do strony produktu
+- event|lookup:'Product Name' - Nazwa produktu
+- event.Categories.2       - Kategoria drugiego rzędu (opcjonalna)
+- event.Quantity           - Ilość produktu
+- event.Price              - Aktualna cena
+- event.CompareAtPrice     - Cena przed rabatem (opcjonalna, NULL jeśli brak)
+
+TRIGGER:
+- Shopify: Checkout Started
+- Shopify: Added to Cart
+
+UŻYCIE:
+1. Skopiuj cały kod poniżej (od <!-- PRODUCT CARD START --> do <!-- PRODUCT CARD END -->)
+2. Wklej w miejsce gdzie ma się pojawić karta produktu w emailu
+3. Upewnij się że email jest triggerowany przez odpowiedni event (Checkout Started)
+
+BRANDING:
+- GenActiv Red: #EF3340
+- Success Green: #27ae60
+- Font: Branding-medium, Helvetica, Arial, sans-serif
+
+AUTOR: Claude Code
+DATA: 2025-11-19
+WERSJA: 2.0
+================================================================================
+-->
+
+<!-- PRODUCT CARD START -->
+<div class="mj-column-per-100 mj-outlook-group-fix component-wrapper" style="font-size:0px;text-align:left;direction:ltr;vertical-align:top;width:100%;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;" width="100%">
+<tbody>
+<tr>
+<td class="" style="vertical-align:top;padding-top:20px;padding-right:18px;padding-bottom:20px;padding-left:18px;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
+<tbody>
+<tr>
+<td align="left" class="kl-split" style="font-size:0px;padding:0px;word-break:break-word;">
+<div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;"><!--[if true]><table role="presentation" width="100%" style="all:unset;opacity:0;"><tr><![endif]-->
+<!--[if false]></td></tr></table><![endif]-->
+<div style="display:table;width:100%;">
+<!--[if true]><td vertical-align="top" width="40%"><![endif]-->
+<!--[if !true]><!--><div class="kl-split-subblock top" style="display:table-cell;vertical-align:top;width:40%;"><!--<![endif]-->
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tbody>
+<tr>
+<td class="spacer" style="padding-left:0px;padding-right:20px;" vertical-align="top">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tr>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" class="" style="font-size:0px;word-break:break-word;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;">
+<tbody>
+<tr>
+<td class="kl-img-base-auto-width" style="border:0;padding:0;width:600px;" valign="top">
+<a href="{{ event.URL|default:'' }}" style="text-decoration:none;">
+<img alt="{{ event|lookup:'Product Name'|default:'' }}" src="{{ event.ImageURL|default:'' }}" style="display:block;outline:none;text-decoration:none;height:auto;font-size:13px;width:100%;max-width:220px;border-radius:8px;" title="" width="600"/>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--[if !true]><!--></div><!--<![endif]-->
+<!--[if true]></td><![endif]-->
+<!--[if true]><td vertical-align="top" width="60%"><![endif]-->
+<!--[if !true]><!--><div class="kl-split-subblock bottom" style="display:table-cell;vertical-align:top;width:60%;"><!--<![endif]-->
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tbody>
+<tr>
+<td class="spacer" style="padding-left:20px;padding-right:0px;" vertical-align="top">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tr>
+<td>
+<div style="font-family:'Helvetica Neue',Arial;font-size:14px;font-style:normal;font-weight:400;letter-spacing:0px;line-height:1.4;text-align:left;color:#222222;">
+<!-- 1. Product Name -->
+<div style="font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:8px;font-family:'Branding-medium',Helvetica,Arial,sans-serif;line-height:1.4;">
+<a href="{{ event.URL|default:'' }}" style="color:#1a1a1a;text-decoration:none;">{{ event|lookup:'Product Name'|default:'' }}</a>
+</div>
+<!-- 2. Category (second level) -->
+<div style="font-size:13px;color:#666;margin-bottom:12px;font-family:'Helvetica Neue',Arial;text-transform:uppercase;letter-spacing:0.5px;">
+{{ event.Categories.2|default:'' }}
+</div>
+<!-- 3. Quantity (bez przecinka) -->
+<div style="margin:15px 0 10px 0;">
+<span style="font-size:14px;color:#666;font-family:'Helvetica Neue',Arial;">
+Ilość: <strong style="color:#222;">{{ event.Quantity|floatformat:0|default:'1' }}</strong>
+</span>
+</div>
+<!-- 4. Price Section z oszczędnościami -->
+{% if event.CompareAtPrice and event.CompareAtPrice > event.Price %}
+<div style="margin:10px 0;">
+<!-- Cena przed rabatem (przekreślona) -->
+<span style="text-decoration:line-through;color:#999;font-size:16px;margin-right:10px;">{{ event.CompareAtPrice|floatformat:0 }} zł</span>
+<!-- Aktualna cena (GenActiv RED) -->
+<span style="color:#EF3340;font-weight:bold;font-size:22px;font-family:'Branding-medium',Helvetica,Arial,sans-serif;">{{ event.Price|floatformat:0 }} zł</span>
+</div>
+<!-- Oszczędności -->
+<div style="margin:8px 0 0 0;">
+<span style="font-size:14px;color:#27ae60;font-weight:600;font-family:'Helvetica Neue',Arial;">
+Oszczędzasz {{ event.CompareAtPrice|minus:event.Price|floatformat:0 }} zł
+</span>
+</div>
+{% else %}
+<div style="margin:10px 0;">
+<!-- Normalna cena (bez przecinka) -->
+<span style="color:#EF3340;font-weight:bold;font-size:22px;font-family:'Branding-medium',Helvetica,Arial,sans-serif;">{{ event.Price|floatformat:0 }} zł</span>
+</div>
+{% endif %}
+
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--[if !true]><!--></div><!--<![endif]-->
+<!--[if true]></td><![endif]-->
+</div>
+<!--[if true]></tr></table><![endif]--></div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PRODUCT CARD END -->
+

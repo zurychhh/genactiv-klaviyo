@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Operacyjny — GenActiv.pl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #F5333F;
+    --red-hover: #EA0B19;
+    --red-soft: #FFF8F8;
+    --red-glow: #FFA9AD;
+    --text: #1A1818;
+    --text-secondary: #6A6566;
+    --text-muted: #999;
+    --white: #FFFFFF;
+    --bg-soft: rgba(26,24,24,0.03);
+    --border: #E5E5E5;
+    --border-light: #F0F0F0;
+    --green: #2E9E5E;
+    --green-bg: #EEFBF3;
+    --red-bg: #FEF2F2;
+    --yellow-bg: #FFFBEB;
+    --yellow-text: #92400E;
+    --orange: #F8A230;
+    --radius: 5px;
+    --container: 1280px;
+    --pad: 40px;
+    --section-gap: 48px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* =============================== */
+  /* ANNOUNCEMENT BAR (GenActiv style)*/
+  /* =============================== */
+  .announcement {
+    background: var(--red);
+    color: white;
+    text-align: center;
+    padding: 14px var(--pad);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  /* =============================== */
+  /* HEADER                          */
+  /* =============================== */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px var(--pad);
+    max-width: var(--container);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--red); }
+  .logo-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+  }
+  .logo-sub {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.96px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-date {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .header-period {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* =============================== */
+  /* NAV                             */
+  /* =============================== */
+  .nav {
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav a {
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .nav a:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+
+  /* =============================== */
+  /* CONTAINER                       */
+  /* =============================== */
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 32px var(--pad) 64px;
+  }
+
+  /* =============================== */
+  /* SECTION                         */
+  /* =============================== */
+  .section {
+    margin-bottom: var(--section-gap);
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .source-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.96px;
+    padding: 4px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    background: var(--white);
+  }
+
+  /* =============================== */
+  /* ACTIONS (hero top section)      */
+  /* =============================== */
+  .actions-section {
+    margin-bottom: var(--section-gap);
+  }
+  .actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .action-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .action-card.span-2 {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .action-card.urgent {
+    background: var(--red-bg);
+    border-color: var(--red);
+    border-width: 2px;
+  }
+  .action-card.act {
+    background: var(--yellow-bg);
+    border-color: #fde68a;
+  }
+  .action-card.monitor {
+    background: var(--white);
+    border-color: var(--border);
+  }
+  .action-card.win {
+    background: var(--green-bg);
+    border-color: #a7f3d0;
+  }
+  .action-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    width: fit-content;
+  }
+  .action-card.urgent .action-tag {
+    background: var(--red);
+    color: white;
+  }
+  .action-card.act .action-tag {
+    background: var(--orange);
+    color: white;
+  }
+  .action-card.monitor .action-tag {
+    background: var(--text-muted);
+    color: white;
+  }
+  .action-card.win .action-tag {
+    background: var(--green);
+    color: white;
+  }
+  .action-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .action-context {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .action-metric {
+    text-align: center;
+    padding: 16px 24px;
+    min-width: 140px;
+  }
+  .action-metric-val {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .action-card.urgent .action-metric-val { color: var(--red); }
+  .action-card.act .action-metric-val { color: var(--yellow-text); }
+  .action-card.win .action-metric-val { color: var(--green); }
+  .action-metric-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+  .action-next {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    padding: 8px 0 0;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .action-next span {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* =============================== */
+  /* KPI GRID                        */
+  /* =============================== */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .kpi {
+    background: var(--white);
+    padding: 24px;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .kpi-val {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+  .kpi-val small {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .kpi-foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .kpi-prev {
+    color: var(--text-muted);
+  }
+  .delta {
+    font-weight: 700;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .d-up { background: var(--green-bg); color: var(--green); }
+  .d-down { background: var(--red-bg); color: var(--red); }
+  .d-flat { background: var(--border-light); color: var(--text-secondary); }
+
+  /* =============================== */
+  /* TABLES                          */
+  /* =============================== */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+  }
+  .card + .card {
+    margin-top: 12px;
+  }
+  .card-head {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-head-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .card-head-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    padding: 10px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-soft);
+  }
+  thead th.r { text-align: right; }
+  tbody td {
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+  }
+  tbody td.r {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  tbody td.b { font-weight: 700; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-soft); }
+  .row-total {
+    background: var(--bg-soft);
+    font-weight: 700;
+  }
+  .row-total td {
+    border-top: 2px solid var(--border);
+    padding: 13px 20px;
+  }
+  .row-problem {
+    background: var(--red-bg);
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .p-green { background: var(--green-bg); color: var(--green); }
+  .p-red { background: var(--red-bg); color: var(--red); }
+  .p-yellow { background: var(--yellow-bg); color: var(--yellow-text); }
+  .p-gray { background: var(--border-light); color: var(--text-muted); }
+
+  /* =============================== */
+  /* BARS                            */
+  /* =============================== */
+  .bars {
+    padding: 20px;
+  }
+  .bar-item {
+    display: grid;
+    grid-template-columns: 140px 1fr 64px 52px;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 0;
+  }
+  .bar-item + .bar-item {
+    border-top: 1px solid var(--border-light);
+  }
+  .bar-name {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+  }
+  .bar-track {
+    height: 24px;
+    background: var(--border-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    min-width: 32px;
+  }
+  .bar-num {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar-chg {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+  }
+  /* Bar colors — minimal, using brand red for paid */
+  .b-organic { background: var(--green); }
+  .b-paid { background: var(--red); }
+  .b-direct { background: #999; }
+  .b-social { background: #D2354F; }
+  .b-email { background: var(--green); opacity: 0.7; }
+  .b-video { background: #E74C3C; }
+  .b-other { background: #888; }
+  .b-unassigned { background: #CCC; color: #666; }
+  .t-green { color: var(--green); }
+  .t-red { color: var(--red); }
+  .t-muted { color: var(--text-muted); }
+
+  /* =============================== */
+  /* 2-COL                           */
+  /* =============================== */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* =============================== */
+  /* CONTEXT NOTES                   */
+  /* =============================== */
+  .context-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+  }
+  .context-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: var(--bg-soft);
+    border-radius: 3px;
+  }
+
+  /* =============================== */
+  /* CARD FOOTER NOTE                */
+  /* =============================== */
+  .card-note {
+    padding: 12px 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-light);
+    background: var(--bg-soft);
+  }
+
+  /* =============================== */
+  /* FOOTER                          */
+  /* =============================== */
+  .footer {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 24px var(--pad);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* =============================== */
+  /* RESPONSIVE                      */
+  /* =============================== */
+  @media (max-width: 960px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .actions-grid { grid-template-columns: 1fr; }
+    .action-card.span-2 { grid-column: span 1; grid-template-columns: 1fr; }
+    :root { --pad: 20px; }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  @media print {
+    .nav { display: none; }
+    .announcement { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR (GenActiv red strip) -->
+<div class="announcement">
+  DASHBOARD OPERACYJNY &mdash; dane na zywo z Shopify, GA4, Google Ads, Meta Ads, Klaviyo
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-area">
+    <div class="logo"><span>GEN</span>ACTIV<span>.</span>pl</div>
+    <div class="logo-divider"></div>
+    <div class="logo-sub">Dashboard Operacyjny</div>
+  </div>
+  <div class="header-right">
+    <div class="header-date">02.03.2026</div>
+    <div class="header-period">Okres: 23.02 &ndash; 01.03 vs 16.02 &ndash; 22.02</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#actions">Co robic</a>
+    <a href="#sprzedaz">Sprzedaz</a>
+    <a href="#ruch">Ruch</a>
+    <a href="#google">Google Ads</a>
+    <a href="#meta">Meta Ads</a>
+    <a href="#porownanie">Porownanie</a>
+    <a href="#email">Email</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ============================== -->
+  <!-- NEXT BEST ACTIONS              -->
+  <!-- ============================== -->
+  <div id="actions" class="actions-section">
+    <div class="actions-grid">
+
+      <!-- URGENT #1 — full width -->
+      <div class="action-card urgent span-2">
+        <div>
+          <div class="action-tag">Pilne</div>
+          <div class="action-title" style="margin-top:8px">Wstrzymaj kampanie Spoty15s i przenies budzet do Performance Max</div>
+          <div class="action-context">Spoty15s pochlanaja 2 134 PLN tygodniowo przy 0 konwersjach &mdash; drugi tydzien z rzedu. W tym czasie Performance Max generuje ROAS 36x, ale jego budzet spadl o 45%.</div>
+          <div class="action-next"><span>Nastepny krok:</span> Google Ads &rarr; Spoty15s &rarr; Wstrzymaj. Zwolniony budzet dopisz do Performance Max.</div>
+        </div>
+        <div class="action-metric">
+          <div class="action-metric-val">2 134</div>
+          <div class="action-metric-label">PLN / tydzien &rarr; 0 konwersji</div>
+        </div>
+      </div>
+
+      <!-- URGENT #2 -->
+      <div class="action-card urgent">
+        <div class="action-tag">Pilne</div>
+        <div class="action-title">Napraw UTM-y w szablonach Klaviyo</div>
+        <div class="action-context">3 z 4 lutowych kampanii email sa niewidoczne w GA4 &mdash; linki w szablonach HTML nie zawieraja parametrow UTM. Nie da sie mierzyc efektywnosci email marketingu.</div>
+        <div class="action-next"><span>Nastepny krok:</span> Otworz szablony w Klaviyo, dodaj do linkow: <code style="font-size:11px; background:rgba(0,0,0,0.06); padding:2px 4px; border-radius:2px">?utm_source=klaviyo&amp;utm_medium=email&amp;utm_campaign=NAZWA</code></div>
+      </div>
+
+      <!-- ACTION #1 -->
+      <div class="action-card act">
+        <div class="action-tag">Dzialaj</div>
+        <div class="action-title">Zrewiduj kampanie zasiegowe Meta Ads</div>
+        <div class="action-context">Laczny ROAS Meta to 0.86x. Kampanie ZASIEG_Zima (IG + FB) spalaja 2 019 PLN z minimalnym zwrotem. Jedynie SALES_WINTER_KIDS jest rentowny (3.97x, CPA 59 PLN).</div>
+        <div class="action-next"><span>Nastepny krok:</span> Rozwazyc wstrzymanie kampanii zasiegowych. Przeniesc budzet do SALES_WINTER_KIDS lub nowej kampanii sprzedazowej.</div>
+      </div>
+
+      <!-- ACTION #2 -->
+      <div class="action-card act">
+        <div class="action-tag">Dzialaj</div>
+        <div class="action-title">Sprawdz aktywnosc social media &mdash; Organic Social spadl 46%</div>
+        <div class="action-context">Organic Social: 585 sesji vs 1 093 tydzien wczesniej. Drastyczny spadek. Czy w zeszlym tygodniu byly publikowane posty na Instagramie i Facebooku?</div>
+        <div class="action-next"><span>Nastepny krok:</span> Sprawdzic kalendarz publikacji. Jesli nie bylo postow &mdash; wznowic regularne publikacje z UTM-ami w linkach.</div>
+      </div>
+
+      <!-- WIN -->
+      <div class="action-card win">
+        <div class="action-tag">Dziala</div>
+        <div class="action-title">Organic Search +22% &mdash; SEO przynosi wyniki</div>
+        <div class="action-context">2 692 sesji z wyszukiwarki (najsilniejszy kanal). Glowne zrodlo konwersji organicznych. Utrzymac kierunek &mdash; optymalizacja tresci i meta description dziala.</div>
+        <div class="action-next"><span>Info:</span> Organic Search generuje 14 380 PLN przychodu w GA4 przy zerowym koszcie pozyskania.</div>
+      </div>
+
+      <!-- MONITOR -->
+      <div class="action-card monitor">
+        <div class="action-tag">Monitoruj</div>
+        <div class="action-title">Sprzedaz -7% WoW &mdash; ale koszyki rosna</div>
+        <div class="action-context">77.6k vs 83.4k PLN (-7%), ale sredni koszyk wzrosl z 279 do 293 PLN (+5%). Mniej zamowien, wyzsze wartosci. Sprawdzic czy to sezonowy trend (koniec zimy) czy trwaly spadek.</div>
+        <div class="action-next"><span>Info:</span> GA4 widzi 48.4k vs Shopify 77.6k PLN (-38%) &mdash; roznica z Consent Mode i Przelewy24 redirect. Shopify = source of truth.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- SPRZEDAZ KPI                   -->
+  <!-- ============================== -->
+  <div id="sprzedaz" class="section">
+    <div class="section-head">
+      <h2>Sprzedaz</h2>
+      <span class="source-label">Shopify</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">Zamowienia (7d)</div>
+        <div class="kpi-val">265</div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">poprz. 299</span>
+          <span class="delta d-down">-11.4%</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Przychod (7d)</div>
+        <div class="kpi-val">77 587 <small>PLN</small></div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">poprz. 83 442 PLN</span>
+          <span class="delta d-down">-7.0%</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Sredni koszyk (AOV)</div>
+        <div class="kpi-val">293 <small>PLN</small></div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">poprz. 279 PLN</span>
+          <span class="delta d-up">+5.0%</span>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">Sesje GA4 (7d)</div>
+        <div class="kpi-val">8 638</div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">poprz. 8 871</span>
+          <span class="delta d-down">-2.6%</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Konwersje GA4</div>
+        <div class="kpi-val">173</div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">poprz. 200 &bull; CR 2.0%</span>
+          <span class="delta d-down">-13.5%</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Laczny wydatek Ads</div>
+        <div class="kpi-val">8 216 <small>PLN</small></div>
+        <div class="kpi-foot">
+          <span class="kpi-prev">Google 4 638 &bull; Meta 3 578</span>
+          <span class="delta d-flat">10.6%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- RUCH                           -->
+  <!-- ============================== -->
+  <div id="ruch" class="section">
+    <div class="section-head">
+      <h2>Zrodla ruchu &mdash; sesje</h2>
+      <span class="source-label">GA4</span>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Sesje wg kanalu</span>
+        <span class="card-head-meta">Lacznie: 8 638</span>
+      </div>
+      <div class="bars">
+        <div class="bar-item">
+          <div class="bar-name">Organic Search</div>
+          <div class="bar-track"><div class="bar-fill b-organic" style="width:100%">2 692</div></div>
+          <div class="bar-num">2 692</div>
+          <div class="bar-chg t-green">+22%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Cross-network</div>
+          <div class="bar-track"><div class="bar-fill b-paid" style="width:85%">2 297</div></div>
+          <div class="bar-num">2 297</div>
+          <div class="bar-chg t-red">-12%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Paid Social</div>
+          <div class="bar-track"><div class="bar-fill b-social" style="width:24.8%">667</div></div>
+          <div class="bar-num">667</div>
+          <div class="bar-chg t-red">-13%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Direct</div>
+          <div class="bar-track"><div class="bar-fill b-direct" style="width:24.7%">664</div></div>
+          <div class="bar-num">664</div>
+          <div class="bar-chg t-green">+6%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Unassigned</div>
+          <div class="bar-track"><div class="bar-fill b-unassigned" style="width:22%">594</div></div>
+          <div class="bar-num">594</div>
+          <div class="bar-chg t-red">-2%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Organic Social</div>
+          <div class="bar-track"><div class="bar-fill b-social" style="width:21.7%">585</div></div>
+          <div class="bar-num">585</div>
+          <div class="bar-chg t-red">-46%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Organic Video</div>
+          <div class="bar-track"><div class="bar-fill b-video" style="width:11.7%">314</div></div>
+          <div class="bar-num">314</div>
+          <div class="bar-chg t-green">+45%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Paid Search</div>
+          <div class="bar-track"><div class="bar-fill b-paid" style="width:10.9%">295</div></div>
+          <div class="bar-num">295</div>
+          <div class="bar-chg t-red">-9%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Paid Shopping</div>
+          <div class="bar-track"><div class="bar-fill b-paid" style="width:10.9%">293</div></div>
+          <div class="bar-num">293</div>
+          <div class="bar-chg t-green">+5%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Email</div>
+          <div class="bar-track"><div class="bar-fill b-email" style="width:3.3%">90</div></div>
+          <div class="bar-num">90</div>
+          <div class="bar-chg t-green">+8%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-name">Display + Inne</div>
+          <div class="bar-track"><div class="bar-fill b-other" style="width:5.1%">137</div></div>
+          <div class="bar-num">137</div>
+          <div class="bar-chg t-green">+177%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- GOOGLE ADS + META ADS          -->
+  <!-- ============================== -->
+  <div class="grid-2">
+
+    <!-- GOOGLE ADS -->
+    <div id="google" class="section">
+      <div class="section-head">
+        <h2>Google Ads</h2>
+        <span class="source-label">Live</span>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-head-title">Kampanie &mdash; ostatnie 7 dni</span>
+          <span class="card-head-meta">4 638 PLN</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Kampania</th>
+              <th class="r">Klik.</th>
+              <th class="r">Wydatek</th>
+              <th class="r">Konw.</th>
+              <th class="r">Wartosc</th>
+              <th class="r">ROAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="b">Performance Max</td>
+              <td class="r">1 577</td>
+              <td class="r">884</td>
+              <td class="r b">136</td>
+              <td class="r b">31 836</td>
+              <td class="r"><span class="pill p-green">36.0x</span></td>
+            </tr>
+            <tr>
+              <td>UGC_Junior</td>
+              <td class="r">309</td>
+              <td class="r">726</td>
+              <td class="r">5</td>
+              <td class="r">1 807</td>
+              <td class="r"><span class="pill p-yellow">2.5x</span></td>
+            </tr>
+            <tr>
+              <td>Remarketing_Test</td>
+              <td class="r">418</td>
+              <td class="r">702</td>
+              <td class="r">5</td>
+              <td class="r">1 008</td>
+              <td class="r"><span class="pill p-yellow">1.4x</span></td>
+            </tr>
+            <tr>
+              <td>ProduktowaTest</td>
+              <td class="r">467</td>
+              <td class="r">191</td>
+              <td class="r">3</td>
+              <td class="r">254</td>
+              <td class="r"><span class="pill p-yellow">1.3x</span></td>
+            </tr>
+            <tr class="row-problem">
+              <td>Spoty15s_Niemozliwa</td>
+              <td class="r">91</td>
+              <td class="r" style="color:var(--red)">2 134</td>
+              <td class="r b" style="color:var(--red)">0</td>
+              <td class="r" style="color:var(--red)">0</td>
+              <td class="r"><span class="pill p-red">0x</span></td>
+            </tr>
+            <tr class="row-total">
+              <td>Suma</td>
+              <td class="r">2 862</td>
+              <td class="r">4 638</td>
+              <td class="r">149</td>
+              <td class="r">34 904</td>
+              <td class="r"><span class="pill p-green">7.5x</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <span class="card-head-title">Tydzien do tygodnia</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Kampania</th>
+              <th class="r">Wydatek biez.</th>
+              <th class="r">Wydatek poprz.</th>
+              <th class="r">ROAS biez.</th>
+              <th class="r">ROAS poprz.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="b">Performance Max</td>
+              <td class="r">884</td>
+              <td class="r">1 602</td>
+              <td class="r"><span class="pill p-green">36.0x</span></td>
+              <td class="r"><span class="pill p-green">29.6x</span></td>
+            </tr>
+            <tr>
+              <td>UGC_Junior</td>
+              <td class="r">726</td>
+              <td class="r">726</td>
+              <td class="r"><span class="pill p-yellow">2.5x</span></td>
+              <td class="r"><span class="pill p-yellow">1.5x</span></td>
+            </tr>
+            <tr>
+              <td>Remarketing_Test</td>
+              <td class="r">702</td>
+              <td class="r">703</td>
+              <td class="r"><span class="pill p-yellow">1.4x</span></td>
+              <td class="r"><span class="pill p-red">0.9x</span></td>
+            </tr>
+            <tr>
+              <td>ProduktowaTest</td>
+              <td class="r">191</td>
+              <td class="r">216</td>
+              <td class="r"><span class="pill p-yellow">1.3x</span></td>
+              <td class="r"><span class="pill p-green">7.6x</span></td>
+            </tr>
+            <tr class="row-problem">
+              <td>Spoty15s</td>
+              <td class="r" style="color:var(--red)">2 134</td>
+              <td class="r">2 127</td>
+              <td class="r"><span class="pill p-red">0x</span></td>
+              <td class="r"><span class="pill p-red">0x</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- META ADS -->
+    <div id="meta" class="section">
+      <div class="section-head">
+        <h2>Meta Ads</h2>
+        <span class="source-label">Live</span>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-head-title">Kampanie &mdash; ostatnie 7 dni</span>
+          <span class="card-head-meta">3 578 PLN</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Kampania</th>
+              <th class="r">Zasieg</th>
+              <th class="r">Wydatek</th>
+              <th class="r">Zakupy</th>
+              <th class="r">Wartosc</th>
+              <th class="r">ROAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="b">SALES_WINTER_KIDS</td>
+              <td class="r">24 366</td>
+              <td class="r">588</td>
+              <td class="r b">10</td>
+              <td class="r b">2 335</td>
+              <td class="r"><span class="pill p-green">3.97x</span></td>
+            </tr>
+            <tr>
+              <td>junior_winter_2026</td>
+              <td class="r">396 897</td>
+              <td class="r">971</td>
+              <td class="r">2</td>
+              <td class="r">493</td>
+              <td class="r"><span class="pill p-red">0.51x</span></td>
+            </tr>
+            <tr>
+              <td>ZASIEG_Zima_IG</td>
+              <td class="r">385 792</td>
+              <td class="r">1 308</td>
+              <td class="r">2</td>
+              <td class="r">232</td>
+              <td class="r"><span class="pill p-red">0.18x</span></td>
+            </tr>
+            <tr>
+              <td>ZASIEG_Zima_FB</td>
+              <td class="r">268 950</td>
+              <td class="r">711</td>
+              <td class="r">0</td>
+              <td class="r t-muted">0</td>
+              <td class="r"><span class="pill p-gray">0x</span></td>
+            </tr>
+            <tr class="row-total">
+              <td>Suma</td>
+              <td class="r">&mdash;</td>
+              <td class="r">3 578</td>
+              <td class="r">14</td>
+              <td class="r">3 060</td>
+              <td class="r"><span class="pill p-red">0.86x</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <span class="card-head-title">Efektywnosc kreacji</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Kampania</th>
+              <th class="r">CPM</th>
+              <th class="r">CTR</th>
+              <th class="r">CPC</th>
+              <th class="r">LPV</th>
+              <th class="r">ATC</th>
+              <th class="r">CPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="b">SALES_WINTER_KIDS</td>
+              <td class="r">13.32</td>
+              <td class="r"><span class="pill p-green">0.91%</span></td>
+              <td class="r">1.46</td>
+              <td class="r">196</td>
+              <td class="r">58</td>
+              <td class="r"><span class="pill p-green">58.79</span></td>
+            </tr>
+            <tr>
+              <td>ZASIEG_Zima_IG</td>
+              <td class="r">2.41</td>
+              <td class="r"><span class="pill p-red">0.07%</span></td>
+              <td class="r">3.60</td>
+              <td class="r">12</td>
+              <td class="r">7</td>
+              <td class="r"><span class="pill p-red">654</span></td>
+            </tr>
+            <tr>
+              <td>junior_winter_2026</td>
+              <td class="r">2.05</td>
+              <td class="r"><span class="pill p-yellow">0.14%</span></td>
+              <td class="r">1.41</td>
+              <td class="r">14</td>
+              <td class="r">6</td>
+              <td class="r"><span class="pill p-red">485</span></td>
+            </tr>
+            <tr>
+              <td>ZASIEG_Zima_FB</td>
+              <td class="r">1.91</td>
+              <td class="r"><span class="pill p-yellow">0.19%</span></td>
+              <td class="r">1.03</td>
+              <td class="r">7</td>
+              <td class="r">1</td>
+              <td class="r"><span class="pill p-gray">&mdash;</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================== -->
+  <!-- CROSS-PLATFORM                 -->
+  <!-- ============================== -->
+  <div id="porownanie" class="section">
+    <div class="section-head">
+      <h2>Wydatki vs Przychod &mdash; porownanie zrodel</h2>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Atrybucja: platforma vs GA4</span>
+        <span class="card-head-meta">23.02 &ndash; 01.03.2026</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Kanal</th>
+            <th class="r">Wydatek</th>
+            <th class="r">Przychod platformy</th>
+            <th class="r">ROAS platformy</th>
+            <th class="r">Przychod GA4</th>
+            <th class="r">ROAS GA4</th>
+            <th class="r">Roznica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="b">Google Ads</td>
+            <td class="r">4 638</td>
+            <td class="r b">34 904</td>
+            <td class="r"><span class="pill p-green">7.5x</span></td>
+            <td class="r">16 246</td>
+            <td class="r"><span class="pill p-green">3.5x</span></td>
+            <td class="r t-red b">-53%</td>
+          </tr>
+          <tr>
+            <td class="b">Meta Ads</td>
+            <td class="r">3 578</td>
+            <td class="r">3 060</td>
+            <td class="r"><span class="pill p-red">0.86x</span></td>
+            <td class="r">1 170</td>
+            <td class="r"><span class="pill p-red">0.33x</span></td>
+            <td class="r t-red b">-62%</td>
+          </tr>
+          <tr>
+            <td class="b">Bing Ads</td>
+            <td class="r">~1 400</td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r">1 437</td>
+            <td class="r"><span class="pill p-yellow">~1.0x</span></td>
+            <td class="r t-muted">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Organic Search</td>
+            <td class="r"><span class="pill p-green">0</span></td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r b">14 380</td>
+            <td class="r t-green">bezplatny</td>
+            <td class="r t-muted">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Email (Klaviyo)</td>
+            <td class="r"><span class="pill p-green">~0</span></td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r t-muted">&mdash;</td>
+            <td class="r">497</td>
+            <td class="r t-green">bezplatny</td>
+            <td class="r t-muted">&mdash;</td>
+          </tr>
+          <tr class="row-total">
+            <td>Lacznie paid</td>
+            <td class="r">~9 616</td>
+            <td class="r">37 964</td>
+            <td class="r"><span class="pill p-green">3.9x</span></td>
+            <td class="r">18 853</td>
+            <td class="r"><span class="pill p-yellow">2.0x</span></td>
+            <td class="r t-muted">&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-note">
+        Shopify total: <strong>77 587 PLN</strong> &mdash; GA4 widzi 48 410 PLN (-38%). Roznica wynika z Consent Mode (~15%), redirect Przelewy24 i blokowania skryptow. Wszystkie kwoty w PLN.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- EMAIL                          -->
+  <!-- ============================== -->
+  <div id="email" class="section">
+    <div class="section-head">
+      <h2>Email Marketing</h2>
+      <span class="source-label">Klaviyo</span>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Kampanie email &mdash; luty 2026</span>
+        <span class="card-head-meta">4 kampanie</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Kampania</th>
+            <th>Subject</th>
+            <th class="r">Data</th>
+            <th class="r">GA4 sesje</th>
+            <th class="r">GA4 przychod</th>
+            <th>UTM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="b">A2</td>
+            <td>Odkryj pierwotna moc natury!</td>
+            <td class="r">05.02</td>
+            <td class="r">4</td>
+            <td class="r">0 PLN</td>
+            <td><span class="pill p-yellow">utm_source=Klaviyo</span></td>
+          </tr>
+          <tr class="row-problem">
+            <td class="b">[Follow-up] A2</td>
+            <td>Zobacz nasza nowosc!</td>
+            <td class="r">07.02</td>
+            <td class="r b" style="color:var(--red)">0</td>
+            <td class="r" style="color:var(--red)">0 PLN</td>
+            <td><span class="pill p-red">BRAK W GA4</span></td>
+          </tr>
+          <tr class="row-problem">
+            <td class="b">Kampania &ndash; 12 lut</td>
+            <td>Nr 1 na odpornosc Twojego dziecka</td>
+            <td class="r">12.02</td>
+            <td class="r b" style="color:var(--red)">0</td>
+            <td class="r" style="color:var(--red)">0 PLN</td>
+            <td><span class="pill p-red">BRAK W GA4</span></td>
+          </tr>
+          <tr class="row-problem">
+            <td class="b">[Follow-up] Kampania</td>
+            <td>Odkryj sposob na odpornosc dziecka</td>
+            <td class="r">14.02</td>
+            <td class="r b" style="color:var(--red)">0</td>
+            <td class="r" style="color:var(--red)">0 PLN</td>
+            <td><span class="pill p-red">BRAK W GA4</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>Wygenerowano: 02.03.2026 &bull; GenActiv.pl</div>
+  <div>Shopify GraphQL &bull; GA4 Data API &bull; Google Ads GAQL &bull; Meta Ads Insights &bull; Klaviyo API</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,671 @@
+/* ============================================================
+   GenActiv Online — Design System
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Brand */
+  --brand-navy: #1A3B5D;
+  --brand-blue: #0066CC;
+  --brand-blue-light: #1a7adf;
+  --brand-red: #EF3340;
+  --brand-red-hover: #d42a36;
+  --success: #27ae60;
+
+  /* Surface */
+  --bg: #0c0c0c;
+  --surface: #161616;
+  --surface-elevated: #1e1e1e;
+  --surface-hover: #252525;
+  --border: #2a2a2a;
+  --border-light: #333;
+
+  /* Text */
+  --text: #e8e8e8;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666;
+
+  /* Messages */
+  --user-bubble: #162233;
+  --user-bubble-border: #1e3a5f;
+  --assistant-bg: transparent;
+
+  /* Layout */
+  --content-max-width: 768px;
+  --header-height: 56px;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  height: var(--header-height);
+  background: linear-gradient(135deg, var(--brand-navy) 0%, #0d2240 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-logo {
+  width: 34px;
+  height: 34px;
+  background: var(--brand-blue);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.header-title h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.header-suffix {
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  margin-left: 0.35em;
+  font-size: 0.9em;
+}
+
+.status {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1;
+}
+
+.status.connected { color: var(--success); }
+.status.error { color: var(--brand-red); }
+
+#logout-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  transition: all 0.15s ease;
+}
+
+#logout-btn:hover {
+  background: rgba(239, 51, 64, 0.15);
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+/* ============================================================
+   Chat Area
+   ============================================================ */
+
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+#chat-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2rem;
+}
+
+/* ============================================================
+   Messages
+   ============================================================ */
+
+.message {
+  margin-bottom: 1.5rem;
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Message header (avatar + name) --- */
+
+.msg-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.message.user .avatar {
+  background: var(--brand-blue);
+  color: #fff;
+}
+
+.message.assistant .avatar {
+  background: linear-gradient(135deg, var(--brand-navy), var(--brand-blue));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.msg-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.message.user .msg-name { color: var(--brand-blue-light); }
+.message.assistant .msg-name { color: var(--success); }
+
+/* --- User bubble --- */
+
+.message.user .bubble {
+  background: var(--user-bubble);
+  border: 1px solid var(--user-bubble-border);
+  border-radius: 16px 16px 4px 16px;
+  padding: 0.75rem 1rem;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-left: 2.25rem; /* align with avatar */
+}
+
+/* --- Assistant bubble --- */
+
+.message.assistant .bubble {
+  padding: 0.5rem 0 0.5rem 2.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* --- Tool call containers --- */
+
+.msg-tools {
+  margin-left: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ============================================================
+   Tool Indicators — Collapsible Accordions
+   ============================================================ */
+
+.tool-indicator {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-indicator:hover {
+  background: var(--surface-elevated);
+}
+
+.tool-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tool-status-dot.running {
+  background: var(--brand-blue);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.tool-status-dot.complete { background: var(--success); }
+.tool-status-dot.error { background: var(--brand-red); }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.tool-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-duration {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.tool-chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+}
+
+.tool-indicator.expanded .tool-chevron {
+  transform: rotate(90deg);
+}
+
+.tool-details {
+  display: none;
+  margin-top: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.tool-indicator.expanded + .tool-details {
+  display: block;
+}
+
+/* ============================================================
+   Thinking Indicator
+   ============================================================ */
+
+.thinking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  margin-left: 2.25rem;
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.thinking-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.thinking-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  animation: bounce-dot 1.4s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(2) { animation-delay: 0.16s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.32s; }
+
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-5px); opacity: 1; }
+}
+
+.thinking-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Streaming Cursor
+   ============================================================ */
+
+.streaming-cursor::after {
+  content: '▍';
+  animation: blink-cursor 0.8s step-end infinite;
+  color: var(--brand-blue);
+  margin-left: 1px;
+  font-weight: 100;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================================
+   Markdown Rendering
+   ============================================================ */
+
+.bubble h1, .bubble h2, .bubble h3 {
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+  color: #fff;
+}
+
+.bubble h1 { font-size: 1.25em; }
+.bubble h2 { font-size: 1.1em; }
+.bubble h3 { font-size: 1em; }
+
+.bubble p {
+  margin-bottom: 0.6em;
+}
+
+.bubble ul, .bubble ol {
+  margin: 0.4em 0 0.6em 1.5em;
+}
+
+.bubble li {
+  margin-bottom: 0.25em;
+}
+
+.bubble strong { color: #fff; font-weight: 600; }
+
+.bubble a {
+  color: var(--brand-blue-light);
+  text-decoration: none;
+}
+
+.bubble a:hover { text-decoration: underline; }
+
+.bubble code {
+  background: var(--surface-elevated);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+
+.bubble pre {
+  background: #111;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.75em 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.bubble pre code {
+  display: block;
+  padding: 1rem;
+  overflow-x: auto;
+  background: none;
+  border-radius: 0;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: var(--font-sans);
+}
+
+.bubble pre:hover .code-copy-btn { opacity: 1; }
+.code-copy-btn:hover { color: var(--text); background: var(--surface-hover); }
+
+.bubble table {
+  border-collapse: collapse;
+  margin: 0.75em 0;
+  width: 100%;
+  font-size: 0.88rem;
+}
+
+.bubble th, .bubble td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.65rem;
+  text-align: left;
+}
+
+.bubble th {
+  background: var(--surface);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.bubble blockquote {
+  border-left: 3px solid var(--brand-blue);
+  padding-left: 1em;
+  margin: 0.5em 0;
+  color: var(--text-secondary);
+}
+
+.bubble hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1em 0;
+}
+
+/* ============================================================
+   Input Area
+   ============================================================ */
+
+#input-area {
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem 1rem;
+  background: var(--bg);
+}
+
+#input-wrapper {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  background: var(--surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#input-wrapper:focus-within {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+#input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: none;
+  min-height: 24px;
+  max-height: 50dvh;
+  outline: none;
+  padding: 0.15rem 0;
+}
+
+#input::placeholder {
+  color: var(--text-muted);
+}
+
+#input:disabled { opacity: 0.4; }
+
+#send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--brand-red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+#send-btn:hover { background: var(--brand-red-hover); }
+#send-btn:active { transform: scale(0.93); }
+#send-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+.input-hint {
+  max-width: var(--content-max-width);
+  margin: 0.4rem auto 0;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+#chat::-webkit-scrollbar { width: 5px; }
+#chat::-webkit-scrollbar-track { background: transparent; }
+#chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+#chat::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+/* ============================================================
+   Welcome message
+   ============================================================ */
+
+.welcome {
+  text-align: center;
+  padding: 3rem 1rem;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.welcome-logo {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--brand-navy), var(--brand-blue));
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.welcome h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.welcome p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 600px) {
+  :root {
+    --content-max-width: 100%;
+  }
+
+  #chat-inner {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  #input-area {
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+
+  .message.user .bubble {
+    margin-left: 0;
+  }
+
+  .message.assistant .bubble {
+    padding-left: 0;
+  }
+
+  .msg-tools {
+    margin-left: 0;
+  }
+
+  .thinking-indicator {
+    margin-left: 0;
+  }
+
+  .input-hint {
+    display: none;
+  }
+}

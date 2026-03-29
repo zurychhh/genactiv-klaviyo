@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv Dashboard - Live Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #0066CC 0%, #1A3B5D 100%);
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.header h1 { font-size: 22px; font-weight: 600; }
+.header .subtitle { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+.header-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.btn-preset {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-preset:hover { background: rgba(255,255,255,0.25); }
+.btn-preset.active { background: rgba(255,255,255,0.35); border-color: white; }
+.btn-refresh {
+  background: #EF3340;
+  color: white;
+}
+.btn-refresh:hover { background: #d62b37; }
+.btn-refresh:disabled { opacity: 0.6; cursor: not-allowed; }
+.auto-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+}
+.auto-toggle input { cursor: pointer; }
+
+/* Main grid */
+.main {
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* KPI row */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.kpi-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.kpi-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 8px;
+}
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A3B5D;
+}
+.kpi-sub {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.card-header {
+  background: #f8f9fa;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1A3B5D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-body { padding: 20px; }
+
+/* Charts grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.chart-container { position: relative; height: 280px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  text-align: left;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #eee;
+  font-weight: 600;
+  color: #555;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+tbody tr:hover { background: #fafbfc; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+/* Status badges */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.badge-paid { background: #d4edda; color: #155724; }
+.badge-pending { background: #fff3cd; color: #856404; }
+.badge-refunded { background: #f8d7da; color: #721c24; }
+
+/* Rank badges */
+.rank { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; color: white; }
+.rank-1 { background: linear-gradient(135deg, #f0c27f, #d4a44c); }
+.rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); }
+.rank-3 { background: linear-gradient(135deg, #cd7f32, #a56726); }
+.rank-n { background: #ddd; color: #666; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: #999;
+}
+.footer .disclaimer {
+  background: #fff8e1;
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #856404;
+  margin-bottom: 8px;
+}
+
+/* Loading */
+.loading-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+.loading-overlay.hidden { display: none; }
+.spinner {
+  width: 48px; height: 48px;
+  border: 4px solid #e0e0e0;
+  border-top-color: #0066CC;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.error-banner {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  display: none;
+  font-size: 13px;
+}
+.error-banner.visible { display: block; }
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Source footers */
+.source-footer {
+  padding: 8px 20px;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+  font-size: 11px;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.source-icon { display: flex; align-items: center; gap: 6px; }
+.source-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.source-shopify .source-dot { background: #96bf48; }
+.source-ga4 .source-dot { background: #e37400; }
+.source-meta .source-dot { background: #1877f2; }
+.source-google-ads .source-dot { background: #4285f4; }
+.source-klaviyo .source-dot { background: #2bde73; }
+
+/* Section headers */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A3B5D;
+  margin: 8px 0 0 0;
+  padding: 0;
+}
+.section-subtitle {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+/* Error placeholder for failed sections */
+.section-error {
+  padding: 30px 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
+.section-error .error-icon { font-size: 24px; margin-bottom: 8px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .header { padding: 12px 16px; }
+  .main { padding: 0 12px; }
+}
+@media (max-width: 500px) {
+  .kpi-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>GenActiv Dashboard</h1>
+    <div class="subtitle">Live Analytics &bull; Shopify + GA4 + Meta + Google Ads + Klaviyo</div>
+  </div>
+  <div class="header-controls">
+    <button class="btn btn-preset active" data-days="7">7 dni</button>
+    <button class="btn btn-preset" data-days="30">30 dni</button>
+    <button class="btn btn-preset" data-days="90">90 dni</button>
+    <button class="btn btn-refresh" id="refreshBtn" onclick="loadDashboard(true)">Odswiez</button>
+    <label class="auto-toggle">
+      <input type="checkbox" id="autoRefresh" checked> Auto 5min
+    </label>
+  </div>
+</div>
+
+<div class="main">
+  <div class="error-banner" id="errorBanner"></div>
+
+  <!-- KPI -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Przychod</div>
+      <div class="kpi-value" id="kpiRevenue">-</div>
+      <div class="kpi-sub" id="kpiRevenueSub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Zamowienia</div>
+      <div class="kpi-value" id="kpiOrders">-</div>
+      <div class="kpi-sub" id="kpiOrdersSub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Srednia wartosc (AOV)</div>
+      <div class="kpi-value" id="kpiAOV">-</div>
+      <div class="kpi-sub" id="kpiAOVSub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Nowi klienci</div>
+      <div class="kpi-value" id="kpiNewCustomers">-</div>
+      <div class="kpi-sub" id="kpiNewCustomersSub"></div>
+    </div>
+  </div>
+
+  <!-- Charts row 1 -->
+  <div class="charts-grid">
+    <div class="card">
+      <div class="card-header">Trend przychodow</div>
+      <div class="card-body"><div class="chart-container"><canvas id="revenueChart"></canvas></div></div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime1"></span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">Zrodla ruchu</div>
+      <div class="card-body"><div class="chart-container"><canvas id="trafficChart"></canvas></div></div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime2"></span></div>
+    </div>
+  </div>
+
+  <!-- Charts row 2 -->
+  <div class="charts-grid">
+    <div class="card">
+      <div class="card-header">Top kampanie <span style="font-weight:400;font-size:12px;color:#999">wg przychodu</span></div>
+      <div class="card-body" style="padding:0;max-height:340px;overflow-y:auto">
+        <table>
+          <thead><tr><th>Kampania</th><th>Zrodlo</th><th class="text-center">Zamowienia</th><th class="text-right">Przychod</th><th class="text-right">AOV</th></tr></thead>
+          <tbody id="campaignsTable"></tbody>
+        </table>
+      </div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime3"></span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">Metody platnosci</div>
+      <div class="card-body"><div class="chart-container"><canvas id="paymentChart"></canvas></div></div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime4"></span></div>
+    </div>
+  </div>
+
+  <!-- Charts row 3 -->
+  <div class="charts-grid">
+    <div class="card">
+      <div class="card-header">Top produkty <span style="font-weight:400;font-size:12px;color:#999">wg przychodu</span></div>
+      <div class="card-body" style="padding:0;max-height:340px;overflow-y:auto">
+        <table>
+          <thead><tr><th>#</th><th>Produkt</th><th class="text-center">Szt.</th><th class="text-center">Zamowienia</th><th class="text-right">Przychod</th></tr></thead>
+          <tbody id="productsTable"></tbody>
+        </table>
+      </div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime5"></span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">Nowi vs powracajacy klienci</div>
+      <div class="card-body"><div class="chart-container"><canvas id="customerChart"></canvas></div></div>
+      <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime6"></span></div>
+    </div>
+  </div>
+
+  <!-- ===== GA4 - Ruch na stronie ===== -->
+  <div class="section-title">Ruch na stronie</div>
+  <div class="section-subtitle">Google Analytics 4 - zrodla ruchu i zaangazowanie</div>
+
+  <div class="kpi-row" id="ga4Kpis">
+    <div class="kpi-card"><div class="kpi-label">Sesje</div><div class="kpi-value" id="ga4Sessions">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Uzytkownicy</div><div class="kpi-value" id="ga4Users">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Zaangazowanie</div><div class="kpi-value" id="ga4Engagement">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Konwersje e-commerce</div><div class="kpi-value" id="ga4Conversions">-</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Zrodla ruchu (GA4) <span style="font-weight:400;font-size:12px;color:#999">wg sesji</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead><tr><th>Zrodlo / Medium</th><th class="text-right">Sesje</th><th class="text-right">Uzytkownicy</th><th class="text-right">Zaangazowanie</th><th class="text-right">Konwersje</th><th class="text-right">Przychod</th></tr></thead>
+        <tbody id="ga4Table"></tbody>
+      </table>
+    </div>
+    <div class="source-footer source-ga4"><span class="source-icon"><span class="source-dot"></span> Dane: Google Analytics 4</span><span class="source-time" id="ga4Time"></span></div>
+  </div>
+
+  <!-- ===== Google Ads - Kampanie ===== -->
+  <div class="section-title">Google Ads - Kampanie</div>
+  <div class="section-subtitle">Wydatki, klikniecia i konwersje z kampanii Google</div>
+
+  <div class="kpi-row" id="gadsKpis">
+    <div class="kpi-card"><div class="kpi-label">Wydatki</div><div class="kpi-value" id="gadsSpend">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Klikniecia</div><div class="kpi-value" id="gadsClicks">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Wyswietlenia</div><div class="kpi-value" id="gadsImpressions">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Konwersje</div><div class="kpi-value" id="gadsConversions">-</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Kampanie Google Ads <span style="font-weight:400;font-size:12px;color:#999">wg wydatkow</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead><tr><th>Kampania</th><th class="text-center">Status</th><th class="text-right">Klikniecia</th><th class="text-right">Wyswietlenia</th><th class="text-right">Koszt (PLN)</th><th class="text-right">CTR</th><th class="text-right">Konwersje</th><th class="text-right">Wartosc</th></tr></thead>
+        <tbody id="gadsTable"></tbody>
+      </table>
+    </div>
+    <div class="source-footer source-google-ads"><span class="source-icon"><span class="source-dot"></span> Dane: Google Ads</span><span class="source-time" id="gadsTime"></span></div>
+  </div>
+
+  <!-- ===== Meta Ads - Kampanie Facebook/Instagram ===== -->
+  <div class="section-title">Meta Ads - Facebook / Instagram</div>
+  <div class="section-subtitle">Wydatki i wyniki kampanii na Facebooku i Instagramie</div>
+
+  <div class="kpi-row" id="metaKpis">
+    <div class="kpi-card"><div class="kpi-label">Wydatki</div><div class="kpi-value" id="metaSpend">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Wyswietlenia</div><div class="kpi-value" id="metaImpressions">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Klikniecia</div><div class="kpi-value" id="metaClicks">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">CTR / CPC</div><div class="kpi-value" id="metaCtrCpc">-</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Kampanie Meta Ads <span style="font-weight:400;font-size:12px;color:#999">wg wydatkow</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead><tr><th>Kampania</th><th class="text-right">Wydatki</th><th class="text-right">Wyswietlenia</th><th class="text-right">Klikniecia</th><th class="text-right">CTR</th><th class="text-right">CPC</th><th class="text-right">Zakupy</th><th class="text-right">Wartosc</th></tr></thead>
+        <tbody id="metaTable"></tbody>
+      </table>
+    </div>
+    <div class="source-footer source-meta"><span class="source-icon"><span class="source-dot"></span> Dane: Meta Ads (Facebook/Instagram)</span><span class="source-time" id="metaTime"></span></div>
+  </div>
+
+  <!-- ===== Klaviyo - Email Marketing ===== -->
+  <div class="section-title">Klaviyo - Email Marketing</div>
+  <div class="section-subtitle">Wyniki kampanii email z ostatnich 30 dni</div>
+
+  <div class="kpi-row" id="klaviyoKpis">
+    <div class="kpi-card"><div class="kpi-label">Kampanie</div><div class="kpi-value" id="klaviyoCampaigns">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Sr. Open Rate</div><div class="kpi-value" id="klaviyoOR">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Sr. Click Rate</div><div class="kpi-value" id="klaviyoCR">-</div></div>
+    <div class="kpi-card"><div class="kpi-label">Przychod</div><div class="kpi-value" id="klaviyoRevenue">-</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Kampanie email <span style="font-weight:400;font-size:12px;color:#999">ostatnie 30 dni</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead><tr><th>Kampania</th><th>Data</th><th class="text-right">Odbiorcy</th><th class="text-right">Open Rate</th><th class="text-right">Click Rate</th><th class="text-right">Konwersje</th><th class="text-right">Przychod</th></tr></thead>
+        <tbody id="klaviyoTable"></tbody>
+      </table>
+    </div>
+    <div class="source-footer source-klaviyo"><span class="source-icon"><span class="source-dot"></span> Dane: Klaviyo</span><span class="source-time" id="klaviyoTime"></span></div>
+  </div>
+
+  <!-- Recent orders -->
+  <div class="card">
+    <div class="card-header">Ostatnie zamowienia</div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead><tr><th>Nr</th><th>Data</th><th>Klient</th><th>Status</th><th>Platnosc</th><th class="text-right">Kwota</th></tr></thead>
+        <tbody id="ordersTable"></tbody>
+      </table>
+    </div>
+    <div class="source-footer source-shopify"><span class="source-icon"><span class="source-dot"></span> Dane: Shopify</span><span class="source-time" id="shopifyTime7"></span></div>
+  </div>
+
+  <div class="footer">
+    <div class="disclaimer">Analiza do 250 zamowien w wybranym okresie (limit Shopify API)</div>
+    <div id="footerStatus">Ladowanie...</div>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+</div>
+
+<script>
+// --- State ---
+let currentDays = 7;
+let autoRefreshTimer = null;
+let charts = {};
+
+// --- Helpers ---
+function formatPLN(v) {
+  return Number(v).toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' zl';
+}
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+}
+function getDateRange(days) {
+  const to = new Date();
+  const from = new Date();
+  from.setDate(from.getDate() - days);
+  return {
+    dateFrom: from.toISOString().split('T')[0],
+    dateTo: to.toISOString().split('T')[0]
+  };
+}
+function financialBadge(status) {
+  const s = (status || '').toUpperCase();
+  if (s === 'PAID') return '<span class="badge badge-paid">Oplacone</span>';
+  if (s === 'REFUNDED' || s === 'PARTIALLY_REFUNDED') return '<span class="badge badge-refunded">Zwrot</span>';
+  return '<span class="badge badge-pending">' + (status || 'Brak') + '</span>';
+}
+function rankBadge(i) {
+  if (i === 0) return '<span class="rank rank-1">1</span>';
+  if (i === 1) return '<span class="rank rank-2">2</span>';
+  if (i === 2) return '<span class="rank rank-3">3</span>';
+  return '<span class="rank rank-n">' + (i + 1) + '</span>';
+}
+
+const CHART_COLORS = ['#0066CC', '#EF3340', '#27ae60', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#34495e', '#e74c3c', '#2ecc71'];
+
+// --- Chart factory ---
+function makeOrUpdate(id, type, data, options) {
+  if (charts[id]) {
+    charts[id].data = data;
+    charts[id].options = { ...charts[id].options, ...options };
+    charts[id].update();
+  } else {
+    charts[id] = new Chart(document.getElementById(id), { type, data, options });
+  }
+}
+
+// --- Preset buttons ---
+document.querySelectorAll('.btn-preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDays = parseInt(btn.dataset.days);
+    loadDashboard(true);
+  });
+});
+
+// --- Auto refresh ---
+function setupAutoRefresh() {
+  clearInterval(autoRefreshTimer);
+  if (document.getElementById('autoRefresh').checked) {
+    autoRefreshTimer = setInterval(() => loadDashboard(false), 5 * 60 * 1000);
+  }
+}
+document.getElementById('autoRefresh').addEventListener('change', setupAutoRefresh);
+
+// --- Helpers for new sections ---
+function formatPct(v) { return (Number(v) * 100).toFixed(1) + '%'; }
+function formatNum(v) { return Number(v).toLocaleString('pl-PL'); }
+function nowTime() { return new Date().toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' }); }
+
+// --- Load dashboard ---
+async function loadDashboard(force) {
+  const loading = document.getElementById('loading');
+  const errorBanner = document.getElementById('errorBanner');
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  loading.classList.remove('hidden');
+  errorBanner.classList.remove('visible');
+  refreshBtn.disabled = true;
+
+  const { dateFrom, dateTo } = getDateRange(currentDays);
+  const forceParam = force ? '&force=true' : '';
+  const metaDays = currentDays <= 7 ? 7 : currentDays <= 30 ? 30 : 90;
+
+  const results = await Promise.allSettled([
+    fetch(`/api/dashboard?dateFrom=${dateFrom}&dateTo=${dateTo}${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); }),
+    fetch(`/api/orders/recent?limit=10${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); }),
+    fetch(`/api/ga4?dateFrom=${dateFrom}&dateTo=${dateTo}${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); }),
+    fetch(`/api/meta-ads?days=${metaDays}${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); }),
+    fetch(`/api/google-ads?dateFrom=${dateFrom}&dateTo=${dateTo}${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); }),
+    fetch(`/api/klaviyo?${forceParam}`).then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); })
+  ]);
+
+  const [dashResult, ordersResult, ga4Result, metaResult, gadsResult, klaviyoResult] = results;
+  const errors = [];
+
+  // Shopify dashboard
+  if (dashResult.status === 'fulfilled') {
+    const dash = dashResult.value;
+    renderKPIs(dash);
+    renderRevenueChart(dash.conversions);
+    renderTrafficChart(dash.traffic);
+    renderCampaignsTable(dash.campaigns);
+    renderPaymentChart(dash.conversions);
+    renderProductsTable(dash.products);
+    renderCustomerChart(dash.conversions);
+    updateShopifyTimes(dash.fetchedAt);
+  } else {
+    errors.push('Shopify: ' + dashResult.reason?.message);
+  }
+
+  // Orders
+  if (ordersResult.status === 'fulfilled') {
+    renderOrdersTable(ordersResult.value.orders);
+  } else {
+    errors.push('Zamowienia: ' + ordersResult.reason?.message);
+  }
+
+  // GA4
+  if (ga4Result.status === 'fulfilled') {
+    renderGA4(ga4Result.value);
+  } else {
+    renderGA4Error(ga4Result.reason?.message);
+  }
+
+  // Meta Ads
+  if (metaResult.status === 'fulfilled') {
+    renderMetaAds(metaResult.value);
+  } else {
+    renderMetaAdsError(metaResult.reason?.message);
+  }
+
+  // Google Ads
+  if (gadsResult.status === 'fulfilled') {
+    renderGoogleAds(gadsResult.value);
+  } else {
+    renderGoogleAdsError(gadsResult.reason?.message);
+  }
+
+  // Klaviyo
+  if (klaviyoResult.status === 'fulfilled') {
+    renderKlaviyoData(klaviyoResult.value);
+  } else {
+    renderKlaviyoError(klaviyoResult.reason?.message);
+  }
+
+  if (errors.length > 0) {
+    errorBanner.textContent = `Bledne zrodla: ${errors.join(' | ')}`;
+    errorBanner.classList.add('visible');
+  }
+
+  document.getElementById('footerStatus').textContent =
+    `Ostatnia aktualizacja: ${nowTime()} | Okres: ${dateFrom} – ${dateTo} | Auto-odswiezanie: ${document.getElementById('autoRefresh').checked ? '5 min' : 'wyl.'}`;
+
+  loading.classList.add('hidden');
+  refreshBtn.disabled = false;
+}
+
+function updateShopifyTimes(fetchedAt) {
+  const t = formatTime(fetchedAt);
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('shopifyTime' + i);
+    if (el) el.textContent = 'Odswiezono: ' + t;
+  }
+}
+
+// --- Renderers ---
+
+function renderKPIs(dash) {
+  const cs = dash.conversions.summary;
+  const cm = dash.conversions.customerMetrics;
+
+  document.getElementById('kpiRevenue').textContent = formatPLN(cs.totalRevenue);
+  document.getElementById('kpiRevenueSub').textContent = `Rabaty: ${formatPLN(cs.totalDiscounts)} | Wysylka: ${formatPLN(cs.totalShipping)}`;
+
+  document.getElementById('kpiOrders').textContent = cs.totalOrders;
+  document.getElementById('kpiOrdersSub').textContent = `${cs.totalItems} szt. | ${cs.averageItemsPerOrder} szt./zam.`;
+
+  document.getElementById('kpiAOV').textContent = formatPLN(cs.averageOrderValue);
+  document.getElementById('kpiAOVSub').textContent = `Rabat: ${cs.discountRate}%`;
+
+  document.getElementById('kpiNewCustomers').textContent = cm.newCustomerRate + '%';
+  document.getElementById('kpiNewCustomersSub').textContent = `${cm.newCustomerOrders} nowych / ${cm.returningCustomerOrders} powracajacych`;
+}
+
+function renderRevenueChart(conversions) {
+  const trends = conversions.trends || [];
+  makeOrUpdate('revenueChart', 'line', {
+    labels: trends.map(t => t.period),
+    datasets: [
+      {
+        label: 'Przychod (PLN)',
+        data: trends.map(t => t.revenue),
+        borderColor: '#0066CC',
+        backgroundColor: 'rgba(0,102,204,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: trends.length > 40 ? 0 : 3
+      },
+      {
+        label: 'Zamowienia',
+        data: trends.map(t => t.orders),
+        borderColor: '#EF3340',
+        backgroundColor: 'transparent',
+        borderDash: [5, 5],
+        tension: 0.3,
+        yAxisID: 'y1',
+        pointRadius: trends.length > 40 ? 0 : 3
+      }
+    ]
+  }, {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      x: { ticks: { maxTicksLimit: 10, font: { size: 11 } } },
+      y: { beginAtZero: true, title: { display: true, text: 'PLN', font: { size: 11 } } },
+      y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, title: { display: true, text: 'Zam.', font: { size: 11 } } }
+    },
+    plugins: { legend: { labels: { font: { size: 11 } } } }
+  });
+}
+
+function renderTrafficChart(traffic) {
+  const sources = (traffic.bySource || []).slice(0, 8);
+  makeOrUpdate('trafficChart', 'doughnut', {
+    labels: sources.map(s => s.source || 'Brak danych'),
+    datasets: [{
+      data: sources.map(s => s.totalRevenue),
+      backgroundColor: CHART_COLORS.slice(0, sources.length)
+    }]
+  }, {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 11 }, padding: 10 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const src = sources[ctx.dataIndex];
+            return `${src.source}: ${formatPLN(src.totalRevenue)} (${src.orderCount} zam.)`;
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderCampaignsTable(campaigns) {
+  const rows = (campaigns.campaigns || []).slice(0, 15);
+  document.getElementById('campaignsTable').innerHTML = rows.length === 0
+    ? '<tr><td colspan="5" class="text-center" style="padding:20px;color:#999">Brak danych o kampaniach UTM</td></tr>'
+    : rows.map(c => `
+    <tr>
+      <td title="${c.campaign}">${c.campaign.length > 35 ? c.campaign.slice(0, 35) + '...' : c.campaign}</td>
+      <td>${c.utmSource}/${c.utmMedium}</td>
+      <td class="text-center">${c.orderCount}</td>
+      <td class="text-right">${formatPLN(c.totalRevenue)}</td>
+      <td class="text-right">${formatPLN(c.averageOrderValue)}</td>
+    </tr>`).join('');
+}
+
+function renderPaymentChart(conversions) {
+  const gateways = (conversions.byPaymentGateway || []).slice(0, 6);
+  makeOrUpdate('paymentChart', 'bar', {
+    labels: gateways.map(g => g.gateway),
+    datasets: [{
+      label: 'Zamowienia',
+      data: gateways.map(g => g.count),
+      backgroundColor: '#0066CC',
+      borderRadius: 6
+    }, {
+      label: 'Przychod (PLN)',
+      data: gateways.map(g => g.revenue),
+      backgroundColor: '#EF3340',
+      borderRadius: 6,
+      yAxisID: 'y1'
+    }]
+  }, {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    scales: {
+      x: { beginAtZero: true, title: { display: true, text: 'Zamowienia', font: { size: 11 } } },
+      y: { ticks: { font: { size: 11 } } },
+      y1: { display: false }
+    },
+    plugins: { legend: { labels: { font: { size: 11 } } } }
+  });
+}
+
+function renderProductsTable(products) {
+  const rows = (products.topProducts || []).slice(0, 10);
+  document.getElementById('productsTable').innerHTML = rows.length === 0
+    ? '<tr><td colspan="5" class="text-center" style="padding:20px;color:#999">Brak danych</td></tr>'
+    : rows.map((p, i) => `
+    <tr>
+      <td>${rankBadge(i)}</td>
+      <td title="${p.title}">${p.title.length > 40 ? p.title.slice(0, 40) + '...' : p.title}</td>
+      <td class="text-center">${p.unitsSold}</td>
+      <td class="text-center">${p.orderCount}</td>
+      <td class="text-right">${formatPLN(p.revenue)}</td>
+    </tr>`).join('');
+}
+
+function renderCustomerChart(conversions) {
+  const cm = conversions.customerMetrics;
+  makeOrUpdate('customerChart', 'doughnut', {
+    labels: ['Nowi klienci', 'Powracajacy'],
+    datasets: [{
+      data: [cm.newCustomerOrders, cm.returningCustomerOrders],
+      backgroundColor: ['#0066CC', '#27ae60']
+    }]
+  }, {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 12 }, padding: 14 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const val = ctx.raw;
+            const pct = ctx.dataIndex === 0 ? cm.newCustomerRate : cm.returningCustomerRate;
+            return `${ctx.label}: ${val} (${pct}%)`;
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderOrdersTable(orders) {
+  const rows = (orders || []).slice(0, 10);
+  document.getElementById('ordersTable').innerHTML = rows.length === 0
+    ? '<tr><td colspan="6" class="text-center" style="padding:20px;color:#999">Brak zamowien</td></tr>'
+    : rows.map(o => {
+      const name = o.customer ? `${o.customer.firstName || ''} ${o.customer.lastName || ''}`.trim() || o.customer.email : '-';
+      return `
+      <tr>
+        <td><strong>${o.name}</strong></td>
+        <td>${formatDate(o.createdAt)}</td>
+        <td title="${o.customer?.email || ''}">${name.length > 25 ? name.slice(0, 25) + '...' : name}</td>
+        <td>${financialBadge(o.financialStatus)}</td>
+        <td>${(o.paymentGatewayNames || []).join(', ') || '-'}</td>
+        <td class="text-right"><strong>${formatPLN(o.totalPrice?.amount || 0)}</strong></td>
+      </tr>`;
+    }).join('');
+}
+
+// --- GA4 renderer ---
+function renderGA4(data) {
+  const rows = data.rows || [];
+  let totalSessions = 0, totalUsers = 0, totalEngagement = 0, totalConversions = 0, totalRevenue = 0;
+
+  rows.forEach(r => {
+    const m = r.metric_values || r.metricValues || [];
+    totalSessions += Number(m[0]?.value || 0);
+    totalUsers += Number(m[1]?.value || 0);
+    totalEngagement += Number(m[2]?.value || 0) * Number(m[0]?.value || 0);
+    totalConversions += Number(m[3]?.value || 0);
+    totalRevenue += Number(m[4]?.value || 0);
+  });
+
+  const avgEngagement = totalSessions > 0 ? totalEngagement / totalSessions : 0;
+
+  document.getElementById('ga4Sessions').textContent = formatNum(totalSessions);
+  document.getElementById('ga4Users').textContent = formatNum(totalUsers);
+  document.getElementById('ga4Engagement').textContent = formatPct(avgEngagement);
+  document.getElementById('ga4Conversions').textContent = formatNum(totalConversions);
+
+  document.getElementById('ga4Table').innerHTML = rows.length === 0
+    ? '<tr><td colspan="6" class="text-center" style="padding:20px;color:#999">Brak danych GA4</td></tr>'
+    : rows.map(r => {
+        const d = r.dimension_values || r.dimensionValues || [];
+        const m = r.metric_values || r.metricValues || [];
+        const source = d[0]?.value || '(none)';
+        const medium = d[1]?.value || '(none)';
+        return `<tr>
+          <td>${source} / ${medium}</td>
+          <td class="text-right">${formatNum(m[0]?.value || 0)}</td>
+          <td class="text-right">${formatNum(m[1]?.value || 0)}</td>
+          <td class="text-right">${formatPct(m[2]?.value || 0)}</td>
+          <td class="text-right">${formatNum(m[3]?.value || 0)}</td>
+          <td class="text-right">${formatPLN(m[4]?.value || 0)}</td>
+        </tr>`;
+      }).join('');
+
+  document.getElementById('ga4Time').textContent = 'Odswiezono: ' + nowTime();
+}
+
+function renderGA4Error(msg) {
+  document.getElementById('ga4Table').innerHTML =
+    `<tr><td colspan="6" class="section-error"><div class="error-icon">!</div>Nie udalo sie pobrac danych GA4: ${msg || 'nieznany blad'}</td></tr>`;
+  document.getElementById('ga4Time').textContent = 'Blad';
+}
+
+// --- Google Ads renderer ---
+function renderGoogleAds(data) {
+  const results = data.results || [];
+  let totalSpend = 0, totalClicks = 0, totalImpressions = 0, totalConversions = 0;
+
+  results.forEach(r => {
+    const m = r.metrics || {};
+    totalSpend += Number(m.costMicros || m.cost_micros || 0) / 1e6;
+    totalClicks += Number(m.clicks || 0);
+    totalImpressions += Number(m.impressions || 0);
+    totalConversions += Number(m.conversions || 0);
+  });
+
+  document.getElementById('gadsSpend').textContent = formatPLN(totalSpend);
+  document.getElementById('gadsClicks').textContent = formatNum(totalClicks);
+  document.getElementById('gadsImpressions').textContent = formatNum(totalImpressions);
+  document.getElementById('gadsConversions').textContent = Number(totalConversions).toFixed(0);
+
+  document.getElementById('gadsTable').innerHTML = results.length === 0
+    ? '<tr><td colspan="8" class="text-center" style="padding:20px;color:#999">Brak danych Google Ads</td></tr>'
+    : results.map(r => {
+        const c = r.campaign || {};
+        const m = r.metrics || {};
+        const cost = Number(m.costMicros || m.cost_micros || 0) / 1e6;
+        const status = (c.status || '').replace('ENABLED', 'Aktywna').replace('PAUSED', 'Wstrzymana');
+        return `<tr>
+          <td title="${c.name || ''}">${(c.name || '-').length > 40 ? c.name.slice(0, 40) + '...' : c.name || '-'}</td>
+          <td class="text-center"><span class="badge ${c.status === 'ENABLED' ? 'badge-paid' : 'badge-pending'}">${status}</span></td>
+          <td class="text-right">${formatNum(m.clicks || 0)}</td>
+          <td class="text-right">${formatNum(m.impressions || 0)}</td>
+          <td class="text-right">${formatPLN(cost)}</td>
+          <td class="text-right">${(Number(m.ctr || 0) * 100).toFixed(2)}%</td>
+          <td class="text-right">${Number(m.conversions || 0).toFixed(0)}</td>
+          <td class="text-right">${formatPLN(m.conversionsValue || m.conversions_value || 0)}</td>
+        </tr>`;
+      }).join('');
+
+  document.getElementById('gadsTime').textContent = 'Odswiezono: ' + nowTime();
+}
+
+function renderGoogleAdsError(msg) {
+  document.getElementById('gadsTable').innerHTML =
+    `<tr><td colspan="8" class="section-error"><div class="error-icon">!</div>Nie udalo sie pobrac danych Google Ads: ${msg || 'nieznany blad'}</td></tr>`;
+  document.getElementById('gadsTime').textContent = 'Blad';
+}
+
+// --- Meta Ads renderer ---
+function renderMetaAds(data) {
+  const campaigns = data.data || [];
+  let totalSpend = 0, totalImpressions = 0, totalClicks = 0;
+
+  campaigns.forEach(c => {
+    totalSpend += Number(c.spend || 0);
+    totalImpressions += Number(c.impressions || 0);
+    totalClicks += Number(c.clicks || 0);
+  });
+
+  const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions * 100).toFixed(2) : '0';
+  const avgCpc = totalClicks > 0 ? (totalSpend / totalClicks).toFixed(2) : '0';
+
+  document.getElementById('metaSpend').textContent = formatPLN(totalSpend);
+  document.getElementById('metaImpressions').textContent = formatNum(totalImpressions);
+  document.getElementById('metaClicks').textContent = formatNum(totalClicks);
+  document.getElementById('metaCtrCpc').textContent = avgCtr + '% / ' + avgCpc + ' zl';
+
+  document.getElementById('metaTable').innerHTML = campaigns.length === 0
+    ? '<tr><td colspan="8" class="text-center" style="padding:20px;color:#999">Brak danych Meta Ads</td></tr>'
+    : campaigns.map(c => {
+        const purchases = (c.actions || []).find(a => a.action_type === 'purchase');
+        const purchaseValue = (c.action_values || []).find(a => a.action_type === 'purchase');
+        return `<tr>
+          <td title="${c.campaign_name || ''}">${(c.campaign_name || '-').length > 40 ? c.campaign_name.slice(0, 40) + '...' : c.campaign_name || '-'}</td>
+          <td class="text-right">${formatPLN(c.spend || 0)}</td>
+          <td class="text-right">${formatNum(c.impressions || 0)}</td>
+          <td class="text-right">${formatNum(c.clicks || 0)}</td>
+          <td class="text-right">${Number(c.ctr || 0).toFixed(2)}%</td>
+          <td class="text-right">${Number(c.cpc || 0).toFixed(2)} zl</td>
+          <td class="text-right">${purchases ? purchases.value : '0'}</td>
+          <td class="text-right">${purchaseValue ? formatPLN(purchaseValue.value) : '-'}</td>
+        </tr>`;
+      }).join('');
+
+  document.getElementById('metaTime').textContent = 'Odswiezono: ' + nowTime();
+}
+
+function renderMetaAdsError(msg) {
+  document.getElementById('metaTable').innerHTML =
+    `<tr><td colspan="8" class="section-error"><div class="error-icon">!</div>Nie udalo sie pobrac danych Meta Ads: ${msg || 'nieznany blad'}</td></tr>`;
+  document.getElementById('metaTime').textContent = 'Blad';
+}
+
+// --- Klaviyo renderer ---
+function renderKlaviyoData(data) {
+  const results = (data.data && data.data.attributes && data.data.attributes.results) || [];
+  let totalCampaigns = results.length;
+  let totalOR = 0, totalCR = 0, totalRevenue = 0;
+
+  results.forEach(r => {
+    const s = r.statistics || {};
+    totalOR += Number(s.open_rate || 0);
+    totalCR += Number(s.click_rate || 0);
+    totalRevenue += Number(s.conversion_value || 0);
+  });
+
+  const avgOR = totalCampaigns > 0 ? totalOR / totalCampaigns : 0;
+  const avgCR = totalCampaigns > 0 ? totalCR / totalCampaigns : 0;
+
+  document.getElementById('klaviyoCampaigns').textContent = totalCampaigns;
+  document.getElementById('klaviyoOR').textContent = formatPct(avgOR);
+  document.getElementById('klaviyoCR').textContent = formatPct(avgCR);
+  document.getElementById('klaviyoRevenue').textContent = formatPLN(totalRevenue);
+
+  document.getElementById('klaviyoTable').innerHTML = results.length === 0
+    ? '<tr><td colspan="7" class="text-center" style="padding:20px;color:#999">Brak danych Klaviyo</td></tr>'
+    : results.map(r => {
+        const s = r.statistics || {};
+        const cd = (r.campaign_details && r.campaign_details.attributes) || {};
+        return `<tr>
+          <td title="${cd.name || ''}">${(cd.name || '-').length > 35 ? cd.name.slice(0, 35) + '...' : cd.name || '-'}</td>
+          <td>${cd.send_time || '-'}</td>
+          <td class="text-right">${formatNum(s.recipients || 0)}</td>
+          <td class="text-right">${formatPct(s.open_rate || 0)}</td>
+          <td class="text-right">${formatPct(s.click_rate || 0)}</td>
+          <td class="text-right">${s.conversions || 0}</td>
+          <td class="text-right">${formatPLN(s.conversion_value || 0)}</td>
+        </tr>`;
+      }).join('');
+
+  document.getElementById('klaviyoTime').textContent = 'Odswiezono: ' + nowTime();
+}
+
+function renderKlaviyoError(msg) {
+  document.getElementById('klaviyoTable').innerHTML =
+    `<tr><td colspan="7" class="section-error"><div class="error-icon">!</div>Nie udalo sie pobrac danych Klaviyo: ${msg || 'nieznany blad'}</td></tr>`;
+  document.getElementById('klaviyoTime').textContent = 'Blad';
+}
+
+// --- Init ---
+loadDashboard(false);
+setupAutoRefresh();
+</script>
+</body>
+</html>

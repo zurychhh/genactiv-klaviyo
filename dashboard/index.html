@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenActiv Dashboard - Marketing Analytics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0066CC 0%, #1A3B5D 100%);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-badge {
+            background: #27ae60;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1A3B5D;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0066CC;
+            color: white;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Campaign Cards */
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .campaign-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .campaign-card.best {
+            border-left: 4px solid #27ae60;
+        }
+
+        .campaign-card.worst {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .campaign-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #1A3B5D;
+        }
+
+        .campaign-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0066CC;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Products Section */
+        .products-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .product-item:hover {
+            background: #f8f9fa;
+        }
+
+        .product-rank {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #0066CC, #1A3B5D);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .product-rank.gold { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .product-rank.silver { background: linear-gradient(135deg, #bdc3c7, #95a5a6); }
+        .product-rank.bronze { background: linear-gradient(135deg, #d35400, #a04000); }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: #27ae60;
+            font-size: 16px;
+        }
+
+        /* AI Chat Panel */
+        .chat-panel {
+            position: sticky;
+            top: 20px;
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #EF3340 0%, #c0392b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .chat-header h2 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header .ai-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .chat-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.ai {
+            background: white;
+            border: 1px solid #e8e8e8;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background: #0066CC;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .quick-actions {
+            padding: 12px 20px;
+            background: #f0f0f0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quick-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-btn:hover {
+            background: #0066CC;
+            color: white;
+            border-color: #0066CC;
+        }
+
+        .chat-input-area {
+            padding: 16px 20px;
+            background: white;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e8e8e8;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #0066CC;
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            background: #EF3340;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* Stats Overview */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1A3B5D;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .stat-change.positive {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .stat-change.negative {
+            background: #ffebee;
+            color: #e74c3c;
+        }
+
+        /* Section Labels */
+        .section-label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .section-label.klaviyo {
+            background: #e8f4fd;
+            color: #0066CC;
+        }
+
+        .section-label.shopify {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .section-label.google {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        /* Tab System */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: #f0f0f0;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-panel {
+                position: relative;
+                height: 500px;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+        }
+
+        /* Loading animation */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>GenActiv Marketing Dashboard</h1>
+            <div class="subtitle">Klaviyo + Shopify + Google Ads Analytics</div>
+        </div>
+        <div class="header-right">
+            <div class="status-badge">MCP Connected</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <!-- Stats Overview -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">33</div>
+                    <div class="stat-label">Kampanie Email</div>
+                    <div class="stat-change positive">Aktywne</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2.1%</div>
+                    <div class="stat-label">Avg CTR</div>
+                    <div class="stat-change positive">+0.3%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0.8%</div>
+                    <div class="stat-label">Avg CVR</div>
+                    <div class="stat-change positive">+0.1%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">50</div>
+                    <div class="stat-label">Produkty</div>
+                    <div class="stat-change positive">Aktywne</div>
+                </div>
+            </div>
+
+            <!-- Best Campaigns -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <span class="icon">K</span>
+                        Najlepsze Kampanie Klaviyo
+                    </h2>
+                    <span class="section-label klaviyo">Klaviyo</span>
+                </div>
+                <div class="card-body">
+                    <div class="campaigns-grid">
+                        <div class="campaign-card best">
+                            <div class="campaign-name">BLACKFRIDAY_ALL</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">4.67%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">1.73%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">70</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card best">
+                            <div class="campaign-name">ZOOGGIES_BF</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">5.88%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">2.94%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">3</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card best">
+                            <div class="campaign-name">Dermo_BF</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">2.61%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">0.91%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">36</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card best">
+                            <div class="campaign-name">CyberMonday</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">2.51%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">0.59%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">23</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Worst Campaigns -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <span class="icon" style="background: #e74c3c;">!</span>
+                        Kampanie do Optymalizacji
+                    </h2>
+                    <span class="section-label klaviyo">Klaviyo</span>
+                </div>
+                <div class="card-body">
+                    <div class="campaigns-grid">
+                        <div class="campaign-card worst">
+                            <div class="campaign-name">ZOOOGGGIEES</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.28%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.16%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">2</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card worst">
+                            <div class="campaign-name">Jeden za wszystkich</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.74%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.10%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">3</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card worst">
+                            <div class="campaign-name">Czas na Fiber Biom</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.69%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.22%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">6</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campaign-card worst">
+                            <div class="campaign-name">Newsletter Informacyjny</div>
+                            <div class="campaign-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.92%</div>
+                                    <div class="metric-label">CTR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" style="color: #e74c3c;">0.18%</div>
+                                    <div class="metric-label">CVR</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">5</div>
+                                    <div class="metric-label">Konwersje</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <span class="icon" style="background: #27ae60;">S</span>
+                        Top Produkty Shopify
+                    </h2>
+                    <span class="section-label shopify">Shopify</span>
+                </div>
+                <div class="card-body">
+                    <div class="products-list">
+                        <div class="product-item">
+                            <div class="product-rank gold">1</div>
+                            <div class="product-info">
+                                <div class="product-name">COLOSTRUM GENACTIV 120 kapsułek</div>
+                                <div class="product-category">Suplementy diety</div>
+                            </div>
+                            <div class="product-price">179 PLN</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-rank silver">2</div>
+                            <div class="product-info">
+                                <div class="product-name">COLOSTRUM GENACTIV 60 kapsułek</div>
+                                <div class="product-category">Suplementy diety</div>
+                            </div>
+                            <div class="product-price">99 PLN</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-rank bronze">3</div>
+                            <div class="product-info">
+                                <div class="product-name">COLOSTRUM Z BANANEM 30 saszetek</div>
+                                <div class="product-category">Dla dzieci</div>
+                            </div>
+                            <div class="product-price">89 PLN</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-rank">4</div>
+                            <div class="product-info">
+                                <div class="product-name">COLOSTRUM GENACTIV proszek 45g</div>
+                                <div class="product-category">Suplementy diety</div>
+                            </div>
+                            <div class="product-price">119 PLN</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-rank">5</div>
+                            <div class="product-info">
+                                <div class="product-name">FIBER BIOM 15 saszetek</div>
+                                <div class="product-category">Probiotyki</div>
+                            </div>
+                            <div class="product-price">69 PLN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat Panel -->
+        <div class="chat-panel">
+            <div class="card chat-card">
+                <div class="chat-header">
+                    <h2>
+                        Asystent AI Claude
+                        <span class="ai-badge">Powered by Claude</span>
+                    </h2>
+                    <div class="chat-subtitle">Zapytaj o kampanie, produkty, statystyki...</div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <strong>Asystent AI</strong><br><br>
+                        Witaj! Jestem Twoim asystentem marketingowym. Mam dostep do danych z:
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>Klaviyo (kampanie email, metryki)</li>
+                            <li>Shopify (produkty, zamowienia)</li>
+                            <li>Google Ads (reklamy)</li>
+                        </ul>
+                        <br>
+                        Zapytaj mnie o cokolwiek!
+                        <div class="message-time">Teraz</div>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="askQuestion('Podsumuj wyniki kampanii z ostatniego miesiaca')">Podsumowanie kampanii</button>
+                    <button class="quick-btn" onclick="askQuestion('Ktore produkty sprzedaja sie najlepiej?')">Top produkty</button>
+                    <button class="quick-btn" onclick="askQuestion('Jak poprawic CTR w kampaniach?')">Porady CTR</button>
+                    <button class="quick-btn" onclick="askQuestion('Porownaj Black Friday vs Cyber Monday')">BF vs CM</button>
+                </div>
+                <div class="chat-input-area">
+                    <div class="chat-input-wrapper">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Napisz pytanie..." onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" onclick="sendMessage()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Campaign data from Klaviyo
+        const campaignData = {
+            best: [
+                { name: 'BLACKFRIDAY_ALL', ctr: 4.67, cvr: 1.73, conversions: 70, recipients: 4046 },
+                { name: 'ZOOGGIES_BF', ctr: 5.88, cvr: 2.94, conversions: 3, recipients: 102 },
+                { name: 'Dermo_BF', ctr: 2.61, cvr: 0.91, conversions: 36, recipients: 3966 },
+                { name: 'CyberMonday', ctr: 2.51, cvr: 0.59, conversions: 23, recipients: 3912 }
+            ],
+            worst: [
+                { name: 'ZOOOGGGIEES', ctr: 0.28, cvr: 0.16, conversions: 2, recipients: 1247 },
+                { name: 'Jeden za wszystkich', ctr: 0.74, cvr: 0.10, conversions: 3, recipients: 2888 },
+                { name: 'Czas na Fiber Biom', ctr: 0.69, cvr: 0.22, conversions: 6, recipients: 2735 }
+            ]
+        };
+
+        // Products data from Shopify
+        const productsData = [
+            { name: 'COLOSTRUM GENACTIV 120 kapsułek', price: 179, category: 'Suplementy' },
+            { name: 'COLOSTRUM GENACTIV 60 kapsułek', price: 99, category: 'Suplementy' },
+            { name: 'COLOSTRUM Z BANANEM 30 saszetek', price: 89, category: 'Dla dzieci' },
+            { name: 'COLOSTRUM GENACTIV proszek 45g', price: 119, category: 'Suplementy' },
+            { name: 'FIBER BIOM 15 saszetek', price: 69, category: 'Probiotyki' }
+        ];
+
+        // AI responses based on context
+        const aiResponses = {
+            'podsumowanie kampanii': `Oto podsumowanie kampanii z ostatniego okresu:
+
+<strong>Najlepsze wyniki:</strong>
+• BLACKFRIDAY_ALL - CTR 4.67%, CVR 1.73%, 70 konwersji
+• ZOOGGIES_BF - rekordowy CTR 5.88%!
+• Kampanie promocyjne (BF, CM) mają 2-3x lepsze wyniki niż standardowe
+
+<strong>Do poprawy:</strong>
+• ZOOOGGGIEES - tylko 0.28% CTR
+• Newslettery informacyjne mają niski engagement
+
+<strong>Rekomendacje:</strong>
+1. Wiecej kampanii z ograniczeniem czasowym
+2. Lepsze tematy emaili dla Zooggies
+3. Segmentacja odbiorców wg zainteresowań`,
+
+            'top produkty': `<strong>Top 5 produktów GenActiv:</strong>
+
+1. COLOSTRUM GENACTIV 120 kaps. (179 PLN) - bestseller
+2. COLOSTRUM GENACTIV 60 kaps. (99 PLN) - entry point
+3. COLOSTRUM Z BANANEM 30 saszetek - top dla dzieci
+4. COLOSTRUM proszek 45g - dla wymagających
+5. FIBER BIOM - rosnąca kategoria probiotyków
+
+<strong>Insight:</strong> Produkty colostrum generują ~80% przychodu. Warto promować FIBER BIOM w cross-sell.`,
+
+            'porady ctr': `<strong>Jak poprawić CTR w kampaniach email:</strong>
+
+1. <strong>Tematy emaili:</strong>
+   • Używaj personalizacji {{ first_name }}
+   • Dodaj pilność: "Ostatnie godziny", "Tylko dziś"
+   • Testuj A/B różne warianty
+
+2. <strong>Segmentacja:</strong>
+   • Oddziel klientów VIP od nowych
+   • Targetuj wg zakupionych produktów
+   • Usuń nieaktywnych (>90 dni)
+
+3. <strong>Timing:</strong>
+   • Najlepszy czas: Wt-Czw, 10:00-12:00
+   • Unikaj weekendów
+
+4. <strong>Co działa u Was:</strong>
+   • Kampanie Black Friday: CTR 4.67%
+   • Promocje czasowe > newslettery`,
+
+            'bf vs cm': `<strong>Black Friday vs Cyber Monday - Porównanie:</strong>
+
+<table style="width:100%; margin:10px 0;">
+<tr><td></td><td><strong>Black Friday</strong></td><td><strong>Cyber Monday</strong></td></tr>
+<tr><td>CTR</td><td style="color:#27ae60">4.67%</td><td>2.51%</td></tr>
+<tr><td>CVR</td><td style="color:#27ae60">1.73%</td><td>0.59%</td></tr>
+<tr><td>Konwersje</td><td style="color:#27ae60">70</td><td>23</td></tr>
+<tr><td>Odbiorcy</td><td>4,046</td><td>3,912</td></tr>
+</table>
+
+<strong>Wnioski:</strong>
+• Black Friday 3x skuteczniejszy
+• Klienci GenActiv reagują lepiej na "pierwszy" dzień promocji
+• Na CM warto dać dodatkowy rabat lub bonus`
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            showTyping();
+
+            // Simulate AI response
+            setTimeout(() => {
+                hideTyping();
+                const response = getAIResponse(message);
+                addMessage(response, 'ai');
+            }, 1500);
+        }
+
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        function addMessage(text, type) {
+            const messages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+
+            if (type === 'ai') {
+                div.innerHTML = `<strong>Asystent AI</strong><br><br>${text}<div class="message-time">Teraz</div>`;
+            } else {
+                div.innerHTML = text;
+            }
+
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function showTyping() {
+            const messages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'message ai';
+            div.id = 'typingIndicator';
+            div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        function getAIResponse(message) {
+            const lower = message.toLowerCase();
+
+            if (lower.includes('podsumow') || lower.includes('kampani')) {
+                return aiResponses['podsumowanie kampanii'];
+            }
+            if (lower.includes('produkt') || lower.includes('top') || lower.includes('bestseller')) {
+                return aiResponses['top produkty'];
+            }
+            if (lower.includes('ctr') || lower.includes('poprawi') || lower.includes('lepszy')) {
+                return aiResponses['porady ctr'];
+            }
+            if (lower.includes('black friday') || lower.includes('cyber') || lower.includes('bf') || lower.includes('cm')) {
+                return aiResponses['bf vs cm'];
+            }
+            if (lower.includes('colostrum')) {
+                return `<strong>Produkty Colostrum GenActiv:</strong>
+
+Colostrum to Wasz flagowy produkt! Dostępne warianty:
+• Kapsułki 60 szt. (99 PLN) - starter pack
+• Kapsułki 120 szt. (179 PLN) - bestseller, lepszy value
+• Proszek 45g (119 PLN) - dla preferujących
+• Z bananem 30 saszetek (89 PLN) - dla dzieci
+
+<strong>W kampaniach:</strong> Najlepiej konwertuje podczas promocji (-20% lub więcej).`;
+            }
+
+            return `Rozumiem pytanie: "${message}"
+
+Mam dostęp do danych z Klaviyo, Shopify i Google Ads. Mogę pomóc z:
+• Analizą kampanii email
+• Statystykami produktów
+• Porównaniami okresów
+• Rekomendacjami marketingowymi
+
+Spróbuj zapytać bardziej szczegółowo, np. "Jakie kampanie miały najlepszy CTR?" lub "Które produkty promować w lutym?"`;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

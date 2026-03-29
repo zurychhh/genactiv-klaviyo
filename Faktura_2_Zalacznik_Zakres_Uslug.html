@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Załącznik do Faktury #2 - GenActiv</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .company-name {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .company-name::after {
+            content: " • • •";
+            color: #7c3aed;
+        }
+
+        .document-title {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .meta-info span {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, #7c3aed 0%, transparent 100%);
+            margin: 30px 0;
+        }
+
+        .section-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 15px;
+            border-left: 3px solid #7c3aed;
+            padding-left: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .item {
+            margin-bottom: 18px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .item-description {
+            color: #c0c0c0;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #707070;
+            font-style: italic;
+        }
+
+        /* Page break for PDF */
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">OLEKSIAK CONSULT</div>
+            <h1 class="document-title">Załącznik do Faktury #2</h1>
+            <div class="meta-info">Klient: <span>GenActiv Sp. z o.o.</span></div>
+            <div class="meta-info">Pakiet: <span>20 godzin wsparcia konsultingowego</span></div>
+            <div class="meta-info">Data: <span>Styczeń 2025</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-box">
+            <h2 class="section-title">Zakres realizacji pakietu 20h</h2>
+            <p class="section-subtitle">Kompleksowe wsparcie konsultingowe w obszarze marketing automation, remarketingu oraz SEO, obejmujące rozwój scenariuszy automatyzacji, integracje techniczne oraz transfer wiedzy.</p>
+        </div>
+
+        <div class="section-box">
+            <h2 class="section-title">Marketing Automation</h2>
+            <p class="section-subtitle">Rozwój zaawansowanych scenariuszy automatyzacji email marketingu z wykorzystaniem platformy Klaviyo</p>
+
+            <div class="item">
+                <span class="item-title">Analiza danych Browse Abandonment:</span>
+                <span class="item-description">Kompleksowa analiza dostępności danych dla scenariusza porzuconych przeglądań produktów - wyższy etap lejka konwersji niż porzucony koszyk, umożliwiający dotarcie do szerszej grupy odbiorców</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Projektowanie scenariusza Browse Abandonment:</span>
+                <span class="item-description">Prowadzenie i mentoring Dominika Operacza w samodzielnym budowaniu nowego scenariusza automatyzacji porzuconych przeglądań w platformie Klaviyo</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Walidacja spójności komunikacji:</span>
+                <span class="item-description">Testowanie i weryfikacja gotowości scenariusza Browse Abandonment pod kątem spójności przekazu marketingowego z istniejącym scenariuszem Abandoned Cart</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Projektowanie testów A/B:</span>
+                <span class="item-description">Opracowanie metodologii i konfiguracji testów A/B dla optymalizacji skuteczności scenariuszy automatyzacji</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Automatyzacja procesów:</span>
+                <span class="item-description">Wdrożenie i konfiguracja automatycznych działań marketingowych zwiększających efektywność operacyjną</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Integracja Klaviyo z Claude Code:</span>
+                <span class="item-description">Połączenie platformy Klaviyo poprzez MCP (Model Context Protocol) z terminalem Claude Code, umożliwiające znaczną oszczędność czasu w analizie danych, budowie szablonów emailowych oraz samodzielne tworzenie snippetów HTML bez angażowania zasobów IT</span>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2 class="section-title">Remarketing Google Ads</h2>
+            <p class="section-subtitle">Kontynuacja prac nad eliminacją barier technicznych blokujących uruchomienie kampanii remarketingowych</p>
+
+            <div class="item">
+                <span class="item-title">Odblokowanie remarketingu:</span>
+                <span class="item-description">Kontynuacja działań diagnostycznych i wdrożeniowych mających na celu uruchomienie możliwości remarketingu w Google Ads, w tym konfiguracja Google Consent Mode v2 oraz optymalizacja zbierania zgód użytkowników</span>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2 class="section-title">SEO & Działania Uzupełniające</h2>
+            <p class="section-subtitle">Strategiczne wsparcie w obszarze optymalizacji organicznej i współpracy z partnerami zewnętrznymi</p>
+
+            <div class="item">
+                <span class="item-title">Optymalizacja SEO:</span>
+                <span class="item-description">Kontynuacja prac nad optymalizacją SEO poprzez przygotowanie i przekazanie szczegółowych rekomendacji do realizacji przez agencję ICEA</span>
+            </div>
+
+            <div class="item">
+                <span class="item-title">Wsparcie operacyjne:</span>
+                <span class="item-description">Regularne spotkania wspierające oraz stałe doradztwo operacyjne dla Dominika Operacza w zakresie marketing automation i strategii digitalowej</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-copyright">© 2025 Rafał Oleksiak - CRM & Marketing Automation Consulting</div>
+            <div class="footer-note">Ten dokument stanowi integralną część faktury i zawiera szczegółowy zakres wykonanych usług konsultingowych</div>
+        </div>
+    </div>
+</body>
+</html>

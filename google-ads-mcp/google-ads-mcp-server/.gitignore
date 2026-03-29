@@ -1,0 +1,10 @@
+# Environment
+.env
+
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+lib/
+google-ads-mcp-server.dxt

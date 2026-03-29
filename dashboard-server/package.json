@@ -1,0 +1,18 @@
+{
+  "name": "genactiv-dashboard",
+  "version": "1.0.0",
+  "description": "GenActiv live dashboard powered by Shopify Extended analytics",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
+    "@modelcontextprotocol/sdk": "^1.17.1"
+  }
+}

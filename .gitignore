@@ -1,0 +1,39 @@
+# Environment & secrets
+.env
+*.env.local
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node.js
+node_modules/
+
+# OAuth tokens & credentials
+client_secret.json
+google_ads_token.json
+application_default_credentials.json
+*_token.json
+*_secret.json
+
+# Claude Code
+.claude/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.xlsx
+*.pdf
+
+# Large screenshots
+*.png
+!templates/**/*.png
+google-ads-mcp/google_ads_credentials.json

@@ -1,0 +1,234 @@
+import type { GraphQLClient } from "graphql-request";
+import { gql } from "graphql-request";
+import { z } from "zod";
+
+const GetTrafficSourceAnalyticsInputSchema = z.object({
+  dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
+  dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
+  limit: z.number().default(250).describe("Max orders to analyze (max 250)")
+});
+
+type GetTrafficSourceAnalyticsInput = z.infer<typeof GetTrafficSourceAnalyticsInputSchema>;
+
+interface SourceMetrics {
+  source: string;
+  sourceType: string;
+  orderCount: number;
+  totalRevenue: number;
+  averageOrderValue: number;
+  campaigns: Record<string, { orderCount: number; revenue: number }>;
+}
+
+let shopifyClient: GraphQLClient;
+
+const getTrafficSourceAnalytics = {
+  name: "get-traffic-source-analytics",
+  description: "Analyze orders by traffic source with revenue and AOV metrics",
+  schema: GetTrafficSourceAnalyticsInputSchema,
+
+  initialize(client: GraphQLClient) {
+    shopifyClient = client;
+  },
+
+  execute: async (input: GetTrafficSourceAnalyticsInput) => {
+    try {
+      const { dateFrom, dateTo, limit } = input;
+
+      const query = gql`
+        query GetOrdersForAnalytics($first: Int!, $query: String) {
+          orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
+            edges {
+              node {
+                id
+                name
+                createdAt
+                totalPriceSet {
+                  shopMoney {
+                    amount
+                    currencyCode
+                  }
+                }
+                displayFinancialStatus
+                sourceName
+                sourceIdentifier
+                channelInformation {
+                  channelId
+                  channelDefinition {
+                    channelName
+                    handle
+                  }
+                }
+                customerJourneySummary {
+                  firstVisit {
+                    source
+                    sourceType
+                    utmParameters {
+                      source
+                      medium
+                      campaign
+                      content
+                      term
+                    }
+                    referrerUrl
+                  }
+                  lastVisit {
+                    source
+                    sourceType
+                    utmParameters {
+                      source
+                      medium
+                      campaign
+                      content
+                      term
+                    }
+                    referrerUrl
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const queryFilter = `created_at:>=${dateFrom} AND created_at:<=${dateTo}`;
+
+      const variables = {
+        first: Math.min(limit, 250),
+        query: queryFilter
+      };
+
+      const data = (await shopifyClient.request(query, variables)) as {
+        orders: any;
+      };
+
+      // Aggregate by traffic source
+      const sourceMap = new Map<string, SourceMetrics>();
+      const channelMap = new Map<string, { orderCount: number; revenue: number }>();
+      const utmSourceMap = new Map<string, { orderCount: number; revenue: number; campaigns: Set<string> }>();
+
+      let totalOrders = 0;
+      let totalRevenue = 0;
+      let ordersWithJourney = 0;
+      let ordersWithoutJourney = 0;
+
+      for (const edge of data.orders.edges) {
+        const order = edge.node;
+        const revenue = parseFloat(order.totalPriceSet.shopMoney.amount);
+
+        totalOrders++;
+        totalRevenue += revenue;
+
+        // Track channel
+        const channelName = order.channelInformation?.channelDefinition?.channelName || order.sourceName || "Unknown";
+        const channelData = channelMap.get(channelName) || { orderCount: 0, revenue: 0 };
+        channelData.orderCount++;
+        channelData.revenue += revenue;
+        channelMap.set(channelName, channelData);
+
+        // Track customer journey (first visit attribution)
+        const journey = order.customerJourneySummary;
+        if (journey?.firstVisit) {
+          ordersWithJourney++;
+          const firstVisit = journey.firstVisit;
+          const source = firstVisit.source || "Direct";
+          const sourceType = firstVisit.sourceType || "unknown";
+
+          const key = `${source}|${sourceType}`;
+          const existingMetrics = sourceMap.get(key);
+          const metrics: SourceMetrics = existingMetrics || {
+            source,
+            sourceType,
+            orderCount: 0,
+            totalRevenue: 0,
+            averageOrderValue: 0,
+            campaigns: {} as Record<string, { orderCount: number; revenue: number }>
+          };
+
+          metrics.orderCount++;
+          metrics.totalRevenue += revenue;
+
+          // Track campaigns
+          if (firstVisit.utmParameters?.campaign) {
+            const campaign: string = firstVisit.utmParameters.campaign;
+            if (!metrics.campaigns[campaign]) {
+              metrics.campaigns[campaign] = { orderCount: 0, revenue: 0 };
+            }
+            metrics.campaigns[campaign].orderCount++;
+            metrics.campaigns[campaign].revenue += revenue;
+          }
+
+          sourceMap.set(key, metrics);
+
+          // Track UTM sources separately
+          if (firstVisit.utmParameters?.source) {
+            const utmSource = firstVisit.utmParameters.source;
+            const utmData = utmSourceMap.get(utmSource) || { orderCount: 0, revenue: 0, campaigns: new Set<string>() };
+            utmData.orderCount++;
+            utmData.revenue += revenue;
+            if (firstVisit.utmParameters.campaign) {
+              utmData.campaigns.add(firstVisit.utmParameters.campaign);
+            }
+            utmSourceMap.set(utmSource, utmData);
+          }
+        } else {
+          ordersWithoutJourney++;
+        }
+      }
+
+      // Calculate AOV for each source
+      for (const metrics of sourceMap.values()) {
+        metrics.averageOrderValue = metrics.orderCount > 0
+          ? Math.round(metrics.totalRevenue / metrics.orderCount * 100) / 100
+          : 0;
+        metrics.totalRevenue = Math.round(metrics.totalRevenue * 100) / 100;
+      }
+
+      // Sort by revenue
+      const bySource = Array.from(sourceMap.values())
+        .sort((a, b) => b.totalRevenue - a.totalRevenue);
+
+      const byChannel = Array.from(channelMap.entries())
+        .map(([channel, data]) => ({
+          channel,
+          orderCount: data.orderCount,
+          revenue: Math.round(data.revenue * 100) / 100,
+          averageOrderValue: Math.round(data.revenue / data.orderCount * 100) / 100
+        }))
+        .sort((a, b) => b.revenue - a.revenue);
+
+      const byUtmSource = Array.from(utmSourceMap.entries())
+        .map(([source, data]) => ({
+          utmSource: source,
+          orderCount: data.orderCount,
+          revenue: Math.round(data.revenue * 100) / 100,
+          averageOrderValue: Math.round(data.revenue / data.orderCount * 100) / 100,
+          campaigns: Array.from(data.campaigns)
+        }))
+        .sort((a, b) => b.revenue - a.revenue);
+
+      return {
+        period: { from: dateFrom, to: dateTo },
+        summary: {
+          totalOrders,
+          totalRevenue: Math.round(totalRevenue * 100) / 100,
+          averageOrderValue: totalOrders > 0 ? Math.round(totalRevenue / totalOrders * 100) / 100 : 0,
+          ordersWithJourney,
+          ordersWithoutJourney,
+          journeyTrackingRate: totalOrders > 0 ? Math.round(ordersWithJourney / totalOrders * 100) : 0
+        },
+        bySource,
+        byChannel,
+        byUtmSource
+      };
+    } catch (error) {
+      console.error("Error analyzing traffic sources:", error);
+      throw new Error(
+        `Failed to analyze traffic sources: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
+  }
+};
+
+export { getTrafficSourceAnalytics };

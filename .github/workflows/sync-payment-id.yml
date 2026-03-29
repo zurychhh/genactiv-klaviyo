@@ -1,0 +1,34 @@
+name: Sync Payment ID (Shopify → Baselinker)
+
+on:
+  # Uruchamiaj co godzinę
+  schedule:
+    - cron: '0 * * * *'  # Co godzinę o :00
+
+  # Możliwość ręcznego uruchomienia
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Run sync script
+        env:
+          SHOPIFY_DOMAIN: ${{ secrets.SHOPIFY_DOMAIN }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          BASELINKER_TOKEN: ${{ secrets.BASELINKER_TOKEN }}
+        run: |
+          python sync_payment_id_auto.py --live

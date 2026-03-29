@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenActiv - Dane SEO | Oleksiak Consult</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #2D3142 0%, #1a1d2e 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .document-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #2D3142;
+            border-radius: 24px;
+            padding: 60px;
+            border: 3px solid #7B2CBF;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .document-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #7B2CBF, #0066ff, #7B2CBF);
+            border-radius: 24px;
+            z-index: -1;
+        }
+        
+        .header {
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(123, 44, 191, 0.3);
+            padding-bottom: 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            animation: dotPulse 1.2s ease-in-out infinite;
+        }
+        
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.4s; }
+        .dot:nth-child(3) { animation-delay: 0.8s; }
+        
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 42px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            padding-left: 16px;
+            border-left: 4px solid #7B2CBF;
+        }
+        
+        .section-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 13px;
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.3), rgba(0, 102, 255, 0.2));
+            padding: 14px 12px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            color: white;
+            border-bottom: 2px solid rgba(123, 44, 191, 0.3);
+            white-space: nowrap;
+        }
+        
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background: rgba(123, 44, 191, 0.1);
+        }
+        
+        .data-table .number {
+            text-align: right;
+            font-family: 'DM Sans', monospace;
+        }
+        
+        .trend-up {
+            color: #00d26a;
+            font-weight: 600;
+        }
+        
+        .trend-down {
+            color: #ff3b30;
+            font-weight: 600;
+        }
+        
+        .trend-neutral {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .position-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            min-width: 40px;
+        }
+        
+        .position-1 {
+            background: linear-gradient(135deg, #00d26a, #00a854);
+            color: white;
+        }
+        
+        .position-top3 {
+            background: rgba(0, 210, 106, 0.3);
+            color: #00d26a;
+        }
+        
+        .position-top10 {
+            background: rgba(0, 102, 255, 0.3);
+            color: #5fa8ff;
+        }
+        
+        .position-low {
+            background: rgba(255, 149, 0, 0.2);
+            color: #ff9500;
+        }
+        
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .kpi-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .kpi-value {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .kpi-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+        
+        .kpi-change {
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.15), rgba(0, 102, 255, 0.1));
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(123, 44, 191, 0.3);
+        }
+        
+        .summary-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            margin-bottom: 12px;
+        }
+        
+        .summary-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .print-button {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(123, 44, 191, 0.4);
+            z-index: 1000;
+        }
+        
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(123, 44, 191, 0.6);
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .highlight-row {
+            background: rgba(123, 44, 191, 0.15) !important;
+        }
+        
+        .small-text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Explainer boxes - wyjaśnienia dla laików */
+        .explainer-box {
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .explainer-box::before {
+            content: '💡';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #2D3142;
+            padding: 0 8px;
+            font-size: 18px;
+        }
+        
+        .explainer-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #5fa8ff;
+            margin-bottom: 10px;
+        }
+        
+        .explainer-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        .explainer-text strong {
+            color: white;
+        }
+        
+        .metric-explainer {
+            display: inline-block;
+            background: rgba(123, 44, 191, 0.2);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .tooltip-trigger {
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+            cursor: help;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: rgba(0, 210, 106, 0.15);
+            border: 1px solid rgba(0, 210, 106, 0.3);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: #00d26a;
+            margin-left: 8px;
+        }
+        
+        @media print {
+            body {
+                background: #2D3142;
+                padding: 20px;
+            }
+            
+            .document-container {
+                padding: 40px;
+            }
+            
+            .document-container::before {
+                display: none;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @page {
+            size: A4 landscape;
+            margin: 1cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                OLEKSIAK CONSULT
+                <div class="loading-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            
+            <h1>Dane SEO - Arkusz Liczbowy</h1>
+            <div class="subtitle">GenActiv.pl | Źródło: Raporty ICEA + Senuto | Maj - Październik 2025</div>
+            
+            <div class="explainer-box" style="margin-top: 30px; text-align: left;">
+                <div class="explainer-title">Skąd pochodzą te dane?</div>
+                <div class="explainer-text">
+                    <strong>ICEA S.A.</strong> - polska agencja SEO, która dostarcza miesięczne raporty o widoczności strony w Google. Pokazują ile razy strona pojawiła się w wynikach wyszukiwania i ile osób w nią kliknęło.<br><br>
+                    <strong>Senuto</strong> - polskie narzędzie analityczne (jak "rentgen" dla stron internetowych). Śledzi na jakich pozycjach w Google pojawia się strona dla tysięcy różnych haseł, które ludzie wpisują w wyszukiwarkę.<br><br>
+                    <strong>Ahrefs</strong> - międzynarodowe narzędzie SEO, które analizuje linki prowadzące do strony i trudność konkurowania o poszczególne hasła.
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKCJA 1: PODSUMOWANIE MIESIĘCZNE -->
+        <div class="section">
+            <h2 class="section-title">1. Widoczność w Google - Trend miesięczny</h2>
+            <p class="section-description">
+                Dane z raportów ICEA S.A. za okres maj-wrzesień 2025. Pokazują ile razy GenActiv pojawił się w wynikach Google 
+                i ile osób kliknęło w link do strony.
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Co oznaczają te 4 liczby poniżej?</div>
+                <div class="explainer-text">
+                    <strong>2,534 monitorowanych fraz</strong> - tyle różnych haseł (słów kluczowych) ludzie wpisują w Google, a GenActiv pojawia się w wynikach. To jak "2,534 różnych drzwi", przez które klienci mogą trafić na stronę. Im więcej fraz, tym więcej szans na znalezienie.<br><br>
+                    <strong>190 fraz w TOP 3</strong> - dla 190 haseł GenActiv jest na pozycji 1, 2 lub 3 w Google. To kluczowe, bo <strong>pierwsze 3 wyniki zbierają ~60% wszystkich kliknięć</strong>. Bycie w TOP 3 to jak stanie na najlepszej półce w aptece.<br><br>
+                    <strong>578 fraz w TOP 10</strong> - dla 578 haseł GenActiv jest na 1. stronie Google (pozycje 1-10). <strong>Tylko ~5% użytkowników przechodzi na 2. stronę Google</strong>, więc bycie w TOP 10 = bycie widocznym.<br><br>
+                    <strong>Średnia pozycja 25</strong> - to średnia ze wszystkich 2,534 fraz. Pozycja 25 = strona 3 w Google (bo na każdej stronie jest ~10 wyników). Strona 3 to praktycznie niewidoczność - trzeba popracować, żeby przesunąć więcej fraz do TOP 10.
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">2,534</div>
+                    <div class="kpi-label">Monitorowanych fraz</div>
+                    <div class="kpi-change trend-neutral">stan na wrzesień 2025</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">190</div>
+                    <div class="kpi-label">Fraz w TOP 3</div>
+                    <div class="kpi-change trend-up">7.5% portfolio</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">578</div>
+                    <div class="kpi-label">Fraz w TOP 10</div>
+                    <div class="kpi-change trend-up">22.8% portfolio</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">25.0</div>
+                    <div class="kpi-label">Średnia pozycja</div>
+                    <div class="kpi-change trend-neutral">strona 3 Google</div>
+                </div>
+            </div>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Jak czytać tabelę poniżej?</div>
+                <div class="explainer-text">
+                    <strong>Wyświetlenia w Google</strong> - ile razy strona GenActiv pojawiła się w wynikach wyszukiwania (niekoniecznie ktoś kliknął).<br>
+                    <strong>Kliknięcia</strong> - ile razy ktoś faktycznie kliknął w link do GenActiv.<br>
+                    <strong>CTR (Click-Through Rate)</strong> - procent osób, które zobaczyły wynik i kliknęły. CTR 3% = na 100 wyświetleń, 3 osoby kliknęły. Wyższy CTR = lepszy tytuł/opis strony.<br>
+                    <strong>Zmiana M/M</strong> - porównanie do poprzedniego miesiąca. Zielone = wzrost, czerwone = spadek.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Miesiąc</th>
+                        <th>TOP 3</th>
+                        <th>TOP 10</th>
+                        <th>TOP 50</th>
+                        <th>Wyświetlenia w Google</th>
+                        <th>Kliknięcia</th>
+                        <th>CTR</th>
+                        <th>Zmiana wyświetleń</th>
+                        <th>Zmiana kliknięć</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Maj 2025</strong></td>
+                        <td class="number"><span class="position-badge position-top3">414</span></td>
+                        <td class="number">969</td>
+                        <td class="number">2,982,680</td>
+                        <td class="number"><strong>2,982,680</strong></td>
+                        <td class="number"><strong>15,348</strong></td>
+                        <td class="number">0.51%</td>
+                        <td class="number trend-up">+18,860</td>
+                        <td class="number trend-up">+2,891</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>Czerwiec 2025</strong></td>
+                        <td class="number"><span class="position-badge position-top3">559</span></td>
+                        <td class="number">1,299</td>
+                        <td class="number">3,442,796</td>
+                        <td class="number"><strong>3,442,796</strong></td>
+                        <td class="number"><strong>14,125</strong></td>
+                        <td class="number">0.41%</td>
+                        <td class="number trend-up">+460,116 (+15%)</td>
+                        <td class="number trend-down">-1,223</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lipiec 2025</strong> 🚨</td>
+                        <td class="number"><span class="position-badge position-low">256</span></td>
+                        <td class="number">369</td>
+                        <td class="number">911</td>
+                        <td class="number"><strong>289,164</strong></td>
+                        <td class="number"><strong>7,762</strong></td>
+                        <td class="number">2.68%</td>
+                        <td class="number trend-down">-3,153,632 (-92%)</td>
+                        <td class="number trend-down">-6,363</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sierpień 2025</strong></td>
+                        <td class="number"><span class="position-badge position-top10">244</span></td>
+                        <td class="number">371</td>
+                        <td class="number">1,026</td>
+                        <td class="number"><strong>235,503</strong></td>
+                        <td class="number"><strong>7,041</strong></td>
+                        <td class="number">2.99%</td>
+                        <td class="number trend-down">-53,661</td>
+                        <td class="number trend-down">-721</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>Wrzesień 2025</strong></td>
+                        <td class="number"><span class="position-badge position-top3">256</span></td>
+                        <td class="number">379</td>
+                        <td class="number">1,112</td>
+                        <td class="number"><strong>296,513</strong></td>
+                        <td class="number"><strong>10,597</strong></td>
+                        <td class="number">3.57%</td>
+                        <td class="number trend-up">+61,010 (+26%)</td>
+                        <td class="number trend-up">+3,556 (+50%)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary-box">
+                <div class="summary-title">⚠️ Uwaga: Anomalia w lipcu 2025</div>
+                <div class="summary-text">
+                    Dane z lipca pokazują drastyczny spadek wyświetleń (-92% vs czerwiec). Może to wynikać z: 
+                    (1) zmiany metodologii raportowania, (2) problemów technicznych ze stroną, (3) update algorytmu Google, 
+                    (4) sezonowości. Wymaga głębszej analizy.
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKCJA 2: TOP FRAZY -->
+        <div class="section page-break">
+            <h2 class="section-title">2. Najważniejsze frazy kluczowe - Pozycje i wolumen</h2>
+            <p class="section-description">
+                Frazy z najwyższym wolumenem wyszukiwań, na które GenActiv jest widoczny w Google. 
+                Dane z Senuto (wrzesień 2025).
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Jak czytać tę tabelę? Co znaczą poszczególne kolumny?</div>
+                <div class="explainer-text">
+                    <strong>Fraza kluczowa</strong> - dokładne słowa, które ludzie wpisują w Google. Np. "colostrum" to hasło, które ktoś wpisuje szukając informacji lub produktu.<br><br>
+                    <strong>Wyszukiwań/mies.</strong> - ile razy miesięcznie Polacy wpisują to hasło w Google. 33,100 dla "colostrum" = ~1,100 osób dziennie szuka tego słowa. To jak ruch na autostradzie - im większy wolumen, tym więcej potencjalnych klientów.<br><br>
+                    <strong>Pozycja teraz/poprz.</strong> - na którym miejscu w Google pojawia się GenActiv dla tego hasła. Pozycja 1 = pierwszy wynik (najlepiej). Pozycja 10 = ostatni na 1. stronie. Pozycja 11+ = strona 2 i dalej (prawie nikt tam nie zagląda).<br><br>
+                    <strong>Trudność (0-100)</strong> - jak ciężko jest zdobyć wysoką pozycję dla tego hasła. 0-30 = łatwe, 30-50 = średnie, 50-70 = trudne, 70+ = bardzo trudne. Trudność zależy od konkurencji - ile innych stron walczy o to samo hasło.<br><br>
+                    <strong>Strona docelowa</strong> - która strona GenActiv pojawia się w wynikach dla tego hasła. Np. "/pages/co-to-jest-colostrum" to artykuł edukacyjny.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fraza kluczowa</th>
+                        <th>Wyszukiwań/mies.</th>
+                        <th>Pozycja teraz</th>
+                        <th>Pozycja poprz.</th>
+                        <th>Zmiana</th>
+                        <th>Trudność (0-100)</th>
+                        <th>Strona docelowa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td><strong>colostrum</strong></td>
+                        <td class="number"><strong>33,100</strong></td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">56</td>
+                        <td class="small-text">/pages/co-to-jest-colostrum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>leukocyty</strong></td>
+                        <td class="number"><strong>27,100</strong></td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">62</td>
+                        <td class="small-text">/pages/leukocyty-czym-sa...</td>
+                    </tr>
+                    <tr>
+                        <td>laktoferyna</td>
+                        <td class="number">22,200</td>
+                        <td class="number"><span class="position-badge position-top10">6</span></td>
+                        <td class="number">6</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">45</td>
+                        <td class="small-text">/pages/laktoferyna</td>
+                    </tr>
+                    <tr>
+                        <td>hormon wzrostu</td>
+                        <td class="number">18,100</td>
+                        <td class="number"><span class="position-badge position-top10">6</span></td>
+                        <td class="number">6</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">56</td>
+                        <td class="small-text">/pages/hormon-wzrostu</td>
+                    </tr>
+                    <tr>
+                        <td>choroba leśniowskiego crohna</td>
+                        <td class="number">18,100</td>
+                        <td class="number"><span class="position-badge position-top10">11</span></td>
+                        <td class="number">11</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">56</td>
+                        <td class="small-text">/blogs/poradnik/...</td>
+                    </tr>
+                    <tr>
+                        <td>choroba crohna</td>
+                        <td class="number">14,800</td>
+                        <td class="number"><span class="position-badge position-top10">11</span></td>
+                        <td class="number">11</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">58</td>
+                        <td class="small-text">/blogs/poradnik/...</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>colostrum dla dzieci</strong></td>
+                        <td class="number">8,100</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">42</td>
+                        <td class="small-text">/collections/zdrowe-dziecko</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>colostrum genactiv</strong></td>
+                        <td class="number">6,600</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">28</td>
+                        <td class="small-text">/</td>
+                    </tr>
+                    <tr>
+                        <td>zapalenie jelit</td>
+                        <td class="number">6,600</td>
+                        <td class="number"><span class="position-badge position-top10">3</span></td>
+                        <td class="number">4</td>
+                        <td class="number trend-up">+1</td>
+                        <td class="number">51</td>
+                        <td class="small-text">/pages/zapalenie-jelit...</td>
+                    </tr>
+                    <tr>
+                        <td>rekonwalescencja</td>
+                        <td class="number">9,900</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">35</td>
+                        <td class="small-text">/pages/rekonwalescencja</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum bovinum</td>
+                        <td class="number">1,900</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">38</td>
+                        <td class="small-text">/pages/co-to-jest-colostrum</td>
+                    </tr>
+                    <tr>
+                        <td>genactiv</td>
+                        <td class="number">1,900</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1</td>
+                        <td class="number trend-neutral">0</td>
+                        <td class="number">15</td>
+                        <td class="small-text">/</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary-box">
+                <div class="summary-title">📊 Podsumowanie TOP fraz - co to oznacza dla biznesu?</div>
+                <div class="summary-text">
+                    <strong>Łączny wolumen fraz w TOP 10: 348,480 wyszukiwań/miesiąc</strong><br>
+                    To znaczy, że ~348 tysięcy razy miesięcznie ktoś wpisuje w Google hasło, dla którego GenActiv jest na 1. stronie wyników. To potencjalni klienci, którzy widzą markę.<br><br>
+                    <strong>Średnia trudność: 33.6/100 (umiarkowana konkurencja)</strong><br>
+                    Większość haseł, na które GenActiv jest widoczny, ma średnią konkurencję. To dobra wiadomość - nie walczymy z gigantami jak Allegro czy Wikipedia o każde hasło.<br><br>
+                    <strong>Stabilność pozycji</strong><br>
+                    Większość kluczowych fraz (jak "colostrum", "colostrum genactiv") utrzymuje pozycję #1 od lat. To buduje zaufanie Google i jest trudne do "zepchnięcia" przez konkurencję.
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKCJA 3: HISTORIA POZYCJI -->
+        <div class="section page-break">
+            <h2 class="section-title">3. Historia pozycji głównych fraz (2023-2025)</h2>
+            <p class="section-description">
+                Ewolucja pozycji najważniejszych fraz w czasie. Dane pokazują stabilność i trendy długoterminowe.
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Po co analizować historię pozycji?</div>
+                <div class="explainer-text">
+                    <strong>Stabilność = siła</strong> - jeśli fraza trzyma pozycję #1 przez 2 lata, to Google "ufa" tej stronie i trudno ją zepchnąć. To jak reputacja - buduje się latami.<br><br>
+                    <strong>Spadki = alarm</strong> - jeśli fraza spadła z pozycji 3 na 37 (jak "siara bydlęca"), to sygnał, że coś się zmieniło. Może konkurencja napisała lepszy artykuł, może Google zmienił algorytm, może strona ma problemy techniczne.<br><br>
+                    <strong>Wzrosty = szansa</strong> - jeśli fraza rośnie (jak "colostrum opinie" z 14 na 8), to znak, że działania SEO przynoszą efekty i warto kontynuować.<br><br>
+                    <strong>Jak czytać tabelę:</strong> Każda kolumna to data pomiaru. Liczba = pozycja w Google (1 = najlepsza). "b/d" = brak danych (fraza nie była wtedy monitorowana). Kolumna "Trend 2 lata" pokazuje ogólny kierunek zmian.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fraza</th>
+                        <th>02/2023</th>
+                        <th>08/2023</th>
+                        <th>01/2024</th>
+                        <th>06/2024</th>
+                        <th>01/2025</th>
+                        <th>06/2025</th>
+                        <th>09/2025</th>
+                        <th>10/2025</th>
+                        <th>Trend 2 lata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td><strong>colostrum</strong></td>
+                        <td class="number">1</td>
+                        <td class="number">4</td>
+                        <td class="number">3</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="trend-neutral">stabilna #1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum genactiv</strong></td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="trend-up">zawsze #1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum dla dzieci</strong></td>
+                        <td class="number">3</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="trend-up">poprawa +2</td>
+                    </tr>
+                    <tr>
+                        <td>siara bydlęca</td>
+                        <td class="number">13</td>
+                        <td class="number">7</td>
+                        <td class="number">3</td>
+                        <td class="number">3</td>
+                        <td class="number">3</td>
+                        <td class="number">24</td>
+                        <td class="number">18</td>
+                        <td class="number"><span class="position-badge position-low">37</span></td>
+                        <td class="trend-down">spadek -24</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum właściwości</td>
+                        <td class="number">7</td>
+                        <td class="number">6</td>
+                        <td class="number">1</td>
+                        <td class="number">4</td>
+                        <td class="number">2</td>
+                        <td class="number">8</td>
+                        <td class="number">16</td>
+                        <td class="number"><span class="position-badge position-low">22</span></td>
+                        <td class="trend-down">spadek -15</td>
+                    </tr>
+                    <tr>
+                        <td>sibo objawy</td>
+                        <td class="number">24</td>
+                        <td class="number">22</td>
+                        <td class="number">2</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">4</td>
+                        <td class="number">17</td>
+                        <td class="number"><span class="position-badge position-low">30</span></td>
+                        <td class="trend-down">spadek -6</td>
+                    </tr>
+                    <tr>
+                        <td>sibo co to jest</td>
+                        <td class="number">19</td>
+                        <td class="number">22</td>
+                        <td class="number">11</td>
+                        <td class="number">13</td>
+                        <td class="number">13</td>
+                        <td class="number">15</td>
+                        <td class="number">48</td>
+                        <td class="number"><span class="position-badge position-low">75</span></td>
+                        <td class="trend-down">spadek -56</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum opinie</td>
+                        <td class="number">14</td>
+                        <td class="number">20</td>
+                        <td class="number">4</td>
+                        <td class="number">2</td>
+                        <td class="number">2</td>
+                        <td class="number">4</td>
+                        <td class="number">8</td>
+                        <td class="number"><span class="position-badge position-top10">8</span></td>
+                        <td class="trend-up">poprawa +6</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum na co pomaga</td>
+                        <td class="number">b/d</td>
+                        <td class="number">6</td>
+                        <td class="number">2</td>
+                        <td class="number">2</td>
+                        <td class="number">1</td>
+                        <td class="number">17</td>
+                        <td class="number">39</td>
+                        <td class="number"><span class="position-badge position-low">27</span></td>
+                        <td class="trend-down">spadek -21</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum dawkowanie</td>
+                        <td class="number">4</td>
+                        <td class="number">3</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3</td>
+                        <td class="number"><span class="position-badge position-top3">3</span></td>
+                        <td class="trend-up">poprawa +1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEKCJA 4: ZMIANY POZYCJI -->
+        <div class="section">
+            <h2 class="section-title">4. Dynamika zmian pozycji (wrzesień 2025)</h2>
+            <p class="section-description">
+                Analiza ruchu pozycji fraz w ostatnim miesiącu. Pokazuje które frazy rosną, a które spadają.
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Co oznaczają te statystyki?</div>
+                <div class="explainer-text">
+                    <strong>101 fraz wzrosło, 115 spadło, 2,318 bez zmian</strong> - większość fraz (91.5%) nie zmieniła pozycji. To normalne - Google nie przetasowuje wyników codziennie. Zmiany dotyczą głównie fraz, które są "na granicy" (np. pozycja 10-15).<br><br>
+                    <strong>Średnia zmiana -0.24</strong> - minimalny spadek, praktycznie neutralny. Gdyby było -5 lub więcej, to sygnał alarmu. Gdyby było +2 lub więcej, to świetna wiadomość.<br><br>
+                    <strong>Tabela wzrostów/spadków</strong> - pokazuje ekstremalne przypadki. Niektóre skoki (np. z pozycji 100 na 38) mogą wynikać z tego, że Google "odkrył" stronę, której wcześniej nie indeksował. Duże spadki (np. z 23 na 100) mogą oznaczać utratę widoczności - warto sprawdzić co się stało.
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">101</div>
+                    <div class="kpi-label">Fraz które wzrosły</div>
+                    <div class="kpi-change trend-up">4.0% portfolio</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">115</div>
+                    <div class="kpi-label">Fraz które spadły</div>
+                    <div class="kpi-change trend-down">4.5% portfolio</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">2,318</div>
+                    <div class="kpi-label">Fraz bez zmian</div>
+                    <div class="kpi-change trend-neutral">91.5% portfolio</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">-0.24</div>
+                    <div class="kpi-label">Średnia zmiana pozycji</div>
+                    <div class="kpi-change trend-down">lekki spadek</div>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th colspan="4" style="background: rgba(0, 210, 106, 0.2); color: #00d26a;">TOP 10 - Największe wzrosty</th>
+                        <th colspan="4" style="background: rgba(255, 59, 48, 0.2); color: #ff3b30;">TOP 10 - Największe spadki</th>
+                    </tr>
+                    <tr>
+                        <th>Fraza</th>
+                        <th>Pozycja</th>
+                        <th>Była</th>
+                        <th>Zmiana</th>
+                        <th>Fraza</th>
+                        <th>Pozycja</th>
+                        <th>Była</th>
+                        <th>Zmiana</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>siara bydlęca</td>
+                        <td class="number">5</td>
+                        <td class="number">60</td>
+                        <td class="number trend-up">+55</td>
+                        <td>colostrum ceneo</td>
+                        <td class="number">100</td>
+                        <td class="number">23</td>
+                        <td class="number trend-down">-77</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum liquid</td>
+                        <td class="number">38</td>
+                        <td class="number">100</td>
+                        <td class="number trend-up">+62</td>
+                        <td>sibo co to jest</td>
+                        <td class="number">79</td>
+                        <td class="number">52</td>
+                        <td class="number trend-down">-27</td>
+                    </tr>
+                    <tr>
+                        <td>sibo objawy</td>
+                        <td class="number">23</td>
+                        <td class="number">65</td>
+                        <td class="number trend-up">+42</td>
+                        <td>siara bydlęca (fluktuacja)</td>
+                        <td class="number">100</td>
+                        <td class="number">27</td>
+                        <td class="number trend-down">-73</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum immune</td>
+                        <td class="number">43</td>
+                        <td class="number">100</td>
+                        <td class="number trend-up">+57</td>
+                        <td>colostrum dla dzieci gemini</td>
+                        <td class="number">100</td>
+                        <td class="number">13</td>
+                        <td class="number trend-down">-87</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum na co pomaga</td>
+                        <td class="number">15</td>
+                        <td class="number">42</td>
+                        <td class="number trend-up">+27</td>
+                        <td>colostrum apteka</td>
+                        <td class="number">100</td>
+                        <td class="number">25</td>
+                        <td class="number trend-down">-75</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEKCJA 5: TOP STRONY -->
+        <div class="section page-break">
+            <h2 class="section-title">5. Najpopularniejsze strony docelowe</h2>
+            <p class="section-description">
+                Strony GenActiv, które generują najwięcej ruchu z Google. Dane z wrzesień 2025.
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Co to jest "strona docelowa" i dlaczego to ważne?</div>
+                <div class="explainer-text">
+                    <strong>Strona docelowa (landing page)</strong> - konkretna podstrona, na którą trafia użytkownik po kliknięciu w wynik Google. Nie zawsze jest to strona główna - często to artykuł, kategoria produktów lub karta produktu.<br><br>
+                    <strong>Odwiedziny</strong> - ile osób weszło na tę stronę z Google w danym miesiącu.<br><br>
+                    <strong>Zmiana M/M</strong> - porównanie do poprzedniego miesiąca. "+472" znaczy, że o 472 więcej osób odwiedziło tę stronę niż miesiąc wcześniej.<br><br>
+                    <strong>Śr. czas na stronie</strong> - jak długo średnio użytkownik zostaje na stronie. Dłuższy czas (np. 40s) = strona jest interesująca, użytkownik czyta. Krótki czas (np. 17s) = użytkownik szybko przegląda lub od razu przechodzi dalej. Uwaga: krótki czas na stronie głównej może być OK, bo ludzie szybko klikają w produkty.<br><br>
+                    <strong>Główna fraza</strong> - hasło, dla którego ta strona najczęściej pojawia się w Google.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Strona</th>
+                        <th>Odwiedziny</th>
+                        <th>Zmiana M/M</th>
+                        <th>Śr. czas na stronie</th>
+                        <th>Główna fraza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td><strong>/</strong> (strona główna)</td>
+                        <td class="number"><strong>1,875</strong></td>
+                        <td class="number trend-up">+472</td>
+                        <td class="number">20.02s</td>
+                        <td>genactiv, colostrum genactiv</td>
+                    </tr>
+                    <tr>
+                        <td>/collections/colostrum</td>
+                        <td class="number"><strong>1,749</strong></td>
+                        <td class="number trend-up">+303</td>
+                        <td class="number">32.56s</td>
+                        <td>colostrum</td>
+                    </tr>
+                    <tr>
+                        <td>/collections/zdrowe-dziecko</td>
+                        <td class="number"><strong>1,166</strong></td>
+                        <td class="number trend-up">+703</td>
+                        <td class="number">17.04s</td>
+                        <td>colostrum dla dzieci</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>/pages/co-to-jest-colostrum</td>
+                        <td class="number"><strong>1,099</strong></td>
+                        <td class="number trend-up">+531</td>
+                        <td class="number">38.56s</td>
+                        <td>colostrum, co to colostrum</td>
+                    </tr>
+                    <tr>
+                        <td>/products/colostrum-genactiv-120-kapsulek</td>
+                        <td class="number">951</td>
+                        <td class="number trend-up">+298</td>
+                        <td class="number">25.81s</td>
+                        <td>colostrum genactiv 120</td>
+                    </tr>
+                    <tr>
+                        <td>/cart</td>
+                        <td class="number">746</td>
+                        <td class="number trend-up">+289</td>
+                        <td class="number">31.78s</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>/products/colostrum-genactiv-proszek</td>
+                        <td class="number">655</td>
+                        <td class="number trend-up">+171</td>
+                        <td class="number">40.53s</td>
+                        <td>colostrum proszek</td>
+                    </tr>
+                    <tr>
+                        <td>/products/colostrum-genactiv-60-kapsulek</td>
+                        <td class="number">523</td>
+                        <td class="number trend-up">+216</td>
+                        <td class="number">41.39s</td>
+                        <td>colostrum kapsułki</td>
+                    </tr>
+                    <tr>
+                        <td>/products/colostrum-genactiv-zawiesina</td>
+                        <td class="number">448</td>
+                        <td class="number trend-up">+240</td>
+                        <td class="number">30.89s</td>
+                        <td>colostrum dla dzieci</td>
+                    </tr>
+                    <tr>
+                        <td>/collections/produkty-dla-dzieci</td>
+                        <td class="number">369</td>
+                        <td class="number trend-up">+369 (nowa)</td>
+                        <td class="number">52.95s</td>
+                        <td>suplementy dla dzieci</td>
+                    </tr>
+                    <tr>
+                        <td>/collections/mleko-klaczy</td>
+                        <td class="number">360</td>
+                        <td class="number trend-up">+68</td>
+                        <td class="number">22.66s</td>
+                        <td>mleko klaczy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEKCJA 6: STATYSTYKI PORTFOLIO -->
+        <div class="section">
+            <h2 class="section-title">6. Statystyki portfolio fraz (Senuto)</h2>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Co to jest "portfolio fraz" i co oznaczają te metryki?</div>
+                <div class="explainer-text">
+                    <strong>Portfolio fraz</strong> - zbiór wszystkich haseł, dla których strona GenActiv pojawia się w wynikach Google. To jak "inwentarz" widoczności w internecie. Im większe portfolio, tym więcej "drzwi wejściowych" dla potencjalnych klientów.<br><br>
+                    <strong>Łączny wolumen TOP 10 (348,480)</strong> - suma miesięcznych wyszukiwań wszystkich fraz, dla których GenActiv jest na 1. stronie Google. To potencjalny "ruch" który możemy przechwycić.<br><br>
+                    <strong>Średnia trudność (33.6)</strong> - jak trudno konkurować o frazy z portfolio. Skala 0-100. Niska trudność (poniżej 30) = łatwo zdobyć TOP pozycje. Wysoka (powyżej 60) = potrzeba dużo pracy i czasu.<br><br>
+                    <strong>Mediana pozycji (26)</strong> - "środkowa" pozycja, czyli połowa fraz jest wyżej niż 26, połowa niżej. Pozycja 26 = strona 3 w Google (10 wyników na stronę, więc 21-30 = strona 3). <strong>Prawie nikt nie ogląda strony 3</strong> - to duży potencjał do poprawy.
+                </div>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">348,480</div>
+                    <div class="kpi-label">Łączny wolumen TOP 10</div>
+                    <div class="kpi-change">wyszukiwań/miesiąc</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">33.6</div>
+                    <div class="kpi-label">Średnia trudność fraz</div>
+                    <div class="kpi-change trend-neutral">skala 0-100</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">26</div>
+                    <div class="kpi-label">Mediana pozycji</div>
+                    <div class="kpi-change trend-down">strona 3 Google</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">2,519</div>
+                    <div class="kpi-label">Fraz w TOP 50</div>
+                    <div class="kpi-change">99.4% portfolio</div>
+                </div>
+            </div>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Jak interpretować tabelę poniżej?</div>
+                <div class="explainer-text">
+                    <strong>TOP 3 (190 fraz, 7.5%)</strong> - "złoto" portfolio. Te frazy generują najwięcej kliknięć. GenActiv dominuje w swojej niszy.<br><br>
+                    <strong>TOP 10 (578 fraz, 22.8%)</strong> - "srebro". Strona jest widoczna, ale nie zawsze na szczycie. Warto optymalizować te strony, żeby przesunąć do TOP 3.<br><br>
+                    <strong>Pozycje 11-50 (1,941 fraz, 76.6%)</strong> - <strong>największy niewykorzystany potencjał!</strong> Te frazy są "prawie widoczne" - wystarczy mały wysiłek (lepszy content, więcej linków), żeby przesunąć je do TOP 10. To 76% portfolio, które praktycznie nie generuje ruchu.<br><br>
+                    <strong>Poza TOP 50 (15 fraz, 0.6%)</strong> - marginalne, można zignorować lub sprawdzić czy strona w ogóle jest zindeksowana.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metryka</th>
+                        <th>Wartość</th>
+                        <th>Interpretacja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Łączna liczba monitorowanych fraz</td>
+                        <td class="number"><strong>2,534</strong></td>
+                        <td>Całkowite portfolio widoczności</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>Frazy w TOP 3 (pozycje 1-3)</td>
+                        <td class="number"><strong>190</strong> (7.5%)</td>
+                        <td>Dominacja - zbierają ~60% kliknięć</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>Frazy w TOP 10 (pozycje 1-10)</td>
+                        <td class="number"><strong>578</strong> (22.8%)</td>
+                        <td>Widoczność na 1. stronie Google</td>
+                    </tr>
+                    <tr>
+                        <td>Frazy na pozycjach 11-50</td>
+                        <td class="number">1,941 (76.6%)</td>
+                        <td>Potencjał do optymalizacji</td>
+                    </tr>
+                    <tr>
+                        <td>Frazy poza TOP 50</td>
+                        <td class="number">15 (0.6%)</td>
+                        <td>Marginalna widoczność</td>
+                    </tr>
+                    <tr>
+                        <td>Średnia pozycja</td>
+                        <td class="number"><strong>25.00</strong></td>
+                        <td>Środek strony 3 w Google</td>
+                    </tr>
+                    <tr>
+                        <td>Minimalna trudność frazy</td>
+                        <td class="number">7</td>
+                        <td>Łatwe frazy do zdobycia</td>
+                    </tr>
+                    <tr>
+                        <td>Maksymalna trudność frazy</td>
+                        <td class="number">72</td>
+                        <td>Bardzo konkurencyjne frazy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEKCJA 7: GOOGLE ADS vs SEO -->
+        <div class="section page-break">
+            <h2 class="section-title">7. Porównanie Google Ads vs. SEO</h2>
+            <p class="section-description">
+                Frazy, na które GenActiv jest widoczny zarówno organicznie jak i w płatnych wynikach. 
+                Analiza potencjalnej kanibalizacji.
+            </p>
+            
+            <div class="explainer-box">
+                <div class="explainer-title">Co to jest kanibalizacja i dlaczego to problem?</div>
+                <div class="explainer-text">
+                    <strong>Google Ads</strong> - płatne reklamy w Google. Płacisz za każde kliknięcie (CPC = Cost Per Click). Reklamy pojawiają się NAD wynikami organicznymi.<br><br>
+                    <strong>SEO (wyniki organiczne)</strong> - "darmowe" pozycje w Google, które zdobywasz dzięki jakości strony. Nie płacisz za kliknięcia.<br><br>
+                    <strong>Kanibalizacja</strong> - sytuacja, gdy płacisz za reklamy na hasła, dla których już jesteś #1 organicznie. To jak płacenie za wejście do własnego domu. Przykład: jeśli GenActiv jest #1 dla "colostrum" organicznie, to płacenie za reklamę na to hasło to marnowanie pieniędzy - ludzie i tak by kliknęli w wynik organiczny.<br><br>
+                    <strong>CPC (Cost Per Click)</strong> - ile kosztuje jedno kliknięcie w reklamę. 1.20 PLN = każde kliknięcie kosztuje 1.20 zł.<br><br>
+                    <strong>Rekomendacje w tabeli:</strong><br>
+                    ❌ <strong>Wyłącz Ads</strong> - gdy SEO = #1-3, nie płać za reklamy. Oszczędność bez utraty ruchu.<br>
+                    ✅ <strong>Włącz Ads</strong> - gdy SEO jest słabe (pozycje 10+), reklamy są jedynym sposobem na widoczność.
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fraza</th>
+                        <th>Pozycja SEO</th>
+                        <th>CPC (PLN)</th>
+                        <th>Wolumen/mies.</th>
+                        <th>Rekomendacja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td>colostrum</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">1.20</td>
+                        <td class="number">33,100</td>
+                        <td class="trend-down">❌ Wyłącz Ads - SEO wystarczy</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>colostrum genactiv</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">0.80</td>
+                        <td class="number">6,600</td>
+                        <td class="trend-down">❌ Wyłącz Ads - brand defense tylko</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>colostrum dla dzieci</td>
+                        <td class="number"><span class="position-badge position-1">1</span></td>
+                        <td class="number">0.95</td>
+                        <td class="number">8,100</td>
+                        <td class="trend-down">❌ Wyłącz Ads - SEO wystarczy</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum opinie</td>
+                        <td class="number"><span class="position-badge position-top10">8</span></td>
+                        <td class="number">0.65</td>
+                        <td class="number">3,600</td>
+                        <td class="trend-up">✅ Włącz Ads + optymalizuj SEO</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum cena</td>
+                        <td class="number"><span class="position-badge position-low">25</span></td>
+                        <td class="number">1.10</td>
+                        <td class="number">2,400</td>
+                        <td class="trend-up">✅ Agresywne Ads + nowa strona SEO</td>
+                    </tr>
+                    <tr>
+                        <td>najlepsze colostrum</td>
+                        <td class="number"><span class="position-badge position-low">32</span></td>
+                        <td class="number">0.90</td>
+                        <td class="number">1,900</td>
+                        <td class="trend-up">✅ Włącz Ads + artykuł porównawczy</td>
+                    </tr>
+                    <tr>
+                        <td>colostrum apteka</td>
+                        <td class="number"><span class="position-badge position-low">100</span></td>
+                        <td class="number">1.30</td>
+                        <td class="number">1,600</td>
+                        <td class="trend-up">✅ Agresywne Ads (SEO stracone)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary-box">
+                <div class="summary-title">💰 Potencjalne oszczędności - jak to działa w praktyce?</div>
+                <div class="summary-text">
+                    <strong>Logika jest prosta:</strong> jeśli GenActiv jest na pozycji #1 organicznie dla hasła "colostrum" (33,100 wyszukiwań/mies.), to większość ludzi kliknie w ten wynik BEZ płacenia za reklamę.<br><br>
+                    <strong>Ile można zaoszczędzić?</strong><br>
+                    • "colostrum" - CPC 1.20 PLN × ~1,000 kliknięć/mies. = ~1,200 PLN/mies. oszczędności<br>
+                    • "colostrum genactiv" - CPC 0.80 PLN × ~500 kliknięć/mies. = ~400 PLN/mies.<br>
+                    • "colostrum dla dzieci" - CPC 0.95 PLN × ~400 kliknięć/mies. = ~380 PLN/mies.<br><br>
+                    <strong>Łącznie:</strong> wyłączenie reklam na TOP 3 frazy = <strong>~2,000+ PLN/mies. oszczędności</strong>, które można przeznaczyć na hasła, gdzie SEO nie daje wyników (np. "colostrum apteka" - pozycja 100).<br><br>
+                    <strong>Uwaga:</strong> niektóre firmy zostawiają reklamy na brand (np. "colostrum genactiv") jako "obronę" przed konkurencją, która mogłaby wykupić reklamę na tę frazę. To decyzja strategiczna.
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>© 2025 Rafał Oleksiak - CRM & Marketing Automation Consulting</p>
+            <p style="margin-top: 8px;">Źródła danych: Raporty ICEA S.A. (maj-wrzesień 2025), Senuto (wrzesień 2025), Ahrefs</p>
+            <p style="margin-top: 8px; color: rgba(255, 255, 255, 0.3);">Arkusz liczbowy do raportu "Analiza SEO & Strategia Optymalizacji"</p>
+        </div>
+    </div>
+    
+    <button class="print-button" onclick="window.print()">🖨️ Generuj PDF</button>
+</body>
+</html>

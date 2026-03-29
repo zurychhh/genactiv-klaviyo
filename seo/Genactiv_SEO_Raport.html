@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenActiv - Analiza SEO & Strategia Optymalizacji | Oleksiak Consult</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #2D3142 0%, #1a1d2e 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .document-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #2D3142;
+            border-radius: 24px;
+            padding: 60px;
+            border: 3px solid #7B2CBF;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .document-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #7B2CBF, #0066ff, #7B2CBF);
+            border-radius: 24px;
+            z-index: -1;
+        }
+        
+        .header {
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(123, 44, 191, 0.3);
+            padding-bottom: 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            animation: dotPulse 1.2s ease-in-out infinite;
+        }
+        
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.4s; }
+        .dot:nth-child(3) { animation-delay: 0.8s; }
+        
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 48px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .doc-info {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Executive Summary Box */
+        .executive-summary {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.2), rgba(0, 102, 255, 0.1));
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(123, 44, 191, 0.4);
+        }
+        
+        .executive-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .summary-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .summary-card.positive {
+            border-left: 4px solid #00d26a;
+        }
+        
+        .summary-card.warning {
+            border-left: 4px solid #ff9500;
+        }
+        
+        .summary-card.negative {
+            border-left: 4px solid #ff3b30;
+        }
+        
+        .summary-card.opportunity {
+            border-left: 4px solid #0066ff;
+        }
+        
+        .card-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .card-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* Section Styling */
+        .section {
+            margin-bottom: 50px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            padding-left: 16px;
+            border-left: 4px solid #7B2CBF;
+        }
+        
+        .section-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            color: white;
+            margin-bottom: 16px;
+            margin-top: 32px;
+        }
+        
+        .section-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.3), rgba(0, 102, 255, 0.2));
+            padding: 16px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            border-bottom: 2px solid rgba(123, 44, 191, 0.3);
+        }
+        
+        .data-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background: rgba(123, 44, 191, 0.1);
+        }
+        
+        .trend-up {
+            color: #00d26a;
+            font-weight: 600;
+        }
+        
+        .trend-down {
+            color: #ff3b30;
+            font-weight: 600;
+        }
+        
+        .trend-neutral {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .position-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .position-1 {
+            background: linear-gradient(135deg, #00d26a, #00a854);
+            color: white;
+        }
+        
+        .position-top10 {
+            background: rgba(0, 210, 106, 0.2);
+            color: #00d26a;
+        }
+        
+        .position-low {
+            background: rgba(255, 149, 0, 0.2);
+            color: #ff9500;
+        }
+        
+        /* Service List */
+        .service-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .service-item {
+            position: relative;
+            padding-left: 28px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+        
+        .service-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #7B2CBF;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .service-item strong {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Recommendation Cards */
+        .recommendation-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(123, 44, 191, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .recommendation-card:hover {
+            border-color: #7B2CBF;
+            box-shadow: 0 8px 32px rgba(123, 44, 191, 0.3);
+            transform: translateY(-4px);
+        }
+        
+        .rec-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .rec-number {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 48px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .rec-title-section {
+            flex: 1;
+        }
+        
+        .rec-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .rec-budget {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.3), rgba(0, 102, 255, 0.2));
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .rec-problem {
+            background: rgba(255, 59, 48, 0.1);
+            border-left: 3px solid #ff3b30;
+            padding: 16px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+        }
+        
+        .rec-problem-label {
+            font-weight: 700;
+            color: #ff3b30;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        
+        .rec-solution {
+            background: rgba(0, 210, 106, 0.1);
+            border-left: 3px solid #00d26a;
+            padding: 16px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+        }
+        
+        .rec-solution-label {
+            font-weight: 700;
+            color: #00d26a;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        
+        .rec-impact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .impact-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .impact-value {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            background: linear-gradient(135deg, #00d26a, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .impact-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            border-color: #7B2CBF;
+            transform: translateY(-2px);
+        }
+        
+        .metric-value {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+        
+        .metric-change {
+            font-size: 14px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #7B2CBF, #0066ff);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            border: 3px solid #2D3142;
+        }
+        
+        .timeline-quarter {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #7B2CBF;
+            margin-bottom: 12px;
+        }
+        
+        .timeline-content {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        
+        /* ROI Section */
+        .roi-box {
+            background: linear-gradient(135deg, rgba(0, 210, 106, 0.15), rgba(0, 102, 255, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(0, 210, 106, 0.3);
+            text-align: center;
+        }
+        
+        .roi-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .roi-highlight {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 72px;
+            background: linear-gradient(135deg, #00d26a, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .roi-label {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 8px;
+        }
+        
+        .roi-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .roi-detail {
+            text-align: center;
+        }
+        
+        .roi-detail-value {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: white;
+        }
+        
+        .roi-detail-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .print-button {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #7B2CBF, #0066ff);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(123, 44, 191, 0.4);
+            z-index: 1000;
+        }
+        
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(123, 44, 191, 0.6);
+        }
+        
+        /* Page Breaks for Print */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                background: #2D3142;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .document-container {
+                max-width: 100%;
+                border: 3px solid #7B2CBF;
+                box-shadow: none;
+                padding: 40px;
+            }
+            
+            .document-container::before {
+                display: none;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            .recommendation-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        
+        @media (max-width: 768px) {
+            .document-container {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .rec-number {
+                font-size: 36px;
+            }
+            
+            .roi-highlight {
+                font-size: 48px;
+            }
+            
+            .roi-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                OLEKSIAK CONSULT
+                <div class="loading-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            
+            <h1>Analiza SEO & Strategia Optymalizacji</h1>
+            <div class="subtitle">GenActiv.pl - Raport Konsultingowy</div>
+            
+            <div class="doc-info">
+                <div class="info-item">📅 Październik 2025</div>
+                <div class="info-item">🎯 SEO & Organic Growth</div>
+                <div class="info-item">📊 Data-Driven Approach</div>
+            </div>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="executive-summary">
+            <div class="executive-title">
+                ⚡ Executive Summary
+            </div>
+            <div class="summary-grid">
+                <div class="summary-card positive">
+                    <div class="card-icon">✅</div>
+                    <div class="card-title">Silna pozycja w Google</div>
+                    <div class="card-text">Gdy ktoś wpisuje "colostrum" w Google (33,100 osób miesięcznie), GenActiv wyświetla się na pierwszym miejscu - przed wszystkimi konkurentami. To jak najlepsza półka w aptece, tylko w internecie.</div>
+                </div>
+                <div class="summary-card warning">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-title">Wzrost się zatrzymał</div>
+                    <div class="card-text">W lipcu 2025 liczba osób, które zobaczyły GenActiv w Google spadła o 54%. Strona nie przyciąga nowych klientów szukających produktów innymi hasłami niż "colostrum".</div>
+                </div>
+                <div class="summary-card negative">
+                    <div class="card-icon">🚨</div>
+                    <div class="card-title">Widoczni tylko dla części klientów</div>
+                    <div class="card-text">75% haseł, na które moglibyśmy się wyświetlać, pokazuje nas dopiero na 3-5 stronie Google - tam praktycznie nikt nie zagląda. Tracimy klientów szukających np. "suplementy na odporność dla dzieci".</div>
+                </div>
+                <div class="summary-card opportunity">
+                    <div class="card-icon">💡</div>
+                    <div class="card-title">Nowa szansa: Odpowiedzi AI w Google</div>
+                    <div class="card-text">Od września 2025 Google pokazuje "AI Overviews" - podsumowania generowane przez sztuczną inteligencję na górze wyników. GenActiv już się tam pojawia, co daje przewagę nad konkurencją, która jeszcze tego nie ma.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: CO DZIAŁA DOBRZE -->
+        <div class="section">
+            <h2 class="section-title">1. Stan Aktualny - Co Działa Dobrze</h2>
+            
+            <h3 class="section-subtitle">🏆 Dominacja w kategorii "colostrum"</h3>
+            <p class="section-description">
+                <strong>Co to oznacza w praktyce?</strong> Gdy potencjalny klient wpisuje w Google hasła związane z colostrum, 
+                strona GenActiv pojawia się na samej górze wyników - przed konkurencją, przed artykułami, przed reklamami organicznymi.
+                <br><br>
+                <strong>Dlaczego to ważne?</strong> Pierwsze 3 pozycje w Google zbierają około 60% wszystkich kliknięć. 
+                Pozycja 10 (koniec pierwszej strony) to już tylko 2-3% kliknięć. Druga strona Google? Tam trafia mniej niż 1% użytkowników.
+                <br><br>
+                <strong>Skala:</strong> Monitorujemy ~2,500 różnych haseł (tzw. "fraz kluczowych"), które potencjalni klienci wpisują w Google. 
+                Średnia pozycja GenActiv to 25 - co oznacza, że dla większości haseł jesteśmy na stronie 3, ale dla najważniejszych 
+                (tych z największą liczbą wyszukiwań) - jesteśmy liderem.
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Co wpisuje klient w Google</th>
+                        <th>Nasza pozycja</th>
+                        <th>Zmiana (ostatni miesiąc)</th>
+                        <th>Ile osób to wpisuje miesięcznie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>colostrum</strong></td>
+                        <td><span class="position-badge position-1">#1</span></td>
+                        <td class="trend-up">↑ +2 od #3</td>
+                        <td>33,100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum genactiv</strong></td>
+                        <td><span class="position-badge position-1">#1</span></td>
+                        <td class="trend-neutral">—</td>
+                        <td>6,600</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum dla dzieci</strong></td>
+                        <td><span class="position-badge position-1">#1</span></td>
+                        <td class="trend-neutral">—</td>
+                        <td>8,100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum bovinum</strong></td>
+                        <td><span class="position-badge position-1">#1</span></td>
+                        <td class="trend-up">↑ +1</td>
+                        <td>1,900</td>
+                    </tr>
+                    <tr>
+                        <td><strong>siara bydlęca</strong></td>
+                        <td><span class="position-badge position-top10">#3</span></td>
+                        <td class="trend-up">↑ +6 od #9</td>
+                        <td>2,400</td>
+                    </tr>
+                    <tr>
+                        <td><strong>colostrum kapsułki</strong></td>
+                        <td><span class="position-badge position-1">#1</span></td>
+                        <td class="trend-up">↑ +2 od #3</td>
+                        <td>1,300</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">📐 Dobrze zbudowana strona internetowa</h3>
+            <p class="section-description">
+                <strong>Co to znaczy "architektura informacyjna"?</strong> To sposób, w jaki strona jest zorganizowana - 
+                jakie ma podstrony, jak są ze sobą połączone, czy Google rozumie o czym jest każda z nich.
+            </p>
+            <ul class="service-list">
+                <li class="service-item">
+                    <strong>Strony edukacyjne + sklep działają razem</strong> - artykuły typu "Co to jest colostrum?" 
+                    linkują do produktów. Klient najpierw się uczy, potem kupuje. Google to docenia i pokazuje nas wyżej.
+                </li>
+                <li class="service-item">
+                    <strong>Wewnętrzne linkowanie</strong> - podstrony są ze sobą sensownie połączone, co pomaga 
+                    zarówno klientom (łatwiej znajdą co szukają), jak i Google (lepiej rozumie strukturę sklepu).
+                </li>
+                <li class="service-item">
+                    <strong>Widoczność w "AI Overviews"</strong> - od września 2025 Google pokazuje na górze wyników 
+                    podsumowania generowane przez AI. GenActiv już się tam pojawia - to nowy kanał dotarcia do klientów, 
+                    który konkurencja dopiero będzie próbowała zdobyć.
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECTION 2: CO WYMAGA POPRAWY -->
+        <div class="section page-break">
+            <h2 class="section-title">2. Stan Aktualny - Co Wymaga Poprawy</h2>
+            
+            <h3 class="section-subtitle">📉 Ruch z Google przestał rosnąć</h3>
+            <p class="section-description">
+                <strong>Co mierzymy?</strong> Dwa kluczowe wskaźniki:<br>
+                • <strong>Wyświetlenia</strong> - ile razy GenActiv pojawił się w wynikach Google (klient nas zobaczył)<br>
+                • <strong>Kliknięcia</strong> - ile razy klient faktycznie kliknął i wszedł na stronę<br><br>
+                
+                <strong>Problem:</strong> W lipcu 2025 nastąpił dramatyczny spadek - o 54% mniej wyświetleń niż w czerwcu. 
+                To tak, jakby nagle połowa potencjalnych klientów przestała nas widzieć w Google.
+                <br><br>
+                <strong>Możliwe przyczyny (do zbadania):</strong><br>
+                • Sezonowość - latem ludzie mniej szukają suplementów?<br>
+                • Zmiana algorytmu Google - być może coś się zmieniło w sposobie, w jaki Google ocenia strony<br>
+                • Problemy techniczne na stronie - coś mogło się zepsuć i Google gorzej indeksował stronę
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Miesiąc</th>
+                        <th>Ile razy nas zobaczono w Google</th>
+                        <th>Ile osób weszło na stronę</th>
+                        <th>Zmiana vs poprzedni miesiąc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maj 2025</td>
+                        <td>2,982,680</td>
+                        <td>414,969</td>
+                        <td class="trend-neutral">punkt odniesienia</td>
+                    </tr>
+                    <tr>
+                        <td>Czerwiec 2025</td>
+                        <td>3,442,796</td>
+                        <td>559,277</td>
+                        <td class="trend-up">↑ +35%</td>
+                    </tr>
+                    <tr>
+                        <td>Lipiec 2025</td>
+                        <td>911,289</td>
+                        <td>256,164</td>
+                        <td class="trend-down">↓ -54% 🚨</td>
+                    </tr>
+                    <tr>
+                        <td>Sierpień 2025</td>
+                        <td>1,026,235</td>
+                        <td>244,503</td>
+                        <td class="trend-down">↓ -5%</td>
+                    </tr>
+                    <tr>
+                        <td>Wrzesień 2025</td>
+                        <td>1,112,296</td>
+                        <td>256,513</td>
+                        <td class="trend-up">↑ +5%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">⚠️ Zbyt duże uzależnienie od jednego hasła</h3>
+            <p class="section-description">
+                <strong>Problem biznesowy:</strong> Prawie cały ruch z Google (95%) pochodzi z około 20 haseł związanych z "colostrum". 
+                To jak sklep stacjonarny, który ma tylko jedno wejście - jeśli ktoś je zablokuje, biznes staje.
+                <br><br>
+                <strong>Co to oznacza w praktyce?</strong><br>
+                • Jeśli Google zmieni algorytm i obniży nas dla hasła "colostrum" - tracimy większość ruchu<br>
+                • Konkurent, który zainwestuje w SEO, może nas wyprzedzić i przejąć klientów<br>
+                • Nie docieramy do klientów, którzy szukają innymi hasłami (np. "jak wzmocnić odporność dziecka")
+            </p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">ruchu z zaledwie 20 haseł</div>
+                    <div class="metric-change trend-down">ryzyko koncentracji</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">75%</div>
+                    <div class="metric-label">haseł na stronie 3+ Google</div>
+                    <div class="metric-change trend-down">tam nikt nie zagląda</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">26</div>
+                    <div class="metric-label">średnia pozycja w Google</div>
+                    <div class="metric-change trend-down">strona 3 = brak ruchu</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">-0.24</div>
+                    <div class="metric-label">poprawa pozycji/miesiąc</div>
+                    <div class="metric-change trend-neutral">zbyt wolny postęp</div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">❌ Klienci, których nie widzimy (Gap Analysis)</h3>
+            <p class="section-description">
+                <strong>Co to jest "Gap Analysis"?</strong> Analiza luk - sprawdzamy, jakie hasła wpisują potencjalni klienci, 
+                a my się na nie nie wyświetlamy (lub wyświetlamy tak nisko, że nikt nas nie klika).
+                <br><br>
+                <strong>Dlaczego to problem?</strong> To są realni klienci z zamiarem zakupu, którzy trafiają do konkurencji, 
+                bo GenActiv ich nie "łapie" w Google.
+            </p>
+            <ul class="service-list">
+                <li class="service-item">
+                    <strong>Kategorie poboczne (brak widoczności):</strong> Hasła typu "odporność dzieci", "zdrowie jelit", 
+                    "probiotyki naturalne", "suplementy dla sportowców" - ludzie szukający tych tematów mogliby kupić colostrum, 
+                    ale nas nie znajdują.
+                </li>
+                <li class="service-item">
+                    <strong>Hasła zakupowe (gotowość do kupna):</strong> "kup colostrum", "colostrum opinie", "najlepsze colostrum", 
+                    "colostrum cena" - to klienci z portfelem w ręku, którzy chcą kupić TERAZ. Nie wyświetlamy się wysoko na te hasła.
+                </li>
+                <li class="service-item">
+                    <strong>Pytania edukacyjne (początek ścieżki zakupowej):</strong> "jak stosować colostrum", "colostrum efekty", 
+                    "colostrum skutki uboczne" - klienci szukający wiedzy przed zakupem. Gdybyśmy im odpowiedzieli, wróciliby kupić.
+                </li>
+            </ul>
+        </div>
+
+        <!-- SECTION 3: TRENDY -->
+        <div class="section">
+            <h2 class="section-title">3. Trendy - Co Idzie w Dobrą vs. Złą Stronę</h2>
+            <p class="section-description">
+                <strong>Dlaczego analizujemy trendy?</strong> Pojedyncza liczba nic nie mówi. Ważne jest, czy sytuacja się poprawia, 
+                pogarsza, czy stoi w miejscu. Poniżej podsumowanie kierunków zmian.
+            </p>
+            
+            <div class="summary-grid">
+                <div class="summary-card positive">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Pozytywne sygnały</div>
+                    <div class="card-text">
+                        • <strong>Główne hasła rosną</strong> - pozycje dla "colostrum" poprawiają się o 2-5 miejsc miesięcznie<br><br>
+                        • <strong>Google indeksuje więcej stron</strong> - wyszukiwarka "widzi" coraz więcej podstron GenActiv<br><br>
+                        • <strong>Brak kar od Google</strong> - strona nie została ukarana za naruszenie wytycznych<br><br>
+                        • <strong>Widoczność w AI Overviews</strong> - nowy kanał dotarcia do klientów
+                    </div>
+                </div>
+                <div class="summary-card negative">
+                    <div class="card-icon">📉</div>
+                    <div class="card-title">Niepokojące sygnały</div>
+                    <div class="card-text">
+                        • <strong>Lipcowy spadek -54%</strong> - przyczyna niezbadana, może się powtórzyć<br><br>
+                        • <strong>Odwiedzający nie kupują</strong> - ruch z Google słabo przekłada się na sprzedaż<br><br>
+                        • <strong>Podwójne płacenie za klientów</strong> - płacimy za reklamy Google Ads na hasła, gdzie i tak jesteśmy #1 organicznie<br><br>
+                        • <strong>Wolny wzrost w nowych obszarach</strong> - nie zdobywamy nowych haseł
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: TOP 5 REKOMENDACJI -->
+        <div class="section page-break">
+            <h2 class="section-title">4. TOP 5 Rekomendacji Strategicznych</h2>
+            
+            <!-- REKOMENDACJA 1 -->
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-number">01</div>
+                    <div class="rec-title-section">
+                        <div class="rec-title">Zdobycie nowych haseł w Google (Long-Tail Expansion)</div>
+                        <span class="rec-budget">💰 35,000 PLN</span>
+                    </div>
+                </div>
+                
+                <div class="rec-problem">
+                    <div class="rec-problem-label">Problem biznesowy</div>
+                    <strong>Wszystkie jajka w jednym koszyku.</strong> 95% klientów z Google trafia do nas przez ~20 haseł związanych z "colostrum". 
+                    Jeśli konkurent nas wyprzedzi lub Google zmieni algorytm - tracimy większość ruchu z dnia na dzień.
+                    Dodatkowo, nie docieramy do tysięcy osób szukających pokrewnych tematów (odporność, zdrowie jelit, suplementy dla dzieci).
+                </div>
+                
+                <div class="rec-solution">
+                    <div class="rec-solution-label">Co robimy</div>
+                    <strong>Tworzymy treści na nowe tematy, które przyciągną nowych klientów.</strong><br><br>
+                    
+                    Strategia "3x3x3":<br>
+                    • <strong>3 nowe kategorie tematyczne:</strong> Odporność dzieci, Zdrowie sportowców, Regeneracja po chorobie<br>
+                    • <strong>3 typy treści na każdą kategorię:</strong> Główny artykuł ekspercki, Sekcja FAQ (pytania i odpowiedzi), Historie klientów<br>
+                    • <strong>3 miesiące intensywnej pracy:</strong> Publikacja 28 nowych artykułów do końca roku<br><br>
+                    
+                    <strong>Co to są "long-tail"?</strong> Długie, szczegółowe hasła (np. "jak wzmocnić odporność dziecka przed przedszkolem") - 
+                    mniej osób je wpisuje, ale są bardziej gotowi do zakupu. Łatwiej też na nie wypozycjonować stronę niż na ogólne hasła.
+                </div>
+                
+                <ul class="service-list">
+                    <li class="service-item"><strong>Krok 1:</strong> Analiza - znajdziemy 200 nowych haseł, które wpisują potencjalni klienci</li>
+                    <li class="service-item"><strong>Krok 2:</strong> Priorytetyzacja - wybierzemy te, na które najłatwiej wskoczyć do TOP 10 Google</li>
+                    <li class="service-item"><strong>Krok 3:</strong> Produkcja treści - napiszemy 28 artykułów zoptymalizowanych pod Google</li>
+                    <li class="service-item"><strong>Krok 4:</strong> Linkowanie - połączymy artykuły z produktami, żeby przekuwać czytelników w kupujących</li>
+                </ul>
+                
+                <div class="rec-impact">
+                    <div class="impact-item">
+                        <div class="impact-value">+40%</div>
+                        <div class="impact-label">więcej haseł w TOP 10 Google</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+25%</div>
+                        <div class="impact-label">więcej odwiedzających z Google</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">-30%</div>
+                        <div class="impact-label">mniejsze ryzyko (dywersyfikacja)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REKOMENDACJA 2 -->
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-number">02</div>
+                    <div class="rec-title-section">
+                        <div class="rec-title">Zamiana odwiedzających w kupujących (Optymalizacja Konwersji)</div>
+                        <span class="rec-budget">💰 20,000 PLN</span>
+                    </div>
+                </div>
+                
+                <div class="rec-problem">
+                    <div class="rec-problem-label">Problem biznesowy</div>
+                    <strong>Ludzie wchodzą na stronę, czytają i... wychodzą bez zakupu.</strong> 
+                    Strony edukacyjne (np. "Co to jest colostrum?") przyciągają tysiące odwiedzających miesięcznie, 
+                    ale nie przekonują ich do przejścia do sklepu i kupienia produktu. 
+                    To jak sklep z dobrą witryną, ale bez sprzedawcy w środku.
+                </div>
+                
+                <div class="rec-solution">
+                    <div class="rec-solution-label">Co robimy</div>
+                    <strong>Dodajemy elementy, które zachęcają do działania i budują zaufanie.</strong><br><br>
+                    
+                    <strong>Szybkie wygrane (wdrożenie w 2 tygodnie):</strong><br>
+                    • <strong>Przycisk "Kup teraz"</strong> widoczny od razu po wejściu na stronę (nie trzeba scrollować)<br>
+                    • <strong>Darmowy e-book</strong> "10 faktów o Colostrum" w zamian za email (budujemy bazę do remarketingu)<br>
+                    • <strong>Opinie klientów</strong> - gwiazdki i cytaty "★★★★★ 4.8/5 - 1,247 opinii" budują zaufanie<br>
+                    • <strong>Pop-up przy wychodzeniu</strong> - "Poczekaj! -15% na pierwszy zakup" ratuje część klientów<br><br>
+                    
+                    <strong>Co to jest "konwersja"?</strong> Procent odwiedzających, którzy wykonują pożądane działanie 
+                    (zakup, zapis na newsletter, dodanie do koszyka). Obecnie ok. 1.2% kupuje - chcemy zwiększyć do 2.5%.
+                </div>
+                
+                <ul class="service-list">
+                    <li class="service-item"><strong>Faza 1 (2 tyg.):</strong> Dodanie przycisków CTA, opinii klientów, pop-upów - szybki efekt</li>
+                    <li class="service-item"><strong>Faza 2 (1 mies.):</strong> Testowanie A/B - sprawdzamy które wersje działają lepiej</li>
+                    <li class="service-item"><strong>Faza 3 (2 mies.):</strong> Personalizacja - inne komunikaty dla nowych vs. powracających klientów</li>
+                </ul>
+                
+                <div class="rec-impact">
+                    <div class="impact-item">
+                        <div class="impact-value">+108%</div>
+                        <div class="impact-label">więcej kupujących (konwersja 1.2%→2.5%)</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+500</div>
+                        <div class="impact-label">nowych emaili miesięcznie do remarketingu</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+15%</div>
+                        <div class="impact-label">wyższa wartość koszyka (upsell)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REKOMENDACJA 3 -->
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-number">03</div>
+                    <div class="rec-title-section">
+                        <div class="rec-title">Naprawa fundamentów technicznych strony (Technical SEO)</div>
+                        <span class="rec-budget">💰 25,000 PLN</span>
+                    </div>
+                </div>
+                
+                <div class="rec-problem">
+                    <div class="rec-problem-label">Problem biznesowy</div>
+                    <strong>Nie wiemy, czy strona działa optymalnie dla Google.</strong> 
+                    Brak danych o szybkości ładowania, poprawności działania na telefonach, błędach technicznych. 
+                    To jak prowadzenie samochodu bez wskaźników - wszystko może działać, ale nie wiemy o ukrytych problemach, 
+                    które mogą blokować wzrost pozycji w Google.
+                </div>
+                
+                <div class="rec-solution">
+                    <div class="rec-solution-label">Co robimy</div>
+                    <strong>Kompleksowy przegląd techniczny strony i naprawa wykrytych problemów.</strong><br><br>
+                    
+                    <strong>Co sprawdzamy:</strong><br>
+                    • <strong>Szybkość ładowania</strong> - Google premiuje szybkie strony. Cel: poniżej 2.5 sekundy<br>
+                    • <strong>Działanie na telefonach</strong> - ponad 60% klientów przegląda na smartfonie<br>
+                    • <strong>Błędy 404</strong> - "martwe" linki, które frustrują klientów i Google<br>
+                    • <strong>Structured Data</strong> - specjalny kod, który mówi Google czym jest strona (produkt, cena, opinie) 
+                      - dzięki temu w wynikach wyszukiwania pokazują się gwiazdki, ceny, dostępność<br><br>
+                    
+                    <strong>Co to są "Core Web Vitals"?</strong> Trzy wskaźniki, które Google oficjalnie używa do oceny jakości strony: 
+                    szybkość ładowania głównej treści, responsywność na kliknięcia, stabilność wizualna (czy elementy nie "skaczą" podczas ładowania).
+                </div>
+                
+                <ul class="service-list">
+                    <li class="service-item"><strong>Tydzień 1:</strong> Pełny audyt - skanujemy całą stronę specjalistycznymi narzędziami</li>
+                    <li class="service-item"><strong>Tydzień 2-3:</strong> Naprawy priorytetowe - najpierw rzeczy z największym wpływem na pozycje</li>
+                    <li class="service-item"><strong>Tydzień 4:</strong> Weryfikacja - sprawdzamy czy naprawy zadziałały, monitorujemy efekty</li>
+                </ul>
+                
+                <div class="rec-impact">
+                    <div class="impact-item">
+                        <div class="impact-value">-40%</div>
+                        <div class="impact-label">szybsze ładowanie strony</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+20%</div>
+                        <div class="impact-label">więcej kliknięć z Google (rich snippets)</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+2-5</div>
+                        <div class="impact-label">pozycji wyżej średnio</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REKOMENDACJA 4 -->
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-number">04</div>
+                    <div class="rec-title-section">
+                        <div class="rec-title">Przestań płacić za klientów, których już masz (Synergia SEO + Reklamy)</div>
+                        <span class="rec-budget">💰 10,000 PLN + oszczędności z budżetu reklamowego</span>
+                    </div>
+                </div>
+                
+                <div class="rec-problem">
+                    <div class="rec-problem-label">Problem biznesowy</div>
+                    <strong>Płacimy za reklamy Google Ads na hasła, gdzie i tak jesteśmy #1 organicznie.</strong> 
+                    Gdy ktoś wpisuje "colostrum genactiv", pokazujemy się na pozycji #1 za darmo (organicznie) 
+                    ORAZ płacimy za reklamę powyżej. Klient by i tak do nas trafił - płacimy podwójnie za tego samego klienta.
+                    Tymczasem na hasła, gdzie NIE jesteśmy widoczni organicznie, nie reklamujemy się wcale.
+                </div>
+                
+                <div class="rec-solution">
+                    <div class="rec-solution-label">Co robimy</div>
+                    <strong>Koordynujemy działania SEO i Google Ads, żeby nie "kanibalizować" własnego ruchu.</strong><br><br>
+                    
+                    <strong>Zasada prosta:</strong><br>
+                    • <strong>Jeśli jesteśmy #1-3 organicznie</strong> → wyłączamy reklamy (oszczędność ~30% budżetu)<br>
+                    • <strong>Jeśli jesteśmy poza TOP 10 organicznie</strong> → włączamy agresywne reklamy na te hasła<br>
+                    • <strong>Hasła brandowe (z nazwą "GenActiv")</strong> → minimalne reklamy tylko dla ochrony przed konkurencją<br><br>
+                    
+                    <strong>Co to jest "kanibalizacja"?</strong> Sytuacja, gdy nasze własne reklamy "zjadają" nasz własny 
+                    organiczny ruch. Klient kliknąłby w bezpłatny wynik, ale zamiast tego klika w reklamę - płacimy za coś, 
+                    co mielibyśmy za darmo.
+                </div>
+                
+                <ul class="service-list">
+                    <li class="service-item"><strong>Krok 1:</strong> Audyt - sprawdzamy które hasła reklamowe pokrywają się z TOP 3 organicznym</li>
+                    <li class="service-item"><strong>Krok 2:</strong> Wyłączenie zbędnych reklam - natychmiastowe oszczędności</li>
+                    <li class="service-item"><strong>Krok 3:</strong> Przekierowanie budżetu na hasła, gdzie potrzebujemy wsparcia reklamowego</li>
+                    <li class="service-item"><strong>Krok 4:</strong> Cykliczna synchronizacja - co miesiąc aktualizujemy strategię</li>
+                </ul>
+                
+                <div class="rec-impact">
+                    <div class="impact-item">
+                        <div class="impact-value">-30%</div>
+                        <div class="impact-label">kosztów reklam Google Ads</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">5.5x</div>
+                        <div class="impact-label">zwrot z reklam (ROAS) - wzrost z 3.5x</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+15%</div>
+                        <div class="impact-label">więcej klientów łącznie</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REKOMENDACJA 5 -->
+            <div class="recommendation-card">
+                <div class="rec-header">
+                    <div class="rec-number">05</div>
+                    <div class="rec-title-section">
+                        <div class="rec-title">Budowanie autorytetu eksperta w branży (E-E-A-T)</div>
+                        <span class="rec-budget">💰 50,000 PLN</span>
+                    </div>
+                </div>
+                
+                <div class="rec-problem">
+                    <div class="rec-problem-label">Problem biznesowy</div>
+                    <strong>Google coraz bardziej sprawdza "kto stoi za stroną" - szczególnie dla produktów zdrowotnych.</strong> 
+                    Suplementy to kategoria "YMYL" (Your Money Your Life - "Twoje pieniądze, Twoje życie"), gdzie Google 
+                    wymaga udowodnienia, że autor treści jest ekspertem. Bez tego trudno będzie utrzymać i poprawić pozycje.
+                    Konkurenci, którzy zbudują autorytet wcześniej, będą nas wyprzedzać.
+                </div>
+                
+                <div class="rec-solution">
+                    <div class="rec-solution-label">Co robimy</div>
+                    <strong>Budujemy wiarygodność GenActiv jako eksperta w dziedzinie colostrum i suplementacji.</strong><br><br>
+                    
+                    <strong>Co to jest E-E-A-T?</strong> Wytyczne Google:<br>
+                    • <strong>Experience (Doświadczenie)</strong> - czy autor ma praktyczne doświadczenie z tematem?<br>
+                    • <strong>Expertise (Ekspertyza)</strong> - czy autor ma wiedzę i kwalifikacje?<br>
+                    • <strong>Authoritativeness (Autorytet)</strong> - czy strona jest uznawana za źródło wiedzy w branży?<br>
+                    • <strong>Trustworthiness (Wiarygodność)</strong> - czy można zaufać informacjom na stronie?<br><br>
+                    
+                    <strong>Jak to osiągamy:</strong><br>
+                    • <strong>Eksperci z nazwiska</strong> - każdy artykuł podpisany przez dietetyka/lekarza z biogramem i zdjęciem<br>
+                    • <strong>Publikacje w mediach</strong> - artykuły o GenActiv w portalach branżowych (linki zwrotne)<br>
+                    • <strong>Opinie klientów</strong> - program zbierania recenzji (cel: +1,000 opinii)<br>
+                    • <strong>Certyfikaty i badania</strong> - widoczne na stronie dowody jakości produktu
+                </div>
+                
+                <ul class="service-list">
+                    <li class="service-item"><strong>Filar 1:</strong> Podpisy ekspertów pod treściami + strona "Nasi Eksperci" z biogramami</li>
+                    <li class="service-item"><strong>Filar 2:</strong> Digital PR - publikacje w mediach branżowych, zdobycie 10 linków z wartościowych stron</li>
+                    <li class="service-item"><strong>Filar 3:</strong> Program opinii - automatyczne prośby o recenzję po zakupie, cel +1,000 opinii rocznie</li>
+                    <li class="service-item"><strong>Filar 4:</strong> Treści naukowe - artykuły z cytatami z badań, white papers, infografiki</li>
+                </ul>
+                
+                <div class="rec-impact">
+                    <div class="impact-item">
+                        <div class="impact-value">+10</div>
+                        <div class="impact-label">punktów Domain Authority (siła domeny)</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+50</div>
+                        <div class="impact-label">linków z wartościowych stron</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-value">+1,000</div>
+                        <div class="impact-label">opinii klientów</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: ROADMAP -->
+        <div class="section page-break">
+            <h2 class="section-title">5. Harmonogram Wdrożenia - Kiedy Co Robimy</h2>
+            <p class="section-description">
+                <strong>Dlaczego taki podział?</strong> Zaczynamy od rzeczy, które dają najszybsze efekty (technical fixes, CRO), 
+                a równolegle budujemy fundamenty długoterminowe (content, autorytet). 
+                SEO to maraton, nie sprint - pełne efekty widoczne po 6-12 miesiącach.
+            </p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q4 2025 (Październik - Grudzień) - START</div>
+                    <div class="timeline-content">
+                        <strong>Październik:</strong> Audyt techniczny strony, Pierwsze szybkie poprawki konwersji, Start pisania nowych artykułów (8 sztuk)<br><br>
+                        <strong>Listopad:</strong> Analiza nakładania się reklam i SEO, 12 nowych artykułów, Profile ekspertów na stronie, Testy A/B<br><br>
+                        <strong>Grudzień:</strong> 8 ostatnich artykułów (razem 28), Start kampanii PR w mediach, Monitoring efektów technicznych
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q1 2026 (Styczeń - Marzec) - SKALOWANIE</div>
+                    <div class="timeline-content">
+                        <strong>Styczeń:</strong> Analiza wyników Q4 - co zadziałało?, Kolejna faza artykułów (nowe kategorie), Zaawansowana personalizacja strony<br><br>
+                        <strong>Luty:</strong> Webinary z ekspertami, Pierwsze artykuły naukowe, Przesunięcie budżetu reklamowego na nowe hasła<br><br>
+                        <strong>Marzec:</strong> Podsumowanie Q1, Rozbudowa treści na podstawie danych, Kampania zbierania opinii klientów
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q2 2026 (Kwiecień - Czerwiec) - OPTYMALIZACJA</div>
+                    <div class="timeline-content">
+                        <strong>Kwiecień-Czerwiec:</strong> Pomiar wzrostu vs. stan z września 2025, Skalowanie tego co działa najlepiej, 
+                        Nowe kategorie treści na podstawie danych, Ciągła optymalizacja wszystkich kanałów<br><br>
+                        <strong>Oczekiwany efekt:</strong> +75% ruchu organicznego, +108% konwersji, zwrot z inwestycji 39x
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="section-subtitle">⏱️ Kiedy zobaczymy efekty?</h3>
+            <p class="section-description">
+                Różne działania dają efekty w różnym czasie. Poniżej realistyczne oczekiwania:
+            </p>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">1-3</div>
+                    <div class="metric-label">Naprawy techniczne</div>
+                    <div class="metric-change">miesiące do efektu</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1-2</div>
+                    <div class="metric-label">Optymalizacja konwersji</div>
+                    <div class="metric-change">miesiące do efektu</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3-6</div>
+                    <div class="metric-label">Nowe treści (artykuły)</div>
+                    <div class="metric-change">miesięcy do efektu</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">6-12</div>
+                    <div class="metric-label">Budowanie autorytetu</div>
+                    <div class="metric-change">miesięcy do efektu</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: ROI -->
+        <div class="section">
+            <h2 class="section-title">6. Inwestycja i Zwrot - Czy To Się Opłaca?</h2>
+            <p class="section-description">
+                <strong>Kluczowe pytanie:</strong> Ile wydajemy i ile z tego wróci? Poniżej kalkulacja oparta na danych z branży 
+                i doświadczeniu z podobnymi projektami e-commerce.
+            </p>
+            
+            <div class="roi-box">
+                <div class="roi-title">Prognozowany zwrot z inwestycji (12 miesięcy)</div>
+                <div class="roi-highlight">39.4x</div>
+                <div class="roi-label">Każda złotówka inwestycji zwraca się prawie 40-krotnie</div>
+                
+                <div class="roi-details">
+                    <div class="roi-detail">
+                        <div class="roi-detail-value">140,000 PLN</div>
+                        <div class="roi-detail-label">Łączna inwestycja (6 miesięcy wdrożenia)</div>
+                    </div>
+                    <div class="roi-detail">
+                        <div class="roi-detail-value">+460K PLN</div>
+                        <div class="roi-detail-label">Dodatkowy przychód miesięcznie</div>
+                    </div>
+                    <div class="roi-detail">
+                        <div class="roi-detail-value">~5.5M PLN</div>
+                        <div class="roi-detail-label">Dodatkowy przychód rocznie</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="section-subtitle">📊 Skąd te liczby? Rozbicie kalkulacji</h3>
+            <p class="section-description">
+                <strong>Założenia:</strong><br>
+                • Wzrost ruchu organicznego o 75% = +192,000 dodatkowych odwiedzających miesięcznie<br>
+                • Poprawa konwersji z 1.2% do 2.8% = więcej kupujących z tego samego ruchu<br>
+                • Średnia wartość zamówienia: 150 PLN<br><br>
+                <strong>Kalkulacja:</strong> (Obecny ruch + nowy ruch) × nowa konwersja × średnie zamówienie = dodatkowy przychód
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Na co idą pieniądze</th>
+                        <th>Kwota</th>
+                        <th>Co dostajemy w zamian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>#1</strong> Nowe treści (28 artykułów)</td>
+                        <td>35,000 PLN</td>
+                        <td>+40% haseł w TOP 10 Google, +25% ruchu</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#2</strong> Optymalizacja konwersji</td>
+                        <td>20,000 PLN</td>
+                        <td>+108% kupujących, +500 emaili/mies.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#3</strong> Naprawy techniczne</td>
+                        <td>25,000 PLN</td>
+                        <td>Szybsza strona, +20% kliknięć z Google</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#4</strong> Koordynacja reklam i SEO</td>
+                        <td>10,000 PLN</td>
+                        <td>-30% kosztów reklam, lepszy ROAS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#5</strong> Budowanie autorytetu (PR, eksperci)</td>
+                        <td>50,000 PLN</td>
+                        <td>Wyższe pozycje długoterminowo, +1000 opinii</td>
+                    </tr>
+                    <tr style="background: rgba(0, 210, 106, 0.15);">
+                        <td><strong>RAZEM</strong></td>
+                        <td><strong>140,000 PLN</strong></td>
+                        <td><strong>ROI: 39.4x (zwrot ~5.5M PLN rocznie)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p class="section-description" style="margin-top: 24px;">
+                <strong>⚠️ Uwaga:</strong> To są prognozy oparte na benchmarkach branżowych i doświadczeniu. 
+                Rzeczywiste wyniki mogą się różnić w zależności od wielu czynników (konkurencja, sezonowość, zmiany w Google). 
+                Rekomendujemy mierzenie postępów co miesiąc i korektę strategii na podstawie realnych danych.
+            </p>
+        </div>
+
+        <!-- SECTION 7: KPI TARGETS -->
+        <div class="section page-break">
+            <h2 class="section-title">7. Jak Będziemy Mierzyć Sukces (KPI)</h2>
+            <p class="section-description">
+                <strong>Co to są KPI?</strong> Key Performance Indicators - kluczowe wskaźniki efektywności. 
+                To liczby, które regularnie sprawdzamy, żeby wiedzieć czy idziemy w dobrym kierunku.
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Obszar</th>
+                        <th>Co mierzymy</th>
+                        <th>Teraz (09/2025)</th>
+                        <th>Cel: grudzień 2025</th>
+                        <th>Cel: czerwiec 2026</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3"><strong>Widoczność<br>w Google</strong></td>
+                        <td>Ile haseł mamy w TOP 3</td>
+                        <td>~20</td>
+                        <td>35</td>
+                        <td class="trend-up">60</td>
+                    </tr>
+                    <tr>
+                        <td>Ile haseł mamy w TOP 10</td>
+                        <td>~80</td>
+                        <td>150</td>
+                        <td class="trend-up">250</td>
+                    </tr>
+                    <tr>
+                        <td>Średnia pozycja (im niżej tym lepiej)</td>
+                        <td>25.0</td>
+                        <td>20.0</td>
+                        <td class="trend-up">15.0</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>Ruch<br>na stronie</strong></td>
+                        <td>Odwiedzający z Google / miesiąc</td>
+                        <td>256,513</td>
+                        <td>320,000</td>
+                        <td class="trend-up">450,000</td>
+                    </tr>
+                    <tr>
+                        <td>Ile razy pokazaliśmy się w Google</td>
+                        <td>1,112,296</td>
+                        <td>1,400,000</td>
+                        <td class="trend-up">2,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>% osób, które kliknęły (CTR)</td>
+                        <td>~23%</td>
+                        <td>25%</td>
+                        <td class="trend-up">28%</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Sprzedaż</strong></td>
+                        <td>% odwiedzających, którzy kupili</td>
+                        <td>1.2%</td>
+                        <td>2.0%</td>
+                        <td class="trend-up">2.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Nowe emaile do bazy / miesiąc</td>
+                        <td>~100</td>
+                        <td>400</td>
+                        <td class="trend-up">800</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Autorytet<br>strony</strong></td>
+                        <td>Domain Authority (siła domeny)</td>
+                        <td>XX</td>
+                        <td>+3 punkty</td>
+                        <td class="trend-up">+8 punktów</td>
+                    </tr>
+                    <tr>
+                        <td>Linki z innych stron do nas</td>
+                        <td>XX</td>
+                        <td>+20 nowych</td>
+                        <td class="trend-up">+50 nowych</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p class="section-description" style="margin-top: 24px;">
+                <strong>Jak będziemy raportować?</strong><br>
+                • <strong>Co tydzień:</strong> Krótki status - czy są jakieś problemy do rozwiązania?<br>
+                • <strong>Co miesiąc:</strong> Pełny raport z porównaniem do celów<br>
+                • <strong>Co kwartał:</strong> Strategiczny przegląd - czy strategia działa?
+            </p>
+        </div>
+
+        <!-- SECTION 8: NEXT STEPS -->
+        <div class="section">
+            <h2 class="section-title">8. Co Robimy w Najbliższych Tygodniach</h2>
+            <p class="section-description">
+                <strong>Konkretny plan działania</strong> - krok po kroku, co trzeba zrobić, żeby ruszyć z projektem.
+            </p>
+            
+            <h3 class="section-subtitle">📅 Tydzień 1 - Decyzje i organizacja</h3>
+            <ul class="service-list">
+                <li class="service-item"><strong>Akceptacja strategii</strong> - decyzja zarządu, które rekomendacje realizujemy</li>
+                <li class="service-item"><strong>Spotkanie startowe</strong> - zebranie zespołu (SEO, marketing, IT, content)</li>
+                <li class="service-item"><strong>Wybór dostawców</strong> - kto robi audyt techniczny, kto pisze treści</li>
+                <li class="service-item"><strong>Brief dla autorów</strong> - tematy pierwszych 8 artykułów</li>
+                <li class="service-item"><strong>Dashboard</strong> - ustawienie raportów do śledzenia postępów</li>
+            </ul>
+            
+            <h3 class="section-subtitle">📅 Tydzień 2 - Start prac</h3>
+            <ul class="service-list">
+                <li class="service-item"><strong>Audyt techniczny</strong> - rozpoczęcie skanowania strony pod kątem błędów</li>
+                <li class="service-item"><strong>Pierwsze poprawki konwersji</strong> - dodanie przycisków CTA, opinii klientów</li>
+                <li class="service-item"><strong>Analiza reklam vs. SEO</strong> - sprawdzenie które reklamy się nakładają z organicznym TOP 3</li>
+                <li class="service-item"><strong>Poszukiwanie ekspertów</strong> - kto będzie podpisywał treści (dietetyk, lekarz)</li>
+                <li class="service-item"><strong>Przegląd prawny</strong> - czy komunikaty zdrowotne są zgodne z przepisami</li>
+            </ul>
+            
+            <h3 class="section-subtitle">📅 Tydzień 3-4 - Pierwsze efekty</h3>
+            <ul class="service-list">
+                <li class="service-item"><strong>Publikacja pierwszych artykułów</strong> - 4 teksty na stronie</li>
+                <li class="service-item"><strong>Naprawy techniczne</strong> - usunięcie najważniejszych błędów</li>
+                <li class="service-item"><strong>Testy A/B</strong> - uruchomienie pierwszych testów na stronie</li>
+                <li class="service-item"><strong>Lista kontaktów PR</strong> - 50 portali do pozyskania linków</li>
+                <li class="service-item"><strong>Kod structured data</strong> - wdrożenie na stronach produktowych</li>
+            </ul>
+            
+            <div class="summary-card opportunity" style="margin-top: 32px;">
+                <div class="card-icon">🚀</div>
+                <div class="card-title">Gotowi do startu?</div>
+                <div class="card-text">
+                    Po akceptacji strategii możemy zacząć w ciągu 3-5 dni roboczych. 
+                    Pierwsze widoczne efekty (szybkość strony, konwersja) już po 4-6 tygodniach.
+                    Pełne efekty SEO po 6-12 miesiącach systematycznej pracy.
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>© 2025 Rafał Oleksiak - CRM & Marketing Automation Consulting</p>
+            <p style="margin-top: 8px;">Ten dokument stanowi kompleksową analizę SEO i strategię optymalizacji dla GenActiv.pl</p>
+            <p style="margin-top: 8px; color: rgba(255, 255, 255, 0.3);">Metodologia: McKinsey & Accenture | Data-Driven Digital Consulting</p>
+        </div>
+    </div>
+    
+    <button class="print-button" onclick="window.print()">🖨️ Generuj PDF</button>
+</body>
+</html>
