@@ -2,11 +2,51 @@ const chatEl = document.getElementById('chat-inner');
 const inputEl = document.getElementById('input');
 const sendBtn = document.getElementById('send-btn');
 const statusEl = document.getElementById('status');
+const clearBtn = document.getElementById('clear-btn');
 
-const messages = [];
+// Fix 13/14: localStorage persistence
+const MAX_STORED_MESSAGES = 20;
+
+function saveMessages(msgs) {
+  try {
+    const toStore = msgs.slice(-MAX_STORED_MESSAGES);
+    localStorage.setItem('genactiv-messages', JSON.stringify(toStore));
+  } catch { /* quota exceeded — ignore */ }
+}
+
+function loadMessages() {
+  try {
+    const stored = localStorage.getItem('genactiv-messages');
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.slice(-MAX_STORED_MESSAGES);
+  } catch { return []; }
+}
+
+function clearStoredMessages() {
+  localStorage.removeItem('genactiv-messages');
+}
+
+const messages = loadMessages();
 let isProcessing = false;
 
 marked.setOptions({ breaks: true, gfm: true });
+
+// --- Restore history or show welcome ---
+function init() {
+  if (messages.length > 0) {
+    for (const msg of messages) {
+      const el = appendMessage(msg.role, msg.role === 'user' ? msg.content : '');
+      if (msg.role === 'assistant') {
+        const bubbleEl = el.querySelector('.bubble');
+        bubbleEl.innerHTML = renderMarkdown(msg.content);
+      }
+    }
+  } else {
+    showWelcome();
+  }
+}
 
 // --- Welcome screen ---
 function showWelcome() {
@@ -21,13 +61,25 @@ function showWelcome() {
   chatEl.appendChild(welcome);
 }
 
-showWelcome();
+init();
 
-// --- Health check ---
+// Fix 14: Clear button
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    if (isProcessing) return;
+    messages.length = 0;
+    clearStoredMessages();
+    chatEl.innerHTML = '';
+    showWelcome();
+  });
+}
+
+// Fix 4: Enhanced health check — show MCP status
 fetch('/api/health')
   .then(r => r.json())
-  .then(() => {
-    statusEl.textContent = 'Połączono';
+  .then((data) => {
+    const mcpInfo = data.mcp ? `${data.mcp.connected}/${data.mcp.total} MCP` : '';
+    statusEl.textContent = `Połączono${mcpInfo ? ` (${mcpInfo})` : ''}`;
     statusEl.className = 'status connected';
   })
   .catch(() => {
@@ -54,25 +106,19 @@ sendBtn.addEventListener('click', sendMessage);
 let thinkingEl = null;
 let thinkingTimers = [];
 
-function showThinking() {
+function showThinking(text) {
+  if (thinkingEl) {
+    updateThinkingText(text || 'Przetwarzam...');
+    return;
+  }
   thinkingEl = document.createElement('div');
   thinkingEl.className = 'thinking-indicator';
   thinkingEl.innerHTML = `
     <div class="thinking-dots"><span></span><span></span><span></span></div>
-    <span class="thinking-text">Przetwarzam...</span>
+    <span class="thinking-text">${text || 'Przetwarzam...'}</span>
   `;
   chatEl.appendChild(thinkingEl);
   scrollToBottom();
-
-  const textEl = thinkingEl.querySelector('.thinking-text');
-  thinkingTimers.push(
-    setTimeout(() => {
-      if (textEl) textEl.textContent = 'Analizuję dane i wywołuję narzędzia...';
-    }, 5000),
-    setTimeout(() => {
-      if (textEl) textEl.textContent = 'To zapytanie wymaga więcej czasu...';
-    }, 20000)
-  );
 }
 
 function updateThinkingText(text) {
@@ -92,24 +138,38 @@ function hideThinking() {
 }
 
 // --- Tool call tracking ---
-const activeTools = new Map(); // toolName -> { el, startTime }
+const activeTools = new Map();
+
+// --- Inactivity timeout ---
+const INACTIVITY_TIMEOUT_MS = 45000;
+let inactivityTimer = null;
+
+function resetInactivityTimer(onTimeout) {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(onTimeout, INACTIVITY_TIMEOUT_MS);
+}
+
+function clearInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = null;
+}
 
 // --- Send message ---
 function sendMessage() {
   const text = inputEl.value.trim();
   if (!text || isProcessing) return;
 
-  // Remove welcome screen
   const welcomeEl = document.getElementById('welcome');
   if (welcomeEl) welcomeEl.remove();
 
   messages.push({ role: 'user', content: text });
+  saveMessages(messages);
   appendMessage('user', text);
 
   inputEl.value = '';
   inputEl.style.height = 'auto';
   setProcessing(true);
-  showThinking();
+  showThinking('Przetwarzam...');
 
   const assistantEl = appendMessage('assistant', '');
   const bubbleEl = assistantEl.querySelector('.bubble');
@@ -118,19 +178,62 @@ function sendMessage() {
 
   let fullText = '';
   let gotFirstText = false;
+  let finalized = false;
+
+  function finalize(errorMsg) {
+    if (finalized) return;
+    finalized = true;
+    clearInactivityTimer();
+    hideThinking();
+    assistantEl.style.display = '';
+
+    if (errorMsg) {
+      bubbleEl.innerHTML = `<span style="color:var(--brand-red)">${errorMsg}</span>`;
+    } else if (fullText) {
+      messages.push({ role: 'assistant', content: fullText });
+      saveMessages(messages);
+      bubbleEl.innerHTML = renderMarkdown(fullText);
+    }
+
+    bubbleEl.classList.remove('streaming-cursor');
+    for (const [, tool] of activeTools) {
+      markToolComplete(tool);
+    }
+    activeTools.clear();
+    setProcessing(false);
+    scrollToBottom();
+  }
+
+  const timeoutHandler = () => {
+    finalize('Przekroczono czas oczekiwania (45s). Spróbuj ponownie.');
+  };
+
+  resetInactivityTimer(timeoutHandler);
 
   fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages })
   }).then(response => {
+    if (!response.ok) {
+      if (response.status === 429) {
+        finalize('Zbyt wiele zapytań. Poczekaj chwilę i spróbuj ponownie.');
+        return;
+      }
+      finalize(`Błąd serwera: ${response.status}`);
+      return;
+    }
+
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
 
     function read() {
       reader.read().then(({ done, value }) => {
+        if (finalized) return;
         if (done) { finalize(); return; }
+
+        resetInactivityTimer(timeoutHandler);
 
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
@@ -147,11 +250,23 @@ function sendMessage() {
                 hideThinking();
                 assistantEl.style.display = '';
                 gotFirstText = true;
-              } else if (event.type === 'tool_use' && thinkingEl) {
+              }
+
+              if (event.type === 'progress') {
+                if (!gotFirstText) {
+                  showThinking(event.data);
+                } else {
+                  showThinking(event.data);
+                }
+              }
+
+              if (event.type === 'tool_use') {
                 const toolShort = event.data.tool.split('__').pop();
-                updateThinkingText('Wywołuję: ' + toolShort + '...');
-              } else if (event.type === 'tool_result' && thinkingEl) {
-                updateThinkingText('Przetwarzam wyniki...');
+                showThinking('Wywołuję: ' + toolShort + '...');
+              }
+
+              if (event.type === 'tool_result') {
+                showThinking('Analizuję wyniki...');
               }
 
               handleEvent(event, bubbleEl, toolsEl);
@@ -161,38 +276,23 @@ function sendMessage() {
         }
 
         read();
+      }).catch(err => {
+        if (!finalized) {
+          finalize(`Błąd połączenia: ${err.message}`);
+        }
       });
     }
 
     read();
   }).catch(err => {
-    hideThinking();
-    assistantEl.style.display = '';
-    bubbleEl.innerHTML = `<span style="color:var(--brand-red)">Błąd: ${err.message}</span>`;
-    setProcessing(false);
+    finalize(`Błąd: ${err.message}`);
   });
-
-  function finalize() {
-    hideThinking();
-    assistantEl.style.display = '';
-    if (fullText) {
-      messages.push({ role: 'assistant', content: fullText });
-      bubbleEl.innerHTML = renderMarkdown(fullText);
-      bubbleEl.classList.remove('streaming-cursor');
-    }
-    // Mark all active tools as complete
-    for (const [, tool] of activeTools) {
-      markToolComplete(tool);
-    }
-    activeTools.clear();
-    setProcessing(false);
-    scrollToBottom();
-  }
 }
 
 function handleEvent(event, bubbleEl, toolsEl) {
   switch (event.type) {
     case 'text':
+      hideThinking();
       bubbleEl.textContent += event.data;
       bubbleEl.classList.add('streaming-cursor');
       scrollToBottom();
@@ -238,7 +338,6 @@ function handleEvent(event, bubbleEl, toolsEl) {
       const tool = activeTools.get(event.data.tool);
       if (tool) {
         markToolComplete(tool);
-        // Update details with result preview
         const wrapper = tool.el.parentElement;
         if (wrapper) {
           const details = wrapper.querySelector('.tool-details');

@@ -1,13 +1,15 @@
 import type { GraphQLClient } from "graphql-request";
 import { gql } from "graphql-request";
 import { z } from "zod";
+import { fetchAllOrders, buildOrderQueryFilter } from "../utils/paginateOrders.js";
 
 const GetCampaignPerformanceInputSchema = z.object({
   dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
   dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-  limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
+  limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
   utmSource: z.string().optional().describe("Filter by UTM source (e.g., facebook, instagram, google)"),
-  utmMedium: z.string().optional().describe("Filter by UTM medium (e.g., cpc, email, social)")
+  utmMedium: z.string().optional().describe("Filter by UTM medium (e.g., cpc, email, social)"),
+  financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid)")
 });
 
 type GetCampaignPerformanceInput = z.infer<typeof GetCampaignPerformanceInputSchema>;
@@ -27,9 +29,60 @@ interface CampaignMetrics {
 
 let shopifyClient: GraphQLClient;
 
+const ORDERS_QUERY = gql`
+  query GetOrdersForCampaigns($first: Int!, $query: String, $after: String) {
+    orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          createdAt
+          totalPriceSet {
+            shopMoney {
+              amount
+              currencyCode
+            }
+          }
+          displayFinancialStatus
+          customerJourneySummary {
+            firstVisit {
+              source
+              sourceType
+              utmParameters {
+                source
+                medium
+                campaign
+                content
+                term
+              }
+              referrerUrl
+            }
+            lastVisit {
+              source
+              sourceType
+              utmParameters {
+                source
+                medium
+                campaign
+                content
+                term
+              }
+              referrerUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const getCampaignPerformance = {
   name: "get-campaign-performance",
-  description: "Get detailed performance metrics for marketing campaigns based on UTM parameters",
+  description: "Get detailed performance metrics for marketing campaigns based on UTM parameters. Uses pagination to fetch ALL orders (not limited to 250). Default: only paid orders.",
   schema: GetCampaignPerformanceInputSchema,
 
   initialize(client: GraphQLClient) {
@@ -38,65 +91,16 @@ const getCampaignPerformance = {
 
   execute: async (input: GetCampaignPerformanceInput) => {
     try {
-      const { dateFrom, dateTo, limit, utmSource, utmMedium } = input;
+      const { dateFrom, dateTo, limit, utmSource, utmMedium, financialStatus } = input;
 
-      const query = gql`
-        query GetOrdersForCampaigns($first: Int!, $query: String) {
-          orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
-            edges {
-              node {
-                id
-                name
-                createdAt
-                totalPriceSet {
-                  shopMoney {
-                    amount
-                    currencyCode
-                  }
-                }
-                displayFinancialStatus
-                customerJourneySummary {
-                  firstVisit {
-                    source
-                    sourceType
-                    utmParameters {
-                      source
-                      medium
-                      campaign
-                      content
-                      term
-                    }
-                    referrerUrl
-                  }
-                  lastVisit {
-                    source
-                    sourceType
-                    utmParameters {
-                      source
-                      medium
-                      campaign
-                      content
-                      term
-                    }
-                    referrerUrl
-                  }
-                }
-              }
-            }
-          }
-        }
-      `;
+      const queryFilter = buildOrderQueryFilter({ dateFrom, dateTo, financialStatus });
 
-      const queryFilter = `created_at:>=${dateFrom} AND created_at:<=${dateTo}`;
-
-      const variables = {
-        first: Math.min(limit, 250),
-        query: queryFilter
-      };
-
-      const data = (await shopifyClient.request(query, variables)) as {
-        orders: any;
-      };
+      const { edges, totalFetched, hasMore } = await fetchAllOrders(
+        shopifyClient,
+        ORDERS_QUERY,
+        { query: queryFilter },
+        limit
+      );
 
       // Aggregate by campaign
       const campaignMap = new Map<string, CampaignMetrics>();
@@ -104,7 +108,7 @@ const getCampaignPerformance = {
       let totalRevenue = 0;
       let ordersWithCampaign = 0;
 
-      for (const edge of data.orders.edges) {
+      for (const edge of edges) {
         const order = edge.node;
         const revenue = parseFloat(order.totalPriceSet.shopMoney.amount);
         const createdAt = order.createdAt;
@@ -192,6 +196,17 @@ const getCampaignPerformance = {
       return {
         period: { from: dateFrom, to: dateTo },
         filters: { utmSource: utmSource || null, utmMedium: utmMedium || null },
+        dataQuality: {
+          ordersAnalyzed: totalFetched,
+          hasMoreOrders: hasMore,
+          financialStatusFilter: financialStatus,
+          campaignAttributionRate: totalOrders > 0
+            ? Math.round(ordersWithCampaign / totalOrders * 100)
+            : 0,
+          note: hasMore
+            ? `Przeanalizowano ${totalFetched} zamówień (limit). Mogą istnieć dodatkowe zamówienia.`
+            : `Przeanalizowano WSZYSTKIE ${totalFetched} zamówień w tym okresie.`
+        },
         summary: {
           totalOrders,
           totalRevenue: Math.round(totalRevenue * 100) / 100,

@@ -1,9 +1,28 @@
 import bcrypt from 'bcryptjs';
 import session from 'express-session';
 
+// Load users from AUTH_USERS (JSON array) or fallback to single AUTH_USERNAME/AUTH_PASSWORD_HASH
+function getUsers() {
+  if (process.env.AUTH_USERS) {
+    try {
+      return JSON.parse(process.env.AUTH_USERS);
+    } catch (e) {
+      console.error('[Auth] Failed to parse AUTH_USERS JSON:', e.message);
+    }
+  }
+  const hash = process.env.AUTH_PASSWORD_HASH;
+  if (!hash) return [];
+  return [{ username: process.env.AUTH_USERNAME || 'admin', hash }];
+}
+
 export function setupAuth(app) {
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret && process.env.NODE_ENV === 'production') {
+    throw new Error('[Auth] SESSION_SECRET must be set in production');
+  }
+
   app.use(session({
-    secret: process.env.SESSION_SECRET || 'dev-secret-change-in-production',
+    secret: sessionSecret || 'dev-secret-change-in-production',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -22,23 +41,22 @@ export function setupAuth(app) {
     res.send(loginPage());
   });
 
-  // Login handler
+  // Login handler (supports multiple users via AUTH_USERS JSON or single user via AUTH_USERNAME/AUTH_PASSWORD_HASH)
   app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    const validUsername = process.env.AUTH_USERNAME || 'admin';
-    const passwordHash = process.env.AUTH_PASSWORD_HASH;
-
-    if (!passwordHash) {
-      console.error('[Auth] AUTH_PASSWORD_HASH not set');
+    const users = getUsers();
+    if (users.length === 0) {
+      console.error('[Auth] No users configured (set AUTH_PASSWORD_HASH or AUTH_USERS)');
       return res.status(500).send(loginPage('Błąd konfiguracji serwera'));
     }
 
-    if (username !== validUsername) {
+    const user = users.find(u => u.username === username);
+    if (!user) {
       return res.status(401).send(loginPage('Nieprawidłowe dane logowania'));
     }
 
-    const valid = await bcrypt.compare(password, passwordHash);
+    const valid = await bcrypt.compare(password, user.hash);
     if (!valid) {
       return res.status(401).send(loginPage('Nieprawidłowe dane logowania'));
     }

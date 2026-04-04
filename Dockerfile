@@ -10,7 +10,7 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 
 # Install Python MCP packages
-RUN pip3 install --break-system-packages meta-ads-mcp analytics-mcp
+RUN pip3 install --break-system-packages meta-ads-mcp analytics-mcp tiktok-ads-mcp
 
 WORKDIR /app
 
@@ -34,6 +34,9 @@ RUN cd genactiv-online && npm ci --production
 COPY genactiv-online/ ./genactiv-online/
 
 WORKDIR /app/genactiv-online
+
+# Fix 21: Memory limit for Node.js
+ENV NODE_OPTIONS="--max-old-space-size=512"
 
 EXPOSE 3000
 

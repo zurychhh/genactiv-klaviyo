@@ -20,6 +20,8 @@ import { createProduct } from "./tools/createProduct.js";
 // SEO update tools
 import { updateProductSeo } from "./tools/updateProductSeo.js";
 import { updateCollectionSeo } from "./tools/updateCollectionSeo.js";
+import { updateProductImages } from "./tools/updateProductImages.js";
+import { getSeoAudit } from "./tools/getSeoAudit.js";
 // Analytics tools
 import { getTrafficSourceAnalytics } from "./tools/getTrafficSourceAnalytics.js";
 import { getCampaignPerformance } from "./tools/getCampaignPerformance.js";
@@ -80,6 +82,8 @@ createProduct.initialize(shopifyClient);
 // Initialize SEO update tools
 updateProductSeo.initialize(shopifyClient);
 updateCollectionSeo.initialize(shopifyClient);
+updateProductImages.initialize(shopifyClient);
+getSeoAudit.initialize(shopifyClient);
 // Initialize analytics tools
 getTrafficSourceAnalytics.initialize(shopifyClient);
 getCampaignPerformance.initialize(shopifyClient);
@@ -324,15 +328,49 @@ server.tool(
   }
 );
 
+// Update Product Images - ALT text for SEO
+server.tool(
+  "update-product-images",
+  {
+    productId: z.string().min(1).describe("Shopify product ID (numeric, without gid prefix)"),
+    images: z.array(z.object({
+      imageId: z.string().min(1).describe("Shopify image ID (numeric, without gid prefix)"),
+      altText: z.string().describe("ALT text for the image (SEO-friendly description)")
+    })).min(1).describe("Array of images to update with new ALT text")
+  },
+  async (args) => {
+    const result = await updateProductImages.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
+// SEO Audit - scan for missing meta titles, descriptions, ALT texts
+server.tool(
+  "get-seo-audit",
+  {
+    scope: z.enum(["products", "collections", "all"]).default("all").describe("What to audit: products, collections, or all"),
+    limit: z.number().default(50).describe("Max items to scan per type (max 250)")
+  },
+  async (args) => {
+    const result = await getSeoAudit.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
 // === ANALYTICS TOOLS ===
 
-// Traffic Source Analytics - analyze orders by traffic source
+// Traffic Source Analytics - analyze orders by traffic source (with pagination)
 server.tool(
   "get-traffic-source-analytics",
   {
     dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
     dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-    limit: z.number().default(250).describe("Max orders to analyze (max 250)")
+    limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+    financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid — excludes cancelled/refunded)")
   },
   async (args) => {
     const result = await getTrafficSourceAnalytics.execute(args);
@@ -342,15 +380,16 @@ server.tool(
   }
 );
 
-// Campaign Performance - detailed UTM campaign analysis
+// Campaign Performance - detailed UTM campaign analysis (with pagination)
 server.tool(
   "get-campaign-performance",
   {
     dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
     dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-    limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
+    limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
     utmSource: z.string().optional().describe("Filter by UTM source (e.g., facebook, instagram, google)"),
-    utmMedium: z.string().optional().describe("Filter by UTM medium (e.g., cpc, email, social)")
+    utmMedium: z.string().optional().describe("Filter by UTM medium (e.g., cpc, email, social)"),
+    financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid)")
   },
   async (args) => {
     const result = await getCampaignPerformance.execute(args);
@@ -360,14 +399,15 @@ server.tool(
   }
 );
 
-// Conversion Metrics - payment, fulfillment, and conversion trends
+// Conversion Metrics - payment, fulfillment, and conversion trends (with pagination)
 server.tool(
   "get-conversion-metrics",
   {
     dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
     dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-    limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
-    groupBy: z.enum(["day", "week", "month"]).default("day").describe("Time grouping for trends")
+    limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+    groupBy: z.enum(["day", "week", "month"]).default("day").describe("Time grouping for trends"),
+    financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("any").describe("Filter by financial status (default: any — shows all for conversion funnel)")
   },
   async (args) => {
     const result = await getConversionMetrics.execute(args);
@@ -377,14 +417,15 @@ server.tool(
   }
 );
 
-// Product Performance - product sales by traffic source
+// Product Performance - product sales by traffic source (with pagination)
 server.tool(
   "get-product-performance",
   {
     dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
     dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-    limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
-    utmSource: z.string().optional().describe("Filter by UTM source to see product performance from specific source")
+    limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+    utmSource: z.string().optional().describe("Filter by UTM source to see product performance from specific source"),
+    financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid)")
   },
   async (args) => {
     const result = await getProductPerformance.execute(args);

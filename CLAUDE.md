@@ -34,6 +34,7 @@ genactiv-klaviyo/
 ├── shopify_theme_api.py       # Shopify Theme API client
 ├── sync_payment_id.py         # Payment ID sync: Shopify -> Baselinker
 ├── generate_ga4_token.py      # GA4 OAuth token generator
+├── generate_tiktok_token.py   # TikTok Business API OAuth token generator
 └── venv/                      # Python virtual environment
 ```
 
@@ -43,13 +44,14 @@ Browser-based AI assistant at `genactiv.oleksiakconsulting.com` — replaces loc
 
 ### Architecture
 ```
-Browser → Express (auth + SSE) → Anthropic API ⇄ 6 MCP servers
+Browser → Express (auth + SSE) → Anthropic API ⇄ 7 MCP servers
                                                  ├── Klaviyo (Python/uvx)
                                                  ├── Shopify Extended (Node.js)
                                                  ├── Shopify Standard (Node.js)
                                                  ├── Meta Ads (Python)
                                                  ├── Google Ads (Python/FastMCP venv)
-                                                 └── GA4 (Python/analytics-mcp)
+                                                 ├── GA4 (Python/analytics-mcp)
+                                                 └── TikTok Ads (Python/tiktok-ads-mcp)
 ```
 
 ### Two-Phase Query Routing
@@ -131,7 +133,7 @@ railway login --browserless    # Daje link + kod do wklejenia na stronie Railway
 ```
 
 ### Docker Build (root `Dockerfile`)
-Node 18 + Python 3 + uv → builds Shopify Extended MCP → builds Google Ads MCP venv → copies genactiv-online → installs meta-ads-mcp + analytics-mcp
+Node 18 + Python 3 + uv → builds Shopify Extended MCP → builds Google Ads MCP venv → copies genactiv-online → installs meta-ads-mcp + analytics-mcp + tiktok-ads-mcp
 
 ### Environment Variables (`.env.example`)
 ```
@@ -148,6 +150,9 @@ GOOGLE_ADS_REFRESH_TOKEN                # Google Ads OAuth refresh token
 GOOGLE_ADS_LOGIN_CUSTOMER_ID            # MCC ID: 2538328866
 GA4_PROPERTY_ID                         # GA4 property: 279858535
 GA4_REFRESH_TOKEN                       # GA4 OAuth refresh token
+TIKTOK_APP_ID                           # TikTok Business App ID
+TIKTOK_SECRET                           # TikTok App Secret
+TIKTOK_ACCESS_TOKEN                     # TikTok OAuth access token (24h, auto-refreshed)
 PORT, NODE_ENV, SESSION_SECRET          # Server config
 ```
 
@@ -156,17 +161,19 @@ PORT, NODE_ENV, SESSION_SECRET          # Server config
 - **Large tool results:** Auto-compressed (nulls stripped) and truncated at 15k chars.
 - **Meta Ads MCP:** Sometimes fails to connect locally (Python module issue). Works on Railway.
 - **Google OAuth tokens:** Expire when Google Cloud consent screen is in "Testing" mode (7 days). Po publication → tokeny nie wygasają. Regeneracja: `python generate_refresh_token.py` (Ads) / `python generate_ga4_token.py` (GA4).
+- **TikTok tokens:** Access token expires every 24h — `tiktok-ads-mcp` auto-refreshes using APP_ID + SECRET. First token: `python3 generate_tiktok_token.py`.
 - **Railway CLI auth:** Zawsze `unset RAILWAY_TOKEN` przed użyciem CLI (patrz sekcja wyżej).
 
 ## MCP Integrations
 
-Seven MCP servers provide API access (6 active in genactiv-online, all 7 in local Claude Code):
+Eight MCP servers provide API access (7 active in genactiv-online, all 8 in local Claude Code):
 - **Klaviyo MCP**: Email campaigns, flows, profiles, templates, metrics
 - **Shopify MCP**: Products, customers, orders (standard tools)
 - **Shopify Extended MCP**: Analytics - traffic sources, campaign performance, product performance
 - **Google Ads MCP**: GAQL queries, keyword research (account: 339-338-2047)
 - **Meta Ads MCP**: Facebook/Instagram campaigns, audiences, insights
 - **GA4 MCP**: Analytics reports, realtime data (property: 279858535)
+- **TikTok Ads MCP**: TikTok campaigns, ad groups, ads, performance reports
 - **Chrome DevTools MCP**: Page inspection, screenshots, performance traces — local only
 
 ### Klaviyo MCP Tools
@@ -241,6 +248,16 @@ mcp__ga4__get_account_summaries             # Account overview
 mcp__ga4__get_property_details              # Property config
 mcp__ga4__get_custom_dimensions_and_metrics # Custom dimensions
 mcp__ga4__list_google_ads_links             # GA4-Ads linking status
+```
+
+### TikTok Ads MCP Tools
+```
+mcp__tiktok-ads__get_business_centers       # Business centers
+mcp__tiktok-ads__get_authorized_ad_accounts # Authorized ad accounts
+mcp__tiktok-ads__get_campaigns              # Campaigns with filters
+mcp__tiktok-ads__get_ad_groups              # Ad groups + targeting
+mcp__tiktok-ads__get_ads                    # Ads + creatives
+mcp__tiktok-ads__get_reports                # Performance reports (ROAS, CTR, CPC, conversions)
 ```
 
 ## Local Python Scripts

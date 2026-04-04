@@ -19,9 +19,12 @@
         <span id="status" class="status">Łączenie...</span>
       </div>
     </div>
-    <form method="POST" action="/logout" style="margin:0">
-      <button id="logout-btn" type="submit">Wyloguj</button>
-    </form>
+    <div class="header-actions">
+      <button id="clear-btn" type="button" title="Wyczyść historię">Wyczyść</button>
+      <form method="POST" action="/logout" style="margin:0">
+        <button id="logout-btn" type="submit">Wyloguj</button>
+      </form>
+    </div>
   </header>
 
   <main id="chat">

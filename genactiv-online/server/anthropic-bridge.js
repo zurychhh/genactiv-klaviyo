@@ -34,6 +34,8 @@ async function streamWithRetry(params, onText) {
       let currentToolUse = null;
       let currentToolInput = '';
       const contentBlocks = [];
+      // Fix 15: Track token usage
+      let usage = null;
 
       for await (const event of response) {
         switch (event.type) {
@@ -72,7 +74,25 @@ async function streamWithRetry(params, onText) {
               currentToolInput = '';
             }
             break;
+
+          // Fix 15: Capture usage from message_delta
+          case 'message_delta':
+            if (event.usage) {
+              usage = { ...usage, ...event.usage };
+            }
+            break;
+
+          case 'message_start':
+            if (event.message?.usage) {
+              usage = { ...usage, ...event.message.usage };
+            }
+            break;
         }
+      }
+
+      // Fix 15: Log token usage
+      if (usage) {
+        console.log(`[Anthropic] Tokens — input: ${usage.input_tokens || 0}, output: ${usage.output_tokens || 0}`);
       }
 
       return contentBlocks;
@@ -120,7 +140,6 @@ async function routeQuery(userMessage) {
 // --- Sliding window ---
 function trimHistory(messages) {
   if (messages.length <= MAX_HISTORY_MESSAGES) return messages;
-  // Keep last N messages, ensure first message is user role
   const trimmed = messages.slice(-MAX_HISTORY_MESSAGES);
   if (trimmed[0].role !== 'user') {
     trimmed.shift();
@@ -129,23 +148,26 @@ function trimHistory(messages) {
 }
 
 // --- Main entry point ---
-export async function processChat(messages, { onText, onToolUse, onToolResult, onError, onDone }) {
+// Fix 3: Accept signal param for client disconnect detection
+export async function processChat(messages, { signal, onText, onToolUse, onToolResult, onProgress, onError, onDone }) {
   const MAX_TOOL_ROUNDS = 8;
 
   try {
-    // Get latest user message for routing
     const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
     const userText = typeof lastUserMsg?.content === 'string'
       ? lastUserMsg.content
       : lastUserMsg?.content?.[0]?.text || '';
 
-    // Ensure tool cache is populated
     await getAllTools();
 
-    // PHASE 1: Route to correct server via Haiku
+    // Fix 3: Check if client disconnected
+    if (signal?.aborted) return;
+
+    onProgress?.('Routing...');
     const targetServer = await routeQuery(userText);
 
-    // PHASE 2: Load only the needed tools
+    if (signal?.aborted) return;
+
     let tools;
     if (targetServer) {
       const { tools: serverTools } = getToolsForServer(targetServer);
@@ -165,7 +187,14 @@ export async function processChat(messages, { onText, onToolUse, onToolResult, o
     console.log(`[Anthropic] Est input tokens: ${estTokens} (messages: ${workingMessages.length}, tools: ${tools.length})`);
 
     for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
+      // Fix 3: Check abort before each API round
+      if (signal?.aborted) {
+        console.log('[Anthropic] Aborted — client disconnected');
+        return;
+      }
+
       console.log(`[Anthropic] Round ${round}`);
+      onProgress?.('Generuję odpowiedź...');
 
       const contentBlocks = await streamWithRetry({
         model: ANTHROPIC_MODEL,
@@ -187,7 +216,11 @@ export async function processChat(messages, { onText, onToolUse, onToolResult, o
 
       const toolResults = [];
       for (const toolBlock of toolUseBlocks) {
+        if (signal?.aborted) return;
+
+        const toolShort = toolBlock.name.split('__').pop();
         onToolUse({ tool: toolBlock.name, args: toolBlock.input });
+        onProgress?.(`Wywołuję ${toolShort}...`);
 
         try {
           const result = await callTool(toolBlock.name, toolBlock.input);
@@ -200,18 +233,20 @@ export async function processChat(messages, { onText, onToolUse, onToolResult, o
           });
           onToolResult({ tool: toolBlock.name, result: resultText.slice(0, 500) });
         } catch (err) {
-          const errorMsg = `Error: ${err.message}`;
+          // Fix 10: Enhanced error message with instructions for Claude
+          const errorMsg = `Error calling ${toolBlock.name}: ${err.message}. [Instrukcja: poinformuj użytkownika o błędzie narzędzia i kontynuuj rozmowę. Zasugeruj alternatywne podejście lub ponowienie próby.]`;
           toolResults.push({
             type: 'tool_result',
             tool_use_id: toolBlock.id,
             content: errorMsg,
             is_error: true
           });
-          onToolResult({ tool: toolBlock.name, result: errorMsg });
+          onToolResult({ tool: toolBlock.name, result: `Error: ${err.message}` });
         }
       }
 
       workingMessages.push({ role: 'user', content: toolResults });
+      onProgress?.('Analizuję wyniki...');
     }
 
     onText('\n\n[Limit rund narzędzi]');

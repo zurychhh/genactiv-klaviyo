@@ -1,11 +1,13 @@
 import type { GraphQLClient } from "graphql-request";
 import { gql } from "graphql-request";
 import { z } from "zod";
+import { fetchAllOrders, buildOrderQueryFilter } from "../utils/paginateOrders.js";
 
 const GetTrafficSourceAnalyticsInputSchema = z.object({
   dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
   dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-  limit: z.number().default(250).describe("Max orders to analyze (max 250)")
+  limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+  financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid — excludes cancelled/refunded)")
 });
 
 type GetTrafficSourceAnalyticsInput = z.infer<typeof GetTrafficSourceAnalyticsInputSchema>;
@@ -21,9 +23,69 @@ interface SourceMetrics {
 
 let shopifyClient: GraphQLClient;
 
+const ORDERS_QUERY = gql`
+  query GetOrdersForAnalytics($first: Int!, $query: String, $after: String) {
+    orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          createdAt
+          totalPriceSet {
+            shopMoney {
+              amount
+              currencyCode
+            }
+          }
+          displayFinancialStatus
+          sourceName
+          sourceIdentifier
+          channelInformation {
+            channelId
+            channelDefinition {
+              channelName
+              handle
+            }
+          }
+          customerJourneySummary {
+            firstVisit {
+              source
+              sourceType
+              utmParameters {
+                source
+                medium
+                campaign
+                content
+                term
+              }
+              referrerUrl
+            }
+            lastVisit {
+              source
+              sourceType
+              utmParameters {
+                source
+                medium
+                campaign
+                content
+                term
+              }
+              referrerUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const getTrafficSourceAnalytics = {
   name: "get-traffic-source-analytics",
-  description: "Analyze orders by traffic source with revenue and AOV metrics",
+  description: "Analyze orders by traffic source with revenue and AOV metrics. Uses pagination to fetch ALL orders (not limited to 250). Default: only paid orders.",
   schema: GetTrafficSourceAnalyticsInputSchema,
 
   initialize(client: GraphQLClient) {
@@ -32,74 +94,16 @@ const getTrafficSourceAnalytics = {
 
   execute: async (input: GetTrafficSourceAnalyticsInput) => {
     try {
-      const { dateFrom, dateTo, limit } = input;
+      const { dateFrom, dateTo, limit, financialStatus } = input;
 
-      const query = gql`
-        query GetOrdersForAnalytics($first: Int!, $query: String) {
-          orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
-            edges {
-              node {
-                id
-                name
-                createdAt
-                totalPriceSet {
-                  shopMoney {
-                    amount
-                    currencyCode
-                  }
-                }
-                displayFinancialStatus
-                sourceName
-                sourceIdentifier
-                channelInformation {
-                  channelId
-                  channelDefinition {
-                    channelName
-                    handle
-                  }
-                }
-                customerJourneySummary {
-                  firstVisit {
-                    source
-                    sourceType
-                    utmParameters {
-                      source
-                      medium
-                      campaign
-                      content
-                      term
-                    }
-                    referrerUrl
-                  }
-                  lastVisit {
-                    source
-                    sourceType
-                    utmParameters {
-                      source
-                      medium
-                      campaign
-                      content
-                      term
-                    }
-                    referrerUrl
-                  }
-                }
-              }
-            }
-          }
-        }
-      `;
+      const queryFilter = buildOrderQueryFilter({ dateFrom, dateTo, financialStatus });
 
-      const queryFilter = `created_at:>=${dateFrom} AND created_at:<=${dateTo}`;
-
-      const variables = {
-        first: Math.min(limit, 250),
-        query: queryFilter
-      };
-
-      const data = (await shopifyClient.request(query, variables)) as {
-        orders: any;
-      };
+      const { edges, totalFetched, hasMore } = await fetchAllOrders(
+        shopifyClient,
+        ORDERS_QUERY,
+        { query: queryFilter },
+        limit
+      );
 
       // Aggregate by traffic source
       const sourceMap = new Map<string, SourceMetrics>();
@@ -111,7 +115,7 @@ const getTrafficSourceAnalytics = {
       let ordersWithJourney = 0;
       let ordersWithoutJourney = 0;
 
-      for (const edge of data.orders.edges) {
+      for (const edge of edges) {
         const order = edge.node;
         const revenue = parseFloat(order.totalPriceSet.shopMoney.amount);
 
@@ -208,6 +212,15 @@ const getTrafficSourceAnalytics = {
 
       return {
         period: { from: dateFrom, to: dateTo },
+        dataQuality: {
+          ordersAnalyzed: totalFetched,
+          hasMoreOrders: hasMore,
+          financialStatusFilter: financialStatus,
+          journeyTrackingRate: totalOrders > 0 ? Math.round(ordersWithJourney / totalOrders * 100) : 0,
+          note: hasMore
+            ? `Przeanalizowano ${totalFetched} zamówień (limit). Mogą istnieć dodatkowe zamówienia w tym okresie.`
+            : `Przeanalizowano WSZYSTKIE ${totalFetched} zamówień w tym okresie.`
+        },
         summary: {
           totalOrders,
           totalRevenue: Math.round(totalRevenue * 100) / 100,

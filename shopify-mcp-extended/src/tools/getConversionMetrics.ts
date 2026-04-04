@@ -1,21 +1,90 @@
 import type { GraphQLClient } from "graphql-request";
 import { gql } from "graphql-request";
 import { z } from "zod";
+import { fetchAllOrders, buildOrderQueryFilter } from "../utils/paginateOrders.js";
 
 const GetConversionMetricsInputSchema = z.object({
   dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
   dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-  limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
-  groupBy: z.enum(["day", "week", "month"]).default("day").describe("Time grouping for trends")
+  limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+  groupBy: z.enum(["day", "week", "month"]).default("day").describe("Time grouping for trends"),
+  financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("any").describe("Filter by financial status (default: any — shows all statuses for conversion analysis)")
 });
 
 type GetConversionMetricsInput = z.infer<typeof GetConversionMetricsInputSchema>;
 
 let shopifyClient: GraphQLClient;
 
+const ORDERS_QUERY = gql`
+  query GetOrdersForConversion($first: Int!, $query: String, $after: String) {
+    orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          createdAt
+          displayFinancialStatus
+          displayFulfillmentStatus
+          cancelledAt
+          cancelReason
+          totalPriceSet {
+            shopMoney {
+              amount
+              currencyCode
+            }
+          }
+          subtotalPriceSet {
+            shopMoney {
+              amount
+            }
+          }
+          totalDiscountsSet {
+            shopMoney {
+              amount
+            }
+          }
+          totalShippingPriceSet {
+            shopMoney {
+              amount
+            }
+          }
+          paymentGatewayNames
+          transactions(first: 5) {
+            id
+            status
+            kind
+            gateway
+            formattedGateway
+            amountSet {
+              shopMoney {
+                amount
+              }
+            }
+          }
+          customer {
+            id
+            numberOfOrders
+          }
+          lineItems(first: 20) {
+            edges {
+              node {
+                quantity
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const getConversionMetrics = {
   name: "get-conversion-metrics",
-  description: "Get conversion metrics including payment methods, financial status, and fulfillment trends",
+  description: "Get conversion metrics including payment methods, financial status, and fulfillment trends. Uses pagination to fetch ALL orders (not limited to 250). Default: all financial statuses (for full conversion funnel view).",
   schema: GetConversionMetricsInputSchema,
 
   initialize(client: GraphQLClient) {
@@ -24,81 +93,16 @@ const getConversionMetrics = {
 
   execute: async (input: GetConversionMetricsInput) => {
     try {
-      const { dateFrom, dateTo, limit, groupBy } = input;
+      const { dateFrom, dateTo, limit, groupBy, financialStatus } = input;
 
-      const query = gql`
-        query GetOrdersForConversion($first: Int!, $query: String) {
-          orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
-            edges {
-              node {
-                id
-                name
-                createdAt
-                displayFinancialStatus
-                displayFulfillmentStatus
-                cancelledAt
-                cancelReason
-                totalPriceSet {
-                  shopMoney {
-                    amount
-                    currencyCode
-                  }
-                }
-                subtotalPriceSet {
-                  shopMoney {
-                    amount
-                  }
-                }
-                totalDiscountsSet {
-                  shopMoney {
-                    amount
-                  }
-                }
-                totalShippingPriceSet {
-                  shopMoney {
-                    amount
-                  }
-                }
-                paymentGatewayNames
-                transactions(first: 5) {
-                  id
-                  status
-                  kind
-                  gateway
-                  formattedGateway
-                  amountSet {
-                    shopMoney {
-                      amount
-                    }
-                  }
-                }
-                customer {
-                  id
-                  numberOfOrders
-                }
-                lineItems(first: 20) {
-                  edges {
-                    node {
-                      quantity
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `;
+      const queryFilter = buildOrderQueryFilter({ dateFrom, dateTo, financialStatus });
 
-      const queryFilter = `created_at:>=${dateFrom} AND created_at:<=${dateTo}`;
-
-      const variables = {
-        first: Math.min(limit, 250),
-        query: queryFilter
-      };
-
-      const data = (await shopifyClient.request(query, variables)) as {
-        orders: any;
-      };
+      const { edges, totalFetched, hasMore } = await fetchAllOrders(
+        shopifyClient,
+        ORDERS_QUERY,
+        { query: queryFilter },
+        limit
+      );
 
       // Initialize metrics
       let totalOrders = 0;
@@ -116,7 +120,7 @@ const getConversionMetrics = {
       const byCancelReason: Record<string, number> = {};
       const byTimeGroup: Record<string, { orders: number; revenue: number; items: number }> = {};
 
-      for (const edge of data.orders.edges) {
+      for (const edge of edges) {
         const order = edge.node;
         const revenue = parseFloat(order.totalPriceSet.shopMoney.amount);
         const discounts = parseFloat(order.totalDiscountsSet?.shopMoney?.amount || "0");
@@ -151,12 +155,12 @@ const getConversionMetrics = {
         }
 
         // Track by financial status
-        const financialStatus = order.displayFinancialStatus || "UNKNOWN";
-        if (!byFinancialStatus[financialStatus]) {
-          byFinancialStatus[financialStatus] = { count: 0, revenue: 0 };
+        const finStatus = order.displayFinancialStatus || "UNKNOWN";
+        if (!byFinancialStatus[finStatus]) {
+          byFinancialStatus[finStatus] = { count: 0, revenue: 0 };
         }
-        byFinancialStatus[financialStatus].count++;
-        byFinancialStatus[financialStatus].revenue += revenue;
+        byFinancialStatus[finStatus].count++;
+        byFinancialStatus[finStatus].revenue += revenue;
 
         // Track by fulfillment status
         const fulfillmentStatus = order.displayFulfillmentStatus || "UNKNOWN";
@@ -224,6 +228,14 @@ const getConversionMetrics = {
 
       return {
         period: { from: dateFrom, to: dateTo, groupBy },
+        dataQuality: {
+          ordersAnalyzed: totalFetched,
+          hasMoreOrders: hasMore,
+          financialStatusFilter: financialStatus,
+          note: hasMore
+            ? `Przeanalizowano ${totalFetched} zamówień (limit). Mogą istnieć dodatkowe zamówienia.`
+            : `Przeanalizowano WSZYSTKIE ${totalFetched} zamówień w tym okresie.`
+        },
         summary: {
           totalOrders,
           totalRevenue: Math.round(totalRevenue * 100) / 100,

@@ -51,6 +51,10 @@ const getProducts = {
                     currencyCode
                   }
                 }
+                seo {
+                  title
+                  description
+                }
                 images(first: 1) {
                   edges {
                     node {
@@ -123,6 +127,7 @@ const getProducts = {
               currencyCode: product.priceRangeV2.maxVariantPrice.currencyCode
             }
           },
+          seo: product.seo,
           imageUrl,
           variants
         };

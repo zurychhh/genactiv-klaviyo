@@ -58,6 +58,22 @@ function ensureGA4Credentials() {
 ensureGoogleAdsCredentials();
 ensureGA4Credentials();
 
+// --- Check required tokens at startup ---
+const requiredTokens = {
+  KLAVIYO_API_KEY: 'Klaviyo',
+  SHOPIFY_ACCESS_TOKEN: 'Shopify',
+  META_ACCESS_TOKEN: 'Meta Ads',
+  GOOGLE_ADS_REFRESH_TOKEN: 'Google Ads',
+  GA4_REFRESH_TOKEN: 'GA4',
+  TIKTOK_ACCESS_TOKEN: 'TikTok Ads'
+};
+
+for (const [envVar, label] of Object.entries(requiredTokens)) {
+  if (!process.env[envVar]) {
+    console.warn(`[Config] WARNING: ${envVar} not set — ${label} MCP server may fail to connect`);
+  }
+}
+
 // --- MCP Server definitions ---
 export const mcpServers = [
   {
@@ -117,6 +133,16 @@ export const mcpServers = [
         ? '/tmp/gcloud/application_default_credentials.json'
         : (process.env.GOOGLE_APPLICATION_CREDENTIALS || '')
     }
+  },
+  {
+    name: 'tiktok-ads',
+    command: 'python3',
+    args: ['-m', 'tiktok_ads_mcp'],
+    env: {
+      TIKTOK_APP_ID: process.env.TIKTOK_APP_ID || '',
+      TIKTOK_SECRET: process.env.TIKTOK_SECRET || '',
+      TIKTOK_ACCESS_TOKEN: process.env.TIKTOK_ACCESS_TOKEN || ''
+    }
   }
 ];
 
@@ -126,9 +152,10 @@ export const MAX_TOKENS = 4096;
 export const CONNECT_TIMEOUT = 30_000;
 export const TOOL_CACHE_TTL = 5 * 60 * 1000;
 export const TOOL_RESULT_MAX_CHARS = 15_000;
-export const TOOL_DESCRIPTION_MAX_CHARS = 100;
+export const TOOL_DESCRIPTION_MAX_CHARS = 500;
+export const TOOL_CALL_TIMEOUT = 30_000;
 export const MAX_HISTORY_MESSAGES = 6;
-export const MIN_API_INTERVAL_MS = 3000;
+export const MIN_API_INTERVAL_MS = 500;
 
 export const VALID_SERVERS = mcpServers.map(s => s.name);
 
@@ -139,6 +166,7 @@ export const ROUTER_PROMPT = `Jesteś routerem zapytań. Na podstawie pytania u�
 - shopify-standard — podstawowe operacje sklepowe (zamówienia, klienci, produkty)
 - google-ads — reklamy Google, kampanie Google Ads, słowa kluczowe, ROAS, wydatki
 - ga4 — Google Analytics 4, sesje, użytkownicy, źródła ruchu, pageviews, bounce rate, konwersje GA4
+- tiktok-ads — reklamy TikTok, kampanie TikTok Ads, grupy reklam, kreacje, raporty wydajności TikTok
 - none — pytanie nie wymaga narzędzi (np. ogólne pytania, konwersacja)
 
 Odpowiedz JEDNYM SŁOWEM — tylko nazwą serwera lub "none". Nic więcej.`;
@@ -146,7 +174,7 @@ Odpowiedz JEDNYM SŁOWEM — tylko nazwą serwera lub "none". Nic więcej.`;
 export function getSystemPrompt() {
   const today = new Date().toISOString().split('T')[0];
   return `Jesteś asystentem GenActiv.pl — polskiej marki colostrum #1 w aptekach.
-Masz dostęp do narzędzi MCP: Klaviyo, Shopify, Meta Ads, Google Ads, GA4. Odpowiadaj po polsku. Waluta: PLN (bez miejsc dziesiętnych).
+Masz dostęp do narzędzi MCP: Klaviyo, Shopify, Meta Ads, Google Ads, GA4, TikTok Ads. Odpowiadaj po polsku. Waluta: PLN (bez miejsc dziesiętnych).
 Bądź konkretny i zwięzły.
 
 Zasady:

@@ -1,12 +1,14 @@
 import type { GraphQLClient } from "graphql-request";
 import { gql } from "graphql-request";
 import { z } from "zod";
+import { fetchAllOrders, buildOrderQueryFilter } from "../utils/paginateOrders.js";
 
 const GetProductPerformanceInputSchema = z.object({
   dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
   dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
-  limit: z.number().default(250).describe("Max orders to analyze (max 250)"),
-  utmSource: z.string().optional().describe("Filter by UTM source to see product performance from specific source")
+  limit: z.number().default(2000).describe("Max orders to analyze (default 2000, max 5000 — uses pagination)"),
+  utmSource: z.string().optional().describe("Filter by UTM source to see product performance from specific source"),
+  financialStatus: z.enum(["any", "paid", "pending", "refunded", "voided", "authorized"]).default("paid").describe("Filter by financial status (default: paid)")
 });
 
 type GetProductPerformanceInput = z.infer<typeof GetProductPerformanceInputSchema>;
@@ -25,9 +27,60 @@ interface ProductMetrics {
 
 let shopifyClient: GraphQLClient;
 
+const ORDERS_QUERY = gql`
+  query GetOrdersForProducts($first: Int!, $query: String, $after: String) {
+    orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          createdAt
+          displayFinancialStatus
+          customerJourneySummary {
+            firstVisit {
+              source
+              sourceType
+              utmParameters {
+                source
+                medium
+                campaign
+              }
+            }
+          }
+          lineItems(first: 50) {
+            edges {
+              node {
+                id
+                title
+                quantity
+                originalTotalSet {
+                  shopMoney {
+                    amount
+                  }
+                }
+                variant {
+                  id
+                  title
+                  sku
+                  product {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const getProductPerformance = {
   name: "get-product-performance",
-  description: "Analyze product performance with breakdown by traffic source",
+  description: "Analyze product performance with breakdown by traffic source. Uses pagination to fetch ALL orders (not limited to 250). Default: only paid orders.",
   schema: GetProductPerformanceInputSchema,
 
   initialize(client: GraphQLClient) {
@@ -36,65 +89,16 @@ const getProductPerformance = {
 
   execute: async (input: GetProductPerformanceInput) => {
     try {
-      const { dateFrom, dateTo, limit, utmSource } = input;
+      const { dateFrom, dateTo, limit, utmSource, financialStatus } = input;
 
-      const query = gql`
-        query GetOrdersForProducts($first: Int!, $query: String) {
-          orders(first: $first, query: $query, sortKey: CREATED_AT, reverse: true) {
-            edges {
-              node {
-                id
-                createdAt
-                displayFinancialStatus
-                customerJourneySummary {
-                  firstVisit {
-                    source
-                    sourceType
-                    utmParameters {
-                      source
-                      medium
-                      campaign
-                    }
-                  }
-                }
-                lineItems(first: 50) {
-                  edges {
-                    node {
-                      id
-                      title
-                      quantity
-                      originalTotalSet {
-                        shopMoney {
-                          amount
-                        }
-                      }
-                      variant {
-                        id
-                        title
-                        sku
-                        product {
-                          id
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `;
+      const queryFilter = buildOrderQueryFilter({ dateFrom, dateTo, financialStatus });
 
-      const queryFilter = `created_at:>=${dateFrom} AND created_at:<=${dateTo}`;
-
-      const variables = {
-        first: Math.min(limit, 250),
-        query: queryFilter
-      };
-
-      const data = (await shopifyClient.request(query, variables)) as {
-        orders: any;
-      };
+      const { edges, totalFetched, hasMore } = await fetchAllOrders(
+        shopifyClient,
+        ORDERS_QUERY,
+        { query: queryFilter },
+        limit
+      );
 
       // Aggregate by product
       const productMap = new Map<string, ProductMetrics>();
@@ -102,7 +106,7 @@ const getProductPerformance = {
       let totalRevenue = 0;
       let totalUnits = 0;
 
-      for (const edge of data.orders.edges) {
+      for (const edge of edges) {
         const order = edge.node;
         const journey = order.customerJourneySummary;
         const orderSource: string = journey?.firstVisit?.utmParameters?.source ||
@@ -212,6 +216,14 @@ const getProductPerformance = {
       return {
         period: { from: dateFrom, to: dateTo },
         filters: { utmSource: utmSource || null },
+        dataQuality: {
+          ordersAnalyzed: totalFetched,
+          hasMoreOrders: hasMore,
+          financialStatusFilter: financialStatus,
+          note: hasMore
+            ? `Przeanalizowano ${totalFetched} zamówień (limit). Mogą istnieć dodatkowe zamówienia.`
+            : `Przeanalizowano WSZYSTKIE ${totalFetched} zamówień w tym okresie.`
+        },
         summary: {
           totalOrders,
           totalRevenue: Math.round(totalRevenue * 100) / 100,

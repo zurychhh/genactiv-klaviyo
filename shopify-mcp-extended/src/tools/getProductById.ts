@@ -81,6 +81,10 @@ const getProductById = {
                 }
               }
             }
+            seo {
+              title
+              description
+            }
             tags
             vendor
           }
@@ -151,6 +155,7 @@ const getProductById = {
         images,
         variants,
         collections,
+        seo: product.seo,
         tags: product.tags,
         vendor: product.vendor
       };
