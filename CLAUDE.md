@@ -40,7 +40,9 @@ genactiv-klaviyo/
 
 ## GenActiv Online (Web Terminal)
 
-Browser-based AI assistant at `genactiv.oleksiakconsulting.com` — replaces local Claude Code CLI.
+Browser-based AI assistant deployed on Railway — replaces local Claude Code CLI.
+- **Aktywny URL:** `https://exemplary-learning-production-414a.up.railway.app`
+- ⚠️ Custom domain `genactiv.oleksiakconsulting.com` jest **nieaktywny** (problem z DNS/CNAME)
 
 ### Architecture
 ```
@@ -113,8 +115,8 @@ railway variables set KEY=VALUE KEY2=VALUE2
 railway logs
 ```
 - **Project:** cozy-trust | **Service:** exemplary-learning
-- **URL:** `https://exemplary-learning-production-414a.up.railway.app`
-- **Custom domain:** `genactiv.oleksiakconsulting.com` (CNAME → Railway)
+- **URL (produkcyjny):** `https://exemplary-learning-production-414a.up.railway.app`
+- **Custom domain:** `genactiv.oleksiakconsulting.com` — ⚠️ **NIEAKTYWNY** (CNAME nie działa, nie używać do czasu naprawy DNS)
 - **Health check:** `GET /api/health` (no auth)
 
 #### Railway CLI — rozwiązywanie problemów z logowaniem
