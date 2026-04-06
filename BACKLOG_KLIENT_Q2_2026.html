@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv Online — Backlog Q2 2026</title>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f8f9fb; --border: #e2e6ea;
+    --text: #1a1a2e; --muted: #6b7280; --accent: #0066CC;
+    --green: #059669; --green-bg: #ecfdf5; --green-border: #a7f3d0;
+    --blue: #2563eb; --blue-bg: #eff6ff; --blue-border: #bfdbfe;
+    --amber: #d97706; --amber-bg: #fffbeb; --amber-border: #fde68a;
+    --red: #EF3340; --red-bg: #fef2f2; --red-border: #fecaca;
+    --purple: #7c3aed; --purple-bg: #f5f3ff; --purple-border: #ddd6fe;
+    --gray: #6b7280; --gray-bg: #f3f4f6; --gray-border: #d1d5db;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'SF Pro Display', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 40px; line-height: 1.6; max-width: 1100px; margin: 0 auto; }
+
+  /* Header */
+  .header { margin-bottom: 40px; border-bottom: 3px solid var(--accent); padding-bottom: 20px; }
+  .header h1 { font-size: 1.8rem; font-weight: 700; color: var(--text); }
+  .header .sub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+  .header .date { color: var(--accent); font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+
+  /* Legend */
+  .legend-bar { display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; padding: 16px 20px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  /* Section */
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .section-header h2 { font-size: 1.3rem; font-weight: 700; }
+  .section-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; color: white; }
+  .section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; padding-left: 46px; }
+
+  /* Feedback block */
+  .fb-block { margin-bottom: 24px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .fb-header { padding: 14px 20px; display: flex; align-items: center; gap: 12px; cursor: default; }
+  .fb-num { font-weight: 700; font-size: 0.8rem; padding: 3px 10px; border-radius: 6px; white-space: nowrap; }
+  .fb-title { font-weight: 600; font-size: 0.95rem; flex: 1; }
+  .fb-status { font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+
+  .fb-body { padding: 0 20px 16px; }
+  .fb-quote { font-style: italic; color: var(--muted); font-size: 0.85rem; padding: 10px 16px; background: var(--surface); border-left: 3px solid var(--border); border-radius: 0 6px 6px 0; margin-bottom: 14px; }
+
+  /* Task list */
+  .task-list { list-style: none; }
+  .task-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+  .task-item:last-child { border-bottom: none; }
+  .task-check { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 0.75rem; }
+  .task-check.done { background: var(--green); border-color: var(--green); color: white; }
+  .task-check.todo { background: white; border-color: var(--border); }
+  .task-content { flex: 1; }
+  .task-name { font-weight: 600; font-size: 0.9rem; }
+  .task-name.done-text { color: var(--green); }
+  .task-desc { color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+  .task-meta { display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+  .tag-sp { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+  .tag-rice { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .tag-rice-mid { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+  .tag-dep { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .tag-qw { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .tag-bb { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+
+  /* Progress bar */
+  .progress-wrap { margin-top: 8px; }
+  .progress-bar { height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .progress-fill.green { background: var(--green); }
+  .progress-label { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+
+  /* Category 2 & 3 - simpler lists */
+  .ops-list { list-style: none; }
+  .ops-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; background: var(--surface); }
+  .ops-icon { font-size: 1.2rem; }
+  .ops-content { flex: 1; }
+  .ops-name { font-weight: 600; font-size: 0.9rem; }
+  .ops-desc { color: var(--muted); font-size: 0.82rem; }
+  .ops-effort { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+
+  .blocked-reason { display: inline-block; padding: 4px 10px; background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); border-radius: 6px; font-size: 0.78rem; font-weight: 600; margin-top: 4px; }
+
+  /* Summary box */
+  .summary-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 36px; }
+  .sum-card { padding: 20px; border-radius: 12px; text-align: center; border: 1px solid; }
+  .sum-card .num { font-size: 2.2rem; font-weight: 800; }
+  .sum-card .label { font-size: 0.8rem; font-weight: 500; margin-top: 2px; }
+  .sum-card.c1 { background: var(--blue-bg); border-color: var(--blue-border); }
+  .sum-card.c1 .num { color: var(--blue); }
+  .sum-card.c2 { background: var(--gray-bg); border-color: var(--gray-border); }
+  .sum-card.c2 .num { color: var(--gray); }
+  .sum-card.c3 { background: var(--amber-bg); border-color: var(--amber-border); }
+  .sum-card.c3 .num { color: var(--amber); }
+
+  @media print {
+    body { padding: 20px; font-size: 0.85rem; }
+    .fb-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GenActiv Online — Plan Rozwoju</h1>
+  <div class="sub">Odpowiedź na feedback + roadmap prac · Metodologia RICE · Story Pointy</div>
+  <div class="date">Przygotowane: 6 kwietnia 2026 · Spotkanie: 7 kwietnia 2026</div>
+</div>
+
+<!-- Legend -->
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Zrobione</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Do realizacji</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Zablokowane (czeka na decyzję)</div>
+  <div class="legend-item"><span class="tag tag-sp">SP 3</span> Story pointy (złożoność 1-13)</div>
+  <div class="legend-item"><span class="tag tag-rice">RICE 4.0</span> Priorytet (wyższy = ważniejszy)</div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+  <div class="sum-card c1">
+    <div class="num">19</div>
+    <div class="label">Tasków z feedbacku<br>(4 zrobione, 15 do realizacji)</div>
+  </div>
+  <div class="sum-card c2">
+    <div class="num">4</div>
+    <div class="label">Maintenance / tech debt<br>(bieżące utrzymanie)</div>
+  </div>
+  <div class="sum-card c3">
+    <div class="num">3</div>
+    <div class="label">Zablokowane decyzje<br>(czekają na klienta)</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- KATEGORIA 1: FEEDBACK INTERESARIUSZA -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--accent);">1</div>
+    <h2>Feedback interesariusza — backlog rozwoju</h2>
+  </div>
+  <p class="section-desc">Taski wynikające bezpośrednio z 5 punktów feedbacku. To jest właściwy backlog produktowy.</p>
+
+  <!-- FB1 -->
+  <div class="fb-block">
+    <div class="fb-header" style="background: var(--green-bg);">
+      <span class="fb-num" style="background: var(--accent); color: white;">FB1</span>
+      <span class="fb-title">Rozbieżności w danych między panelami</span>
+      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">3 z 5 zrobione</span>
+    </div>
+    <div class="fb-body">
+      <div class="fb-quote">„Pojawiła się dość spora rozbieżność pomiędzy ukazanymi przychodami w panelu MCP a Shopify, więc myślę że to kwestia pobierania danych po API. Generalnie temat zbierania danych do przepracowania."</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill green" style="width: 60%"></div></div>
+        <div class="progress-label">60% ukończone (3 z 5 tasków)</div>
+      </div>
+
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-check done">✓</div>
+          <div class="task-content">
+            <div class="task-name done-text">Cursor-based paginacja (limit 250 → 2000 zamówień)</div>
+            <div class="task-desc">Główna przyczyna rozbieżności — jeśli w okresie było >250 zamówień, reszta była pomijana. Teraz analizujemy wszystkie.</div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check done">✓</div>
+          <div class="task-content">
+            <div class="task-name done-text">Filtr statusu finansowego (default: paid)</div>
+            <div class="task-desc">Anulowane i zwrócone zamówienia nie zawyżają revenue. Wcześniej liczyliśmy wszystko.</div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check done">✓</div>
+          <div class="task-content">
+            <div class="task-name done-text">Wskaźniki jakości danych w każdym raporcie</div>
+            <div class="task-desc">Każda odpowiedź zawiera: ile zamówień przeanalizowano, czy są jeszcze jakieś poza limitem, jaki filtr zastosowano.</div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Revenue reconciliation tool</div>
+            <div class="task-desc">Nowe narzędzie: jednym pytaniem porównuje revenue z naszych analytics vs. Shopify Admin. Pokazuje różnicę i wyjaśnia skąd się bierze.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 5</span>
+              <span class="tag tag-rice">RICE 4.0</span>
+              <span class="tag tag-qw">Quick Win</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Unit testy na kalkulacjach revenue</div>
+            <div class="task-desc">Automatyczne testy poprawności obliczeń — gwarancja że paginacja i filtry nie psują wyników.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 3</span>
+              <span class="tag tag-rice">RICE 3.0</span>
+              <span class="tag tag-qw">Quick Win</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FB2 -->
+  <div class="fb-block">
+    <div class="fb-header" style="background: var(--green-bg);">
+      <span class="fb-num" style="background: var(--accent); color: white;">FB2</span>
+      <span class="fb-title">Edytowanie i tworzenie, nie tylko analiza</span>
+      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">1 z 4 zrobione</span>
+    </div>
+    <div class="fb-body">
+      <div class="fb-quote">„Aktualnie jest to narzędzie bardziej do analizy niż do edytowania i tworzenia. Np. w kontekście obsługi SEO — robimy audyt i zlecamy po kolei wdrożenie napraw technical SEO, np. dodanie opisów ALT do zdjęć."</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill green" style="width: 25%"></div></div>
+        <div class="progress-label">25% ukończone (1 z 4 tasków)</div>
+      </div>
+
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-check done">✓</div>
+          <div class="task-content">
+            <div class="task-name done-text">SEO Audit tool + update ALT text</div>
+            <div class="task-desc">Dwa nowe narzędzia: skanowanie produktów pod kątem braków SEO (meta, ALT texty) + batch update ALT textów na zdjęciach.</div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Edycja opisu produktu (descriptionHtml)</div>
+            <div class="task-desc">Zmiana opisu HTML produktu z terminala, bez wchodzenia w Shopify Admin.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 2</span>
+              <span class="tag tag-rice">RICE 4.5</span>
+              <span class="tag tag-qw">Quick Win</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Bulk SEO update (tryb batch)</div>
+            <div class="task-desc">Jedno polecenie naprawia meta descriptions dla wielu produktów/kolekcji naraz. Audyt → fix w jednej sesji.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 3</span>
+              <span class="tag tag-rice">RICE 4.0</span>
+              <span class="tag tag-qw">Quick Win</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Weryfikacja Klaviyo write tools</div>
+            <div class="task-desc">Potwierdzenie że tworzenie szablonów email i kampanii działa end-to-end na produkcji.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 2</span>
+              <span class="tag tag-rice-mid">RICE 2.4</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FB3 -->
+  <div class="fb-block">
+    <div class="fb-header" style="background: var(--surface);">
+      <span class="fb-num" style="background: var(--accent); color: white;">FB3</span>
+      <span class="fb-title">Możliwość wrzucania plików</span>
+      <span class="fb-status" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border);">0 z 3 zrobione</span>
+    </div>
+    <div class="fb-body">
+      <div class="fb-quote">„Na pewno przyda się możliwość wrzucania plików, bo bez tego ciężko wrzucać sporą część materiałów i utrudnia to pracę."</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill green" style="width: 0%"></div></div>
+        <div class="progress-label">0% — nie rozpoczęte</div>
+      </div>
+
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">File upload — backend</div>
+            <div class="task-desc">Obsługa plików na serwerze: przyjmowanie CSV, Excel, obrazów, PDF, HTML. Parsowanie i przekazywanie do AI.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 8</span>
+              <span class="tag tag-rice-mid">RICE 2.0</span>
+              <span class="tag tag-bb">Big Bet</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">File upload — interfejs (przycisk + drag & drop)</div>
+            <div class="task-desc">Przycisk 📎 obok pola tekstowego, podgląd pliku przed wysłaniem, pasek postępu.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 5</span>
+              <span class="tag tag-rice-mid">RICE 2.6</span>
+              <span class="tag tag-bb">Big Bet</span>
+              <span class="tag tag-dep">Wymaga: backend</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Plik jako kontekst dla narzędzi MCP</div>
+            <div class="task-desc">Wrzucony CSV → AI analizuje dane. Wrzucony HTML → AI tworzy template Klaviyo. Wrzucony screenshot → AI opisuje co widzi.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 3</span>
+              <span class="tag tag-rice-mid">RICE 2.1</span>
+              <span class="tag tag-dep">Wymaga: backend + interfejs</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FB4 -->
+  <div class="fb-block">
+    <div class="fb-header" style="background: var(--surface);">
+      <span class="fb-num" style="background: var(--accent); color: white;">FB4</span>
+      <span class="fb-title">Wiele wątków / historia konwersacji</span>
+      <span class="fb-status" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border);">0 z 5 zrobione</span>
+    </div>
+    <div class="fb-body">
+      <div class="fb-quote">„Brakuje mi możliwości tworzenia kilku wątków, jako osobnych chatów i np. cofania się do nich. Np. wątek Meta Ads, TikTok Ads, oddzielnie analityka."</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill green" style="width: 0%"></div></div>
+        <div class="progress-label">0% — nie rozpoczęte</div>
+      </div>
+
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Baza danych (persystencja)</div>
+            <div class="task-desc">Dodanie bazy danych do serwera. Dziś restart = utrata wszystkiego. Po zmianie: konwersacje zapisywane trwale.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 5</span>
+              <span class="tag tag-rice-mid">RICE 2.6</span>
+              <span class="tag tag-bb">Big Bet</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">API do zarządzania wątkami</div>
+            <div class="task-desc">Backend: tworzenie, listowanie, usuwanie, zmiana nazwy wątków. Każda wiadomość zapisywana.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 5</span>
+              <span class="tag tag-rice-mid">RICE 2.9</span>
+              <span class="tag tag-bb">Big Bet</span>
+              <span class="tag tag-dep">Wymaga: baza danych</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Sidebar — lista wątków w interfejsie</div>
+            <div class="task-desc">Lewa kolumna z listą wątków: „Meta Ads", „Analityka marzec", „SEO audit". Przycisk „Nowy wątek".</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 8</span>
+              <span class="tag tag-rice-mid">RICE 1.6</span>
+              <span class="tag tag-bb">Big Bet</span>
+              <span class="tag tag-dep">Wymaga: baza + API</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Przełączanie wątków + historia</div>
+            <div class="task-desc">Klik na wątek → załaduj pełną historię rozmowy. Cofanie się do starszych konwersacji.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 3</span>
+              <span class="tag tag-rice-mid">RICE 2.4</span>
+              <span class="tag tag-dep">Wymaga: sidebar</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Podsumowywanie długich konwersacji</div>
+            <div class="task-desc">Dziś terminal „pamięta" ostatnie 6 wiadomości. Po zmianie: AI tworzy streszczenie starszej części, więc kontekst się nie gubi.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 5</span>
+              <span class="tag tag-rice-mid">RICE 1.3</span>
+              <span class="tag tag-dep">Wymaga: baza danych</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FB5 -->
+  <div class="fb-block">
+    <div class="fb-header" style="background: var(--surface);">
+      <span class="fb-num" style="background: var(--accent); color: white;">FB5</span>
+      <span class="fb-title">Konektor Senuto + Bing Ads</span>
+      <span class="fb-status" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border);">0 z 3 zrobione</span>
+    </div>
+    <div class="fb-body">
+      <div class="fb-quote">„Musimy też dodać konektor z Senuto żeby lepiej operować z SEO, i warto też dodać Bing, ponieważ jednak stanowi kolejne źródło sprzedaży i danych."</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill green" style="width: 0%"></div></div>
+        <div class="progress-label">0% — nie rozpoczęte</div>
+      </div>
+
+      <ul class="task-list">
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Senuto — research API + prototyp</div>
+            <div class="task-desc">Zbadanie dokumentacji Senuto API, zbudowanie 3 podstawowych narzędzi: widoczność domeny, pozycje fraz, analiza konkurencji.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 3</span>
+              <span class="tag tag-rice-mid">RICE 2.4</span>
+              <span class="tag tag-qw">Quick Win</span>
+              <span class="tag tag-dep">Wymaga: API key Senuto</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Senuto — pełny serwer MCP</div>
+            <div class="task-desc">Kompletna integracja: widoczność, keywords, SERP, competitors, content planner. Wpięcie do terminala.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 8</span>
+              <span class="tag tag-rice-mid">RICE 0.9</span>
+              <span class="tag tag-bb">Big Bet</span>
+              <span class="tag tag-dep">Wymaga: research + API key</span>
+            </div>
+          </div>
+        </li>
+        <li class="task-item">
+          <div class="task-check todo"></div>
+          <div class="task-content">
+            <div class="task-name">Bing Ads — serwer MCP</div>
+            <div class="task-desc">Integracja Microsoft Advertising: kampanie, raporty wydatków, ROAS, słowa kluczowe. Wpięcie do terminala.</div>
+            <div class="task-meta">
+              <span class="tag tag-sp">SP 8</span>
+              <span class="tag tag-rice-mid">RICE 0.4</span>
+              <span class="tag tag-bb">Big Bet</span>
+              <span class="tag tag-dep">Wymaga: konto Microsoft Ads</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- KATEGORIA 2: TECH DEBT / MAINTENANCE -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--gray);">2</div>
+    <h2>Maintenance / tech debt</h2>
+  </div>
+  <p class="section-desc">Bieżące utrzymanie infrastruktury. Nie wynika z feedbacku, ale wpływa na stabilność.</p>
+
+  <ul class="ops-list">
+    <li class="ops-item">
+      <div class="ops-icon">🔑</div>
+      <div class="ops-content">
+        <div class="ops-name">Google OAuth consent screen → publikacja</div>
+        <div class="ops-desc">Tokeny Google Ads i GA4 wygasają co 7 dni. Po publikacji consent screen → przestaną wygasać. Wymaga review Google.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp">SP 2</span></div>
+    </li>
+    <li class="ops-item">
+      <div class="ops-icon">🌐</div>
+      <div class="ops-content">
+        <div class="ops-name">Custom domain DNS (genactiv.oleksiakconsulting.com)</div>
+        <div class="ops-desc">CNAME nie działa. Railway URL jest aktywny. Fix kiedy będzie czas — nie wpływa na działanie.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp">SP 2</span></div>
+    </li>
+    <li class="ops-item">
+      <div class="ops-icon">🔧</div>
+      <div class="ops-content">
+        <div class="ops-name">Footer „Cookkies" — typo fix</div>
+        <div class="ops-desc">Podwójne „k" w „Polityka plików Cookkies" — widoczne na każdej stronie. 1 minuta w Shopify theme.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp">SP 1</span></div>
+    </li>
+    <li class="ops-item">
+      <div class="ops-icon">📝</div>
+      <div class="ops-content">
+        <div class="ops-name">530 błędów interpunkcyjnych (cytaty naukowe)</div>
+        <div class="ops-desc">Spacje przed kropkami/przecinkami w cytatach naukowych. Minimalny wpływ na SEO. Niska pilność.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp">SP 5</span></div>
+    </li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- KATEGORIA 3: ZABLOKOWANE DECYZJE -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--amber);">3</div>
+    <h2>Zablokowane — czekają na decyzję klienta</h2>
+  </div>
+  <p class="section-desc">Nie możemy ich realizować bez decyzji biznesowej lub prawnej. Wymagają rozmowy na spotkaniu.</p>
+
+  <ul class="ops-list">
+    <li class="ops-item" style="border-color: var(--amber-border); background: var(--amber-bg);">
+      <div class="ops-icon">🚨</div>
+      <div class="ops-content">
+        <div class="ops-name">Atrybucja remarketingowa = 1%</div>
+        <div class="ops-desc">Pandectes blokuje WSZYSTKIE cookies targeting. Google/Meta nie widzą konwersji. Budżet reklamowy wydawany „w ciemno". 5 opcji rozwiązania — od UX bannera po server-side GTM.</div>
+        <div class="blocked-reason">⏳ Wymaga: opinia prawna GDPR + decyzja biznesowa o akceptowalnym consent rate</div>
+      </div>
+    </li>
+    <li class="ops-item" style="border-color: var(--amber-border); background: var(--amber-bg);">
+      <div class="ops-icon">📊</div>
+      <div class="ops-content">
+        <div class="ops-name">Plan strategiczny SEO — 140 tys. PLN / 6 miesięcy</div>
+        <div class="ops-desc">Ekspansja na frazy „odporność", „zdrowie jelit". Content marketing na long-tail. Optymalizacja PPC vs organic.</div>
+        <div class="blocked-reason">⏳ Wymaga: zatwierdzenie budżetu przez klienta</div>
+      </div>
+    </li>
+    <li class="ops-item" style="border-color: var(--amber-border); background: var(--amber-bg);">
+      <div class="ops-icon">🔒</div>
+      <div class="ops-content">
+        <div class="ops-name">Shopify Theme editing z terminala</div>
+        <div class="ops-desc">Terminal mógłby edytować pliki Liquid (szablony sklepu). Potężne, ale ryzykowne — błąd może zepsuć stronę.</div>
+        <div class="blocked-reason">⏳ Wymaga: decyzja o risk appetite (czy dajemy AI write access do theme?)</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div style="margin-top: 48px; padding: 20px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--muted);">
+  <strong style="color: var(--text);">Rekomendacja kolejności realizacji:</strong><br>
+  Najpierw dokończyć <strong>FB1</strong> (revenue reconciliation) i <strong>FB2</strong> (bulk SEO + product content edit) — to quick winy po SP 2-5, a interesariusz od razu zobaczy efekt.
+  Potem równolegle <strong>FB3</strong> (file upload) i <strong>FB4</strong> (wątki) — większy effort, ale odblokują kolejne możliwości.
+  <strong>FB5</strong> (Senuto/Bing) zaczynamy od researchu API, żeby wiedzieć czy się da — a pełna implementacja po dostarczeniu FB3/FB4.
+</div>
+
+</body>
+</html>

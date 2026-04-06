@@ -22,6 +22,7 @@ import { updateProductSeo } from "./tools/updateProductSeo.js";
 import { updateCollectionSeo } from "./tools/updateCollectionSeo.js";
 import { updateProductImages } from "./tools/updateProductImages.js";
 import { getSeoAudit } from "./tools/getSeoAudit.js";
+import { getRevenueReconciliation } from "./tools/getRevenueReconciliation.js";
 // Analytics tools
 import { getTrafficSourceAnalytics } from "./tools/getTrafficSourceAnalytics.js";
 import { getCampaignPerformance } from "./tools/getCampaignPerformance.js";
@@ -84,6 +85,7 @@ updateProductSeo.initialize(shopifyClient);
 updateCollectionSeo.initialize(shopifyClient);
 updateProductImages.initialize(shopifyClient);
 getSeoAudit.initialize(shopifyClient);
+getRevenueReconciliation.initialize(shopifyClient);
 // Initialize analytics tools
 getTrafficSourceAnalytics.initialize(shopifyClient);
 getCampaignPerformance.initialize(shopifyClient);
@@ -355,6 +357,22 @@ server.tool(
   },
   async (args) => {
     const result = await getSeoAudit.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
+// Revenue Reconciliation - cross-validate revenue data
+server.tool(
+  "get-revenue-reconciliation",
+  {
+    dateFrom: z.string().describe("Start date in ISO format (e.g., 2024-01-01)"),
+    dateTo: z.string().describe("End date in ISO format (e.g., 2024-12-31)"),
+    maxOrders: z.number().default(5000).describe("Max orders to fetch for reconciliation (default 5000)")
+  },
+  async (args) => {
+    const result = await getRevenueReconciliation.execute(args);
     return {
       content: [{ type: "text", text: JSON.stringify(result) }]
     };

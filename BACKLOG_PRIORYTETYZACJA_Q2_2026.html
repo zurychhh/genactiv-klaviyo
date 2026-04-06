@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv Online — Backlog Q2 2026 (RICE)</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --yellow: #d29922; --red: #f85149; --purple: #bc8cff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 24px; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); margin-bottom: 24px; font-size: 0.9rem; }
+
+  /* Methodology box */
+  .method-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 28px; }
+  .method-box h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 12px; }
+  .formula { background: #1c2333; padding: 12px 16px; border-radius: 6px; font-family: 'SF Mono', monospace; font-size: 0.95rem; margin: 10px 0; display: inline-block; }
+  .scale-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+  .scale-card { background: #1c2333; border-radius: 6px; padding: 12px; }
+  .scale-card h4 { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .scale-card p { font-size: 0.82rem; color: var(--muted); }
+
+  /* Summary cards */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .stat-card .num { font-size: 2rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .green { color: var(--green); } .yellow { color: var(--yellow); } .red { color: var(--red); } .purple { color: var(--purple); }
+
+  /* Filters */
+  .filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; transition: all 0.15s; }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead { background: var(--surface); position: sticky; top: 0; z-index: 2; }
+  th { padding: 10px 12px; text-align: left; font-weight: 600; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; user-select: none; white-space: nowrap; border-bottom: 1px solid var(--border); }
+  th:hover { color: var(--accent); }
+  th .arrow { margin-left: 4px; font-size: 0.7rem; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover { background: rgba(88,166,255,0.04); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+  .badge-quick-win { background: rgba(63,185,80,0.15); color: var(--green); }
+  .badge-big-bet { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .badge-fill-in { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .badge-deprioritize { background: rgba(248,81,73,0.15); color: var(--red); }
+
+  .sp { font-family: 'SF Mono', monospace; font-weight: 700; font-size: 0.9rem; }
+  .rice-score { font-family: 'SF Mono', monospace; font-weight: 700; font-size: 1rem; }
+  .rice-high { color: var(--green); }
+  .rice-mid { color: var(--yellow); }
+  .rice-low { color: var(--red); }
+
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; margin-right: 3px; }
+  .tag-data { background: rgba(63,185,80,0.12); color: var(--green); }
+  .tag-seo { background: rgba(188,140,255,0.12); color: var(--purple); }
+  .tag-ux { background: rgba(88,166,255,0.12); color: var(--accent); }
+  .tag-infra { background: rgba(210,153,34,0.12); color: var(--yellow); }
+  .tag-mcp { background: rgba(248,81,73,0.12); color: var(--red); }
+
+  .feedback-ref { color: var(--muted); font-size: 0.75rem; }
+  .desc { color: var(--muted); font-size: 0.8rem; margin-top: 3px; }
+  .dep { color: var(--yellow); font-size: 0.75rem; font-style: italic; }
+
+  /* Done row */
+  tr.done { opacity: 0.45; }
+  tr.done td { text-decoration: line-through; }
+
+  .legend { margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<h1>GenActiv Online — Backlog Priorytetyzacja Q2 2026</h1>
+<p class="subtitle">Metodologia RICE · Story Pointy (Fibonacci 1-13) · 27 tasków · Feedback interesariusza 5 punktów</p>
+
+<!-- Methodology -->
+<div class="method-box">
+  <h2>Metodologia RICE — jak czytać tę tabelę</h2>
+  <div class="formula">RICE Score = (Reach × Impact × Confidence) ÷ Effort</div>
+  <div class="scale-grid">
+    <div class="scale-card">
+      <h4>Reach (1-5)</h4>
+      <p><strong>5</strong> = każdy user terminala<br><strong>3</strong> = większość sesji<br><strong>1</strong> = edge case</p>
+    </div>
+    <div class="scale-card">
+      <h4>Impact (1-5)</h4>
+      <p><strong>5</strong> = krytyczny blocker biznesowy<br><strong>3</strong> = widoczna poprawa workflow<br><strong>1</strong> = nice-to-have</p>
+    </div>
+    <div class="scale-card">
+      <h4>Confidence (0.5-1.0)</h4>
+      <p><strong>1.0</strong> = pewne, znamy rozwiązanie<br><strong>0.8</strong> = solidna estymata<br><strong>0.5</strong> = duża niepewność (nowe API, research)</p>
+    </div>
+    <div class="scale-card">
+      <h4>Effort (SP 1-13)</h4>
+      <p><strong>1</strong> = config change<br><strong>3</strong> = dzień roboty<br><strong>5</strong> = 2-3 dni<br><strong>8</strong> = tydzień<br><strong>13</strong> = 2 tygodnie</p>
+    </div>
+  </div>
+  <p style="margin-top:14px; font-size:0.82rem; color:var(--muted);">
+    <strong>Klasyfikacja:</strong>
+    <span class="badge badge-quick-win">Quick Win</span> RICE ≥ 3.0 + SP ≤ 5 ·
+    <span class="badge badge-big-bet">Big Bet</span> RICE ≥ 2.0 + SP > 5 ·
+    <span class="badge badge-fill-in">Fill-in</span> RICE 1.0-2.9 ·
+    <span class="badge badge-deprioritize">Deprioritize</span> RICE < 1.0
+  </p>
+</div>
+
+<!-- Summary -->
+<div class="summary-row">
+  <div class="stat-card"><div class="num green">8</div><div class="label">Quick Wins</div></div>
+  <div class="stat-card"><div class="num purple">7</div><div class="label">Big Bets</div></div>
+  <div class="stat-card"><div class="num yellow">8</div><div class="label">Fill-ins</div></div>
+  <div class="stat-card"><div class="num red">4</div><div class="label">Deprioritize / Done</div></div>
+</div>
+
+<!-- Filters -->
+<div class="filters">
+  <button class="filter-btn active" onclick="filterTable('all')">Wszystkie (27)</button>
+  <button class="filter-btn" onclick="filterTable('quick-win')">🟢 Quick Wins</button>
+  <button class="filter-btn" onclick="filterTable('big-bet')">🟣 Big Bets</button>
+  <button class="filter-btn" onclick="filterTable('fill-in')">🟡 Fill-ins</button>
+  <button class="filter-btn" onclick="filterTable('done')">✅ Done</button>
+  <button class="filter-btn" onclick="filterTable('fb1')">FB1: Dane</button>
+  <button class="filter-btn" onclick="filterTable('fb2')">FB2: Edycja</button>
+  <button class="filter-btn" onclick="filterTable('fb3')">FB3: Upload</button>
+  <button class="filter-btn" onclick="filterTable('fb4')">FB4: Wątki</button>
+  <button class="filter-btn" onclick="filterTable('fb5')">FB5: Konektory</button>
+</div>
+
+<!-- Table -->
+<div class="table-wrap">
+<table id="backlog">
+<thead>
+<tr>
+  <th onclick="sortTable(0)"># <span class="arrow">↕</span></th>
+  <th onclick="sortTable(1)">Task <span class="arrow">↕</span></th>
+  <th onclick="sortTable(2)">Feedback <span class="arrow">↕</span></th>
+  <th onclick="sortTable(3)">Kategoria <span class="arrow">↕</span></th>
+  <th onclick="sortTable(4)" title="Reach">R <span class="arrow">↕</span></th>
+  <th onclick="sortTable(5)" title="Impact">I <span class="arrow">↕</span></th>
+  <th onclick="sortTable(6)" title="Confidence">C <span class="arrow">↕</span></th>
+  <th onclick="sortTable(7)" title="Story Points">SP <span class="arrow">↕</span></th>
+  <th onclick="sortTable(8)" title="RICE Score">RICE <span class="arrow">↕</span></th>
+  <th onclick="sortTable(9)">Typ <span class="arrow">↕</span></th>
+  <th>Opis / Efekt biznesowy</th>
+  <th>Zależności</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- ===== DONE (Sprint 1 already delivered) ===== -->
+<tr class="done" data-cat="done" data-fb="fb1">
+  <td>D1</td>
+  <td><strong>Cursor-based paginacja</strong></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>5</td><td>5</td><td>1.0</td><td class="sp">3</td>
+  <td class="rice-score rice-high">8.3</td>
+  <td><span class="badge badge-quick-win">Done ✅</span></td>
+  <td class="desc">Limit 250→2000 zamówień. Główna przyczyna rozbieżności danych.</td>
+  <td>—</td>
+</tr>
+<tr class="done" data-cat="done" data-fb="fb1">
+  <td>D2</td>
+  <td><strong>Financial status filter</strong></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>5</td><td>4</td><td>1.0</td><td class="sp">1</td>
+  <td class="rice-score rice-high">20.0</td>
+  <td><span class="badge badge-quick-win">Done ✅</span></td>
+  <td class="desc">Cancelled/refunded wyłączone z revenue. Default: paid.</td>
+  <td>—</td>
+</tr>
+<tr class="done" data-cat="done" data-fb="fb1">
+  <td>D3</td>
+  <td><strong>Data quality indicators</strong></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>5</td><td>3</td><td>1.0</td><td class="sp">1</td>
+  <td class="rice-score rice-high">15.0</td>
+  <td><span class="badge badge-quick-win">Done ✅</span></td>
+  <td class="desc">Sekcja dataQuality w response — widać coverage i completeness.</td>
+  <td>—</td>
+</tr>
+<tr class="done" data-cat="done" data-fb="fb2">
+  <td>D4</td>
+  <td><strong>SEO Audit + ALT text tool</strong></td>
+  <td><span class="feedback-ref">FB2</span></td>
+  <td><span class="tag tag-seo">seo</span></td>
+  <td>4</td><td>4</td><td>1.0</td><td class="sp">5</td>
+  <td class="rice-score rice-high">3.2</td>
+  <td><span class="badge badge-quick-win">Done ✅</span></td>
+  <td class="desc">get-seo-audit + update-product-images. Terminal umie edytować, nie tylko czytać.</td>
+  <td>—</td>
+</tr>
+
+<!-- ===== QUICK WINS ===== -->
+<tr data-cat="quick-win" data-fb="fb1">
+  <td>1</td>
+  <td><strong>Revenue reconciliation tool</strong>
+    <div class="desc">Nowy tool porównujący revenue z analytics vs. Shopify Admin GraphQL (count API).</div></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>5</td><td>5</td><td>0.8</td><td class="sp">5</td>
+  <td class="rice-score rice-high">4.0</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Interesariusz może jednym pytaniem zweryfikować czy dane się zgadzają. Buduje zaufanie.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb2">
+  <td>2</td>
+  <td><strong>Bulk SEO update (batch mode)</strong>
+    <div class="desc">Przyjmuje array {productId, seo} i wykonuje mutations w pętli z rate limit.</div></td>
+  <td><span class="feedback-ref">FB2</span></td>
+  <td><span class="tag tag-seo">seo</span></td>
+  <td>3</td><td>4</td><td>1.0</td><td class="sp">3</td>
+  <td class="rice-score rice-high">4.0</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Audyt → fix w jednej sesji. „Napraw meta descriptions dla wszystkich 24 kolekcji."</td>
+  <td>—</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb2">
+  <td>3</td>
+  <td><strong>Update product content (descriptionHtml)</strong>
+    <div class="desc">GraphQL mutation productUpdate — edycja HTML body produktu z terminala.</div></td>
+  <td><span class="feedback-ref">FB2</span></td>
+  <td><span class="tag tag-seo">seo</span></td>
+  <td>3</td><td>3</td><td>1.0</td><td class="sp">2</td>
+  <td class="rice-score rice-high">4.5</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Edycja opisu produktu bez wchodzenia w Shopify Admin.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb5">
+  <td>4</td>
+  <td><strong>Senuto API research + prototyp</strong>
+    <div class="desc">Zbadać Senuto REST API, zbudować 3 endpointy: visibility, keywords, competitors.</div></td>
+  <td><span class="feedback-ref">FB5</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>3</td><td>4</td><td>0.6</td><td class="sp">3</td>
+  <td class="rice-score rice-mid">2.4</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Dane SEO Senuto w terminalu — widoczność, pozycje, konkurencja. Kluczowe dla FB5.</td>
+  <td class="dep">Wymaga API key Senuto od klienta</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb1">
+  <td>5</td>
+  <td><strong>Cross-platform revenue comparison</strong>
+    <div class="desc">Multi-server routing: Shopify revenue vs GA4 sessions vs Google Ads spend w jednym response.</div></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span><span class="tag tag-infra">infra</span></td>
+  <td>4</td><td>4</td><td>0.7</td><td class="sp">5</td>
+  <td class="rice-score rice-mid">2.2</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Odpowiada na „dlaczego GA4 pokazuje co innego niż Shopify" — top frustracja interesariusza.</td>
+  <td class="dep">Wymaga modyfikacji anthropic-bridge.js (multi-server routing)</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb1">
+  <td>6</td>
+  <td><strong>Google OAuth consent screen → publikacja</strong>
+    <div class="desc">Opublikować Google Cloud consent screen. Tokeny przestają wygasać co 7 dni.</div></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>4</td><td>3</td><td>0.8</td><td class="sp">2</td>
+  <td class="rice-score rice-high">4.8</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Eliminuje ręczną regenerację tokenów. Wymaga Google review (może potrwać).</td>
+  <td class="dep">Wymaga dostępu do Google Cloud Console</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb1">
+  <td>7</td>
+  <td><strong>TikTok MCP aktywacja</strong>
+    <div class="desc">Wygenerować token OAuth, zrestartować serwis. 5 minut pracy.</div></td>
+  <td><span class="feedback-ref">—</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>2</td><td>2</td><td>1.0</td><td class="sp">1</td>
+  <td class="rice-score rice-high">4.0</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">7→8 aktywnych serwerów MCP. Zero effort, 100% pewność.</td>
+  <td class="dep">python3 generate_tiktok_token.py</td>
+</tr>
+<tr data-cat="quick-win" data-fb="fb1">
+  <td>8</td>
+  <td><strong>Unit testy revenue calculations</strong>
+    <div class="desc">Jest tests z mock data: paginacja, financial status, edge cases.</div></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>3</td><td>3</td><td>1.0</td><td class="sp">3</td>
+  <td class="rice-score rice-high">3.0</td>
+  <td><span class="badge badge-quick-win">Quick Win</span></td>
+  <td class="desc">Gwarancja że paginacja + filtry działają poprawnie. Regression safety.</td>
+  <td>—</td>
+</tr>
+
+<!-- ===== BIG BETS ===== -->
+<tr data-cat="big-bet" data-fb="fb3">
+  <td>9</td>
+  <td><strong>File upload — backend (multer + processing)</strong>
+    <div class="desc">Express multer middleware, parsowanie CSV/XLSX/obrazów, przekazanie do Anthropic API.</div></td>
+  <td><span class="feedback-ref">FB3</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>4</td><td>5</td><td>0.8</td><td class="sp">8</td>
+  <td class="rice-score rice-mid">2.0</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Fundament pod wrzucanie plików. Bez tego FB3 nie jest możliwy.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb3">
+  <td>10</td>
+  <td><strong>File upload — frontend (UI + drag&drop)</strong>
+    <div class="desc">Przycisk 📎, drag&drop zone, preview pliku, progress bar, FormData.</div></td>
+  <td><span class="feedback-ref">FB3</span></td>
+  <td><span class="tag tag-ux">ux</span></td>
+  <td>4</td><td>4</td><td>0.8</td><td class="sp">5</td>
+  <td class="rice-score rice-mid">2.6</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Interesariusz może wrzucić CSV z danymi, screenshot, HTML template.</td>
+  <td class="dep">Wymaga #9 (backend)</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb4">
+  <td>11</td>
+  <td><strong>Baza danych — SQLite/PostgreSQL + schema</strong>
+    <div class="desc">Tabele: conversations, messages, users. SQLite dev / PostgreSQL prod (Railway addon).</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>4</td><td>4</td><td>0.8</td><td class="sp">5</td>
+  <td class="rice-score rice-mid">2.6</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Fundament pod persystencję. Bez tego: brak wątków, brak historii, restart = utrata danych.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb4">
+  <td>12</td>
+  <td><strong>Conversations API (REST endpoints)</strong>
+    <div class="desc">GET/POST/DELETE/PATCH /api/conversations. Zapis wiadomości do DB.</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>4</td><td>4</td><td>0.9</td><td class="sp">5</td>
+  <td class="rice-score rice-mid">2.9</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Backend do zarządzania wątkami. Każda konwersacja zapisywana i odtwarzalna.</td>
+  <td class="dep">Wymaga #11 (baza danych)</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb4">
+  <td>13</td>
+  <td><strong>Sidebar UI — lista wątków</strong>
+    <div class="desc">Lewa kolumna z listą wątków, auto-tytuł, ikony MCP, „Nowy wątek" button.</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-ux">ux</span></td>
+  <td>4</td><td>4</td><td>0.8</td><td class="sp">8</td>
+  <td class="rice-score rice-mid">1.6</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">UX przeskok — z „jednego czatu" do „wielu wątków tematycznych".</td>
+  <td class="dep">Wymaga #11 + #12</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb5">
+  <td>14</td>
+  <td><strong>Senuto MCP server (pełny)</strong>
+    <div class="desc">FastMCP Python: visibility, keywords, competitors, SERP, content planner. + router.</div></td>
+  <td><span class="feedback-ref">FB5</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>3</td><td>4</td><td>0.6</td><td class="sp">8</td>
+  <td class="rice-score rice-low">0.9</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Pełna integracja SEO w terminalu. Depends on API research (#4).</td>
+  <td class="dep">Wymaga #4 (research) + API key</td>
+</tr>
+<tr data-cat="big-bet" data-fb="fb5">
+  <td>15</td>
+  <td><strong>Bing Ads MCP server</strong>
+    <div class="desc">FastMCP Python: campaigns, performance reports, keywords. Microsoft OAuth flow.</div></td>
+  <td><span class="feedback-ref">FB5</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>2</td><td>3</td><td>0.5</td><td class="sp">8</td>
+  <td class="rice-score rice-low">0.4</td>
+  <td><span class="badge badge-big-bet">Big Bet</span></td>
+  <td class="desc">Kolejne źródło danych reklamowych. Interesariusz wspomniał Bing jako źródło sprzedaży.</td>
+  <td class="dep">Wymaga credentials Microsoft Advertising</td>
+</tr>
+
+<!-- ===== FILL-INS ===== -->
+<tr data-cat="fill-in" data-fb="fb4">
+  <td>16</td>
+  <td><strong>Thread switching + scroll preservation</strong>
+    <div class="desc">Klik na wątek → załaduj historię, zachowaj scroll, animacja przejścia.</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-ux">ux</span></td>
+  <td>3</td><td>3</td><td>0.8</td><td class="sp">3</td>
+  <td class="rice-score rice-mid">2.4</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Płynne UX przy przełączaniu wątków.</td>
+  <td class="dep">Wymaga #11-13</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb4">
+  <td>17</td>
+  <td><strong>Conversation summarization (Haiku)</strong>
+    <div class="desc">Po 10+ messages: Haiku generuje summary. Summary + last 6 = pełny kontekst.</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>3</td><td>3</td><td>0.7</td><td class="sp">5</td>
+  <td class="rice-score rice-mid">1.3</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Rozwiązuje limit 6 wiadomości. Utrata kontekstu → zachowanie kontekstu.</td>
+  <td class="dep">Wymaga #11-12</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb4">
+  <td>18</td>
+  <td><strong>Search w historii wątków</strong>
+    <div class="desc">Search bar nad listą wątków, full-text search po treści.</div></td>
+  <td><span class="feedback-ref">FB4</span></td>
+  <td><span class="tag tag-ux">ux</span></td>
+  <td>2</td><td>2</td><td>0.8</td><td class="sp">3</td>
+  <td class="rice-score rice-low">1.1</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">„Znajdź mi tę analizę Meta Ads sprzed 2 tygodni".</td>
+  <td class="dep">Wymaga #11-13</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb3">
+  <td>19</td>
+  <td><strong>File → MCP workflow integration</strong>
+    <div class="desc">Wrzucony CSV/HTML → AI analizuje → wywołuje narzędzia MCP w kontekście pliku.</div></td>
+  <td><span class="feedback-ref">FB3</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>3</td><td>3</td><td>0.7</td><td class="sp">3</td>
+  <td class="rice-score rice-mid">2.1</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">User wrzuca HTML template → terminal tworzy Klaviyo template. Power feature.</td>
+  <td class="dep">Wymaga #9-10 (file upload)</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb2">
+  <td>20</td>
+  <td><strong>Shopify Theme MCP server</strong>
+    <div class="desc">get/update/search theme files z terminala. Backup before edit, dry-run mode.</div></td>
+  <td><span class="feedback-ref">FB2</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>2</td><td>3</td><td>0.6</td><td class="sp">8</td>
+  <td class="rice-score rice-low">0.5</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Edycja Liquid templates z terminala. Ryzykowne (write do theme), ale potężne.</td>
+  <td class="dep">⚠️ Wymaga decyzji o risk appetite</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb5">
+  <td>21</td>
+  <td><strong>Senuto + Bing → router integration + Dockerfile</strong>
+    <div class="desc">Dodanie nowych serwerów do config.js, router prompt, Dockerfile build steps.</div></td>
+  <td><span class="feedback-ref">FB5</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>3</td><td>2</td><td>0.9</td><td class="sp">2</td>
+  <td class="rice-score rice-mid">2.7</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Wiring — wpięcie nowych MCP serwerów do istniejącej infrastruktury.</td>
+  <td class="dep">Wymaga #14 i/lub #15</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb1">
+  <td>22</td>
+  <td><strong>Multi-server routing (anthropic-bridge)</strong>
+    <div class="desc">Router zwraca array serwerów zamiast jednego. Sonnet dostaje tools z 2-3 serwerów.</div></td>
+  <td><span class="feedback-ref">FB1</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>3</td><td>4</td><td>0.6</td><td class="sp">8</td>
+  <td class="rice-score rice-low">0.9</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Odpowiedzi cross-platform: „Porównaj Google Ads vs Meta Ads za marzec".</td>
+  <td>—</td>
+</tr>
+<tr data-cat="fill-in" data-fb="fb2">
+  <td>23</td>
+  <td><strong>Klaviyo write tools verification</strong>
+    <div class="desc">End-to-end test: create_email_template, create_campaign. Dokumentacja limitations.</div></td>
+  <td><span class="feedback-ref">FB2</span></td>
+  <td><span class="tag tag-mcp">mcp</span></td>
+  <td>3</td><td>2</td><td>0.8</td><td class="sp">2</td>
+  <td class="rice-score rice-mid">2.4</td>
+  <td><span class="badge badge-fill-in">Fill-in</span></td>
+  <td class="desc">Potwierdzenie że Klaviyo write tools działają na produkcji.</td>
+  <td>—</td>
+</tr>
+
+<!-- ===== DEPRIORITIZE (low RICE or blocked) ===== -->
+<tr data-cat="deprioritize" data-fb="">
+  <td>24</td>
+  <td><strong>Custom domain DNS naprawa</strong>
+    <div class="desc">Fix CNAME genactiv.oleksiakconsulting.com → Railway.</div></td>
+  <td><span class="feedback-ref">—</span></td>
+  <td><span class="tag tag-infra">infra</span></td>
+  <td>2</td><td>1</td><td>0.5</td><td class="sp">2</td>
+  <td class="rice-score rice-low">0.5</td>
+  <td><span class="badge badge-deprioritize">Deprioritize</span></td>
+  <td class="desc">Vanity URL. Railway URL działa fine. Fix kiedy będzie czas.</td>
+  <td class="dep">Wymaga dostępu do DNS registrar</td>
+</tr>
+<tr data-cat="deprioritize" data-fb="">
+  <td>25</td>
+  <td><strong>530 błędów interpunkcyjnych (SEO)</strong>
+    <div class="desc">Głównie cytaty naukowe — spacje przed kropkami/przecinkami.</div></td>
+  <td><span class="feedback-ref">—</span></td>
+  <td><span class="tag tag-seo">seo</span></td>
+  <td>1</td><td>1</td><td>0.8</td><td class="sp">5</td>
+  <td class="rice-score rice-low">0.2</td>
+  <td><span class="badge badge-deprioritize">Deprioritize</span></td>
+  <td class="desc">Minimalny SEO impact. Cytaty naukowe to edge case.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="deprioritize" data-fb="">
+  <td>26</td>
+  <td><strong>Footer „Cookkies" typo fix</strong>
+    <div class="desc">Podwójne k w „Polityka plików Cookkies" — widoczne na wszystkich stronach.</div></td>
+  <td><span class="feedback-ref">—</span></td>
+  <td><span class="tag tag-seo">seo</span></td>
+  <td>1</td><td>1</td><td>1.0</td><td class="sp">1</td>
+  <td class="rice-score rice-low">1.0</td>
+  <td><span class="badge badge-deprioritize">Deprioritize</span></td>
+  <td class="desc">Drobny, ale widoczny. 1 minuta pracy w Shopify theme.</td>
+  <td>—</td>
+</tr>
+<tr data-cat="deprioritize" data-fb="">
+  <td>27</td>
+  <td><strong>Atrybucja 1% — Pandectes consent fix</strong>
+    <div class="desc">Zmiana cookiesBlockedByDefault lub Enhanced Conversions. Wymaga decyzji prawnej.</div></td>
+  <td><span class="feedback-ref">—</span></td>
+  <td><span class="tag tag-data">data</span></td>
+  <td>5</td><td>5</td><td>0.3</td><td class="sp">13</td>
+  <td class="rice-score rice-low">0.6</td>
+  <td><span class="badge badge-deprioritize">Deprioritize</span></td>
+  <td class="desc">KRYTYCZNY problem, ale ZABLOKOWANY — wymaga opinii prawnej GDPR + decyzji klienta. Nie da się go rozwiązać technicznie bez tych decyzji.</td>
+  <td class="dep">⚠️ Zablokowany: wymaga opinii prawnej + decyzji biznesowej</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="tag tag-data">data</span> Jakość danych / analytics</div>
+  <div class="legend-item"><span class="tag tag-seo">seo</span> SEO / content</div>
+  <div class="legend-item"><span class="tag tag-ux">ux</span> Frontend / UX</div>
+  <div class="legend-item"><span class="tag tag-infra">infra</span> Backend / infra</div>
+  <div class="legend-item"><span class="tag tag-mcp">mcp</span> Nowy MCP server</div>
+</div>
+
+<script>
+// Sort table
+let sortDir = {};
+function sortTable(col) {
+  const table = document.getElementById('backlog');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  sortDir[col] = !sortDir[col];
+  const dir = sortDir[col] ? 1 : -1;
+
+  rows.sort((a, b) => {
+    let aVal = a.cells[col]?.textContent.trim() || '';
+    let bVal = b.cells[col]?.textContent.trim() || '';
+
+    // Numeric sort for R, I, C, SP, RICE columns
+    if (col >= 4 && col <= 8) {
+      return (parseFloat(aVal) - parseFloat(bVal)) * dir;
+    }
+    return aVal.localeCompare(bVal, 'pl') * dir;
+  });
+
+  rows.forEach(row => tbody.appendChild(row));
+}
+
+// Filter
+function filterTable(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const rows = document.querySelectorAll('#backlog tbody tr');
+  rows.forEach(row => {
+    if (cat === 'all') {
+      row.style.display = '';
+    } else if (cat.startsWith('fb')) {
+      row.style.display = row.dataset.fb?.includes(cat) ? '' : 'none';
+    } else {
+      row.style.display = row.dataset.cat === cat ? '' : 'none';
+    }
+  });
+}
+
+// Default sort by RICE desc
+setTimeout(() => { sortDir[8] = false; sortTable(8); }, 100);
+</script>
+
+</body>
+</html>
