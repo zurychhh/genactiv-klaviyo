@@ -28,6 +28,9 @@ COPY shopify-mcp-extended/ ./shopify-mcp-extended/
 RUN cd shopify-mcp-extended && npm run build
 RUN cd shopify-mcp-extended && npm prune --production
 
+# Senuto SEO MCP (pre-install for faster startup)
+RUN npm install -g senuto-mcp
+
 # Main application
 COPY genactiv-online/package*.json ./genactiv-online/
 RUN cd genactiv-online && npm ci --production

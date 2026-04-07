@@ -24,6 +24,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         <span>SEO</span>
       </a>
+      <a href="/senuto-guide.html" style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.25);color:#8b5cf6;padding:0.35rem 0.85rem;border-radius:6px;font-size:0.8rem;font-weight:500;text-decoration:none;font-family:var(--font-sans);transition:all 0.15s">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Senuto</span>
+      </a>
       <button id="capabilities-btn" type="button" title="Możliwości terminala">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         <span>Możliwości</span>
@@ -41,7 +45,7 @@
 
   <div id="input-area">
     <div id="input-wrapper">
-      <textarea id="input" rows="1" placeholder="Zadaj pytanie o Klaviyo, Shopify, Google Ads, GA4 lub Meta Ads..." autofocus></textarea>
+      <textarea id="input" rows="1" placeholder="Zadaj pytanie o Klaviyo, Shopify, Google Ads, GA4, Meta Ads lub Senuto SEO..." autofocus></textarea>
       <button id="send-btn" type="button" aria-label="Wyślij">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="19" x2="12" y2="5"></line>
@@ -65,9 +69,9 @@
     <div class="cap-body">
 
       <div class="cap-stats">
-        <div class="cap-stat"><span class="cap-stat-num">7</span><span class="cap-stat-label">Serwisów MCP</span></div>
+        <div class="cap-stat"><span class="cap-stat-num">8</span><span class="cap-stat-label">Serwisów MCP</span></div>
         <div class="cap-stat"><span class="cap-stat-num">19</span><span class="cap-stat-label">Narzędzi Shopify</span></div>
-        <div class="cap-stat"><span class="cap-stat-num">46+</span><span class="cap-stat-label">Narzędzi łącznie</span></div>
+        <div class="cap-stat"><span class="cap-stat-num">66+</span><span class="cap-stat-label">Narzędzi łącznie</span></div>
       </div>
 
       <!-- Shopify & SEO -->
@@ -240,6 +244,37 @@
         </div>
       </div>
 
+      <!-- Senuto SEO -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">🔎</span>
+          <h3>Senuto SEO <span class="cap-badge new">NOWE</span></h3>
+          <span class="cap-count">20 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Widoczność domeny</span>
+            <span class="cap-tool-desc">Pozycje fraz, Top 3/10/50, statystyki domeny, visibility score, domain rank, ekwiwalent reklamowy</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Analiza konkurencji</span>
+            <span class="cap-tool-desc">Porównanie z konkurentami, wspólne frazy, kanibalizacja słów kluczowych (wiele URL na tę samą frazę)</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Keyword research</span>
+            <span class="cap-tool-desc">Klastry tematyczne, pytania użytkowników, featured snippets, segmentacja fraz (wolumen, difficulty, trendy)</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Historia pozycji i Rank Tracker</span>
+            <span class="cap-tool-desc">Śledzenie zmian pozycji w czasie, projekty RT, grupy fraz, snippety, statystyki dzienne/tygodniowe</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Analiza URL i sekcji</span>
+            <span class="cap-tool-desc">Wydajność poszczególnych URL, rozkład widoczności wg sekcji strony (/products/, /blog/, /collections/)</span>
+          </div>
+        </div>
+      </div>
+
       <!-- SEO Command Center -->
       <div class="cap-section">
         <div class="cap-section-header">
@@ -272,6 +307,10 @@
         <h3>Co nowego</h3>
         <div class="cap-change">
           <span class="cap-change-date">7 kwi 2026</span>
+          <span class="cap-change-text">Senuto SEO MCP (20 narzędzi): widoczność domeny, pozycje fraz, analiza konkurencji, kanibalizacja, keyword research, rank tracker, historia pozycji</span>
+        </div>
+        <div class="cap-change">
+          <span class="cap-change-date">7 kwi 2026</span>
           <span class="cap-change-text">SEO Command Center v2: dashboard /seo.html z audytem, ruchem organicznym, priorytetyzacją Impact Score, fix modalem z sugestiami AI i char counterami, GA4 graceful degradation</span>
         </div>
         <div class="cap-change">
@@ -298,6 +337,8 @@
           <button class="cap-example" data-prompt="Pokaż ROAS kampanii Google Ads z ostatnich 30 dni">📢 ROAS Google Ads</button>
           <button class="cap-example" data-prompt="Kto jest teraz na stronie i skąd przyszedł?">📊 Realtime GA4</button>
           <button class="cap-example" data-prompt="Pokaż performance produktów z ruchu organicznego za ostatni miesiąc">🛒 Produkty z organic</button>
+          <button class="cap-example" data-prompt="Pokaż widoczność genactiv.pl i Top 10 fraz kluczowych w Senuto">🔎 Widoczność SEO Senuto</button>
+          <button class="cap-example" data-prompt="Jakich konkurentów ma genactiv.pl wg Senuto i ile wspólnych fraz?">🏆 Konkurenci SEO</button>
         </div>
       </div>
 

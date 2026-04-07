@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senuto SEO Intelligence — GenActiv Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c0c; --surface: #161616; --surface2: #1e1e1e; --surface3: #252525;
+  --border: #2a2a2a; --border-light: #333;
+  --text: #e8e8e8; --text2: #a0a0a0; --muted: #666;
+  --blue: #0066CC; --blue-l: #1a7adf; --blue-bg: rgba(0,102,204,0.08);
+  --green: #27ae60; --green-bg: rgba(39,174,96,0.08);
+  --red: #EF3340; --red-bg: rgba(239,51,64,0.08);
+  --amber: #d97706; --amber-bg: rgba(217,119,6,0.08);
+  --purple: #8b5cf6; --purple-bg: rgba(139,92,246,0.08);
+  --cyan: #06b6d4; --cyan-bg: rgba(6,182,212,0.08);
+  --navy: #1A3B5D;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:var(--bg); color:var(--text); min-height:100dvh; -webkit-font-smoothing:antialiased; line-height:1.65; }
+
+/* --- Header --- */
+.header { display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; height:56px; background:linear-gradient(135deg,var(--navy),#0d2240); border-bottom:1px solid rgba(255,255,255,0.06); position:sticky; top:0; z-index:10; }
+.header-left { display:flex; align-items:center; gap:0.75rem; }
+.header-logo { width:34px; height:34px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; color:#fff; }
+.header h1 { font-size:1rem; font-weight:700; color:#fff; }
+.header h1 span { font-weight:400; color:rgba(255,255,255,0.5); margin-left:0.3em; font-size:0.9em; }
+.header-actions { display:flex; gap:0.5rem; align-items:center; }
+.header-actions a { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:0.35rem 0.85rem; border-radius:6px; cursor:pointer; font-size:0.8rem; font-family:var(--font); text-decoration:none; transition:all 0.15s; display:inline-flex; align-items:center; gap:0.4rem; }
+.header-actions a:hover { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); }
+.header-actions a.active { background:rgba(139,92,246,0.15); border-color:rgba(139,92,246,0.3); color:var(--purple); }
+
+/* --- Hero --- */
+.hero { padding:3.5rem 1.5rem 2.5rem; text-align:center; background:linear-gradient(180deg, rgba(139,92,246,0.06) 0%, transparent 100%); border-bottom:1px solid var(--border); }
+.hero-badge { display:inline-flex; align-items:center; gap:0.4rem; background:var(--purple-bg); border:1px solid rgba(139,92,246,0.2); color:var(--purple); padding:0.3rem 0.9rem; border-radius:99px; font-size:0.72rem; font-weight:600; letter-spacing:0.02em; margin-bottom:1rem; }
+.hero h2 { font-size:2rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.5rem; }
+.hero h2 em { font-style:normal; background:linear-gradient(135deg, var(--purple), var(--blue-l)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero p { color:var(--text2); font-size:0.95rem; max-width:680px; margin:0 auto; }
+
+/* --- Stats strip --- */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; max-width:900px; margin:-1.5rem auto 2rem; padding:0 1.5rem; position:relative; z-index:2; }
+.stat-card { padding:1.1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-align:center; }
+.stat-card .num { font-size:1.6rem; font-weight:800; }
+.stat-card .lbl { font-size:0.7rem; color:var(--text2); margin-top:0.1rem; }
+.stat-card.purple .num { color:var(--purple); }
+.stat-card.blue .num { color:var(--blue-l); }
+.stat-card.green .num { color:var(--green); }
+.stat-card.amber .num { color:var(--amber); }
+
+/* --- Container --- */
+.container { max-width:960px; margin:0 auto; padding:2rem 1.5rem; }
+
+/* --- Section --- */
+.section { margin-bottom:3rem; }
+.section-label { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.6rem; }
+.section h3 { font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:0.4rem; }
+.section .desc { color:var(--text2); font-size:0.88rem; margin-bottom:1.25rem; }
+
+/* --- Tool cards --- */
+.tool-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem; }
+.tool-card { padding:1rem 1.15rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; transition:border-color 0.15s, background 0.15s; }
+.tool-card:hover { border-color:var(--border-light); background:var(--surface2); }
+.tool-card .tool-name { font-weight:600; font-size:0.85rem; margin-bottom:0.25rem; display:flex; align-items:center; gap:0.4rem; }
+.tool-card .tool-name .icon { font-size:1rem; }
+.tool-card .tool-desc { font-size:0.78rem; color:var(--text2); line-height:1.55; }
+.tool-card .tool-mcp { font-family:var(--mono); font-size:0.62rem; color:var(--muted); margin-top:0.4rem; background:var(--surface3); padding:0.15rem 0.5rem; border-radius:4px; display:inline-block; }
+
+/* --- Synergy section --- */
+.synergy { background:linear-gradient(135deg, rgba(139,92,246,0.06), rgba(0,102,204,0.06)); border:1px solid rgba(139,92,246,0.15); border-radius:14px; padding:2rem; margin-bottom:3rem; }
+.synergy h3 { font-size:1.2rem; margin-bottom:0.5rem; }
+.synergy .desc { color:var(--text2); font-size:0.88rem; margin-bottom:1.25rem; }
+.flow-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
+.flow-step { padding:1rem; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; text-align:center; }
+.flow-step .step-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; font-weight:700; font-size:0.75rem; margin-bottom:0.5rem; }
+.flow-step .step-title { font-weight:600; font-size:0.82rem; margin-bottom:0.25rem; }
+.flow-step .step-desc { font-size:0.72rem; color:var(--text2); line-height:1.5; }
+.flow-step.purple .step-num { background:var(--purple-bg); color:var(--purple); border:1px solid rgba(139,92,246,0.25); }
+.flow-step.green .step-num { background:var(--green-bg); color:var(--green); border:1px solid rgba(39,174,96,0.25); }
+.flow-step.blue .step-num { background:var(--blue-bg); color:var(--blue-l); border:1px solid rgba(0,102,204,0.25); }
+
+/* --- Prompt cards --- */
+.prompt-grid { display:grid; grid-template-columns:1fr; gap:0.6rem; }
+.prompt-card { display:flex; align-items:flex-start; gap:0.75rem; padding:0.9rem 1.1rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; cursor:pointer; transition:all 0.15s; text-decoration:none; color:inherit; }
+.prompt-card:hover { border-color:var(--purple); background:var(--surface2); transform:translateX(3px); }
+.prompt-card .prompt-icon { font-size:1.2rem; flex-shrink:0; margin-top:0.1rem; }
+.prompt-card .prompt-body { flex:1; }
+.prompt-card .prompt-title { font-weight:600; font-size:0.82rem; margin-bottom:0.15rem; }
+.prompt-card .prompt-text { font-family:var(--mono); font-size:0.72rem; color:var(--purple); background:var(--purple-bg); padding:0.25rem 0.6rem; border-radius:5px; display:inline-block; margin-top:0.3rem; line-height:1.4; }
+.prompt-card .prompt-result { font-size:0.72rem; color:var(--text2); margin-top:0.3rem; }
+
+/* --- Effect cards --- */
+.effect-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem; }
+.effect-card { padding:1.1rem; border-radius:10px; }
+.effect-card .effect-icon { font-size:1.5rem; margin-bottom:0.5rem; }
+.effect-card h4 { font-size:0.88rem; font-weight:700; margin-bottom:0.25rem; }
+.effect-card p { font-size:0.78rem; color:var(--text2); line-height:1.55; }
+.effect-card.purple { background:var(--purple-bg); border:1px solid rgba(139,92,246,0.15); }
+.effect-card.blue { background:var(--blue-bg); border:1px solid rgba(0,102,204,0.15); }
+.effect-card.green { background:var(--green-bg); border:1px solid rgba(39,174,96,0.15); }
+.effect-card.amber { background:var(--amber-bg); border:1px solid rgba(217,119,6,0.15); }
+
+/* --- Responsive --- */
+@media (max-width:768px) {
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .tool-grid { grid-template-columns:1fr; }
+  .flow-grid { grid-template-columns:1fr; }
+  .effect-grid { grid-template-columns:1fr; }
+  .hero h2 { font-size:1.5rem; }
+}
+@media (max-width:480px) {
+  .stats { grid-template-columns:1fr 1fr; gap:0.5rem; }
+  .hero { padding:2rem 1rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">G</div>
+    <div>
+      <h1>GenActiv<span>Online</span></h1>
+    </div>
+  </div>
+  <div class="header-actions">
+    <a href="/">Terminal</a>
+    <a href="/seo.html">SEO Dashboard</a>
+    <a href="/senuto-guide.html" class="active">Senuto Guide</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    SENUTO SEO INTELLIGENCE &middot; 20 NARZĘDZI API
+  </div>
+  <h2>Widoczność, frazy, konkurencja —<br><em>dane z Senuto prosto w terminalu</em></h2>
+  <p>Senuto daje Ci kompletny obraz SEO genactiv.pl: od pozycji fraz i analizy konkurencji, przez keyword research i kanibalizację, po historię zmian i rank tracking. Wszystko dostępne głosem w terminalu GenActiv Online.</p>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat-card purple"><div class="num">20</div><div class="lbl">Narzędzi API</div></div>
+  <div class="stat-card blue"><div class="num">5</div><div class="lbl">Kategorii analizy</div></div>
+  <div class="stat-card green"><div class="num">PL</div><div class="lbl">Baza Polska 2.0</div></div>
+  <div class="stat-card amber"><div class="num">~09.2026</div><div class="lbl">Token ważny do</div></div>
+</div>
+
+<div class="container">
+
+  <!-- ============================================================ -->
+  <!--  SYNERGY: Senuto + SEO Command Center                       -->
+  <!-- ============================================================ -->
+  <div class="synergy">
+    <div class="section-label" style="color:var(--purple);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      SYNERGIA
+    </div>
+    <h3>Senuto + SEO Command Center = pełny cykl SEO</h3>
+    <p class="desc">Senuto dostarcza dane zewnętrzne (pozycje w Google, widoczność, konkurencja), a SEO Command Center skanuje dane wewnętrzne (meta tagi, opisy, ALT texty w Shopify). Razem tworzą zamknięty cykl: <strong>diagnoza → priorytetyzacja → naprawa → weryfikacja</strong>.</p>
+
+    <div class="flow-grid">
+      <div class="flow-step purple">
+        <div class="step-num">1</div>
+        <div class="step-title">Odkryj w Senuto</div>
+        <div class="step-desc">Sprawdź które frazy spadły, gdzie konkurencja Cię wyprzedza, które URL-e kanibalizują się nawzajem. Dane z Google — zewnętrzny obraz SEO.</div>
+      </div>
+      <div class="flow-step green">
+        <div class="step-num">2</div>
+        <div class="step-title">Audytuj w SEO Center</div>
+        <div class="step-desc">SEO Command Center skanuje Shopify: brakujące meta, krótkie opisy, brak ALT. Krzyżuje z GA4 ruchem organicznym → Impact Score.</div>
+      </div>
+      <div class="flow-step blue">
+        <div class="step-num">3</div>
+        <div class="step-title">Napraw i zweryfikuj</div>
+        <div class="step-desc">1-click fix w SEO Center zapisuje do Shopify. Po tygodniu sprawdź w Senuto czy pozycje się poprawiły. Zamknięty cykl.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  1. WIDOCZNOŚĆ DOMENY                                        -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--purple);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      WIDOCZNOŚĆ DOMENY
+    </div>
+    <h3>Jak genactiv.pl jest widoczne w Google?</h3>
+    <p class="desc">Statystyki domeny, pozycje fraz kluczowych, rozkład Top 3/10/50 i visibility score. Fundamentalne dane do oceny kondycji SEO.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📊</span> Statystyki domeny</div>
+        <div class="tool-desc">Top 3/10/50, visibility score, domain rank, ekwiwalent reklamowy (ile musiałbyś wydać w Google Ads na ten sam ruch). Porównanie z poprzednim tygodniem.</div>
+        <div class="tool-mcp">get_domain_statistics</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🔑</span> Pozycje fraz</div>
+        <div class="tool-desc">Pełna lista fraz na które rankuje genactiv.pl: pozycja, wolumen wyszukiwań, CPC, difficulty, URL. Paginowane do 100 wyników na stronę.</div>
+        <div class="tool-mcp">get_positions_data</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🌐</span> Subdomeny</div>
+        <div class="tool-desc">Rozkład widoczności pomiędzy subdomenami (www, sklep, blog). Sprawdź czy subdomena nie kradnie ruchu głównej domenie.</div>
+        <div class="tool-mcp">get_subdomains</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📄</span> Analiza URL</div>
+        <div class="tool-desc">Wydajność poszczególnych URL-i: ile fraz, jaka widoczność. Identyfikuj najsilniejsze i najsłabsze strony.</div>
+        <div class="tool-mcp">get_urls</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  2. ANALIZA KONKURENCJI                                      -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--blue-l);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+      ANALIZA KONKURENCJI
+    </div>
+    <h3>Kto Cię wyprzedza i na czym?</h3>
+    <p class="desc">Porównaj się z konkurentami, znajdź wspólne frazy, wykryj kanibalizację wewnętrzną i zidentyfikuj luki do zagospodarowania.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">⚔️</span> Konkurenci</div>
+        <div class="tool-desc">Lista domen konkurujących z genactiv.pl, z metrykami SEO: wspólne frazy, visibility, Top 3/10/50. Sortowane wg stopnia nakładania się.</div>
+        <div class="tool-mcp">get_competitors</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">⚠️</span> Kanibalizacja</div>
+        <div class="tool-desc">Wykrywanie fraz, na które rankuje więcej niż jeden URL z Twojej domeny — Google nie wie, którą stronę pokazać i obniża obie. Krytyczne do naprawienia.</div>
+        <div class="tool-mcp">get_cannibalization_keywords</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🔍</span> Odkrywanie domen</div>
+        <div class="tool-desc">Wpisz słowo lub domenę, a Senuto zasugeruje powiązanych konkurentów. Odkrywaj nowych graczy w niszy suplementów i colostrum.</div>
+        <div class="tool-mcp">suggest_domains</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📐</span> Sekcje URL</div>
+        <div class="tool-desc">Porównaj widoczność sekcji strony (/products/, /collections/, /pages/). Sprawdź, które sekcje mają największy potencjał wzrostu.</div>
+        <div class="tool-mcp">get_url_sections</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  3. KEYWORD RESEARCH                                          -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--green);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      KEYWORD RESEARCH
+    </div>
+    <h3>Nowe frazy, klastry tematyczne, pytania użytkowników</h3>
+    <p class="desc">Znajdź frazy, na które warto się pozycjonować. Klastry tematyczne dla strategii contentowej, pytania z featured snippets.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🧩</span> Klastry tematyczne</div>
+        <div class="tool-desc">Semantyczne grupy fraz wokół tematu (np. "colostrum"). Wolumen, difficulty, powiązane frazy. Idealne do planowania artykułów na blog.</div>
+        <div class="tool-mcp">get_groups</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">❓</span> Pytania użytkowników</div>
+        <div class="tool-desc">Jakie pytania ludzie wpisują w Google? "Czy colostrum jest bezpieczne?" — gotowe tematy na FAQ, artykuły, featured snippets.</div>
+        <div class="tool-mcp">get_questions</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📈</span> Segmentacja fraz</div>
+        <div class="tool-desc">Rozkład fraz wg długości, trendów, wolumenu, difficulty i cech SERP. Zidentyfikuj low-hanging fruits: wysoki wolumen + niska difficulty.</div>
+        <div class="tool-mcp">get_characteristics_table</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🏷️</span> Lookup fraz</div>
+        <div class="tool-desc">Szybkie sprawdzenie danych o konkretnych frazach: wolumen, CPC, difficulty, trend. Weryfikacja potencjału przed tworzeniem contentu.</div>
+        <div class="tool-mcp">get_keywords</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  4. HISTORIA I RANK TRACKER                                   -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--amber);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      HISTORIA POZYCJI I RANK TRACKER
+    </div>
+    <h3>Śledź zmiany i mierz efekty działań SEO</h3>
+    <p class="desc">Historyczne dane pozycji: widzisz czy optymalizacje przynoszą efekt. Rank Tracker do systematycznego monitoringu najważniejszych fraz.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📉</span> Historia pozycji (wykres)</div>
+        <div class="tool-desc">Time series: Top 3/10/50 w czasie. Ustaw zakres dat i granularność (dzienna/tygodniowa). Idealne do raportowania efektów SEO.</div>
+        <div class="tool-mcp">get_positions_history_chart</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🔬</span> Historia pojedynczej frazy</div>
+        <div class="tool-desc">Jak zmieniała się pozycja konkretnej frazy w czasie? Sprawdź efekt optymalizacji strony na konkretne słowo kluczowe.</div>
+        <div class="tool-mcp">get_keyword_history</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">📋</span> Projekty Rank Tracker</div>
+        <div class="tool-desc">Lista projektów RT z aktywnym monitoringiem. Zarządzaj grupami fraz, sprawdzaj pozycje dziennie, śledź postępy.</div>
+        <div class="tool-mcp">rt_get_projects_list &middot; rt_get_active_projects</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name"><span class="icon">🎯</span> Dane RT i snippety</div>
+        <div class="tool-desc">Pozycje fraz w projekcie RT, grupy fraz, statystyki snippetów SERP (ile wyników ma featured snippets, PAA, sitelinks).</div>
+        <div class="tool-mcp">rt_get_position_data &middot; rt_get_snippets_statistics</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  EFEKT BIZNESOWY                                              -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--green);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      EFEKT BIZNESOWY
+    </div>
+    <h3>Co to daje GenActiv?</h3>
+    <p class="desc">Konkretne efekty, które Senuto + SEO Command Center generują w połączeniu ze sobą.</p>
+    <div class="effect-grid">
+      <div class="effect-card purple">
+        <div class="effect-icon">🎯</div>
+        <h4>Priorytetyzacja oparta na danych</h4>
+        <p>Zamiast zgadywać co naprawić, krzyżujesz dane Senuto (wolumen frazy, pozycja) z audytem Shopify (brakujące meta) i ruchem GA4 (sesje). Naprawiasz to, co da największy ROI.</p>
+      </div>
+      <div class="effect-card blue">
+        <div class="effect-icon">⚔️</div>
+        <h4>Wyprzedzanie konkurencji</h4>
+        <p>Widzisz na jakich frazach konkurenci Cię biją i gdzie masz lukę. Senuto pokazuje dokładnie ile fraz wspólnych ma np. swissherbs.pl czy colostrigen.pl — i gdzie Ty jesteś niżej.</p>
+      </div>
+      <div class="effect-card green">
+        <div class="effect-icon">📈</div>
+        <h4>Mierzalny wzrost widoczności</h4>
+        <p>Po każdej optymalizacji sprawdzasz w Senuto czy frazy poszły w górę. Historia pozycji daje twardy dowód: "po zmianie meta descriptions widoczność wzrosła o X%".</p>
+      </div>
+      <div class="effect-card amber">
+        <div class="effect-icon">💡</div>
+        <h4>Content strategy na danych</h4>
+        <p>Klastry tematyczne + pytania użytkowników = gotowy plan treści na blog. Wiesz dokładnie co ludzie szukają w Google i jakie artykuły napisać, żeby łapać ruch organiczny.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  JAK PRACOWAĆ Z SENUTO W TERMINALU                           -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--cyan);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      JAK PRACOWAĆ
+    </div>
+    <h3>Przykłady pytań do terminala</h3>
+    <p class="desc">Wpisz te pytania w terminalu GenActiv Online. AI automatycznie użyje odpowiednich narzędzi Senuto i pokaże wyniki z analizą.</p>
+
+    <div class="prompt-grid">
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">📊</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Codzienny health-check SEO</div>
+          <div class="prompt-text">Pokaż statystyki widoczności genactiv.pl z Senuto — Top 3, Top 10, visibility i porównaj z poprzednim tygodniem</div>
+          <div class="prompt-result">Dostaniesz: visibility score, Top 3/10/50, domain rank, zmiana tydzień do tygodnia, ekwiwalent reklamowy</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">🔑</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Top frazy i potencjał</div>
+          <div class="prompt-text">Na jakie frazy rankuje genactiv.pl w Top 10? Pokaż wolumen i pozycję</div>
+          <div class="prompt-result">Dostaniesz: listę fraz z pozycją, wolumenem, CPC, difficulty, URL — posortowane wg widoczności</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">⚔️</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Analiza konkurencji</div>
+          <div class="prompt-text">Jakich konkurentów ma genactiv.pl wg Senuto? Ile mamy wspólnych fraz i gdzie przegrywamy?</div>
+          <div class="prompt-result">Dostaniesz: ranking konkurentów, wspólne frazy, różnica w widoczności, sugestie do zagospodarowania</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">⚠️</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Kanibalizacja słów kluczowych</div>
+          <div class="prompt-text">Sprawdź kanibalizację na genactiv.pl — które frazy mają wiele URL-i?</div>
+          <div class="prompt-result">Dostaniesz: listę fraz z wieloma URL-ami, severity, rekomendację który URL zostawić, a który przekierować</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">❓</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Pomysły na content (pytania)</div>
+          <div class="prompt-text">Jakie pytania ludzie zadają w Google o colostrum? Pokaż z Senuto + które mają featured snippet</div>
+          <div class="prompt-result">Dostaniesz: pytania z wolumenem, szansą na featured snippet, gotowe tematy na FAQ i artykuły blogowe</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">🧩</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Klastry do strategii contentowej</div>
+          <div class="prompt-text">Pokaż klastry tematyczne z Senuto dla frazy "colostrum bovinum" — chcę zaplanować artykuły na blog</div>
+          <div class="prompt-result">Dostaniesz: semantyczne grupy fraz, wolumen, difficulty — gotowy plan artykułów z priorytetyzacją</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">📉</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Weryfikacja efektów (historia)</div>
+          <div class="prompt-text">Pokaż historię widoczności genactiv.pl z ostatnich 6 miesięcy — chcę zobaczyć trend</div>
+          <div class="prompt-result">Dostaniesz: time series Top 3/10/50 za pół roku, widoczny wpływ optymalizacji na wykresie</div>
+        </div>
+      </a>
+      <a href="/" class="prompt-card" title="Kliknij aby przejść do terminala">
+        <div class="prompt-icon">🔄</div>
+        <div class="prompt-body">
+          <div class="prompt-title">Pełny cykl: Senuto → audyt → fix</div>
+          <div class="prompt-text">Sprawdź w Senuto które frazy spadły w ostatnim tygodniu, potem uruchom audyt SEO żebym widział co naprawić</div>
+          <div class="prompt-result">AI połączy dane z Senuto (spadki pozycji) z audytem Shopify (brakujące meta), pokaże co naprawić w pierwszej kolejności</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  PEŁNA LISTA NARZĘDZI                                        -->
+  <!-- ============================================================ -->
+  <div class="section">
+    <div class="section-label" style="color:var(--muted);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      REFERENCJA
+    </div>
+    <h3>Pełna lista 20 narzędzi Senuto MCP</h3>
+    <p class="desc">Wszystkie endpointy dostępne przez API. Domyślna konfiguracja: domena <code style="background:var(--surface2);padding:0.1rem 0.4rem;border-radius:3px;font-family:var(--mono);font-size:0.8em;">genactiv.pl</code>, rynek <code style="background:var(--surface2);padding:0.1rem 0.4rem;border-radius:3px;font-family:var(--mono);font-size:0.8em;">200</code> (Polska Base 2.0).</p>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1rem; overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.76rem;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="text-align:left; padding:0.5rem 0.75rem; color:var(--text2); font-weight:600;">Narzędzie</th>
+            <th style="text-align:left; padding:0.5rem 0.75rem; color:var(--text2); font-weight:600;">Opis</th>
+            <th style="text-align:left; padding:0.5rem 0.75rem; color:var(--text2); font-weight:600;">Kategoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--purple);font-size:0.7rem;">get_domain_statistics</td><td style="padding:0.4rem 0.75rem;">Top 3/10/50, visibility, domain rank, ads equivalent</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Widoczność</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--purple);font-size:0.7rem;">get_positions_data</td><td style="padding:0.4rem 0.75rem;">Pozycje fraz z wolumenem, CPC, difficulty</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Widoczność</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--purple);font-size:0.7rem;">get_urls</td><td style="padding:0.4rem 0.75rem;">Wydajność poszczególnych URL</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Widoczność</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--purple);font-size:0.7rem;">get_subdomains</td><td style="padding:0.4rem 0.75rem;">Rozkład widoczności subdomen</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Widoczność</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--purple);font-size:0.7rem;">get_url_sections</td><td style="padding:0.4rem 0.75rem;">Widoczność sekcji URL (/blog/, /products/)</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Widoczność</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--blue-l);font-size:0.7rem;">get_competitors</td><td style="padding:0.4rem 0.75rem;">Analiza konkurencji z metrykami SEO</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Konkurencja</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--blue-l);font-size:0.7rem;">get_cannibalization_keywords</td><td style="padding:0.4rem 0.75rem;">Kanibalizacja — wiele URL na jedną frazę</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Konkurencja</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--blue-l);font-size:0.7rem;">suggest_domains</td><td style="padding:0.4rem 0.75rem;">Odkrywanie powiązanych domen/konkurentów</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Konkurencja</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--green);font-size:0.7rem;">get_groups</td><td style="padding:0.4rem 0.75rem;">Semantyczne klastry tematyczne</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Keywords</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--green);font-size:0.7rem;">get_questions</td><td style="padding:0.4rem 0.75rem;">Pytania użytkowników + featured snippets</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Keywords</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--green);font-size:0.7rem;">get_characteristics_table</td><td style="padding:0.4rem 0.75rem;">Segmentacja fraz (wolumen, difficulty, trend, SERP)</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Keywords</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--green);font-size:0.7rem;">get_keywords</td><td style="padding:0.4rem 0.75rem;">Lookup danych o konkretnych frazach</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Keywords</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">get_positions_history_chart</td><td style="padding:0.4rem 0.75rem;">Historia Top 3/10/50 (time series)</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Historia</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">get_keyword_history</td><td style="padding:0.4rem 0.75rem;">Historia pozycji pojedynczej frazy</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Historia</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">rt_get_projects_list</td><td style="padding:0.4rem 0.75rem;">Rank Tracker: lista projektów</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Rank Tracker</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">rt_get_active_projects</td><td style="padding:0.4rem 0.75rem;">Rank Tracker: aktywne projekty</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Rank Tracker</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">rt_get_project_keywords</td><td style="padding:0.4rem 0.75rem;">Rank Tracker: frazy w projekcie</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Rank Tracker</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">rt_get_position_data</td><td style="padding:0.4rem 0.75rem;">Rank Tracker: dane pozycji</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Rank Tracker</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--amber);font-size:0.7rem;">rt_get_snippets_statistics</td><td style="padding:0.4rem 0.75rem;">Rank Tracker: statystyki snippetów SERP</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Rank Tracker</td></tr>
+          <tr><td style="padding:0.4rem 0.75rem;font-family:var(--mono);color:var(--muted);font-size:0.7rem;">get_countries_list</td><td style="padding:0.4rem 0.75rem;">Dostępne rynki/kraje</td><td style="padding:0.4rem 0.75rem;color:var(--text2);">Utility</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center; padding:2rem 0 3rem; color:var(--muted); font-size:0.72rem;">
+    GenActiv Online &middot; Senuto SEO MCP v1.3.1 &middot; Token ważny do ~wrzesień 2026<br>
+    <a href="/" style="color:var(--blue-l); text-decoration:none;">← Wróć do terminala</a>
+  </div>
+
+</div>
+</body>
+</html>

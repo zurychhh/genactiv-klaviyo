@@ -65,7 +65,8 @@ const requiredTokens = {
   META_ACCESS_TOKEN: 'Meta Ads',
   GOOGLE_ADS_REFRESH_TOKEN: 'Google Ads',
   GA4_REFRESH_TOKEN: 'GA4',
-  TIKTOK_ACCESS_TOKEN: 'TikTok Ads'
+  TIKTOK_ACCESS_TOKEN: 'TikTok Ads',
+  SENUTO_API_KEY: 'Senuto SEO'
 };
 
 for (const [envVar, label] of Object.entries(requiredTokens)) {
@@ -143,6 +144,14 @@ export const mcpServers = [
       TIKTOK_SECRET: process.env.TIKTOK_SECRET || '',
       TIKTOK_ACCESS_TOKEN: process.env.TIKTOK_ACCESS_TOKEN || ''
     }
+  },
+  {
+    name: 'senuto',
+    command: 'npx',
+    args: ['-y', 'senuto-mcp'],
+    env: {
+      SENUTO_API_KEY: process.env.SENUTO_API_KEY || ''
+    }
   }
 ];
 
@@ -167,6 +176,7 @@ export const ROUTER_PROMPT = `Jesteś routerem zapytań. Na podstawie pytania u�
 - google-ads — reklamy Google, kampanie Google Ads, słowa kluczowe, ROAS, wydatki
 - ga4 — Google Analytics 4, sesje, użytkownicy, źródła ruchu, pageviews, bounce rate, konwersje GA4
 - tiktok-ads — reklamy TikTok, kampanie TikTok Ads, grupy reklam, kreacje, raporty wydajności TikTok
+- senuto — SEO: widoczność domeny, pozycje fraz kluczowych, analiza konkurencji, kanibalizacja słów kluczowych, keyword research, pytania użytkowników, klastry tematyczne, historia pozycji, rank tracker
 - none — pytanie nie wymaga narzędzi (np. ogólne pytania, konwersacja)
 
 Odpowiedz JEDNYM SŁOWEM — tylko nazwą serwera lub "none". Nic więcej.`;
@@ -174,7 +184,7 @@ Odpowiedz JEDNYM SŁOWEM — tylko nazwą serwera lub "none". Nic więcej.`;
 export function getSystemPrompt() {
   const today = new Date().toISOString().split('T')[0];
   return `Jesteś asystentem GenActiv.pl — polskiej marki colostrum #1 w aptekach.
-Masz dostęp do narzędzi MCP: Klaviyo, Shopify, Meta Ads, Google Ads, GA4, TikTok Ads. Odpowiadaj po polsku. Waluta: PLN (bez miejsc dziesiętnych).
+Masz dostęp do narzędzi MCP: Klaviyo, Shopify, Meta Ads, Google Ads, GA4, TikTok Ads, Senuto SEO. Odpowiadaj po polsku. Waluta: PLN (bez miejsc dziesiętnych).
 Bądź konkretny i zwięzły.
 
 Zasady:
@@ -182,6 +192,7 @@ Zasady:
 - Wywołuj narzędzia jedno po drugim.
 - Używaj limit: 50 żeby ograniczyć wyniki.
 - Google Ads customer_id: "3393382047" (Genactiv). GA4 property_id: "279858535".
+- Senuto: domena "genactiv.pl", country_id "200" (Polska Base 2.0), fetch_mode "topLevelDomain".
 - Kontekst: to może być fragment konwersacji, wcześniejsze wiadomości mogły zostać pominięte.
 
 ## Zasady odpowiadania — analiza i rekomendacje

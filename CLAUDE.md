@@ -46,14 +46,15 @@ Browser-based AI assistant deployed on Railway — replaces local Claude Code CL
 
 ### Architecture
 ```
-Browser → Express (auth + SSE) → Anthropic API ⇄ 7 MCP servers
+Browser → Express (auth + SSE) → Anthropic API ⇄ 8 MCP servers
                                                  ├── Klaviyo (Python/uvx)
                                                  ├── Shopify Extended (Node.js)
                                                  ├── Shopify Standard (Node.js)
                                                  ├── Meta Ads (Python)
                                                  ├── Google Ads (Python/FastMCP venv)
                                                  ├── GA4 (Python/analytics-mcp)
-                                                 └── TikTok Ads (Python/tiktok-ads-mcp)
+                                                 ├── TikTok Ads (Python/tiktok-ads-mcp)
+                                                 └── Senuto SEO (Node.js/npx)
 ```
 
 ### Two-Phase Query Routing
@@ -157,6 +158,7 @@ GA4_REFRESH_TOKEN                       # GA4 OAuth refresh token
 TIKTOK_APP_ID                           # TikTok Business App ID
 TIKTOK_SECRET                           # TikTok App Secret
 TIKTOK_ACCESS_TOKEN                     # TikTok OAuth access token (24h, auto-refreshed)
+SENUTO_API_KEY                          # Senuto SEO API key (JWT, exp ~Sep 2026)
 PORT, NODE_ENV, SESSION_SECRET          # Server config
 ```
 
@@ -170,7 +172,7 @@ PORT, NODE_ENV, SESSION_SECRET          # Server config
 
 ## MCP Integrations
 
-Eight MCP servers provide API access (7 active in genactiv-online, all 8 in local Claude Code):
+Nine MCP servers provide API access (8 active in genactiv-online, all 9 in local Claude Code):
 - **Klaviyo MCP**: Email campaigns, flows, profiles, templates, metrics
 - **Shopify MCP**: Products, customers, orders (standard tools)
 - **Shopify Extended MCP**: Analytics - traffic sources, campaign performance, product performance
@@ -178,6 +180,7 @@ Eight MCP servers provide API access (7 active in genactiv-online, all 8 in loca
 - **Meta Ads MCP**: Facebook/Instagram campaigns, audiences, insights
 - **GA4 MCP**: Analytics reports, realtime data (property: 279858535)
 - **TikTok Ads MCP**: TikTok campaigns, ad groups, ads, performance reports
+- **Senuto SEO MCP**: Domain visibility, keyword positions, competitor analysis, cannibalization, keyword research, rank tracker (20 tools)
 - **Chrome DevTools MCP**: Page inspection, screenshots, performance traces — local only
 
 ### Klaviyo MCP Tools
@@ -265,6 +268,31 @@ mcp__tiktok-ads__get_ad_groups              # Ad groups + targeting
 mcp__tiktok-ads__get_ads                    # Ads + creatives
 mcp__tiktok-ads__get_reports                # Performance reports (ROAS, CTR, CPC, conversions)
 ```
+
+### Senuto SEO MCP Tools
+```
+mcp__senuto__get_positions_data             # Keyword positions, visibility, volume, CPC, difficulty
+mcp__senuto__get_domain_statistics          # Domain health: Top 3/10/50, visibility, domain rank, ads equivalent
+mcp__senuto__get_competitors                # Competitor analysis with SEO metrics comparison
+mcp__senuto__get_cannibalization_keywords   # Keyword cannibalization detection (multiple URLs on same keyword)
+mcp__senuto__get_subdomains                 # Subdomain visibility distribution
+mcp__senuto__get_characteristics_table      # Keyword segmentation by length/trends/volume/difficulty/SERP
+mcp__senuto__get_positions_history_chart    # Historical position tracking (time series)
+mcp__senuto__get_keyword_history            # Individual keyword position history
+mcp__senuto__get_urls                       # URL-level keyword and visibility data
+mcp__senuto__get_countries_list             # Available markets/countries
+mcp__senuto__suggest_domains                # Domain/competitor discovery
+mcp__senuto__get_questions                  # Question-based keywords + featured snippet opportunities
+mcp__senuto__get_groups                     # Semantic keyword clusters for content strategy
+mcp__senuto__get_keywords                   # Keyword data lookup
+mcp__senuto__rt_get_projects_list           # Rank Tracker: list projects
+mcp__senuto__rt_get_active_projects         # Rank Tracker: active projects
+mcp__senuto__rt_get_project_keywords        # Rank Tracker: project keyword list
+mcp__senuto__rt_get_position_data           # Rank Tracker: position data for project
+mcp__senuto__rt_get_snippets_statistics     # Rank Tracker: SERP snippet statistics
+mcp__senuto__rt_list_groups                 # Rank Tracker: keyword groups
+```
+Default config: domain="genactiv.pl", country_id="200" (Poland Base 2.0), fetch_mode="topLevelDomain"
 
 ## Local Python Scripts
 
