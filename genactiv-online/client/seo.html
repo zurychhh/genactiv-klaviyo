@@ -317,6 +317,10 @@ async function loadAudit() {
       throw new Error((eb && eb.error) || ('HTTP ' + res.status));
     }
     auditData = await res.json();
+    // Check if the response itself is an error object
+    if (auditData && auditData.error && !auditData.issues) {
+      throw new Error(auditData.error);
+    }
     auditError = null;
     lastAuditTime = new Date();
     setDot('dot-audit', 'ok');

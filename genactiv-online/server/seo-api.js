@@ -33,16 +33,26 @@ router.get('/audit', async (req, res) => {
     console.log(`[SEO API] Calling get-seo-audit (scope=${scope}, limit=${limit})`);
     const result = await callTool('mcp__shopify-extended__get-seo-audit', { scope, limit });
 
-    // Validate result shape
-    if (result && typeof result === 'object' && !result.error) {
-      res.json(result);
+    console.log(`[SEO API] Audit result type: ${typeof result}, keys: ${result && typeof result === 'object' ? Object.keys(result).join(',') : 'N/A'}`);
+
+    // If result is a string, try to parse it as JSON
+    let parsed = result;
+    if (typeof result === 'string') {
+      try { parsed = JSON.parse(result); } catch { /* keep as string */ }
+    }
+
+    // Pass through whatever we got — let frontend handle display
+    if (parsed && typeof parsed === 'object') {
+      // If it has issues array, it's a valid audit result (even if it also has other fields)
+      res.json(parsed);
     } else {
-      const errMsg = result?.error || 'Unexpected response format from SEO audit tool';
-      console.error('[SEO API] Audit returned error:', errMsg);
-      res.status(502).json({ error: errMsg, source: 'shopify-extended' });
+      // Truly unexpected: not an object even after parsing
+      const errMsg = typeof parsed === 'string' ? parsed : 'SEO audit tool returned non-object result';
+      console.error('[SEO API] Audit non-object result:', typeof parsed, String(parsed).slice(0, 500));
+      res.status(502).json({ error: errMsg, source: 'shopify-extended', resultType: typeof parsed });
     }
   } catch (err) {
-    console.error('[SEO API] Audit error:', err.message);
+    console.error('[SEO API] Audit error:', err.message, err.stack?.split('\n')[1]);
     res.status(500).json({ error: err.message, source: 'seo-api' });
   }
 });
