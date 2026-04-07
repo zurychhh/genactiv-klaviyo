@@ -447,3 +447,63 @@ function escapeHtml(text) {
   div.textContent = text;
   return div.innerHTML;
 }
+
+// ============================================================
+// Capabilities Panel
+// ============================================================
+
+const capBtn = document.getElementById('capabilities-btn');
+const capPanel = document.getElementById('capabilities-panel');
+const capOverlay = document.getElementById('capabilities-overlay');
+const capClose = document.getElementById('cap-close');
+
+function openCapabilities() {
+  capPanel.classList.remove('hidden');
+  capOverlay.classList.remove('hidden');
+  // Force reflow for CSS transition
+  requestAnimationFrame(() => {
+    capPanel.style.transform = 'translateX(0)';
+  });
+}
+
+function closeCapabilities() {
+  capPanel.classList.add('hidden');
+  capOverlay.classList.add('hidden');
+}
+
+if (capBtn) capBtn.addEventListener('click', openCapabilities);
+if (capClose) capClose.addEventListener('click', closeCapabilities);
+if (capOverlay) capOverlay.addEventListener('click', closeCapabilities);
+
+// ESC key closes panel
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !capPanel.classList.contains('hidden')) {
+    closeCapabilities();
+  }
+});
+
+// Example prompts — click to insert into input
+document.querySelectorAll('.cap-example').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const prompt = btn.getAttribute('data-prompt');
+    if (prompt && inputEl) {
+      inputEl.value = prompt;
+      inputEl.style.height = 'auto';
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 200) + 'px';
+      closeCapabilities();
+      inputEl.focus();
+    }
+  });
+});
+
+// Collapsible sections
+document.querySelectorAll('.cap-section-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const tools = header.nextElementSibling;
+    if (tools && tools.classList.contains('cap-tools')) {
+      const isHidden = tools.style.display === 'none';
+      tools.style.display = isHidden ? '' : 'none';
+      header.style.borderRadius = isHidden ? '8px 8px 0 0' : '8px';
+    }
+  });
+});

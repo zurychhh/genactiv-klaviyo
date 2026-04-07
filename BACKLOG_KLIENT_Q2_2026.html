@@ -107,7 +107,7 @@
 <div class="header">
   <h1>GenActiv Online — Plan Rozwoju</h1>
   <div class="sub">Odpowiedź na feedback + roadmap prac · Metodologia RICE · Story Pointy</div>
-  <div class="date">Przygotowane: 6 kwietnia 2026 · Spotkanie: 7 kwietnia 2026</div>
+  <div class="date">Przygotowane: 6 kwietnia 2026 · Ostatnia aktualizacja: 7 kwietnia 2026</div>
 </div>
 
 <!-- Legend -->
@@ -123,7 +123,7 @@
 <div class="summary-box">
   <div class="sum-card c1">
     <div class="num">19</div>
-    <div class="label">Tasków z feedbacku<br>(4 zrobione, 15 do realizacji)</div>
+    <div class="label">Tasków z feedbacku<br>(8 zrobione, 11 do realizacji)</div>
   </div>
   <div class="sum-card c2">
     <div class="num">4</div>
@@ -150,14 +150,14 @@
     <div class="fb-header" style="background: var(--green-bg);">
       <span class="fb-num" style="background: var(--accent); color: white;">FB1</span>
       <span class="fb-title">Rozbieżności w danych między panelami</span>
-      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">3 z 5 zrobione</span>
+      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">✅ 5 z 5 zrobione</span>
     </div>
     <div class="fb-body">
       <div class="fb-quote">„Pojawiła się dość spora rozbieżność pomiędzy ukazanymi przychodami w panelu MCP a Shopify, więc myślę że to kwestia pobierania danych po API. Generalnie temat zbierania danych do przepracowania."</div>
 
       <div class="progress-wrap">
-        <div class="progress-bar"><div class="progress-fill green" style="width: 60%"></div></div>
-        <div class="progress-label">60% ukończone (3 z 5 tasków)</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 100%"></div></div>
+        <div class="progress-label">100% ukończone (5 z 5 tasków)</div>
       </div>
 
       <ul class="task-list">
@@ -183,10 +183,10 @@
           </div>
         </li>
         <li class="task-item">
-          <div class="task-check todo"></div>
+          <div class="task-check done">✓</div>
           <div class="task-content">
-            <div class="task-name">Revenue reconciliation tool</div>
-            <div class="task-desc">Nowe narzędzie: jednym pytaniem porównuje revenue z naszych analytics vs. Shopify Admin. Pokazuje różnicę i wyjaśnia skąd się bierze.</div>
+            <div class="task-name done-text">Revenue reconciliation tool</div>
+            <div class="task-desc">Nowe narzędzie: jednym pytaniem porównuje revenue z naszych analytics vs. Shopify Admin. Pokazuje różnicę i wyjaśnia skąd się bierze. 4 warianty revenue: allOrders, paidOnly, paidMinusRefunds, subtotalOnly.</div>
             <div class="task-meta">
               <span class="tag tag-sp">SP 5</span>
               <span class="tag tag-rice">RICE 4.0</span>
@@ -195,10 +195,10 @@
           </div>
         </li>
         <li class="task-item">
-          <div class="task-check todo"></div>
+          <div class="task-check done">✓</div>
           <div class="task-content">
-            <div class="task-name">Unit testy na kalkulacjach revenue</div>
-            <div class="task-desc">Automatyczne testy poprawności obliczeń — gwarancja że paginacja i filtry nie psują wyników.</div>
+            <div class="task-name done-text">Unit testy na kalkulacjach revenue</div>
+            <div class="task-desc">13 testów: paginacja (single/multi-page, limity, safety), filtry query, kalkulacje revenue (sumy, paid-only, net, floating point).</div>
             <div class="task-meta">
               <span class="tag tag-sp">SP 3</span>
               <span class="tag tag-rice">RICE 3.0</span>
@@ -215,14 +215,14 @@
     <div class="fb-header" style="background: var(--green-bg);">
       <span class="fb-num" style="background: var(--accent); color: white;">FB2</span>
       <span class="fb-title">Edytowanie i tworzenie, nie tylko analiza</span>
-      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">1 z 4 zrobione</span>
+      <span class="fb-status" style="background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border);">3 z 4 zrobione</span>
     </div>
     <div class="fb-body">
       <div class="fb-quote">„Aktualnie jest to narzędzie bardziej do analizy niż do edytowania i tworzenia. Np. w kontekście obsługi SEO — robimy audyt i zlecamy po kolei wdrożenie napraw technical SEO, np. dodanie opisów ALT do zdjęć."</div>
 
       <div class="progress-wrap">
-        <div class="progress-bar"><div class="progress-fill green" style="width: 25%"></div></div>
-        <div class="progress-label">25% ukończone (1 z 4 tasków)</div>
+        <div class="progress-bar"><div class="progress-fill green" style="width: 75%"></div></div>
+        <div class="progress-label">75% ukończone (3 z 4 tasków)</div>
       </div>
 
       <ul class="task-list">
@@ -234,10 +234,10 @@
           </div>
         </li>
         <li class="task-item">
-          <div class="task-check todo"></div>
+          <div class="task-check done">✓</div>
           <div class="task-content">
-            <div class="task-name">Edycja opisu produktu (descriptionHtml)</div>
-            <div class="task-desc">Zmiana opisu HTML produktu z terminala, bez wchodzenia w Shopify Admin.</div>
+            <div class="task-name done-text">Edycja opisu produktu (descriptionHtml)</div>
+            <div class="task-desc">Nowe narzędzie update-product-content: zmiana opisu HTML, tytułu, tagów, vendora. Pokazuje before/after. Klucz do naprawy literówek GENACITV w 15 produktach FUREVER.</div>
             <div class="task-meta">
               <span class="tag tag-sp">SP 2</span>
               <span class="tag tag-rice">RICE 4.5</span>
@@ -246,10 +246,10 @@
           </div>
         </li>
         <li class="task-item">
-          <div class="task-check todo"></div>
+          <div class="task-check done">✓</div>
           <div class="task-content">
-            <div class="task-name">Bulk SEO update (tryb batch)</div>
-            <div class="task-desc">Jedno polecenie naprawia meta descriptions dla wielu produktów/kolekcji naraz. Audyt → fix w jednej sesji.</div>
+            <div class="task-name done-text">Bulk SEO update (tryb batch)</div>
+            <div class="task-desc">Nowe narzędzie bulk-update-seo: do 25 produktów/kolekcji naraz, dry-run mode, integracja z get-seo-audit. Audyt → batch fix w jednej sesji.</div>
             <div class="task-meta">
               <span class="tag tag-sp">SP 3</span>
               <span class="tag tag-rice">RICE 4.0</span>
@@ -556,11 +556,60 @@
   </ul>
 </div>
 
+<!-- ============================================================ -->
+<!-- CO NOWEGO — 7 KWIETNIA 2026 -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--green);">✦</div>
+    <h2>Co nowego — 7 kwietnia 2026</h2>
+  </div>
+  <p class="section-desc">Zmiany wdrożone od ostatniego spotkania. Wszystko jest na produkcji.</p>
+
+  <ul class="ops-list">
+    <li class="ops-item" style="border-color: var(--green-border); background: var(--green-bg);">
+      <div class="ops-icon">🧠</div>
+      <div class="ops-content">
+        <div class="ops-name">Panel „Możliwości" w terminalu</div>
+        <div class="ops-desc">Nowy przycisk w headerze terminala — otwiera panel z listą wszystkich 42+ narzędzi pogrupowanych po serwisach, changelogiem i przykładowymi pytaniami. Kliknięcie na przykład wstawia prompt do chata.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp" style="background:var(--green-bg);color:var(--green);border-color:var(--green-border);">LIVE</span></div>
+    </li>
+    <li class="ops-item" style="border-color: var(--green-border); background: var(--green-bg);">
+      <div class="ops-icon">🔍</div>
+      <div class="ops-content">
+        <div class="ops-name">Edycja treści produktu z terminala</div>
+        <div class="ops-desc">Nowe narzędzie: zmiana opisu HTML, tytułu, tagów, vendora produktu — bez wchodzenia w Shopify Admin. Kluczowe do naprawy literówek w 15 produktach FUREVER.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp" style="background:var(--green-bg);color:var(--green);border-color:var(--green-border);">LIVE</span></div>
+    </li>
+    <li class="ops-item" style="border-color: var(--green-border); background: var(--green-bg);">
+      <div class="ops-icon">⚡</div>
+      <div class="ops-content">
+        <div class="ops-name">Bulk SEO update (batch mode)</div>
+        <div class="ops-desc">Jedno polecenie naprawia meta descriptions dla max 25 produktów/kolekcji naraz. Tryb dry-run do podglądu zmian. Workflow: audyt → batch fix w jednej sesji.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp" style="background:var(--green-bg);color:var(--green);border-color:var(--green-border);">LIVE</span></div>
+    </li>
+    <li class="ops-item" style="border-color: var(--green-border); background: var(--green-bg);">
+      <div class="ops-icon">📊</div>
+      <div class="ops-content">
+        <div class="ops-name">Revenue reconciliation + paginacja + testy</div>
+        <div class="ops-desc">Zamknięty FB1: 4 warianty revenue, paginacja do 5000 zamówień, filtr statusu finansowego, 13 unit testów. Rozbieżności z Shopify Admin wyjaśnione i naprawione.</div>
+      </div>
+      <div class="ops-effort"><span class="tag tag-sp" style="background:var(--green-bg);color:var(--green);border-color:var(--green-border);">LIVE</span></div>
+    </li>
+  </ul>
+</div>
+
 <div style="margin-top: 48px; padding: 20px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--muted);">
-  <strong style="color: var(--text);">Rekomendacja kolejności realizacji:</strong><br>
-  Najpierw dokończyć <strong>FB1</strong> (revenue reconciliation) i <strong>FB2</strong> (bulk SEO + product content edit) — to quick winy po SP 2-5, a interesariusz od razu zobaczy efekt.
-  Potem równolegle <strong>FB3</strong> (file upload) i <strong>FB4</strong> (wątki) — większy effort, ale odblokują kolejne możliwości.
-  <strong>FB5</strong> (Senuto/Bing) zaczynamy od researchu API, żeby wiedzieć czy się da — a pełna implementacja po dostarczeniu FB3/FB4.
+  <strong style="color: var(--text);">Status i rekomendacja kolejności:</strong><br>
+  <strong style="color: var(--green);">FB1 — ZROBIONE ✅</strong> Paginacja, filtry, reconciliation, unit testy — cały blok zamknięty.<br>
+  <strong style="color: var(--green);">FB2 — 75% ✅</strong> SEO audit, ALT text update, edycja treści, bulk SEO — wszystko działa. Zostaje weryfikacja Klaviyo write tools (SP 2).<br>
+  <strong>Następne:</strong> FB3 (file upload) i FB4 (wątki) — większy effort, ale odblokują kolejne możliwości.<br>
+  <strong>FB5</strong> (Senuto/Bing) — zaczynamy od researchu API po dostarczeniu FB3/FB4.<br>
+  <br>
+  <strong style="color: var(--accent);">Łącznie zrobione: 8 z 19 tasków (42%) + panel Możliwości w terminalu</strong>
 </div>
 
 </body>

@@ -21,6 +21,8 @@ import { createProduct } from "./tools/createProduct.js";
 import { updateProductSeo } from "./tools/updateProductSeo.js";
 import { updateCollectionSeo } from "./tools/updateCollectionSeo.js";
 import { updateProductImages } from "./tools/updateProductImages.js";
+import { updateProductContent } from "./tools/updateProductContent.js";
+import { bulkUpdateSeo } from "./tools/bulkUpdateSeo.js";
 import { getSeoAudit } from "./tools/getSeoAudit.js";
 import { getRevenueReconciliation } from "./tools/getRevenueReconciliation.js";
 // Analytics tools
@@ -84,6 +86,8 @@ createProduct.initialize(shopifyClient);
 updateProductSeo.initialize(shopifyClient);
 updateCollectionSeo.initialize(shopifyClient);
 updateProductImages.initialize(shopifyClient);
+updateProductContent.initialize(shopifyClient);
+bulkUpdateSeo.initialize(shopifyClient);
 getSeoAudit.initialize(shopifyClient);
 getRevenueReconciliation.initialize(shopifyClient);
 // Initialize analytics tools
@@ -342,6 +346,45 @@ server.tool(
   },
   async (args) => {
     const result = await updateProductImages.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
+// Update Product Content - description, title, tags, vendor
+server.tool(
+  "update-product-content",
+  {
+    productId: z.string().min(1).describe("Shopify product ID (numeric, without gid prefix)"),
+    descriptionHtml: z.string().optional().describe("New product description in HTML format"),
+    title: z.string().optional().describe("New product title (visible in storefront)"),
+    tags: z.array(z.string()).optional().describe("Replace product tags"),
+    vendor: z.string().optional().describe("Product vendor/brand name"),
+    productType: z.string().optional().describe("Product type/category"),
+  },
+  async (args) => {
+    const result = await updateProductContent.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
+// Bulk Update SEO - batch meta title/description for products and collections
+server.tool(
+  "bulk-update-seo",
+  {
+    items: z.array(z.object({
+      id: z.string().min(1).describe("Shopify product or collection ID (numeric)"),
+      type: z.enum(["product", "collection"]).describe("Whether this is a product or collection"),
+      metaTitle: z.string().optional().describe("New SEO meta title"),
+      metaDescription: z.string().optional().describe("New SEO meta description"),
+    })).min(1).max(25).describe("Array of items to update (max 25 per batch)"),
+    dryRun: z.boolean().default(false).describe("If true, preview changes without applying them"),
+  },
+  async (args) => {
+    const result = await bulkUpdateSeo.execute(args);
     return {
       content: [{ type: "text", text: JSON.stringify(result) }]
     };

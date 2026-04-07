@@ -20,6 +20,10 @@
       </div>
     </div>
     <div class="header-actions">
+      <button id="capabilities-btn" type="button" title="Możliwości terminala">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Możliwości</span>
+      </button>
       <button id="clear-btn" type="button" title="Wyczyść historię">Wyczyść</button>
       <form method="POST" action="/logout" style="margin:0">
         <button id="logout-btn" type="submit">Wyloguj</button>
@@ -43,6 +47,227 @@
     </div>
     <div class="input-hint">Enter — wyślij · Shift+Enter — nowa linia</div>
   </div>
+
+  <!-- Capabilities Panel -->
+  <div id="capabilities-overlay" class="cap-overlay hidden"></div>
+  <aside id="capabilities-panel" class="cap-panel hidden">
+    <div class="cap-header">
+      <div>
+        <h2>Możliwości terminala</h2>
+        <span class="cap-version">v2.1 · Kwiecień 2026</span>
+      </div>
+      <button id="cap-close" type="button" aria-label="Zamknij">&times;</button>
+    </div>
+    <div class="cap-body">
+
+      <div class="cap-stats">
+        <div class="cap-stat"><span class="cap-stat-num">7</span><span class="cap-stat-label">Serwisów MCP</span></div>
+        <div class="cap-stat"><span class="cap-stat-num">17</span><span class="cap-stat-label">Narzędzi Shopify</span></div>
+        <div class="cap-stat"><span class="cap-stat-num">42+</span><span class="cap-stat-label">Narzędzi łącznie</span></div>
+      </div>
+
+      <!-- Shopify & SEO -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">🛒</span>
+          <h3>Shopify + SEO</h3>
+          <span class="cap-count">17 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Analiza źródeł ruchu</span>
+            <span class="cap-tool-desc">Zamówienia wg UTM source/medium, paginacja do 5000</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Performance kampanii</span>
+            <span class="cap-tool-desc">ROAS, revenue, konwersje per kampania UTM</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Metryki konwersji</span>
+            <span class="cap-tool-desc">Trendy dzienne/tygodniowe/miesięczne, lejek płatności</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Performance produktów</span>
+            <span class="cap-tool-desc">Sprzedaż per produkt wg źródła ruchu</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Revenue reconciliation</span>
+            <span class="cap-tool-desc">4 warianty revenue vs Shopify Admin, wyjaśnienie rozbieżności</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Audyt SEO <span class="cap-badge new">NOWE</span></span>
+            <span class="cap-tool-desc">Skanowanie produktów i kolekcji: brakujące meta, ALT texty, opisy</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Edycja treści produktu <span class="cap-badge new">NOWE</span></span>
+            <span class="cap-tool-desc">Zmiana opisu HTML, tytułu, tagów, vendora — bez wchodzenia w Admin</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Bulk update SEO <span class="cap-badge new">NOWE</span></span>
+            <span class="cap-tool-desc">Batch update meta title/description dla max 25 produktów naraz</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Update ALT textów</span>
+            <span class="cap-tool-desc">Batch aktualizacja opisów zdjęć produktów</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">SEO meta (produkt/kolekcja)</span>
+            <span class="cap-tool-desc">Aktualizacja meta title i description per pozycja</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Produkty, zamówienia, klienci</span>
+            <span class="cap-tool-desc">CRUD: wyszukiwanie, podgląd, edycja tagów/notatek, tworzenie produktów</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Klaviyo -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">📧</span>
+          <h3>Klaviyo</h3>
+          <span class="cap-count">11 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Kampanie email/SMS</span>
+            <span class="cap-tool-desc">Lista kampanii, metryki otwarć, kliknięć, revenue</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Flows (automatyzacje)</span>
+            <span class="cap-tool-desc">Lista flow, raporty performance per flow</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Profile i segmenty</span>
+            <span class="cap-tool-desc">Wyszukiwanie klientów, listy subskrypcji, segmenty</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Szablony email</span>
+            <span class="cap-tool-desc">Tworzenie szablonów HTML z pełnym formatowaniem</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Eventy i katalog</span>
+            <span class="cap-tool-desc">Viewed Product, Added to Cart, katalog produktów</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Ads -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">📢</span>
+          <h3>Google Ads</h3>
+          <span class="cap-count">3 narzędzia</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Zapytania GAQL</span>
+            <span class="cap-tool-desc">Dowolne zapytania o kampanie, grupy reklam, konwersje, budżety</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Keyword Planner</span>
+            <span class="cap-tool-desc">Research słów kluczowych z wolumenami i konkurencją</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meta Ads -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">📘</span>
+          <h3>Meta Ads (Facebook/Instagram)</h3>
+          <span class="cap-count">7 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Kampanie i ad sety</span>
+            <span class="cap-tool-desc">Lista kampanii, grup reklam, aktywnych reklam</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Insights (wydatki, ROAS)</span>
+            <span class="cap-tool-desc">Performance insights: spend, impressions, clicks, ROAS</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Targetowanie i konkurencja</span>
+            <span class="cap-tool-desc">Search interests, archiwum reklam konkurencji</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GA4 -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">📊</span>
+          <h3>Google Analytics 4</h3>
+          <span class="cap-count">6 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Raporty analityczne</span>
+            <span class="cap-tool-desc">Sesje, użytkownicy, strony, zdarzenia — dowolne wymiary i metryki</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Dane w czasie rzeczywistym</span>
+            <span class="cap-tool-desc">Kto jest teraz na stronie, skąd przyszedł, co ogląda</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Konfiguracja</span>
+            <span class="cap-tool-desc">Konta, property, custom dimensions, GA4↔Ads linking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="cap-section">
+        <div class="cap-section-header">
+          <span class="cap-icon">🎵</span>
+          <h3>TikTok Ads</h3>
+          <span class="cap-count">6 narzędzi</span>
+        </div>
+        <div class="cap-tools">
+          <div class="cap-tool">
+            <span class="cap-tool-name">Kampanie i ad groups</span>
+            <span class="cap-tool-desc">Kampanie, grupy reklam z targetowaniem, kreacje</span>
+          </div>
+          <div class="cap-tool">
+            <span class="cap-tool-name">Raporty performance</span>
+            <span class="cap-tool-desc">ROAS, CTR, CPC, konwersje — szczegółowe raporty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Changelog -->
+      <div class="cap-changelog">
+        <h3>Co nowego</h3>
+        <div class="cap-change">
+          <span class="cap-change-date">7 kwi 2026</span>
+          <span class="cap-change-text">Edycja treści produktu, Bulk SEO update, panel Możliwości</span>
+        </div>
+        <div class="cap-change">
+          <span class="cap-change-date">6 kwi 2026</span>
+          <span class="cap-change-text">Revenue reconciliation, paginacja do 5000 zamówień, filtr statusu finansowego, unit testy, SEO audit, ALT text update</span>
+        </div>
+        <div class="cap-change">
+          <span class="cap-change-date">Mar 2026</span>
+          <span class="cap-change-text">TikTok Ads MCP, two-phase routing, integracja 7 serwisów</span>
+        </div>
+      </div>
+
+      <!-- Example prompts -->
+      <div class="cap-examples">
+        <h3>Przykłady pytań</h3>
+        <div class="cap-example-grid">
+          <button class="cap-example" data-prompt="Zrób audyt SEO wszystkich produktów">🔍 Audyt SEO produktów</button>
+          <button class="cap-example" data-prompt="Pokaż revenue za ostatni miesiąc i porównaj z Shopify Admin">💰 Reconciliation revenue</button>
+          <button class="cap-example" data-prompt="Jakie kampanie Klaviyo miały najwyższy open rate w tym miesiącu?">📧 Top kampanie Klaviyo</button>
+          <button class="cap-example" data-prompt="Pokaż ROAS kampanii Google Ads z ostatnich 30 dni">📢 ROAS Google Ads</button>
+          <button class="cap-example" data-prompt="Kto jest teraz na stronie i skąd przyszedł?">📊 Realtime GA4</button>
+          <button class="cap-example" data-prompt="Pokaż performance produktów z ruchu organicznego za ostatni miesiąc">🛒 Produkty z organic</button>
+        </div>
+      </div>
+
+    </div>
+  </aside>
 
   <script src="terminal.js"></script>
 </body>

@@ -222,6 +222,8 @@ mcp__shopify-extended__update-product-seo            # Update product meta title
 mcp__shopify-extended__update-collection-seo         # Update collection meta title/description
 mcp__shopify-extended__update-customer               # Update customer data
 mcp__shopify-extended__update-order                  # Update order tags/notes
+mcp__shopify-extended__update-product-content        # Update product HTML description, title, tags, vendor
+mcp__shopify-extended__bulk-update-seo               # Batch update meta title/description (max 25 items, dry-run mode)
 ```
 
 ### Google Ads MCP Tools
