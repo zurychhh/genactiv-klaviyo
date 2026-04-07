@@ -28,9 +28,18 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
 .header-logo { width:34px; height:34px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; color:#fff; }
 .header h1 { font-size:1rem; font-weight:700; color:#fff; }
 .header h1 span { font-weight:400; color:rgba(255,255,255,0.5); margin-left:0.3em; font-size:0.9em; }
-.header-actions { display:flex; gap:0.5rem; }
+.header-actions { display:flex; gap:0.5rem; align-items:center; }
 .header-actions a, .header-actions button { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:0.35rem 0.85rem; border-radius:6px; cursor:pointer; font-size:0.8rem; font-family:var(--font); text-decoration:none; transition:all 0.15s; }
 .header-actions a:hover, .header-actions button:hover { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); }
+
+/* Status bar */
+.status-bar { display:flex; gap:0.5rem; padding:0.5rem 1.5rem; background:var(--surface); border-bottom:1px solid var(--border); font-size:0.72rem; color:var(--muted); align-items:center; flex-wrap:wrap; }
+.status-dot { width:7px; height:7px; border-radius:50%; display:inline-block; }
+.status-dot.ok { background:var(--green); }
+.status-dot.err { background:var(--red); }
+.status-dot.loading { background:var(--amber); animation:pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+.status-item { display:flex; align-items:center; gap:0.3rem; }
 
 /* Layout */
 .container { max-width:1200px; margin:0 auto; padding:1.5rem; }
@@ -90,8 +99,10 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
 .spinner { width:20px; height:20px; border:2px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin 0.8s linear infinite; }
 @keyframes spin { to { transform:rotate(360deg); } }
 
-/* Empty state */
+/* Empty & Error states */
 .empty { text-align:center; padding:3rem; color:var(--muted); font-size:0.88rem; }
+.error-box { text-align:center; padding:2rem; background:var(--red-bg); border:1px solid rgba(239,51,64,0.2); border-radius:10px; color:var(--red); font-size:0.85rem; }
+.error-box .error-detail { font-family:var(--mono); font-size:0.75rem; margin-top:0.5rem; color:rgba(239,51,64,0.7); word-break:break-all; }
 
 /* Tabs */
 .tabs { display:flex; gap:0; margin-bottom:1rem; border-bottom:1px solid var(--border); }
@@ -135,26 +146,33 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
     <h1>SEO Command Center <span>GenActiv</span></h1>
   </div>
   <div class="header-actions">
-    <button id="refresh-btn" class="btn btn-ghost" onclick="loadAll()">Odśwież</button>
+    <button id="refresh-btn" class="btn btn-ghost" onclick="loadAll()">Odswiez</button>
     <a href="/">Terminal</a>
   </div>
+</div>
+
+<!-- Status bar -->
+<div class="status-bar" id="status-bar">
+  <span class="status-item"><span class="status-dot loading" id="dot-audit"></span> Audyt SEO</span>
+  <span class="status-item"><span class="status-dot loading" id="dot-ga4"></span> GA4 Organic</span>
+  <span id="status-msg" style="margin-left:auto">Laczenie z MCP...</span>
 </div>
 
 <div class="container">
 
   <!-- Score strip -->
   <div class="score-strip">
-    <div class="score-card health"><div class="val" id="score-health">—</div><div class="lbl">Health Score</div></div>
-    <div class="score-card issues"><div class="val" id="score-issues">—</div><div class="lbl">Problemy SEO</div></div>
-    <div class="score-card organic"><div class="val" id="score-organic">—</div><div class="lbl">Sesje organic / 30d</div></div>
-    <div class="score-card fixed"><div class="val" id="score-fixed">0</div><div class="lbl">Naprawione dziś</div></div>
+    <div class="score-card health"><div class="val" id="score-health">&mdash;</div><div class="lbl">Health Score</div></div>
+    <div class="score-card issues"><div class="val" id="score-issues">&mdash;</div><div class="lbl">Problemy SEO</div></div>
+    <div class="score-card organic"><div class="val" id="score-organic">&mdash;</div><div class="lbl">Sesje organic / 30d</div></div>
+    <div class="score-card fixed"><div class="val" id="score-fixed">0</div><div class="lbl">Naprawione dzis</div></div>
   </div>
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab active" data-tab="issues">Problemy <span class="count" id="tab-issues-count">0</span></button>
-    <button class="tab" data-tab="organic">Ruch organiczny <span class="count" id="tab-organic-count">0</span></button>
-    <button class="tab" data-tab="crossref">Priorytetyzacja <span class="count" id="tab-crossref-count">0</span></button>
+    <button class="tab active" data-tab="issues">Problemy <span class="count" id="tab-issues-count">&mdash;</span></button>
+    <button class="tab" data-tab="organic">Ruch organiczny <span class="count" id="tab-organic-count">&mdash;</span></button>
+    <button class="tab" data-tab="crossref">Priorytetyzacja <span class="count" id="tab-crossref-count">&mdash;</span></button>
   </div>
 
   <!-- Issues Tab -->
@@ -165,12 +183,12 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
         <select id="severity-filter" class="btn btn-ghost" style="appearance:auto">
           <option value="all">Wszystkie</option>
           <option value="high">Wysokie</option>
-          <option value="medium">Średnie</option>
+          <option value="medium">Srednie</option>
           <option value="low">Niskie</option>
         </select>
       </div>
     </div>
-    <div id="issues-container"><div class="loading"><div class="spinner"></div>Ładowanie audytu SEO...</div></div>
+    <div id="issues-container"><div class="loading"><div class="spinner"></div>Ladowanie audytu SEO...</div></div>
   </div>
 
   <!-- Organic Tab -->
@@ -178,7 +196,7 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
     <div class="section-header">
       <h2>Top strony z ruchu organicznego (30 dni)</h2>
     </div>
-    <div id="organic-container"><div class="loading"><div class="spinner"></div>Ładowanie danych GA4...</div></div>
+    <div id="organic-container"><div class="loading"><div class="spinner"></div>Ladowanie danych GA4...</div></div>
   </div>
 
   <!-- Crossref Tab -->
@@ -186,8 +204,8 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
     <div class="section-header">
       <h2>Priorytetyzacja: problemy SEO x ruch organiczny</h2>
     </div>
-    <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;">Strony, które mają problemy SEO ORAZ generują ruch organiczny — naprawienie ich daje natychmiastowy efekt.</p>
-    <div id="crossref-container"><div class="loading"><div class="spinner"></div>Analizuję krzyżowo...</div></div>
+    <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;">Strony, ktore maja problemy SEO ORAZ generuja ruch organiczny — naprawienie ich daje natychmiastowy efekt.</p>
+    <div id="crossref-container"><div class="loading"><div class="spinner"></div>Analizuje krzyzowo...</div></div>
   </div>
 
 </div>
@@ -212,8 +230,11 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
 // State
 // ============================================================
 let auditData = null;
+let auditError = null;
 let organicData = null;
-let fixedToday = parseInt(sessionStorage.getItem('seo-fixed-today') || '0');
+let organicError = null;
+let fixedToday = 0;
+try { fixedToday = parseInt(sessionStorage.getItem('seo-fixed-today') || '0'); } catch(e) {}
 let currentFix = null;
 
 document.getElementById('score-fixed').textContent = fixedToday;
@@ -221,137 +242,243 @@ document.getElementById('score-fixed').textContent = fixedToday;
 // ============================================================
 // Tabs
 // ============================================================
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(p => p.style.display = 'none');
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(p) { p.style.display = 'none'; });
     tab.classList.add('active');
     document.getElementById('panel-' + tab.dataset.tab).style.display = '';
   });
 });
 
 // ============================================================
+// Status helpers
+// ============================================================
+function setDot(id, state) {
+  var dot = document.getElementById(id);
+  if (!dot) return;
+  dot.className = 'status-dot ' + state;
+}
+function setStatus(msg) {
+  var el = document.getElementById('status-msg');
+  if (el) el.textContent = msg;
+}
+
+// ============================================================
 // Load all data
 // ============================================================
 async function loadAll() {
-  document.getElementById('refresh-btn').disabled = true;
-  await Promise.all([loadAudit(), loadOrganic()]);
+  var btn = document.getElementById('refresh-btn');
+  btn.disabled = true;
+  setStatus('Ladowanie...');
+
+  auditData = null;
+  auditError = null;
+  organicData = null;
+  organicError = null;
+
+  setDot('dot-audit', 'loading');
+  setDot('dot-ga4', 'loading');
+
+  // Run in parallel, catch individually
+  var auditPromise = loadAudit().catch(function() {});
+  var organicPromise = loadOrganic().catch(function() {});
+  await Promise.all([auditPromise, organicPromise]);
+
   buildCrossref();
-  document.getElementById('refresh-btn').disabled = false;
+
+  var parts = [];
+  if (auditError) parts.push('Audyt: BLAD');
+  if (organicError) parts.push('GA4: BLAD');
+  if (parts.length === 0) parts.push('OK');
+  setStatus(parts.join(' | ') + '  ·  ' + new Date().toLocaleTimeString('pl'));
+
+  btn.disabled = false;
 }
 
 // ============================================================
 // Audit
 // ============================================================
 async function loadAudit() {
-  const container = document.getElementById('issues-container');
-  container.innerHTML = '<div class="loading"><div class="spinner"></div>Ładowanie audytu SEO...</div>';
+  var container = document.getElementById('issues-container');
+  container.innerHTML = '<div class="loading"><div class="spinner"></div>Ladowanie audytu SEO...</div>';
+
   try {
-    const res = await fetch('/api/seo/audit?scope=all&limit=100');
+    var res = await fetch('/api/seo/audit?scope=all&limit=100');
+
+    if (!res.ok) {
+      var errBody = null;
+      try { errBody = await res.json(); } catch(e) {}
+      var errMsg = (errBody && errBody.error) || ('HTTP ' + res.status);
+      throw new Error(errMsg);
+    }
+
     auditData = await res.json();
+    auditError = null;
+    setDot('dot-audit', 'ok');
     renderAudit();
   } catch (err) {
-    container.innerHTML = `<div class="empty">Błąd: ${err.message}</div>`;
+    auditError = err.message;
+    auditData = null;
+    setDot('dot-audit', 'err');
+    container.innerHTML = '<div class="error-box">Nie udalo sie zaladowac audytu SEO<div class="error-detail">' + esc(err.message) + '</div></div>';
+    document.getElementById('score-health').textContent = '\u2014';
+    document.getElementById('score-issues').textContent = '\u2014';
+    document.getElementById('tab-issues-count').textContent = '!';
   }
 }
 
 function renderAudit() {
-  const container = document.getElementById('issues-container');
-  const issues = auditData?.issues || [];
-  const filter = document.getElementById('severity-filter').value;
-  const filtered = filter === 'all' ? issues : issues.filter(i => i.severity === filter);
+  var container = document.getElementById('issues-container');
 
-  // Score
-  const totalItems = (auditData?.productsScanned || 0) + (auditData?.collectionsScanned || 0);
-  const highCount = issues.filter(i => i.severity === 'high').length;
-  const healthPct = totalItems > 0 ? Math.max(0, Math.round(100 - (highCount / totalItems * 100))) : 0;
-
-  document.getElementById('score-health').textContent = healthPct + '%';
-  document.getElementById('score-health').style.color =
-    healthPct >= 80 ? 'var(--green)' : healthPct >= 50 ? 'var(--amber)' : 'var(--red)';
-  document.getElementById('score-issues').textContent = issues.length;
-  document.getElementById('tab-issues-count').textContent = issues.length;
-
-  if (filtered.length === 0) {
-    container.innerHTML = '<div class="empty">Brak problemów SEO — gratulacje!</div>';
+  if (!auditData) {
+    container.innerHTML = '<div class="error-box">Brak danych audytu</div>';
     return;
   }
 
-  let html = `<table class="issues-table"><thead><tr>
-    <th>Priorytet</th><th>Typ problemu</th><th>Produkt / Kolekcja</th><th>Rekomendacja</th><th></th>
-  </tr></thead><tbody>`;
+  // Handle both flat and nested response structures
+  var issues = auditData.issues || [];
+  var summary = auditData.summary || auditData;
+  var productsScanned = summary.productsScanned || 0;
+  var collectionsScanned = summary.collectionsScanned || 0;
+  var imageStats = summary.imageStats || auditData.imageStats || null;
 
-  for (const issue of filtered) {
-    const itemId = issue.itemId?.replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '') || '';
-    html += `<tr data-id="${itemId}" data-type="${issue.itemType}">
-      <td><span class="severity ${issue.severity}">${issue.severity}</span></td>
-      <td><span class="issue-type">${issue.type.replace(/_/g, ' ')}</span></td>
-      <td><span class="issue-item">${esc(issue.itemTitle)}</span><br><span style="font-size:0.72rem;color:var(--muted)">${issue.itemType} #${itemId}</span></td>
-      <td><span class="issue-rec">${esc(issue.recommendation)}</span></td>
-      <td><button class="btn btn-sm btn-primary" onclick="openFix(${JSON.stringify(JSON.stringify(issue))})">Napraw</button></td>
-    </tr>`;
+  var filter = document.getElementById('severity-filter').value;
+  var filtered = filter === 'all' ? issues : issues.filter(function(i) { return i.severity === filter; });
+
+  // Health score
+  var totalItems = productsScanned + collectionsScanned;
+  var highCount = issues.filter(function(i) { return i.severity === 'high'; }).length;
+  var healthPct = totalItems > 0 ? Math.max(0, Math.round(100 - (highCount / totalItems * 100))) : null;
+
+  var healthEl = document.getElementById('score-health');
+  if (healthPct !== null) {
+    healthEl.textContent = healthPct + '%';
+    healthEl.style.color = healthPct >= 80 ? 'var(--green)' : healthPct >= 50 ? 'var(--amber)' : 'var(--red)';
+  } else {
+    healthEl.textContent = '\u2014';
+  }
+
+  document.getElementById('score-issues').textContent = issues.length;
+  document.getElementById('tab-issues-count').textContent = issues.length;
+
+  if (filtered.length === 0 && issues.length === 0 && totalItems > 0) {
+    container.innerHTML = '<div class="empty" style="color:var(--green)">Brak problemow SEO — gratulacje! Przeskanowano ' + totalItems + ' elementow.</div>';
+    return;
+  }
+
+  if (filtered.length === 0 && issues.length > 0) {
+    container.innerHTML = '<div class="empty">Brak problemow o priorytecie "' + filter + '" (wszystkich: ' + issues.length + ')</div>';
+    return;
+  }
+
+  if (filtered.length === 0 && totalItems === 0) {
+    container.innerHTML = '<div class="error-box">Audyt zwrocil 0 produktow i 0 kolekcji. Sprawdz polaczenie z Shopify.</div>';
+    return;
+  }
+
+  var html = '<table class="issues-table"><thead><tr><th>Priorytet</th><th>Typ problemu</th><th>Produkt / Kolekcja</th><th>Rekomendacja</th><th></th></tr></thead><tbody>';
+
+  for (var idx = 0; idx < filtered.length; idx++) {
+    var issue = filtered[idx];
+    var itemId = (issue.itemId || '').toString().replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '');
+    html += '<tr data-id="' + itemId + '" data-type="' + (issue.itemType || '') + '">' +
+      '<td><span class="severity ' + issue.severity + '">' + issue.severity + '</span></td>' +
+      '<td><span class="issue-type">' + (issue.type || '').replace(/_/g, ' ') + '</span></td>' +
+      '<td><span class="issue-item">' + esc(issue.itemTitle) + '</span><br><span style="font-size:0.72rem;color:var(--muted)">' + (issue.itemType || '') + ' #' + itemId + '</span></td>' +
+      '<td><span class="issue-rec">' + esc(issue.recommendation) + '</span></td>' +
+      '<td><button class="btn btn-sm btn-primary" onclick="openFix(' + JSON.stringify(JSON.stringify(issue)) + ')">Napraw</button></td>' +
+    '</tr>';
   }
   html += '</tbody></table>';
 
-  // Image stats
-  if (auditData.imageStats) {
-    const s = auditData.imageStats;
-    html += `<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;color:var(--text2)">
-      Zdjęcia: <strong>${s.totalImages}</strong> łącznie · <strong style="color:var(--red)">${s.imagesWithoutAlt}</strong> bez ALT ·
-      Pokrycie ALT: <strong style="color:${s.altTextCoverage > 80 ? 'var(--green)' : 'var(--amber)'}">${s.altTextCoverage}%</strong>
-    </div>`;
+  // Summary bar
+  html += '<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;color:var(--text2)">';
+  html += 'Przeskanowano: <strong>' + productsScanned + '</strong> produktow, <strong>' + collectionsScanned + '</strong> kolekcji';
+
+  if (imageStats) {
+    html += ' · Zdjecia: <strong>' + (imageStats.totalImages || 0) + '</strong> lacznie, ' +
+      '<strong style="color:var(--red)">' + (imageStats.imagesWithoutAlt || 0) + '</strong> bez ALT, ' +
+      'Pokrycie ALT: <strong style="color:' + ((imageStats.altTextCoverage || 0) > 80 ? 'var(--green)' : 'var(--amber)') + '">' + (imageStats.altTextCoverage || 0) + '%</strong>';
   }
+  html += '</div>';
 
   container.innerHTML = html;
 }
 
-document.getElementById('severity-filter').addEventListener('change', renderAudit);
+document.getElementById('severity-filter').addEventListener('change', function() {
+  if (auditData) renderAudit();
+});
 
 // ============================================================
 // Organic Traffic
 // ============================================================
 async function loadOrganic() {
-  const container = document.getElementById('organic-container');
-  container.innerHTML = '<div class="loading"><div class="spinner"></div>Ładowanie danych GA4...</div>';
+  var container = document.getElementById('organic-container');
+  container.innerHTML = '<div class="loading"><div class="spinner"></div>Ladowanie danych GA4...</div>';
+
   try {
-    const res = await fetch('/api/seo/organic?days=30');
+    var res = await fetch('/api/seo/organic?days=30');
+
+    if (!res.ok) {
+      var errBody = null;
+      try { errBody = await res.json(); } catch(e) {}
+      var errMsg = (errBody && errBody.error) || ('HTTP ' + res.status);
+      throw new Error(errMsg);
+    }
+
     organicData = await res.json();
+    organicError = null;
+    setDot('dot-ga4', 'ok');
     renderOrganic();
   } catch (err) {
-    container.innerHTML = `<div class="empty">Błąd: ${err.message}. Sprawdź połączenie GA4.</div>`;
+    organicError = err.message;
+    organicData = null;
+    setDot('dot-ga4', 'err');
+    container.innerHTML = '<div class="error-box">Nie udalo sie zaladowac danych GA4<div class="error-detail">' + esc(err.message) + '</div></div>';
+    document.getElementById('score-organic').textContent = '\u2014';
+    document.getElementById('tab-organic-count').textContent = '!';
   }
 }
 
 function renderOrganic() {
-  const container = document.getElementById('organic-container');
-  let rows = [];
+  var container = document.getElementById('organic-container');
+  var rows = [];
 
-  // Parse GA4 response — it can have different structures
-  if (organicData?.rows) {
+  // Parse GA4 response — handle multiple possible structures
+  if (organicData && organicData.rows) {
     rows = organicData.rows;
+  } else if (organicData && organicData.data && organicData.data.rows) {
+    rows = organicData.data.rows;
   } else if (Array.isArray(organicData)) {
     rows = organicData;
   }
 
   // Normalize rows
-  const pages = [];
-  let totalOrganic = 0;
+  var pages = [];
+  var totalOrganic = 0;
 
-  for (const row of rows) {
-    let path, sessions, users;
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var path = '', sessions = 0, users = 0;
+
     if (row.dimensionValues) {
-      path = row.dimensionValues[0]?.value || '';
-      sessions = parseInt(row.metricValues?.[0]?.value || '0');
-      users = parseInt(row.metricValues?.[1]?.value || '0');
+      path = (row.dimensionValues[0] && row.dimensionValues[0].value) || '';
+      sessions = parseInt((row.metricValues && row.metricValues[0] && row.metricValues[0].value) || '0');
+      users = parseInt((row.metricValues && row.metricValues[1] && row.metricValues[1].value) || '0');
     } else if (row.dimensions) {
-      path = row.dimensions?.[0] || '';
-      sessions = parseInt(row.metrics?.[0] || '0');
-      users = parseInt(row.metrics?.[1] || '0');
-    } else {
-      continue;
+      path = (Array.isArray(row.dimensions) ? row.dimensions[0] : '') || '';
+      sessions = parseInt((Array.isArray(row.metrics) ? row.metrics[0] : '') || '0');
+      users = parseInt((Array.isArray(row.metrics) ? row.metrics[1] : '') || '0');
+    } else if (typeof row === 'object') {
+      // Try common field names
+      path = row.pagePath || row.page || row.path || '';
+      sessions = parseInt(row.sessions || row.session_count || '0');
+      users = parseInt(row.activeUsers || row.users || row.active_users || '0');
     }
+
     if (path && sessions > 0) {
-      pages.push({ path, sessions, users });
+      pages.push({ path: path, sessions: sessions, users: users });
       totalOrganic += sessions;
     }
   }
@@ -360,96 +487,127 @@ function renderOrganic() {
   document.getElementById('tab-organic-count').textContent = pages.length;
 
   if (pages.length === 0) {
-    container.innerHTML = '<div class="empty">Brak danych o ruchu organicznym. Sprawdź połączenie GA4.</div>';
+    // If we got a response but no rows, show the raw structure for debugging
+    var debugInfo = '';
+    if (organicData) {
+      var keys = Object.keys(organicData);
+      debugInfo = ' (response keys: ' + keys.join(', ') + ')';
+    }
+    container.innerHTML = '<div class="empty">Brak danych o ruchu organicznym w ostatnich 30 dniach.' + esc(debugInfo) + '</div>';
     return;
   }
 
-  let html = '<div class="organic-grid">';
-  for (const page of pages.slice(0, 30)) {
-    html += `<div class="organic-card">
-      <span class="path" title="${esc(page.path)}">${esc(page.path)}</span>
-      <span class="stats">
-        <span><span class="stat-val">${page.sessions}</span> sesji</span>
-        <span><span class="stat-val">${page.users}</span> user</span>
-      </span>
-    </div>`;
+  var html = '<div class="organic-grid">';
+  var limit = Math.min(pages.length, 30);
+  for (var j = 0; j < limit; j++) {
+    var page = pages[j];
+    html += '<div class="organic-card">' +
+      '<span class="path" title="' + esc(page.path) + '">' + esc(page.path) + '</span>' +
+      '<span class="stats">' +
+        '<span><span class="stat-val">' + page.sessions + '</span> sesji</span>' +
+        '<span><span class="stat-val">' + page.users + '</span> user</span>' +
+      '</span>' +
+    '</div>';
   }
   html += '</div>';
   container.innerHTML = html;
 }
 
 // ============================================================
-// Crossref: issues × organic traffic
+// Crossref: issues x organic traffic
 // ============================================================
 function buildCrossref() {
-  const container = document.getElementById('crossref-container');
-  const issues = auditData?.issues || [];
+  var container = document.getElementById('crossref-container');
+  var issues = (auditData && auditData.issues) || [];
+  var rawRows = [];
 
-  // Build set of paths with organic traffic
-  let organicPaths = new Map();
-  const rows = organicData?.rows || (Array.isArray(organicData) ? organicData : []);
-  for (const row of rows) {
-    let path, sessions;
+  if (organicData && organicData.rows) {
+    rawRows = organicData.rows;
+  } else if (organicData && organicData.data && organicData.data.rows) {
+    rawRows = organicData.data.rows;
+  } else if (Array.isArray(organicData)) {
+    rawRows = organicData;
+  }
+
+  // Build organic paths map
+  var organicPaths = new Map();
+  for (var r = 0; r < rawRows.length; r++) {
+    var row = rawRows[r];
+    var path = '', sessions = 0;
     if (row.dimensionValues) {
-      path = row.dimensionValues[0]?.value || '';
-      sessions = parseInt(row.metricValues?.[0]?.value || '0');
+      path = (row.dimensionValues[0] && row.dimensionValues[0].value) || '';
+      sessions = parseInt((row.metricValues && row.metricValues[0] && row.metricValues[0].value) || '0');
     } else if (row.dimensions) {
-      path = row.dimensions?.[0] || '';
-      sessions = parseInt(row.metrics?.[0] || '0');
-    } else continue;
+      path = (Array.isArray(row.dimensions) ? row.dimensions[0] : '') || '';
+      sessions = parseInt((Array.isArray(row.metrics) ? row.metrics[0] : '') || '0');
+    } else if (typeof row === 'object') {
+      path = row.pagePath || row.page || row.path || '';
+      sessions = parseInt(row.sessions || '0');
+    }
     if (path) organicPaths.set(path, sessions);
   }
 
+  if (issues.length === 0 && rawRows.length === 0) {
+    container.innerHTML = '<div class="empty">Brak danych do analizy krzyzowej (wymagany audyt SEO + dane GA4).</div>';
+    document.getElementById('tab-crossref-count').textContent = '0';
+    return;
+  }
+
   // Match issues to organic pages by handle
-  const crossref = [];
-  for (const issue of issues) {
+  var crossref = [];
+  for (var i = 0; i < issues.length; i++) {
+    var issue = issues[i];
     if (issue.severity === 'low') continue;
-    const handle = issue.itemTitle?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || '';
+    var handle = (issue.itemTitle || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
-    // Try matching /products/handle or /collections/handle
-    const prefix = issue.itemType === 'product' ? '/products/' : '/collections/';
-    let matchedSessions = 0;
-    let matchedPath = '';
+    var matchedSessions = 0;
+    var matchedPath = '';
 
-    for (const [path, sessions] of organicPaths) {
-      if (path.includes(handle) || (handle.length > 5 && path.toLowerCase().includes(handle.slice(0, 15)))) {
-        matchedSessions = Math.max(matchedSessions, sessions);
-        matchedPath = path;
+    organicPaths.forEach(function(sess, p) {
+      if (p.includes(handle) || (handle.length > 5 && p.toLowerCase().includes(handle.slice(0, 15)))) {
+        if (sess > matchedSessions) {
+          matchedSessions = sess;
+          matchedPath = p;
+        }
       }
-    }
+    });
 
     if (matchedSessions > 0) {
-      crossref.push({ ...issue, organicSessions: matchedSessions, organicPath: matchedPath });
+      var merged = {};
+      for (var key in issue) { if (issue.hasOwnProperty(key)) merged[key] = issue[key]; }
+      merged.organicSessions = matchedSessions;
+      merged.organicPath = matchedPath;
+      crossref.push(merged);
     }
   }
 
-  // Sort by organic sessions (highest first = most impact to fix)
-  crossref.sort((a, b) => b.organicSessions - a.organicSessions);
+  crossref.sort(function(a, b) { return b.organicSessions - a.organicSessions; });
 
   document.getElementById('tab-crossref-count').textContent = crossref.length;
 
   if (crossref.length === 0) {
-    container.innerHTML = '<div class="empty">Brak dopasowań. Możliwe przyczyny: GA4 zwraca inne ścieżki niż handlele Shopify, lub produkty z problemami SEO nie generują ruchu organicznego (co samo w sobie jest cenną informacją).</div>';
+    container.innerHTML = '<div class="empty">Brak dopasowah. Produkty z problemami SEO nie generuja (jeszcze) ruchu organicznego, lub GA4 zwraca inne sciezki niz handlele Shopify.</div>';
     return;
   }
 
-  let html = `<table class="issues-table"><thead><tr>
-    <th>Sesje organic</th><th>Priorytet</th><th>Problem</th><th>Produkt</th><th>Impact</th><th></th>
-  </tr></thead><tbody>`;
+  var html = '<table class="issues-table"><thead><tr>' +
+    '<th>Sesje organic</th><th>Priorytet</th><th>Problem</th><th>Produkt</th><th>Impact</th><th></th>' +
+  '</tr></thead><tbody>';
 
-  for (const item of crossref) {
-    const impact = item.organicSessions >= 50 ? 'WYSOKI' : item.organicSessions >= 10 ? 'ŚREDNI' : 'NISKI';
-    const impactColor = item.organicSessions >= 50 ? 'var(--red)' : item.organicSessions >= 10 ? 'var(--amber)' : 'var(--muted)';
-    const itemId = item.itemId?.replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '') || '';
+  for (var ci = 0; ci < crossref.length; ci++) {
+    var item = crossref[ci];
+    var impact = item.organicSessions >= 50 ? 'WYSOKI' : item.organicSessions >= 10 ? 'SREDNI' : 'NISKI';
+    var impactColor = item.organicSessions >= 50 ? 'var(--red)' : item.organicSessions >= 10 ? 'var(--amber)' : 'var(--muted)';
+    var cItemId = (item.itemId || '').toString().replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '');
 
-    html += `<tr>
-      <td><strong style="color:var(--blue-l)">${item.organicSessions}</strong></td>
-      <td><span class="severity ${item.severity}">${item.severity}</span></td>
-      <td><span class="issue-type">${item.type.replace(/_/g, ' ')}</span></td>
-      <td><span class="issue-item">${esc(item.itemTitle)}</span><br><span style="font-size:0.7rem;color:var(--muted)">${esc(item.organicPath)}</span></td>
-      <td><strong style="color:${impactColor}">${impact}</strong></td>
-      <td><button class="btn btn-sm btn-primary" onclick="openFix(${JSON.stringify(JSON.stringify(item))})">Napraw</button></td>
-    </tr>`;
+    html += '<tr>' +
+      '<td><strong style="color:var(--blue-l)">' + item.organicSessions + '</strong></td>' +
+      '<td><span class="severity ' + item.severity + '">' + item.severity + '</span></td>' +
+      '<td><span class="issue-type">' + (item.type || '').replace(/_/g, ' ') + '</span></td>' +
+      '<td><span class="issue-item">' + esc(item.itemTitle) + '</span><br><span style="font-size:0.7rem;color:var(--muted)">' + esc(item.organicPath) + '</span></td>' +
+      '<td><strong style="color:' + impactColor + '">' + impact + '</strong></td>' +
+      '<td><button class="btn btn-sm btn-primary" onclick="openFix(' + JSON.stringify(JSON.stringify(item)) + ')">Napraw</button></td>' +
+    '</tr>';
   }
   html += '</tbody></table>';
   container.innerHTML = html;
@@ -459,47 +617,43 @@ function buildCrossref() {
 // Fix Modal
 // ============================================================
 function openFix(issueJson) {
-  const issue = JSON.parse(issueJson);
+  var issue = JSON.parse(issueJson);
   currentFix = issue;
-  const modal = document.getElementById('fix-modal');
-  const body = document.getElementById('modal-body');
-  const title = document.getElementById('modal-title');
-  const itemId = issue.itemId?.replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '') || '';
+  var modal = document.getElementById('fix-modal');
+  var body = document.getElementById('modal-body');
+  var title = document.getElementById('modal-title');
+  var itemId = (issue.itemId || '').toString().replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '');
 
-  title.textContent = `Napraw: ${issue.itemTitle}`;
+  title.textContent = 'Napraw: ' + (issue.itemTitle || '');
 
   if (issue.type === 'missing_meta_description' || issue.type === 'short_meta_description') {
-    body.innerHTML = `
-      <label>Meta Description (SEO)</label>
-      <textarea id="fix-value" placeholder="Wpisz meta description (140-160 znaków)...">${issue.currentValue || ''}</textarea>
-      <div style="font-size:0.72rem;color:var(--muted)">Typ: ${issue.itemType} #${itemId} · Rekomendacja: ${issue.recommendation}</div>
-    `;
+    body.innerHTML =
+      '<label>Meta Description (SEO)</label>' +
+      '<textarea id="fix-value" placeholder="Wpisz meta description (140-160 znakow)...">' + esc(issue.currentValue || '') + '</textarea>' +
+      '<div style="font-size:0.72rem;color:var(--muted)">Typ: ' + (issue.itemType || '') + ' #' + itemId + ' · Rekomendacja: ' + esc(issue.recommendation || '') + '</div>';
     currentFix._fixType = 'meta';
     currentFix._field = 'metaDescription';
   } else if (issue.type === 'missing_meta_title' || issue.type === 'long_meta_title') {
-    body.innerHTML = `
-      <label>Meta Title (SEO)</label>
-      <input id="fix-value" placeholder="Wpisz meta title (do 60 znaków)..." value="${esc(issue.currentValue || '')}">
-      <div style="font-size:0.72rem;color:var(--muted)">Typ: ${issue.itemType} #${itemId} · Rekomendacja: ${issue.recommendation}</div>
-    `;
+    body.innerHTML =
+      '<label>Meta Title (SEO)</label>' +
+      '<input id="fix-value" placeholder="Wpisz meta title (do 60 znakow)..." value="' + esc(issue.currentValue || '') + '">' +
+      '<div style="font-size:0.72rem;color:var(--muted)">Typ: ' + (issue.itemType || '') + ' #' + itemId + ' · Rekomendacja: ' + esc(issue.recommendation || '') + '</div>';
     currentFix._fixType = 'meta';
     currentFix._field = 'metaTitle';
   } else if (issue.type === 'missing_alt_text') {
-    body.innerHTML = `
-      <label>ALT Text dla zdjęcia</label>
-      <input id="fix-value" placeholder="Opisz co jest na zdjęciu...">
-      <div style="font-size:0.72rem;color:var(--muted)">Produkt #${itemId} · Wymaga ID zdjęcia (widoczne w audycie). Na ten moment użyj terminala: „dodaj ALT texty do zdjęć produktu ${issue.itemTitle}"</div>
-    `;
+    body.innerHTML =
+      '<label>ALT Text dla zdjecia</label>' +
+      '<input id="fix-value" placeholder="Opisz co jest na zdjeciu...">' +
+      '<div style="font-size:0.72rem;color:var(--muted)">Produkt #' + itemId + ' · Wymaga ID zdjecia (widoczne w audycie). Na ten moment uzyj terminala.</div>';
     currentFix._fixType = 'alt';
   } else if (issue.type === 'missing_product_description') {
-    body.innerHTML = `
-      <label>Opis produktu (HTML)</label>
-      <textarea id="fix-value" rows="6" placeholder="Wpisz opis produktu...">${issue.currentValue || ''}</textarea>
-      <div style="font-size:0.72rem;color:var(--muted)">Produkt #${itemId} · Rekomendacja: ${issue.recommendation}</div>
-    `;
+    body.innerHTML =
+      '<label>Opis produktu (HTML)</label>' +
+      '<textarea id="fix-value" rows="6" placeholder="Wpisz opis produktu...">' + esc(issue.currentValue || '') + '</textarea>' +
+      '<div style="font-size:0.72rem;color:var(--muted)">Produkt #' + itemId + ' · Rekomendacja: ' + esc(issue.recommendation || '') + '</div>';
     currentFix._fixType = 'content';
   } else {
-    body.innerHTML = `<div style="color:var(--muted)">Typ problemu: ${issue.type}<br>Rekomendacja: ${issue.recommendation}<br><br>Użyj terminala do bardziej złożonych napraw.</div>`;
+    body.innerHTML = '<div style="color:var(--muted)">Typ problemu: ' + (issue.type || '') + '<br>Rekomendacja: ' + esc(issue.recommendation || '') + '<br><br>Uzyj terminala do bardziej zlozonych napraw.</div>';
     currentFix._fixType = 'unknown';
   }
 
@@ -513,49 +667,47 @@ function closeModal() {
 
 async function executeFix() {
   if (!currentFix) return;
-  const saveBtn = document.getElementById('modal-save');
+  var saveBtn = document.getElementById('modal-save');
   saveBtn.disabled = true;
-  saveBtn.textContent = 'Zapisuję...';
+  saveBtn.textContent = 'Zapisuje...';
 
-  const value = document.getElementById('fix-value')?.value;
-  const itemId = currentFix.itemId?.replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '') || '';
+  var valueEl = document.getElementById('fix-value');
+  var value = valueEl ? valueEl.value : '';
+  var itemId = (currentFix.itemId || '').toString().replace('gid://shopify/Product/', '').replace('gid://shopify/Collection/', '');
 
   try {
     if (currentFix._fixType === 'meta') {
-      const item = {
-        id: itemId,
-        type: currentFix.itemType,
-      };
+      var item = { id: itemId, type: currentFix.itemType };
       if (currentFix._field === 'metaDescription') item.metaDescription = value;
       if (currentFix._field === 'metaTitle') item.metaTitle = value;
 
-      const res = await fetch('/api/seo/fix/meta', {
+      var res = await fetch('/api/seo/fix/meta', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: [item] })
       });
-      const result = await res.json();
-      if (result.summary?.updated > 0) {
-        showToast('success', `Zaktualizowano ${currentFix._field} dla "${currentFix.itemTitle}"`);
+      var result = await res.json();
+      if (result.summary && result.summary.updated > 0) {
+        showToast('success', 'Zaktualizowano ' + currentFix._field + ' dla "' + currentFix.itemTitle + '"');
         bumpFixed();
       } else {
-        showToast('error', result.error || 'Nie udało się zaktualizować');
+        showToast('error', result.error || 'Nie udalo sie zaktualizowac');
       }
     } else if (currentFix._fixType === 'content') {
-      const res = await fetch('/api/seo/fix/content', {
+      var res2 = await fetch('/api/seo/fix/content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId: itemId, descriptionHtml: value })
       });
-      const result = await res.json();
-      if (result.status === 'updated') {
-        showToast('success', `Zaktualizowano opis "${currentFix.itemTitle}"`);
+      var result2 = await res2.json();
+      if (result2.status === 'updated') {
+        showToast('success', 'Zaktualizowano opis "' + currentFix.itemTitle + '"');
         bumpFixed();
       } else {
-        showToast('error', result.error || 'Nie udało się zaktualizować');
+        showToast('error', result2.error || 'Nie udalo sie zaktualizowac');
       }
     } else {
-      showToast('error', 'Ten typ naprawy wymaga użycia terminala');
+      showToast('error', 'Ten typ naprawy wymaga uzycia terminala');
     }
   } catch (err) {
     showToast('error', err.message);
@@ -568,7 +720,7 @@ async function executeFix() {
 
 function bumpFixed() {
   fixedToday++;
-  sessionStorage.setItem('seo-fixed-today', fixedToday);
+  try { sessionStorage.setItem('seo-fixed-today', fixedToday); } catch(e) {}
   document.getElementById('score-fixed').textContent = fixedToday;
 }
 
@@ -576,18 +728,18 @@ function bumpFixed() {
 // Toast
 // ============================================================
 function showToast(type, msg) {
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
+  var toast = document.createElement('div');
+  toast.className = 'toast ' + type;
   toast.textContent = msg;
   document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 4000);
+  setTimeout(function() { toast.remove(); }, 4000);
 }
 
 // ============================================================
 // Utils
 // ============================================================
 function esc(s) {
-  const d = document.createElement('div');
+  var d = document.createElement('div');
   d.textContent = s || '';
   return d.innerHTML;
 }

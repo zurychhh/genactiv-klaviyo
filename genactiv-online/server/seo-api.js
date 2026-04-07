@@ -3,9 +3,26 @@
  * Direct MCP tool calls for SEO audit, GA4 organic traffic, and fix actions.
  */
 import { Router } from 'express';
-import { callTool } from './mcp-orchestrator.js';
+import { callTool, getConnectionStatus } from './mcp-orchestrator.js';
 
 const router = Router();
+
+// --- Diagnostic endpoint: show which MCP servers are connected ---
+router.get('/status', async (req, res) => {
+  try {
+    const status = getConnectionStatus();
+    res.json({
+      ok: true,
+      mcp: status,
+      env: {
+        GA4_PROPERTY_ID: process.env.GA4_PROPERTY_ID ? 'set' : 'MISSING',
+        SHOPIFY_ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN ? 'set' : 'MISSING',
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
 
 // --- SEO Audit (Shopify products + collections) ---
 router.get('/audit', async (req, res) => {
@@ -13,11 +30,20 @@ router.get('/audit', async (req, res) => {
     const scope = req.query.scope || 'all';
     const limit = Math.min(parseInt(req.query.limit) || 100, 250);
 
+    console.log(`[SEO API] Calling get-seo-audit (scope=${scope}, limit=${limit})`);
     const result = await callTool('mcp__shopify-extended__get-seo-audit', { scope, limit });
-    res.json(result);
+
+    // Validate result shape
+    if (result && typeof result === 'object' && !result.error) {
+      res.json(result);
+    } else {
+      const errMsg = result?.error || 'Unexpected response format from SEO audit tool';
+      console.error('[SEO API] Audit returned error:', errMsg);
+      res.status(502).json({ error: errMsg, source: 'shopify-extended' });
+    }
   } catch (err) {
     console.error('[SEO API] Audit error:', err.message);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message, source: 'seo-api' });
   }
 });
 
@@ -28,11 +54,12 @@ router.get('/organic', async (req, res) => {
     const endDate = new Date().toISOString().split('T')[0];
     const startDate = new Date(Date.now() - days * 86400000).toISOString().split('T')[0];
 
+    console.log(`[SEO API] Calling GA4 run_report (${startDate} → ${endDate})`);
     const result = await callTool('mcp__ga4__run_report', {
       property_id: process.env.GA4_PROPERTY_ID || '279858535',
       date_ranges: [{ start_date: startDate, end_date: endDate }],
-      dimensions: ['pagePath', 'sessionDefaultChannelGrouping'],
-      metrics: ['sessions', 'activeUsers', 'screenPageViews', 'averageSessionDuration', 'bounceRate'],
+      dimensions: ['pagePath'],
+      metrics: ['sessions', 'activeUsers', 'screenPageViews'],
       dimension_filter: {
         filter: {
           field_name: 'sessionDefaultChannelGrouping',
@@ -43,10 +70,22 @@ router.get('/organic', async (req, res) => {
       limit: 50
     });
 
-    res.json(result);
+    // The GA4 result can be a string (from MCP) or an object
+    let parsed = result;
+    if (typeof result === 'string') {
+      try { parsed = JSON.parse(result); } catch { parsed = { raw: result }; }
+    }
+
+    if (parsed && typeof parsed === 'object' && !parsed.error) {
+      res.json(parsed);
+    } else {
+      const errMsg = parsed?.error || 'Unexpected response from GA4';
+      console.error('[SEO API] GA4 returned error:', errMsg);
+      res.status(502).json({ error: errMsg, source: 'ga4' });
+    }
   } catch (err) {
     console.error('[SEO API] Organic traffic error:', err.message);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message, source: 'seo-api' });
   }
 });
 
