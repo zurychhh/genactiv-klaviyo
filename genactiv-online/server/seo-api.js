@@ -48,13 +48,15 @@ router.get('/audit', async (req, res) => {
 });
 
 // --- GA4 Organic Traffic (top landing pages) ---
+// Graceful degradation: if GA4 fails, return partial result so dashboard still works
 router.get('/organic', async (req, res) => {
-  try {
-    const days = parseInt(req.query.days) || 30;
-    const endDate = new Date().toISOString().split('T')[0];
-    const startDate = new Date(Date.now() - days * 86400000).toISOString().split('T')[0];
+  const days = parseInt(req.query.days) || 30;
+  const endDate = new Date().toISOString().split('T')[0];
+  const startDate = new Date(Date.now() - days * 86400000).toISOString().split('T')[0];
 
-    console.log(`[SEO API] Calling GA4 run_report (${startDate} → ${endDate})`);
+  console.log(`[SEO API] Calling GA4 run_report (${startDate} → ${endDate})`);
+
+  try {
     const result = await callTool('mcp__ga4__run_report', {
       property_id: process.env.GA4_PROPERTY_ID || '279858535',
       date_ranges: [{ start_date: startDate, end_date: endDate }],
@@ -81,11 +83,13 @@ router.get('/organic', async (req, res) => {
     } else {
       const errMsg = parsed?.error || 'Unexpected response from GA4';
       console.error('[SEO API] GA4 returned error:', errMsg);
-      res.status(502).json({ error: errMsg, source: 'ga4' });
+      // Graceful: return empty rows + error note (200, not 500)
+      res.json({ rows: [], partial: true, ga4_error: errMsg, dateRange: { startDate, endDate } });
     }
   } catch (err) {
     console.error('[SEO API] Organic traffic error:', err.message);
-    res.status(500).json({ error: err.message, source: 'seo-api' });
+    // Graceful degradation: return empty result instead of 500
+    res.json({ rows: [], partial: true, ga4_error: err.message, dateRange: { startDate, endDate } });
   }
 });
 

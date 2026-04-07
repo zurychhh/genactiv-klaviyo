@@ -15,6 +15,8 @@ interface SeoIssue {
   itemType: "product" | "collection";
   itemId: string;
   itemTitle: string;
+  handle: string;
+  itemUrl: string;
   field: string;
   currentValue: string | null;
   recommendation: string;
@@ -82,6 +84,9 @@ const getSeoAudit = {
           const numericId = product.id.split("/").pop();
           productsScanned++;
 
+          const productHandle = product.handle || "";
+          const productUrl = `/products/${productHandle}`;
+
           // Check meta title
           if (!product.seo?.title) {
             issues.push({
@@ -90,6 +95,8 @@ const getSeoAudit = {
               itemType: "product",
               itemId: numericId,
               itemTitle: product.title,
+              handle: productHandle,
+              itemUrl: productUrl,
               field: "seo.title",
               currentValue: null,
               recommendation: `Dodaj meta title dla "${product.title}" (50-60 znaków, z frazą kluczową)`
@@ -101,6 +108,8 @@ const getSeoAudit = {
               itemType: "product",
               itemId: numericId,
               itemTitle: product.title,
+              handle: productHandle,
+              itemUrl: productUrl,
               field: "seo.title",
               currentValue: product.seo.title,
               recommendation: `Meta title ma ${product.seo.title.length} znaków (max 60). Skróć do ~55-60 znaków.`
@@ -115,6 +124,8 @@ const getSeoAudit = {
               itemType: "product",
               itemId: numericId,
               itemTitle: product.title,
+              handle: productHandle,
+              itemUrl: productUrl,
               field: "seo.description",
               currentValue: null,
               recommendation: `Dodaj meta description dla "${product.title}" (120-160 znaków, z CTA)`
@@ -126,6 +137,8 @@ const getSeoAudit = {
               itemType: "product",
               itemId: numericId,
               itemTitle: product.title,
+              handle: productHandle,
+              itemUrl: productUrl,
               field: "seo.description",
               currentValue: product.seo.description,
               recommendation: `Meta description ma tylko ${product.seo.description.length} znaków (min 120). Rozbuduj opis.`
@@ -140,6 +153,8 @@ const getSeoAudit = {
               itemType: "product",
               itemId: numericId,
               itemTitle: product.title,
+              handle: productHandle,
+              itemUrl: productUrl,
               field: "descriptionHtml",
               currentValue: product.descriptionHtml ? `${product.descriptionHtml.length} znaków` : null,
               recommendation: `Produkt "${product.title}" ma zbyt krótki lub brak opisu HTML. Dodaj min. 200 znaków unikalnego opisu.`
@@ -160,6 +175,8 @@ const getSeoAudit = {
                 itemType: "product",
                 itemId: numericId,
                 itemTitle: product.title,
+                handle: productHandle,
+                itemUrl: productUrl,
                 field: `image:${imgNumericId}`,
                 currentValue: null,
                 recommendation: `Dodaj ALT text do zdjęcia produktu "${product.title}" (opisz co widać na zdjęciu, 5-15 słów)`
@@ -203,6 +220,8 @@ const getSeoAudit = {
           const collection = edge.node;
           const numericId = collection.id.split("/").pop();
           collectionsScanned++;
+          const collectionHandle = collection.handle || "";
+          const collectionUrl = `/collections/${collectionHandle}`;
 
           // Check meta title
           if (!collection.seo?.title) {
@@ -212,6 +231,8 @@ const getSeoAudit = {
               itemType: "collection",
               itemId: numericId,
               itemTitle: collection.title,
+              handle: collectionHandle,
+              itemUrl: collectionUrl,
               field: "seo.title",
               currentValue: null,
               recommendation: `Dodaj meta title dla kolekcji "${collection.title}" (50-60 znaków)`
@@ -226,6 +247,8 @@ const getSeoAudit = {
               itemType: "collection",
               itemId: numericId,
               itemTitle: collection.title,
+              handle: collectionHandle,
+              itemUrl: collectionUrl,
               field: "seo.description",
               currentValue: null,
               recommendation: `Dodaj meta description dla kolekcji "${collection.title}" (120-160 znaków)`
@@ -237,6 +260,8 @@ const getSeoAudit = {
               itemType: "collection",
               itemId: numericId,
               itemTitle: collection.title,
+              handle: collectionHandle,
+              itemUrl: collectionUrl,
               field: "seo.description",
               currentValue: collection.seo.description,
               recommendation: `Meta description kolekcji ma tylko ${collection.seo.description.length} znaków (min 120).`
@@ -255,6 +280,8 @@ const getSeoAudit = {
                 itemType: "collection",
                 itemId: numericId,
                 itemTitle: collection.title,
+                handle: collectionHandle,
+                itemUrl: collectionUrl,
                 field: `image:${imgNumericId}`,
                 currentValue: null,
                 recommendation: `Dodaj ALT text do zdjęcia kolekcji "${collection.title}"`
