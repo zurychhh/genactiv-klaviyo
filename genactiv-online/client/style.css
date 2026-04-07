@@ -703,13 +703,16 @@ body {
   z-index: 100;
   display: flex;
   flex-direction: column;
-  transform: translateX(0);
+  transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: -8px 0 32px rgba(0,0,0,0.4);
 }
 
+.cap-panel:not(.hidden) {
+  transform: translateX(0);
+}
+
 .cap-panel.hidden {
-  transform: translateX(100%);
   pointer-events: none;
 }
 
@@ -992,8 +995,8 @@ body {
     display: none;
   }
 
-  #capabilities-btn span { display: none; }
-  #capabilities-btn { padding: 0.35rem 0.55rem; }
+  #capabilities-btn span, #seo-btn span { display: none; }
+  #capabilities-btn, #seo-btn { padding: 0.35rem 0.55rem; }
 
   .cap-example-grid { grid-template-columns: 1fr; }
 }

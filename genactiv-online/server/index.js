@@ -7,6 +7,7 @@ import { dirname, join } from 'path';
 import { setupAuth, requireAuth } from './auth.js';
 import { connectAll, shutdownAll, getConnectionStatus } from './mcp-orchestrator.js';
 import { processChat } from './anthropic-bridge.js';
+import seoApi from './seo-api.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PORT = parseInt(process.env.PORT || '3000');
@@ -23,7 +24,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "cdn.jsdelivr.net"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
       styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
       fontSrc: ["'self'", "fonts.gstatic.com"],
       imgSrc: ["'self'", "data:"],
@@ -82,6 +83,9 @@ app.get('/api/health', (_req, res) => {
     }
   });
 });
+
+// SEO Command Center API
+app.use('/api/seo', requireAuth, seoApi);
 
 // Static client files (require auth)
 app.use('/', requireAuth, express.static(join(__dirname, '..', 'client')));

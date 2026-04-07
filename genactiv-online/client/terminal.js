@@ -460,10 +460,6 @@ const capClose = document.getElementById('cap-close');
 function openCapabilities() {
   capPanel.classList.remove('hidden');
   capOverlay.classList.remove('hidden');
-  // Force reflow for CSS transition
-  requestAnimationFrame(() => {
-    capPanel.style.transform = 'translateX(0)';
-  });
 }
 
 function closeCapabilities() {

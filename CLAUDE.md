@@ -76,14 +76,16 @@ Browser → Express (auth + SSE) → Anthropic API ⇄ 7 MCP servers
 ```
 genactiv-online/
 ├── client/
-│   ├── index.html              # Main page (Polish UI)
-│   ├── style.css               # Dark terminal theme
-│   └── terminal.js             # SSE client, markdown rendering, thinking indicator
+│   ├── index.html              # Main page (Polish UI) + capabilities panel
+│   ├── seo.html                # SEO Command Center dashboard (audit + GA4 organic + fix)
+│   ├── style.css               # Dark terminal theme + capabilities panel styles
+│   └── terminal.js             # SSE client, markdown rendering, thinking indicator, capabilities toggle
 ├── server/
-│   ├── index.js                # Express: auth, SSE streaming, health check
+│   ├── index.js                # Express: auth, SSE streaming, health check, SEO API mount
 │   ├── config.js               # MCP servers, models, prompts, constants
 │   ├── auth.js                 # Login (bcrypt + session, 24h expiry)
 │   ├── mcp-orchestrator.js     # MCP connections, tool caching, result compression
+│   ├── seo-api.js              # SEO Command Center REST API (audit, organic, fix endpoints)
 │   └── anthropic-bridge.js     # Two-phase routing, retry logic, rate limiting
 ├── .env.example                # Env var template
 ├── package.json                # Dependencies
