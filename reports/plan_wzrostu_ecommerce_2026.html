@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Wzrostu E-commerce GenActiv 2026</title>
+<style>
+:root{--red:#EF3340;--red-l:#FFF0F1;--navy:#1A3B5D;--blue:#0066CC;--green:#27AE60;--green-l:#E8F8EF;--orange:#E67E22;--orange-l:#FFF6EC;--pink:#F67FB4;--purple:#8B5CF6;--g50:#F9FAFB;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;--g400:#9CA3AF;--g500:#6B7280;--g700:#374151;--g900:#111827}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F1F3F5;color:var(--g900)}
+
+/* top */
+.top{background:var(--navy);color:#fff;padding:13px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:90}
+.top b{color:var(--red)}
+.top .t{font-size:13px;opacity:.7;margin-left:8px}
+.wrap{max-width:1060px;margin:0 auto;padding:32px 20px 60px}
+
+/* hero */
+.hero{text-align:center;margin-bottom:36px}
+.hero h1{font-size:34px;font-weight:800;color:var(--navy)}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:14px;color:var(--g500);margin-top:6px}
+
+/* kpi strip */
+.kpis{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;justify-content:center}
+.kpi{background:#fff;border:1px solid var(--g200);border-radius:10px;padding:16px 20px;min-width:180px;flex:1;text-align:center}
+.kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--g400);font-weight:600}
+.kpi .v{font-size:24px;font-weight:800;color:var(--navy);margin:2px 0}
+.kpi .d{font-size:12px}
+.kpi .d.up{color:var(--green)}.kpi .d.dn{color:var(--red)}
+.kpi.alert{border-left:4px solid var(--red)}
+
+/* alert */
+.alert{background:var(--red-l);border:1px solid #FECACA;border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:13px;line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+.alert b{color:var(--red)}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:54px}
+.tl::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--red),var(--orange),var(--navy));border-radius:2px}
+
+.mo{position:relative;margin-bottom:36px}
+.mo:last-child{margin-bottom:0}
+
+/* dot */
+.dot{position:absolute;left:-54px;top:0;width:44px;height:44px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;line-height:1;z-index:2;border:4px solid #F1F3F5;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.dot .mon{font-size:9px;font-weight:600;letter-spacing:.3px;opacity:.8;margin-top:1px}
+
+/* card */
+.card{background:#fff;border:1px solid var(--g200);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card.peak{border:2px solid var(--orange);box-shadow:0 2px 12px rgba(230,126,34,.15)}
+
+/* card header */
+.card-head{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--g100)}
+.card-head h2{font-size:20px;font-weight:800;color:var(--navy)}
+.card-head .nums{display:flex;align-items:center;gap:8px}
+.card-head .base{font-size:20px;font-weight:700;color:var(--g400)}
+.card-head .arrow{color:var(--g300);font-size:18px}
+.card-head .goal{font-size:22px;font-weight:800;color:var(--red)}
+.badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:700}
+.badge-g{background:var(--green-l);color:var(--green)}
+.badge-o{background:var(--orange-l);color:var(--orange)}
+.tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin-left:4px;vertical-align:middle}
+.tag-bf{background:var(--orange);color:#fff}
+
+/* CHANNEL GROWTH ROWS */
+.channels{padding:16px 24px 20px}
+.ch-wrap{border-bottom:1px solid var(--g100);padding:4px 0 6px}
+.ch-wrap:last-child{border-bottom:none}
+.ch{display:grid;grid-template-columns:110px 1fr 70px 60px 50px;align-items:center;gap:8px;font-size:13px}
+.ch-name{font-weight:600;display:flex;align-items:center;gap:6px}
+.ch-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.ch-bars{position:relative;height:22px}
+.ch-base-bar{position:absolute;left:0;top:3px;height:7px;background:var(--g200);border-radius:3px}
+.ch-goal-bar{position:absolute;left:0;bottom:3px;height:9px;border-radius:4px}
+.ch-base-val{text-align:right;color:var(--g400);font-size:12px}
+.ch-goal-val{text-align:right;font-weight:700;font-size:13px}
+.ch-delta{text-align:right;font-size:11px;font-weight:700;border-radius:8px;padding:1px 6px}
+.ch-delta.pos{color:var(--green);background:var(--green-l)}
+.ch-delta.neg{color:var(--g500);background:var(--g100)}
+.ch-delta.big{color:var(--orange);background:var(--orange-l)}
+.ch-delta.new{color:#fff;background:var(--blue)}
+
+/* channel reason */
+.ch-why{font-size:11px;color:var(--g400);padding:2px 0 0 18px;line-height:1.35;font-style:italic}
+
+/* actions toggle */
+.actions-toggle{display:block;width:100%;padding:10px 24px;background:var(--g50);border:none;border-top:1px solid var(--g100);cursor:pointer;font-size:12px;font-weight:600;color:var(--g500);text-align:left;font-family:inherit}
+.actions-toggle:hover{background:var(--g100)}
+.actions-body{padding:16px 24px 20px;display:none;border-top:1px solid var(--g100)}
+.actions-body.open{display:block}
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.ag-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;padding-bottom:3px;border-bottom:2px solid}
+.ag-title.ads{color:var(--red);border-color:var(--red)}
+.ag-title.seo{color:var(--blue);border-color:var(--blue)}
+.ag-title.email{color:var(--green);border-color:var(--green)}
+.ag-title.social{color:var(--purple);border-color:var(--purple)}
+.al{list-style:none;font-size:12px;line-height:1.5}
+.al li{padding:2px 0 2px 14px;position:relative}
+.al li::before{content:'';position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--g300)}
+.al li.hot::before{background:var(--red)}
+
+/* budget */
+.budget{margin-top:40px}
+.budget h2{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.bt{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--g200)}
+.bt th{background:var(--g50);padding:9px 14px;text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--g400);font-weight:600;border-bottom:2px solid var(--g200)}
+.bt th:first-child{text-align:left}
+.bt td{padding:8px 14px;text-align:right;border-bottom:1px solid var(--g100)}
+.bt td:first-child{text-align:left;font-weight:600}
+.bt .pk{background:var(--orange-l)}
+.bt .tot td{border-top:2px solid var(--g300);font-weight:800;background:var(--g50)}
+
+/* top5 */
+.top5{margin-top:40px}
+.top5 h2{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.t5g{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.t5{background:#fff;border:1px solid var(--g200);border-radius:10px;padding:16px;display:flex;gap:12px}
+.t5n{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+.t5 h4{font-size:13px;font-weight:700;margin-bottom:2px}
+.t5 p{font-size:11px;color:var(--g500);line-height:1.4}
+
+.footer{text-align:center;margin-top:40px;padding:20px;font-size:11px;color:var(--g400);border-top:1px solid var(--g200)}
+
+@media(max-width:700px){
+  .wrap{padding:20px 12px 40px}
+  .tl{padding-left:40px}
+  .tl::before{left:16px}
+  .dot{left:-40px;width:36px;height:36px;font-size:12px}
+  .ch{grid-template-columns:80px 1fr 55px 50px 42px;gap:4px;font-size:11px}
+  .ch-why{font-size:10px;padding-left:14px}
+  .card-head{padding:14px 16px}
+  .channels{padding:12px 16px}
+  .acts{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <span>GEN<b>ACTIV</b></span>
+  <span class="t">Plan Wzrostu E-commerce 2026 &mdash; +15% YoY</span>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <h1>Roadmap wzrostu <span>+15%</span></h1>
+  <p>Cel per kanal, per miesiac &bull; cze&ndash;gru 2026 &bull; dane: GA4, Google Ads, Klaviyo, Shopify</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">Bazowy (12m)</div><div class="v">2,84M</div><div class="d">PLN</div></div>
+  <div class="kpi"><div class="l">Cel (+15%)</div><div class="v" style="color:var(--red)">3,27M</div><div class="d up">+427K PLN</div></div>
+  <div class="kpi"><div class="l">H2 bazowy</div><div class="v">1,74M</div><div class="d">cze-gru '25</div></div>
+  <div class="kpi"><div class="l">H2 cel</div><div class="v" style="color:var(--red)">2,02M</div><div class="d up">+271K (+15,6%)</div></div>
+  <div class="kpi alert"><div class="l">Google Ads budzet</div><div class="v" style="color:var(--red)">3,1K</div><div class="d dn">spadl z 15K/m</div></div>
+</div>
+
+<div class="alert">
+  <span style="font-size:18px">&#9888;</span>
+  <div><b>Budzet Google Ads spadl 6x</b> w kwi-maj 2026. PMax/Cross-network = 33% przychodu. Przywrocenie budzetu do 15K/mies. to priorytet #1.</div>
+</div>
+
+<!-- TIMELINE -->
+<div class="tl">
+
+<!-- CZERWIEC -->
+<div class="mo">
+  <div class="dot" style="background:var(--red)">06<span class="mon">CZE</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Czerwiec 2026</h2>
+      <div class="nums">
+        <span class="base">179K</span>
+        <span class="arrow">&rarr;</span>
+        <span class="goal">200K</span>
+        <span class="badge badge-g">+12%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:21%"></div><div class="ch-goal-bar" style="width:50%;background:var(--red)"></div></div>
+          <div class="ch-base-val">19K</div>
+          <div class="ch-goal-val">45K</div>
+          <div class="ch-delta big">+135%</div>
+        </div>
+        <div class="ch-why">Przywrocenie budzetu z 2,5K do 12K. Historycznie 15K budzetu = 87-134K przychodu (ROAS 8-12x).</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:46%"></div><div class="ch-goal-bar" style="width:50%;background:var(--blue)"></div></div>
+          <div class="ch-base-val">41K</div>
+          <div class="ch-goal-val">45K</div>
+          <div class="ch-delta pos">+10%</div>
+        </div>
+        <div class="ch-why">Naprawa tech SEO (FAQ schema, footer &quot;Cookkies&quot;) + content calendar Q3. Bazowy 41K — stabilny kanal.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:55%"></div><div class="ch-goal-bar" style="width:39%;background:#F59E0B"></div></div>
+          <div class="ch-base-val">50K</div>
+          <div class="ch-goal-val">35K</div>
+          <div class="ch-delta neg">-30%</div>
+        </div>
+        <div class="ch-why">PMax kanibalizuje Paid Search od lip'25 (spadek z 59K do 8K). To naturalny transfer — PMax przejmuje te konwersje.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:41%"></div><div class="ch-goal-bar" style="width:33%;background:var(--navy)"></div></div>
+          <div class="ch-base-val">37K</div>
+          <div class="ch-goal-val">30K</div>
+          <div class="ch-delta neg">-19%</div>
+        </div>
+        <div class="ch-why">Direct spada gdy rosna paid channels (PMax, Meta) — typowa kanibalizacja. Trend widoczny od sty'26 (z 35K do 15K).</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:25%"></div><div class="ch-goal-bar" style="width:27%;background:var(--pink)"></div></div>
+          <div class="ch-base-val">22K</div>
+          <div class="ch-goal-val">24K</div>
+          <div class="ch-delta pos">+8%</div>
+        </div>
+        <div class="ch-why">Zwiekszenie czestotliwosci postow (3/tyg vs 1-2/tyg). UGC z recenzji Klaviyo jako social proof.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:6%"></div><div class="ch-goal-bar" style="width:11%;background:var(--green)"></div></div>
+          <div class="ch-base-val">5K</div>
+          <div class="ch-goal-val">10K</div>
+          <div class="ch-delta big">+97%</div>
+        </div>
+        <div class="ch-why">Z 1 kampanii/mies. do 4. Sredni przychod per kampania = 3,2K PLN. Optymalizacja Browse Abandonment (CR 0,9% &rarr; 2%).</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch">
+          <div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div>
+          <div class="ch-bars"><div class="ch-base-bar" style="width:0%"></div><div class="ch-goal-bar" style="width:6%;background:var(--purple)"></div></div>
+          <div class="ch-base-val">0</div>
+          <div class="ch-goal-val">5K</div>
+          <div class="ch-delta new">nowy</div>
+        </div>
+        <div class="ch-why">Start Meta retargeting (warm audiences). 0,4% udzialu w przychodach = anomalia. Budzet startowy 2K PLN.</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania w czerwcu</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 12K</div><ul class="al"><li class="hot">Przywrocic budzet do 12-15K <span class="tag" style="background:var(--red);color:#fff">PILNE</span></li><li>Audyt PMax &mdash; asset groups</li><li>Nowe assets Fiberbiom</li><li>Wlaczyc Shopping Ads</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>Audyt 10 stron (Senuto)</li><li>Fix &quot;Cookkies&quot; + FAQPage schema</li><li>Content calendar Q3</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 4 kampanie</div><ul class="al"><li>4 kampanie (2x/tyg)</li><li>A/B Browse Abandonment</li><li>+2 maile w Abandoned Cart</li><li>Segment VIP (3+ zam.)</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 2K</div><ul class="al"><li>Meta retargeting <span class="tag" style="background:var(--blue);color:#fff">START</span></li><li>Katalog FB (Shopify feed)</li><li>Check Pandectes consent</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIPIEC -->
+<div class="mo">
+  <div class="dot" style="background:var(--navy)">07<span class="mon">LIP</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Lipiec 2026</h2>
+      <div class="nums">
+        <span class="base">172K</span><span class="arrow">&rarr;</span><span class="goal">205K</span>
+        <span class="badge badge-g">+19%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:12%"></div><div class="ch-goal-bar" style="width:37%;background:var(--red)"></div></div><div class="ch-base-val">17K</div><div class="ch-goal-val">55K</div><div class="ch-delta big">+219%</div></div>
+        <div class="ch-why">Pelny miesiac budzetu 15K vs lip'25 tylko 11K. PMax ramp-up po czerwcowym restarcie — algorytm potrzebuje 2-4 tyg. na optymalizacje.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:26%"></div><div class="ch-goal-bar" style="width:29%;background:var(--blue)"></div></div><div class="ch-base-val">38K</div><div class="ch-goal-val">43K</div><div class="ch-delta pos">+13%</div></div>
+        <div class="ch-why">2 artykuly blogowe (long-tail z Senuto) + optymalizacja meta desc top 20 stron. Efekty tech SEO z czerwca zaczynaja dzialac.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:39%"></div><div class="ch-goal-bar" style="width:20%;background:#F59E0B"></div></div><div class="ch-base-val">59K</div><div class="ch-goal-val">30K</div><div class="ch-delta neg">-49%</div></div>
+        <div class="ch-why">Kontynuacja kanibalizacji przez PMax. lip'25 = 59K bylo anomalnie wysokie (PMax jeszcze nie dzialal pelna para).</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:21%"></div><div class="ch-goal-bar" style="width:19%;background:var(--navy)"></div></div><div class="ch-base-val">31K</div><div class="ch-goal-val">28K</div><div class="ch-delta neg">-8%</div></div>
+        <div class="ch-why">Sezonowy spadek (wakacje) + naturalny transfer do atrybucji PMax i Paid Social.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:15%"></div><div class="ch-goal-bar" style="width:17%;background:var(--pink)"></div></div><div class="ch-base-val">22K</div><div class="ch-goal-val">25K</div><div class="ch-delta pos">+14%</div></div>
+        <div class="ch-why">Kampania &quot;Wakacyjny challenge&quot; + Reels/short-form video. Zwiekszone zaangazowanie latem.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:0.1%"></div><div class="ch-goal-bar" style="width:8%;background:var(--green)"></div></div><div class="ch-base-val">0,2K</div><div class="ch-goal-val">12K</div><div class="ch-delta big">x63</div></div>
+        <div class="ch-why">lip'25 = 189 PLN (prawie zero kampanii). 4 kampanie + nowy Post-Purchase flow = latwy wzrost z niskiej bazy.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:0.1%"></div><div class="ch-goal-bar" style="width:4%;background:var(--purple)"></div></div><div class="ch-base-val">0,2K</div><div class="ch-goal-val">6K</div><div class="ch-delta big">x30</div></div>
+        <div class="ch-why">Scale Meta do 3K. Test 3 audiences (LAL, interests, retargeting). lip'25 = 203 PLN — praktycznie brak aktywnosci.</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania w lipcu</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 15K</div><ul class="al"><li>Utrzymac PMax 15K</li><li>Search terms &rarr; negatywne</li><li>&quot;Wakacje + Odpornosc&quot;</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>2 artykuly (long-tail Senuto)</li><li>Meta desc. top 20 stron</li><li>Internal linking audit</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 4 kamp.</div><ul class="al"><li>Wakacje, odpornosc, dzieci</li><li>Post-Purchase flow <span class="tag" style="background:var(--blue);color:#fff">NOWY</span></li><li>A/B pora wysylki</li><li>Czyszczenie listy &gt;6m</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 3K</div><ul class="al"><li>Meta: LAL + interests + retarget</li><li>Dynamic Product Ads</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIERPIEN -->
+<div class="mo">
+  <div class="dot" style="background:var(--blue)">08<span class="mon">SIE</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Sierpien 2026</h2>
+      <div class="nums">
+        <span class="base">212K</span><span class="arrow">&rarr;</span><span class="goal">240K</span>
+        <span class="badge badge-g">+13%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:58%"></div><div class="ch-goal-bar" style="width:63%;background:var(--red)"></div></div><div class="ch-base-val">87K</div><div class="ch-goal-val">95K</div><div class="ch-delta pos">+10%</div></div>
+        <div class="ch-why">Stabilizacja na budzecie 15K. sie'25 = 87K byl juz mocny (ROAS 11,3x) — mniej przestrzeni na wzrost niz w cze-lip.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:26%"></div><div class="ch-goal-bar" style="width:31%;background:var(--blue)"></div></div><div class="ch-base-val">39K</div><div class="ch-goal-val">46K</div><div class="ch-delta pos">+18%</div></div>
+        <div class="ch-why">Kumulacja 4 artykulow z cze-lip + product schema markup. Back-to-school = naturalny popyt na odpornosc dziecka.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:20%"></div><div class="ch-goal-bar" style="width:22%;background:var(--pink)"></div></div><div class="ch-base-val">31K</div><div class="ch-goal-val">33K</div><div class="ch-delta pos">+8%</div></div>
+        <div class="ch-why">Back-to-school content + UGC reposty. sie'25 = 31K — stabilny kanal, organiczny wzrost.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:20%"></div><div class="ch-goal-bar" style="width:15%;background:var(--navy)"></div></div><div class="ch-base-val">31K</div><div class="ch-goal-val">22K</div><div class="ch-delta neg">-28%</div></div>
+        <div class="ch-why">Direct maleje gdy rosna PMax i Paid Social — ruch jest lepiej atrybucjonowany do platnych kanalow.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:11%"></div><div class="ch-goal-bar" style="width:12%;background:#F59E0B"></div></div><div class="ch-base-val">16K</div><div class="ch-goal-val">18K</div><div class="ch-delta pos">+13%</div></div>
+        <div class="ch-why">Stabilizacja po kanibalizacji PMax. Back-to-school kampanie + RLSA na branded queries.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:0.3%"></div><div class="ch-goal-bar" style="width:9%;background:var(--green)"></div></div><div class="ch-base-val">0,5K</div><div class="ch-goal-val">14K</div><div class="ch-delta big">x28</div></div>
+        <div class="ch-why">sie'25 = 498 PLN (1 kampania, 0 przychodu). 4-5 kampanii + Winback flow (90+ dni) = latwy wzrost z zerowej bazy.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:0%"></div><div class="ch-goal-bar" style="width:5%;background:var(--purple)"></div></div><div class="ch-base-val">0</div><div class="ch-goal-val">7K</div><div class="ch-delta new">nowy</div></div>
+        <div class="ch-why">sie'25 = 0 PLN. Meta scale winners z lipca (4K) + TikTok trial 1K. Budowanie audiences na jesien.</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania w sierpniu</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 15K</div><ul class="al"><li>Back-to-School (+20% budzet)</li><li>Nowe creative assets PMax</li><li>Review bidding strategy</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>2 artykuly (odpornosc dziecka)</li><li>Fix ~530 bledow interpunkcji</li><li>Product schema markup</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 4-5 kamp.</div><ul class="al"><li>Back2School (proven: 4,8K w '25)</li><li>Winback flow 90+ dni <span class="tag" style="background:var(--blue);color:#fff">NOWY</span></li><li>Welcome A/B: rabat vs dostawa</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 5K</div><ul class="al"><li>Meta: scale winners (4K)</li><li>TikTok trial 1K <span class="tag" style="background:var(--blue);color:#fff">START</span></li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WRZESIEN -->
+<div class="mo">
+  <div class="dot" style="background:var(--green)">09<span class="mon">WRZ</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Wrzesien 2026</h2>
+      <div class="nums">
+        <span class="base">333K</span><span class="arrow">&rarr;</span><span class="goal">370K</span>
+        <span class="badge badge-g">+11%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:72%"></div><div class="ch-goal-bar" style="width:80%;background:var(--red)"></div></div><div class="ch-base-val">134K</div><div class="ch-goal-val">148K</div><div class="ch-delta pos">+10%</div></div>
+        <div class="ch-why">Budzet 18K (vs 13K w wrz'25). Sezon jesienny = naturalny peak popytu na suplementy. ROAS wrz'25 = 12x.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:37%"></div><div class="ch-goal-bar" style="width:42%;background:var(--blue)"></div></div><div class="ch-base-val">68K</div><div class="ch-goal-val">78K</div><div class="ch-delta pos">+14%</div></div>
+        <div class="ch-why">3 nowe artykuly + content gaps z Senuto. Kumulacja 6+ artykulow z Q3. Jesien = peak wyszukiwan &quot;odpornosc&quot;.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:35%"></div><div class="ch-goal-bar" style="width:30%;background:var(--navy)"></div></div><div class="ch-base-val">66K</div><div class="ch-goal-val">55K</div><div class="ch-delta neg">-16%</div></div>
+        <div class="ch-why">wrz'25 = 66K bylo anomalnie wysokie. Wzrost paid channels (PMax 18K, Meta 5K) przejmuje czesc ruchu direct.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:22%"></div><div class="ch-goal-bar" style="width:24%;background:var(--pink)"></div></div><div class="ch-base-val">40K</div><div class="ch-goal-val">45K</div><div class="ch-delta pos">+11%</div></div>
+        <div class="ch-why">Jesienny content + wieksze zaangazowanie po wakacjach. Premiera nowych produktow = organiczny buzz.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:4%"></div><div class="ch-goal-bar" style="width:10%;background:var(--green)"></div></div><div class="ch-base-val">7K</div><div class="ch-goal-val">18K</div><div class="ch-delta big">+173%</div></div>
+        <div class="ch-why">5-6 kampanii + Birthday flow + follow-upy do non-openers. wrz'25 = 3 kampanie = 17K — teraz 2x wiecej wysilek.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:3%"></div><div class="ch-goal-bar" style="width:5%;background:#F59E0B"></div></div><div class="ch-base-val">6K</div><div class="ch-goal-val">10K</div><div class="ch-delta big">+75%</div></div>
+        <div class="ch-why">RLSA na branded + generic queries. wrz'25 = 6K bylo anomalnie niskie (PMax przejal). Optymalizacja kampanii search.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:0.2%"></div><div class="ch-goal-bar" style="width:4%;background:var(--purple)"></div></div><div class="ch-base-val">0,3K</div><div class="ch-goal-val">8K</div><div class="ch-delta big">x26</div></div>
+        <div class="ch-why">Meta 5K (LAL 1-3% top customers) + retargeting 7/14/30d. Audiences dojrzale po 3 mies. testow (cze-sie).</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania we wrzesniu</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 18K</div><ul class="al"><li>PMax 18K (sezon jesienny)</li><li>Kampanie Fiberbiom</li><li>RLSA branded + generic</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>3 artykuly (jesien, suplementacja)</li><li>Senuto: analiza konkurencji</li><li>Optymalizacja stron kategorii</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 5-6 kamp.</div><ul class="al"><li>Premiery + follow-upy</li><li>Segment &quot;kupili wrz '25&quot;</li><li>Birthday flow <span class="tag" style="background:var(--blue);color:#fff">NOWY</span></li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 6,5K</div><ul class="al"><li>Meta 5K: LAL 1-3%</li><li>Retargeting 7/14/30d</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAZDZIERNIK -->
+<div class="mo">
+  <div class="dot" style="background:#F59E0B">10<span class="mon">PAZ</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Pazdziernik 2026</h2>
+      <div class="nums">
+        <span class="base">301K</span><span class="arrow">&rarr;</span><span class="goal">340K</span>
+        <span class="badge badge-g">+13%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:62%"></div><div class="ch-goal-bar" style="width:67%;background:var(--red)"></div></div><div class="ch-base-val">106K</div><div class="ch-goal-val">115K</div><div class="ch-delta pos">+8%</div></div>
+        <div class="ch-why">Budzet 20K (pre-BF ramp-up). paz'25 = 106K przy 22K budzetu (ROAS 6,1x). Ostrozny wzrost — Q4 wymaga wiecej na BF.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:32%"></div><div class="ch-goal-bar" style="width:37%;background:var(--blue)"></div></div><div class="ch-base-val">54K</div><div class="ch-goal-val">63K</div><div class="ch-delta pos">+16%</div></div>
+        <div class="ch-why">BF landing pages (SEO-optimized) + kumulacja 8+ artykulow z Q3. Frazy &quot;black friday suplementy&quot; rosna od paz.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:35%"></div><div class="ch-goal-bar" style="width:32%;background:var(--navy)"></div></div><div class="ch-base-val">61K</div><div class="ch-goal-val">55K</div><div class="ch-delta neg">-9%</div></div>
+        <div class="ch-why">Kontynuacja trendu — paid channels przejmuja direct traffic. Klienci stali wracaja, ale atrybucja idzie do PMax/Email.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:27%"></div><div class="ch-goal-bar" style="width:29%;background:var(--pink)"></div></div><div class="ch-base-val">46K</div><div class="ch-goal-val">50K</div><div class="ch-delta pos">+9%</div></div>
+        <div class="ch-why">BF hype content + video testimoniale. Budowanie oczekiwania na Black Friday w social media.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:7%"></div><div class="ch-goal-bar" style="width:12%;background:var(--green)"></div></div><div class="ch-base-val">12K</div><div class="ch-goal-val">20K</div><div class="ch-delta big">+67%</div></div>
+        <div class="ch-why">BF hype + VIP early access buduje napieciee. paz'25 = 12K (3 kamp.); teraz 5-6 + templates BF + segment VIP top 20% LTV.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:5%"></div><div class="ch-goal-bar" style="width:7%;background:#F59E0B"></div></div><div class="ch-base-val">9K</div><div class="ch-goal-val">12K</div><div class="ch-delta pos">+39%</div></div>
+        <div class="ch-why">Branded &quot;genactiv black friday&quot; + in-market health supplements. Pre-BF wyszukiwania zaczynaja rosnac.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:1%"></div><div class="ch-goal-bar" style="width:6%;background:var(--purple)"></div></div><div class="ch-base-val">2K</div><div class="ch-goal-val">10K</div><div class="ch-delta big">+490%</div></div>
+        <div class="ch-why">Budzet 8K — budowanie audiences przed BF. TikTok scale jesli ROAS &gt;3x. paz'25 = 2K (minimalny budzet).</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania w pazdzierniku</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 20K</div><ul class="al"><li>Przygotowac kampanie BF</li><li>In-market: health supplements</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>BF landing pages SEO</li><li>2 artykuly + FAQ</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 5-6 kamp.</div><ul class="al"><li>BF hype + VIP early access</li><li>Segment BF VIP (top 20% LTV)</li><li>Templates: teaser, launch, last chance</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 8K</div><ul class="al"><li>Meta 6K: budowa audiences BF</li><li>Video testimoniale</li><li>TikTok scale jesli ROAS &gt;3x</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LISTOPAD (BF PEAK) -->
+<div class="mo">
+  <div class="dot" style="background:var(--orange);width:52px;height:52px;left:-58px;font-size:14px;top:-4px">11<span class="mon">LIS</span></div>
+  <div class="card peak">
+    <div class="card-head" style="background:var(--orange-l)">
+      <h2>Listopad 2026 <span class="tag tag-bf">BLACK FRIDAY</span></h2>
+      <div class="nums">
+        <span class="base">348K</span><span class="arrow">&rarr;</span><span class="goal">420K</span>
+        <span class="badge badge-o">+21%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:62%"></div><div class="ch-goal-bar" style="width:76%;background:var(--red)"></div></div><div class="ch-base-val">106K</div><div class="ch-goal-val">130K</div><div class="ch-delta big">+23%</div></div>
+        <div class="ch-why">BF peak — budzet 30K (rowny do lis'25). Lepsze assets + remarketing bidding +30%. ROAS lis'25 = 8,7x przy 30K spend.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:43%"></div><div class="ch-goal-bar" style="width:47%;background:var(--blue)"></div></div><div class="ch-base-val">74K</div><div class="ch-goal-val">80K</div><div class="ch-delta pos">+8%</div></div>
+        <div class="ch-why">BF LP zaindeksowana od paz. Organiczne wyszukiwania &quot;genactiv promocja&quot;, &quot;colostrum black friday&quot;. SEO ceiling — wiekszosc BF to paid.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:34%"></div><div class="ch-goal-bar" style="width:35%;background:var(--navy)"></div></div><div class="ch-base-val">58K</div><div class="ch-goal-val">60K</div><div class="ch-delta pos">+4%</div></div>
+        <div class="ch-why">BF generuje naturalny powrot stalych klientow. Wpisuja URL bezposrednio. Stabilizacja vs spadkowy trend.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:28%"></div><div class="ch-goal-bar" style="width:30%;background:var(--pink)"></div></div><div class="ch-base-val">48K</div><div class="ch-goal-val">52K</div><div class="ch-delta pos">+8%</div></div>
+        <div class="ch-why">BF viral content + UGC z zakupow. Posty z ofertami maja wyzsze zaangazowanie. lis'25 = 48K — mocna baza.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:12%"></div><div class="ch-goal-bar" style="width:23%;background:var(--green)"></div></div><div class="ch-base-val">21K</div><div class="ch-goal-val">40K</div><div class="ch-delta big">+89%</div></div>
+        <div class="ch-why">10-12 kampanii BF (vs 4 w lis'25 = 25K z samego BLACKFRIDAY_ALL). VIP Early Access + segmentacja dermo/fiberbiom/zooggies.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:5%"></div><div class="ch-goal-bar" style="width:9%;background:#F59E0B"></div></div><div class="ch-base-val">8K</div><div class="ch-goal-val">15K</div><div class="ch-delta big">+83%</div></div>
+        <div class="ch-why">Branded &quot;genactiv black friday&quot; + Shopping sale flag. Wyszukiwania BF-specific rosna 3-5x vs normalny miesiac.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:0.6%"></div><div class="ch-goal-bar" style="width:9%;background:var(--purple)"></div></div><div class="ch-base-val">1K</div><div class="ch-goal-val">15K</div><div class="ch-delta big">x14</div></div>
+        <div class="ch-why">Full-funnel Meta 10K + TikTok 3K. Peak season = najwyzszy ROAS. lis'25 = 1K (brak aktywnosci). Dojrzale audiences z Q3.</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')" style="background:var(--orange-l)">&#9660; Zadania &mdash; PEAK MONTH</button>
+    <div class="actions-body open">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 30K <span class="tag tag-bf">PEAK</span></div><ul class="al"><li class="hot">PMax 30K (ROAS lis '25: 8,7x)</li><li>Brand &quot;genactiv black friday&quot;</li><li>Shopping: sale flag</li><li>Remarketing bidding +30%</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 10-12 kamp. <span class="tag tag-bf">PEAK</span></div><ul class="al"><li class="hot">VIP Early Access (pt przed BF)</li><li>BF Launch + Saturday + CyberMonday</li><li>Last Chance + follow-upy x3</li><li>Segmentacja: dermo/fiberbiom/zooggies</li><li>BF '25 = 25K &rarr; cel: 35K+</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 13K <span class="tag tag-bf">PEAK</span></div><ul class="al"><li>Meta 10K: DPA + LAL</li><li>TikTok 3K: BF creative</li><li>Full-funnel</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>BF LP zaindeksowana</li><li>Monitor: &quot;genactiv promocja&quot;</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GRUDZIEN -->
+<div class="mo">
+  <div class="dot" style="background:var(--navy)">12<span class="mon">GRU</span></div>
+  <div class="card">
+    <div class="card-head">
+      <h2>Grudzien 2026</h2>
+      <div class="nums">
+        <span class="base">198K</span><span class="arrow">&rarr;</span><span class="goal">240K</span>
+        <span class="badge badge-o">+21%</span>
+      </div>
+    </div>
+    <div class="channels">
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--red)"></div>PMax</div><div class="ch-bars"><div class="ch-base-bar" style="width:44%"></div><div class="ch-goal-bar" style="width:53%;background:var(--red)"></div></div><div class="ch-base-val">66K</div><div class="ch-goal-val">80K</div><div class="ch-delta big">+21%</div></div>
+        <div class="ch-why">Swiateczny peak — budzet 20K. &quot;Prezent na Swieta&quot; bundles + darmowa dostawa &gt;200 PLN. ROAS gru'25 = 7,7x.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--blue)"></div>SEO</div><div class="ch-bars"><div class="ch-base-bar" style="width:27%"></div><div class="ch-goal-bar" style="width:33%;background:var(--blue)"></div></div><div class="ch-base-val">41K</div><div class="ch-goal-val">50K</div><div class="ch-delta big">+21%</div></div>
+        <div class="ch-why">Kumulacja roczna contentu (12+ artykulow). Artykul &quot;Prezenty dla zdrowia&quot;. gru'25 = 41K — potencjal na duzy skok dzieki content Q3-Q4.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--navy)"></div>Direct</div><div class="ch-bars"><div class="ch-base-bar" style="width:17%"></div><div class="ch-goal-bar" style="width:19%;background:var(--navy)"></div></div><div class="ch-base-val">26K</div><div class="ch-goal-val">28K</div><div class="ch-delta pos">+7%</div></div>
+        <div class="ch-why">Swiateczne powtorne zakupy — gift buying dla bliskich. Klienci z BF wracaja na prezenty.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--pink)"></div>Org Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:16%"></div><div class="ch-goal-bar" style="width:19%;background:var(--pink)"></div></div><div class="ch-base-val">25K</div><div class="ch-goal-val">28K</div><div class="ch-delta pos">+14%</div></div>
+        <div class="ch-why">Swiateczny content + gift guides. gru'25 = 25K — wzrost dzieki lepszej czestotliwosci postow przez caly rok.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--green)"></div>Email</div><div class="ch-bars"><div class="ch-base-bar" style="width:10%"></div><div class="ch-goal-bar" style="width:17%;background:var(--green)"></div></div><div class="ch-base-val">15K</div><div class="ch-goal-val">25K</div><div class="ch-delta big">+69%</div></div>
+        <div class="ch-why">6-8 kampanii swiatecznych (vs 4 w gru'25 = 15K). Gift guide + last order date + post-Christmas sale + Winback 180+ dni.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:#F59E0B"></div>Paid Search</div><div class="ch-bars"><div class="ch-base-bar" style="width:4%"></div><div class="ch-goal-bar" style="width:7%;background:#F59E0B"></div></div><div class="ch-base-val">6K</div><div class="ch-goal-val">10K</div><div class="ch-delta big">+66%</div></div>
+        <div class="ch-why">Wzmocnione kampanie swiateczne + &quot;prezent zdrowie&quot;. gru'25 = 6K — niski, bo PMax dominowal. Lepsze RLSA + nowe frazy.</div>
+      </div>
+      <div class="ch-wrap">
+        <div class="ch"><div class="ch-name"><div class="ch-dot" style="background:var(--purple)"></div>Paid Social</div><div class="ch-bars"><div class="ch-base-bar" style="width:0%"></div><div class="ch-goal-bar" style="width:7%;background:var(--purple)"></div></div><div class="ch-base-val">0</div><div class="ch-goal-val">10K</div><div class="ch-delta new">nowy</div></div>
+        <div class="ch-why">gru'25 = 0 PLN. Meta 8K (gift creative &quot;Kup dla bliskiej osoby&quot;) + TikTok 2K. Dojrzale audiences po 6 mies. kampanii.</div>
+      </div>
+    </div>
+    <button class="actions-toggle" onclick="this.nextElementSibling.classList.toggle('open')">&#9660; Zadania do wykonania w grudniu</button>
+    <div class="actions-body">
+      <div class="acts">
+        <div><div class="ag-title ads">Google Ads &bull; 20K</div><ul class="al"><li>&quot;Prezent na Swieta&quot; bundles</li><li>Darmowa dostawa &gt;200 PLN</li></ul></div>
+        <div><div class="ag-title email">Klaviyo &bull; 6-8 kamp.</div><ul class="al"><li>Darmowa Swiateczna dostawa</li><li>Gift guide &mdash; zestawy</li><li>Last order date Christmas</li><li>Winback 180+ dni</li><li>Post-Christmas sale 26-31</li></ul></div>
+        <div><div class="ag-title social">Paid Social &bull; 10K</div><ul class="al"><li>Meta 8K: gift creative</li><li>TikTok 2K</li></ul></div>
+        <div><div class="ag-title seo">SEO</div><ul class="al"><li>&quot;Prezenty dla zdrowia&quot;</li><li>Structured data update</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tl -->
+
+<!-- BUDGET -->
+<div class="budget">
+  <h2>Budzet mediowy H2 2026</h2>
+  <table class="bt">
+    <thead><tr><th>Miesiac</th><th>Google Ads</th><th>Meta</th><th>TikTok</th><th>Razem</th></tr></thead>
+    <tbody>
+      <tr><td>Czerwiec</td><td>12 000</td><td>2 000</td><td>0</td><td>14 000</td></tr>
+      <tr><td>Lipiec</td><td>15 000</td><td>3 000</td><td>0</td><td>18 000</td></tr>
+      <tr><td>Sierpien</td><td>15 000</td><td>4 000</td><td>1 000</td><td>20 000</td></tr>
+      <tr><td>Wrzesien</td><td>18 000</td><td>5 000</td><td>1 500</td><td>24 500</td></tr>
+      <tr><td>Pazdziernik</td><td>20 000</td><td>6 000</td><td>2 000</td><td>28 000</td></tr>
+      <tr class="pk"><td><b>Listopad (BF)</b></td><td><b>30 000</b></td><td><b>10 000</b></td><td><b>3 000</b></td><td><b>43 000</b></td></tr>
+      <tr><td>Grudzien</td><td>20 000</td><td>8 000</td><td>2 000</td><td>30 000</td></tr>
+      <tr class="tot"><td>H2 RAZEM</td><td>130 000</td><td>38 000</td><td>9 500</td><td>177 500</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TOP 5 -->
+<div class="top5">
+  <h2>TOP 5 najpilniejszych dzialan</h2>
+  <div class="t5g">
+    <div class="t5"><div class="t5n" style="background:var(--red)">1</div><div><h4>Przywrocic budzet Google Ads do 15K/mies.</h4><p>PMax = 33% przychodu. Spadl z 15K do 2,5K. Kazdy mies. = ~40-50K utraconych.</p></div></div>
+    <div class="t5"><div class="t5n" style="background:var(--red)">2</div><div><h4>Klaviyo: z 2-3 do 4-5 kampanii/mies.</h4><p>1 kampania = ~3,2K PLN. +2 kampanie = +76K/rok.</p></div></div>
+    <div class="t5"><div class="t5n" style="background:var(--orange)">3</div><div><h4>Uruchomic Meta Ads retargeting</h4><p>0,4% udzialu = anomalia. Start 2K/mies, ROAS 3-5x.</p></div></div>
+    <div class="t5"><div class="t5n" style="background:var(--blue)">4</div><div><h4>Content marketing SEO (2-3 art./mies.)</h4><p>SEO = 20% przychodu. Kazdy % wzrostu = 5,7K PLN.</p></div></div>
+    <div class="t5"><div class="t5n" style="background:var(--blue)">5</div><div><h4>Nowe Klaviyo flows</h4><p>Post-Purchase + Winback + Birthday. Potencjal ~50K/rok.</p></div></div>
+  </div>
+</div>
+
+<div class="footer">GA4 (279858535) &bull; Google Ads (339-338-2047) &bull; Klaviyo &bull; Shopify &bull; 22 maja 2026</div>
+
+</div><!-- /wrap -->
+</body>
+</html>

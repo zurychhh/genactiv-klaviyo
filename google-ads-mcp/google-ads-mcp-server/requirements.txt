@@ -1,4 +1,4 @@
-fastmcp>=0.8.0
+fastmcp>=2.8.0
 
 # HTTP requests for API calls
 requests>=2.31.0

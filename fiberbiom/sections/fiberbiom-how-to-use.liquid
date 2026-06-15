@@ -1,0 +1,138 @@
+<section class="fiberbiom-page fiberbiom-how-to-use">
+  <div class="fb-container">
+    <div class="fiberbiom-how-to-use__inner">
+      <div class="fiberbiom-how-to-use__collage-wrap">
+        <div class="fiberbiom-how-to-use__collage">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'day' -%}
+              <div class="fiberbiom-how-to-use__day" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 400
+                    | image_tag:
+                      widths: '200,400',
+                      sizes: '120px',
+                      loading: 'lazy',
+                      class: 'fiberbiom-how-to-use__day-image',
+                      alt: block.settings.alt
+                  }}
+                {%- endif -%}
+                <span class="fiberbiom-how-to-use__day-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.collage_caption != blank -%}
+          <p class="fiberbiom-how-to-use__collage-caption">{{ section.settings.collage_caption }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-how-to-use__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fiberbiom-how-to-use__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="fiberbiom-how-to-use__title">{{ section.settings.title }}</h2>
+
+        <div class="fiberbiom-how-to-use__body">
+          {{ section.settings.body }}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          {% render 'fiberbiom-button',
+            label: section.settings.button_label,
+            url: section.settings.button_url,
+            variant: 'red',
+            size: 'large'
+          %}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Stosowanie",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CODZIENNY RYTUAL"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul H2",
+      "default": "JAK STOSOWAC FIBERBIOM?"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Instrukcja stosowania",
+      "default": "<p>Jedna saszetke (6g) wsyp do pelnej 15-dniowej kuracji. Stosuj codziennie rano, wsypujac do szklanki wody — wypij, poczekaj lub dodaj do koktajlu lub jogurtu. Proste!</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Tekst CTA",
+      "default": "KUP TERAZ"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link CTA"
+    },
+    {
+      "type": "text",
+      "id": "collage_caption",
+      "label": "Podpis pod kolazem",
+      "default": "Codzienny rytual w 30 sekund!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "day",
+      "name": "Dzien tygodnia",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nazwa dnia",
+          "default": "Pon"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Zdjecie saszetki"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "default": "Saszetka Fiberbiom"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Stosowanie",
+      "blocks": [
+        { "type": "day", "settings": { "label": "Pon" } },
+        { "type": "day", "settings": { "label": "Wt" } },
+        { "type": "day", "settings": { "label": "Sr" } },
+        { "type": "day", "settings": { "label": "Czw" } },
+        { "type": "day", "settings": { "label": "Pt" } },
+        { "type": "day", "settings": { "label": "Sob" } },
+        { "type": "day", "settings": { "label": "Ndz" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

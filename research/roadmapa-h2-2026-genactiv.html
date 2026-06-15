@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmapa E-commerce H2 2026 — Genactiv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#0b0d1a;
+  --dark-2:#13162a;
+  --dark-3:#1a1e35;
+  --lime:#d4ff3a;
+  --lime-dim:#a8cc2e;
+  --cream:#f5f1e8;
+  --paper:#faf7f0;
+  --ink:#0b0d1a;
+  --ink-2:#3a3d4f;
+  --ink-3:#6b6e80;
+  --blue:#1e3aff;
+  --blue-2:#2540ff;
+  --orange:#ff5a2a;
+  --red:#e23838;
+  --green:#16a34a;
+  --amber:#f59e0b;
+  --hairline:rgba(255,255,255,.08);
+  --hairline-light:rgba(11,13,26,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+.serif{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+
+section{padding:120px 0;position:relative}
+.container{max-width:1280px;margin:0 auto;padding:0 48px}
+.container-narrow{max-width:960px;margin:0 auto;padding:0 48px}
+
+.section-tag{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.section-tag .line{width:32px;height:1px;background:currentColor;opacity:.5}
+
+.eyebrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:48px}
+.eyebrow .dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.4}
+
+.dark{background:var(--dark);color:#fff}
+.dark .section-tag{color:var(--lime)}
+.dark .eyebrow{color:rgba(255,255,255,.5)}
+.dark .accent{color:var(--lime)}
+.dark .card{background:var(--dark-2);border:1px solid var(--hairline)}
+.dark .hairline{border-color:var(--hairline)}
+.dark .muted{color:rgba(255,255,255,.55)}
+
+.light{background:var(--paper);color:var(--ink)}
+.light .section-tag{color:var(--blue)}
+.light .eyebrow{color:var(--ink-3)}
+.light .accent{color:var(--blue)}
+.light .accent-orange{color:var(--orange)}
+.light .card{background:#fff;border:1px solid var(--hairline-light);box-shadow:0 1px 0 rgba(11,13,26,.04)}
+.light .hairline{border-color:var(--hairline-light)}
+.light .muted{color:var(--ink-3)}
+
+.cream{background:var(--cream);color:var(--ink)}
+.cream .section-tag{color:var(--blue)}
+.cream .eyebrow{color:var(--ink-3)}
+.cream .card{background:#fff;border:1px solid var(--hairline-light)}
+.cream .muted{color:var(--ink-3)}
+
+h1.display{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(56px,8vw,128px);line-height:.95;letter-spacing:-.035em}
+h2.display{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(40px,5.5vw,84px);line-height:1.02;letter-spacing:-.03em}
+h3.heading{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(24px,2.4vw,36px);line-height:1.15;letter-spacing:-.02em}
+h4.subheading{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;line-height:1.25}
+
+p.lead{font-size:20px;line-height:1.55;max-width:680px}
+p.body{font-size:16.5px;line-height:1.65;max-width:640px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px);background:rgba(11,13,26,.85);border-bottom:1px solid var(--hairline);transition:all .3s ease}
+.nav-inner{max-width:1280px;margin:0 auto;padding:18px 48px;display:flex;justify-content:space-between;align-items:center}
+.nav .brand{color:var(--lime);font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.nav ul{list-style:none;display:flex;gap:32px}
+.nav a{color:rgba(255,255,255,.65);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
+.nav a:hover{color:var(--lime)}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.hero .eyebrow{color:rgba(255,255,255,.5);margin-bottom:64px}
+.hero h1{margin-bottom:48px}
+.hero p.lead{color:rgba(255,255,255,.75);font-size:22px;max-width:760px;margin-bottom:64px}
+.hero-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:48px;padding-top:48px;border-top:1px solid var(--hairline);max-width:1080px}
+.hero-meta dt{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px}
+.hero-meta dd{font-size:18px;font-weight:500}
+
+.pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:64px}
+.pillar{padding:36px 28px;border-top:4px solid;position:relative;background:#fff;border-radius:2px;min-height:280px;display:flex;flex-direction:column}
+.pillar.shopify{border-color:var(--blue)}
+.pillar.email{border-color:var(--orange)}
+.pillar.seo{border-color:var(--green)}
+.pillar.ltv{border-color:var(--red)}
+.pillar .num{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.pillar.shopify .num{color:var(--blue)}
+.pillar.email .num{color:var(--orange)}
+.pillar.seo .num{color:var(--green)}
+.pillar.ltv .num{color:var(--red)}
+.pillar h4{margin-bottom:14px}
+.pillar .scope{font-size:13.5px;color:var(--ink-3);margin-bottom:16px;font-style:italic}
+.pillar p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin-bottom:auto}
+.pillar .kpis{margin-top:20px;padding-top:16px;border-top:1px solid var(--hairline-light)}
+.pillar .kpis .kpi-line{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.pillar .kpis .kpi-line strong{color:var(--ink);font-weight:600}
+@media(max-width:1100px){.pillar-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.pillar-grid{grid-template-columns:1fr}}
+
+.etap-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:20px;margin-top:48px;align-items:stretch}
+.etap{background:var(--dark-2);border:1px solid var(--hairline);padding:32px 28px;border-radius:4px;position:relative}
+.etap .num{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
+.etap h4{color:#fff;margin-bottom:12px;font-size:22px}
+.etap .when{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px}
+.etap p{color:rgba(255,255,255,.7);font-size:14.5px;line-height:1.55;margin-bottom:14px}
+.etap .why{font-size:13px;color:rgba(212,255,58,.85);background:rgba(212,255,58,.06);padding:10px 12px;border-radius:3px;border-left:2px solid var(--lime);line-height:1.45}
+.etap-arrow{display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:24px}
+@media(max-width:980px){.etap-grid{grid-template-columns:1fr}.etap-arrow{display:none}}
+
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;white-space:nowrap}
+.badge-critical{background:#ffe4e0;color:#9a1a0a}
+.badge-high{background:#fff0d6;color:#a16207}
+.badge-mid{background:#dbeafe;color:#1e40af}
+.badge-low{background:#e5e7eb;color:#4b5563}
+.badge-done{background:#dcfce7;color:#15803d}
+.badge-shopify{background:#dbeafe;color:#1e40af}
+.badge-email{background:#fff0d6;color:#a16207}
+.badge-seo{background:#dcfce7;color:#15803d}
+.badge-ltv{background:#ffe4e0;color:#9a1a0a}
+
+.timeline{margin-top:48px;position:relative}
+.timeline-header{display:grid;grid-template-columns:200px repeat(7,1fr);gap:8px;padding-bottom:20px;border-bottom:1px solid var(--hairline);margin-bottom:0}
+.timeline-header .owner-col{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.timeline-header .month{text-align:center;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:600}
+.swimlane{display:grid;grid-template-columns:200px repeat(7,1fr);gap:8px;padding:18px 0;border-bottom:1px solid var(--hairline);align-items:stretch;min-height:90px}
+.swimlane .label{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:17px;color:#fff;align-self:center}
+.swimlane .label .who{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px;font-weight:400}
+.cell{background:transparent;border-radius:3px;padding:8px 10px;font-size:11.5px;line-height:1.35;color:rgba(255,255,255,.85);position:relative}
+.cell.active{background:var(--dark-3);border:1px solid rgba(212,255,58,.25)}
+.cell.lime{background:rgba(212,255,58,.12);border:1px solid rgba(212,255,58,.5);color:var(--lime)}
+.cell.blue{background:rgba(30,58,255,.18);border:1px solid rgba(30,58,255,.5);color:#a3b4ff}
+.cell.orange{background:rgba(255,90,42,.15);border:1px solid rgba(255,90,42,.5);color:#ffb59c}
+.cell.green{background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.5);color:#86efac}
+.cell.red{background:rgba(226,56,56,.12);border:1px solid rgba(226,56,56,.5);color:#fca5a5}
+.cell.span-2{grid-column:span 2}
+.cell.span-3{grid-column:span 3}
+.cell.span-4{grid-column:span 4}
+@media(max-width:1100px){
+  .timeline-header,.swimlane{grid-template-columns:1fr}
+  .cell{grid-column:span 1!important;border:1px solid var(--hairline)!important;background:var(--dark-3)!important;color:#fff!important}
+  .timeline-header .month{display:none}
+}
+
+.todo-bucket{margin-bottom:64px}
+.todo-bucket-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--hairline-light)}
+.todo-bucket-header h3{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:600}
+.todo-bucket-header .count{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+.todo-item{display:grid;grid-template-columns:32px 1fr 320px;gap:24px;padding:20px 0;border-bottom:1px solid var(--hairline-light);align-items:start;transition:opacity .2s}
+.todo-item.done{opacity:.4}
+.todo-item.done .todo-title{text-decoration:line-through}
+.todo-check{width:22px;height:22px;border:1.5px solid var(--ink-3);border-radius:4px;cursor:pointer;flex-shrink:0;margin-top:2px;transition:all .2s;background:#fff;position:relative}
+.todo-check:hover{border-color:var(--blue)}
+.todo-check.checked{background:var(--blue);border-color:var(--blue)}
+.todo-check.checked::after{content:'';position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.todo-title{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;line-height:1.35;margin-bottom:6px}
+.todo-desc{font-size:14px;color:var(--ink-2);line-height:1.5}
+.todo-meta{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:flex-start}
+@media(max-width:800px){
+  .todo-item{grid-template-columns:32px 1fr;gap:16px}
+  .todo-meta{grid-column:2;justify-content:flex-start;margin-top:8px}
+}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+.kpi{background:var(--dark-2);border:1px solid var(--hairline);padding:32px 28px;border-radius:4px;position:relative}
+.kpi .name{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:24px}
+.kpi .target{font-family:'Fraunces',Georgia,serif;font-size:48px;font-weight:600;color:#fff;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.kpi .target small{font-size:18px;color:rgba(255,255,255,.55);font-weight:400}
+.kpi .label{font-size:13.5px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.kpi-thresholds{border-top:1px solid var(--hairline);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.kpi-thresholds .row{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.kpi-thresholds .row .k{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.kpi-thresholds .row .v{color:#fff;font-weight:500}
+.kpi-thresholds .row.warn .v{color:var(--amber)}
+.kpi-thresholds .row.stop .v{color:var(--red)}
+.kpi-thresholds .row.good .v{color:var(--lime)}
+
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px}
+.risk{padding:28px 28px;border:1px solid var(--hairline-light);background:#fff;border-radius:4px;border-left:4px solid var(--red)}
+.risk.med{border-left-color:var(--amber)}
+.risk.low{border-left-color:var(--green)}
+.risk .head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.risk.med .head{color:var(--amber)}
+.risk.low .head{color:var(--green)}
+.risk h5{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;margin-bottom:10px;line-height:1.3}
+.risk p{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:8px}
+.risk .mitigation{font-size:13px;color:var(--ink);background:var(--paper);padding:10px 12px;border-radius:3px;margin-top:12px;border-left:2px solid var(--blue)}
+.risk .mitigation strong{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:4px;font-weight:600}
+
+.parked-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px}
+.parked{padding:24px 24px;border:1px dashed var(--hairline-light);background:rgba(255,255,255,.4);border-radius:4px}
+.parked .head{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;font-weight:600}
+.parked h5{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin-bottom:8px}
+.parked p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+
+.decisions{margin-top:48px;border-top:1px solid var(--hairline-light)}
+.decision-row{display:grid;grid-template-columns:48px 1fr 220px;gap:24px;padding:24px 0;border-bottom:1px solid var(--hairline-light);align-items:start}
+.decision-row .nr{font-family:'Fraunces',Georgia,serif;font-size:28px;color:var(--blue);font-weight:500}
+.decision-row .content h5{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:18px;margin-bottom:8px;line-height:1.3}
+.decision-row .content p{font-size:14px;color:var(--ink-2);line-height:1.55}
+.decision-row .meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right}
+@media(max-width:800px){
+  .decision-row{grid-template-columns:32px 1fr;gap:16px}
+  .decision-row .meta{grid-column:1/-1;flex-direction:row;text-align:left;margin-top:8px;align-items:flex-start}
+}
+
+.quote-block{margin:48px 0;padding:32px 40px;border-left:3px solid var(--blue);background:var(--cream);font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:22px;line-height:1.45;color:var(--ink);max-width:880px}
+.quote-block .src{display:block;margin-top:14px;font-family:'JetBrains Mono',monospace;font-style:normal;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+
+.footer{padding:80px 0;background:var(--dark);color:rgba(255,255,255,.55)}
+.footer .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:48px;margin-bottom:48px}
+.footer h6{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;font-weight:600}
+.footer p,.footer li{font-size:14px;line-height:1.7;list-style:none}
+.footer .sig{padding-top:32px;border-top:1px solid var(--hairline);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+.it{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600}
+em.lime{color:var(--lime);font-style:normal;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600}
+em.blue{color:var(--blue);font-style:italic;font-family:'Fraunces',Georgia,serif;font-weight:600}
+
+.target-row{display:grid;grid-template-columns:1fr 1.5fr 200px;gap:24px;padding:20px 0;border-bottom:1px solid var(--hairline-light);align-items:center}
+.target-row .metric{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600}
+.target-row .desc{font-size:14px;color:var(--ink-2)}
+.target-row .value{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--ink);text-align:right;font-weight:500}
+.target-row .value.target{color:var(--blue);font-size:16px}
+
+@media(max-width:900px){
+  .container,.container-narrow,.nav-inner{padding:0 24px}
+  section{padding:80px 0}
+  .target-row{grid-template-columns:1fr;gap:6px}
+  .target-row .value{text-align:left}
+  .nav ul{display:none}
+  .decision-row{grid-template-columns:48px 1fr;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">Genactiv · Roadmapa E-com · H2 2026</div>
+    <ul>
+      <li><a href="#exec">Streszczenie</a></li>
+      <li><a href="#filary">Filary</a></li>
+      <li><a href="#projekty">Projekty</a></li>
+      <li><a href="#qw">Quick wins</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#kpi">KPI</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero dark">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="eyebrow">
+      <span class="mono">Plan H2 2026</span>
+      <span class="dot"></span>
+      <span class="mono">Genactiv · DRM</span>
+      <span class="dot"></span>
+      <span class="mono">Dominik Operacz</span>
+      <span class="dot"></span>
+      <span class="mono">Wersja 1.1</span>
+    </div>
+
+    <h1 class="display">Roadmapa E-com.<br>4 filary. <em class="lime">7 miesięcy.</em></h1>
+
+    <p class="lead">Synteza notatek strategicznych ze spotkania z Antonim w plan operacyjny czerwiec→grudzień 2026. Jedno nadrzędne KPI: <strong style="color:#fff">5,5 mln PLN Shopify</strong> (35% YoY). Cztery filary współpracują &mdash; <strong style="color:var(--lime)">A. Shopify</strong> jako driver przychodu, <strong style="color:var(--lime)">D. LTV/Retencja</strong> jako primary driver długoterm., <strong style="color:var(--lime)">B. Email/SMS</strong> i <strong style="color:var(--lime)">C. SEO</strong> jako horyzontalne. Allegro &mdash; parked.</p>
+
+    <dl class="hero-meta">
+      <div>
+        <dt>Cel nadrzędny</dt>
+        <dd>5,5 mln PLN Shopify · <span class="accent">35% YoY</span></dd>
+      </div>
+      <div>
+        <dt>Horyzont</dt>
+        <dd>Czerwiec → grudzień 2026 (~31 tygodni)</dd>
+      </div>
+      <div>
+        <dt>Scope pracy</dt>
+        <dd>10 quick wins · 3 projekty strategiczne</dd>
+      </div>
+      <div>
+        <dt>Kluczowa decyzja</dt>
+        <dd>Sekwencja: Subskrypcja → Lojalność → Rekomendacje</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- 01 STRESZCZENIE -->
+<section id="exec" class="light">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">01 / Streszczenie</span>
+    </div>
+
+    <h2 class="display">Czego ten plan <em class="blue">nie jest.</em></h2>
+
+    <p class="lead" style="margin-top:40px;color:var(--ink-2)">To nie jest „wszystko naraz". 6 osób w DRM, jedno e-commerce/performance (ja), 7 miesięcy &mdash; nie zrobimy trzech dużych projektów równolegle. Plan zakłada <span class="it">sekwencję</span>: najpierw fundamenty (segmentacja, LP, tracking automatyzacji), potem pierwszy duży projekt (subskrypcja w sierpniu/wrześniu), potem drugi (lojalność w październiku), potem trzeci (rekomendacje w listopadzie jako feature w lojalności). Quick winsy idą równolegle.</p>
+
+    <p class="lead" style="margin-top:24px;color:var(--ink-2)">Co odpuszczamy świadomie: <strong>Allegro</strong> (maintenance only, brak inicjatyw), <strong>Triple Whale</strong> (odsuwamy na H1 2027), <strong>nowe kanały paid</strong> (TikTok Ads, YT Ads &mdash; rozwijamy dopiero po stabilizacji Shopify). Fokus to 100% obecne 4 filary.</p>
+
+    <div class="parked-grid" style="margin-top:48px">
+      <div class="parked">
+        <div class="head">Parked · maintenance only</div>
+        <h5>Allegro</h5>
+        <p>Kanał działa, ale bez dedykowanych inicjatyw. Sanity check 1×/msc. Powrót jako temat strategiczny w H1 2027. Owner maintenance: <span class="it">do ustalenia</span>.</p>
+      </div>
+      <div class="parked">
+        <div class="head">Parked · do H1 2027</div>
+        <h5>Triple Whale</h5>
+        <p>Multi-touch attribution narzędzie. W międzyczasie attribution na GA4 + UTMy + native Shopify analytics. Decyzja czy wracamy &mdash; po Q1 2027.</p>
+      </div>
+      <div class="parked">
+        <div class="head">Parked · po H2</div>
+        <h5>Nowe kanały paid</h5>
+        <p>TikTok Ads, YouTube Ads na pełnej skali. W H2 utrzymujemy Meta + Google na obecnym poziomie. Eksperymenty TikTok dopuszczalne tylko w ramach budżetu testowego (&lt;5% paid).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 FILARY -->
+<section id="filary" class="cream">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">02 / Filary strategiczne</span>
+    </div>
+
+    <h2 class="display">4 filary. <em class="blue">Każdy z własnym KPI.</em></h2>
+    <p class="lead muted" style="margin-top:32px">Filary nie są równe. A i D są primary driverami przychodu i LTV. B i C są horyzontalne &mdash; działają na pozyskiwanie i aktywację w obu kierunkach.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar shopify">
+        <div class="num">Filar A · Driver przychodu</div>
+        <h4 class="subheading">Shopify E-commerce</h4>
+        <div class="scope">UX/UI, oferta, LP, segmentacja, promocje, konwersja</div>
+        <p>Główny silnik 5,5 mln PLN. Decyzje konwersji, ofertowanie, segmentacja klientów per persona × grupa produktowa. Dedykowane LP pod sub-segmenty. Optymalizacja PDP, koszyk, checkout.</p>
+        <div class="kpis">
+          <div class="kpi-line"><strong>5,5 mln PLN</strong> przychód całoroczny</div>
+          <div class="kpi-line"><strong>+10&ndash;15%</strong> CR sesja→order</div>
+          <div class="kpi-line"><strong>Liczba opakowań</strong> + mix kategorii</div>
+        </div>
+      </div>
+
+      <div class="pillar email">
+        <div class="num">Filar B · Horyzontalny</div>
+        <h4 class="subheading">Email / SMS / Automation</h4>
+        <div class="scope">Klaviyo, SMS, ManyChat, flow automation</div>
+        <p>Rozrost bazy jako KPI (email + SMS). Onboarding, welcome, abandoned cart, post-purchase, win-back. ManyChat dla IG/Messenger autoresponderów. SMS od stretch goal.</p>
+        <div class="kpis">
+          <div class="kpi-line"><strong>+X%</strong> baza email (do kwantyfikacji)</div>
+          <div class="kpi-line"><strong>0 → X</strong> baza SMS subscribers</div>
+          <div class="kpi-line"><strong>5&ndash;15%</strong> flow conversion rate</div>
+        </div>
+      </div>
+
+      <div class="pillar seo">
+        <div class="num">Filar C · Horyzontalny</div>
+        <h4 class="subheading">SEO / Traffic organiczny</h4>
+        <div class="scope">Frazy TOP3, treści, LLM recommendation, AEO</div>
+        <p>Frazy w TOP3 na colostrum/odporność/kategorie. Treści cluster pod search intent. Mierzenie LLM mention rate (ChatGPT/Claude/Gemini/Perplexity) jako leading indicator AEO/GEO.</p>
+        <div class="kpis">
+          <div class="kpi-line"><strong>+X fraz</strong> w TOP3 SERP</div>
+          <div class="kpi-line"><strong>+X%</strong> organic sessions YoY</div>
+          <div class="kpi-line"><strong>+X%</strong> sprzedaż PLN per Traffic</div>
+        </div>
+      </div>
+
+      <div class="pillar ltv">
+        <div class="num">Filar D · Driver LTV</div>
+        <h4 class="subheading">LTV / Retencja</h4>
+        <div class="scope">Subskrypcja, lojalność, rekomendacje, druga konwersja</div>
+        <p>Hard userzy (≥6 zakupów) generują 13% przychodu &mdash; cel rozwinąć do 18&ndash;20%. Trzy projekty strategiczne w sekwencji. Druga konwersja jako KPI średnioterminowy.</p>
+        <div class="kpis">
+          <div class="kpi-line"><strong>+X pp</strong> klienci z 2. konwersją</div>
+          <div class="kpi-line"><strong>13% → 18&ndash;20%</strong> hard userzy w przychodzie</div>
+          <div class="kpi-line"><strong>X k PLN MRR</strong> z subskrypcji (EoY)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PROJEKTY STRATEGICZNE -->
+<section id="projekty" class="dark">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">03 / Projekty strategiczne · sekwencja</span>
+    </div>
+
+    <h2 class="display">3 projekty. <em class="lime">W sekwencji, nie równolegle.</em></h2>
+    <p class="lead muted" style="margin-top:40px;color:rgba(255,255,255,.65)">Nie zrobimy trzech dużych projektów jednocześnie. Sekwencja Subskrypcja → Lojalność → Rekomendacje wynika z trzech argumentów: bezpośredni wpływ na MRR (P1 najsilniejszy), wpływ na drugą konwersję (P1 najwyższy), czas do pierwszego efektu (P1: 2&ndash;3 m-ce; P2: 3&ndash;4; P3: 4&ndash;6).</p>
+
+    <div class="etap-grid">
+      <div class="etap">
+        <div class="num">P1 · Pierwszy</div>
+        <h4>Model subskrypcyjny</h4>
+        <div class="when">Sierpień PoC · Wrzesień full launch</div>
+        <p>Recurring purchase dla wybranych SKU (top sellers + hard userzy jako test). Apka Shopify: Recharge / Bold / Skio &mdash; shortlist w czerwcu, decyzja max 1.07.</p>
+        <div class="why">Dlaczego pierwszy: bezpośredni wpływ na MRR i wymuszenie n-tej konwersji. Time-to-impact najkrótszy.</div>
+      </div>
+      <div class="etap-arrow">→</div>
+      <div class="etap">
+        <div class="num">P2 · Drugi</div>
+        <h4>Program lojalnościowy</h4>
+        <div class="when">Wrzesień design · Październik full launch</div>
+        <p>Tiery, punkty, nagrody. Apka Shopify: Smile / LoyaltyLion / Yotpo. Mechanika musi działać z subskrypcją (extra punkty za sub) &mdash; stąd po P1.</p>
+        <div class="why">Dlaczego drugi: amplifikuje P1 (punkty za sub). Wpływ na drugą konwersję wysoki, ale wolniejszy niż subskrypcja.</div>
+      </div>
+      <div class="etap-arrow">→</div>
+      <div class="etap">
+        <div class="num">P3 · Trzeci (lub feature)</div>
+        <h4>Program rekomendacji</h4>
+        <div class="when">Listopad soft launch (BFCM context)</div>
+        <p>MGM (member get member). Alternatywa: jako feature w P2 (lojalność) zamiast osobnego projektu &mdash; redukuje scope, przyspiesza launch. <strong>Decyzja Q3→Q4.</strong></p>
+        <div class="why">Dlaczego trzeci: korzysta z mechaniki lojalności (P2). Wpływ głównie na CAC, czas dyfuzji 4&ndash;6 m-cy &mdash; mało zdąży zadziałać w H2.</div>
+      </div>
+    </div>
+
+    <blockquote class="quote-block" style="background:var(--dark-2);color:rgba(255,255,255,.9);border-left-color:var(--lime);margin-top:64px">
+      „Alternatywa: jeśli zespół DRM ma niedostateczną pojemność na launch subskrypcji w sierpniu, można odwrócić P1↔P2 (lojalność pierwsza). Tracimy ~2 m-ce wpływu na MRR, ale niższe ryzyko technologiczne. Trzeci wariant: P3 jako feature w P2, nie osobny projekt."
+      <span class="src" style="color:rgba(255,255,255,.5)">— Rekomendacja do walidacji z Antonim</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- 04 QUICK WINS -->
+<section id="qw" class="light">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">04 / Quick wins · 10 inicjatyw</span>
+    </div>
+
+    <h2 class="display">Quick wins. <em class="blue">Bez czekania na projekty.</em></h2>
+    <p class="lead muted" style="margin-top:40px">Idą równolegle z projektami strategicznymi. Niskie ryzyko, krótki czas wdrożenia (&le;6 tyg), measurable impact w 2&ndash;8 tyg od startu. Checkbox stan zapisywany lokalnie (localStorage).</p>
+
+    <div class="todo-bucket" style="margin-top:64px">
+      <div class="todo-bucket-header">
+        <h3>Foundation · <em class="it accent">czerwiec (start)</em></h3>
+        <span class="count">4 zadania · krytyczne dla pozostałych</span>
+      </div>
+
+      <div class="todo-item" data-id="qw1">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW1 · Segmentacja klientów per persona × grupa produktowa</div>
+          <div class="todo-desc">Audyt obecnej segmentacji w Klaviyo + Shopify. Definicja matrixa 3×3 lub 4×4 (persona × grupa). Baseline danych: kim są klienci dziś, kto wraca, po jakim czasie, na co. Owner: Dominik. Input od: Antoniego (zatwierdzenie person).</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-shopify">Filar A+B</span>
+          <span class="badge badge-critical">Impact: H</span>
+          <span class="badge badge-mid">Effort: M</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw2">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW2 · POPy on-site (welcome, exit intent, scroll, koszyk)</div>
+          <div class="todo-desc">Pierwszy welcome popup (zapis do email/SMS z incentywą), exit intent (anti-bounce z ofertą), scroll-triggered na PDP, popup w koszyku przy porzuceniu. Owner: Dominik. Tool: Klaviyo onsite lub Shopify natywny.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-shopify">Filar A</span>
+          <span class="badge badge-high">Impact: M</span>
+          <span class="badge badge-low">Effort: S</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw3">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW7 · ManyChat: onboarding + automatyczne odpowiedzi (IG/Messenger)</div>
+          <div class="todo-desc">Setup połączenia z IG + FB Messenger. Welcome flow po DM, FAQ autoresponder (najczęstsze pytania o colostrum), routing do customer service przy złożonych. Owner: Ilona/Magda buduje, Dominik konfiguruje.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-email">Filar B</span>
+          <span class="badge badge-high">Impact: M</span>
+          <span class="badge badge-low">Effort: S</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw4">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW10 · SEO: keyword research + content brief</div>
+          <div class="todo-desc">Pełna lista TOP fraz dla colostrum/odporność/kategorie. Audyt obecnej widoczności (Senuto/Ahrefs). Inwentaryzacja istniejących treści. Brief contentowy pod 10&ndash;15 artykułów (long-tail z dobrym intent commercial). Owner: Dominik + Magda.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-seo">Filar C</span>
+          <span class="badge badge-high">Impact: M</span>
+          <span class="badge badge-mid">Effort: M</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="todo-bucket">
+      <div class="todo-bucket-header">
+        <h3>Akwizycja · konwersja · <em class="it accent">lipiec/sierpień</em></h3>
+        <span class="count">3 zadania · go live</span>
+      </div>
+
+      <div class="todo-item" data-id="qw5">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW3 · Dedykowane Landing Page (per persona × grupa)</div>
+          <div class="todo-desc">3&ndash;4 LP w lipcu&ndash;sierpniu. Pierwsza: top persona × top grupa produktowa (LP #1). Kolejne LP #2, LP #3 na podstawie danych z #1. Resource: Michalina/Ilona projekt, Dominik build na Shopify. <strong>Otwarte:</strong> wybór technologii (sekcje Shopify natywne vs. zewnętrzny page builder).</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-shopify">Filar A</span>
+          <span class="badge badge-critical">Impact: H</span>
+          <span class="badge badge-mid">Effort: M</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw6">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW4 · Oferta dedykowana pod LP (zestawy, promocje)</div>
+          <div class="todo-desc">Każda LP musi mieć własną ofertę &mdash; bez tego LP są generyczne. Zestawy (bundles), promocje czasowe, exclusive offers (np. dla nowych). Owner: Dominik (build), Antoni (zatwierdzenie cenowe). Zależność: QW3 (LP musi istnieć).</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-shopify">Filar A</span>
+          <span class="badge badge-critical">Impact: H</span>
+          <span class="badge badge-low">Effort: S&ndash;M</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw7">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW5 · Automatyzacje email Klaviyo (welcome, post-purchase, win-back)</div>
+          <div class="todo-desc">Audyt obecnych flow, build nowych: welcome series (3&ndash;5 emaili), abandoned cart v2 (z social proof), browse abandonment, post-purchase (review request, cross-sell), win-back po 60/90/180 dniach. Owner: Dominik.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-email">Filar B</span>
+          <span class="badge badge-critical">Impact: H</span>
+          <span class="badge badge-mid">Effort: M</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="todo-bucket">
+      <div class="todo-bucket-header">
+        <h3>Optymalizacja + skalowanie · <em class="it accent">sierpień&ndash;październik</em></h3>
+        <span class="count">3 zadania · iteracja</span>
+      </div>
+
+      <div class="todo-item" data-id="qw8">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW9 · UX/UI quick wins na Shopify (PDP, koszyk, checkout)</div>
+          <div class="todo-desc">Priorytetyzacja debt na podstawie heatmaps, GA4, scrolldepth. Konkretne zmiany: PDP (trust signals, recenzje, FAQ), koszyk (upsell, social proof), checkout (one-page jeśli możliwe). Iteracje miesięczne na podstawie danych. Owner: Dominik + ewentualnie zewnętrzny dev.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-shopify">Filar A</span>
+          <span class="badge badge-critical">Impact: H</span>
+          <span class="badge badge-mid">Effort: M</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw9">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW8 · SMS — strategia + setup transactional → marketing</div>
+          <div class="todo-desc">Setup dostawcy SMS (lub Klaviyo SMS jeśli dostępne w PL). System nagród za zapis (np. &minus;10% za email+SMS). Pierwsza fala kampanii w sierpniu. Compliance: zgoda zgodna z polskim prawem. Owner: Dominik.</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-email">Filar B</span>
+          <span class="badge badge-high">Impact: M</span>
+          <span class="badge badge-low">Effort: S&ndash;M</span>
+        </div>
+      </div>
+
+      <div class="todo-item" data-id="qw10">
+        <div class="todo-check"></div>
+        <div>
+          <div class="todo-title">QW6 · Marketing automation: porzucony koszyk + opinie (social proof)</div>
+          <div class="todo-desc">Abandoned cart z social proof (rzeczywiste opinie klientów). Post-purchase flow z review request po 14 dniach (Growave/Yotpo). Cross-sell na podstawie zakupu. Owner: Dominik (build w Klaviyo). Zależność: QW5 (welcome flow już live).</div>
+        </div>
+        <div class="todo-meta">
+          <span class="badge badge-ltv">Filar D</span>
+          <span class="badge badge-high">Impact: M&ndash;H</span>
+          <span class="badge badge-low">Effort: S&ndash;M</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:32px;font-size:13.5px">
+      <strong>Filar:</strong> A Shopify · B Email/SMS · C SEO · D LTV/Retencja.
+      <strong>Impact:</strong> H wpływ na cel 5,5 mln · M wpływ na jeden filar · L polish.
+      <strong>Effort:</strong> S &le;1 tyg · M 2&ndash;4 tyg · L &gt;4 tyg.
+      Numeracja QW1&ndash;QW10 zgodna z dokumentem .md.
+    </p>
+  </div>
+</section>
+
+<!-- 05 TIMELINE -->
+<section id="timeline" class="dark">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">05 / Timeline · 7 miesięcy · 4 swimlane</span>
+    </div>
+
+    <h2 class="display">Harmonogram. <em class="lime">Per miesiąc, per filar.</em></h2>
+    <p class="lead muted" style="margin-top:40px;color:rgba(255,255,255,.65)">Kluczowe punkty: <strong style="color:var(--lime)">koniec czerwca</strong> &mdash; decyzje technologiczne dla P1/P2 + baseline danych zamknięty. <strong style="color:var(--lime)">Wrzesień</strong> &mdash; subskrypcja full launch. <strong style="color:var(--lime)">Październik</strong> &mdash; lojalność full launch. <strong style="color:var(--lime)">1 listopada</strong> &mdash; freeze nowych wdrożeń przed BFCM.</p>
+
+    <div class="timeline">
+      <div class="timeline-header">
+        <div class="owner-col">Filar / Miesiąc</div>
+        <div class="month">Cz</div>
+        <div class="month">Lip</div>
+        <div class="month">Sie</div>
+        <div class="month">Wrz</div>
+        <div class="month">Paź</div>
+        <div class="month">Lis</div>
+        <div class="month">Gru</div>
+      </div>
+
+      <div class="swimlane">
+        <div class="label">A · Shopify<span class="who">Dominik + Michalina/Ilona</span></div>
+        <div class="cell blue">Audyt segm. · POPy v1 · UX debt</div>
+        <div class="cell blue">LP #1 · oferta #1 · QW1 live · UX v1</div>
+        <div class="cell blue">LP #2, #3 · POPy iter. · zestawy</div>
+        <div class="cell blue">LP optymalizacja · nowe POPy</div>
+        <div class="cell blue">Iteracje pre-BFCM · UX v2</div>
+        <div class="cell blue">BFCM kampanie · A/B testy CTA</div>
+        <div class="cell blue">Święta · gift sets · last-minute</div>
+      </div>
+
+      <div class="swimlane">
+        <div class="label">B · Email/SMS<span class="who">Dominik + Ilona</span></div>
+        <div class="cell orange">Audyt Klaviyo · ManyChat setup · SMS provider</div>
+        <div class="cell orange">QW5 flow live · QW7 ManyChat live</div>
+        <div class="cell orange">SMS marketing live · nagrody za zapis</div>
+        <div class="cell orange">Onboarding po sub. · flow extension</div>
+        <div class="cell orange">Lojalność komunikacja · SMS kampanie</div>
+        <div class="cell orange">BFCM email + SMS heavy cadence</div>
+        <div class="cell orange">Win-back nieaktywni · świąteczne</div>
+      </div>
+
+      <div class="swimlane">
+        <div class="label">C · SEO<span class="who">Dominik + Magda (lub agencja)</span></div>
+        <div class="cell green">KW research · audyt widoczności · brief</div>
+        <div class="cell green">2&ndash;3 artykuły live (long-tail commercial)</div>
+        <div class="cell green">Content cadence 4 artykuły/msc</div>
+        <div class="cell green">Analiza pozycji · klastry optym.</div>
+        <div class="cell green">Content cadence · linki wewn.</div>
+        <div class="cell green">Gift guides · porównania (BFCM)</div>
+        <div class="cell green">Treści retrospektywne · roczne</div>
+      </div>
+
+      <div class="swimlane">
+        <div class="label">D · LTV/Retencja<span class="who">Dominik (+ wsparcie)</span></div>
+        <div class="cell red">Cohort analysis · hard userzy · RFP P1/P2</div>
+        <div class="cell red">QW6 abandoned cart · P1 start (tech, SKU)</div>
+        <div class="cell red lime"><strong>P1 PoC</strong> · soft launch dla hard userów · P2 design</div>
+        <div class="cell red lime"><strong>P1 full launch</strong> · P2 build/testy</div>
+        <div class="cell red lime"><strong>P2 launch lojalność</strong> · P3 design</div>
+        <div class="cell red lime"><strong>P3 soft launch</strong> (MGM) · BFCM lojalność</div>
+        <div class="cell red">Tier reset · roczne podsumowanie</div>
+      </div>
+
+      <div class="swimlane">
+        <div class="label">Sync &amp; Review<span class="who">Dominik ↔ Antoni</span></div>
+        <div class="cell active">Weekly · checkpoint koniec mc</div>
+        <div class="cell active">Weekly · KPI #1</div>
+        <div class="cell active">Weekly · KPI #2</div>
+        <div class="cell lime">Quarterly Q3 review</div>
+        <div class="cell active">Weekly · pre-BFCM</div>
+        <div class="cell active">Weekly · BFCM live</div>
+        <div class="cell lime">Quarterly Q4 + H2 review + plan H1 '27</div>
+      </div>
+    </div>
+
+    <blockquote class="quote-block" style="background:var(--dark-2);color:rgba(255,255,255,.9);border-left-color:var(--lime);margin-top:64px">
+      „Filary A i B działają równolegle przez cały okres (każdy miesiąc). C (SEO) ma długi tail &mdash; pierwsze efekty po 3&ndash;6 miesiącach, więc start w czerwcu jest <em class='lime'>krytyczny</em>. D (LTV/Retencja) startuje od audytu w czerwcu, ale prawdziwe wdrożenia idą od sierpnia."
+      <span class="src" style="color:rgba(255,255,255,.5)">— Konsekwencja sekwencji projektów</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- 06 KPI -->
+<section id="kpi" class="dark">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">06 / KPI dashboard · cele kwartalne</span>
+    </div>
+
+    <h2 class="display">Cele. <em class="lime">Hard targety.</em></h2>
+    <p class="lead muted" style="margin-top:40px;color:rgba(255,255,255,.65)">Główne KPI per filar + KPI nadrzędne. „?" oznacza wymóg ustalenia z Antonim (sekcja decyzji otwartych). Próg = ostrzegawcze. Hard stop = decyzja o zmianie podejścia.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="name">KPI 01 · Nadrzędny</div>
+        <div class="target">5,5<small> mln PLN</small></div>
+        <div class="label">Przychód Shopify e-commerce H2 2026 (full year)</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">Target</span><span class="v">5,5 mln · 35% YoY</span></div>
+          <div class="row warn"><span class="k">Próg</span><span class="v">4,8 mln (+20% YoY)</span></div>
+          <div class="row stop"><span class="k">Hard stop</span><span class="v">4,1 mln (+5% YoY)</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 02 · Konwersja</div>
+        <div class="target">+10&ndash;15<small>%</small></div>
+        <div class="label">Conversion Rate (sesja → order) Shopify</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">Q3 cel</span><span class="v">+10% MoM trend</span></div>
+          <div class="row good"><span class="k">Q4 cel</span><span class="v">+15% vs. Q3</span></div>
+          <div class="row warn"><span class="k">Baseline</span><span class="v">do uzupełnienia</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 03 · Retencja</div>
+        <div class="target">18&ndash;20<small>%</small></div>
+        <div class="label">Udział hard-userów (≥6 zakupów) w przychodzie</div>
+        <div class="kpi-thresholds">
+          <div class="row"><span class="k">Baseline</span><span class="v">13%</span></div>
+          <div class="row good"><span class="k">Target EoY</span><span class="v">18&ndash;20%</span></div>
+          <div class="row warn"><span class="k">Próg</span><span class="v">15%</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 04 · 2. konwersja</div>
+        <div class="target">+X<small> pp</small></div>
+        <div class="label">% klientów z drugą konwersją (kwantyfikacja TBD)</div>
+        <div class="kpi-thresholds">
+          <div class="row warn"><span class="k">Baseline</span><span class="v">do ustalenia</span></div>
+          <div class="row"><span class="k">Driver</span><span class="v">P1 subskrypcja, P2 lojalność</span></div>
+          <div class="row"><span class="k">Pomiar</span><span class="v">cohort retention</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 05 · Email/SMS</div>
+        <div class="target">+X<small>%</small></div>
+        <div class="label">Rozrost bazy email + SMS (do kwantyfikacji)</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">Driver</span><span class="v">POPy, system nagród za zapis</span></div>
+          <div class="row"><span class="k">SMS start</span><span class="v">0 → X subscribers</span></div>
+          <div class="row"><span class="k">Email revenue share</span><span class="v">X% Shopify</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 06 · SEO</div>
+        <div class="target">+X<small> fraz</small></div>
+        <div class="label">Frazy w TOP3 SERP (Google) + LLM mention rate</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">TOP3 target</span><span class="v">do ustalenia</span></div>
+          <div class="row"><span class="k">Organic sessions</span><span class="v">+X% YoY</span></div>
+          <div class="row"><span class="k">LLM mention</span><span class="v">leading indicator</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 07 · Subskrypcja</div>
+        <div class="target">X<small> k PLN MRR</small></div>
+        <div class="label">MRR z subskrypcji do końca grudnia (P1)</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">PoC start</span><span class="v">Sierpień (hard userzy)</span></div>
+          <div class="row"><span class="k">Full launch</span><span class="v">Wrzesień (all SKU)</span></div>
+          <div class="row warn"><span class="k">Churn próg</span><span class="v">&lt;15% / msc</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 08 · Lojalność</div>
+        <div class="target">X<small>%</small></div>
+        <div class="label">% klientów aktywnych w programie lojalnościowym (P2)</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">Launch</span><span class="v">Październik</span></div>
+          <div class="row"><span class="k">Adoption EoY</span><span class="v">do ustalenia</span></div>
+          <div class="row"><span class="k">Redemption rate</span><span class="v">benchmark 20&ndash;30%</span></div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="name">KPI 09 · Efektywność</div>
+        <div class="target">+X<small>%</small></div>
+        <div class="label">Sprzedaż PLN per Traffic (efektywność ruchu)</div>
+        <div class="kpi-thresholds">
+          <div class="row good"><span class="k">Driver</span><span class="v">CR + AOV + segmentacja</span></div>
+          <div class="row"><span class="k">Baseline</span><span class="v">do uzupełnienia czerwiec</span></div>
+          <div class="row"><span class="k">Pomiar</span><span class="v">Revenue / Sessions</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 RYZYKA -->
+<section class="cream">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">07 / Ryzyka + mitygacje</span>
+    </div>
+
+    <h2 class="display">Co może <em class="blue">pójść nie tak.</em></h2>
+    <p class="lead muted" style="margin-top:32px">5 kluczowych ryzyk z planu z konkretnymi mitygacjami. Pokazane proporcjonalnie do priorytetu &mdash; nie wszystkie wymagają reakcji teraz.</p>
+
+    <div class="risk-grid">
+      <div class="risk">
+        <div class="head">Wysokie ryzyko</div>
+        <h5>Pojemność zespołu DRM</h5>
+        <p>6 osób w DRM, jedno e-commerce/performance (ja). Trzy duże projekty (P1/P2/P3) + 10 quick winsów w 7 m-cy to ambitne &mdash; nawet po deprioritization Allegro. Realna ścieżka tylko w sekwencji + scoping.</p>
+        <div class="mitigation">
+          <strong>Mitygacja</strong>
+          Sztywna priorytetyzacja P1→P2→P3. Quick winsy w równoległej kolejce. Zewnętrzny support na konkretny scope: agencja SEO (Filar C) lub freelance dev pod LP (Filar A). Decyzja budżetowa max do końca czerwca.
+        </div>
+      </div>
+
+      <div class="risk">
+        <div class="head">Wysokie ryzyko</div>
+        <h5>Decyzje technologiczne odkładane</h5>
+        <p>Apki Shopify dla P1 (Recharge/Bold/Skio) i P2 (Smile/LoyaltyLion/Yotpo) mają długie ogony konsekwencji (data lock-in, mechaniki, integracje). Migracja jest droga. Wybór &bdquo;szybko&rdquo; w sierpniu = długoterminowy dług.</p>
+        <div class="mitigation">
+          <strong>Mitygacja</strong>
+          RFP/shortlist w pierwszych 3 tygodniach czerwca. Decyzja P1 do 15 czerwca, P2 do 30 czerwca. Kryteria: cena, integracja z Klaviyo, polskie wsparcie, lokalizacja, support 24h. Demo każdej shortlist.
+        </div>
+      </div>
+
+      <div class="risk med">
+        <div class="head">Średnie ryzyko</div>
+        <h5>Bazowanie na założeniach bez baseline</h5>
+        <p>Wiele KPI ma „?". Bez baseline (CR, AOV, druga konwersja %, rozkład klientów) plany skalowania są spekulacją. Ryzyko: pobudowanie KPI na fałszywych fundamentach.</p>
+        <div class="mitigation">
+          <strong>Mitygacja</strong>
+          Czerwcowy sprint na baseline: cohort, segmentacja, raporty Shopify, Klaviyo flow data. Wszystkie „?" zamknięte do końca czerwca. Antoni walidacja: tabele baseline w Q3 kick-off.
+        </div>
+      </div>
+
+      <div class="risk med">
+        <div class="head">Średnie ryzyko</div>
+        <h5>Peak season (BFCM) overload</h5>
+        <p>Listopad to test wszystkich systemów &mdash; subskrypcja, lojalność, email, SMS, rekomendacje. Jeśli któryś nie jest stabilny, BFCM go zaorze (degradacja UX, error rate, churn).</p>
+        <div class="mitigation">
+          <strong>Mitygacja</strong>
+          Freeze nowych wdrożeń od 1.11. Stress testy systemów w październiku (load test, simulated traffic). Backup plan: jeśli P3 (rekomendacje) nie gotowe &mdash; pominąć w H2, włączyć w styczniu.
+        </div>
+      </div>
+
+      <div class="risk low">
+        <div class="head">Niskie ryzyko</div>
+        <h5>Drift Allegro (parked, ale generuje sprzedaż)</h5>
+        <p>Allegro nie ma inicjatyw rozwojowych, ale nadal generuje sprzedaż. Jeśli kanał spadnie istotnie (np. &minus;30% przez 2 m-ce z rzędu), może uderzyć w przychód całkowity nawet gdy Shopify rośnie zgodnie z planem.</p>
+        <div class="mitigation">
+          <strong>Mitygacja</strong>
+          Miesięczny sanity-check Allegro (~1h/msc) &mdash; tylko monitoring, bez akcji. Trigger powrotu do tematu: spadek &gt;30% przez 2 m-ce. Wówczas re-prioritization w styczniu '27.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 DECYZJE OTWARTE -->
+<section class="light">
+  <div class="container">
+    <div class="section-tag">
+      <span class="line"></span>
+      <span class="mono">08 / Decyzje otwarte · do walidacji</span>
+    </div>
+
+    <h2 class="display">7 decyzji <em class="blue">do Antoniego.</em></h2>
+    <p class="lead muted" style="margin-top:32px">Pytania, których notatki ze spotkania nie rozstrzygają. Lock-in planu wymaga odpowiedzi na te punkty &mdash; proponowane spotkanie 45-min w pierwszym tygodniu czerwca.</p>
+
+    <div class="decisions">
+      <div class="decision-row">
+        <div class="nr">01</div>
+        <div class="content">
+          <h5>Sekwencja projektów P1 → P2 → P3</h5>
+          <p>Czy potwierdzasz <strong>Subskrypcja → Lojalność → Rekomendacje</strong>? Czy widzisz inny układ? Alternatywa: odwrócenie P1↔P2 (lojalność pierwsza, ale tracimy ~2 m-ce wpływu na MRR). Alternatywa 2: P3 jako feature w P2 zamiast osobnego projektu.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-critical">Blocker H2</span>
+          <span class="badge badge-low">Deadline: T1 czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">02</div>
+        <div class="content">
+          <h5>Budżet H2 na narzędzia i support</h5>
+          <p>(a) Apki Shopify (subskrypcja, lojalność) — szacunkowo $200&ndash;500/msc każda. (b) Wsparcie zewnętrzne &mdash; agencja SEO (Filar C) lub freelance dev pod LP (Filar A). Bez tej decyzji nie wybieram tech stack.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-critical">Blocker P1+P2</span>
+          <span class="badge badge-low">Deadline: T1 czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">03</div>
+        <div class="content">
+          <h5>Resource SEO &mdash; kto pisze treści?</h5>
+          <p>Trzy opcje: (a) Magda jako copywriter SEO (jej kompetencje?), (b) zewnętrzny copywriter freelance, (c) agencja SEO. Bez decyzji nie mam cadence treści. Cel: 4 artykuły/msc od lipca.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-high">Blocker Filar C</span>
+          <span class="badge badge-low">Deadline: T2 czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">04</div>
+        <div class="content">
+          <h5>Allegro maintenance &mdash; kto, jak, jaka dolna granica?</h5>
+          <p>Kanał parked, ale nadal generuje sprzedaż. (a) Kto przejmuje miesięczny sanity-check &mdash; ja minimalnie? Ktoś z zespołu? Nikt? (b) Jaka „dolna granica" Allegro, poniżej której wracamy do tematu w H2 (proponuję: &minus;30% przez 2 m-ce).</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-mid">Maintenance</span>
+          <span class="badge badge-low">Deadline: T2 czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">05</div>
+        <div class="content">
+          <h5>Cele jakościowe &mdash; kwantyfikacja</h5>
+          <p>Ile fraz w TOP3 do końca roku? Ile +% bazy email (vs baseline)? +% drugiej konwersji? Bez konkretnych liczb KPI 04, 05, 06 są niemierzalne. Sugestia: ustalić na podstawie baseline z czerwca, walidacja w Q3 kick-off.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-high">Q3 kick-off</span>
+          <span class="badge badge-low">Deadline: koniec czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">06</div>
+        <div class="content">
+          <h5>Triple Whale &mdash; potwierdzenie + interim attribution</h5>
+          <p>Potwierdzenie, że na pewno odpuszczamy w H2. Jakim narzędziem mierzymy attribution multi-touch w międzyczasie &mdash; GA4 + UTMy + native Shopify analytics? Northbeam? Custom? Inaczej tracimy kontekst per kanał.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-mid">Attribution</span>
+          <span class="badge badge-low">Deadline: T2 czerwca</span>
+        </div>
+      </div>
+
+      <div class="decision-row">
+        <div class="nr">07</div>
+        <div class="content">
+          <h5>Resource graficzny dla LP (3&ndash;4 LP w Q3)</h5>
+          <p>Michalina/Ilona &mdash; czy są w stanie produkować 3&ndash;4 LP w lipcu&ndash;sierpniu? Każda LP wymaga: design (Michalina), grafiki produktowe (Ilona), copy (Dominik lub zewnętrzny copywriter). Jeśli capacity brak &mdash; sub-contract.</p>
+        </div>
+        <div class="meta">
+          <span class="badge badge-high">Blocker LP</span>
+          <span class="badge badge-low">Deadline: T2 czerwca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <h6>Filary H2 2026</h6>
+        <p>A · Shopify E-commerce<br>B · Email/SMS/Automation<br>C · SEO/Traffic organiczny<br>D · LTV/Retencja<br><span style="color:rgba(255,255,255,.4)">Allegro &mdash; parked / maintenance</span></p>
+      </div>
+      <div>
+        <h6>Owners</h6>
+        <p>Shopify · Dominik (lead) + Michalina/Ilona<br>Email/SMS · Dominik + ManyChat: Ilona/Magda<br>SEO · Dominik + content TBD<br>LTV/Retencja · Dominik<br>Strategia · Antoni</p>
+      </div>
+      <div>
+        <h6>Cykl pracy</h6>
+        <p>Czerwiec · Foundation + decyzje tech<br>Lipiec&ndash;Sierpień · Quick wins go live<br>Sierpień&ndash;Wrzesień · P1 (subskrypcja)<br>Październik · P2 (lojalność)<br>Listopad · BFCM + P3 (rekomendacje)<br>Grudzień · Świąteczne + zamknięcie</p>
+      </div>
+      <div>
+        <h6>Cele główne</h6>
+        <p>5,5 mln PLN Shopify (35% YoY)<br>18&ndash;20% udział hard-userów<br>+10&ndash;15% CR sesja→order<br>X k PLN MRR subskrypcja<br><span style="color:rgba(255,255,255,.4)">„X" = do ustalenia z Antonim</span></p>
+      </div>
+    </div>
+    <div class="sig">
+      <span>Dominik Operacz · DRM Genactiv · H2 2026</span>
+      <span>Wersja 1.1 · 2026-05-27</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const STORAGE_KEY='genactiv-roadmapa-h2-2026-todo';
+let state={};
+try{state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch(e){state={}}
+
+document.querySelectorAll('.todo-item').forEach(item=>{
+  const id=item.dataset.id;
+  if(!id)return;
+  const check=item.querySelector('.todo-check');
+  if(state[id]){
+    check.classList.add('checked');
+    item.classList.add('done');
+  }
+  check.addEventListener('click',()=>{
+    const isChecked=check.classList.toggle('checked');
+    item.classList.toggle('done',isChecked);
+    state[id]=isChecked;
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

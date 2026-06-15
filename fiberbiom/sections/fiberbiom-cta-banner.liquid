@@ -1,0 +1,116 @@
+<section class="fiberbiom-page fiberbiom-cta-banner" style="background-color: {{ section.settings.bg_color }};">
+  {%- comment -%} Decorative wave lines {%- endcomment -%}
+  <div class="fiberbiom-cta-banner__waves" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 60C240 20 480 100 720 60C960 20 1200 100 1440 60" stroke="white" stroke-width="2" fill="none"/>
+    </svg>
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 80C200 40 400 120 600 80C800 40 1000 120 1200 80C1400 40 1440 60 1440 60" stroke="white" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="fb-container">
+    <div class="fiberbiom-cta-banner__inner">
+      <div class="fiberbiom-cta-banner__content">
+        {%- if section.settings.product_name != blank -%}
+          <p class="fiberbiom-cta-banner__product-name">{{ section.settings.product_name }}</p>
+        {%- endif -%}
+
+        <h2 class="fiberbiom-cta-banner__title">{{ section.settings.title }}</h2>
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="fiberbiom-cta-banner__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          {% render 'fiberbiom-button',
+            label: section.settings.button_label,
+            url: section.settings.button_url,
+            variant: 'red',
+            size: 'large'
+          %}
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-cta-banner__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              widths: '375,750,1100',
+              sizes: '(max-width: 749px) 100vw, 45vw',
+              loading: 'lazy',
+              class: 'fiberbiom-cta-banner__image',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <div style="aspect-ratio: 3/4; max-width: 300px; background-color: rgba(255,255,255,0.1); border-radius: var(--fb-radius-card); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">
+            Dodaj zdjecie
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Banner CTA",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Nazwa produktu (nad tytulem)",
+      "default": "FIBERBIOM"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul",
+      "default": "Nadaj <strong>RYTM</strong> Twoim jelitom"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Podtytul",
+      "default": "Zamow 15-dniowa kuracje i poczuj roznice."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Tekst CTA",
+      "default": "ZAMOW 15% TANIEJ Z KODEM 'FIBERBIOM'"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link CTA"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Zdjecie (kobieta z produktem)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Alt text",
+      "default": "Kobieta z Fiberbiom"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Kolor tla bannera",
+      "default": "#F67FB4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Banner CTA"
+    }
+  ]
+}
+{% endschema %}

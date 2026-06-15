@@ -1,0 +1,99 @@
+<section class="fiberbiom-page fiberbiom-solution">
+  <div class="fb-container">
+    <div class="fiberbiom-solution__inner">
+      <div class="fiberbiom-solution__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fiberbiom-solution__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="fiberbiom-solution__title">{{ section.settings.title }}</h2>
+
+        <div class="fiberbiom-solution__body">
+          {{ section.settings.body }}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          {% render 'fiberbiom-button',
+            label: section.settings.button_label,
+            url: section.settings.button_url,
+            variant: 'red'
+          %}
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-solution__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              widths: '375,750,1100',
+              sizes: '(max-width: 749px) 100vw, 45vw',
+              loading: 'lazy',
+              class: 'fiberbiom-solution__image',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <div class="fiberbiom-solution__image" style="background-color: var(--fb-color-pink-soft); aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; color: var(--fb-color-text-light);">
+            Dodaj zdjecie
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Solution",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ROZWIAZANIE"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul H2",
+      "default": "POZNAJ FIBERBIOM"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Tresc",
+      "default": "<p>Fiberbiom laczy sile arabinogalaktanu — naturalnego blonnika z kory modrzewia — z unikalna formula Genactiv® Colostrum. 15 saszetek po 6g, ktore wystarczy rozpuscic w szklance wody. Prosty codzienny rytual dla Twoich jelit.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Tekst CTA",
+      "default": "WYPRUBUJ FIBERBIOM"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link CTA"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Zdjecie (kobieta z produktem)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Alt text",
+      "default": "Kobieta z opakowaniem Fiberbiom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Solution"
+    }
+  ]
+}
+{% endschema %}

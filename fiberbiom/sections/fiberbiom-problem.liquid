@@ -1,0 +1,99 @@
+<section class="fiberbiom-page fiberbiom-problem">
+  <div class="fb-container">
+    <div class="fiberbiom-problem__inner">
+      <div class="fiberbiom-problem__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              widths: '375,750,1100',
+              sizes: '(max-width: 749px) 100vw, 45vw',
+              loading: 'lazy',
+              class: 'fiberbiom-problem__image',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <div class="fiberbiom-problem__image" style="background-color: var(--fb-color-pink-soft); aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; color: var(--fb-color-text-light);">
+            Dodaj zdjecie
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-problem__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fiberbiom-problem__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="fiberbiom-problem__title">{{ section.settings.title }}</h2>
+
+        <div class="fiberbiom-problem__body">
+          {{ section.settings.body }}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          {% render 'fiberbiom-button',
+            label: section.settings.button_label,
+            url: section.settings.button_url,
+            variant: 'red'
+          %}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Problem",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "PROBLEM"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul H2",
+      "default": "BRAKUJE CI...REGULARNOSCI?"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Tresc",
+      "default": "<p>Miliony ludzi na swiecie zmagaja sie z nieregularnym wyprозnianiem. Napiecia, uczucie ciezkosci, brak komfortu. Watroba i jelita potrzebuja wsparcia — nie kolejnej kawy na pusty zoladek.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Tekst CTA",
+      "default": "POZNAJ FIBERBIOM"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link CTA"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Zdjecie produktu"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Alt text zdjecia",
+      "default": "Fiberbiom na rozowym tle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Problem"
+    }
+  ]
+}
+{% endschema %}

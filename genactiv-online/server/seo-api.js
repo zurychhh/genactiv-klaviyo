@@ -31,7 +31,7 @@ router.get('/audit', async (req, res) => {
     const limit = Math.min(parseInt(req.query.limit) || 100, 250);
 
     console.log(`[SEO API] Calling get-seo-audit (scope=${scope}, limit=${limit})`);
-    const result = await callTool('mcp__shopify-extended__get-seo-audit', { scope, limit });
+    const result = await callTool('mcp__shopify-extended__get-seo-audit', { scope, limit }, { raw: true });
 
     console.log(`[SEO API] Audit result type: ${typeof result}, keys: ${result && typeof result === 'object' ? Object.keys(result).join(',') : 'N/A'}`);
 
@@ -80,7 +80,7 @@ router.get('/organic', async (req, res) => {
       },
       order_bys: [{ metric: { metric_name: 'sessions' }, desc: true }],
       limit: 50
-    });
+    }, { raw: true });
 
     // The GA4 result can be a string (from MCP) or an object
     let parsed = result;
@@ -117,7 +117,7 @@ router.post('/fix/meta', async (req, res) => {
     const result = await callTool('mcp__shopify-extended__bulk-update-seo', {
       items,
       dryRun: dryRun || false
-    });
+    }, { raw: true });
     res.json(result);
   } catch (err) {
     console.error('[SEO API] Fix meta error:', err.message);
@@ -138,7 +138,7 @@ router.post('/fix/content', async (req, res) => {
     if (title !== undefined) args.title = title;
     if (tags !== undefined) args.tags = tags;
 
-    const result = await callTool('mcp__shopify-extended__update-product-content', args);
+    const result = await callTool('mcp__shopify-extended__update-product-content', args, { raw: true });
     res.json(result);
   } catch (err) {
     console.error('[SEO API] Fix content error:', err.message);
@@ -157,7 +157,7 @@ router.post('/fix/alt', async (req, res) => {
     const result = await callTool('mcp__shopify-extended__update-product-images', {
       productId,
       images
-    });
+    }, { raw: true });
     res.json(result);
   } catch (err) {
     console.error('[SEO API] Fix ALT error:', err.message);
@@ -169,7 +169,7 @@ router.post('/fix/alt', async (req, res) => {
 router.get('/products', async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit) || 50, 100);
-    const result = await callTool('mcp__shopify-extended__get-products', { limit });
+    const result = await callTool('mcp__shopify-extended__get-products', { limit }, { raw: true });
     res.json(result);
   } catch (err) {
     console.error('[SEO API] Products error:', err.message);

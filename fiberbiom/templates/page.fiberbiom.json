@@ -1,0 +1,178 @@
+{
+  "sections": {
+    "hero": {
+      "type": "fiberbiom-hero",
+      "settings": {
+        "eyebrow": "GENACTIV",
+        "title": "Regularne wypróżnianie każdego dnia!",
+        "subtitle": "Rozpuszczalny błonnik i Genactiv® Colostrum w jednej saszetce — dla prawidłowej pracy jelit.",
+        "button_label": "SPRAWDŹ FIBERBIOM",
+        "button_url": "",
+        "image_alt": "Opakowania Fiberbiom na tle łazienki",
+        "bg_color_start": "#A42D2B",
+        "bg_color_end": "#B84040"
+      }
+    },
+    "problem": {
+      "type": "fiberbiom-problem",
+      "settings": {
+        "eyebrow": "PROBLEM",
+        "title": "BRAKUJE CI...REGULARNOŚCI?",
+        "body": "<p>Miliony ludzi na świecie zmagają się z nieregularnym wypróżnianiem. Napięcia, uczucie ciężkości, brak komfortu. Wątroba i jelita potrzebują wsparcia — nie kolejnej kawy na pusty żołądek.</p>",
+        "button_label": "POZNAJ FIBERBIOM",
+        "button_url": "",
+        "image_alt": "Fiberbiom na różowym tle"
+      }
+    },
+    "solution": {
+      "type": "fiberbiom-solution",
+      "settings": {
+        "eyebrow": "ROZWIĄZANIE",
+        "title": "POZNAJ FIBERBIOM",
+        "body": "<p>Fiberbiom łączy siłę arabinogalaktanu — naturalnego błonnika z kory modrzewia — z unikalną formułą Genactiv® Colostrum. 15 saszetek po 6g, które wystarczy rozpuścić w szklance wody. Prosty codzienny rytuał dla Twoich jelit.</p>",
+        "button_label": "WYPRÓBUJ FIBERBIOM",
+        "button_url": "",
+        "image_alt": "Kobieta z opakowaniem Fiberbiom"
+      }
+    },
+    "how_it_works": {
+      "type": "fiberbiom-how-it-works",
+      "settings": {
+        "title": "JAK DZIAŁA FIBERBIOM?"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "feature_card",
+          "settings": {
+            "title": "Błonnik rozpuszczalny z kory modrzewia",
+            "body": "<p>Arabinogalaktan — naturalny prebiotyk, który wspiera mikrobiom jelitowy i regularne wypróżnianie.</p>",
+            "card_variant": "red"
+          }
+        },
+        "card_2": {
+          "type": "feature_card",
+          "settings": {
+            "title": "Genactiv® Colostrum",
+            "body": "<p>Opatentowana formuła colostrum bogatego w immunoglobuliny i czynniki wzrostu, które wspierają integralność błony śluzowej jelit.</p>",
+            "card_variant": "light"
+          }
+        },
+        "card_3": {
+          "type": "feature_card",
+          "settings": {
+            "title": "Synergia dwóch substancji",
+            "body": "<p>Połączenie błonnika i colostrum działa synergistycznie — błonnik karmi mikrobiom, colostrum wzmacnia barierę jelitową.</p>",
+            "card_variant": "burgundy"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"]
+    },
+    "stats": {
+      "type": "fiberbiom-stats",
+      "settings": {
+        "stat_number": "73%",
+        "claim": "badanych potwierdza — Fiberbiom wspomaga regularne wypróżnianie.*",
+        "footnote": "*Badanie kliniczne na 120 osobach, efekty po 30 dniach stosowania. Pełny raport dostępny na żądanie.",
+        "image_alt": "Badanie kliniczne Fiberbiom",
+        "bg_color": "#F67FB4",
+        "media_bg_color": "#EF3340"
+      }
+    },
+    "how_to_use": {
+      "type": "fiberbiom-how-to-use",
+      "settings": {
+        "eyebrow": "CODZIENNY RYTUAŁ",
+        "title": "JAK STOSOWAĆ FIBERBIOM?",
+        "body": "<p>Jedną saszetkę wsyp do pełnej 15-dniowej kuracji. Stosuj codziennie rano, wsypując do szklanki wody — wypij, poczekaj lub dodaj do koktajlu lub jogurtu. Proste!</p>",
+        "button_label": "KUP TERAZ",
+        "button_url": "",
+        "collage_caption": "Codzienny rytuał w 30 sekund!"
+      },
+      "blocks": {
+        "day_1": { "type": "day", "settings": { "label": "Pon", "alt": "Saszetka Fiberbiom — Poniedziałek" } },
+        "day_2": { "type": "day", "settings": { "label": "Wt", "alt": "Saszetka Fiberbiom — Wtorek" } },
+        "day_3": { "type": "day", "settings": { "label": "Śr", "alt": "Saszetka Fiberbiom — Środa" } },
+        "day_4": { "type": "day", "settings": { "label": "Czw", "alt": "Saszetka Fiberbiom — Czwartek" } },
+        "day_5": { "type": "day", "settings": { "label": "Pt", "alt": "Saszetka Fiberbiom — Piątek" } },
+        "day_6": { "type": "day", "settings": { "label": "Sob", "alt": "Saszetka Fiberbiom — Sobota" } },
+        "day_7": { "type": "day", "settings": { "label": "Ndz", "alt": "Saszetka Fiberbiom — Niedziela" } }
+      },
+      "block_order": ["day_1", "day_2", "day_3", "day_4", "day_5", "day_6", "day_7"]
+    },
+    "faq": {
+      "type": "fiberbiom-faq",
+      "settings": {
+        "badge_text": "Q&A"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Po jakim czasie zobaczę efekty?",
+            "answer": "<p>Efekt zauważysz już po kilku dniach. Pełna poprawa regularności może nastąpić po 10-14 dniach stosowania.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Czy produkt jest dla każdego?",
+            "answer": "<p>Fiberbiom jest dla osób dorosłych, które chcą wspomagać prawidłową pracę jelit i regularność wypróżnień. W przypadku alergii na białka mleka krowiego skonsultuj się z lekarzem.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Czym różni się od innych błonników?",
+            "answer": "<p>Nie pęcznieje, nie daje uczucia pełności. Arabinogalaktan jest błonnikiem rozpuszczalnym, który działa jako prebiotyk. W połączeniu z Genactiv® Colostrum wspiera nie tylko mikrobiom, ale też barierę jelitową.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    },
+    "cta_banner": {
+      "type": "fiberbiom-cta-banner",
+      "settings": {
+        "product_name": "FIBERBIOM",
+        "title": "Nadaj <strong>RYTM</strong> Twoim jelitom",
+        "subtitle": "Zamów 15-dniową kurację i poczuj różnicę.",
+        "button_label": "ZAMÓW 15% TANIEJ Z KODEM 'FIBERBIOM'",
+        "button_url": "",
+        "image_alt": "Kobieta z Fiberbiom",
+        "bg_color": "#F67FB4"
+      }
+    },
+    "bibliography": {
+      "type": "fiberbiom-bibliography",
+      "settings": {
+        "title": "BIBLIOGRAFIA"
+      },
+      "blocks": {
+        "ref_1": {
+          "type": "reference",
+          "settings": {
+            "reference": "Chen O, Sudakaran S, Blonquist T, Mah E, Purnell S, Astorquia A. (2023). Effect of arabinogalactan on the gut microbiome: A randomized, double-blind, placebo-controlled, crossover trial in healthy adults. Nutrition, 110, 112002."
+          }
+        },
+        "ref_2": {
+          "type": "reference",
+          "settings": {
+            "reference": "Dion C, Chappuis E, Ripoll C. (2016). Does larch arabinogalactan enhance immune function? A review of mechanistic and clinical trials. Nutrition & Metabolism, 13, 28."
+          }
+        }
+      },
+      "block_order": ["ref_1", "ref_2"]
+    }
+  },
+  "order": [
+    "hero",
+    "problem",
+    "solution",
+    "how_it_works",
+    "stats",
+    "how_to_use",
+    "faq",
+    "cta_banner",
+    "bibliography"
+  ]
+}

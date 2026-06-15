@@ -30,6 +30,7 @@ function clearStoredMessages() {
 
 const messages = loadMessages();
 let isProcessing = false;
+let currentAbortController = null;
 
 marked.setOptions({ breaks: true, gfm: true });
 
@@ -100,7 +101,13 @@ inputEl.addEventListener('keydown', (e) => {
   }
 });
 
-sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', () => {
+  if (isProcessing) {
+    stopRequest();
+  } else {
+    sendMessage();
+  }
+});
 
 // --- Thinking indicator ---
 let thinkingEl = null;
@@ -168,6 +175,8 @@ function sendMessage() {
 
   inputEl.value = '';
   inputEl.style.height = 'auto';
+
+  currentAbortController = new AbortController();
   setProcessing(true);
   showThinking('Przetwarzam...');
 
@@ -210,10 +219,13 @@ function sendMessage() {
 
   resetInactivityTimer(timeoutHandler);
 
+  const abortSignal = currentAbortController.signal;
+
   fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages })
+    body: JSON.stringify({ messages }),
+    signal: abortSignal
   }).then(response => {
     if (!response.ok) {
       if (response.status === 429) {
@@ -269,6 +281,11 @@ function sendMessage() {
                 showThinking('Analizuję wyniki...');
               }
 
+              if (event.type === 'aborted') {
+                finalize();
+                return;
+              }
+
               handleEvent(event, bubbleEl, toolsEl);
               if (event.type === 'text') fullText += event.data;
             } catch { /* ignore parse errors */ }
@@ -278,14 +295,24 @@ function sendMessage() {
         read();
       }).catch(err => {
         if (!finalized) {
-          finalize(`Błąd połączenia: ${err.message}`);
+          if (err.name === 'AbortError') {
+            fullText += '\n\n*[Przerwano przez użytkownika]*';
+            finalize();
+          } else {
+            finalize(`Błąd połączenia: ${err.message}`);
+          }
         }
       });
     }
 
     read();
   }).catch(err => {
-    finalize(`Błąd: ${err.message}`);
+    if (err.name === 'AbortError') {
+      fullText += '\n\n*[Przerwano przez użytkownika]*';
+      finalize();
+    } else {
+      finalize(`Błąd: ${err.message}`);
+    }
   });
 }
 
@@ -430,11 +457,30 @@ function appendMessage(role, content) {
   return msg;
 }
 
+function stopRequest() {
+  if (currentAbortController) {
+    currentAbortController.abort();
+    currentAbortController = null;
+  }
+}
+
 function setProcessing(state) {
   isProcessing = state;
-  sendBtn.disabled = state;
   inputEl.disabled = state;
-  if (!state) inputEl.focus();
+
+  if (state) {
+    sendBtn.disabled = false;
+    sendBtn.classList.add('stop-mode');
+    sendBtn.setAttribute('aria-label', 'Zatrzymaj');
+    sendBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>`;
+  } else {
+    sendBtn.disabled = false;
+    sendBtn.classList.remove('stop-mode');
+    sendBtn.setAttribute('aria-label', 'Wyślij');
+    sendBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`;
+    currentAbortController = null;
+    inputEl.focus();
+  }
 }
 
 function scrollToBottom() {

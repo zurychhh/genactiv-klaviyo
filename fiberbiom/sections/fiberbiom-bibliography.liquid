@@ -1,0 +1,62 @@
+<section class="fiberbiom-page fiberbiom-bibliography">
+  <div class="fb-container">
+    <h2 class="fiberbiom-bibliography__title">{{ section.settings.title }}</h2>
+
+    <ol class="fiberbiom-bibliography__list">
+      {%- for block in section.blocks -%}
+        <li class="fiberbiom-bibliography__item" {{ block.shopify_attributes }}>
+          {{ block.settings.reference }}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Bibliografia",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Tytul sekcji",
+      "default": "BIBLIOGRAFIA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reference",
+      "name": "Referencja",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "reference",
+          "label": "Pelna referencja (autor, tytul, zrodlo, rok)",
+          "default": "Autor A, et al. (2024). Tytul badania. Journal Name, 12(3), 45-67."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Bibliografia",
+      "blocks": [
+        {
+          "type": "reference",
+          "settings": {
+            "reference": "Chen O, Sudakaran S, Blonquist T, Mah E, Purnell S, Astorquia A. (2023). Effect of arabinogalactan on the gut microbiome: A randomized, double-blind, placebo-controlled, crossover trial in healthy adults. Nutrition, 110, 112002."
+          }
+        },
+        {
+          "type": "reference",
+          "settings": {
+            "reference": "Dion C, Chappuis E, Ripoll C. (2016). Does larch arabinogalactan enhance immune function? A review of mechanistic and clinical trials. Nutrition & Metabolism, 13, 28."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -5,13 +5,25 @@ Uses local server method (opens browser automatically)
 """
 
 from google_auth_oauthlib.flow import InstalledAppFlow
+from dotenv import load_dotenv
 import json
 import os
+import sys
+
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+load_dotenv()
+
+_client_id = os.environ.get("GOOGLE_OAUTH_CLIENT_ID") or os.environ.get("GA4_OAUTH_CLIENT_ID", "")
+_client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET") or os.environ.get("GA4_OAUTH_CLIENT_SECRET", "")
+
+if not _client_id or not _client_secret:
+    print("Ustaw GOOGLE_OAUTH_CLIENT_ID i GOOGLE_OAUTH_CLIENT_SECRET w .env")
+    sys.exit(1)
 
 CLIENT_CONFIG = {
     "installed": {
-        "client_id": "922442902358-nrq0c7it50uoiq0gfoeeii7lgfvcbq97.apps.googleusercontent.com",
-        "client_secret": "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",
+        "client_id": _client_id,
+        "client_secret": _client_secret,
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "redirect_uris": ["http://localhost"]
@@ -86,12 +98,14 @@ def main():
     print()
 
     # Also save legacy format
+    developer_token = os.environ.get("GOOGLE_ADS_DEVELOPER_TOKEN", "")
+    login_customer_id = os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "2538328866")
     legacy_data = {
         "refresh_token": credentials.refresh_token,
         "client_id": CLIENT_CONFIG["installed"]["client_id"],
         "client_secret": CLIENT_CONFIG["installed"]["client_secret"],
-        "developer_token": "uA8Vjo2J4B-3qVdH4LcEXQ",
-        "login_customer_id": "2538328866"
+        "developer_token": developer_token,
+        "login_customer_id": login_customer_id
     }
 
     legacy_path = os.path.join(script_dir, "google_ads_credentials.json")

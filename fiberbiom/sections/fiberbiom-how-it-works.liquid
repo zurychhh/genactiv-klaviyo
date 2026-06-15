@@ -1,0 +1,118 @@
+<section class="fiberbiom-page fiberbiom-how-it-works">
+  <div class="fb-container">
+    <h2 class="fiberbiom-how-it-works__title">{{ section.settings.title }}</h2>
+
+    <div class="fiberbiom-how-it-works__grid">
+      {%- for block in section.blocks -%}
+        <div
+          class="fiberbiom-how-it-works__card fiberbiom-how-it-works__card--{{ block.settings.card_variant }}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.icon_svg != blank -%}
+            <div class="fiberbiom-how-it-works__card-icon">
+              {{ block.settings.icon_svg }}
+            </div>
+          {%- else -%}
+            <div class="fiberbiom-how-it-works__card-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+                <path d="M24 14v20M14 24h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          {%- endif -%}
+
+          <h3 class="fiberbiom-how-it-works__card-title">{{ block.settings.title }}</h3>
+
+          {%- if block.settings.body != blank -%}
+            <div class="fiberbiom-how-it-works__card-body">
+              {{ block.settings.body }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Jak dziala",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul sekcji",
+      "default": "JAK DZIALA FIBERBIOM?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Karta skladnika",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tytul karty",
+          "default": "Skladnik"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Opis karty",
+          "default": "<p>Opis dzialania skladnika.</p>"
+        },
+        {
+          "type": "select",
+          "id": "card_variant",
+          "label": "Wariant koloru karty",
+          "options": [
+            { "value": "red", "label": "Czerwona" },
+            { "value": "light", "label": "Jasna (rozowa)" },
+            { "value": "burgundy", "label": "Burgundowa (ciemna)" }
+          ],
+          "default": "red"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Ikona SVG (inline HTML)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Jak dziala",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "Blonnik rozpuszczalny z kory modrzewia",
+            "body": "<p>Arabinogalaktan — naturalny prebiotyk, ktory wspiera mikrobiom jelitowy i regularne wyprозnianie.</p>",
+            "card_variant": "red"
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "Genactiv® Colostrum",
+            "body": "<p>Opatentowana formula colostrum bogatego w immunoglobuliny i czynniki wzrostu, ktore wspieraja integralnosc blony sluzowej jelit.</p>",
+            "card_variant": "light"
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "Synergia dwoch substancji",
+            "body": "<p>Polaczenie blonnika i colostrum dziala synergistycznie — blonnik kari mikrobiom, colostrum wzmacnia bariere jelitowa.</p>",
+            "card_variant": "burgundy"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

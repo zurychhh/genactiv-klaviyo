@@ -1,0 +1,876 @@
+/* ==========================================================================
+   FIBERBIOM LANDING PAGE — Design Tokens + All Sections
+   Scoped under .fiberbiom-page to avoid theme collisions
+   ========================================================================== */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* --- Design Tokens --- */
+.fiberbiom-page {
+  --fb-font: 'Poppins', system-ui, -apple-system, sans-serif;
+
+  /* Colors */
+  --fb-color-red: #EF3340;
+  --fb-color-red-dark: #D42D38;
+  --fb-color-hero-bg: #A42D2B;
+  --fb-color-hero-bg-end: #B84040;
+  --fb-color-pink: #F67FB4;
+  --fb-color-pink-medium: #E76C9C;
+  --fb-color-pink-soft: #FDE5E7;
+  --fb-color-pink-line: #FFA2D0;
+  --fb-color-card-light: #FFF0F3;
+  --fb-color-burgundy: #610C1A;
+  --fb-color-burgundy-title: #F49495;
+  --fb-color-burgundy-body: #F1CCDE;
+  --fb-color-white: #FFFFFF;
+  --fb-color-text: #1A1A1A;
+  --fb-color-text-muted: #404040;
+  --fb-color-text-light: #BFBFBF;
+
+  /* Spacing */
+  --fb-section-py: clamp(3rem, 8vw, 7.5rem);
+  --fb-container: 1280px;
+  --fb-container-px: clamp(1.25rem, 4vw, 2.5rem);
+  --fb-gap: clamp(1rem, 2vw, 2rem);
+  --fb-card-padding: clamp(1.5rem, 3vw, 2.5rem);
+
+  /* Radii */
+  --fb-radius-card: 16px;
+  --fb-radius-btn: 4px;
+  --fb-radius-badge: 8px;
+
+  font-family: var(--fb-font);
+  color: var(--fb-color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Utilities --- */
+.fiberbiom-page *,
+.fiberbiom-page *::before,
+.fiberbiom-page *::after {
+  box-sizing: border-box;
+}
+
+.fb-container {
+  width: 100%;
+  max-width: var(--fb-container);
+  margin-inline: auto;
+  padding-inline: var(--fb-container-px);
+}
+
+.fb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Typography --- */
+.fiberbiom-page h1,
+.fiberbiom-page h2,
+.fiberbiom-page h3 {
+  font-family: var(--fb-font);
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* --- Buttons (via snippet) --- */
+.fb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fb-font);
+  font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: none;
+  border-radius: var(--fb-radius-btn);
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.fb-btn:focus-visible {
+  outline: 3px solid var(--fb-color-red);
+  outline-offset: 3px;
+}
+
+.fb-btn--red {
+  background-color: var(--fb-color-red);
+  color: var(--fb-color-white);
+}
+
+.fb-btn--red:hover {
+  background-color: var(--fb-color-red-dark);
+  box-shadow: 0 4px 12px rgba(239, 51, 64, 0.3);
+}
+
+.fb-btn--white {
+  background-color: var(--fb-color-white);
+  color: var(--fb-color-red);
+}
+
+.fb-btn--white:hover {
+  background-color: #F5F5F5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fb-btn--large {
+  padding: 16px 40px;
+  font-size: clamp(0.875rem, 1.1vw, 1rem);
+}
+
+/* ==========================================================================
+   SECTION 1: HERO
+   ========================================================================== */
+.fiberbiom-hero {
+  background: linear-gradient(135deg, var(--fb-color-hero-bg), var(--fb-color-hero-bg-end));
+  color: var(--fb-color-white);
+  overflow: hidden;
+}
+
+.fiberbiom-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--fb-gap);
+  min-height: 500px;
+}
+
+.fiberbiom-hero__content {
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-hero__eyebrow {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.fiberbiom-hero__title {
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  color: var(--fb-color-white);
+}
+
+.fiberbiom-hero__subtitle {
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.125rem);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 480px;
+}
+
+.fiberbiom-hero__media {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fiberbiom-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 0 0 var(--fb-radius-card);
+}
+
+/* ==========================================================================
+   SECTION 2: PROBLEM
+   ========================================================================== */
+.fiberbiom-problem {
+  background-color: var(--fb-color-white);
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-problem__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.fiberbiom-problem__media {
+  position: relative;
+}
+
+.fiberbiom-problem__media::after {
+  content: '';
+  position: absolute;
+  inset: 20px -20px -20px 20px;
+  background-color: var(--fb-color-pink);
+  border-radius: var(--fb-radius-card);
+  z-index: 0;
+}
+
+.fiberbiom-problem__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: var(--fb-radius-card);
+  display: block;
+}
+
+.fiberbiom-problem__eyebrow {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fb-color-pink-medium);
+  margin-bottom: 0.75rem;
+}
+
+.fiberbiom-problem__title {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.625rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--fb-color-text);
+  margin-bottom: 1.25rem;
+}
+
+.fiberbiom-problem__body {
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.125rem);
+  color: var(--fb-color-text-muted);
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+/* ==========================================================================
+   SECTION 3: SOLUTION / ABOUT
+   ========================================================================== */
+.fiberbiom-solution {
+  background-color: var(--fb-color-white);
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-solution__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.fiberbiom-solution__media {
+  position: relative;
+  order: 2;
+}
+
+.fiberbiom-solution__media::after {
+  content: '';
+  position: absolute;
+  inset: 20px 20px -20px -20px;
+  background-color: var(--fb-color-pink);
+  border-radius: var(--fb-radius-card);
+  z-index: 0;
+}
+
+.fiberbiom-solution__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: var(--fb-radius-card);
+  display: block;
+}
+
+.fiberbiom-solution__content {
+  order: 1;
+}
+
+.fiberbiom-solution__eyebrow {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fb-color-pink-medium);
+  margin-bottom: 0.75rem;
+}
+
+.fiberbiom-solution__title {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.625rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--fb-color-text);
+  margin-bottom: 1.25rem;
+}
+
+.fiberbiom-solution__body {
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.125rem);
+  color: var(--fb-color-text-muted);
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+/* ==========================================================================
+   SECTION 4: HOW IT WORKS
+   ========================================================================== */
+.fiberbiom-how-it-works {
+  background-color: var(--fb-color-white);
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-how-it-works__title {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.625rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--fb-color-text);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.fiberbiom-how-it-works__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--fb-gap);
+}
+
+.fiberbiom-how-it-works__card {
+  border-radius: var(--fb-radius-card);
+  padding: var(--fb-card-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.fiberbiom-how-it-works__card--red {
+  background-color: var(--fb-color-red);
+  color: var(--fb-color-white);
+}
+
+.fiberbiom-how-it-works__card--light {
+  background-color: var(--fb-color-card-light);
+  color: var(--fb-color-text);
+}
+
+.fiberbiom-how-it-works__card--burgundy {
+  background-color: var(--fb-color-burgundy);
+  color: var(--fb-color-burgundy-title);
+}
+
+.fiberbiom-how-it-works__card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.fiberbiom-how-it-works__card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.fiberbiom-how-it-works__card-title {
+  font-size: clamp(1.25rem, 2vw + 0.25rem, 1.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.fiberbiom-how-it-works__card--burgundy .fiberbiom-how-it-works__card-title {
+  color: var(--fb-color-burgundy-title);
+}
+
+.fiberbiom-how-it-works__card-body {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.fiberbiom-how-it-works__card--burgundy .fiberbiom-how-it-works__card-body {
+  color: var(--fb-color-burgundy-body);
+}
+
+.fiberbiom-how-it-works__card--light .fiberbiom-how-it-works__card-body {
+  color: var(--fb-color-text-muted);
+}
+
+/* ==========================================================================
+   SECTION 5: STATS / SOCIAL PROOF
+   ========================================================================== */
+.fiberbiom-stats {
+  padding-block: var(--fb-section-py);
+  overflow: hidden;
+}
+
+.fiberbiom-stats__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--fb-gap);
+  align-items: center;
+  border-radius: var(--fb-radius-card);
+  overflow: hidden;
+}
+
+.fiberbiom-stats__content {
+  background-color: var(--fb-color-pink);
+  padding: var(--fb-card-padding);
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  color: var(--fb-color-white);
+}
+
+.fiberbiom-stats__number {
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--fb-color-white);
+  margin-bottom: 0.5rem;
+}
+
+.fiberbiom-stats__claim {
+  font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+}
+
+.fiberbiom-stats__footnote {
+  font-size: clamp(0.6875rem, 0.8vw, 0.8125rem);
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.fiberbiom-stats__media {
+  background-color: var(--fb-color-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  align-self: stretch;
+}
+
+.fiberbiom-stats__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fiberbiom-stats__placeholder {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fb-color-white);
+  opacity: 0.7;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ==========================================================================
+   SECTION 6: HOW TO USE
+   ========================================================================== */
+.fiberbiom-how-to-use {
+  background-color: var(--fb-color-white);
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-how-to-use__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+/* Week collage grid */
+.fiberbiom-how-to-use__collage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.fiberbiom-how-to-use__day {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--fb-color-pink-soft);
+}
+
+.fiberbiom-how-to-use__day-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fiberbiom-how-to-use__day-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 8px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+  color: var(--fb-color-white);
+  font-size: clamp(0.625rem, 0.8vw, 0.75rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fiberbiom-how-to-use__collage-caption {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 600;
+  color: var(--fb-color-red);
+  padding-top: 0.5rem;
+}
+
+.fiberbiom-how-to-use__content {
+  max-width: 520px;
+}
+
+.fiberbiom-how-to-use__eyebrow {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fb-color-pink-medium);
+  margin-bottom: 0.75rem;
+}
+
+.fiberbiom-how-to-use__title {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.625rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--fb-color-red);
+  margin-bottom: 1.25rem;
+}
+
+.fiberbiom-how-to-use__body {
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.125rem);
+  color: var(--fb-color-text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   SECTION 7: Q&A / FAQ
+   ========================================================================== */
+.fiberbiom-faq {
+  background-color: var(--fb-color-white);
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-faq__badge {
+  display: inline-block;
+  background-color: var(--fb-color-pink-medium);
+  color: var(--fb-color-white);
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: var(--fb-radius-badge);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.fiberbiom-faq__list {
+  max-width: 900px;
+}
+
+.fiberbiom-faq__item {
+  border-bottom: 1px solid var(--fb-color-pink-line);
+}
+
+.fiberbiom-faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  font-family: var(--fb-font);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-weight: 600;
+  color: var(--fb-color-pink-medium);
+  list-style: none;
+  gap: 1rem;
+  min-height: 44px;
+}
+
+.fiberbiom-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.fiberbiom-faq__item summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--fb-color-red);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  width: 24px;
+  text-align: center;
+}
+
+.fiberbiom-faq__item[open] summary::after {
+  content: '\2212'; /* minus sign */
+}
+
+.fiberbiom-faq__item:focus-visible {
+  outline: 3px solid var(--fb-color-red);
+  outline-offset: 2px;
+}
+
+.fiberbiom-faq__answer {
+  padding-bottom: 1.25rem;
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.0625rem);
+  color: var(--fb-color-text-muted);
+  line-height: 1.7;
+  max-width: 760px;
+}
+
+/* JSON-LD script should be invisible */
+.fiberbiom-faq__jsonld {
+  display: none;
+}
+
+/* ==========================================================================
+   SECTION 8: CTA BANNER
+   ========================================================================== */
+.fiberbiom-cta-banner {
+  background-color: var(--fb-color-pink);
+  color: var(--fb-color-white);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decorative wave lines */
+.fiberbiom-cta-banner__waves {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fiberbiom-cta-banner__waves svg {
+  position: absolute;
+  width: 120%;
+  left: -10%;
+  opacity: 0.15;
+}
+
+.fiberbiom-cta-banner__waves svg:nth-child(1) {
+  top: 15%;
+}
+
+.fiberbiom-cta-banner__waves svg:nth-child(2) {
+  bottom: 20%;
+}
+
+.fiberbiom-cta-banner__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--fb-gap);
+  position: relative;
+  z-index: 1;
+}
+
+.fiberbiom-cta-banner__content {
+  padding-block: var(--fb-section-py);
+}
+
+.fiberbiom-cta-banner__product-name {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.fiberbiom-cta-banner__title {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.625rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.fiberbiom-cta-banner__title strong {
+  font-weight: 800;
+}
+
+.fiberbiom-cta-banner__subtitle {
+  font-size: clamp(0.9375rem, 1vw + 0.25rem, 1.125rem);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 460px;
+}
+
+.fiberbiom-cta-banner__media {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.fiberbiom-cta-banner__image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   SECTION 9: BIBLIOGRAPHY
+   ========================================================================== */
+.fiberbiom-bibliography {
+  background-color: var(--fb-color-white);
+  padding-block: clamp(2rem, 4vw, 4rem);
+}
+
+.fiberbiom-bibliography__title {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fb-color-text);
+  margin-bottom: 1.5rem;
+}
+
+.fiberbiom-bibliography__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fiberbiom-bibliography__item {
+  font-size: clamp(0.6875rem, 0.8vw, 0.75rem);
+  line-height: 1.5;
+  color: var(--fb-color-text-light);
+}
+
+/* ==========================================================================
+   RESPONSIVE — Mobile first overrides
+   ========================================================================== */
+
+/* --- Mobile: < 750px --- */
+@media (max-width: 749px) {
+  .fiberbiom-hero__inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .fiberbiom-hero__media {
+    max-height: 320px;
+    overflow: hidden;
+  }
+
+  .fiberbiom-hero__image {
+    border-radius: 0;
+  }
+
+  .fiberbiom-problem__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .fiberbiom-problem__media {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  .fiberbiom-solution__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .fiberbiom-solution__media {
+    order: 1;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  .fiberbiom-solution__content {
+    order: 2;
+  }
+
+  .fiberbiom-how-it-works__grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  .fiberbiom-stats__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .fiberbiom-stats__media {
+    min-height: 240px;
+  }
+
+  .fiberbiom-how-to-use__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .fiberbiom-how-to-use__collage {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
+  .fiberbiom-cta-banner__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .fiberbiom-cta-banner__subtitle {
+    margin-inline: auto;
+  }
+
+  .fiberbiom-cta-banner__media {
+    max-height: 320px;
+    overflow: hidden;
+  }
+}
+
+/* --- Tablet: 750–989px --- */
+@media (min-width: 750px) and (max-width: 989px) {
+  .fiberbiom-how-it-works__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fiberbiom-how-it-works__card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin-inline: auto;
+  }
+}
+
+/* --- Desktop: >= 990px — base styles already target this --- */
+
+/* --- Large: >= 1400px --- */
+@media (min-width: 1400px) {
+  .fb-container {
+    max-width: 1280px;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .fiberbiom-page *,
+  .fiberbiom-page *::before,
+  .fiberbiom-page *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

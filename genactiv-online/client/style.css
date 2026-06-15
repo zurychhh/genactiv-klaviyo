@@ -594,6 +594,20 @@ body {
 #send-btn:active { transform: scale(0.93); }
 #send-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
+#send-btn.stop-mode {
+  background: #dc2626;
+  animation: pulse-stop 1.5s ease-in-out infinite;
+}
+
+#send-btn.stop-mode:hover {
+  background: #b91c1c;
+}
+
+@keyframes pulse-stop {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+}
+
 .input-hint {
   max-width: var(--content-max-width);
   margin: 0.4rem auto 0;

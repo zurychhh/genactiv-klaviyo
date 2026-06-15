@@ -211,7 +211,7 @@ function compressResult(obj) {
   return Object.keys(result).length > 0 ? result : undefined;
 }
 
-export async function callTool(prefixedToolName, args) {
+export async function callTool(prefixedToolName, args, { raw = false } = {}) {
   const { serverMap } = await getAllTools();
   const mapping = serverMap.get(prefixedToolName);
 
@@ -270,8 +270,8 @@ export async function callTool(prefixedToolName, args) {
       // not JSON, keep as-is
     }
 
-    // Fix 12: Better truncation warning
-    if (text.length > TOOL_RESULT_MAX_CHARS) {
+    // Fix 12: Better truncation warning (skip for raw/direct API calls)
+    if (!raw && text.length > TOOL_RESULT_MAX_CHARS) {
       const originalLength = text.length;
       console.log(`[MCP] Truncating ${serverName}.${originalName}: ${originalLength} → ${TOOL_RESULT_MAX_CHARS}`);
       text = text.slice(0, TOOL_RESULT_MAX_CHARS)

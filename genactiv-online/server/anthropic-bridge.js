@@ -25,11 +25,12 @@ async function rateLimitWait() {
 // --- Retry logic ---
 const RETRY_DELAYS = [3000, 6000, 12000];
 
-async function streamWithRetry(params, onText) {
+async function streamWithRetry(params, onText, signal) {
   for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt++) {
     try {
+      if (signal?.aborted) return [];
       await rateLimitWait();
-      const response = await anthropic.messages.create(params);
+      const response = await anthropic.messages.create(params, { signal });
 
       let currentToolUse = null;
       let currentToolInput = '';
@@ -38,6 +39,7 @@ async function streamWithRetry(params, onText) {
       let usage = null;
 
       for await (const event of response) {
+        if (signal?.aborted) break;
         switch (event.type) {
           case 'content_block_start':
             if (event.content_block.type === 'text') {
@@ -97,6 +99,12 @@ async function streamWithRetry(params, onText) {
 
       return contentBlocks;
     } catch (err) {
+      // Abort — don't retry, return what we have
+      if (signal?.aborted || err.name === 'AbortError') {
+        console.log('[Anthropic] Aborted — client disconnected');
+        return [];
+      }
+
       const is429 = err.status === 429
         || err.error?.type === 'rate_limit_error'
         || (typeof err.message === 'string' && err.message.includes('rate_limit'));
@@ -203,7 +211,7 @@ export async function processChat(messages, { signal, onText, onToolUse, onToolR
         messages: workingMessages,
         tools: tools.length > 0 ? tools : undefined,
         stream: true
-      }, onText);
+      }, onText, signal);
 
       const toolUseBlocks = contentBlocks.filter(b => b.type === 'tool_use');
 

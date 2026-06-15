@@ -18,12 +18,20 @@ Use refresh_token to get new access_token automatically (tiktok-ads-mcp handles 
 """
 
 import json
+import os
+import sys
 import urllib.parse
 import webbrowser
 import requests
+from dotenv import load_dotenv
 
-APP_ID = "7612480542698176529"
-APP_SECRET = "08f4714fd078a0b314a318acbb163648d9f20c8d"
+load_dotenv()
+
+APP_ID = os.environ.get("TIKTOK_APP_ID", "7612480542698176529")
+APP_SECRET = os.environ.get("TIKTOK_SECRET", "")
+if not APP_SECRET:
+    print("Ustaw TIKTOK_SECRET w .env (lub jako zmienna srodowiskowa)")
+    sys.exit(1)
 REDIRECT_URI = "https://genactiv.pl/"
 
 AUTH_URL = "https://business-api.tiktok.com/portal/auth"

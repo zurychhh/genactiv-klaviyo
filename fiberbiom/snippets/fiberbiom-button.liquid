@@ -1,0 +1,20 @@
+{%- comment -%}
+  Fiberbiom CTA Button snippet
+  Usage: {% render 'fiberbiom-button', label: 'CTA Text', url: '/products/fiberbiom', variant: 'red', size: 'large' %}
+  Variants: 'red' (default), 'white'
+  Sizes: 'default', 'large'
+{%- endcomment -%}
+
+{%- liquid
+  assign btn_label = label | default: 'Dowiedz sie wiecej'
+  assign btn_url = url | default: '#'
+  assign btn_variant = variant | default: 'red'
+  assign btn_size = size | default: 'default'
+-%}
+
+<a
+  href="{{ btn_url }}"
+  class="fb-btn fb-btn--{{ btn_variant }}{% if btn_size == 'large' %} fb-btn--large{% endif %}"
+>
+  {{- btn_label -}}
+</a>

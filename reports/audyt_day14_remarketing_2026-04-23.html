@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audyt Day 14 — Weryfikacja napraw remarketingowych | GenActiv</title>
+    <style>
+        :root {
+            --blue: #0066CC;
+            --red: #EF3340;
+            --green: #27ae60;
+            --navy: #1A3B5D;
+            --orange: #e67e22;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --muted: #7f8c8d;
+            --border: #e1e8ed;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, #2c5282 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header .subtitle { opacity: 0.85; font-size: 16px; }
+        .header .meta {
+            display: flex; gap: 24px; margin-top: 16px;
+            font-size: 13px; opacity: 0.75;
+        }
+
+        /* Score cards */
+        .score-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .score-card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .score-card.green { border-left-color: var(--green); }
+        .score-card.red { border-left-color: var(--red); }
+        .score-card.orange { border-left-color: var(--orange); }
+        .score-card.blue { border-left-color: var(--blue); }
+        .score-card .label { font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; }
+        .score-card .value { font-size: 32px; font-weight: 700; margin: 4px 0; }
+        .score-card .delta { font-size: 13px; }
+        .score-card .delta.up { color: var(--green); }
+        .score-card .delta.down { color: var(--red); }
+        .score-card .delta.neutral { color: var(--orange); }
+
+        /* Sections */
+        .section {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h3 {
+            font-size: 15px;
+            margin: 16px 0 10px;
+            color: var(--navy);
+        }
+
+        /* Status badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge.done { background: #e8f5e9; color: #2e7d32; }
+        .badge.partial { background: #fff3e0; color: #e65100; }
+        .badge.failed { background: #ffebee; color: #c62828; }
+        .badge.info { background: #e3f2fd; color: #1565c0; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 12px 0;
+        }
+        thead th {
+            background: var(--bg);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+        }
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        tbody tr:hover { background: #f8f9fa; }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+        /* Bar chart */
+        .bar-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+        .bar-label { width: 140px; font-size: 13px; text-align: right; flex-shrink: 0; }
+        .bar-track { flex: 1; height: 22px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; color: white; font-weight: 600; min-width: 30px; }
+        .bar-fill.google { background: var(--blue); }
+        .bar-fill.seo { background: var(--green); }
+        .bar-fill.direct { background: var(--muted); }
+        .bar-fill.instagram { background: #e1306c; }
+        .bar-fill.bing { background: #008373; }
+        .bar-fill.facebook { background: #1877f2; }
+        .bar-fill.email { background: var(--orange); }
+        .bar-fill.other { background: #95a5a6; }
+        .bar-value { width: 80px; font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .check-icon { font-size: 18px; flex-shrink: 0; width: 24px; text-align: center; }
+
+        /* Action items */
+        .action-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px 0;
+            display: flex;
+            gap: 14px;
+        }
+        .action-item .priority {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; color: white; flex-shrink: 0;
+        }
+        .action-item .priority.p0 { background: var(--red); }
+        .action-item .priority.p1 { background: var(--orange); }
+        .action-item .priority.p2 { background: var(--blue); }
+        .action-item .priority.p3 { background: var(--muted); }
+        .action-item .action-body h4 { font-size: 14px; margin-bottom: 4px; }
+        .action-item .action-body p { font-size: 13px; color: var(--muted); }
+        .action-item .action-body .tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* Klaviyo section */
+        .klaviyo-box {
+            background: #f0f7ff;
+            border: 1px solid #bdd7f1;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+        .klaviyo-box h4 { color: var(--blue); font-size: 14px; margin-bottom: 8px; }
+        .klaviyo-box p { font-size: 13px; }
+        .klaviyo-box code {
+            background: #dce8f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+        .code-block .comment { color: #64748b; }
+        .code-block .key { color: #7dd3fc; }
+        .code-block .str { color: #86efac; }
+        .code-block .bool { color: #fbbf24; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media print {
+            body { background: white; }
+            .container { max-width: 100%; padding: 0; }
+            .section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Audyt Day 14 — Weryfikacja napraw remarketingowych</h1>
+        <div class="subtitle">GenActiv.pl &mdash; Plan napraw wdrożony 7.04.2026</div>
+        <div class="meta">
+            <span>Data audytu: 23.04.2026</span>
+            <span>Okres analizy: 7–23.04.2026 (17 dni)</span>
+            <span>Źródła: Google Ads API &bull; GA4 &bull; Shopify Order API &bull; Klaviyo API</span>
+        </div>
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="score-row">
+        <div class="score-card green">
+            <div class="label">Attribution Rate (Shopify)</div>
+            <div class="value">38.8%</div>
+            <div class="delta up">&#9650; +30.8pp (baseline: 8%)</div>
+        </div>
+        <div class="score-card green">
+            <div class="label">Zamówienia z utm_source=google</div>
+            <div class="value">191</div>
+            <div class="delta up">&#9650; od 0 (baseline)</div>
+        </div>
+        <div class="score-card green">
+            <div class="label">Primary PURCHASE actions</div>
+            <div class="value">1</div>
+            <div class="delta up">&#9660; z 3 (poprawnie)</div>
+        </div>
+        <div class="score-card orange">
+            <div class="label">Campaign 3528 (sesje/mies.)</div>
+            <div class="value">~192</div>
+            <div class="delta neutral">&#9660; -83% (było ~1,106)</div>
+        </div>
+    </div>
+
+    <!-- STATUS NAPRAW -->
+    <div class="section">
+        <h2>&#9989; Status 4 napraw</h2>
+        <ul class="checklist">
+            <li>
+                <span class="check-icon">&#9989;</span>
+                <div>
+                    <strong>Naprawa #1: Conversion Actions → Secondary</strong>
+                    <span class="badge done">DONE</span><br>
+                    <span style="font-size:13px; color: var(--muted);">
+                        Shopping App Purchase (1) i Konwersje_Marzec zmienione na <code>primaryForGoal: false</code>.
+                        Teraz 1 Primary (GA4 purchase) zamiast 3. Konwersje spadły ~44% (oczekiwane ~50%).
+                    </span>
+                </div>
+            </li>
+            <li>
+                <span class="check-icon">&#9989;</span>
+                <div>
+                    <strong>Naprawa #2: Google Ads UTM tracking template</strong>
+                    <span class="badge done">DONE</span><br>
+                    <span style="font-size:13px; color: var(--muted);">
+                        191 zamówień Shopify z <code>utm_source=google</code> w 17 dni (baseline: 0).
+                        Performance Max generuje 177 zamówień z prawidłowym UTM.
+                    </span>
+                </div>
+            </li>
+            <li>
+                <span class="check-icon">&#9888;</span>
+                <div>
+                    <strong>Naprawa #3: Klaviyo UTM defaults</strong>
+                    <span class="badge partial">CZĘŚCIOWO</span><br>
+                    <span style="font-size:13px; color: var(--muted);">
+                        GA4 widzi 136 sesji z Klaviyo/newsletter (PostFix: 27+109). Shopify: tylko 4 zamówienia
+                        z UTM Klaviyo. Tracking włączony na 24/49 kampaniach, ale custom_tracking_params puste
+                        na większości — używane są Klaviyo defaults (mogą nie dodawać utm_source).
+                    </span>
+                </div>
+            </li>
+            <li>
+                <span class="check-icon">&#128270;</span>
+                <div>
+                    <strong>Naprawa #4: Phantom campaign "3528"</strong>
+                    <span class="badge partial">POPRAWA</span><br>
+                    <span style="font-size:13px; color: var(--muted);">
+                        Sesje spadły o 83% (z ~1,106/mies. do ~192/mies.). Nadal generuje 8 konwersji i 2,067 PLN
+                        w 17 dni. Źródło nie zostało zidentyfikowane — wymaga dalszej analizy (DevTools/GTM).
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- CONVERSION ACTIONS -->
+    <div class="section">
+        <h2>&#128200; Naprawa #1 — Google Ads Conversion Actions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Typ</th>
+                    <th>Primary</th>
+                    <th>Status</th>
+                    <th>Zmiana</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>genactiv.pl – GA4 (web) purchase</td>
+                    <td>GA4_PURCHASE</td>
+                    <td><strong style="color:var(--green)">&#9679; Primary</strong></td>
+                    <td>ENABLED</td>
+                    <td>Bez zmian (jedyny Primary)</td>
+                </tr>
+                <tr>
+                    <td>Google Shopping App Purchase (1)</td>
+                    <td>WEBPAGE</td>
+                    <td style="color:var(--muted)">&#9675; Secondary</td>
+                    <td>ENABLED</td>
+                    <td><span class="badge done">ZMIENIONE z Primary</span></td>
+                </tr>
+                <tr>
+                    <td>Konwersje_Marzec</td>
+                    <td>GA4_CUSTOM</td>
+                    <td style="color:var(--muted)">&#9675; Secondary</td>
+                    <td>ENABLED</td>
+                    <td><span class="badge done">ZMIENIONE z Primary</span></td>
+                </tr>
+                <tr>
+                    <td>Google Shopping App Purchase</td>
+                    <td>WEBPAGE</td>
+                    <td style="color:var(--muted)">&#9675; Secondary</td>
+                    <td>ENABLED</td>
+                    <td>Bez zmian</td>
+                </tr>
+                <tr>
+                    <td>Transactions (UA)</td>
+                    <td>UA_TRANSACTION</td>
+                    <td style="color:var(--muted)">&#9675; Secondary</td>
+                    <td>ENABLED</td>
+                    <td>Bez zmian</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">
+            <strong>Efekt:</strong> Primary conversions/30d spadły z 713 → ~399 (−44%). Oczekiwany spadek ~50%.
+            Kolumna "Conversions" w Google Ads jest teraz dokładniejsza — pokazuje tylko GA4 purchase.
+        </p>
+    </div>
+
+    <!-- GOOGLE ADS CAMPAIGNS -->
+    <div class="section">
+        <h2>&#128176; Google Ads — Performance po naprawach (30 dni)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kampania</th>
+                    <th class="num">Kliknięcia</th>
+                    <th class="num">Konwersje</th>
+                    <th class="num">Wartość</th>
+                    <th class="num">Koszt</th>
+                    <th class="num">ROAS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Performance Max GENACTIV</td>
+                    <td class="num">6,237</td>
+                    <td class="num">387</td>
+                    <td class="num">108,894 PLN</td>
+                    <td class="num">3,163 PLN</td>
+                    <td class="num"><strong style="color:var(--green)">34.4x</strong></td>
+                </tr>
+                <tr>
+                    <td>Remarketing_Test</td>
+                    <td class="num">354</td>
+                    <td class="num">8</td>
+                    <td class="num">2,911 PLN</td>
+                    <td class="num">759 PLN</td>
+                    <td class="num">3.8x</td>
+                </tr>
+                <tr>
+                    <td>UGC_Junior</td>
+                    <td class="num">237</td>
+                    <td class="num">3.7</td>
+                    <td class="num">1,076 PLN</td>
+                    <td class="num">839 PLN</td>
+                    <td class="num">1.3x</td>
+                </tr>
+                <tr>
+                    <td>Spoty15s (Video)</td>
+                    <td class="num">46</td>
+                    <td class="num">0</td>
+                    <td class="num">0 PLN</td>
+                    <td class="num">1,925 PLN</td>
+                    <td class="num" style="color:var(--red)">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SHOPIFY UTM -->
+    <div class="section">
+        <h2>&#128722; Naprawa #2 — Shopify UTM Attribution (7–23.04)</h2>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">
+            627 zamówień przeanalizowanych (100%) &bull; Journey Tracking Rate: 93%
+        </p>
+
+        <h3>Zamówienia wg utm_source</h3>
+        <div style="margin: 12px 0;">
+            <div class="bar-row">
+                <div class="bar-label">google</div>
+                <div class="bar-track"><div class="bar-fill google" style="width:78.6%">191</div></div>
+                <div class="bar-value">56,788 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">ig (Instagram)</div>
+                <div class="bar-track"><div class="bar-fill instagram" style="width:11.1%">27</div></div>
+                <div class="bar-value">6,288 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">bing</div>
+                <div class="bar-track"><div class="bar-fill bing" style="width:3.7%">9</div></div>
+                <div class="bar-value">3,003 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Instagram</div>
+                <div class="bar-track"><div class="bar-fill instagram" style="width:2.5%">6</div></div>
+                <div class="bar-value">1,450 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">fb (Facebook)</div>
+                <div class="bar-track"><div class="bar-fill facebook" style="width:1.6%">4</div></div>
+                <div class="bar-value">666 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Klaviyo</div>
+                <div class="bar-track"><div class="bar-fill email" style="width:0.8%">2</div></div>
+                <div class="bar-value">539 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">newsletter</div>
+                <div class="bar-track"><div class="bar-fill email" style="width:0.8%">2</div></div>
+                <div class="bar-value">439 PLN</div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">inne</div>
+                <div class="bar-track"><div class="bar-fill other" style="width:0.8%">2</div></div>
+                <div class="bar-value">599 PLN</div>
+            </div>
+        </div>
+
+        <h3>Podsumowanie atrybucji</h3>
+        <table>
+            <thead>
+                <tr><th>Kategoria</th><th class="num">Zamówienia</th><th class="num">%</th><th class="num">Revenue</th></tr>
+            </thead>
+            <tbody>
+                <tr style="font-weight:600;">
+                    <td>Z UTM (atrybucja znana)</td>
+                    <td class="num">243</td>
+                    <td class="num" style="color:var(--green)">38.8%</td>
+                    <td class="num">69,772 PLN</td>
+                </tr>
+                <tr>
+                    <td>Bez UTM (direct / unknown / organic)</td>
+                    <td class="num">384</td>
+                    <td class="num">61.2%</td>
+                    <td class="num">106,056 PLN</td>
+                </tr>
+                <tr style="font-weight:600; border-top: 2px solid var(--border);">
+                    <td>Razem</td>
+                    <td class="num">627</td>
+                    <td class="num">100%</td>
+                    <td class="num">175,828 PLN</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- GA4 SOURCES -->
+    <div class="section">
+        <h2>&#128202; GA4 — Sesje wg źródeł (7–23.04)</h2>
+        <table>
+            <thead>
+                <tr><th>Źródło / Medium</th><th class="num">Sesje</th><th class="num">Konwersje</th><th class="num">Revenue (PLN)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>google / organic</td><td class="num">5,332</td><td class="num">88</td><td class="num">23,748</td></tr>
+                <tr style="background:#f0f7ff;"><td><strong>google / cpc</strong></td><td class="num"><strong>4,221</strong></td><td class="num"><strong>155</strong></td><td class="num"><strong>45,091</strong></td></tr>
+                <tr><td>l.instagram.com / referral</td><td class="num">2,340</td><td class="num">49</td><td class="num">11,317</td></tr>
+                <tr><td>(direct) / (none)</td><td class="num">1,236</td><td class="num">40</td><td class="num">11,776</td></tr>
+                <tr><td>bing / cpc</td><td class="num">592</td><td class="num">14</td><td class="num">5,191</td></tr>
+                <tr><td>tiktok / paidsocial</td><td class="num">436</td><td class="num">0</td><td class="num">0</td></tr>
+                <tr style="background:#fff8f0;"><td><strong>newsletter / email</strong></td><td class="num"><strong>109</strong></td><td class="num"><strong>12</strong></td><td class="num"><strong>3,841</strong></td></tr>
+                <tr style="background:#fff8f0;"><td><strong>Klaviyo / (medium?)</strong></td><td class="num"><strong>27</strong></td><td class="num"><strong>4</strong></td><td class="num"><strong>1,111</strong></td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">
+            <strong>Uwaga:</strong> Sesje z Klaviyo pojawiają się pod dwoma źródłami: <code>newsletter</code> (109 sesji)
+            i <code>Klaviyo</code> (27 sesji). Niespójność nazewnictwa UTM — różne kampanie używają różnych wartości.
+        </p>
+    </div>
+
+    <!-- CAMPAIGN 3528 -->
+    <div class="section">
+        <h2>&#128123; Naprawa #4 — Phantom Campaign "3528"</h2>
+        <table>
+            <thead>
+                <tr><th>Okres</th><th class="num">Sesje</th><th class="num">~Sesje/mies.</th><th class="num">Konwersje</th><th class="num">Revenue (PLN)</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Baseline (sty–6.04, 90 dni)</td>
+                    <td class="num">3,319</td>
+                    <td class="num">~1,106</td>
+                    <td class="num">122</td>
+                    <td class="num">33,049</td>
+                </tr>
+                <tr style="background:#f0fff4;">
+                    <td>Post-fix (7–23.04, 17 dni)</td>
+                    <td class="num">109</td>
+                    <td class="num" style="color:var(--green)">~192</td>
+                    <td class="num">8</td>
+                    <td class="num">2,067</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">
+            Spadek ~83%. Campaign 3528 nie zniknęła — nadal generuje sesje. Prawdopodobne źródło:
+            skrypt GTM, Pandectes, lub Shopify pixel wstrzykujący <code>utm_campaign=3528</code> do wybranych hitów.
+            Wymaga analizy z Chrome DevTools (Network tab + GTM debugger).
+        </p>
+    </div>
+
+    <!-- KLAVIYO UTM — DEEP DIVE -->
+    <div class="section">
+        <h2>&#128231; Naprawa #3 — Klaviyo UTM (deep dive)</h2>
+
+        <h3>Stan obecny kampanii Klaviyo</h3>
+        <p style="font-size:13px; margin-bottom:12px;">
+            Analiza 49 wysłanych kampanii email z Klaviyo API:
+        </p>
+        <table>
+            <thead>
+                <tr><th>Ustawienie</th><th class="num">Kampanie</th><th class="num">%</th><th>Uwagi</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>add_tracking_params: true</code>, puste custom params</td>
+                    <td class="num">23</td>
+                    <td class="num">47%</td>
+                    <td>Używają Klaviyo defaults (mogą być puste!)</td>
+                </tr>
+                <tr>
+                    <td><code>add_tracking_params: false</code></td>
+                    <td class="num">25</td>
+                    <td class="num">51%</td>
+                    <td style="color:var(--red)"><strong>Brak UTM na linkach</strong></td>
+                </tr>
+                <tr>
+                    <td><code>add_tracking_params: true</code> + custom UTM</td>
+                    <td class="num">1</td>
+                    <td class="num">2%</td>
+                    <td>Jedyna z jawnym <code>utm_source=Klaviyo</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="klaviyo-box" style="margin-top:16px;">
+            <h4>Problem: 51% kampanii nie ma UTM w ogóle</h4>
+            <p>
+                25 z 49 kampanii wysłanych ma <code>add_tracking_params: false</code> — linki idą bez
+                żadnych parametrów UTM. Klaviyo defaults (gdy <code>custom_tracking_params</code> jest puste)
+                mogą, ale nie muszą dodawać UTM — zależy od ustawień konta w Klaviyo UI
+                (<strong>Settings → UTM Tracking</strong>).
+            </p>
+        </div>
+
+        <h3>Opcje naprawy UTM w Klaviyo</h3>
+
+        <div class="klaviyo-box">
+            <h4>Opcja A: Ustawienia globalne w Klaviyo UI (REKOMENDOWANE)</h4>
+            <p>
+                W panelu Klaviyo: <strong>Settings → UTM Tracking → Enable UTM parameters</strong>.<br>
+                Ustawić domyślne wartości:
+            </p>
+            <ul style="font-size:13px; margin: 8px 0 0 20px;">
+                <li><code>utm_source</code> = <strong>klaviyo</strong></li>
+                <li><code>utm_medium</code> = <strong>email</strong></li>
+                <li><code>utm_campaign</code> = <strong>{{ campaign.name }}</strong> (dynamiczny)</li>
+            </ul>
+            <p style="margin-top:8px; font-size:13px;">
+                Dotyczy WSZYSTKICH nowych kampanii i flows automatycznie. Najszybsza opcja — 2 minuty w UI.
+            </p>
+        </div>
+
+        <div class="klaviyo-box">
+            <h4>Opcja B: Programatycznie przez Klaviyo MCP API</h4>
+            <p>
+                Przy tworzeniu kampanii z <code>create_campaign</code> można ustawić <code>tracking_options</code>
+                z custom_tracking_params:
+            </p>
+            <div class="code-block">
+<span class="key">"tracking_options"</span>: {
+  <span class="key">"value"</span>: {
+    <span class="key">"add_tracking_params"</span>: <span class="bool">true</span>,
+    <span class="key">"custom_tracking_params"</span>: [
+      { <span class="key">"type"</span>: <span class="str">"static"</span>,  <span class="key">"name"</span>: <span class="str">"utm_source"</span>,   <span class="key">"value"</span>: <span class="str">"klaviyo"</span> },
+      { <span class="key">"type"</span>: <span class="str">"static"</span>,  <span class="key">"name"</span>: <span class="str">"utm_medium"</span>,   <span class="key">"value"</span>: <span class="str">"email"</span> },
+      { <span class="key">"type"</span>: <span class="str">"dynamic"</span>, <span class="key">"name"</span>: <span class="str">"utm_campaign"</span>, <span class="key">"value"</span>: <span class="str">"campaign_name"</span> }
+    ],
+    <span class="key">"is_tracking_clicks"</span>: <span class="bool">true</span>,
+    <span class="key">"is_tracking_opens"</span>: <span class="bool">true</span>
+  }
+}
+            </div>
+            <p style="font-size:13px;">
+                Dynamiczne wartości dostępne: <code>campaign_id</code>, <code>campaign_name</code>,
+                <code>campaign_name_id</code>, <code>campaign_name_send_day</code>, <code>email_subject</code>,
+                <code>message_type</code>, <code>profile_id</code>.
+            </p>
+        </div>
+
+        <div class="klaviyo-box">
+            <h4>Opcja C: Ręczne UTM w linkach HTML szablonów</h4>
+            <p style="font-size:13px;">
+                Dodawanie <code>?utm_source=klaviyo&utm_medium=email&utm_campaign=NAZWA</code> do każdego linka
+                w szablonie HTML. Najbardziej niezawodne, ale wymaga edycji każdego szablonu osobno.
+                Można łączyć z Opcją A jako fallback.
+            </p>
+        </div>
+
+        <div style="background:#fff3e0; border:1px solid #ffcc80; border-radius:8px; padding:14px; margin-top:16px;">
+            <p style="font-size:13px;">
+                <strong>REKOMENDACJA:</strong> Opcja A (globalne defaults) + Opcja B (API dla nowych kampanii tworzonych przez MCP).
+                Dzięki temu WSZYSTKIE przyszłe emaile będą miały spójne UTM, a kampanie tworzone przez nas
+                automatycznie dostaną prawidłowe tracking params.
+            </p>
+        </div>
+    </div>
+
+    <!-- NEXT STEPS -->
+    <div class="section">
+        <h2>&#128640; Co dalej — Plan działań</h2>
+
+        <div class="action-item">
+            <div class="priority p0">P0</div>
+            <div class="action-body">
+                <h4>Klaviyo: Włączyć globalne UTM defaults</h4>
+                <p>Klaviyo UI → Settings → UTM Tracking. Ustawić utm_source=klaviyo, utm_medium=email, utm_campaign=dynamiczny.
+                Dotyczy WSZYSTKICH nowych kampanii i flows. Wymaga 2 min w panelu.</p>
+                <span class="tag">Klaviyo UI</span> <span class="tag">~2 min</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p0">P0</div>
+            <div class="action-body">
+                <h4>Zweryfikować Klaviyo UTM po włączeniu defaults</h4>
+                <p>Wysłać testowy email → sprawdzić czy linki mają UTM parametry → potwierdzić w GA4 Realtime.</p>
+                <span class="tag">Klaviyo + GA4</span> <span class="tag">~10 min</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p1">P1</div>
+            <div class="action-body">
+                <h4>Campaign 3528 — identyfikacja źródła</h4>
+                <p>Otworzyć genactiv.pl w Chrome → DevTools Network tab → szukać requestów do GA4 z <code>campaign=3528</code>.
+                Sprawdzić GTM container (GTM-5W5Z2ML) i Pandectes scripts. Spadek 83% ale nie 100%.</p>
+                <span class="tag">Chrome DevTools</span> <span class="tag">~30 min</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p1">P1</div>
+            <div class="action-body">
+                <h4>Deploy Google Ads MCP write tools na Railway</h4>
+                <p>Commit <code>862002a</code> z 11 nowymi write tools (budgets, campaigns, ad groups, RSA, keywords).
+                Wymaga <code>railway up</code> z project root. Po deploy — test dry_run.</p>
+                <span class="tag">Railway</span> <span class="tag">~5 min</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p1">P1</div>
+            <div class="action-body">
+                <h4>TikTok Ads MCP — wygenerować OAuth token</h4>
+                <p>Odpalić <code>python3 generate_tiktok_token.py</code>, przejść OAuth flow w przeglądarce,
+                ustawić token na Railway. TikTok generuje 436 sesji/17 dni ale 0 konwersji w GA4.</p>
+                <span class="tag">OAuth</span> <span class="tag">~5 min</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p2">P2</div>
+            <div class="action-body">
+                <h4>Pandectes Consent Mode — zmiana konfiguracji</h4>
+                <p><code>cookiesBlockedByDefault=7</code> blokuje WSZYSTKIE opcjonalne cookies.
+                Rozważyć zmianę na analytics_storage GRANTED domyślnie (kategoria 2 = Performance).
+                Wymaga decyzji prawnej. Wpływ: lepsza atrybucja GA4 i Google Ads.</p>
+                <span class="tag">Pandectes</span> <span class="tag">Decyzja biznesowa</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p2">P2</div>
+            <div class="action-body">
+                <h4>Enhanced Conversions (Google Ads)</h4>
+                <p>Wdrożyć Enhanced Conversions na stronie checkout — haszowane dane klienta (email, telefon)
+                wysyłane do Google Ads. Poprawia atrybucję konwersji, szczególnie cross-device.
+                Nie wymaga cookies.</p>
+                <span class="tag">Google Ads + GTM</span> <span class="tag">Implementacja</span>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="priority p3">P3</div>
+            <div class="action-body">
+                <h4>Audyt Day 30 — pełna re-weryfikacja</h4>
+                <p>Zaplanować na ~7.05.2026. Sprawdzić: (1) Klaviyo UTM coverage po zmianach,
+                (2) Attribution rate (cel: >50%), (3) Campaign 3528 status,
+                (4) Enhanced Conversions efektywność.</p>
+                <span class="tag">Audyt</span> <span class="tag">~7.05.2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BASELINE vs NOW -->
+    <div class="section">
+        <h2>&#128203; Porównanie: Baseline vs Now</h2>
+        <table>
+            <thead>
+                <tr><th>Metryka</th><th class="num">Baseline (7.04)</th><th class="num">Teraz (23.04)</th><th class="num">Zmiana</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Primary PURCHASE actions</td>
+                    <td class="num">3</td>
+                    <td class="num" style="color:var(--green)"><strong>1</strong></td>
+                    <td class="num"><span class="badge done">-2</span></td>
+                </tr>
+                <tr>
+                    <td>Primary conversions / 30d</td>
+                    <td class="num">713</td>
+                    <td class="num"><strong>~399</strong></td>
+                    <td class="num">-44%</td>
+                </tr>
+                <tr>
+                    <td>Zamówienia Shopify z utm_source=google</td>
+                    <td class="num" style="color:var(--red)">0</td>
+                    <td class="num" style="color:var(--green)"><strong>191</strong></td>
+                    <td class="num"><span class="badge done">od zera</span></td>
+                </tr>
+                <tr>
+                    <td>Attribution rate (Shopify UTM)</td>
+                    <td class="num">8%</td>
+                    <td class="num" style="color:var(--green)"><strong>38.8%</strong></td>
+                    <td class="num"><span class="badge done">+30.8pp</span></td>
+                </tr>
+                <tr>
+                    <td>Campaign 3528 sesje / mies.</td>
+                    <td class="num">~1,106</td>
+                    <td class="num"><strong>~192</strong></td>
+                    <td class="num">-83%</td>
+                </tr>
+                <tr>
+                    <td>Klaviyo kampanie z UTM tracking ON</td>
+                    <td class="num">~39%</td>
+                    <td class="num" style="color:var(--orange)"><strong>~49%</strong></td>
+                    <td class="num"><span class="badge partial">+10pp</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Raport wygenerowany automatycznie &bull; 23.04.2026 &bull; Claude Code + MCP (Google Ads, GA4, Shopify Extended, Klaviyo)<br>
+        Dane: Google Ads API v23, GA4 Data API, Shopify Admin API, Klaviyo API &bull; GenActiv.pl
+    </div>
+
+</div>
+</body>
+</html>

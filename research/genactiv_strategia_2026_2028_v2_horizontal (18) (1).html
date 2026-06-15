@@ -1,0 +1,3969 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genactiv 2026–2028 — Od Diagnozy do Healthy Gut Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Core ink palette */
+    --ink: #0F0F12;
+    --ink-800: #1A1A22;
+    --ink-700: #2C2C33;
+    --ink-500: #6B6B75;
+    --ink-400: #8B8B96;
+    --ink-300: #B8B8C0;
+    --ink-200: #E2E2E6;
+    --ink-100: #F2F2F5;
+    --ink-50: #FAFAFB;
+    --white: #FFFFFF;
+
+    /* Substance colors — spine of entire document */
+    --col: #1F3864;          /* Noga 1 Colostrum — ciemnoszafir */
+    --col-dark: #16294A;
+    --col-light: #E8EEF8;
+    --col-bg: #F5F8FD;
+
+    --fib: #2D8659;          /* Noga 2 Fiberbiom — zielony */
+    --fib-dark: #1E6A44;
+    --fib-light: #E6F3EC;
+    --fib-bg: #F2F9F5;
+
+    --lak: #C2590A;          /* Noga 3 Laktoferyna — pomarańcz */
+    --lak-dark: #964406;
+    --lak-light: #FDEDD9;
+    --lak-bg: #FEF7EC;
+
+    --mk: #7C3AED;           /* Noga 4 Mleko Klaczy — fiolet */
+    --mk-dark: #5B21B6;
+    --mk-light: #EEE6FD;
+    --mk-bg: #F6F2FE;
+
+    --ghi: #B91C5C;          /* Noga 5 Gut Health Inne — bordowy */
+    --sur: #6B7280;          /* Noga 6 Surowiec — szary */
+    --ghi-dark: #871246;
+    --ghi-light: #FBE4EC;
+    --ghi-bg: #FDF2F6;
+
+    --cross: #334155;        /* Inicjatywy przekrojowe — grafit */
+    --cross-light: #E7EBF0;
+
+    --red: #C8102E;          /* Akcent diagnoza (spójne z Diagnoza_Big5) */
+    --red-light: #FDF2F4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--ink);
+    background: var(--ink-50);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'tnum' 1, 'ss01' 1;
+  }
+
+  /* ═════════════════ LAYOUT ═════════════════ */
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 80px 0; border-top: 1px solid var(--ink-200); }
+  .section:first-of-type { border-top: none; }
+
+  /* ═════════════════ SECTION HEADER ═════════════════ */
+  .sec-num { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-500); font-weight: 700; margin-bottom: 12px; }
+  .sec-num .dot { display: inline-block; width: 6px; height: 6px; background: var(--col); border-radius: 50%; margin-right: 10px; vertical-align: middle; }
+  .sec-title { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1.1; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 16px; font-weight: 400; }
+  .sec-subtitle { font-size: 16px; color: var(--ink-500); max-width: 820px; line-height: 1.65; font-weight: 400; margin-bottom: 48px; }
+  .sec-subtitle strong { color: var(--ink); font-weight: 600; }
+
+  /* ═════════════════ HERO ═════════════════ */
+  .hero {
+    background: var(--ink);
+    color: var(--white);
+    padding: 100px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: -10%; bottom: 0;
+    width: 60%;
+    background: radial-gradient(circle at 30% 50%, rgba(200, 16, 46, 0.35) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-kicker {
+    font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); font-weight: 700; margin-bottom: 24px;
+  }
+  .hero-kicker .bar { display: inline-block; width: 24px; height: 2px; background: var(--red); vertical-align: middle; margin-right: 14px; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 68px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    max-width: 1100px;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .hero h1 em { font-style: italic; color: #FF6B7C; }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    max-width: 760px;
+    line-height: 1.65;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+
+  /* ═════════════════ STICKY NAV ═════════════════ */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ink-200);
+  }
+  .nav-inner {
+    max-width: 1400px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; gap: 32px;
+  }
+  .nav-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--ink-500);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .nav-brand::after {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--red);
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  .nav-links {
+    display: flex; gap: 4px; margin-left: auto;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    font-size: 12px;
+    color: var(--ink-500);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .nav-links a:hover {
+    color: var(--ink);
+    background: var(--ink-100);
+  }
+
+  /* ═════════════════ DIAGNOZA ═════════════════ */
+  .diag-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .diag-card {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 24px 22px;
+    position: relative;
+    display: flex; flex-direction: column;
+    min-height: 340px;
+    transition: all 0.2s ease;
+  }
+  .diag-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 8px 24px rgba(200, 16, 46, 0.08);
+    transform: translateY(-2px);
+  }
+  .diag-num {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .diag-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+  }
+  .diag-preview {
+    font-size: 12.5px;
+    color: var(--ink-500);
+    line-height: 1.6;
+    flex: 1;
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .diag-wniosek {
+    background: var(--ink);
+    color: var(--white);
+    padding: 12px 14px;
+    margin: 0 -22px -24px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .diag-wniosek-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .diag-wniosek strong { color: var(--white); border-bottom: 1.5px solid var(--red); }
+
+  /* ═════════════════ WNIOSKI ═════════════════ */
+  .wnioski-intro {
+    background: var(--white);
+    border-left: 4px solid var(--ink);
+    padding: 24px 28px;
+    font-size: 15px;
+    color: var(--ink-700);
+    max-width: 1000px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+  .wnioski-intro strong { color: var(--ink); font-weight: 700; }
+
+  /* ═════════════════ KLAMRA: PO CO TO ROBIMY ═════════════════ */
+  .diag-closing {
+    background: var(--ink);
+    color: var(--white);
+    padding: 52px 56px 56px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .diag-closing::before {
+    content: '';
+    position: absolute;
+    top: 0; right: -5%;
+    width: 45%; height: 100%;
+    background: radial-gradient(circle at 60% 40%, rgba(200,16,46,0.22) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .diag-closing-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+    font-weight: 400;
+  }
+  .diag-closing p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.88);
+    font-weight: 400;
+    letter-spacing: 0;
+    max-width: 1050px;
+    position: relative;
+    z-index: 1;
+  }
+  .diag-closing p strong {
+    color: var(--white);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .wnioski-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .wniosek {
+    background: var(--white);
+    border-top: 4px solid var(--ink);
+    padding: 26px 20px 22px;
+    display: flex; flex-direction: column;
+    min-height: 340px;
+    position: relative;
+  }
+  .wniosek.w1 { border-top-color: var(--col); }
+  .wniosek.w2 { border-top-color: var(--col-dark); }
+  .wniosek.w3 { border-top-color: var(--fib); }
+  .wniosek.w4 { border-top-color: var(--red); }
+  .wniosek.w5 { border-top-color: var(--lak); }
+  .wniosek.w6 { border-top-color: var(--cross); }
+
+  .wniosek-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--ink-400);
+  }
+  .wniosek.w1 .wniosek-num { color: var(--col); }
+  .wniosek.w2 .wniosek-num { color: var(--col-dark); }
+  .wniosek.w3 .wniosek-num { color: var(--fib); }
+  .wniosek.w4 .wniosek-num { color: var(--red); }
+  .wniosek.w5 .wniosek-num { color: var(--lak); }
+  .wniosek.w6 .wniosek-num { color: var(--cross); }
+
+  .wniosek-tag {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .wniosek-desc {
+    font-size: 12.5px;
+    color: var(--ink-500);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .wniosek-body {
+    font-size: 12.5px;
+    color: var(--ink-700);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 18px;
+  }
+
+  .wniosek-addresses {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--ink-100);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 600;
+  }
+  .wniosek-addresses strong { color: var(--ink-700); font-weight: 700; }
+
+  /* Horyzonty czasowe — używane w sekcji Architektura */
+  .wniosek-horyzonty {
+    border-top: 1px solid var(--ink-100);
+    padding-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .wniosek-horyzont {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+  .wniosek-horyzont-label {
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--ink-500);
+    padding-top: 2px;
+    line-height: 1.2;
+  }
+  .wniosek-horyzont-text {
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: var(--ink-700);
+  }
+  .wniosek.w1 .wniosek-horyzont-label { color: var(--col); }
+  .wniosek.w2 .wniosek-horyzont-label { color: var(--col-dark); }
+  .wniosek.w3 .wniosek-horyzont-label { color: var(--fib); }
+  .wniosek.w4 .wniosek-horyzont-label { color: var(--red); }
+  .wniosek.w5 .wniosek-horyzont-label { color: var(--lak); }
+  .wniosek.w6 .wniosek-horyzont-label { color: var(--cross); }
+
+  /* ═════════════════ ROLE ═════════════════ */
+  .role-cycle {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .role-card {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 32px 22px 26px;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .role-card + .role-card { border-left: none; }
+  .role-card::after {
+    content: '→';
+    position: absolute;
+    right: -12px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--ink-300);
+    background: var(--ink-50);
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 5;
+    font-weight: 300;
+  }
+  .role-card:last-child::after { display: none; }
+
+  .role-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--ink-100);
+    color: var(--ink-700);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+  .role-card.r-col .role-badge { background: var(--col-light); color: var(--col); }
+  .role-card.r-fib .role-badge { background: var(--fib-light); color: var(--fib); }
+  .role-card.r-lak .role-badge { background: var(--lak-light); color: var(--lak); }
+  .role-card.r-mk .role-badge { background: var(--mk-light); color: var(--mk); }
+  .role-card.r-ghi .role-badge { background: var(--ghi-light); color: var(--ghi); }
+
+  .role-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .role-card.r-col .role-name { color: var(--col); }
+  .role-card.r-fib .role-name { color: var(--fib); }
+  .role-card.r-lak .role-name { color: var(--lak); }
+  .role-card.r-mk .role-name { color: var(--mk); }
+  .role-card.r-ghi .role-name { color: var(--ghi); }
+
+  .role-sub {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .role-quote {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 18px;
+    line-height: 1.4;
+    padding-left: 12px;
+    border-left: 2px solid currentColor;
+  }
+  .role-card.r-col .role-quote { color: var(--col); }
+  .role-card.r-fib .role-quote { color: var(--fib); }
+  .role-card.r-lak .role-quote { color: var(--lak); }
+  .role-card.r-mk .role-quote { color: var(--mk); }
+  .role-card.r-ghi .role-quote { color: var(--ghi); }
+
+  .role-mech {
+    font-size: 12px;
+    color: var(--ink-500);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+  .role-subst {
+    padding-top: 14px;
+    border-top: 1px solid var(--ink-100);
+    font-size: 11px;
+  }
+  .role-subst-label { letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-400); font-weight: 600; display: block; margin-bottom: 4px; }
+  .role-subst-value { color: var(--ink); font-weight: 700; font-size: 13px; }
+
+  .role-principle {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    border-left: 4px solid var(--ink);
+    padding: 22px 28px;
+    font-size: 14px;
+    color: var(--ink-700);
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+  .role-principle strong { color: var(--ink); font-weight: 700; }
+
+  /* ═════════════════ NOGI ═════════════════ */
+  .noga {
+    background: var(--white);
+    margin-bottom: 32px;
+    border: 1px solid var(--ink-200);
+    border-left-width: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .noga.n1 { border-left-color: var(--col); }
+  .noga.n2 { border-left-color: var(--fib); }
+  .noga.n3 { border-left-color: var(--lak); }
+  .noga.n4 { border-left-color: var(--mk); }
+  .noga.n5 { border-left-color: var(--ghi); }
+  .noga.n6 { border-left-color: var(--sur); }
+
+  .noga-header {
+    padding: 28px 36px;
+    border-bottom: 1px solid var(--ink-100);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .noga-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink-200);
+  }
+  .noga.n1 .noga-num { color: var(--col); }
+  .noga.n2 .noga-num { color: var(--fib); }
+  .noga.n3 .noga-num { color: var(--lak); }
+  .noga.n4 .noga-num { color: var(--mk); }
+  .noga.n5 .noga-num { color: var(--ghi); }
+
+  .noga-title-wrap { }
+  .noga-kicker { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-400); font-weight: 700; margin-bottom: 6px; }
+  .noga-title { font-family: 'DM Serif Display', serif; font-size: 30px; letter-spacing: -0.01em; color: var(--ink); line-height: 1.1; }
+  .noga-meta { text-align: right; font-size: 11px; line-height: 1.6; }
+  .noga-meta-row { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 2px; }
+  .noga-meta-label { color: var(--ink-400); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; font-size: 9.5px; }
+  .noga-meta-value { color: var(--ink); font-weight: 700; }
+
+  .noga-body { padding: 32px 36px 36px; display: none; }
+  .noga.open .noga-body { display: block; }
+  .noga-header { cursor: pointer; }
+  .noga-header::after { content: none; }
+  .noga-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1.5px solid #FF6B7C;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FF6B7C;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .noga-header:hover .noga-toggle-btn {
+    background: #FF6B7C;
+    color: var(--white);
+  }
+  .noga.open .noga-toggle-btn {
+    background: #FF6B7C;
+    color: var(--white);
+    border-color: #FF6B7C;
+  }
+  .noga-toggle-btn .btn-arrow { transition: transform 0.2s ease; display: inline-block; }
+  .noga.open .noga-toggle-btn .btn-arrow { transform: rotate(90deg); }
+  .noga.open .noga-header::after { transform: rotate(180deg); }
+  .noga-header:hover { background: var(--ink-50, #f9f9f9); }
+  .noga-bio {
+    background: var(--ink-50, #f5f5f5);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+  }
+  .noga-bio-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-400);
+    margin-bottom: 6px;
+  }
+  .noga-bio-text {
+    font-size: 13px;
+    color: var(--ink-700);
+    line-height: 1.6;
+  }
+
+  /* Blocks inside a noga (Colostrum A-E) */
+  .noga-blocks {
+    display: grid;
+    gap: 18px;
+  }
+  .noga-blocks.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .noga-blocks.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .noga-block {
+    background: var(--ink-50);
+    border: 1px solid var(--ink-100);
+    padding: 22px 24px;
+  }
+  .noga.n1 .noga-block { background: var(--col-bg); border-color: var(--col-light); }
+  .noga.n2 .noga-block { background: var(--fib-bg); border-color: var(--fib-light); }
+  .noga.n3 .noga-block { background: var(--lak-bg); border-color: var(--lak-light); }
+  .noga.n4 .noga-block { background: var(--mk-bg); border-color: var(--mk-light); }
+  .noga.n5 .noga-block { background: var(--ghi-bg); border-color: var(--ghi-light); }
+
+  .noga-block.rozpatrywane {
+    background: var(--ink-100);
+    border-color: var(--ink-200);
+    border-style: dashed;
+  }
+  .noga.n1 .noga-block.rozpatrywane { background: var(--ink-100); border-color: var(--ink-300); }
+
+  .block-label {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .block-letter {
+    width: 24px; height: 24px;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+  .noga.n1 .block-letter { background: var(--col); }
+  .noga.n2 .block-letter { background: var(--fib); }
+  .noga.n3 .block-letter { background: var(--lak); }
+  .noga.n4 .block-letter { background: var(--mk); }
+  .noga.n5 .block-letter { background: var(--ghi); }
+
+  .noga-block.rozpatrywane .block-letter { background: var(--ink-500); }
+  .block-name { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); }
+  .block-tag {
+    margin-left: auto;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 600;
+    padding: 3px 8px;
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    border-radius: 2px;
+  }
+
+  .block-list { list-style: none; }
+  .block-list li {
+    font-size: 13px;
+    color: var(--ink-700);
+    line-height: 1.55;
+    padding: 7px 0 7px 18px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .block-list li:last-child { border-bottom: none; }
+  .block-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 8px; height: 1.5px;
+    background: var(--ink-400);
+  }
+  .noga.n1 .block-list li::before { background: var(--col); }
+  .noga.n2 .block-list li::before { background: var(--fib); }
+  .noga.n3 .block-list li::before { background: var(--lak); }
+  .noga.n4 .block-list li::before { background: var(--mk); }
+  .noga.n5 .block-list li::before { background: var(--ghi); }
+
+  .block-list strong { color: var(--ink); font-weight: 700; }
+
+  .block-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    font-size: 11.5px;
+    color: var(--ink-500);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .analiza-btn {
+    margin-top: 16px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--white);
+    border: 1px solid var(--ink-300);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .analiza-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .analiza-btn::after { content: '→'; font-size: 14px; }
+
+  /* ═════════════════ PRZEKROJOWE ═════════════════ */
+  .przekrojowe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .przek-card {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 22px 22px 26px;
+    transition: all 0.2s ease;
+    min-height: 220px;
+    display: flex; flex-direction: column;
+  }
+  .przek-card:hover {
+    border-color: var(--cross);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  }
+  .przek-icon {
+    width: 36px; height: 36px;
+    background: var(--cross-light);
+    color: var(--cross);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+  .przek-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
+  .przek-desc { font-size: 12.5px; color: var(--ink-500); line-height: 1.6; flex: 1; }
+  .przek-when {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ink-100);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cross);
+    font-weight: 700;
+  }
+
+  /* ═════════════════ OŚ CZASU ═════════════════ */
+  .timeline-wrap {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 40px 40px 36px;
+    overflow-x: auto;
+  }
+  .timeline-scale {
+    display: grid;
+    grid-template-columns: 200px repeat(11, 1fr);
+    gap: 0;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 700;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+  .timeline-scale .col-label { color: transparent; }
+  .timeline-scale .q {
+    text-align: center;
+    padding: 0 2px;
+    border-left: 1px solid var(--ink-100);
+  }
+  .timeline-scale .q:first-of-type { border-left: 1px solid var(--ink-300); }
+
+  .act-bands {
+    display: grid;
+    grid-template-columns: 200px repeat(11, 1fr);
+    gap: 0;
+    margin-bottom: 14px;
+    height: 32px;
+    position: relative;
+  }
+  .act-bands .ab-label { }
+  .act-band {
+    display: flex; align-items: center;
+    padding: 0 12px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .act-band.i { background: var(--col); grid-column: 2 / span 6; }
+  .act-band.ii { background: var(--fib); grid-column: 6 / span 7; }
+  .act-band.iii { background: var(--mk); grid-column: 11 / span 2; opacity: 0.7; }
+  .act-band.ii { position: relative; z-index: 1; margin-left: -2px; }
+  .act-band.iii { position: relative; z-index: 2; margin-left: -2px; }
+
+  .timeline-rows {
+    position: relative;
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 200px repeat(11, 1fr);
+    gap: 0;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ink-100);
+    position: relative;
+  }
+  .tl-label {
+    padding-right: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .tl-label .tl-sub { display: block; font-size: 10px; color: var(--ink-400); font-weight: 500; margin-top: 2px; letter-spacing: 0.02em; }
+  .tl-bar {
+    height: 18px;
+    border-radius: 2px;
+    position: relative;
+    margin: 0 1px;
+  }
+  .tl-bar.col { background: var(--col); }
+  .tl-bar.fib { background: var(--fib); }
+  .tl-bar.lak { background: var(--lak); }
+  .tl-bar.mk { background: var(--mk); }
+  .tl-bar.ghi { background: var(--ghi); }
+  .tl-bar.faded { opacity: 0.45; }
+  .tl-bar.medium { opacity: 0.7; }
+
+  .tl-phase-label {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    padding: 0 6px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .tl-gates {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 2px solid var(--ink);
+  }
+  .tl-gates-title {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .tl-gate-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .tl-gate {
+    padding: 12px 14px;
+    background: var(--ink-50);
+    border-left: 3px solid var(--ink);
+    font-size: 12px;
+  }
+  .tl-gate-when { font-size: 10px; color: var(--ink-500); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .tl-gate-what { color: var(--ink); font-weight: 600; line-height: 1.4; }
+
+  .act-descriptions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .act-desc {
+    padding: 20px 22px;
+    background: var(--white);
+    border-top: 4px solid var(--col);
+  }
+  .act-desc.a2 { border-top-color: var(--fib); }
+  .act-desc.a3 { border-top-color: var(--mk); }
+  .act-desc-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 2px;
+    color: var(--col);
+  }
+  .act-desc.a2 .act-desc-title { color: var(--fib); }
+  .act-desc.a3 .act-desc-title { color: var(--mk); }
+  .act-desc-when { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-400); font-weight: 700; margin-bottom: 12px; }
+  .act-desc-cel { font-size: 12.5px; color: var(--ink-700); line-height: 1.55; margin-bottom: 10px; }
+  .act-desc-komunikat {
+    font-size: 12.5px;
+    color: var(--ink);
+    font-weight: 600;
+    font-style: italic;
+    padding: 10px 12px;
+    background: var(--ink-50);
+    border-left: 2px solid currentColor;
+    margin-top: 10px;
+  }
+
+  /* ═════════════════ ENDPOINT ═════════════════ */
+  .endpoint-hero {
+    color: var(--white);
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .endpoint-hero::before {
+    content: none;
+  }
+  .endpoint-kicker { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 20px; }
+  .endpoint-hero h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px; line-height: 1.05; margin-bottom: 28px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    max-width: 1000px;
+    position: relative;
+    z-index: 1;
+  }
+  .endpoint-hero h2 em { color: #FF6B7C; font-style: italic; }
+  .endpoint-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.82);
+    max-width: 900px;
+    position: relative; z-index: 1;
+  }
+  .endpoint-text strong { color: var(--white); font-weight: 600; }
+
+  /* Endpoint marketing story */
+  .endpoint-story {
+    max-width: 880px;
+    position: relative;
+    z-index: 1;
+  }
+  .endpoint-story .es-lead {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: -0.005em;
+    font-weight: 400;
+  }
+  .endpoint-story .es-lead strong { color: #FF6B7C; font-weight: 700; }
+  .endpoint-story .es-body strong { color: #FF6B7C; font-weight: 700; }
+  .endpoint-story .es-body em { color: #FF6B7C; font-style: normal; font-weight: 700; }
+  .endpoint-story .es-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 22px;
+  }
+  .endpoint-story .es-closing {
+    margin-top: 34px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--white);
+    font-weight: 500;
+  }
+  .endpoint-story .es-closing strong {
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .bounds-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .bb {
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 22px 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .bb.bb-in { border-top: 4px solid #15803D; }
+  .bb.bb-open { border-top: 4px solid #B45309; }
+  .bb.bb-out { border-top: 4px solid var(--red); }
+  .bb-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .bb.bb-in .bb-title { color: #15803D; }
+  .bb.bb-open .bb-title { color: #B45309; }
+  .bb.bb-out .bb-title { color: var(--red); }
+  .bb-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .bb.bb-in .bb-dot { background: #15803D; }
+  .bb.bb-open .bb-dot { background: #B45309; }
+  .bb.bb-out .bb-dot { background: var(--red); }
+  .bb ul { list-style: none; }
+  .bb li {
+    padding: 8px 0 8px 16px;
+    font-size: 12.5px;
+    color: var(--ink-700);
+    position: relative;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .bb li:last-child { border-bottom: none; }
+  .bb li::before {
+    content: '—';
+    position: absolute;
+    left: 0; top: 8px;
+    color: var(--ink-300);
+  }
+
+  /* ═════════════════ FOOTER ═════════════════ */
+  .doc-footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--ink-200);
+    font-size: 12px;
+    color: var(--ink-500);
+    line-height: 1.7;
+  }
+  .doc-footer strong { color: var(--ink-700); font-weight: 700; }
+
+  /* ═════════════════ MODAL ═════════════════ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,15,18,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white);
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    max-height: 85vh;
+    display: flex; flex-direction: column;
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--ink-500);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .modal-close:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .modal-header {
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .modal-kicker { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-500); font-weight: 700; margin-bottom: 10px; }
+  .modal-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .modal-body { padding: 28px 40px 40px; overflow-y: auto; }
+  .modal-section { margin-bottom: 26px; }
+  .modal-section h4 {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .modal-section p {
+    font-size: 14px;
+    color: var(--ink-700);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .modal-section ul { list-style: none; margin: 10px 0; }
+  .modal-section li {
+    padding: 6px 0 6px 18px;
+    font-size: 13px;
+    color: var(--ink-700);
+    position: relative;
+    line-height: 1.55;
+  }
+  .modal-section li::before {
+    content: '▪';
+    position: absolute;
+    left: 0; top: 6px;
+    color: var(--red);
+  }
+  .modal-section li strong { color: var(--ink); font-weight: 700; }
+
+  .scenario-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 12.5px;
+  }
+  .scenario-table th,
+  .scenario-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .scenario-table th {
+    background: var(--ink);
+    color: var(--white);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .scenario-table tr.bad td { background: var(--red-light); }
+  .scenario-table td.neg { color: var(--red); font-weight: 700; }
+
+  .reco-box {
+    background: var(--ink);
+    color: var(--white);
+    padding: 22px 26px;
+    margin-top: 24px;
+  }
+  .reco-box h5 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .reco-box p { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.65; }
+
+  /* Modal wide (dla Low+Medium) */
+  .modal-wide { max-width: 1080px; }
+
+  /* Modal h4 w kolorze colostrum */
+  .ms-col {
+    color: var(--col) !important;
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 22px !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .ms-col .ms-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: var(--ink-500);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Assumptions box */
+  .assumptions-box {
+    background: #F5F8FD;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+  }
+  .assump-col { display: flex; flex-direction: column; gap: 18px; }
+  .assump-item { }
+  .assump-label {
+    font-size: 13px;
+    color: var(--ink-500);
+    font-weight: 400;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .assump-sub {
+    font-size: 12px;
+    color: var(--ink-400);
+  }
+  .assump-value {
+    font-size: 18px;
+    color: var(--col);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .assump-value .assump-sub {
+    font-size: 13px;
+    color: var(--ink-500);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+
+  /* Simulation table */
+  .sim-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .sim-table th {
+    background: var(--col);
+    color: var(--white);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .sim-table th.num { text-align: right; }
+  .sim-table th.var-col { width: 80px; }
+  .sim-table td {
+    padding: 14px 14px;
+    border-bottom: 1px solid var(--ink-100);
+    color: var(--ink-700);
+  }
+  .sim-table td.var {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--ink);
+    width: 80px;
+  }
+  .sim-table td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .sim-table td.neg { color: var(--red); font-weight: 700; }
+  .sim-table td.pos { color: #15803D; font-weight: 700; }
+  .sim-table td.dash { color: var(--ink-400); }
+  .sim-table tr.baseline-row { background: #F5F8FD; }
+  .sim-table tr.baseline-row td { color: var(--ink); }
+  .sim-table tr.worst { background: var(--red-light); }
+  .sim-table tr.worst td { color: var(--ink-700); }
+  .sim-table tr.worst td.neg { color: var(--red); font-weight: 800; }
+  .sim-table tr.positive-row { background: #ECF7EE; }
+  .sim-table tr.positive-row td.pos { color: #15803D; font-weight: 800; }
+
+  .reco-box.reco-positive {
+    background: #15803D;
+  }
+  .reco-box.reco-positive h5,
+  .reco-box.reco-positive p strong { color: var(--white); }
+  .reco-box.reco-positive p { color: rgba(255,255,255,0.92); }
+
+  /* Key number box — green */
+  .key-number-box {
+    background: #FFF0F1;
+    border-left: 5px solid var(--red);
+    padding: 24px 28px;
+  }
+  .kn-label {
+    font-size: 14px;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .kn-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 14px;
+    letter-spacing: -0.015em;
+  }
+  .kn-footer {
+    font-size: 13.5px;
+    color: var(--ink-700);
+    line-height: 1.55;
+  }
+  .kn-footer strong { color: var(--red); font-weight: 700; }
+
+  /* Reason list with arrow */
+  .reason-list { list-style: none; margin: 10px 0; }
+  .reason-list li {
+    padding: 10px 0 10px 22px;
+    font-size: 13.5px;
+    color: var(--ink-700);
+    position: relative;
+    line-height: 1.65;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .reason-list li:last-child { border-bottom: none; }
+  .reason-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0; top: 10px;
+    color: var(--col);
+    font-size: 13px;
+  }
+  .reason-list li strong { color: var(--ink); font-weight: 700; }
+
+  /* ═════════════════ DIAGNOZA EXPANDED — ROZWIJANIE W BOK ═════════════════ */
+  .diag-card { cursor: pointer; position: relative; transition: all 0.3s ease; }
+  .diag-expanded-content {
+    display: none;
+    margin-top: 20px;
+    padding-top: 22px;
+    border-top: 1px solid var(--ink-100);
+  }
+
+  /* Stan: któraś karta aktywna → grid zmienia geometrię */
+  .diag-grid.has-active {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  /* Aktywna karta: pełna szerokość u góry */
+  .diag-grid.has-active .diag-card.active {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding: 40px 48px 36px;
+    min-height: auto;
+    border-color: var(--red);
+    border-width: 2px;
+    background: var(--white);
+    box-shadow: 0 12px 40px rgba(200, 16, 46, 0.1);
+  }
+  .diag-grid.has-active .diag-card.active .diag-title {
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    padding-right: 60px;
+  }
+  .diag-grid.has-active .diag-card.active .diag-preview {
+    font-size: 15px;
+    color: var(--ink-700);
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 8px;
+    line-height: 1.65;
+  }
+  .diag-grid.has-active .diag-card.active .diag-expanded-content {
+    display: block;
+  }
+  .diag-grid.has-active .diag-card.active .diag-wniosek {
+    margin: 24px -48px -36px;
+    padding: 18px 48px;
+  }
+
+  /* Nieaktywne karty: wąskie taby w drugim wierszu */
+  .diag-grid.has-active .diag-card:not(.active) {
+    grid-row: 2;
+    min-height: 110px;
+    padding: 18px 20px 20px;
+    background: var(--white);
+  }
+  .diag-grid.has-active .diag-card:not(.active):hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+  .diag-grid.has-active .diag-card:not(.active) .diag-preview,
+  .diag-grid.has-active .diag-card:not(.active) .diag-wniosek,
+  .diag-grid.has-active .diag-card:not(.active) .diag-expanded-content {
+    display: none;
+  }
+  .diag-grid.has-active .diag-card:not(.active) .diag-title {
+    font-size: 13px;
+    line-height: 1.35;
+    margin-bottom: 0;
+    padding-right: 28px;
+  }
+  .diag-grid.has-active .diag-card:not(.active) .diag-num {
+    margin-bottom: 10px;
+  }
+  .diag-grid.has-active .diag-card:not(.active) .diag-ind {
+    display: none;
+  }
+  /* W aktywnej karcie również ukrywamy diag-ind — jego rolę przejmuje diag-close-btn */
+  .diag-grid.has-active .diag-card.active .diag-ind {
+    display: none;
+  }
+
+  /* Przycisk zamknij — tylko w aktywnej karcie */
+  .diag-close-btn {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--ink-700);
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    padding: 0;
+    line-height: 1;
+    z-index: 5;
+  }
+  .diag-card.active .diag-close-btn { display: flex; }
+  .diag-close-btn:hover {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+    transform: rotate(90deg);
+  }
+
+  .seg-chart {
+    margin: 14px 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .seg-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 72px;
+    align-items: center;
+    gap: 12px;
+  }
+  .seg-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .seg-bar-wrap {
+    background: var(--ink-100);
+    height: 28px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .seg-bar {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .seg-bar.seg-neg { background: var(--red); }
+  .seg-bar.seg-pos { background: var(--ink); }
+  .seg-val {
+    font-size: 13px;
+    font-weight: 800;
+    text-align: right;
+    letter-spacing: -0.01em;
+  }
+  .seg-val-neg { color: var(--red); }
+  .seg-val-pos { color: var(--ink); }
+
+  .diag-sec-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 700;
+    margin: 22px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .diag-facts { list-style: none; }
+  .diag-facts li {
+    position: relative;
+    padding: 8px 0 8px 20px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-700);
+  }
+  .diag-facts li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 14px;
+    width: 10px; height: 1.5px;
+    background: var(--red);
+  }
+  .diag-facts strong { color: var(--ink); font-weight: 700; background: var(--red-light); padding: 1px 4px; border-radius: 2px; }
+
+  .diag-ind {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 24px; height: 24px;
+    border: 1px solid var(--ink-200);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+  .diag-card:hover .diag-ind { border-color: var(--red); background: var(--red-light); }
+  .diag-ind::before, .diag-ind::after {
+    content: '';
+    position: absolute;
+    background: var(--ink-500);
+    transition: all 0.2s ease;
+  }
+  .diag-ind::before { width: 10px; height: 1.5px; }
+  .diag-ind::after { width: 1.5px; height: 10px; }
+  .diag-card:hover .diag-ind::before,
+  .diag-card:hover .diag-ind::after { background: var(--red); }
+
+  .diag-wniosek-bullet {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: rgba(200,16,46,0.15);
+    border-left: 2px solid var(--red);
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .diag-table {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid var(--ink-200);
+    font-size: 11px;
+    border-collapse: collapse;
+  }
+  .diag-table th {
+    background: var(--ink);
+    color: var(--white);
+    padding: 6px 8px;
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .diag-table td {
+    padding: 6px 8px;
+    border-top: 1px solid var(--ink-100);
+    color: var(--ink-700);
+  }
+  .diag-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .diag-table td.num.up { color: var(--ink); font-weight: 700; }
+  .diag-table td.num.down { color: var(--red); font-weight: 700; }
+  .diag-table tr.highlight td { background: var(--red-light); font-weight: 700; }
+
+  /* ═════════════════ HGH ARCHITEKTURA DRZEWKO ═════════════════ */
+  .hgh-tree {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: stretch;
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    padding: 44px 48px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .hgh-cycle-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .hgh-cycle-header {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink-200);
+    margin-bottom: 8px;
+  }
+  .hgh-step {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 14px;
+    background: var(--ink-50);
+    border-left: 4px solid var(--ink-300);
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  .hgh-step.s-col { border-left-color: var(--col); }
+  .hgh-step.s-fib { border-left-color: var(--fib); }
+  .hgh-step.s-lak { border-left-color: var(--lak); }
+  .hgh-step.s-mk { border-left-color: var(--mk); }
+  .hgh-step.s-ghi { border-left-color: var(--ghi); }
+
+  .hgh-step-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--ink-400);
+    min-width: 22px;
+  }
+  .hgh-step.s-col .hgh-step-num { color: var(--col); }
+  .hgh-step.s-fib .hgh-step-num { color: var(--fib); }
+  .hgh-step.s-lak .hgh-step-num { color: var(--lak); }
+  .hgh-step.s-mk .hgh-step-num { color: var(--mk); }
+  .hgh-step.s-ghi .hgh-step-num { color: var(--ghi); }
+
+  .hgh-step-role {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .hgh-step-subrole {
+    font-size: 10px;
+    color: var(--ink-500);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .hgh-arrow-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40px;
+    flex-shrink: 0;
+    position: relative;
+    padding: 40px 0 0;
+  }
+
+  .hgh-substance-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hgh-substance-header {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink-200);
+    margin-bottom: 8px;
+  }
+
+  .hgh-card {
+    padding: 20px 24px;
+    background: var(--white);
+    border: 2px solid var(--ink-200);
+    border-left-width: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+  }
+  .hgh-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .hgh-card.s-col { border-left-color: var(--col); background: linear-gradient(to right, var(--col-bg) 0%, var(--white) 50%); }
+  .hgh-card.s-fib { border-left-color: var(--fib); background: linear-gradient(to right, var(--fib-bg) 0%, var(--white) 50%); }
+  .hgh-card.s-lak { border-left-color: var(--lak); background: linear-gradient(to right, var(--lak-bg) 0%, var(--white) 50%); }
+  .hgh-card.s-mk { border-left-color: var(--mk); background: linear-gradient(to right, var(--mk-bg) 0%, var(--white) 50%); }
+  .hgh-card.s-ghi { border-left-color: var(--ghi); background: linear-gradient(to right, var(--ghi-bg) 0%, var(--white) 50%); }
+
+  .hgh-main { }
+  .hgh-subst-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .hgh-card.s-col .hgh-subst-title { color: var(--col); }
+  .hgh-card.s-fib .hgh-subst-title { color: var(--fib); }
+  .hgh-card.s-lak .hgh-subst-title { color: var(--lak); }
+  .hgh-card.s-mk .hgh-subst-title { color: var(--mk); }
+  .hgh-card.s-ghi .hgh-subst-title { color: var(--ghi); }
+
+  .hgh-quote {
+    font-size: 12.5px;
+    color: var(--ink-500);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .hgh-cta {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .hgh-cta::after { content: ' →'; }
+  .hgh-card:hover .hgh-cta { color: currentColor; }
+
+  .hgh-details {
+    display: none;
+    margin-top: 10px;
+    padding: 28px 32px;
+    background: var(--white);
+    border: 1px solid var(--ink-200);
+    border-top: 3px solid var(--ink);
+  }
+  .hgh-details.open { display: block; }
+  .hgh-details.s-col { border-top-color: var(--col); }
+  .hgh-details.s-fib { border-top-color: var(--fib); }
+  .hgh-details.s-lak { border-top-color: var(--lak); }
+  .hgh-details.s-mk { border-top-color: var(--mk); }
+  .hgh-details.s-ghi { border-top-color: var(--ghi); }
+
+  .hgh-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .hgh-details-section { }
+  .hgh-details-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .hgh-details-text {
+    font-size: 12.5px;
+    color: var(--ink-700);
+    line-height: 1.65;
+  }
+  .hgh-details-text strong { color: var(--ink); font-weight: 700; }
+
+  /* ═════════════════ ROZWIJALNE INICJATYWY W NOGACH ═════════════════ */
+  .block-item {
+    padding: 12px 14px;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .block-item:hover { border-color: var(--ink-300); }
+  .block-item-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .block-item-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.35;
+  }
+  .block-item-chev {
+    font-size: 11px;
+    color: var(--ink-400);
+    transition: transform 0.2s ease;
+  }
+  .block-item.open .block-item-chev { transform: rotate(180deg); }
+  .block-item-detail {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--ink-100);
+    font-size: 12px;
+    color: var(--ink-500);
+    line-height: 1.6;
+  }
+  .block-item.open .block-item-detail { display: block; }
+  .block-item-detail strong { color: var(--ink-700); }
+  .block-item-detail ul { list-style: none; margin-top: 6px; }
+  .block-item-detail ul li {
+    padding: 3px 0 3px 12px;
+    position: relative;
+    font-size: 11.5px;
+  }
+  .block-item-detail ul li::before {
+    content: '·';
+    position: absolute;
+    left: 3px; top: 3px;
+    color: var(--ink-400);
+    font-weight: 700;
+  }
+
+  /* Dot accent color per noga */
+  .noga.n1 .block-item-chev { color: var(--col); }
+  .noga.n2 .block-item-chev { color: var(--fib); }
+  .noga.n3 .block-item-chev { color: var(--lak); }
+  .noga.n4 .block-item-chev { color: var(--mk); }
+  .noga.n5 .block-item-chev { color: var(--ghi); }
+
+  /* ═════════════════ TIMELINE ROZWIJALNY ═════════════════ */
+  .tl-row.expandable { cursor: pointer; }
+  .tl-row.expandable:hover { background: var(--ink-50); }
+  .tl-row-expander {
+    display: none;
+    background: var(--ink-50);
+    padding: 6px 0 14px;
+    border-bottom: 1px solid var(--ink-200);
+  }
+  .tl-row.open + .tl-row-expander { display: block; }
+  .tl-row.open > .tl-label::after {
+    content: ' ▾';
+    font-size: 10px;
+    color: var(--ink-400);
+  }
+  .tl-row.expandable:not(.open) > .tl-label::after {
+    content: ' ▸';
+    font-size: 10px;
+    color: var(--ink-300);
+  }
+
+  .tl-row.sub {
+    padding: 4px 0;
+    border-bottom: none;
+    opacity: 0.95;
+  }
+  .tl-row.sub .tl-label.sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-600, #52525b);
+    padding-left: 20px;
+    padding-right: 14px;
+    line-height: 1.3;
+  }
+  .tl-row.sub .tl-bar {
+    height: 10px;
+    border-radius: 2px;
+    opacity: 0.85;
+  }
+    display: none;
+    grid-column: 1 / -1;
+    padding: 14px 0 8px 200px;
+  }
+  .tl-sub-rows { }
+  .tl-sub-row {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 0;
+    align-items: center;
+    padding: 5px 0;
+  }
+  .tl-sub-row .tl-sub-bar {
+    height: 10px;
+    margin: 0 1px;
+    border-radius: 1px;
+    position: relative;
+  }
+  .tl-sub-row .tl-sub-label {
+    position: absolute;
+    left: -200px; top: 50%;
+    transform: translateY(-50%);
+    width: 190px;
+    padding-right: 20px;
+    font-size: 10.5px;
+    color: var(--ink-700);
+    font-weight: 500;
+    text-align: right;
+  }
+  .tl-sub-bar.col { background: var(--col); }
+  .tl-sub-bar.fib { background: var(--fib); }
+  .tl-sub-bar.lak { background: var(--lak); }
+  .tl-sub-bar.mk { background: var(--mk); }
+  .tl-sub-bar.ghi { background: var(--ghi); }
+  .tl-sub-bar.faded { opacity: 0.4; }
+  .tl-sub-bar.medium { opacity: 0.65; }
+
+  .tl-expander-wrap {
+    grid-column: 2 / -1;
+    padding: 6px 0;
+    background: var(--ink-50);
+    border-left: 3px solid var(--ink-200);
+    margin-top: 8px;
+  }
+
+  /* ═════════════════ RESPONSIVE ═════════════════ */
+  @media (max-width: 1400px) {
+    .wnioski-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 1100px) {
+    .diag-grid { grid-template-columns: repeat(2, 1fr); }
+    .diag-grid.has-active { grid-template-columns: repeat(2, 1fr); }
+    .diag-grid.has-active .diag-card:not(.active) { grid-row: auto; min-height: 100px; }
+    .wnioski-grid { grid-template-columns: repeat(2, 1fr); }
+    .role-cycle { grid-template-columns: 1fr; }
+    .role-card::after { display: none; }
+    .przekrojowe-grid { grid-template-columns: repeat(2, 1fr); }
+    .bounds-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 48px; }
+    .endpoint-hero h2 { font-size: 36px; }
+    .noga-blocks.cols-2, .noga-blocks.cols-3 { grid-template-columns: 1fr; }
+    .tl-gate-list { grid-template-columns: 1fr; }
+    .act-descriptions { grid-template-columns: 1fr; }
+    .diag-closing { padding: 32px 24px 36px; }
+    .diag-closing-label { font-size: 30px; margin-bottom: 20px; }
+    .diag-closing p { font-size: 14.5px; line-height: 1.7; }
+    .assumptions-box { grid-template-columns: 1fr; gap: 20px; }
+    .sim-table { font-size: 11px; }
+    .sim-table th, .sim-table td { padding: 8px 6px; }
+    .endpoint-story .es-lead { font-size: 18px; }
+    .endpoint-story .es-closing { font-size: 16px; }
+  }
+  @media (max-width: 700px) {
+    .container { padding: 0 20px; }
+    .section { padding: 56px 0; }
+    .hero { padding: 70px 0 50px; }
+    .hero h1 { font-size: 34px; }
+    .sec-title { font-size: 30px; }
+    .diag-grid { grid-template-columns: 1fr; }
+    .diag-grid.has-active { grid-template-columns: 1fr; }
+    .diag-grid.has-active .diag-card.active { padding: 28px 24px; }
+    .diag-grid.has-active .diag-card.active .diag-wniosek { margin: 20px -24px -28px; padding: 16px 24px; }
+    .diag-grid.has-active .diag-card.active .diag-title { font-size: 20px; padding-right: 44px; }
+    .wnioski-grid { grid-template-columns: 1fr; }
+    .przekrojowe-grid { grid-template-columns: 1fr; }
+    .noga-header { grid-template-columns: 1fr; gap: 12px; padding: 22px 24px; }
+    .noga-meta { text-align: left; }
+    .noga-body { padding: 24px; }
+    .nav-links { display: none; }
+    .hero-meta-item { display: none; }
+  }
+  .noga-inner { display: flex; }
+  .noga-sidebar {
+    width: 280px;
+    min-width: 280px;
+    border-right: 1px solid var(--ink-100);
+    cursor: pointer;
+  }
+  .noga-sidebar:hover { background: var(--ink-50, #f9f9f9); }
+  .noga-header {
+    padding: 28px 24px;
+    border-bottom: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .noga-body-wrap { padding: 32px 36px 36px; display: none; flex: 1; overflow: auto; }
+  .noga.open .noga-body-wrap { display: flex; flex: 1; flex-direction: column; }
+  .noga.open .noga-inner { align-items: stretch; }
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════════════ HERO ═════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-kicker"><span class="bar"></span>Narzędzie warsztatowe · 2026–2028</div>
+    <h1><em>Healthy Gut Company.</em> Architektura transformacji.</h1>
+    <p class="hero-sub">Narzędzie do wspólnej pracy nad transformacją Genactiv. Diagnoza, wnioski, architektura portfolio i plan operacyjny — otwarte na iterację i decyzje zespołu.</p>
+  </div>
+    </header>
+
+<!-- ═════════════════════════════ NAV ═════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Menu nawigacyjne</div>
+    <div class="nav-links">
+      <a href="#diagnoza">01 Diagnoza</a>
+      <a href="#wnioski">02 Wnioski</a>
+      <a href="#nogi">03 Nogi wzrostu</a>
+      <a href="#przekrojowe">04 Przekrojowe</a>
+      <a href="#endpoint">05 Endpoint</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<!-- ═════════════════════════════ 01 DIAGNOZA ═════════════════════════════ -->
+<section class="section" id="diagnoza">
+  <div class="sec-num"><span class="dot"></span>Sekcja 01 · Punkt wyjścia</div>
+  <h2 class="sec-title">Diagnoza — pięć obszarów wyjaśniających spadek</h2>
+
+  <div class="diag-grid">
+
+    <article class="diag-card" data-diag="1">
+      <div class="diag-ind"></div>
+      <button class="diag-close-btn" onclick="event.stopPropagation(); closeDiagFull();" aria-label="Zamknij">✕</button>
+      <div class="diag-num">Obszar 01 · Kategoria</div>
+      <h3 class="diag-title">Kategoria odporności i colostrum tracą popyt — nie przez cenę</h3>
+      <p class="diag-preview">70% straty Genactiv w Q1 2026 to konsumenci, którzy zrezygnowali z zakupu w kategorii w ogóle. Segment economy spada najmocniej. W aptece stacjonarnej zabieramy konkurencji udział.</p>
+
+      <div class="diag-expanded-content">
+        <div class="diag-sec-label">Trend sprzedaży przyspiesza — udziały roczne stabilne</div>
+        <ul class="diag-facts">
+          <li>Sprzedaż Genactiv w aptekach spada <strong>3× szybciej w 6 mies. niż YoY (−17,7% vs −5,4%)</strong>. Silna korelacja z sezonem infekcyjnym.</li>
+          <li>Kategoria colostrum w aptekach: <strong>−14,5% w 6 mies. vs −5,8% MAT</strong>. Kategoria Immuno (cała odporność) <strong>−25% w 6 mies., −20% MAT</strong>.</li>
+          <li>W ujęciu 12-mies. udziały względnie stabilne (60,1% → 60,4%, +0,3 p.p. MAT). Genactiv spada wolniej niż kategoria (−5,4% vs −5,8%). <strong>Rocznie NIE tracimy do konkurencji.</strong></li>
+          <li>Sygnał spadku udziału pojawia się w ostatnich 6 mies. (−2,3 p.p., z 62,0% do 59,7%) — ale wolumenowo to tylko ~3 700 szt. (<strong>18% całego spadku Genactiv</strong>). Pozostałe 82% to kurczenie kategorii.</li>
+        </ul>
+
+        <div class="diag-sec-label">Struktura segmentów cenowych — kto rośnie, kto spada (MAT)</div>
+
+        <div class="seg-chart">
+          <div class="seg-row">
+            <div class="seg-label">Budżetowy &lt;50 PLN</div>
+            <div class="seg-bar-wrap"><div class="seg-bar seg-neg" style="width:2%"></div></div>
+            <div class="seg-val seg-val-neg">−3,0%</div>
+          </div>
+          <div class="seg-row">
+            <div class="seg-label">Średni 50–80 PLN</div>
+            <div class="seg-bar-wrap"><div class="seg-bar seg-neg" style="width:63%"></div></div>
+            <div class="seg-val seg-val-neg">−34,6%</div>
+          </div>
+          <div class="seg-row">
+            <div class="seg-label">Premium-średni 80–110</div>
+            <div class="seg-bar-wrap"><div class="seg-bar seg-pos" style="width:43%"></div></div>
+            <div class="seg-val seg-val-pos">+74,7%</div>
+          </div>
+          <div class="seg-row">
+            <div class="seg-label">Premium &gt;110 (z Genactiv)</div>
+            <div class="seg-bar-wrap"><div class="seg-bar seg-neg" style="width:2.5%"></div></div>
+            <div class="seg-val seg-val-neg">−4,3%</div>
+          </div>
+          <div class="seg-row">
+            <div class="seg-label">Premium &gt;110 BEZ Genactiv</div>
+            <div class="seg-bar-wrap"><div class="seg-bar seg-pos" style="width:100%"></div></div>
+            <div class="seg-val seg-val-pos">+173,6%</div>
+          </div>
+        </div>
+
+        <ul class="diag-facts">
+          <li><strong>Dolna półka NIE rośnie</strong> — economy &lt;50 PLN: −3,0% MAT, −14,4% Q1. Średni 50–80 PLN: <strong>−34,6% MAT</strong>. Nie ma sytuacji „klienci uciekają do taniego colostrum".</li>
+          <li>Wszyscy duzi gracze economy tracą: A-Z Medica, Adamed, Pharmabest, Laboratoria Natury — dwucyfrowe spadki.</li>
+          <li>Jedyne rosnące segmenty: Premium-średni +74,7% i Premium &gt;110 bez Genactiv <strong>+173,6%</strong>. Razem tylko 5,3% kategorii ≈ ~14,9 tys. szt. rocznie.</li>
+          <li>Konkurenci rosnący w premium to <strong>Health Labs Care, Colostrum Polska, MyBestPharm, Medicaline</strong>. Rosną narracją, nie ceną.</li>
+        </ul>
+
+        <div class="diag-sec-label">Gdzie przeszły wolumeny w Q1 2026?</div>
+        <ul class="diag-facts">
+          <li>Z 11 706 szt. straty Genactiv w Q1 2026, tylko 3 551 szt. (30%) trafiło do konkurencji. <strong>Pozostałe 8 155 szt. (70%) to konsumenci, którzy zrezygnowali z kategorii colostrum w ogóle.</strong></li>
+          <li>Spadek najsilniej skorelowany z: (a) spadkiem popularności colostrum w Google <strong>(−31% YoY)</strong>, (b) efektem worka klasyfikacyjnego — kupcy aptek zastokowali produkty odpornościowe.</li>
+        </ul>
+
+        <div class="diag-sec-label">Gdzie tracimy udziały — kanał stacjonarny vs internet</div>
+        <ul class="diag-facts">
+          <li>W <strong>aptece stacjonarnej</strong> udział Genactiv wzrósł z 49,1% do 50,7% (+1,6 p.p. MAT). Tort się skurczył, ale <strong>zabieramy konkurencji</strong>.</li>
+          <li>W <strong>aptece internetowej</strong> straciliśmy udział (−4,9 p.p. w 6 mies.). Klient online ma szeroki wachlarz do porównania — łatwo zmienić markę.</li>
+          <li>W szerszej kategorii Immuno (śr. cena 130 PLN) udziały Genactiv <strong>rosną</strong> — premium narracja działa, cena nie jest problemem.</li>
+        </ul>
+      </div>
+
+      <div class="diag-wniosek">
+        <div class="diag-wniosek-label">Wniosek</div>
+        Głównym problemem <strong>NIE jest konkurencja</strong>, tylko kurczenie się kategorii odporności i popytu na colostrum jako substancję. Konsument albo rezygnuje, albo idzie <strong>W GÓRĘ cenowo</strong> do lepiej opakowanych marek premium.
+        <div class="diag-wniosek-bullet">→ Nie walczymy ceną. Bronimy narracją i idziemy w górę (A2).</div>
+      </div>
+    </article>
+
+    <article class="diag-card" data-diag="2">
+      <div class="diag-ind"></div>
+      <button class="diag-close-btn" onclick="event.stopPropagation(); closeDiagFull();" aria-label="Zamknij">✕</button>
+      <div class="diag-num">Obszar 02 · Klient</div>
+      <h3 class="diag-title">Narracja „odporność" zamyka w sezonie, „jelita" otwiera na cały rok</h3>
+      <p class="diag-preview">69,8% klientów DTC kupiło tylko RAZ. Konwersja 1→2 zamówień = +117% LTV. Klient gut health ma LTV 3–5× wyższy — natura kategorii wymusza codzienne użycie.</p>
+
+      <div class="diag-expanded-content">
+        <div class="diag-sec-label">Segmentacja klienta DTC Shopify (36 798 klientów, 16,24 mln PLN)</div>
+        <ul class="diag-facts">
+          <li><strong>69,8% klientów DTC kupiło tylko RAZ</strong> — 25 673 osoby, 6,1 mln PLN (37,5% przychodu sklepu).</li>
+          <li>Segment 2+ zamówień to tylko 30,2% klientów, ale generuje <strong>62,5% przychodu</strong>.</li>
+          <li>Dźwignia 1→2: LTV skacze z <strong>238 PLN (1 zam.) do 516 PLN (2 zam.) = +117%</strong> przy jednym dodatkowym zamówieniu.</li>
+          <li>Ambasadorzy (6+ zamówień) = <strong>3,2% klientów, 18,9% przychodu</strong>. Avg LTV 2 159 PLN w segmencie 6–10 — 9× więcej niż jednorazowy.</li>
+          <li>Średni LTV w bazie DTC = <strong>441 PLN ≈ 3,4 opakowania</strong>. Colostrum dla większości klientów to produkt sezonowy, nie codzienna suplementacja.</li>
+        </ul>
+
+        <div class="diag-sec-label">Dźwignia retencyjna</div>
+        <ul class="diag-facts">
+          <li><strong>Konwersja 20% bazy jednorazowej</strong> (5 135 osób) na drugie zamówienie = <strong>+1,4 mln PLN</strong> rocznie przy zerowych kosztach akwizycji.</li>
+          <li>Klient gut health ma <strong>potencjał LTV 3–5× wyższy</strong> niż kolostrum-odporność. Natura kategorii wymusza codzienne, całoroczne użycie.</li>
+        </ul>
+      </div>
+
+      <div class="diag-wniosek">
+        <div class="diag-wniosek-label">Wniosek</div>
+        Problem leży w <strong>narracji kategorii, nie w cenie</strong>. „Colostrum na odporność" to obietnica sezonowa — konsument po grypie nie ma powodu wracać. Gut health daje logiczny powód do codziennego używania.
+        <div class="diag-wniosek-bullet">→ Zmieniamy narrację z „odporność" na „jelita" — to otwiera całoroczność.</div>
+      </div>
+    </article>
+
+    <article class="diag-card" data-diag="3">
+      <div class="diag-ind"></div>
+      <button class="diag-close-btn" onclick="event.stopPropagation(); closeDiagFull();" aria-label="Zamknij">✕</button>
+      <div class="diag-num">Obszar 03 · Rynek</div>
+      <h3 class="diag-title">Rynek suplementów rośnie — nasza kategoria nie</h3>
+      <p class="diag-preview">Rynek +8,2% nominalnie. Gut health +10–14% (~800 mln PLN, 2,6× większy niż odporność). Odporność −1,9%. „Colostrum na jelita" rośnie +9,7%, „na odporność" spada −6,9%.</p>
+
+      <div class="diag-expanded-content">
+        <div class="diag-sec-label">Rynek suplementów — makro</div>
+        <ul class="diag-facts">
+          <li>Rynek suplementów w Polsce rośnie <strong>+8,2% nominalnie (+3,1% realnie)</strong> w 2025 (PMR: 8 743 mln PLN → 9 333 mln PLN w 2026p).</li>
+          <li>Spadek Genactiv NIE wynika z kryzysu rynku suplementów — wynika z bycia w jednej z nielicznych <strong>spadających</strong> kategorii aptecznych.</li>
+        </ul>
+
+        <div class="diag-sec-label">Kategorie rosnące vs nasza kategoria (PMR 2024)</div>
+        <table class="diag-table">
+          <tr><th>Kategoria</th><th style="text-align:right">Wartość</th><th style="text-align:right">YoY</th></tr>
+          <tr><td>Probiotyki</td><td class="num">642 mln</td><td class="num up">+9,9%</td></tr>
+          <tr><td>Trawienie/jelita</td><td class="num">157 mln</td><td class="num up">+14,4%</td></tr>
+          <tr class="highlight"><td>SUMA GUT HEALTH</td><td class="num">799 mln</td><td class="num up">+10–14%</td></tr>
+          <tr><td style="color: var(--red)">Odporność (my tu)</td><td class="num">304 mln</td><td class="num down">−1,9%</td></tr>
+        </table>
+
+        <ul class="diag-facts">
+          <li><strong>Gut health jest 2,6× WIĘKSZY niż odporność i rośnie, gdy odporność spada.</strong></li>
+          <li>Share of search w Google: <strong>„colostrum na jelita" +9,7% MAT</strong> vs <strong>„colostrum na odporność" −6,9% MAT</strong>.</li>
+          <li><strong>Każdy klient gut health ma potencjał LTV 3–5× wyższy.</strong></li>
+          <li>Inne rosnące kategorie PMR: włosy/skóra/paznokcie +14,8%, wątroba +11,5%, układ nerwowy +10,3%, magnez +8,1%.</li>
+        </ul>
+      </div>
+
+      <div class="diag-wniosek">
+        <div class="diag-wniosek-label">Wniosek</div>
+        Gut health — <strong>2,6× większy, szybko rosnący, z 3–5× wyższym LTV klienta</strong> — jest naturalnym kierunkiem strategicznym.
+      </div>
+    </article>
+
+    <article class="diag-card" data-diag="4">
+      <div class="diag-ind"></div>
+      <button class="diag-close-btn" onclick="event.stopPropagation(); closeDiagFull();" aria-label="Zamknij">✕</button>
+      <div class="diag-num">Obszar 04 · Kanały</div>
+      <h3 class="diag-title">Zbyt silne skupienie tylko na rynku aptecznym</h3>
+      <p class="diag-preview">Klient suplementów używa średnio 3 kanałów. Genactiv silnie obecny w 2 (aptecznych). Nieobecni w drogeriach, supermarketach, zielarniach. Apteka stacjonarna spadła −21,5% MAT.</p>
+
+      <div class="diag-expanded-content">
+        <div class="diag-sec-label">Gdzie klient kupuje suplementy (Blix/Kantar 2026)</div>
+        <ul class="diag-facts">
+          <li>Klient suplementów używa <strong>średnio 3 kanałów zakupu</strong>. Genactiv jest silnie obecny tylko w 2: apteka stacjonarna i online.</li>
+          <li>Marginalnie obecni w internecie non-pharma (40% klientów — Allegro). DTC <strong>niewykorzystany potencjał</strong> pod retencję, subskrypcję, program poleceń.</li>
+          <li><strong>Nieobecni w 3 kanałach:</strong> drogerie (24% klientów — Rossmann, Hebe), supermarkety (13% — Biedronka, Lidl), zielarskie (10%).</li>
+          <li><strong>1/3 zachowań zakupowych klienta odbywa się poza kanałami, gdzie jesteśmy widoczni.</strong></li>
+          <li>Allegro potrzebuje <strong>dedykowanego cennika</strong> — klient porównuje bezpośrednio i ma tańsze alternatywy.</li>
+        </ul>
+
+        <div class="diag-sec-label">Co robi konkurencja premium</div>
+        <ul class="diag-facts">
+          <li>Konkurenci premium (Health Labs Care, Nikalab, Your KAYA) są <strong>OMNIKANAŁOWI</strong> — DTC, Allegro, drogerie, supermarkety, zdrowa żywność.</li>
+          <li>Gdy klient porównuje premium na Allegro — <strong>Genactiv wygląda jak „preparat apteczny", konkurenci jak „premium wellness lifestyle"</strong>.</li>
+        </ul>
+
+        <div class="diag-sec-label">Kanał apteczny się kurczy</div>
+        <ul class="diag-facts">
+          <li>Apteka stacjonarna w suplementach spadła <strong>−21,5% MAT, −26% w 6 mies</strong>. Apteka online +12% wartościowo, ale w colostrum straciliśmy 3 p.p. udziału.</li>
+          <li>Jesteśmy <strong>przypięci do kanału, który sam się kurczy</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="diag-wniosek">
+        <div class="diag-wniosek-label">Wniosek</div>
+        Byliśmy <strong>zbyt mocno skupieni na rynku aptecznym</strong>. Na Allegro wyglądamy jak „preparat apteczny", konkurenci jak „premium wellness lifestyle". Jesteśmy przypięci do kurczącego się kanału.
+        <div class="diag-wniosek-bullet">→ Otwieramy nowe kanały — D2C, Allegro, Amazon, Empik, drogerie.</div>
+      </div>
+    </article>
+
+    <article class="diag-card" data-diag="5">
+      <div class="diag-ind"></div>
+      <button class="diag-close-btn" onclick="event.stopPropagation(); closeDiagFull();" aria-label="Zamknij">✕</button>
+      <div class="diag-num">Obszar 05 · Popularność</div>
+      <h3 class="diag-title">Popularność colostrum jako substancji się zmniejsza</h3>
+      <p class="diag-preview">„Colostrum" w Google −31% YoY. Wszystkie frazy kategorii spadają dwucyfrowo. Konsument przestaje szukać kategorii — strukturalna zmiana świadomości, nie sezonowa.</p>
+
+      <div class="diag-expanded-content">
+        <div class="diag-sec-label">Google Keyword Stats — ostatnie 6 mies. YoY</div>
+        <ul class="diag-facts">
+          <li>Wyszukania „colostrum" (generyczne) w Google <strong>spadły −31,1% YoY</strong> (526 500 → 363 000).</li>
+          <li>Fraza brandowa „genactiv colostrum" <strong>−23,9% YoY</strong>.</li>
+          <li>Rosną tylko nisze funkcyjne: „colostrum forte" +128,2%, „colostrum suplement" +89,7%.</li>
+          <li>Rośnie konkurencja premium: „healthlabs colostrum" <strong>+172,7%</strong> (niska baza, ale kierunkowo).</li>
+          <li>Nasza nowa marka: <strong>„fiberbiom" 2 170 wyszukań od zera</strong> — potwierdza że inwestycja w nowe kategorie działa.</li>
+        </ul>
+      </div>
+
+      <div class="diag-wniosek">
+        <div class="diag-wniosek-label">Wniosek</div>
+        Konsument <strong>przestaje szukać kategorii colostrum</strong> jako takiej. Strukturalna zmiana świadomości, nie sezonowa. Utrata narracji kategorii oznacza: <strong>przebudować ją (gut health) albo wyjść do rosnących</strong>.
+        <div class="diag-wniosek-bullet">→ Budujemy nową tożsamość: Healthy Gut Company.</div>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="margin-top: 24px; text-align: center; font-size: 12px; color: var(--ink-500); letter-spacing: 0.08em; text-transform: uppercase;">→ kliknij obszar, aby rozwinąć pełne dane</div>
+
+  <!-- KLAMRA: PO CO TO ROBIMY -->
+  <div class="diag-closing">
+    <div class="diag-closing-label">Po co to robimy?</div>
+    <p>Przez ostatnie lata zbudowaliśmy kategorię colostrum w Polsce — z <strong>60% udziałem w aptece</strong> jesteśmy jedynym graczem, który może próbować narzucić narrację. To nie był błąd, że skupialiśmy się wyłącznie na jednej substancji; bez tej koncentracji nie mielibyśmy dziś tej pozycji. Ale kategoria się kurczy, a nowi gracze na półce colostrum nie powiększają tortu. Natomiast nasze zasoby w skali całego rynku suplementów są zbyt ograniczone, żeby dalej rosnąć z jednej substancji i jednej kategorii (odporność). Potrzebujemy <strong>nowych okazji do penetracji marki</strong>: silniejszej narracji dla colostrum, która przenosi je z odporności do rosnącej kategorii jelit, oraz nowych produktów, które nie kanibalizują colostrum, tylko otwierają nowe kategorie — błonniki, laktoferyna, maślan sodu, autorskie mieszanki. Dalsza część tego dokumentu pokazuje, jak to robimy.</p>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ 02 WNIOSKI ═════════════════════════════ -->
+<section class="section" id="wnioski">
+  <div class="sec-num"><span class="dot"></span>Sekcja 02 · Most diagnoza → strategia</div>
+  <h2 class="sec-title">Sześć wniosków strategicznych</h2>
+
+
+  <div class="wnioski-grid">
+    <article class="wniosek w1">
+      <div class="wniosek-num">WNIOSEK 1</div>
+      <div class="wniosek-tag">PRZEBUDOWA NARRACJI COLOSTRUM</div>
+      <div class="wniosek-desc">Z sezonowej odporności na całoroczny fundament jelitowy.</div>
+      <div class="wniosek-body">Samo colostrum wymaga nowego kontekstu, nie nowego produktu. Mamy lidera kategorii — ale kategoria się kurczy. Żeby odwrócić trend, musimy przykleić colostrum do rosnącej kategorii jelit: zmienić narrację z „weź na infekcję" na „buduj fundament codziennie". Do tej pory próbowaliśmy robić obie rzeczy jednocześnie. Fokusujemy zasoby i budżet w jednym CEP dla Colostrum. To otwiera całoroczność, wyższą częstotliwość zakupu i wyższy LifeTimeValue bez zmiany składu ani ceny.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 2, 3, 5</strong></div>
+    </article>
+
+    <article class="wniosek w2">
+      <div class="wniosek-num">WNIOSEK 2</div>
+      <div class="wniosek-tag">PRZEŁAMANIE SEZONOWOŚCI</div>
+      <div class="wniosek-desc">Aktywność poza oknem wrzesień–marzec — otwarcie drugiej połowy roku.</div>
+      <div class="wniosek-body">Aktualnie naszym biznesem rządzi sezon infekcyjny. Marki konkurencyjne z szerokim portfolio komunikują się cały rok. Musimy zbudować popyt off-season i popularyzować nowe CEP jelitowe.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 1, 2, 4</strong></div>
+    </article>
+
+    <article class="wniosek w3">
+      <div class="wniosek-num">WNIOSEK 3</div>
+      <div class="wniosek-tag">PLATFORMA PRODUKTOWA GUT HEALTH</div>
+      <div class="wniosek-desc">Nowy silnik wzrostu: Fiberbiom → laktoferyna → mleko klaczy → substancje regeneracyjne.</div>
+      <div class="wniosek-body">Nasza kategoria odporności strukturalnie się kurczy, gut health rośnie 2,6× i ma LTV 3–5× wyższe. Cztery substancje (błonnik, laktoferyna, mleko klaczy, postbiotyki/aminokwasy) holistycznie opiekują się jelitami. Takie portfolio da nam też prawne możliwości do promowania marki w kierunku jelit.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 1, 3, 5</strong></div>
+    </article>
+
+    <article class="wniosek w4">
+      <div class="wniosek-num">WNIOSEK 4</div>
+      <div class="wniosek-tag">PRZEBUDOWA PORTFOLIO — OBRONA PREMIUM</div>
+      <div class="wniosek-desc">Optymalizacja portfolio i wejście A2 do szerokiej dystrybucji.</div>
+      <div class="wniosek-body">Segment Economy Colostrum spada najmocniej (−34,6% MAT) — konsument nie ucieka do taniego colostrum, idzie w górę cenowo. Nasza odpowiedź: konsolidacja portfolio do dwóch ról (A2 — premium tier, Classic — volume play), wprowadzenie pojedynczych saszetek 2g CiMK jako nowego formatu z niską barierą wejścia, wejście A2 do szerokiej dystrybucji.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 1, 2</strong></div>
+    </article>
+
+    <article class="wniosek w5">
+      <div class="wniosek-num">WNIOSEK 5</div>
+      <div class="wniosek-tag">OTWARCIE NOWYCH KANAŁÓW SPRZEDAŻY ONLINE</div>
+      <div class="wniosek-desc">Prawdziwy omnichannel.</div>
+      <div class="wniosek-body">1/3 zachowań zakupowych odbywa się poza naszymi kanałami. Apteka stacjonarna kurczy się strukturalnie (−21,5%). Konkurenci premium są w drogeriach, mają znacznie bardziej rozwinięte DTC. Odbudowujemy obecność na Allegro, budujemy ją na Amazon i Empik z dedykowaną polityką cenową. Inwestujemy w rozbudowę funkcjonalności D2C — Ecommerce.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 2, 4</strong></div>
+    </article>
+
+    <article class="wniosek w6">
+      <div class="wniosek-num">WNIOSEK 6</div>
+      <div class="wniosek-tag">EKOSYSTEM WOKÓŁ JELIT</div>
+      <div class="wniosek-desc">Quiz, dietetyk, diagnostyka, follow-up, edukacja ekspertów.</div>
+      <div class="wniosek-body">Wychodzimy poza produkt fizyczny: edukacja, wsparcie dietetyczne, może narzędzia diagnostyczne. Konkurencja skupia się na produktach — my budujemy miejsce, do którego konsument wraca z problemem jelitowym. To największa dźwignia credibility i retencji jednocześnie.</div>
+      <div class="wniosek-addresses">Adresuje: <strong>Obszary 2, 3, 4</strong></div>
+    </article>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ 04 NOGI WZROSTU ═════════════════════════════ -->
+<section class="section" id="nogi">
+  <div class="sec-num"><span class="dot"></span>Sekcja 03 · Architektura operacyjna</div>
+  <h2 class="sec-title">Pięć nóg wzrostu — drzewko decyzyjne</h2>
+  <p class="sec-subtitle">Pięć nóg po substancjach. Każda pełni jedną rolę biologiczną i zawiera wszystkie konkretne inicjatywy dotyczące danej substancji. Colostrum ma <strong>dwa tryby działania</strong> (sezon i off-season) — ale pozostaje jedną nogą, bo to jeden produkt.</p>
+
+
+
+
+
+
+
+  <!-- NOGA 1 — COLOSTRUM -->
+  <article class="noga n1">
+  <div class="noga-inner">
+    <div class="noga-sidebar" onclick="toggleNogaSide(this)">
+    <header class="noga-header">
+      <div class="noga-num">01</div>
+      <div class="noga-title-wrap">
+        <div class="noga-kicker">Rola · Budowa</div>
+        <h3 class="noga-title">Colostrum</h3>
+      </div>
+      <div class="noga-meta">
+        <div class="noga-meta-row"><span class="noga-meta-label">Wnioski</span> <span class="noga-meta-value">W1 · W3 · W4</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Horyzont</span> <span class="noga-meta-value">Ciągły</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Priorytet</span> <span class="noga-meta-value">#1 Obrona</span></div>
+      </div>
+      <div class="noga-toggle-btn"><span>Rozwiń</span> <span class="btn-arrow">►</span></div>
+    </header>
+    </div><!-- /noga-sidebar -->
+<div class="noga-body-wrap">
+      <div class="noga-bio">
+        <div class="noga-bio-label">Mechanizm biologiczny</div>
+        <div class="noga-bio-text"><strong>Czynniki wzrostu, immunoglobuliny, uszczelnienie tight junctions.</strong> Pierwszy pokarm każdego ssaka — fundament nabłonka jelitowego.</div>
+      </div>
+      <div class="noga-blocks cols-2">
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">A</div>
+            <div class="block-name">Off-season · maj–sierpień</div>
+            <div class="block-tag">atak online</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Kampania Rebel FAZA I — „Tak działa prawdziwe colostrum"</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Przygotowanie maj, launch czerwiec 2026. Budżet przesunięty z jesiennej kampanii odpornościowej. Konfrontacyjna i odważna narracja.
+              <ul>
+                <li>Digital, VOD, YouTube, Meta — ongoing maj → wrzesień</li>
+                <li>Bez dużych budżetów zasięgowych budujących całą kategorię → przekierowanie bezpośrednie do sklepu → GENACTIV, nie Colostrum</li>
+                <li>Peak aktywności: sierpień (przygotowanie do powrotu do szkoły)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Dedykowana oferta Allegro + zestawy online-only</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Cennik core'owych produktów przystosowany do cen Allegro. Zestawy i wielopaki na Allegro, Amazon, Empik dające niższą cenę efektywną bez obniżki jednostkowej. Apteka utrzymuje pełną cenę — klient online widzi konkurencyjną ofertę, apteka nie odczuwa kanibalizacji.
+              <ul>
+                <li>Wielopaki 2+1, 3+1 (cena efektywna ~20% niższa)</li>
+                <li>Zestawy Colostrum + Mleko Klaczy (cross-sell)</li>
+                <li>Limitowane edycje sezonowe (np. „Lato" — Colostrum + brzoskwinia, 99 PLN)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Performance marketing — SEM, Allegro Ads, Social, SEO</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Skupienie na działaniach generujących sprzedaż. Budowa widoczności na frazy, które za chwilę będą nam potrzebne — laktoferyna, błonnik, maślan sodu itd.
+              <ul>
+                <li>Keyword targeting: „colostrum", „colostrum na jelita", „colostrum premium"</li>
+                <li>Content SEO pod Rebel: edukacja o colostrum, liofilizacja vs spray-dry, badania kliniczne</li>
+                <li>Ranking colostrum na www.colostrum.pl</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">B</div>
+            <div class="block-name">Sezon · wrzesień–luty</div>
+            <div class="block-tag">obrona ongoing</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Ongoing digital zamiast peak TV — dyscyplina inhouse</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Rezygnacja z peak TV w październiku–grudniu. Budżet rozsmarowany maj → grudzień jako ongoing. Powód: w colostrum nikt poza nami nie robi TV — nie ma od kogo przejmować SOV. Przestajemy subsydiować kategorię, skupiamy się na własnej przewadze.
+              <ul>
+                <li>Kanały digital: VOD, YouTube, Meta, programmatic</li>
+                <li>Zespół inhouse przejmuje więcej egzekucji (mniej zewnętrznych buildupów)</li>
+                <li>Mini-bursty w październiku/listopadzie/grudniu dla utrzymania mental availability</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Zespół medyczny w nowym układzie — pediatrzy, farmaceuci, dietetycy, gastro, chirurgia, POZ (opieka koordynowana) zespoły prehabilitacyjne</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Rozszerzenie dotychczasowej roli zespołu medycznego.
+              <ul>
+                <li>Pediatrzy — CEP „dziecko choruje → pediatra → apteka"</li>
+                <li>Farmaceuci — sezon infekcyjny, rekomendacja przy ladzie</li>
+                <li>Dietetycy — całoroczna rekomendacja w kontekście gut health (integracja z warstwą W5)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Saszetka 2g BC+MK „za grosz" — trade tool dla 10 PM</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Narzędzie sprzedażowe dla 10-osobowego zespołu PM do wyższego towarowania przed sezonem. Bonus „1 grosz" (100 szt.) przy zamówieniu bazy min. 1500 PLN. Display na ladę = ~590 PLN marży dla apteki.
+              <ul>
+                <li>Cel: 10 PM × 50 aptek = 500 displayów w rotacji (lipiec/sierpień)</li>
+                <li>Cena saszetki dla klienta: 5,90 zł / bonus dla apteki</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">C</div>
+            <div class="block-name">Portfolio</div>
+            <div class="block-tag">upward move</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Linia A2 super-premium (kapsułki + puszka)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Wariant bez kazeiny A1, najwyższy standard czystości dla najbardziej wrażliwych pacjentów. Rekomendacja EBI (upward move portfolio, nie downward). Wdrożenie Q2 2026.
+              <ul>
+                <li>Target: konsument premium + dzieci z nietolerancją</li>
+                <li>Cena powyżej standardowej linii</li>
+                <li>Zespół medyczny jako kanał rekomendacyjny</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Przejście do FAZA II — „Colostrum buduje fundament jelitowy"</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Po okresie Rebel FAZA I (2026–2027) — przejście do docelowej narracji. Colostrum opowiedziane przez jelita, nie przez odporność. Wpięcie w logikę 5 ról biologicznych jako „Krok 1: Budowa".
+              <ul>
+                <li>Horyzont: Q4 2026 → 2028</li>
+                <li>Komunikat: „Pierwszy pokarm. Fundament bariery jelitowej"</li>
+                <li>Synergia z Fiberbiom — Krok 2 w tym samym cyklu</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Podgałąź Genactiv Pet — colostrum dla zwierząt</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Rebranding linii PET z Zooggies (wygaszany) pod markę Genactiv Pet. Wykorzystuje <strong>surowiec rozpyłowy</strong> — tańszy w produkcji, nie trafia do produktów ludzkich, nie psuje premium equity.
+              <ul>
+                <li>Technologia: spray-dry, standaryzacja na IgG</li>
+                <li>Cel: utylizacja nadmiaru surowca z magazynu</li>
+                <li>Nie jest growth driver — surowiec-utilization play</li>
+                <li>Puszka 100 g lub 50 g</li>
+                <li>Kolejne dwa produkty w PET — np. po 6 mc — reaktywacja formuły Progen C i Progen D w oparciu o liofilizat. Cena 50% wyżej niż rozpyłowy PET</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">D</div>
+            <div class="block-name">D2C · retencja · ekosystem</div>
+            <div class="block-tag">reusable dla wszystkich nóg</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Program lojalnościowy — punkty za powtarzalność</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Mechanika nagradzania klientów D2C za powtarzalność zakupu. Cel: konwersja 1→2 (+117% LTV) i 2→6+ (ambasadorzy, 9× LTV).
+              <ul>
+                <li>Punkty za zakup, za recenzję, za polecenie</li>
+                <li>Integracja z Shopify</li>
+                <li>Statusy: Klient → Stały → Ambasador (benefity rosną)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Program polecający — referral klient-klient</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Mechanizm poleceń: klient dostaje kod, polecony dostaje zniżkę, polecający dostaje benefit. Niski koszt akwizycji, wysoka konwersja (social proof).
+              <ul>
+                <li>Benefity asymetryczne (ochrona przed nadużyciem)</li>
+                <li>Integracja z programem lojalnościowym</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Program ambasadorski / dietetyczny — afiliacja</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Dietetycy jako ambasadorzy Genactiv. Model afiliacyjny — rekomendacja produktów w praktyce + prowizja od sprzedaży. Synergiczne z warstwą W5 (ekosystem) i Programem Dietetycznym MVP z sekcji przekrojowej.
+              <ul>
+                <li>Start: 20 dietetyków w MVP (Q4 - początek)</li>
+                <li>Materiały edukacyjne, szkolenia, case studies</li>
+                <li>Płatność: % od sprzedaży poleconej + fixed fee za content</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Konsultacje online dietetyczne — warstwa usługowa</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Płatne konsultacje dietetyczne online dla klientów D2C. Integracja z produktami Genactiv — dietetyk może rekomendować konkretny stack w ramach konsultacji.
+              <ul>
+                <li>Model: pakiety (single session, 3-miesięczny, pełny protokół)</li>
+                <li>Cross-sell: konsultacja → rekomendacja produktów</li>
+                <li>Element konstruujący pozycjonowanie „firma, która rozwiązuje problemy, nie sprzedaje suplementów"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block rozpatrywane" style="grid-column: 1 / -1;">
+          <div class="block-label">
+            <div class="block-letter">E</div>
+            <div class="block-name">LOW + MEDIUM — analiza rozważana</div>
+            <div class="block-tag">pełne scenariusze 24M</div>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-700); line-height: 1.6; margin-bottom: 8px;">Pomysł rozpatrywany: wprowadzenie tańszych wariantów Colostrum pod marką Genactiv (49 PLN LOW / 79 PLN MEDIUM) w odpowiedzi na presję cenową rynku. Pełna analiza decyzyjna z kalkulacjami scenariuszowymi 24M — cztery warianty (Nic nie robimy vs Mały/Średni/Duży LOW+MEDIUM). Każdy wariant inwestycji pokazuje <strong>ujemny bottomline</strong> — im bardziej inwestujemy, tym więcej tracimy.</p>
+          <button class="analiza-btn" onclick="openModal('lowmedium')">Zobacz pełną analizę decyzyjną</button>
+        </div>
+
+        <div class="noga-block" style="grid-column: 1 / -1;">
+          <div class="block-label">
+            <div class="block-letter">F</div>
+            <div class="block-name">Konsolidacja portfolio — likwidacja Classic 60 kaps</div>
+            <div class="block-tag">decyzja do zatwierdzenia</div>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-700); line-height: 1.6; margin-bottom: 14px;">Dziś: trzy SKU Colostrum (Classic 60, Classic 120, A2 60) z nakładającymi się punktami cenowymi. Propozycja: <strong>likwidujemy Classic 60</strong>, zostawiamy <strong>Classic 120 (136 zł, volume play)</strong> + <strong>A2 60 (104 zł, premium tier)</strong>. Czysta drabina dwóch ról. Każdy scenariusz konwersji klienta Classic 60 daje wyższą marżę (+50% przy migracji na A2 60, +87% przy migracji na Classic 120).</p>
+
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Migracja portfolio Q2–Q3 2026 — stopniowe wygaszanie Classic 60</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Równoległe wygaszanie Classic 60 z launchem A2 60 — bez luki w średnim tierze. Jeden cutover date zapobiega chaosowi trzech opcji na półce.
+              <ul>
+                <li>Q2 2026: launch A2 60 (zgodnie z planem)</li>
+                <li>Q2–Q3 2026: stopniowe wygaszanie stanów magazynowych Classic 60</li>
+                <li>Q4 2026: pełny cutover — dwa SKU na rynku (A2 60 + Classic 120)</li>
+                <li>Komunikacja do apteki 8–12 tyg. przed cutover + materiały dla zespołu 10 PM</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Komunikacja drabiny 2 SKU — „A2 = czystość, 120 = długa kuracja"</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Każde SKU z jasną rolą i nie-pokrywającym się komunikatem. Klient nie porównuje „tego samego w różnej jakości" — porównuje dwie różne obietnice.
+              <ul>
+                <li><strong>A2 60 kaps (104 zł, PPU 1,73 zł/kaps):</strong> „Elitarna czystość bez kazeiny A1. Kuracja startowa."</li>
+                <li><strong>Classic 120 kaps (136 zł, PPU 1,13 zł/kaps):</strong> „Długa, całoroczna kuracja. Najlepsza cena za kapsułkę."</li>
+                <li>Różnica PPU 53% uzasadnia premium A2 — bo A2 jest czystsze, a Classic tańsze per dawka bo duże opakowanie</li>
+                <li>Spójność z narracją gut health: opakowanie 120 kaps = 2–4 miesiące kuracji ≈ całoroczna suplementacja</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Saszetka 2g jako nowy entry SKU — przejście z trade tool w funnel akwizycyjny</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Po likwidacji Classic 60 minimalna cena wejścia rośnie z 74 zł do 104 zł (A2) / 136 zł (Classic 120) — to +40–83% wyższa bariera dla nowego klienta. Saszetka 2g przestaje być tylko narzędziem dla 10 PM — staje się kluczowym elementem ścieżki akwizycyjnej.
+              <ul>
+                <li>Wprowadzenie produktu do sprzedaży w formie pojedynczej saszetki — niska bariera wejścia</li>
+                <li>Saszetka w zestawach Allegro/D2C jako free sample przy pierwszym zamówieniu</li>
+                <li>Konwersja próbki → pełne opakowanie (A2 60 lub Classic 120)</li>
+                <li>Pokrywa się z Blokiem A (trade) i Blokiem B (off-season online) — wielokrotne zastosowanie</li>
+              </ul>
+            </div>
+          </div>
+
+          <button class="analiza-btn" onclick="openModal('konsolidacja')" style="margin-top: 16px;">Zobacz analizę konsolidacji portfolio</button>
+        </div>
+
+      </div>
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">G</div>
+            <div class="block-name">Sprzedaż surowca</div>
+            <div class="block-tag">utylizacja + B2B</div>
+          </div>
+          <div class="block-item" role="button" tabindex="0" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Sprzedaż surowca rozpyłowego — nadwyżki z dojów</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Utylizacja nadmiaru surowca z rozszerzenia produkcji. Nauczenie się technologii rozpyłowej jako kompetencji wewnętrznej.
+              <ul>
+                <li>Kanał: B2B — inni producenci suplementów, kosmetyki</li>
+                <li>Produkt uboczny skalowania Nogi 1 i Nogi 4</li>
+                <li>Nie jest growth driver — surowiec-utilization play</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" role="button" tabindex="0" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Kosmetyki — surowiec MK i colostrum</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Wejście w segment kosmetyczny jako kanał dla nadwyżek surowca MK i colostrum.
+              <ul>
+                <li>CEP: zdrowa skóra od wewnątrz + zewnętrznie</li>
+                <li>Format: private label lub współpraca z marką kosmetyczną</li>
+                <li>Horyzont: 2027–2028</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div><!-- /noga-body-wrap -->
+  </div><!-- /noga-inner -->
+  </article>
+
+  <!-- NOGA 2 — FIBERBIOM -->
+  <article class="noga n2">
+  <div class="noga-inner">
+    <div class="noga-sidebar" onclick="toggleNogaSide(this)">
+    <header class="noga-header">
+      <div class="noga-num">02</div>
+      <div class="noga-title-wrap">
+        <div class="noga-kicker">Rola · Usprawnienie</div>
+        <h3 class="noga-title">Błonnik / Fiberbiom</h3>
+      </div>
+      <div class="noga-meta">
+        <div class="noga-meta-row"><span class="noga-meta-label">Wnioski</span> <span class="noga-meta-value">W2 · W4</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Horyzont</span> <span class="noga-meta-value">Q2 2026 → 2027</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Priorytet</span> <span class="noga-meta-value">#2 Atak</span></div>
+      </div>
+      <div class="noga-toggle-btn"><span>Rozwiń</span> <span class="btn-arrow">►</span></div>
+    </header>
+    </div><!-- /noga-sidebar -->
+<div class="noga-body-wrap">
+      <div class="noga-bio">
+        <div class="noga-bio-label">Mechanizm biologiczny</div>
+        <div class="noga-bio-text">Błonnik funkcjonalny → <strong>fermentacja jelitowa → krótkołańcuchowe kwasy tłuszczowe (SCFA)</strong> → zdrowy mikrobiom → regularność.</div>
+      </div>
+      <div class="noga-blocks cols-2">
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">A</div>
+            <div class="block-name">Faza 1 · Launch online-first</div>
+            <div class="block-tag">Q2–Q3 2026</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Pure — czysty arabinogalaktan, produkt wejściowy 79 PLN</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Najtańszy SKU w portfolio Fiberbiom. Otwiera drabinę cenową — klient wchodzi w kategorię przez Pure, następnie up-sell do Daily, Complete.
+              <ul>
+                <li>Skład: czysty arabinogalaktan (prebiotyk)</li>
+                <li>Cena docelowa: 79 PLN</li>
+                <li>Kanał: online-first (D2C, Allegro)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Ananas i Porzeczka — warianty smakowe</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Dwa smakowe warianty Fiberbiom dla budowy nawyku codziennego użycia. Target: konsument D2C, który chce przyjemnej suplementacji.
+              <ul>
+                <li>Format: saszetki + doypack</li>
+                <li>Kanał: D2C, Allegro, Empik</li>
+                <li>Cel: trial i retencja w nowej kategorii</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Mix Pack i Doypack 30 dni — formaty rodzinne</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Mix Pack = zestaw różnych smaków do testowania. Doypack 30 dni = format rodzinny, lepszy stosunek cena/porcja.
+              <ul>
+                <li>Mix Pack: 5 × smak, discovery format</li>
+                <li>Doypack 30 dni: lepsza cena jednostkowa, sub-target rodzina</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">B</div>
+            <div class="block-name">Faza 2 · Funkcjonalne błonniki</div>
+            <div class="block-tag">Q4 26 – Q1 27</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Daily — trzy frakcje błonnika (PHGG + Solnul + Rice Bran)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Flagship codziennego używania. Trzy frakcje błonnika pracują synergicznie: PHGG (rozpuszczalny, fermentacja), Solnul RS2 (odporna skrobia), Rice Bran Hull (nierozpuszczalny, objętość).
+              <ul>
+                <li>PHGG 2g + Solnul RS2 3,5g + Rice Bran Hull 2g</li>
+                <li>Bez colostrum — czysty błonnik codzienny</li>
+                <li>CEP: „wrażliwe jelita", „regularność"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Kids — laktoferyna + Benicaros dla dzieci</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Wejście w kanał pediatryczny. Laktoferyna + Benicaros dopasowane do mikrobiomu dziecka.
+              <ul>
+                <li>Format saszetkowy (łatwy do podania dziecku)</li>
+                <li>Kanał: apteka (rekomendacja pediatry) + D2C (rekomendacja dietetyka)</li>
+                <li>Blocker: potwierdzenie Novel Food dla Benicaros (Ania R&amp;D)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Complete Gut — flagship z colostrum</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Najwyżej pozycjonowany SKU. Arabinogalaktan + colostrum = jedyne takie połączenie w 400+ produktach rynku. Patent otwarty.
+              <ul>
+                <li>Cel: flagship premium, najwyższa cena w linii</li>
+                <li>Patent: Genactiv jedyny producent łączący prebiotyk + colostrum</li>
+                <li>CEP: „leaky gut", „po antybiotyku", „odbudowa"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">C</div>
+            <div class="block-name">Faza 3 · Osie funkcyjne</div>
+            <div class="block-tag">2027</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Skin &amp; Gut — oś jelito-skóra</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Wejście w rosnący segment beauty-from-within. Błonnik + Verisol (kolagen peptydowy). CEP: „zdrowe jelita → zdrowa skóra".
+              <ul>
+                <li>Target: kobiety 25–45, zainteresowane holistycznym wellness</li>
+                <li>Kanał: D2C, drogerie (nowy kanał!), Allegro</li>
+                <li>Wchodzi w FAZA III — osie jelitowe</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Fiberbiom Recovery — sport i regeneracja</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Wejście w segment sport supplements. Błonnik + składniki regeneracyjne. CEP: „zdrowe jelita = lepsza wydolność".
+              <ul>
+                <li>Target: osoby aktywne fizycznie, biegacze, amatorzy sportu</li>
+                <li>Kanał: D2C, sklepy sportowe, Allegro</li>
+                <li>Wchodzi w FAZA III — osie jelitowe</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">D</div>
+            <div class="block-name">Dźwignie platformy</div>
+            <div class="block-tag">inicjatywy cross</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Edukacja farmaceutyczna — „Fiberbiom po antybiotyku" jako nowy CEP</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Onboarding farmaceutów analogiczny do tego, co zrobiliśmy z colostrum w pediatrii. Budowa nowego CEP aptecznego: „po antybiotyku → farmaceuta → Fiberbiom".
+              <ul>
+                <li>Materiały edukacyjne + wizyty merchandiserów</li>
+                <li>Webinary B2B (integracja z przekrojową inicjatywą)</li>
+                <li>Cel: Fiberbiom w TOP 3 rekomendacji po antybiotyku w 12 mies.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Patent na połączenie prebiotyk + colostrum</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Zabezpieczenie IP. Żaden z 400+ produktów rynku nie łączy prebiotyku z colostrum — luka patentowa otwarta.
+              <ul>
+                <li>Deadline: Q3 2026</li>
+                <li>Beneficjent: Fiberbiom Complete Gut (flagship)</li>
+                <li>Fosa konkurencyjna na 20 lat</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Walidacja Benicaros EU — Novel Food status</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Blocker dla Fiberbiom Kids (Faza 2). Musi być potwierdzony status regulacyjny Benicaros w EU.
+              <ul>
+                <li>Odpowiedzialna: Ania R&amp;D</li>
+                <li>Deadline: Q2 2026</li>
+                <li>Fallback: alternatywny skład Kids bez Benicaros</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /noga-body-wrap -->
+  </div><!-- /noga-inner -->
+  </article>
+
+  <!-- NOGA 3 — LAKTOFERYNA -->
+  <article class="noga n3">
+  <div class="noga-inner">
+    <div class="noga-sidebar" onclick="toggleNogaSide(this)">
+    <header class="noga-header">
+      <div class="noga-num">03</div>
+      <div class="noga-title-wrap">
+        <div class="noga-kicker">Rola · Ochrona</div>
+        <h3 class="noga-title">Laktoferyna</h3>
+      </div>
+      <div class="noga-meta">
+        <div class="noga-meta-row"><span class="noga-meta-label">Wnioski</span> <span class="noga-meta-value">W2 · W4</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Horyzont</span> <span class="noga-meta-value">Q3/Q4 2026 → Q1 2027</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Priorytet</span> <span class="noga-meta-value">#3 Rozwój</span></div>
+      </div>
+      <div class="noga-toggle-btn"><span>Rozwiń</span> <span class="btn-arrow">►</span></div>
+    </header>
+    </div><!-- /noga-sidebar -->
+<div class="noga-body-wrap">
+      <div class="noga-bio">
+        <div class="noga-bio-label">Mechanizm biologiczny</div>
+        <div class="noga-bio-text"><strong>Wiąże żelazo patogenów, blokuje wejście wirusów</strong>, wzmacnia odpowiedź immunologiczną błony śluzowej. Molekularna tarcza jelita.</div>
+      </div>
+      <div class="noga-blocks cols-2">
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">A</div>
+            <div class="block-name">Portfolio SKU</div>
+            <div class="block-tag">luka EU otwarta</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">SKU 1 — Laktoferyna z mlekiem klaczy (kapsułki, 69–89 PLN)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Launch Q3/Q4 2026. Formuła zamknięta. 100mg laktoferyny + 250mg mleka klaczy jako nośnik zamiast mąki ryżowej. Pierwszy z 2 SKU w kategorii.
+              <ul>
+                <li>Cena: 69–89 PLN</li>
+                <li>Format: 30 kapsułek</li>
+                <li>Kanał: D2C, Allegro</li>
+                <li>Wyróżnik: jedyny na rynku z MK jako nośnikiem (HLC używa mąki ryżowej)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">SKU 2 — Mleko klaczy z laktoferyną (saszetki, Q1 2027)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Formuła otwarta — zamknięcie zależy od decyzji CEP (gate Q2 2026). MK dominant + LF enhancement. Inna architektura niż SKU 1 — tu mleko klaczy gra główną rolę.
+              <ul>
+                <li>Format: saszetki (łatwe do podania, dobre dla dzieci)</li>
+                <li>Cross-sell: z nowym SKU Fortified w linii MK</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">B</div>
+            <div class="block-name">Bramki decyzyjne</div>
+            <div class="block-tag">Q2 2026</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Decyzja CEP dla SKU 2 — beauty / odporność / dzieci / żelazo</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Deadline: koniec Q2 2026. Bez tej decyzji formuła SKU 2 pozostaje otwarta i blokuje launch Q1 2027. Cztery opcje CEP:
+              <ul>
+                <li>Beauty/skin — synergia z Fiberbiom Skin&amp;Gut, kanał drogerie</li>
+                <li>Odporność — konfrontacja z HLC Forte, kanał apteka</li>
+                <li>Dzieci — kanał pediatryczny, synergie z Fiberbiom Kids</li>
+                <li>Żelazo/kobiety — kanał drogerie, D2C, target kobiet aktywnych</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Patent na kombinację laktoferyna + mleko klaczy</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Luka patentowa EU jest otwarta — żaden producent europejski nie oferuje tego połączenia jako suplementu. Deadline złożenia: Q2/Q3 2026.
+              <ul>
+                <li>Ochrona IP dla Nogi 3 i Nogi 4 (mleko klaczy)</li>
+                <li>Fosa konkurencyjna przed Equilac (48 krajów, zagrożenie wejścia do PL)</li>
+                <li>Metryka sukcesu planu strategicznego 2026</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block" style="grid-column: 1 / -1;">
+          <div class="block-label">
+            <div class="block-letter">C</div>
+            <div class="block-name">Narracja i konfrontacja rynkowa</div>
+            <div class="block-tag">evidence-based adult premium</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Narracja „ochrona jelita" — wpięcie w logikę 5 ról biologicznych</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Zmiana komunikacji z „odporność + żelazo" (standard rynku) na <strong>„ochrona jelita"</strong>. Laktoferyna pełni rolę Kroku 3 w cyklu HGH: Budowa → Usprawnienie → <strong>Ochrona</strong> → Odżywienie → Regeneracja.
+              <ul>
+                <li>Mechanizm: wiąże żelazo patogenów, blokuje wejście wirusów</li>
+                <li>Pozycja: adult premium, evidence-based (nie wellness/lifestyle)</li>
+                <li>Synergia z innymi nogami HGH (cross-sell)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Konfrontacja z Health Labs Care — „bez wypełniaczy" vs mąka ryżowa</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              HLC komunikuje „bez wypełniaczy" ale ma mąkę ryżową w składzie. Wprost falsyfikowalne — mocna dźwignia Rebel w content marketingu.
+              <ul>
+                <li>Nasza przewaga: mleko klaczy jako biologicznie aktywny nośnik</li>
+                <li>Egzekucja: content, karty produktowe, porównanie składów</li>
+                <li>Wpisuje się w szerszą narrację „Prawdziwe znaczy udowodnione"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Edukacja lekarska + treści eksperckie</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Pod pozycjonowanie evidence-based adult premium. Budowa autorytetu w segmencie lekarskim i dietetycznym.
+              <ul>
+                <li>Webinary B2B (integracja z przekrojową inicjatywą)</li>
+                <li>Content: ≥85 publikacji, mechanizmy, klinika</li>
+                <li>Rekomendacje lekarzy i dietetyków jako kanał wiarygodności</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /noga-body-wrap -->
+  </div><!-- /noga-inner -->
+  </article>
+
+  <!-- NOGA 4 — MLEKO KLACZY -->
+  <article class="noga n4">
+  <div class="noga-inner">
+    <div class="noga-sidebar" onclick="toggleNogaSide(this)">
+    <header class="noga-header">
+      <div class="noga-num">04</div>
+      <div class="noga-title-wrap">
+        <div class="noga-kicker">Rola · Odżywienie</div>
+        <h3 class="noga-title">Mleko Klaczy</h3>
+      </div>
+      <div class="noga-meta">
+        <div class="noga-meta-row"><span class="noga-meta-label">Wnioski</span> <span class="noga-meta-value">W1 · W2</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Horyzont</span> <span class="noga-meta-value">Q3 2026 → 2027</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Priorytet</span> <span class="noga-meta-value">#4 Budowanie</span></div>
+      </div>
+      <div class="noga-toggle-btn"><span>Rozwiń</span> <span class="btn-arrow">►</span></div>
+    </header>
+    </div><!-- /noga-sidebar -->
+<div class="noga-body-wrap">
+      <div class="noga-bio">
+        <div class="noga-bio-label">Mechanizm biologiczny</div>
+        <div class="noga-bio-text"><strong>48 oligosacharydów (19 identycznych z ludzkimi HMO), lizozym 1000× krowi, egzosomy</strong>, stymulacja fibroblastów. Najbliższe ludzkiemu mleko ssaka.</div>
+      </div>
+      <div class="noga-blocks cols-2">
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">A</div>
+            <div class="block-name">Tożsamość sub-brandu</div>
+            <div class="block-tag">osobna marka</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Naming sub-brandu — osobna nazwa brandowa dla linii MK</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Mleko klaczy dostaje osobną nazwę brandową — nie „Genactiv Mleko Klaczy", tylko samodzielny sub-brand pod Genactiv. Powód: inny target, inne CEP-y, inna estetyka niż Genactiv Colostrum.
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Rebrand istniejących SKU MK pod nową nazwę — Q4 2026</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Obecne produkty (czyste MK, Colostrum+MK, EQ Activ) przechodzą pod nową nazwę brandową. Nowe opakowania, nowe pozycjonowanie, nowa estetyka — odrębna od Colostrum.
+              <ul>
+                <li>Okno: Q4 2026 – Q1 2027</li>
+                <li>Claim pozycjonujący: ODŻYWIENIE / odnowa / longevity</li>
+                <li>Kanał: D2C, drogerie, apteki premium</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Własna estetyka i narracja — odrębne od Genactiv Colostrum</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Sub-brand ma swoją tożsamość wizualną i językową. Colostrum = medycyna, nauka, evidence. MK = odżywienie, biostruktura, natura, longevity. Dwa różne emocjonalne rejestry.
+              <ul>
+                <li>Typografia, kolory, kompozycja — osobne guidelines</li>
+                <li>Social media: osobne konta (przynajmniej Instagram)</li>
+                <li>Synergia pod parasolem HGH, ale z wyraźnym rozróżnieniem</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">B</div>
+            <div class="block-name">Rozbudowa portfolio</div>
+            <div class="block-tag">Q1 2027+</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Nowy SKU Fortified — MK hero + laktoferyna</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Flagowy SKU sub-brandu MK. Mleko klaczy jako główny składnik + laktoferyna jako enhancement. Cross-sell z SKU 2 laktoferyny (saszetki).
+              <ul>
+                <li>Launch: Q1 2027</li>
+                <li>Format: proszek, kapsułki lub saszetki (decyzja R&amp;D)</li>
+                <li>Pozycjonowanie: premium, odnowa, longevity</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Rozszerzenie linii — longevity, beauty, regeneracja sportowa (2027–2028)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Kierunek FAZA III. Mleko klaczy pod parasolem odnowy — nowe CEP-y i nowe kanały.
+              <ul>
+                <li>Longevity — target 40+, kanał D2C, apteki premium</li>
+                <li>Beauty-from-within — synergia z Fiberbiom Skin&amp;Gut, kanał drogerie</li>
+                <li>Regeneracja sportowa — synergia z Fiberbiom Recovery</li>
+                <li>Decyzja na podstawie wyników sprzedaży SKU 1–2 i badania klinicznego</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">C</div>
+            <div class="block-name">System wiarygodności</div>
+            <div class="block-tag">fosa konkurencyjna</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">EQ Score™ — własny standard jakości (model manuka/UMF)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              System oceny jakości na wzór miodu manuka UMF. QR na opakowaniu → wyniki badań partii. Kto ustanawia standard w kategorii, ten ją kontroluje.
+              <ul>
+                <li>Parametry: lizozym (mg/L), laktoferyna endogenna, oligosacharydy, serwatka:kazeina</li>
+                <li>Wdrożenie: Q1–Q2 2027</li>
+                <li>Walidacja z R&amp;D i akredytowanym laboratorium</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Badanie kliniczne pilotowe (n=50–80) — 2027</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Nie jest wymogiem regulacyjnym — jest assetem marketingowym i patentem. MK ma jedno RCT (Foekel 2009, n=23) — potrzebujemy większego badania, żeby mieć własny dowód.
+              <ul>
+                <li>Endpointy: skóra + biomarkery jelitowe</li>
+                <li>Horyzont: Q3 2027</li>
+                <li>Wynik: asset komunikacyjny, wzmocnienie patentu, obrona przed konkurencją</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Język mechanizmów, nie claimów — narracja bez wymogu regulacyjnego</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              MK nie ma EFSA claims. Komunikujemy się przez fakty składowe, nie obietnice zdrowotne. Ten sam playbook co colostrum.
+              <ul>
+                <li>„Najbliższe mleku ludzkiemu"</li>
+                <li>„48 oligosacharydów, 19 identycznych z ludzkimi HMO"</li>
+                <li>„Lizozym 1000× mleko krowie"</li>
+                <li>„Liofilizacja &lt;40°C" (proces, nie obietnica)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">D</div>
+            <div class="block-name">Wymiar surowcowy</div>
+            <div class="block-tag">wymusza skalę</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Nowe Jankowice — nowy kanał surowca MK</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Otwarcie nowego kanału surowca znacząco zwiększa uzysk mleka klaczy. <strong>Wymusza szybkie budowanie skali sprzedaży</strong> — niezależnie od decyzji strategicznych. Bez skali surowiec się zmarnuje.
+              <ul>
+                <li>Warunek brzegowy dla priorytetów sub-brandu MK</li>
+                <li>Harmonogram sprzedaży musi iść w parze z dostawami</li>
+                <li>Synergia z Nogą 3 (laktoferyna jako wehikuł do MK)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Laktoferyna jako wehikuł do skali MK</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Inicjatywa laktoferynowa (Noga 3) otwiera drzwi do kategorii MK. SKU 1 laktoferyna ma mleko klaczy jako nośnik — konsument pierwszy raz kojarzy MK z Genactiv.
+              <ul>
+                <li>SKU 1 laktoferyna = first touch z MK</li>
+                <li>SKU 2 saszetki i SKU Fortified = docelowe role MK</li>
+                <li>Długoterminowy cel: MK jako druga substancja flagowa Genactiv, w skali porównywalnej z colostrum</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /noga-body-wrap -->
+  </div><!-- /noga-inner -->
+  </article>
+
+  <!-- NOGA 5 — GUT HEALTH INNE -->
+  <article class="noga n5">
+  <div class="noga-inner">
+    <div class="noga-sidebar" onclick="toggleNogaSide(this)">
+    <header class="noga-header">
+      <div class="noga-num">05</div>
+      <div class="noga-title-wrap">
+        <div class="noga-kicker">Rola · Regeneracja</div>
+        <h3 class="noga-title">Gut Health — inne substancje</h3>
+      </div>
+      <div class="noga-meta">
+        <div class="noga-meta-row"><span class="noga-meta-label">Wnioski</span> <span class="noga-meta-value">W2</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Horyzont</span> <span class="noga-meta-value">Q3 2026 → 2027</span></div>
+        <div class="noga-meta-row"><span class="noga-meta-label">Priorytet</span> <span class="noga-meta-value">Low-cost expansion</span></div>
+      </div>
+      <div class="noga-toggle-btn"><span>Rozwiń</span> <span class="btn-arrow">►</span></div>
+    </header>
+    </div><!-- /noga-sidebar -->
+<div class="noga-body-wrap">
+      <div class="noga-bio">
+        <div class="noga-bio-label">Mechanizm biologiczny</div>
+        <div class="noga-bio-text"><strong>Maślan karmi kolonocyty, L-glutamina enterocyty, tributyryna uwalnia SCFA</strong> w okrężnicy. Substraty dla komórek nabłonka — regeneracja od wewnątrz.</div>
+      </div>
+      <div class="noga-blocks cols-2">
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">A</div>
+            <div class="block-name">Portfolio launch</div>
+            <div class="block-tag">FSMP kategoria</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Genactiv Maślan Sodu — 600mg kapsułki, 89 PLN (Q3 2026)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Pierwszy SKU Nogi 5. Maślan sodu mikrokapsułkowany (Butyrose® LSC od SILA). Kategoria FSMP. Private label w fazie 1, własna produkcja docelowo.
+              <ul>
+                <li>Format: 60 kapsułek × 600mg, 89 PLN</li>
+                <li>Target: IBS, IBD, po antybiotyku, leaky gut</li>
+                <li>Kanał: apteka + D2C + Allegro</li>
+                <li>Break-even: miesiąc 3–6</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Genactiv Gut Butyric — tributyryna CoreBiome™, 179 PLN (Q2/Q3 2027)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Premium SKU Nogi 5. Nowa generacja kwasu masłowego (tributyryna uwalnia maślan w okrężnicy). Własna produkcja. Pierwszy w PL w segmencie FSMP premium.
+              <ul>
+                <li>Format: 60 kapsułek × 300mg, 179 PLN</li>
+                <li>Target: świadomy konsument, biohacker, upgrade z Maślanu Sodu</li>
+                <li>Wyróżnik: „prawdziwe znaczy udowodnione — w jelicie, nie na etykiecie"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">„Plaster na Jelita" — saszetki WPI + BC + L-glutamina + cynk (Q1 2027)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Hybryda substancji: WPI (białko serwatki) + BC (colostrum) + L-glutamina + cynk. Pozycjonowanie: regeneracja nabłonka, „zaplastrowanie" jelita.
+              <ul>
+                <li>Format: saszetki</li>
+                <li>Target: IBS, leaky gut, sport recovery</li>
+                <li>Rola: Regeneracja — colostrum jako ingredient (nie hero), L-glutamina główny aktyw</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">PLASTER REGEN — wariant onkologiczny (MK + LF + L-glutamina + cynk)</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Aktywowany przy nadmiarze MK i rozsądnym TKW. Produkty pozycjonowane w onkologii są wysoko marżowe, sprzedawane na saszetki.
+              <ul>
+                <li><strong>Liofilizowane Mleko Klaczy</strong> — lekkostrawna baza albuminowa, najbliższa mleku matki</li>
+                <li><strong>Laktoferyna</strong> — białko przeciwzapalne, uszczelnia barierę jelitową</li>
+                <li><strong>L-glutamina</strong> — regeneracja enterocytów</li>
+                <li><strong>Cynk</strong> — spoinownik połączeń ścisłych nabłonka</li>
+                <li>Format: saszetki; target: onkologia, regeneracja po chemioterapii</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">B</div>
+            <div class="block-name">Operacje i sourcing</div>
+            <div class="block-tag">walidacja surowcowa</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Sourcing SILA + backup IPS/Suractives</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Faza 0 (T1–T3, kwiecień–maj 2026). SILA (Butyrose® LSC) jako primary, IPS/Suractives (MATRIS®) jako backup. Próbki, walidacja, test kapsułkowania.
+              <ul>
+                <li>Decyzja: technologia, model produkcji fazy 1</li>
+                <li>Pierwsza partia: 1500 opak. private label SILA</li>
+                <li>Budżet fazy 0+1: 56–88 tys PLN</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Kontakt z Prinova o CoreBiome™ — dossier regulacyjne FSMP UE</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Prinova jest dostawcą CoreBiome™ (tributyryna). Potrzebne dossier regulacyjne dla FSMP w UE przed launch SKU 2 (2027).
+              <ul>
+                <li>Równoległy kontakt od fazy 0</li>
+                <li>Deadline dossier: Q4 2026</li>
+                <li>Koszt: w ramach budżetu fazy 3 (69–99 tys PLN)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Walidacja Novel Food dla CoreBiome — Q2 2026</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Gate dla Gut Butyric (Q2/Q3 2027). Bez potwierdzenia statusu Novel Food w EU nie można launchować. Fallback: L-glutamina mono lub S. boulardii jako trzeci SKU.
+              <ul>
+                <li>Odpowiedzialna: Ania R&amp;D</li>
+                <li>Deadline: Q2 2026</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="noga-block">
+          <div class="block-label">
+            <div class="block-letter">C</div>
+            <div class="block-name">Strategia obecności</div>
+            <div class="block-tag">low-cost expansion</div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Bez kampanii mediowych, bez ambasadorów — organic only</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Noga 5 nie goni BestButyric (z Mauriczem) ani HLC Forte w wolumenie. Strategia: obecność na półce, cross-sell z bazy Genactiv, organiczne SEO.
+              <ul>
+                <li>Wolumen organiczny z bazy D2C Genactiv</li>
+                <li>Cross-sell w ekosystemie HGH (maślan jako dopełnienie cyklu)</li>
+                <li>Content SEO pod „maślan sodu", „tributyryna", „postbiotyki"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Obecność na półce we wszystkich kanałach</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Allegro, Amazon, Empik, D2C, apteki online. Cel: fundament pod rebranding na Healthy Gut Company w 2027–2028.
+              <ul>
+                <li>Cel: 1000 opak./mies. stabilnie od miesiąca 6 (SKU 1)</li>
+                <li>Cross-buy colostrum → maślan w bazie D2C: ≥10%</li>
+                <li>Udział nogi w przychodzie Genactiv: 3–6% koniec 2027</li>
+              </ul>
+            </div>
+          </div>
+          <div class="block-item" onclick="toggleItem(this)">
+            <div class="block-item-head">
+              <div class="block-item-title">Budżet 12 miesięcy: 125–187 tys PLN — 3–4× niższy niż pełny launch</div>
+              <div class="block-item-chev">▾</div>
+            </div>
+            <div class="block-item-detail">
+              Inkrementalny do istniejącego budżetu. Brak kampanii mediowych, brak ambasadorów, brak płatnego influencer marketingu.
+              <ul>
+                <li>Faza 0+1 (SKU 1 launch): 56–88 tys PLN</li>
+                <li>Faza 3 (SKU 2 launch): 69–99 tys PLN</li>
+                <li>Break-even SKU 1: miesiąc 3–6</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </div><!-- /noga-body-wrap -->
+  </div><!-- /noga-inner -->
+  </article>
+
+</section>
+
+<!-- ═════════════════════════════ 05 PRZEKROJOWE ═════════════════════════════ -->
+<section class="section" id="przekrojowe">
+  <div class="sec-num"><span class="dot"></span>Sekcja 04 · Warstwa ekosystemowa</div>
+  <h2 class="sec-title">Inicjatywy przekrojowe</h2>
+  <p class="sec-subtitle">Inicjatywy, które nie należą do jednej nogi, tylko pracują dla całej marki. Realizują głównie <strong>W5 (Ekosystem wokół jelit)</strong>, ale wspierają też transformację na Healthy Gut Company.</p>
+
+  <div class="przekrojowe-grid">
+<article class="przek-card">
+      <div class="przek-icon">◎</div>
+      <h4 class="przek-title">Program Dietetyczny MVP</h4>
+      <p class="przek-desc">20 dietetyków, model afiliacyjny. Materiały edukacyjne. Konsument dostaje rozwiązanie, nie tylko suplement.</p>
+      <div class="przek-when">Q3 2026 · Do First</div>
+    </article>
+
+    <article class="przek-card">
+      <div class="przek-icon">∿</div>
+      <h4 class="przek-title">Diagnostyka wysyłkowa</h4>
+      <p class="przek-desc">Umowy z 2–3 laboratoriami, nasi dietetycy interpretują wyniki, rekomendacja produktów Genactiv.</p>
+      <div class="przek-when">2027 · Do Last</div>
+    </article>
+
+    <article class="przek-card">
+      <div class="przek-icon">◆</div>
+      <h4 class="przek-title">Relaunch wizualny marki</h4>
+      <p class="przek-desc">Nowa identyfikacja wizualna, www, social, opakowania. Relaunch jako potwierdzenie nowego kierunku strategicznego.</p>
+      <div class="przek-when">Q4 26 – Q1 27 · Do Next</div>
+    </article>
+
+    <article class="przek-card">
+      <div class="przek-icon">§</div>
+      <h4 class="przek-title">Patent MK + bLF</h4>
+      <p class="przek-desc">Żaden producent europejski nie łączy mleka klaczy z laktoferyną. Luka patentowa otwarta — deadline krytyczny.</p>
+      <div class="przek-when">Q2/Q3 2026 · Do First</div>
+    </article>
+
+    <article class="przek-card">
+      <div class="przek-icon">★</div>
+      <h4 class="przek-title">EQ Score™</h4>
+      <p class="przek-desc">Własny system oceny jakości dla Mleka Klaczy na wzór manuka/UMF. Kto ustanawia standard — kontroluje kategorię.</p>
+      <div class="przek-when">Q1–Q2 2027 · Do Next</div>
+    </article>
+    <article class="przek-card">
+      <div class="przek-icon">◈</div>
+      <h4 class="przek-title">Inne rodzaje</h4>
+      <p class="przek-desc">Sprzedaż surowca rozpyłowego (nauczenie się nowej technologii, nadmiar z kolejnych dojów, kosmetyki itd.)</p>
+      <div class="przek-when">Horyzont otwarty</div>
+    </article>
+  </div>
+</section>
+
+<!-- ═════════════════════════════ 07 ENDPOINT ═════════════════════════════ -->
+<section class="section hero" id="endpoint" style="padding-bottom: 120px;">
+  <div class="container">
+  <div class="sec-num" style="color: rgba(255,255,255,0.45);"><span class="dot" style="background:var(--red)"></span>Sekcja 05 · Docelowa tożsamość</div>
+  <h2 class="sec-title" style="color: var(--white);">Endpoint — Healthy Gut Company</h2>
+
+  <div class="endpoint-hero">
+    <div class="endpoint-kicker">Genactiv · 2028+</div>
+    <h2>Wszystko <em>zaczyna się w jelitach</em>.</h2>
+
+    <div class="endpoint-story">
+      <p class="es-lead">Dwadzieścia lat temu poznaliśmy jedną substancję — colostrum. Nie porzuciliśmy jej dla każdego kolejnego trendu. Zostaliśmy z nią tak długo, aż zrozumieliśmy coś, czego nie rozumie nikt na polskim rynku: <strong>colostrum nie chroni odporności. Buduje jelito. A wszystko inne — od odporności, przez skórę, po nastrój — zaczyna się właśnie tam.</strong></p>
+
+      <p class="es-body">Więc zbudowaliśmy firmę wokół jelita. Nie wokół jednego produktu. <strong>Pięć substancji. Pięć ról biologicznych. Jeden cykl.</strong> Colostrum <em>buduje</em> fundament. Błonnik <em>karmi</em> mikrobiom. Laktoferyna <em>chroni</em> przed patogenami. Mleko klaczy <em>odżywia</em> — najbliższe ludzkiemu mleko ssaka. Postbiotyki i aminokwasy <em>naprawiają</em> komórki nabłonka od środka.</p>
+
+
+      <p class="es-body">Klient nie przychodzi do nas po suplement. Przychodzi z pytaniem. <strong>Co mi jest. Co mam z tym zrobić. Komu mogę zaufać.</strong> Odpowiadamy kwizem diagnostycznym, dietetykiem, badaniem partii na opakowaniu, własnym standardem jakości. Produkt jest tylko konkluzją — efektem rozumienia, nie jego początkiem.</p>
+
+      <p class="es-closing"><strong>Nie „marka suplementów premium". Polska firma, która wie o jelitach więcej niż ktokolwiek — i uczyniła z tej wiedzy system. Wszystko udowodnione. Nic na wyrost. Bo prawdziwe znaczy udowodnione.</strong></p>
+    </div>
+  </div>
+
+  <div class="bounds-row">
+    <div class="bb bb-in">
+      <div class="bb-title"><span class="bb-dot"></span>To JEST Genactiv GH</div>
+      <ul>
+        <li>Wszystko podpięte pod jelita jako mechanizm</li>
+        <li>Edukacja + diagnostyka jako wejście do ekosystemu</li>
+        <li>Konsultacje dietetyczne — uczciwe, bez lock-in</li>
+        <li>Monobrand — wszystko pod Genactiv (poza sub-brandem MK)</li>
+        <li>Evidence-based — każdy produkt z dowodami</li>
+        <li>Core = produkty (generują przychód)</li>
+      </ul>
+    </div>
+
+    <div class="bb bb-open">
+      <div class="bb-title"><span class="bb-dot"></span>OTWARTE DRZWI (nie teraz)</div>
+      <ul>
+        <li>Probiotyki — gdy gotowe i uzasadnione</li>
+        <li>Żywność funkcjonalna — dalszy horyzont</li>
+        <li>Platforma dietetyczna (booking + CRM)</li>
+        <li>Własne badania diagnostyczne mikrobiomu</li>
+        <li>L-glutamina mono, S. boulardii, psyllium — pipeline Nogi 5</li>
+      </ul>
+    </div>
+
+    <div class="bb bb-out">
+      <div class="bb-title"><span class="bb-dot"></span>To NIE JEST Genactiv GH</div>
+      <ul>
+        <li>Ogólna suplementacja (wit. D, omega, magnez)</li>
+        <li>Lifestyle / Instagram brand</li>
+        <li>Wyścig parametrów (IgG%, CFU, mg)</li>
+        <li>Produkt bez dowodów naukowych</li>
+        <li>Walka cenowa (obniżki jednostkowe)</li>
+        <li>Chwytanie trendów (colostrum-ashwagandha-gummy)</li>
+      </ul>
+    </div>
+  </div>
+  </div><!-- /container -->
+</section>
+
+<!-- ═════════════════════════════ FOOTER ═════════════════════════════ -->
+
+
+</main>
+
+<!-- ═════════════════════════════ MODAL LOW+MEDIUM ═════════════════════════════ -->
+<div class="modal-overlay" id="modal-lowmedium" onclick="if(event.target===this)closeModal()">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-header">
+      <div class="modal-kicker">Blok E · Analiza rozważana</div>
+      <h3>Colostrum LOW + MEDIUM — analiza decyzyjna</h3>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <h4 class="ms-col">Kontekst decyzji</h4>
+        <p>Pytanie strategiczne: <strong>czy wprowadzić tańsze warianty Colostrum pod marką Genactiv, aby odzyskać udziały tracone na rzecz konkurencji low-price?</strong> (A-Z Medica, Adamed, Pharmabest).</p>
+        <p>Analiza porównuje 4 scenariusze: <strong>nic nie robimy (baseline)</strong> vs trzy warianty skali wprowadzenia LOW @ 49 zł i MEDIUM @ 79 zł.</p>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Kluczowe założenia</h4>
+        <div class="assumptions-box">
+          <div class="assump-col">
+            <div class="assump-item">
+              <div class="assump-label">Cena premium obecne (ważona)</div>
+              <div class="assump-value">128,75 zł</div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Marża premium / szt</div>
+              <div class="assump-value">104,92 zł <span class="assump-sub">(81,5%)</span></div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">COGS LOW+MED <span class="assump-sub">(surowiec −50%)</span></div>
+              <div class="assump-value">17,83 zł</div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Kanibalizacja szczyt M24</div>
+              <div class="assump-value">60% <span class="assump-sub">(proxy udziału rynkowego)</span></div>
+            </div>
+          </div>
+          <div class="assump-col">
+            <div class="assump-item">
+              <div class="assump-label">COGS premium obecne</div>
+              <div class="assump-value">23,83 zł</div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Cena LOW / MEDIUM</div>
+              <div class="assump-value">49 zł / 79 zł</div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Marża LOW / MEDIUM</div>
+              <div class="assump-value">31,17 zł / 61,17 zł</div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Trend kategorii YoY</div>
+              <div class="assump-value">−5,8% <span class="assump-sub">(ważony stacj + online)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Wyniki symulacji 24M <span class="ms-sub">(run-rate roczny)</span></h4>
+        <table class="sim-table">
+          <thead>
+            <tr>
+              <th class="var-col">Wariant</th>
+              <th>Co robimy</th>
+              <th class="num">Wolumen Genactiv</th>
+              <th class="num">Udział kategorii</th>
+              <th class="num">Marża roczna</th>
+              <th class="num">vs nic nie robić</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="baseline-row">
+              <td class="var">A</td>
+              <td><strong>Nic nie robimy</strong></td>
+              <td class="num">151 816</td>
+              <td class="num">60,2%</td>
+              <td class="num">15,94 M zł</td>
+              <td class="num dash">—</td>
+            </tr>
+            <tr>
+              <td class="var">B</td>
+              <td>Mały LOW+MED (9k szt)</td>
+              <td class="num">155 416</td>
+              <td class="num">61,6%</td>
+              <td class="num">15,75 M zł</td>
+              <td class="num neg">−0,20 M zł</td>
+            </tr>
+            <tr>
+              <td class="var">C</td>
+              <td>Średni LOW+MED (15k szt)</td>
+              <td class="num">157 816</td>
+              <td class="num">62,6%</td>
+              <td class="num">15,62 M zł</td>
+              <td class="num neg">−0,33 M zł</td>
+            </tr>
+            <tr class="worst">
+              <td class="var">D</td>
+              <td>Duży LOW+MED (23k szt)</td>
+              <td class="num">161 016</td>
+              <td class="num">63,8%</td>
+              <td class="num">15,45 M zł</td>
+              <td class="num neg">−0,49 M zł</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Kluczowa liczba</h4>
+        <div class="key-number-box">
+          <div class="kn-label">Wprowadzenie LOW+MEDIUM kosztuje mniej marży niż brak działania</div>
+          <div class="kn-value">−0,20 do −0,49 M zł / rok</div>
+          <div class="kn-footer">Plus 0,5–1,0 M zł kosztu wdrożenia (R&amp;D, packaging, launch marketing, trade). <strong>Im bardziej inwestujemy, tym więcej tracimy.</strong></div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Dlaczego tak się dzieje</h4>
+        <ul class="reason-list">
+          <li><strong>Mamy 60% kategorii aptecznej.</strong> Tańszy produkt pod tą samą marką = 60% sprzedaży z naszych obecnych klientów (kanibalizacja). Tylko 40% to nowi z konkurencji.</li>
+          <li><strong>Asymetria marży:</strong> tracimy 105 zł marży za każdą skanibalizowaną sztukę premium. Zyskujemy średnio 42 zł za sztukę LOW+MED z konkurencji. <strong>Za 1 zł zysku tracimy 3,7 zł.</strong></li>
+          <li><strong>Paradoks skali:</strong> im agresywniej gramy, tym więcej kanibalizujemy. Wariant D (największy udział +3,6 pp) jest marżowo najgorszy.</li>
+          <li><strong>Struktura marki:</strong> portfel schodzi ze 100% premium (dziś) do 85–94% premium (wprowadzenie). Erozja pozycjonowania „premium wellness".</li>
+        </ul>
+      </div>
+
+      <div class="reco-box">
+        <h5>Rekomendacja</h5>
+        <p><strong>Nie wprowadzamy LOW ani MEDIUM pod marką Genactiv.</strong> W zamian: linia A2 super-premium (upward move, rekomendacja EBI), obrona premium narracją Rebel, wzmocnienie kanałów online (zestawy Allegro zamiast obniżek). Jeśli presja cenowa wymaga odpowiedzi — Genactiv Pet (podgałąź Nogi 1) utylizuje tańszy surowiec rozpyłowy bez dotykania produktów ludzkich.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════════════════════ MODAL KONSOLIDACJA PORTFOLIO ═════════════════════════════ -->
+<div class="modal-overlay" id="modal-konsolidacja" onclick="if(event.target===this)closeModal()">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-header">
+      <div class="modal-kicker">Blok F · Decyzja do zatwierdzenia</div>
+      <h3>Konsolidacja portfolio Colostrum — analiza finansowa</h3>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <h4 class="ms-col">Kontekst decyzji</h4>
+        <p>Pytanie strategiczne: <strong>czy zlikwidować Colostrum Classic 60 kaps i zostawić tylko Classic 120 kaps + A2 60 kaps?</strong></p>
+        <p>Dziś trzy SKU w nakładających się punktach cenowych wywołują decision paralysis i bezpośrednie porównywanie „tego samego w różnej jakości". Konsolidacja tworzy <strong>czystą drabinę dwóch różnych obietnic</strong> — premium tier (A2 60) vs volume play (Classic 120) — które się nie kanibalizują.</p>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Parametry finansowe obecnego portfolio</h4>
+        <div class="assumptions-box">
+          <div class="assump-col">
+            <div class="assump-item">
+              <div class="assump-label">Colostrum Classic 60 kaps <span class="assump-sub">(do likwidacji)</span></div>
+              <div class="assump-value">74,21 zł <span class="assump-sub">cena · 14 zł COGS</span></div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Marża jednostkowa Classic 60</div>
+              <div class="assump-value">60,21 zł <span class="assump-sub">(81,1%)</span></div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Price Per Unit Classic 60</div>
+              <div class="assump-value">1,24 zł / kaps</div>
+            </div>
+          </div>
+          <div class="assump-col">
+            <div class="assump-item">
+              <div class="assump-label">Colostrum Classic 120 kaps <span class="assump-sub">(zostaje)</span></div>
+              <div class="assump-value">136,00 zł <span class="assump-sub">cena · 23,66 zł COGS</span></div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">Colostrum A2 60 kaps <span class="assump-sub">(launch Q2 2026)</span></div>
+              <div class="assump-value">104,00 zł <span class="assump-sub">cena · 14 zł COGS</span></div>
+            </div>
+            <div class="assump-item">
+              <div class="assump-label">PPU Classic 120 / A2 60</div>
+              <div class="assump-value">1,13 / 1,73 zł / kaps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Wpływ konwersji klienta Classic 60 na marżę <span class="ms-sub">(per sztuka)</span></h4>
+        <table class="sim-table">
+          <thead>
+            <tr>
+              <th class="var-col">Scenariusz</th>
+              <th>Co robi klient Classic 60 po likwidacji</th>
+              <th class="num">Cena</th>
+              <th class="num">Marża</th>
+              <th class="num">Δ marży / szt.</th>
+              <th class="num">Efekt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="baseline-row">
+              <td class="var">—</td>
+              <td><strong>Status quo:</strong> kupuje Classic 60</td>
+              <td class="num">74,21 zł</td>
+              <td class="num">60,21 zł</td>
+              <td class="num dash">baseline</td>
+              <td class="num dash">—</td>
+            </tr>
+            <tr class="positive-row">
+              <td class="var">A</td>
+              <td>Migruje <strong>w górę jakościowo</strong>: A2 60</td>
+              <td class="num">104,00 zł</td>
+              <td class="num">90,00 zł</td>
+              <td class="num pos">+29,79 zł</td>
+              <td class="num pos">+49,5%</td>
+            </tr>
+            <tr class="positive-row">
+              <td class="var">B</td>
+              <td>Migruje <strong>w górę wolumenowo</strong>: Classic 120</td>
+              <td class="num">136,00 zł</td>
+              <td class="num">112,34 zł</td>
+              <td class="num pos">+52,13 zł</td>
+              <td class="num pos">+86,6%</td>
+            </tr>
+            <tr>
+              <td class="var">C</td>
+              <td>Rezygnuje z zakupu (<strong>churn</strong>)</td>
+              <td class="num">0 zł</td>
+              <td class="num">0 zł</td>
+              <td class="num neg">−60,21 zł</td>
+              <td class="num neg">−100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Scenariusz rocznej marży <span class="ms-sub">(baza 50 tys. opakowań Classic 60 rocznie — zastąp prawdziwą liczbą)</span></h4>
+        <table class="sim-table">
+          <thead>
+            <tr>
+              <th class="var-col">Wariant</th>
+              <th>Konwersja bazy Classic 60</th>
+              <th class="num">Marża baseline</th>
+              <th class="num">Marża po konsolidacji</th>
+              <th class="num">Δ marży rocznie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="baseline-row">
+              <td class="var">—</td>
+              <td><strong>Status quo</strong> (zachowanie Classic 60)</td>
+              <td class="num">3,01 mln zł</td>
+              <td class="num">3,01 mln zł</td>
+              <td class="num dash">—</td>
+            </tr>
+            <tr>
+              <td class="var">P</td>
+              <td><strong>Pesymistyczny:</strong> 30% → A2, 30% → 120, 40% churn</td>
+              <td class="num">3,01 mln zł</td>
+              <td class="num">3,04 mln zł</td>
+              <td class="num pos">+0,03 mln zł</td>
+            </tr>
+            <tr class="positive-row">
+              <td class="var">R</td>
+              <td><strong>Realistyczny:</strong> 40% → A2, 40% → 120, 20% churn</td>
+              <td class="num">3,01 mln zł</td>
+              <td class="num">4,05 mln zł</td>
+              <td class="num pos">+1,04 mln zł</td>
+            </tr>
+            <tr class="positive-row">
+              <td class="var">O</td>
+              <td><strong>Optymistyczny:</strong> 50% → A2, 40% → 120, 10% churn</td>
+              <td class="num">3,01 mln zł</td>
+              <td class="num">4,50 mln zł</td>
+              <td class="num pos">+1,49 mln zł</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Kluczowa liczba</h4>
+        <div class="key-number-box">
+          <div class="kn-label">Konsolidacja portfolio buduje marżę nawet w pesymistycznym scenariuszu</div>
+          <div class="kn-value">+0,03 do +1,49 mln zł / rok</div>
+          <div class="kn-footer">Konwersja 80% klientów Classic 60 w górę (realnie osiągalne dzięki saszetce 2g jako entry funnel) daje <strong>uplift +1,04 mln zł rocznie</strong>. Dodatkowo: mniejsze koszty operacyjne (jedno SKU mniej w produkcji, logistyce, komunikacji trade).</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Dlaczego to działa</h4>
+        <ul class="reason-list">
+          <li><strong>Asymetria marży działa na naszą korzyść.</strong> Każdy scenariusz konwersji daje wyższą marżę jednostkową: +49,5% (A2) lub +86,6% (Classic 120). Jedyne ryzyko to churn — i to jest do kontrolowania.</li>
+          <li><strong>Czysta drabina zamiast trzech nakładających się opcji.</strong> Klient nie porównuje „60 kaps Classic vs 60 kaps A2 vs 120 kaps Classic" — porównuje dwie różne obietnice: premium czystości vs długa kuracja.</li>
+          <li><strong>Saszetka 2g absorbuje problem entry price.</strong> Klient, który nie chce od razu płacić 104–136 zł, dostaje bezpłatną próbkę. Koszt saszetki &lt; 1 zł, ROI konwersji znacznie pozytywny.</li>
+          <li><strong>Spójność z narracją gut health.</strong> 60 kaps = „doraźne, sezonowe" — tego się pozbywamy. 120 kaps = „długa całoroczna kuracja" — tego chcemy. Klient A2 świadomie wybiera premium (nie jest to już „mały Classic").</li>
+          <li><strong>Operacyjne uproszczenie.</strong> Mniej konfliktów cenowych między kanałami, prostsza komunikacja farmaceucie, jedna linia pakująca wygaszona.</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="ms-col">Ryzyka i mitygacja</h4>
+        <ul class="reason-list">
+          <li><strong>Entry barrier w aptece stacjonarnej.</strong> Classic 60 za 74 zł był „product entry". Po likwidacji minimum to 104 zł. <em>Mitygacja: saszetka 2g jako free sample + komunikacja „kuracja startowa A2 60 to 30 dni".</em></li>
+          <li><strong>Chaos trzech SKU podczas tranzycji.</strong> Klienci widzą i Classic 60, i A2 60, i 120 — przez 2–3 miesiące. <em>Mitygacja: jasny cutover date, komunikacja do aptek 8–12 tyg. przed, materiały dla 10 PM.</em></li>
+          <li><strong>Churn wyższy niż zakładany.</strong> Pesymistyczny scenariusz 40% churn daje tylko +0,03 mln zł uplift. <em>Mitygacja: monitoring w trzech pierwszych miesiącach po cutover; jeśli churn &gt; 30%, dodajemy dedykowaną kampanię retencyjną do bazy klientów Classic 60.</em></li>
+        </ul>
+      </div>
+
+      <div class="reco-box reco-positive">
+        <h5>Rekomendacja</h5>
+        <p><strong>Zatwierdzamy konsolidację portfolio.</strong> Likwidujemy Classic 60 kaps równolegle z launchem A2 60 w Q2 2026. Pełny cutover w Q4 2026. Saszetka 2g przechodzi z trade tool w kluczowy element funnel'u akwizycyjnego — to zabezpiecza nas przed churnem przy wyższej cenie wejścia. Oczekiwany uplift marży: +1,04 mln zł rocznie w realistycznym scenariuszu.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Rozwijanie wierszy timeline — pokazuje sub-inicjatywy nogi
+  function toggleTlRow(row) {
+    row.classList.toggle('open');
+  }
+
+  // Rozwijanie pojedynczej inicjatywy wewnątrz bloku nogi
+  function toggleItem(el) {
+    // nie zwijaj gdy klik w zagnieżdżony link/listę
+    el.classList.toggle('open');
+  }
+
+  // Rozwijanie kart substancji w drzewku Healthy Gut Company (sekcja 03)
+  function toggleNogaSide(el) {
+    const article = el.closest('article.noga');
+    const isOpen = article.classList.contains('open');
+    document.querySelectorAll('article.noga').forEach(n => {
+      n.classList.remove('open');
+      const btn = n.querySelector('.noga-toggle-btn span:first-child');
+      if (btn) btn.textContent = 'Rozwiń';
+    });
+    if (!isOpen) {
+      article.classList.add('open');
+      const btn = article.querySelector('.noga-toggle-btn span:first-child');
+      if (btn) btn.textContent = 'Zwiń';
+    }
+  }
+  function toggleNoga(el) {
+    const article = el.closest('article.noga');
+    const isOpen = article.classList.contains('open');
+    document.querySelectorAll('article.noga').forEach(n => n.classList.remove('open'));
+    if (!isOpen) article.classList.add('open');
+  }
+
+  function toggleHgh(id) {
+    const cards = document.querySelectorAll('.hgh-card');
+    const details = document.querySelectorAll('.hgh-details');
+
+    // Zamknij wszystkie oprócz klikniętego
+    const targetCard = document.querySelector('.hgh-card.s-' + id);
+    const targetDetail = document.getElementById('hgh-' + id);
+    const wasOpen = targetCard && targetCard.classList.contains('open');
+
+    cards.forEach(c => c.classList.remove('open'));
+    details.forEach(d => d.classList.remove('open'));
+
+    if (!wasOpen && targetCard && targetDetail) {
+      targetCard.classList.add('open');
+      targetDetail.classList.add('open');
+    }
+  }
+
+  // Fallback: toggleRole dla starszych struktur drzewka, jeśli występują
+  function toggleRole(id) {
+    const panels = document.querySelectorAll('.tree-panel');
+    panels.forEach(p => p.classList.remove('open'));
+    const target = document.getElementById('tp-' + id);
+    if (target) target.classList.add('open');
+
+    const nodes = document.querySelectorAll('.tree-node');
+    nodes.forEach(n => n.classList.remove('active'));
+    const activeNode = document.querySelector('.tree-node[data-role="' + id + '"]');
+    if (activeNode) activeNode.classList.add('active');
+  }
+
+  // Klikalne karty diagnozy — rozwijanie w bok
+  function openDiagFull(card) {
+    const grid = card.closest('.diag-grid');
+    const cards = grid.querySelectorAll('.diag-card');
+
+    if (card.classList.contains('active')) {
+      // Klik w aktywną — zamknij
+      closeDiagFull();
+      return;
+    }
+
+    grid.classList.add('has-active');
+    cards.forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+
+    // Scroll aktywnej karty na widok (z delayem żeby złapać post-layout)
+    setTimeout(() => {
+      const rect = card.getBoundingClientRect();
+      const navH = document.querySelector('.nav')?.offsetHeight || 0;
+      if (rect.top < navH + 20 || rect.top > window.innerHeight - 200) {
+        window.scrollTo({
+          top: window.scrollY + rect.top - navH - 40,
+          behavior: 'smooth'
+        });
+      }
+    }, 250);
+  }
+
+  function closeDiagFull() {
+    const grid = document.querySelector('.diag-grid');
+    if (!grid) return;
+    grid.classList.remove('has-active');
+    grid.querySelectorAll('.diag-card').forEach(c => c.classList.remove('active'));
+  }
+
+  // Przypisz handler do kart diagnozy po załadowaniu
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.diag-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        // nie reaguj gdy klikamy przycisk zamknij (ma własny handler)
+        if (e.target.closest('.diag-close-btn')) return;
+        openDiagFull(card);
+      });
+    });
+
+    // Escape zamyka rozwinięty obszar (oprócz modali które mają swój handler)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const openModal = document.querySelector('.modal-overlay.open');
+        if (!openModal) closeDiagFull();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+

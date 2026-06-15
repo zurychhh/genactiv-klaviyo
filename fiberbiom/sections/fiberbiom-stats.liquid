@@ -1,0 +1,90 @@
+<section class="fiberbiom-page fiberbiom-stats">
+  <div class="fb-container">
+    <div class="fiberbiom-stats__inner">
+      <div class="fiberbiom-stats__content" style="background-color: {{ section.settings.bg_color }};">
+        <div class="fiberbiom-stats__number">{{ section.settings.stat_number }}</div>
+        <div class="fiberbiom-stats__claim">{{ section.settings.claim }}</div>
+
+        {%- if section.settings.footnote != blank -%}
+          <div class="fiberbiom-stats__footnote">{{ section.settings.footnote }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-stats__media" style="background-color: {{ section.settings.media_bg_color }};">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              widths: '375,750,1100',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              loading: 'lazy',
+              class: 'fiberbiom-stats__image',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <div class="fiberbiom-stats__placeholder">
+            <p>Miejsce na zdjecie lub film</p>
+            <p style="font-size: 0.75rem; opacity: 0.6;">Dodaj w Theme Editor</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Statystyka",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "stat_number",
+      "label": "Liczba (np. 73%)",
+      "default": "73%"
+    },
+    {
+      "type": "textarea",
+      "id": "claim",
+      "label": "Twierdzenie",
+      "default": "badanych potwierdza — Fiberbiom wspomaga regularne wyprозnianie.*"
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Przypis (metodologia)",
+      "default": "*Badanie kliniczne na 120 osobach, efekty po 30 dniach stosowania. Pelny raport dostepny na zadanie."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Zdjecie / kadr wideo"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Alt text",
+      "default": "Badanie kliniczne Fiberbiom"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Kolor tla (statystyka)",
+      "default": "#F67FB4"
+    },
+    {
+      "type": "color",
+      "id": "media_bg_color",
+      "label": "Kolor tla (obraz/placeholder)",
+      "default": "#EF3340"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Statystyka"
+    }
+  ]
+}
+{% endschema %}

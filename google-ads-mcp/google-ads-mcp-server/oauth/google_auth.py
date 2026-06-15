@@ -35,7 +35,7 @@ def format_customer_id(customer_id: str) -> str:
     """Format customer ID to ensure it's 10 digits without dashes."""
     customer_id = str(customer_id)
     customer_id = customer_id.replace('\"', '').replace('"', '')
-    customer_id = ''.join(char for char in customer_id if char.isdigit())
+    customer_id = ''.join(char for char in customer_id if char.isascii() and char.isdigit())
     return customer_id.zfill(10)
 
 def get_oauth_credentials():

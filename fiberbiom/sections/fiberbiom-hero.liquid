@@ -1,0 +1,118 @@
+{{ 'fiberbiom.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="fiberbiom-page fiberbiom-hero"
+  style="background: linear-gradient(135deg, {{ section.settings.bg_color_start }}, {{ section.settings.bg_color_end }});"
+>
+  <div class="fb-container">
+    <div class="fiberbiom-hero__inner">
+      <div class="fiberbiom-hero__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fiberbiom-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 class="fiberbiom-hero__title">{{ section.settings.title }}</h1>
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="fiberbiom-hero__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          {% render 'fiberbiom-button',
+            label: section.settings.button_label,
+            url: section.settings.button_url,
+            variant: 'white',
+            size: 'large'
+          %}
+        {%- endif -%}
+      </div>
+
+      <div class="fiberbiom-hero__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              widths: '375,750,1100,1500',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              loading: 'eager',
+              fetchpriority: 'high',
+              class: 'fiberbiom-hero__image',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <div class="fiberbiom-hero__image" style="background-color: rgba(255,255,255,0.1); aspect-ratio: 4/3; border-radius: var(--fb-radius-card); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 1rem;">
+            Dodaj zdjecie w Theme Editor
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FB Hero",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (nad tytulem)",
+      "default": "GENACTIV"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Tytul H1",
+      "default": "Regularne wyprозnianie kazdego dnia!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Podtytul",
+      "default": "Rozpoznajemy problem i Genactiv® Colostrum w jednej saszetce — dla prawidlowej pracy jelit."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Tekst przycisku CTA",
+      "default": "SPRAWDZ FIBERBIOM"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link przycisku CTA"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Zdjecie hero (packshot)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Alt text zdjecia",
+      "default": "Opakowania Fiberbiom na tle lazienki"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_start",
+      "label": "Kolor tla (poczatek gradientu)",
+      "default": "#A42D2B"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_end",
+      "label": "Kolor tla (koniec gradientu)",
+      "default": "#B84040"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Hero"
+    }
+  ]
+}
+{% endschema %}

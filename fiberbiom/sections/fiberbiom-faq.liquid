@@ -1,0 +1,106 @@
+<section class="fiberbiom-page fiberbiom-faq">
+  <div class="fb-container">
+    {%- if section.settings.badge_text != blank -%}
+      <div class="fiberbiom-faq__badge">{{ section.settings.badge_text }}</div>
+    {%- endif -%}
+
+    <div class="fiberbiom-faq__list" role="list">
+      {%- for block in section.blocks -%}
+        <details class="fiberbiom-faq__item" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="fiberbiom-faq__answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <script src="{{ 'fiberbiom.js' | asset_url }}" defer></script>
+
+  {%- comment -%} JSON-LD FAQPage structured data {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in section.blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | json }}
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "FB Q&A",
+  "tag": "div",
+  "class": "fiberbiom-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Tekst badge",
+      "default": "Q&A"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pytanie",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pytanie",
+          "default": "Pytanie klienta?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Odpowiedz",
+          "default": "<p>Odpowiedz na pytanie klienta.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FB Q&A",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "Po jakim czasie zobacze efekty?",
+            "answer": "<p>Efekt zauwazysz juz po kilku dniach. Pelna poprawa regularnosci moze nastapic po 10-14 dniach stosowania.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Czy produkt jest dla kazdego?",
+            "answer": "<p>Fiberbiom jest dla osob doroslych, ktore chca wspomagac prawidlowa prace jelit i regularnosc wyproznien. W przypadku alergii na biaka mleka krowiego skonsultuj sie z lekarzem.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Czym rozni sie od innych blonnikow?",
+            "answer": "<p>Nie pecznieje, nie daje uczucia pelnosci. Arabinogalaktan jest blonnikiem rozpuszczalnym, ktory dziala jako prebiotyk. W polaczeniu z Genactiv Colostrum wspiera nie tylko mikrobiom, ale tez bariere jelitowa.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

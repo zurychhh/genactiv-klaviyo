@@ -132,6 +132,9 @@ app.post('/api/chat', requireAuth, chatLimiter, async (req, res) => {
   const abortController = new AbortController();
 
   req.on('close', () => {
+    if (!clientDisconnected) {
+      sendEvent('aborted', null);
+    }
     clientDisconnected = true;
     abortController.abort();
     console.log('[Chat] Client disconnected');
