@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "google-ads": {
+      "type": "stdio",
+      "command": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server/venv/bin/fastmcp",
+      "args": [
+        "run",
+        "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server/server.py"
+      ],
+      "cwd": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server",
+      "env": {
+        "GOOGLE_ADS_DEVELOPER_TOKEN": "YOUR_GOOGLE_ADS_DEVELOPER_TOKEN",
+        "GOOGLE_ADS_OAUTH_CONFIG_PATH": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server/client_secret.json",
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "2538328866"
+      }
+    },
+    "ga4": {
+      "type": "stdio",
+      "command": "__GA4_MCP_PATH__/analytics-mcp",
+      "env": {
+        "GA_PROPERTY_ID": "279858535",
+        "GOOGLE_APPLICATION_CREDENTIALS": "__HOME__/.config/gcloud/application_default_credentials.json"
+      }
+    },
+    "meta-ads": {
+      "type": "stdio",
+      "command": "__META_ADS_MCP_PATH__/meta-ads-mcp",
+      "env": {
+        "META_ACCESS_TOKEN": "YOUR_META_ACCESS_TOKEN"
+      }
+    },
+    "clarity": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@microsoft/clarity-mcp-server",
+        "--clarity_api_token=YOUR_CLARITY_API_TOKEN"
+      ]
+    }
+  }
+}
