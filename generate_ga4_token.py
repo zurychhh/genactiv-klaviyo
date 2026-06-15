@@ -23,7 +23,10 @@ CLIENT_CONFIG = {
     }
 }
 
-SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
+SCOPES = [
+    "https://www.googleapis.com/auth/analytics.readonly",
+    "https://www.googleapis.com/auth/analytics.edit",
+]
 
 def main():
     print("=" * 70)
@@ -78,8 +81,34 @@ def main():
 
     print(f"Token zapisany do: {adc_path}")
     print()
+
+    # Also print refresh token for .env (used by genactiv-online and scripts)
+    print("GA4_REFRESH_TOKEN (do .env):")
+    print(credentials.refresh_token)
+    print()
+
+    # Update .env if it exists
+    env_path = os.path.join(os.path.dirname(__file__), ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r") as f:
+            env_content = f.read()
+        if "GA4_REFRESH_TOKEN=" in env_content:
+            import re
+            env_content = re.sub(
+                r"GA4_REFRESH_TOKEN=.*",
+                f"GA4_REFRESH_TOKEN={credentials.refresh_token}",
+                env_content
+            )
+        else:
+            env_content += f"\nGA4_REFRESH_TOKEN={credentials.refresh_token}\n"
+        with open(env_path, "w") as f:
+            f.write(env_content)
+        print(f"Zaktualizowano {env_path}")
+
+    print()
     print("=" * 70)
     print("GOTOWE! analytics-mcp uzyje tego tokena automatycznie.")
+    print("Scopes: analytics.readonly + analytics.edit")
     print("Zrestartuj Claude Code zeby MCP serwer GA4 sie zaladowal.")
     print("=" * 70)
 

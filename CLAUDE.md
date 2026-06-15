@@ -4,64 +4,147 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Client:** GenActiv.pl - Poland's #1 colostrum brand in pharmacies
+**Client:** GenActiv.pl — Poland's #1 colostrum brand in pharmacies
 **Platform:** Klaviyo + Shopify + Baselinker integration via MCP (Model Context Protocol)
 **Primary Work:** HTML/CSS email template creation, campaign optimization, marketing automation, order/payment sync
 **Web Terminal:** GenActiv Online — browser-based AI assistant deployed on Railway.app
+**Language:** Polish (PL) for all UI, prompts, and user-facing content. Currency: PLN, no decimals.
 
-## Architecture
+## Quick Start (nowa maszyna)
+
+```bash
+git clone git@github.com:zurychhh/genactiv-klaviyo.git
+cd genactiv-klaviyo
+cp .env.example .env                    # Uzupelnij tokeny (Shopify, Baselinker, TikTok)
+cp genactiv-online/.env.example genactiv-online/.env  # Uzupelnij tokeny (Anthropic, Klaviyo, etc.)
+chmod +x setup-claude.sh && ./setup-claude.sh         # Instalacja: venv, npm, build, .mcp.json
+claude                                  # Claude Code automatycznie wczyta CLAUDE.md + .mcp.json
+```
+
+Pelna instrukcja (konto GitHub, rotacja tokenow, deploy): `GITHUB_SETUP.md`
+
+## Repository Structure
 
 ```
 genactiv-klaviyo/
 ├── genactiv-online/           # ★ Web AI terminal (Express + SSE + MCP, deployed on Railway)
 │   ├── client/                #   Frontend: HTML, CSS, JS (dark terminal theme)
+│   │   ├── index.html         #   Main page (Polish UI) + capabilities panel
+│   │   ├── seo.html           #   SEO Command Center dashboard
+│   │   ├── style.css          #   Dark terminal theme
+│   │   └── terminal.js        #   SSE client, markdown rendering, thinking indicator
 │   └── server/                #   Backend: Express, Anthropic API, MCP orchestrator
-├── templates/snippets/        # Reusable email HTML components
+│       ├── index.js           #   Express: auth, SSE streaming, health check, SEO API mount
+│       ├── config.js          #   MCP server defs, models, system prompts, constants
+│       ├── auth.js            #   Login (bcrypt + session, 24h expiry)
+│       ├── mcp-orchestrator.js #  MCP connections, tool caching, result compression
+│       ├── seo-api.js         #   SEO Command Center REST API
+│       └── anthropic-bridge.js #  Two-phase routing, retry logic, rate limiting
+├── shopify-mcp-extended/      # Extended Shopify MCP with analytics (TypeScript)
 ├── google-ads-mcp/            # Google Ads MCP server (Python/FastMCP)
-├── shopify-mcp-extended/      # Extended Shopify MCP with analytics (TypeScript, 15 tools)
-├── seo/                       # SEO implementation project (COMPLETED: schema + metas)
+├── templates/snippets/        # Reusable email HTML components
+├── seo/                       # SEO implementation project
 ├── reports/                   # Generated reports (dashboards, traffic, consistency)
 ├── docs/                      # Documentation (audit checklists, migration plan, Meta Ads)
-├── dashboard-server/          # Dashboard backend (Node.js + MCP client) — legacy
-├── dashboard/                 # Single-page dashboard HTML — legacy
-├── chat-ui/                   # Chat UI frontend — legacy (replaced by genactiv-online)
-├── theme_backups/             # Shopify theme file backups
 ├── .github/workflows/         # GitHub Actions (automated payment sync)
 ├── Dockerfile                 # Railway Docker build (Node 18 + Python 3 + uv)
 ├── railway.json               # Railway.app deployment config
 ├── baselinker_api.py          # Baselinker API client
 ├── shopify_graphql.py         # Shopify GraphQL client (transactions)
 ├── shopify_theme_api.py       # Shopify Theme API client
-├── sync_payment_id.py         # Payment ID sync: Shopify -> Baselinker
-├── generate_ga4_token.py      # GA4 OAuth token generator
-├── generate_tiktok_token.py   # TikTok Business API OAuth token generator
-└── venv/                      # Python virtual environment
+├── sync_payment_id.py         # Payment ID sync: Shopify → Baselinker
+├── dashboard-server/          # Legacy — replaced by genactiv-online
+└── chat-ui/                   # Legacy — replaced by genactiv-online
 ```
 
-## GenActiv Online (Web Terminal)
+## Build, Test & Dev Commands
 
-Browser-based AI assistant deployed on Railway — replaces local Claude Code CLI.
-- **Aktywny URL:** `https://exemplary-learning-production-414a.up.railway.app`
-- ⚠️ Custom domain `genactiv.oleksiakconsulting.com` jest **nieaktywny** (problem z DNS/CNAME)
+### GenActiv Online (Web Terminal)
 
-### Architecture
+```bash
+cd genactiv-online
+cp .env.example .env            # Fill in API keys (first time only)
+npm install
+npm run dev                     # http://localhost:3000 (node --watch)
+npm start                       # Production mode
+npm test                        # Jest (ESM, requires --experimental-vm-modules)
+
+# Run a single test file:
+node --experimental-vm-modules node_modules/.bin/jest server/__tests__/crash.test.js
+
+# Login: admin / (password from AUTH_PASSWORD_HASH bcrypt hash in .env)
 ```
-Browser → Express (auth + SSE) → Anthropic API ⇄ 8 MCP servers
-                                                 ├── Klaviyo (Python/uvx)
-                                                 ├── Shopify Extended (Node.js)
-                                                 ├── Shopify Standard (Node.js)
-                                                 ├── Meta Ads (Python)
-                                                 ├── Google Ads (Python/FastMCP venv)
-                                                 ├── GA4 (Python/analytics-mcp)
-                                                 ├── TikTok Ads (Python/tiktok-ads-mcp)
-                                                 └── Senuto SEO (Node.js/npx)
+
+Both `genactiv-online` and `shopify-mcp-extended` use ESM (`"type": "module"` in package.json).
+
+### Shopify MCP Extended (TypeScript)
+
+```bash
+cd shopify-mcp-extended
+npm install
+npm run build                   # rimraf dist && tsc → dist/
+npm run dev                     # ts-node with ESM loader
+npm start                       # node dist/index.js
+npm test                        # Jest (ts-jest ESM preset)
+npm run lint                    # ESLint on src/**/*.ts
+npm run clean                   # rimraf dist/
+
+# Run a single test:
+npx jest src/__tests__/crash.test.ts
 ```
 
-### Two-Phase Query Routing
-1. **Phase 1 (Router):** Haiku classifies query → selects target MCP server (~500 tokens)
-2. **Phase 2 (Main):** Sonnet processes with only that server's tools (15-28 tools vs 93 total)
+### Google Ads MCP (Python)
 
-### Key Configuration (`genactiv-online/server/config.js`)
+```bash
+cd google-ads-mcp/google-ads-mcp-server
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+fastmcp run server.py           # Starts MCP server via FastMCP
+```
+
+### Python Scripts (root level)
+
+```bash
+source venv/bin/activate        # Required for all root-level Python scripts
+python baselinker_api.py orders|payments|sources|full
+python sync_payment_id.py [--live]     # Dry run by default
+python3 shopify_graphql.py orders|order|apps
+python3 shopify_theme_api.py themes|assets|get|backup|update|search
+```
+
+### Credential Generation
+
+```bash
+# Generate bcrypt password hash for AUTH_PASSWORD_HASH:
+node -e "require('bcryptjs').hash('your-password', 10).then(console.log)"
+
+# Google Ads OAuth refresh token:
+cd google-ads-mcp && python generate_refresh_token.py
+
+# GA4 OAuth refresh token:
+python generate_ga4_token.py
+
+# TikTok access token (24h expiry, auto-refreshed by tiktok-ads-mcp):
+python3 generate_tiktok_token.py
+```
+
+## Architecture: Two-Phase Query Routing
+
+The web terminal uses a two-model approach to reduce token usage (22k → 1.8k tokens per request):
+
+```
+Browser → Express (auth + SSE) → Phase 1: Haiku classifies query → selects 1 MCP server
+                                → Phase 2: Sonnet processes with only that server's tools
+                                ⇅
+                          8 MCP servers (each 6-20 tools)
+```
+
+**Key files:**
+- `config.js` — MCP server definitions, model constants, system prompt (Polish), router prompt
+- `anthropic-bridge.js` — Two-phase routing: `routeQuery()` calls Haiku (20 token limit), then Sonnet executes with filtered tools. Retry with 3s/6s/12s backoff on 429.
+- `mcp-orchestrator.js` — MCP client lifecycle: 30s connect timeout, tool list caching (5 min TTL), stale cache fallback on fetch failure, exponential reconnection backoff (2s → 32s), result compression (nulls stripped, truncated at 15k chars)
+
+**Configuration constants** (`config.js`):
 | Setting | Value |
 |---------|-------|
 | Main model | `claude-sonnet-4-20250514` |
@@ -69,310 +152,91 @@ Browser → Express (auth + SSE) → Anthropic API ⇄ 8 MCP servers
 | Max tokens | 4096 |
 | Tool result limit | 15,000 chars |
 | History window | 6 messages (3 pairs) |
-| Rate limiter | 3s minimum between API calls |
+| Rate limiter | 500ms minimum between API calls |
 | Tool cache TTL | 5 minutes |
-| Max tool rounds | 8 per conversation turn |
 
-### File Structure
-```
-genactiv-online/
-├── client/
-│   ├── index.html              # Main page (Polish UI) + capabilities panel
-│   ├── seo.html                # SEO Command Center dashboard (audit + GA4 organic + fix)
-│   ├── style.css               # Dark terminal theme + capabilities panel styles
-│   └── terminal.js             # SSE client, markdown rendering, thinking indicator, capabilities toggle
-├── server/
-│   ├── index.js                # Express: auth, SSE streaming, health check, SEO API mount
-│   ├── config.js               # MCP servers, models, prompts, constants
-│   ├── auth.js                 # Login (bcrypt + session, 24h expiry)
-│   ├── mcp-orchestrator.js     # MCP connections, tool caching, result compression
-│   ├── seo-api.js              # SEO Command Center REST API (audit, organic, fix endpoints)
-│   └── anthropic-bridge.js     # Two-phase routing, retry logic, rate limiting
-├── .env.example                # Env var template
-├── package.json                # Dependencies
-├── Dockerfile                  # Local Docker build
-└── README.md                   # Polish documentation
-```
+### SSE Streaming
 
-### Local Development
+Chat responses are streamed via Server-Sent Events with event types: `text`, `tool_use`, `tool_result`, `progress`, `error`, `done`.
+
+### SEO Command Center API (`seo-api.js`)
+
+REST endpoints (require auth):
+- `GET /api/seo/status` — MCP server connection status
+- `GET /api/seo/audit?scope=all&limit=100` — Shopify products/collections SEO issues
+- `GET /api/seo/organic?days=30` — GA4 organic traffic breakdown
+- `POST /api/seo/fix` — Execute SEO fixes (update metas, etc.)
+
+GA4 failures return partial results (`200` with `partial: true`) instead of 5xx.
+
+### Health Check
+
+`GET /api/health` (no auth) — returns MCP connection status, memory usage, uptime.
+
+## MCP Server Configuration
+
+Eight MCP servers defined in `config.js`. Notable: **shopify-standard** and **shopify-extended** both run the same `shopify-mcp-extended/dist/index.js` binary (same tools, different routing labels).
+
+| Server | Runtime | Command |
+|--------|---------|---------|
+| klaviyo | Python/uvx | `uvx klaviyo-mcp-server@0.4.0` |
+| shopify-extended | Node.js | `node shopify-mcp-extended/dist/index.js` |
+| shopify-standard | Node.js | Same binary as shopify-extended |
+| meta-ads | Python | `python3 -m meta_ads_mcp` |
+| google-ads | Python venv | `venv/bin/fastmcp run server.py` |
+| ga4 | Python | `analytics-mcp` |
+| tiktok-ads | Python | `python3 -m tiktok_ads_mcp` |
+| senuto | Node.js/npx | `npx -y senuto-mcp` |
+
+**Startup behavior:** `config.js` auto-generates Google Ads and GA4 credential JSON files from environment variables at startup (lines 9-59). Missing tokens trigger console warnings but don't block other servers.
+
+### MCP Tool Usage Notes
+
+| Server | Key Notes |
+|--------|-----------|
+| Klaviyo | `campaign_report` requires `conversion_metric_id`. Templates need full HTML + `{% unsubscribe %}` |
+| Shopify Extended | `bulk-update-seo` max 25 items, has dry-run mode |
+| Google Ads | Customer ID: 10-digit, no dashes. `primaryForGoal` — ALWAYS check explicitly, don't assume ENABLED = Primary |
+| Senuto | Default: domain="genactiv.pl", country_id="200" (Poland Base 2.0), fetch_mode="topLevelDomain" |
+
+## Railway Deployment
+
 ```bash
-cd genactiv-online
-cp .env.example .env            # Fill in API keys
-npm install
-npm run dev                     # http://localhost:3000
-# Login: admin / (password from AUTH_PASSWORD_HASH in .env)
-```
-
-### Railway Deployment
-```bash
-# WAŻNE: Railway CLI wymaga unset RAILWAY_TOKEN — stary token w env nadpisuje config
+# IMPORTANT: Always unset stale RAILWAY_TOKEN before CLI use
 unset RAILWAY_TOKEN
 
-# Deploy from project root (uses root Dockerfile + railway.json)
-railway up
-
-# Ustawianie zmiennych środowiskowych
-railway variables set KEY=VALUE KEY2=VALUE2
-
-# Logi
-railway logs
+railway up                      # Deploy from project root (uses root Dockerfile)
+railway variables set KEY=VALUE # Set env vars
+railway logs                    # View logs
+railway login --browserless     # Re-authenticate when session expires
+railway whoami                  # Verify auth
 ```
+
 - **Project:** cozy-trust | **Service:** exemplary-learning
-- **URL (produkcyjny):** `https://exemplary-learning-production-414a.up.railway.app`
-- **Custom domain:** `genactiv.oleksiakconsulting.com` — ⚠️ **NIEAKTYWNY** (CNAME nie działa, nie używać do czasu naprawy DNS)
-- **Health check:** `GET /api/health` (no auth)
+- **Production URL:** `https://exemplary-learning-production-414a.up.railway.app`
+- **Custom domain:** `genactiv.oleksiakconsulting.com` — currently **broken** (DNS/CNAME issue)
 
-#### Railway CLI — rozwiązywanie problemów z logowaniem
-Railway CLI (`/opt/homebrew/bin/railway` v4.30.3) odczytuje token z `~/.railway/config.json`.
-Jeśli w środowisku shell istnieje zmienna `RAILWAY_TOKEN` (np. stary token), to **nadpisuje** config i powoduje błąd `Unauthorized`.
+**Docker build** (root `Dockerfile`): Node 18 slim + Python 3 + uv → builds Shopify Extended TypeScript → Google Ads Python venv → installs meta-ads-mcp + analytics-mcp + tiktok-ads-mcp + senuto-mcp globally → copies genactiv-online. `NODE_OPTIONS="--max-old-space-size=512"`.
 
-**Rozwiązanie:** Przed każdym wywołaniem `railway`:
-```bash
-unset RAILWAY_TOKEN
-```
-Weryfikacja: `railway whoami` powinno zwrócić email użytkownika.
+## Account IDs & Service References
 
-Logowanie (gdy sesja wygaśnie):
-```bash
-railway login --browserless    # Daje link + kod do wklejenia na stronie Railway
-```
-
-### Docker Build (root `Dockerfile`)
-Node 18 + Python 3 + uv → builds Shopify Extended MCP → builds Google Ads MCP venv → copies genactiv-online → installs meta-ads-mcp + analytics-mcp + tiktok-ads-mcp
-
-### Environment Variables (`.env.example`)
-```
-AUTH_USERNAME, AUTH_PASSWORD_HASH       # Login credentials (bcrypt hash)
-ANTHROPIC_API_KEY                       # Claude API (sk-ant-...)
-KLAVIYO_API_KEY                         # Klaviyo private key (pk_...)
-SHOPIFY_ACCESS_TOKEN                    # Shopify admin token (shpat_...)
-MYSHOPIFY_DOMAIN                        # genactiv.myshopify.com
-META_ACCESS_TOKEN                       # Meta Graph API token
-GOOGLE_OAUTH_CLIENT_ID                  # Google OAuth (shared by Ads + GA4)
-GOOGLE_OAUTH_CLIENT_SECRET              # Google OAuth secret
-GOOGLE_ADS_DEVELOPER_TOKEN              # Google Ads dev token
-GOOGLE_ADS_REFRESH_TOKEN                # Google Ads OAuth refresh token
-GOOGLE_ADS_LOGIN_CUSTOMER_ID            # MCC ID: 2538328866
-GA4_PROPERTY_ID                         # GA4 property: 279858535
-GA4_REFRESH_TOKEN                       # GA4 OAuth refresh token
-TIKTOK_APP_ID                           # TikTok Business App ID
-TIKTOK_SECRET                           # TikTok App Secret
-TIKTOK_ACCESS_TOKEN                     # TikTok OAuth access token (24h, auto-refreshed)
-SENUTO_API_KEY                          # Senuto SEO API key (JWT, exp ~Sep 2026)
-PORT, NODE_ENV, SESSION_SECRET          # Server config
-```
-
-### Known Issues & Solutions
-- **429 Rate Limit:** Two-phase routing reduces payload from ~22k to ~1.8k tokens. Retry with 3s/6s/12s backoff.
-- **Large tool results:** Auto-compressed (nulls stripped) and truncated at 15k chars.
-- **Meta Ads MCP:** Sometimes fails to connect locally (Python module issue). Works on Railway.
-- **Google OAuth tokens:** Expire when Google Cloud consent screen is in "Testing" mode (7 days). Po publication → tokeny nie wygasają. Regeneracja: `python generate_refresh_token.py` (Ads) / `python generate_ga4_token.py` (GA4).
-- **TikTok tokens:** Access token expires every 24h — `tiktok-ads-mcp` auto-refreshes using APP_ID + SECRET. First token: `python3 generate_tiktok_token.py`.
-- **Railway CLI auth:** Zawsze `unset RAILWAY_TOKEN` przed użyciem CLI (patrz sekcja wyżej).
-
-## MCP Integrations
-
-Nine MCP servers provide API access (8 active in genactiv-online, all 9 in local Claude Code):
-- **Klaviyo MCP**: Email campaigns, flows, profiles, templates, metrics
-- **Shopify MCP**: Products, customers, orders (standard tools)
-- **Shopify Extended MCP**: Analytics - traffic sources, campaign performance, product performance
-- **Google Ads MCP**: GAQL queries, keyword research (account: 339-338-2047)
-- **Meta Ads MCP**: Facebook/Instagram campaigns, audiences, insights
-- **GA4 MCP**: Analytics reports, realtime data (property: 279858535)
-- **TikTok Ads MCP**: TikTok campaigns, ad groups, ads, performance reports
-- **Senuto SEO MCP**: Domain visibility, keyword positions, competitor analysis, cannibalization, keyword research, rank tracker (20 tools)
-- **Chrome DevTools MCP**: Page inspection, screenshots, performance traces — local only
-
-### Klaviyo MCP Tools
-```
-mcp__klaviyo__klaviyo_get_campaigns         # Campaigns (channel: email/sms)
-mcp__klaviyo__klaviyo_get_campaign_report   # Campaign metrics (conversion_metric_id required)
-mcp__klaviyo__klaviyo_get_flows             # Flows list
-mcp__klaviyo__klaviyo_get_flow_report       # Flow metrics
-mcp__klaviyo__klaviyo_get_profiles          # Profiles list
-mcp__klaviyo__klaviyo_get_lists             # Subscription lists
-mcp__klaviyo__klaviyo_get_segments          # Segments
-mcp__klaviyo__klaviyo_get_metrics           # Available metrics
-mcp__klaviyo__klaviyo_get_events            # Events (Viewed Product, etc.)
-mcp__klaviyo__klaviyo_get_catalog_items     # Catalog products
-mcp__klaviyo__klaviyo_create_email_template # Create template (full HTML + unsubscribe)
-```
-
-### Shopify MCP Tools
-```
-mcp__shopify__get-products                  # Products list (searchTitle, limit)
-mcp__shopify__get-product-by-id             # Single product by ID
-mcp__shopify__get-customers                 # Customers (searchQuery, limit)
-mcp__shopify__get-orders                    # Orders (status, limit)
-mcp__shopify__get-order-by-id               # Single order by ID
-mcp__shopify__update-order                  # Update order (tags, note, etc.)
-mcp__shopify__update-customer               # Update customer
-mcp__shopify__get-customer-orders           # Orders for specific customer
-```
-
-### Shopify Extended MCP Tools
-```
-mcp__shopify-extended__get-traffic-source-analytics  # UTM/source breakdown for orders
-mcp__shopify-extended__get-campaign-performance      # Campaign ROAS, revenue per source
-mcp__shopify-extended__get-conversion-metrics        # Conversion rates by channel
-mcp__shopify-extended__get-product-performance       # Product sales analytics
-mcp__shopify-extended__get-customers                 # Extended customer data
-mcp__shopify-extended__get-orders                    # Extended order data
-mcp__shopify-extended__get-order-by-id               # Single order with full details
-mcp__shopify-extended__get-customer-orders            # Orders for specific customer
-mcp__shopify-extended__get-products                  # Product catalog
-mcp__shopify-extended__get-product-by-id             # Single product details
-mcp__shopify-extended__create-product                # Create product
-mcp__shopify-extended__update-product-seo            # Update product meta title/description
-mcp__shopify-extended__update-collection-seo         # Update collection meta title/description
-mcp__shopify-extended__update-customer               # Update customer data
-mcp__shopify-extended__update-order                  # Update order tags/notes
-mcp__shopify-extended__update-product-content        # Update product HTML description, title, tags, vendor
-mcp__shopify-extended__bulk-update-seo               # Batch update meta title/description (max 25 items, dry-run mode)
-```
-
-### Google Ads MCP Tools
-```
-mcp__google-ads__list_accounts              # List accounts
-mcp__google-ads__run_gaql                   # Execute GAQL query
-mcp__google-ads__run_keyword_planner        # Keyword research
-```
-
-### Meta Ads MCP Tools
-```
-mcp__meta-ads__get_campaigns                # Campaign list
-mcp__meta-ads__get_insights                 # Performance insights (spend, ROAS, etc.)
-mcp__meta-ads__get_ad_accounts              # Ad accounts
-mcp__meta-ads__get_ads                      # Active ads
-mcp__meta-ads__get_adsets                   # Ad sets
-mcp__meta-ads__search_interests             # Interest targeting research
-mcp__meta-ads__search_ads_archive           # Competitor ad research
-```
-
-### GA4 MCP Tools
-```
-mcp__ga4__run_report                        # Analytics report (sessions, users, etc.)
-mcp__ga4__run_realtime_report               # Realtime data
-mcp__ga4__get_account_summaries             # Account overview
-mcp__ga4__get_property_details              # Property config
-mcp__ga4__get_custom_dimensions_and_metrics # Custom dimensions
-mcp__ga4__list_google_ads_links             # GA4-Ads linking status
-```
-
-### TikTok Ads MCP Tools
-```
-mcp__tiktok-ads__get_business_centers       # Business centers
-mcp__tiktok-ads__get_authorized_ad_accounts # Authorized ad accounts
-mcp__tiktok-ads__get_campaigns              # Campaigns with filters
-mcp__tiktok-ads__get_ad_groups              # Ad groups + targeting
-mcp__tiktok-ads__get_ads                    # Ads + creatives
-mcp__tiktok-ads__get_reports                # Performance reports (ROAS, CTR, CPC, conversions)
-```
-
-### Senuto SEO MCP Tools
-```
-mcp__senuto__get_positions_data             # Keyword positions, visibility, volume, CPC, difficulty
-mcp__senuto__get_domain_statistics          # Domain health: Top 3/10/50, visibility, domain rank, ads equivalent
-mcp__senuto__get_competitors                # Competitor analysis with SEO metrics comparison
-mcp__senuto__get_cannibalization_keywords   # Keyword cannibalization detection (multiple URLs on same keyword)
-mcp__senuto__get_subdomains                 # Subdomain visibility distribution
-mcp__senuto__get_characteristics_table      # Keyword segmentation by length/trends/volume/difficulty/SERP
-mcp__senuto__get_positions_history_chart    # Historical position tracking (time series)
-mcp__senuto__get_keyword_history            # Individual keyword position history
-mcp__senuto__get_urls                       # URL-level keyword and visibility data
-mcp__senuto__get_countries_list             # Available markets/countries
-mcp__senuto__suggest_domains                # Domain/competitor discovery
-mcp__senuto__get_questions                  # Question-based keywords + featured snippet opportunities
-mcp__senuto__get_groups                     # Semantic keyword clusters for content strategy
-mcp__senuto__get_keywords                   # Keyword data lookup
-mcp__senuto__rt_get_projects_list           # Rank Tracker: list projects
-mcp__senuto__rt_get_active_projects         # Rank Tracker: active projects
-mcp__senuto__rt_get_project_keywords        # Rank Tracker: project keyword list
-mcp__senuto__rt_get_position_data           # Rank Tracker: position data for project
-mcp__senuto__rt_get_snippets_statistics     # Rank Tracker: SERP snippet statistics
-mcp__senuto__rt_list_groups                 # Rank Tracker: keyword groups
-```
-Default config: domain="genactiv.pl", country_id="200" (Poland Base 2.0), fetch_mode="topLevelDomain"
-
-## Local Python Scripts
-
-All scripts require: `source venv/bin/activate`
-
-### Baselinker Integration
-```bash
-python baselinker_api.py orders           # Recent orders
-python baselinker_api.py payments <ID>    # Payment history
-python baselinker_api.py sources          # Order sources
-python baselinker_api.py full             # Orders + payments combined
-```
-
-### Shopify-Baselinker Payment Sync
-```bash
-python sync_payment_id.py                 # Dry run
-python sync_payment_id.py --live          # Live sync
-```
-
-### Shopify GraphQL Client
-Direct queries for transaction details not in MCP:
-```bash
-python3 shopify_graphql.py orders         # Orders with transactions
-python3 shopify_graphql.py order <GID>    # Single order (gid://shopify/Order/...)
-python3 shopify_graphql.py apps           # Installed apps
-```
-
-### Shopify Theme API
-```bash
-python3 shopify_theme_api.py themes              # List themes
-python3 shopify_theme_api.py assets              # Files in active theme
-python3 shopify_theme_api.py get <asset_key>     # Get file
-python3 shopify_theme_api.py backup <asset_key>  # Backup before editing
-python3 shopify_theme_api.py update <key> <file> # Update file
-python3 shopify_theme_api.py search <term>       # Search in files
-```
-Active Theme: GEN-6 global - slideshow (ID: 162539340108)
-
-## Shopify MCP Extended (TypeScript)
-
-Local extension in `shopify-mcp-extended/` with custom analytics tools.
-
-### Build Commands
-```bash
-cd shopify-mcp-extended
-npm install                              # Install dependencies
-npm run build                            # Build TypeScript → dist/
-npm run dev                              # Dev mode with ts-node
-npm test                                 # Run Jest tests
-npm run lint                             # ESLint
-```
-
-### MCP Token Update
-```bash
-claude mcp remove shopify -s user
-claude mcp add shopify -s user \
-  -e SHOPIFY_ACCESS_TOKEN=shpat_YOUR_TOKEN \
-  -e MYSHOPIFY_DOMAIN=genactiv.myshopify.com \
-  -- node /Users/user/projects/genactiv-klaviyo/shopify-mcp-extended/dist/index.js
-```
-
-## GA4 Configuration
-
-| Element | Wartość |
-|---------|---------|
-| Measurement ID | `G-KE8T99MGMJ` |
-| Property ID (numeric) | `279858535` |
-| Account ID | `73256159` |
-| Property name | genactiv.pl – GA4 |
-
-## Shopify Configuration
-
-**Store:** `genactiv.myshopify.com` | **Gateway:** Przelewy24
+| Service | ID |
+|---------|-----|
+| Shopify store | `genactiv.myshopify.com` |
+| Shopify active theme | GEN-6 global - slideshow (ID: 162539340108) |
+| Shopify gateway | Przelewy24 |
+| GA4 Measurement ID | `G-KE8T99MGMJ` |
+| GA4 Property ID | `279858535` |
+| Google Ads MCC | `253-832-8866` (env: `2538328866`) |
+| Google Ads Account | `339-338-2047` (env: `3393382047`) |
+| Google Ads Conversion ID | `AW-779033182` |
+| Meta Pixel ID | `370142134442442` |
+| GTM Container | `GTM-5W5Z2ML` |
 
 ## Klaviyo Template Development
 
-### Requirements
-- Inline CSS only, table-based layouts
-- Max 600px desktop, min 320px mobile, stack on <480px
-- Total size <100KB
+- Inline CSS only, table-based layouts. Max 600px desktop, min 320px mobile, stack on <480px. Total <100KB.
+- Creating via MCP (`klaviyo_create_email_template`): requires complete HTML with `<html>` and `<body>` tags, unsubscribe link `{% unsubscribe 'Anuluj subskrypcję' %}`, images uploaded first via `klaviyo_upload_image_from_url`.
 
 ### Template Variables
 ```django
@@ -383,11 +247,8 @@ claude mcp add shopify -s user \
 {% unsubscribe 'Anuluj subskrypcję' %}  # Required
 ```
 
-### Creating via MCP
-`mcp__klaviyo__klaviyo_create_email_template` requires:
-- Complete HTML with `<html>` and `<body>` tags
-- Unsubscribe link: `{% unsubscribe 'Anuluj subskrypcję' %}`
-- Images: upload first via `klaviyo_upload_image_from_url`
+### Reusable Snippets
+- `templates/snippets/product-card-abandoned-cart.html` — Product card with price comparison
 
 ## Brand Guidelines
 
@@ -398,130 +259,61 @@ claude mcp add shopify -s user \
 | Success Green | `#27ae60` |
 | Trust Navy | `#1A3B5D` |
 | Font | `'Branding-medium', Helvetica, Arial, sans-serif` |
-| Language | Polish (PL) |
-| Currency | PLN, no decimals |
 | UTM | `?utm_source=klaviyo&utm_medium=email&utm_campaign=[name]` |
 
-### Reusable Snippets
-- `templates/snippets/product-card-abandoned-cart.html` - Product card with price comparison
+## Environment Variables
+
+See `genactiv-online/.env.example` for full list. Key groups:
+- `AUTH_USERNAME`, `AUTH_PASSWORD_HASH` — bcrypt login credentials
+- `ANTHROPIC_API_KEY` — Claude API
+- `KLAVIYO_API_KEY`, `SHOPIFY_ACCESS_TOKEN`, `MYSHOPIFY_DOMAIN` — core integrations
+- `META_ACCESS_TOKEN` — Meta Graph API
+- `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET` — shared by Google Ads + GA4
+- `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_REFRESH_TOKEN`, `GOOGLE_ADS_LOGIN_CUSTOMER_ID`
+- `GA4_PROPERTY_ID`, `GA4_REFRESH_TOKEN`
+- `TIKTOK_APP_ID`, `TIKTOK_SECRET`, `TIKTOK_ACCESS_TOKEN` — 24h expiry, auto-refreshed
+- `SENUTO_API_KEY` — JWT, exp ~Sep 2026
+
+## Known Issues
+
+- **Google OAuth tokens** expire in 7 days when Google Cloud consent screen is in "Testing" mode. After publication, tokens don't expire. Regenerate with `python generate_refresh_token.py` (Ads) or `python generate_ga4_token.py` (GA4).
+- **Meta Ads MCP** sometimes fails to connect locally (Python module issue). Works on Railway.
+- **Railway CLI** reads token from `~/.railway/config.json`, but `RAILWAY_TOKEN` env var overrides it. Always `unset RAILWAY_TOKEN` before CLI use.
+- **Pandectes consent banner** `cookiesBlockedByDefault=7` blocks all optional cookies by default, causing low attribution rates. Config in Shopify theme: `assets/pandectes-settings.json`, `snippets/pandectes-rules.liquid`.
+- **Shopify Order API** does NOT store `gclid` — only UTM params.
 
 ## GitHub Actions
 
-### Payment ID Sync
-`.github/workflows/sync-payment-id.yml` syncs Payment ID Shopify → Baselinker
-- Schedule: hourly (`0 * * * *`)
-- Manual: workflow_dispatch
+`.github/workflows/sync-payment-id.yml` — Payment ID sync Shopify → Baselinker
+- Schedule: hourly (`0 * * * *`) + manual dispatch
 - Secrets: `SHOPIFY_DOMAIN`, `SHOPIFY_TOKEN`, `BASELINKER_TOKEN`
 
-## Google Ads MCP Setup
+## Local Python Scripts
 
-Located in `google-ads-mcp/google-ads-mcp-server/`. See README.md there for full setup.
-Required env vars: `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_OAUTH_CONFIG_PATH`
-
-## Meta Ads Configuration
-
-| Element | Value |
-|---------|-------|
-| Meta Pixel ID | `370142134442442` |
-| Setup docs | `docs/META_ADS_MCP_RESEARCH.md`, `docs/META_ACCESS_TOKEN_INSTRUKCJA.md` |
-
-## Pandectes Consent Banner
-
-**Dashboard:** https://app.pandectes.io/
-**GTM Container:** `GTM-5W5Z2ML`
-**CRITICAL:** `cookiesBlockedByDefault=7` — all optional cookies blocked by default, causing 1% attribution rate
-
-Consent Mode v2 mapping:
-- `ad_storage`, `ad_personalization`, `ad_user_data` → Category 4 (Targeting) — DENIED by default
-- `analytics_storage` → Category 2 (Performance) — DENIED by default
-- `redactData: true` — IP/user IDs redacted without consent
-
-Theme files: `assets/pandectes-settings.json`, `snippets/pandectes-rules.liquid`
-
-## PDF Generation
-
-WeasyPrint for invoice attachments:
-```bash
-source venv/bin/activate
-python3 -c "from weasyprint import HTML; HTML('file.html').write_pdf('file.pdf')"
-```
-
-## Python Environment
+All require `source venv/bin/activate`.
 
 ```bash
-source venv/bin/activate
-# Packages: requests, weasyprint
+python3 shopify_theme_api.py themes|assets|get|backup|update|search
+python3 shopify_graphql.py orders|order|apps
+python baselinker_api.py orders|payments|sources|full
+python sync_payment_id.py [--live]
 ```
 
-## Reports & Dashboards
-
-### Generated Reports (in `reports/`)
-```bash
-reports/dashboard_operacyjny_2026-03-02.html   # Operational dashboard (HTML)
-reports/dashboard_operacyjny_2026-03-02.xlsx   # Operational dashboard (Excel)
-reports/weryfikacja_zrodel_ruchu_20-26_02_2026.xlsx  # Traffic source verification
-reports/raport_spojnosci_plan_napraw.xlsx      # Consistency report + repair plan
-reports/REMARKETING_AUDIT_2025-01-23.md        # Remarketing deep-dive audit
-```
-
-### Report Generators
-```bash
-source venv/bin/activate
-python3 reports/dashboard_operacyjny.py                # Generate operational dashboard
-python3 reports/generate_raport_spojnosci.py           # Generate consistency report
-python3 reports/weryfikacja_zrodel_ruchu_2026-02-20_26.py  # Traffic verification
-```
-
-### Dashboard Server (legacy — replaced by genactiv-online)
-```bash
-cd dashboard-server
-node server.js                              # Start dashboard (port in .env)
-# Connects to MCP servers for live data
-```
-
-## Migration Documentation
-
-- `docs/MIGRATION_PLAN_ONLINE.md` — Full migration specification (26 KB, architecture diagrams, all MCP configs)
-- `docs/migration_context.md` — Quick context summary for external developers
-- `genactiv-online/README.md` — Polish quick-start guide
-
-## Remarketing & Attribution Audit
-
-**Status:** KRYTYCZNY — Attribution Rate = 1%
-**Root cause:** Pandectes `cookiesBlockedByDefault=7` blocks targeting cookies
-**Full report:** `reports/REMARKETING_AUDIT_2025-01-23.md`
-**Audit checklist:** `docs/AUDYT_DANYCH_CHECKLIST.md` (5 phases, ~50 checkpoints)
-**TODO:** `TODO_REMARKETING.md`
-
-Key IDs:
-- Google Ads Conversion ID: `AW-779033182`
-- Meta Pixel: `370142134442442`
-- Google Ads Manager: `253-832-8866`, Account: `339-338-2047`
+Active Theme: GEN-6 global - slideshow (ID: 162539340108)
 
 ## SEO Project
 
-**Status:** Core technical SEO COMPLETED (Jan 2026)
-**Summary:** `seo/SEO_PODSUMOWANIE_WDROZENIA.md`
-**Plan:** `seo/SEO_IMPLEMENTATION_PLAN.md`
+Core technical SEO completed (Jan 2026). See `seo/SEO_PODSUMOWANIE_WDROZENIA.md` for summary.
+Remaining: ~530 punctuation errors in scientific citations, footer typo "Cookkies". Strategic plan: `seo/Genactiv_SEO_Analiza_Rekomendacje.md`.
 
-### Completed Tasks
-1. BreadcrumbList Schema — 150+ pages via `snippets/breadcrumbs.liquid`
-2. Collection Meta Descriptions — 24 collections via Shopify GraphQL API
-3. Product Meta Descriptions — 8 products updated
-4. FAQPage Schema — JSON-LD on `/pages/faq`
+## Reports
 
-### Remaining SEO Work
-- **Spelling typos (Priorytet 1):** ALL FIXED (verified live 2026-03-17) — "GENACITV", "prawidziwe", "Jeydnym", test FAQ entries, announcement bar
-- **Punctuation errors (~530):** Still present — mostly in scientific citations (spaces before commas/periods, double spaces). See `seo/PELNY_RAPORT_BLEDOW_GENACTIV_FINAL.md`
-- **FAQ Schema:** 3 duplicate FAQPage blocks (should be 1) — partially fixed
-- **Footer typo:** "Polityka plików Cookkies" (double k) — visible on all pages, needs fix in theme
-- **Strategic recommendations:** `seo/Genactiv_SEO_Analiza_Rekomendacje.md` (140k PLN / 6-month plan, awaiting approval)
+Report generators in `reports/` directory. Run with `source venv/bin/activate && python3 reports/<script>.py`.
+Key report: `reports/REMARKETING_AUDIT_2025-01-23.md` — attribution analysis (1% → 38.8% improvement).
 
-### SEO Scripts
-```bash
-source venv/bin/activate
-python3 seo/add_all_collection_metas.py        # Bulk add collection meta descriptions
-python3 seo/full_site_spell_check.py           # Full site spellchecker (179 pages)
-python3 seo/fix_genacitv_metafields.py         # Fix "GENACITV" typo in metafields
-python3 seo/fix_collection_metas_from_word.py  # Apply metas from Word doc
-```
+## Key Documentation
+
+- `docs/MIGRATION_PLAN_ONLINE.md` — Full migration specification (architecture diagrams, MCP configs)
+- `docs/AUDYT_DANYCH_CHECKLIST.md` — Remarketing audit (5 phases, ~50 checkpoints)
+- `docs/META_ADS_MCP_RESEARCH.md` — Meta Ads setup
+- `google-ads-mcp/google-ads-mcp-server/README.md` — Google Ads MCP setup

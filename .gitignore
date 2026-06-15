@@ -19,7 +19,10 @@ application_default_credentials.json
 *_secret.json
 
 # Claude Code
-.claude/
+.claude/worktrees/
+
+# MCP config (contains API tokens)
+.mcp.json
 
 # IDE
 .vscode/
