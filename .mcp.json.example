@@ -1,5 +1,33 @@
 {
   "mcpServers": {
+    "klaviyo": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["--with", "fastmcp>=2.8.0,<3.0.0", "klaviyo-mcp-server@0.4.0"],
+      "env": {
+        "PRIVATE_API_KEY": "__KLAVIYO_API_KEY__",
+        "READ_ONLY": "false",
+        "ALLOW_USER_GENERATED_CONTENT": "true"
+      }
+    },
+    "shopify-extended": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"],
+      "env": {
+        "SHOPIFY_ACCESS_TOKEN": "__SHOPIFY_ACCESS_TOKEN__",
+        "MYSHOPIFY_DOMAIN": "genactiv.myshopify.com"
+      }
+    },
+    "shopify-standard": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"],
+      "env": {
+        "SHOPIFY_ACCESS_TOKEN": "__SHOPIFY_ACCESS_TOKEN__",
+        "MYSHOPIFY_DOMAIN": "genactiv.myshopify.com"
+      }
+    },
     "google-ads": {
       "type": "stdio",
       "command": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server/venv/bin/fastmcp",
@@ -9,7 +37,7 @@
       ],
       "cwd": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server",
       "env": {
-        "GOOGLE_ADS_DEVELOPER_TOKEN": "YOUR_GOOGLE_ADS_DEVELOPER_TOKEN",
+        "GOOGLE_ADS_DEVELOPER_TOKEN": "__GOOGLE_ADS_DEVELOPER_TOKEN__",
         "GOOGLE_ADS_OAUTH_CONFIG_PATH": "__PROJECT_DIR__/google-ads-mcp/google-ads-mcp-server/client_secret.json",
         "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "2538328866"
       }
@@ -26,7 +54,25 @@
       "type": "stdio",
       "command": "__META_ADS_MCP_PATH__/meta-ads-mcp",
       "env": {
-        "META_ACCESS_TOKEN": "YOUR_META_ACCESS_TOKEN"
+        "META_ACCESS_TOKEN": "__META_ACCESS_TOKEN__"
+      }
+    },
+    "tiktok-ads": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["-m", "tiktok_ads_mcp"],
+      "env": {
+        "TIKTOK_APP_ID": "__TIKTOK_APP_ID__",
+        "TIKTOK_SECRET": "__TIKTOK_SECRET__",
+        "TIKTOK_ACCESS_TOKEN": "__TIKTOK_ACCESS_TOKEN__"
+      }
+    },
+    "senuto": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "senuto-mcp"],
+      "env": {
+        "SENUTO_API_KEY": "__SENUTO_API_KEY__"
       }
     },
     "clarity": {
@@ -34,7 +80,7 @@
       "command": "npx",
       "args": [
         "@microsoft/clarity-mcp-server",
-        "--clarity_api_token=YOUR_CLARITY_API_TOKEN"
+        "--clarity_api_token=__CLARITY_API_TOKEN__"
       ]
     }
   }

@@ -234,12 +234,57 @@ Intelligems ma też MCP server (`https://ai.intelligems.io/mcp`) — OAuth2, do 
 
 ---
 
-## 10. Kolejne kroki (TODO)
+## 10. Clarity Custom Tags — wdrożone 15.06.2026
 
+### Co zrobiono
+Dodano sekcję `// 5. Microsoft Clarity custom tags` do `layout/theme.liquid` w obu tematach:
+
+```javascript
+// 5. Microsoft Clarity custom tags — segmentacja A/B w heatmapach i nagraniach
+if (typeof clarity === 'function') {
+    clarity("set", "ab_theme_variant", THEME_VARIANT);
+    clarity("set", "theme_id", THEME_ID);
+}
+```
+
+**Tagi:**
+- `ab_theme_variant` = `"GEN-6"` lub `"NOTOAGENCY"`
+- `theme_id` = Shopify theme ID
+
+**Filtrowanie w Clarity:** Filters → Custom Tags → `ab_theme_variant` → wybrać wariant → Apply
+Działa na: Dashboard, Heatmaps, Session Recordings.
+
+Tagi pojawią się w Clarity w ciągu 30 min – 2h od pierwszego page view z nowym kodem.
+
+### Intelligems ↔ Clarity (natywna integracja)
+Dodatkowo do ręcznych tagów, Intelligems ma natywną integrację z Clarity:
+1. Intelligems Dashboard → Integrations → Microsoft Clarity → **Enable**
+2. Nie wymaga credentials (używa `window.clarity` API)
+3. Automatycznie taguje sesje: `experiment_name` + `ig_test_group`
+4. **Status: wymaga ręcznego włączenia w panelu Intelligems** (d.slowik@notoagency.pl)
+
+Docs: https://docs.intelligems.io/integrations/heatmap-integrations/integrating-with-microsoft-clarity
+
+### Dlaczego nie Hotjar
+| | Clarity | Hotjar (free) |
+|---|---|---|
+| Custom tags/A/B filtering | **Darmowe, bez limitu** | Wymaga Observe Plus (32€/mies.) |
+| Nagrania | Bez limitu | 10k/mies. (5% sampling) |
+| Integracja Intelligems | Natywna | Brak |
+| GA4 integration | Natywna (bidirectional) | Tylko płatna |
+| Shopify app | Oficjalny | Brak |
+
+---
+
+## 11. Kolejne kroki (TODO)
+
+- [x] ~~Clarity custom tags wdrożone w obu tematach (15.06.2026)~~
+- [ ] **WAŻNE:** Włączyć natywną integrację Intelligems → Clarity w panelu Intelligems (wymaga dostępu admina)
 - [ ] Zweryfikować pokrycie tagiem A/B po fixie (powinno być ~100% od 16.06)
-- [ ] Sprawdzić console errors na NOTO (mobile) — Clarity session recordings
+- [ ] Po 2h: sprawdzić czy tagi `ab_theme_variant` pojawiły się w Clarity Filters → Custom Tags
+- [ ] Porównać heatmapy GEN-6 vs NOTO na stronie produktu (osobno per wariant)
+- [ ] Sprawdzić console errors na NOTO (mobile) — Clarity session recordings filtrowane po wariancie
 - [ ] Porównać pozycję przycisku "Dodaj do koszyka" na mobile: GEN-6 vs NOTO
 - [ ] Sprawdzić checkout flow na NOTO — dlaczego 50% porzuceń
 - [ ] Decyzja: kontynuować test vs naprawić NOTO vs zakończyć
 - [ ] Opcjonalnie: podłączyć Intelligems MCP server do Claude Code
-- [ ] Opcjonalnie: zbudować osobny Clarity projekt per wariant (wymaga zmian w tematach)

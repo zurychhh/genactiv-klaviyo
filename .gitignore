@@ -20,9 +20,13 @@ application_default_credentials.json
 
 # Claude Code
 .claude/worktrees/
+# Keep .claude/settings.local.json committed (permissions, no secrets)
 
-# MCP config (contains API tokens)
+# MCP config (contains API tokens — generated from .mcp.json.example by setup-claude.sh)
 .mcp.json
+
+# Theme backups (local only)
+theme_backups/
 
 # IDE
 .vscode/

@@ -187,8 +187,18 @@ Eight MCP servers defined in `config.js`. Notable: **shopify-standard** and **sh
 | ga4 | Python | `analytics-mcp` |
 | tiktok-ads | Python | `python3 -m tiktok_ads_mcp` |
 | senuto | Node.js/npx | `npx -y senuto-mcp` |
+| clarity | Node.js/npx | `npx @microsoft/clarity-mcp-server` |
 
 **Startup behavior:** `config.js` auto-generates Google Ads and GA4 credential JSON files from environment variables at startup (lines 9-59). Missing tokens trigger console warnings but don't block other servers.
+
+### Claude Code MCP Setup (local dev)
+
+`.mcp.json` is gitignored (contains tokens). Setup for new machine:
+1. Copy `.env.example` → `.env`, fill in tokens
+2. Run `./setup-claude.sh` — generates `.mcp.json` from `.mcp.json.example` + `.env` tokens
+3. Clarity MCP also loads from `.mcp.json` (token from `CLARITY_API_TOKEN` env var)
+
+All 9 MCP servers are configured in `.mcp.json.example` with `__PLACEHOLDER__` format.
 
 ### MCP Tool Usage Notes
 
@@ -198,6 +208,7 @@ Eight MCP servers defined in `config.js`. Notable: **shopify-standard** and **sh
 | Shopify Extended | `bulk-update-seo` max 25 items, has dry-run mode |
 | Google Ads | Customer ID: 10-digit, no dashes. `primaryForGoal` — ALWAYS check explicitly, don't assume ENABLED = Primary |
 | Senuto | Default: domain="genactiv.pl", country_id="200" (Poland Base 2.0), fetch_mode="topLevelDomain" |
+| Clarity | Project `3354986136401458`. Custom tags: `ab_theme_variant`, `theme_id`. JWT token (exp 2126). Limit: 10 req/day |
 
 ## Railway Deployment
 

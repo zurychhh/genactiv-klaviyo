@@ -158,21 +158,40 @@ else
     if [ ! -f .mcp.json.example ]; then
         fail "Brak .mcp.json.example — nie moge wygenerowac"
     else
-        # Load vars from .env if available
-        GOOGLE_ADS_DEV_TOKEN=""
-        META_TOKEN=""
-        if [ -f .env ]; then
-            GOOGLE_ADS_DEV_TOKEN=$(grep -E "^GOOGLE_ADS_DEVELOPER_TOKEN=" .env 2>/dev/null | cut -d= -f2- || true)
-            META_TOKEN=$(grep -E "^META_ACCESS_TOKEN=" .env 2>/dev/null | cut -d= -f2- || true)
-        fi
-        if [ -f genactiv-online/.env ]; then
-            [ -z "$GOOGLE_ADS_DEV_TOKEN" ] && GOOGLE_ADS_DEV_TOKEN=$(grep -E "^GOOGLE_ADS_DEVELOPER_TOKEN=" genactiv-online/.env 2>/dev/null | cut -d= -f2- || true)
-            [ -z "$META_TOKEN" ] && META_TOKEN=$(grep -E "^META_ACCESS_TOKEN=" genactiv-online/.env 2>/dev/null | cut -d= -f2- || true)
-        fi
+        # Helper: load var from .env files (root .env, then genactiv-online/.env as fallback)
+        load_env_var() {
+            local VAR_NAME="$1"
+            local VAL=""
+            if [ -f .env ]; then
+                VAL=$(grep -E "^${VAR_NAME}=" .env 2>/dev/null | cut -d= -f2- || true)
+            fi
+            if [ -z "$VAL" ] && [ -f genactiv-online/.env ]; then
+                VAL=$(grep -E "^${VAR_NAME}=" genactiv-online/.env 2>/dev/null | cut -d= -f2- || true)
+            fi
+            echo "$VAL"
+        }
 
-        # Fallback placeholders
-        [ -z "$GOOGLE_ADS_DEV_TOKEN" ] && GOOGLE_ADS_DEV_TOKEN="YOUR_GOOGLE_ADS_DEVELOPER_TOKEN"
-        [ -z "$META_TOKEN" ] && META_TOKEN="YOUR_META_ACCESS_TOKEN"
+        # Load all tokens from .env files
+        GOOGLE_ADS_DEV_TOKEN=$(load_env_var "GOOGLE_ADS_DEVELOPER_TOKEN")
+        META_TOKEN=$(load_env_var "META_ACCESS_TOKEN")
+        KLAVIYO_KEY=$(load_env_var "KLAVIYO_API_KEY")
+        SHOPIFY_TOKEN=$(load_env_var "SHOPIFY_ACCESS_TOKEN")
+        TIKTOK_APP=$(load_env_var "TIKTOK_APP_ID")
+        TIKTOK_SEC=$(load_env_var "TIKTOK_SECRET")
+        TIKTOK_TOK=$(load_env_var "TIKTOK_ACCESS_TOKEN")
+        SENUTO_KEY=$(load_env_var "SENUTO_API_KEY")
+        CLARITY_TOKEN=$(load_env_var "CLARITY_API_TOKEN")
+
+        # Fallback to placeholders if not found
+        [ -z "$GOOGLE_ADS_DEV_TOKEN" ] && GOOGLE_ADS_DEV_TOKEN="__GOOGLE_ADS_DEVELOPER_TOKEN__"
+        [ -z "$META_TOKEN" ] && META_TOKEN="__META_ACCESS_TOKEN__"
+        [ -z "$KLAVIYO_KEY" ] && KLAVIYO_KEY="__KLAVIYO_API_KEY__"
+        [ -z "$SHOPIFY_TOKEN" ] && SHOPIFY_TOKEN="__SHOPIFY_ACCESS_TOKEN__"
+        [ -z "$TIKTOK_APP" ] && TIKTOK_APP="__TIKTOK_APP_ID__"
+        [ -z "$TIKTOK_SEC" ] && TIKTOK_SEC="__TIKTOK_SECRET__"
+        [ -z "$TIKTOK_TOK" ] && TIKTOK_TOK="__TIKTOK_ACCESS_TOKEN__"
+        [ -z "$SENUTO_KEY" ] && SENUTO_KEY="__SENUTO_API_KEY__"
+        [ -z "$CLARITY_TOKEN" ] && CLARITY_TOKEN="__CLARITY_API_TOKEN__"
 
         HOME_DIR="$HOME"
 
@@ -185,15 +204,25 @@ else
             -e "s|__HOME__|${HOME_DIR}|g" \
             -e "s|__GA4_MCP_PATH__|${GA4_MCP_DIR}|g" \
             -e "s|__META_ADS_MCP_PATH__|${META_MCP_DIR}|g" \
-            -e "s|YOUR_GOOGLE_ADS_DEVELOPER_TOKEN|${GOOGLE_ADS_DEV_TOKEN}|g" \
-            -e "s|YOUR_META_ACCESS_TOKEN|${META_TOKEN}|g" \
+            -e "s|__GOOGLE_ADS_DEVELOPER_TOKEN__|${GOOGLE_ADS_DEV_TOKEN}|g" \
+            -e "s|__META_ACCESS_TOKEN__|${META_TOKEN}|g" \
+            -e "s|__KLAVIYO_API_KEY__|${KLAVIYO_KEY}|g" \
+            -e "s|__SHOPIFY_ACCESS_TOKEN__|${SHOPIFY_TOKEN}|g" \
+            -e "s|__TIKTOK_APP_ID__|${TIKTOK_APP}|g" \
+            -e "s|__TIKTOK_SECRET__|${TIKTOK_SEC}|g" \
+            -e "s|__TIKTOK_ACCESS_TOKEN__|${TIKTOK_TOK}|g" \
+            -e "s|__SENUTO_API_KEY__|${SENUTO_KEY}|g" \
+            -e "s|__CLARITY_API_TOKEN__|${CLARITY_TOKEN}|g" \
             .mcp.json.example > .mcp.json
 
-        ok ".mcp.json wygenerowany z szablonu"
+        ok ".mcp.json wygenerowany z szablonu (9 serwerow MCP)"
 
-        # Warn if placeholders remain
-        if grep -q "YOUR_" .mcp.json 2>/dev/null; then
-            warn "W .mcp.json zostaly placeholdery YOUR_... — uzupelnij recznie lub dodaj tokeny do .env i uruchom ponownie"
+        # Count remaining placeholders
+        REMAINING=$(grep -c "__[A-Z_]*__" .mcp.json 2>/dev/null || echo "0")
+        if [ "$REMAINING" -gt 0 ]; then
+            warn "${REMAINING} placeholderow pozostalo w .mcp.json — uzupelnij tokeny w .env i usun .mcp.json, potem uruchom ponownie"
+        else
+            ok "Wszystkie tokeny uzupelnione z .env"
         fi
     fi
 fi
