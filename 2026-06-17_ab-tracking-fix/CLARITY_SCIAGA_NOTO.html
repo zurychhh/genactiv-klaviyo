@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ściąga — Clarity: dlaczego NOTO traci userów</title>
+<style>
+:root{
+  --bg:#ffffff;--ink:#1a1a1a;--muted:#5c6470;--accent:#1a56db;--border:#e2e5ea;
+  --rowalt:#f6f8fa;--th:#eef1f5;--good:#0a7d33;--bad:#b3261e;--warn:#9a6700;--warnbg:#fff8e6;--badbg:#fdecea;--goodbg:#eafaf0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;border-bottom:3px solid var(--accent);padding-bottom:14px;color:#111}
+h2{font-size:20px;margin:34px 0 10px;color:#111;border-bottom:1px solid var(--border);padding-bottom:6px}
+h3{font-size:16px;margin:20px 0 8px;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--th);color:#111;font-weight:600}
+tr:nth-child(even) td{background:var(--rowalt)}
+code{background:#f3f4f6;border:1px solid var(--border);padding:1px 6px;border-radius:5px;font-size:13px;color:#b3261e}
+.box{border-radius:10px;padding:16px 18px;margin:18px 0;border:1px solid var(--border)}
+.box-warn{background:var(--warnbg);border-color:#f0d98a}
+.box-good{background:var(--goodbg);border-color:#a9e2bd}
+.box-key{background:#eef3ff;border-color:#bcd0ff}
+.box h3{margin-top:0;color:#111}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:20px}
+.t-bad{background:var(--badbg);color:var(--bad)} .t-good{background:var(--goodbg);color:var(--good)} .t-warn{background:var(--warnbg);color:var(--warn)}
+ul,ol{padding-left:22px} li{margin:6px 0}
+.muted{color:var(--muted)}
+.step{background:var(--rowalt);border:1px solid var(--border);border-radius:8px;padding:6px 12px;margin:6px 0;font-size:14px}
+.num-bad{color:var(--bad);font-weight:700} .num-good{color:var(--good);font-weight:700}
+.foot{margin-top:50px;color:var(--muted);font-size:12.5px;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+kbd{background:#eef1f5;border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:1px 6px;font-size:13px}
+</style></head>
+<body><div class="wrap">
+
+<h1>Ściąga — Clarity: dlaczego NOTO traci userów</h1>
+<p class="sub">Do użycia <strong>24–48 h po fixie z 17.06</strong>, gdy uzbiera się próbka otagowanych sesji. Projekt Clarity: <code>3354986136401458</code> · <a href="https://clarity.microsoft.com">clarity.microsoft.com</a></p>
+
+<div class="box box-key">
+<h3>Najpierw: potwierdź, że tag działa</h3>
+<ol style="margin-bottom:0">
+<li>Clarity → <strong>Dashboard</strong> (lub <strong>Recordings</strong>) → <strong>Filters</strong>.</li>
+<li>Szukaj filtra <strong>Custom tags</strong> → <code>ab_theme_variant</code>.</li>
+<li>Jeśli w wartościach widać <code>GEN-6</code> i <code>NOTOAGENCY</code> → ✅ fix działa, możesz segmentować.<br>Jeśli pusto po 48 h → napisz, sprawdzimy snippet jeszcze raz.</li>
+</ol>
+</div>
+
+<h2>1. Jak ustawić porównanie NOTO vs GEN-6</h2>
+<div class="step">📅 Zakres dat: ustaw <strong>od 17.06</strong> (dane sprzed fixu nie są otagowane).</div>
+<div class="step">📱 Dodaj filtr <strong>Device = Mobile</strong> — 82% ruchu jest mobilne, problem NOTO może być wyłącznie mobilny.</div>
+<div class="step">🅰️ Zrób dwa widoki: <code>ab_theme_variant = NOTOAGENCY</code> oraz <code>= GEN-6</code> — zawsze porównuj parami, nie patrz na NOTO w oderwaniu.</div>
+
+<h2>2. Metryki do porównania (Dashboard, NOTO vs GEN-6)</h2>
+<p class="muted">Szukasz metryk, gdzie NOTO jest wyraźnie gorszy niż GEN-6 — to kandydaci na przyczynę.</p>
+<table>
+<thead><tr><th>Metryka Clarity</th><th>Co oznacza / na co wskazuje</th></tr></thead>
+<tbody>
+<tr><td><strong>Dead clicks</strong></td><td>Klik w element, który nie reaguje. PDP Fiberbiom miała 16 — sprawdź czy na NOTO przycisk „dodaj do koszyka"/wariant nie jest martwy.</td></tr>
+<tr><td><strong>Rage clicks</strong></td><td>Szybkie, wielokrotne kliki = frustracja. Wskazuje zepsuty/wolny element.</td></tr>
+<tr><td><strong>Quick back</strong></td><td>Wejście i natychmiastowy powrót — sygnał złego dopasowania/wczytywania strony.</td></tr>
+<tr><td><strong>Excessive scrolling</strong></td><td>User szuka czegoś (cena? przycisk? info?) i nie znajduje.</td></tr>
+<tr><td><strong>Script errors (JS)</strong></td><td>Raport: 55 błędów na LP Fiberbiom. Sprawdź czy NOTO ma więcej błędów niż GEN-6 na tych samych stronach.</td></tr>
+<tr><td><strong>Scroll depth / czas na stronie</strong></td><td>Niższy na NOTO = ludzie wychodzą wcześniej.</td></tr>
+</tbody>
+</table>
+
+<h2>3. Które strony oglądać (priorytet wg danych z raportu)</h2>
+<table>
+<thead><tr><th>Strona</th><th>Dlaczego</th></tr></thead>
+<tbody>
+<tr><td><strong>PDP Fiberbiom</strong> <code>/products/fiberbiom-blonnik-colostrum</code></td><td><span class="num-bad">bounce 64.6% + 16 dead clicks</span>. Główny produkt na paid. Zacznij tutaj.</td></tr>
+<tr><td><strong>Koszyk / „przejdź do kasy"</strong></td><td>Intelligems: przeciek jest <em>za</em> add-to-cart. Zobacz ostatni krok, który Clarity jeszcze łapie przed checkoutem — czy przycisk do kasy działa, czy coś blokuje.</td></tr>
+<tr><td>LP Fiberbiom <code>/pages/fiberbiom</code></td><td>55 błędów JS + wysoki bounce na ruchu Meta.</td></tr>
+<tr><td>Kolekcja <code>/collections/wsparcie-jelit</code></td><td>Dedykowana paid, skrajny bounce.</td></tr>
+</tbody>
+</table>
+
+<h2>4. Hipotezy do potwierdzenia/obalenia z nagrań NOTO</h2>
+<ul>
+<li><strong>Add-to-cart vs dotarcie:</strong> Intelligems mówi, że NOTO ma <em>wyższy</em> view_product_page i tylko nieznacznie niższy add-to-cart. Czy nagrania to potwierdzają — ludzie docierają do produktu i dodają, czy gubią się wcześniej?</li>
+<li><strong>Przejście do kasy:</strong> czy na NOTO przycisk „Przejdź do kasy" / koszyk działa płynnie? Dead/rage clicks tutaj = znaleziony problem.</li>
+<li><strong>Mobile layout:</strong> czy na NOTO coś się rozjeżdża/zasłania CTA na telefonie? (82% ruchu mobilnego)</li>
+<li><strong>Szybkość/JS:</strong> czy NOTO ma widoczne opóźnienia, migające elementy, błędy ładowania, których nie ma GEN-6?</li>
+</ul>
+
+<div class="box box-warn">
+<h3>Ważny limit — czego Clarity NIE pokaże</h3>
+<p style="margin-bottom:0">Clarity najprawdopodobniej <strong>nie nagrywa hostowanego checkoutu Shopify</strong> (osobna domena). A główny przeciek NOTO wg Intelligems jest <strong>w checkoucie</strong> (porzucenia <span class="num-bad">+43%</span>, address submitted −17%). Czyli Clarity da Ci obraz <strong>do momentu „przejdź do kasy"</strong>; sam checkout diagnozuj z Intelligems (lejek per krok) + ewentualnie rozbij go per device.</p>
+</div>
+
+<div class="box box-good">
+<h3>Wniosek operacyjny</h3>
+<p style="margin-bottom:0">Jeśli Clarity NOTO vs GEN-6 <strong>nie pokaże</strong> wyraźnej różnicy przed checkoutem (podobne dead/rage clicks, błędy, scroll) → to potwierdza, że problem NOTO siedzi <strong>w samym checkoucie</strong>, a nie w UX strony. Wtedy następny krok to lejek Intelligems per krok checkoutu + per device, nie dalsze grzebanie w nagraniach.</p>
+</div>
+
+<div class="foot">Ściąga przygotowana 17.06.2026. Bazuje na danych z <code>AB_TEST_WERYFIKACJA_2026-06-16.html</code>. Fix tagowania Clarity wdrożony 17.06 (oba motywy).</div>
+
+</div></body></html>

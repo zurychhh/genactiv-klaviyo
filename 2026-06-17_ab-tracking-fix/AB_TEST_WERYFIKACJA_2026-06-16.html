@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B Test — Weryfikacja danych (16.06.2026)</title>
+<style>
+:root{
+  --bg:#ffffff;--ink:#1a1a1a;--muted:#5c6470;--accent:#1a56db;--border:#e2e5ea;
+  --rowalt:#f6f8fa;--th:#eef1f5;--good:#0a7d33;--bad:#b3261e;--warn:#9a6700;--warnbg:#fff8e6;--badbg:#fdecea;--goodbg:#eafaf0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:29px;line-height:1.2;margin:0 0 6px;border-bottom:3px solid var(--accent);padding-bottom:14px;color:#111}
+h2{font-size:21px;margin:38px 0 10px;color:#111;border-bottom:1px solid var(--border);padding-bottom:6px}
+h3{font-size:17px;margin:22px 0 8px;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--th);color:#111;font-weight:600}
+tr:nth-child(even) td{background:var(--rowalt)}
+code{background:#f3f4f6;border:1px solid var(--border);padding:1px 6px;border-radius:5px;font-size:13px;color:#b3261e}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:20px}
+.t-bad{background:var(--badbg);color:var(--bad)} .t-good{background:var(--goodbg);color:var(--good)} .t-warn{background:var(--warnbg);color:var(--warn)}
+.box{border-radius:10px;padding:16px 18px;margin:18px 0;border:1px solid var(--border)}
+.box-warn{background:var(--warnbg);border-color:#f0d98a}
+.box-bad{background:var(--badbg);border-color:#f3b6ae}
+.box-key{background:#eef3ff;border-color:#bcd0ff}
+.box h3{margin-top:0;color:#111}
+.num-bad{color:var(--bad);font-weight:700}
+.num-good{color:var(--good);font-weight:700}
+.num-warn{color:var(--warn);font-weight:700}
+ul,ol{padding-left:22px} li{margin:5px 0}
+.muted{color:var(--muted)}
+.kpi{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+.kpi .card{flex:1;min-width:150px;border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--rowalt)}
+.kpi .card .v{font-size:24px;font-weight:700;line-height:1.1}
+.kpi .card .l{font-size:12.5px;color:var(--muted);margin-top:4px}
+.foot{margin-top:50px;color:var(--muted);font-size:12.5px;text-align:center;border-top:1px solid var(--border);padding-top:16px}
+@media print{.box{break-inside:avoid}table{break-inside:avoid}}
+</style></head>
+<body><div class="wrap">
+
+<h1>A/B Test GEN-6 vs NOTOAGENCY — weryfikacja danych</h1>
+<p class="sub"><strong>Data weryfikacji:</strong> 16.06.2026 &nbsp;|&nbsp; <strong>Źródła na żywo:</strong> Intelligems (server-side) · GA4 (property 279858535) · Microsoft Clarity &nbsp;|&nbsp; <strong>Eksperyment:</strong> <code>1c371ad8-5826-4c21-abdb-7d0d68390e81</code></p>
+
+<div class="box box-key">
+<h3>Wniosek w jednym zdaniu</h3>
+<p style="margin-bottom:0">Mamy <strong>dwa rozłączne problemy</strong>, które poprzedni raport łączył w jeden: <strong>(A)</strong> test A/B — NOTO konwertuje ~23% gorzej, a przeciek jest w <strong>checkoucie</strong>, nie w add-to-cart; <strong>(B)</strong> płatne strony Fiberbiom (LP, PDP, kolekcja wsparcie-jelit) mają wysoki bounce + błędy JS <em>niezależnie</em> od testu. Dodatkowo: <strong>tagowanie wariantu po stronie klienta było zepsute</strong> — ale z dwóch <em>różnych</em> przyczyn niż zakładał poprzedni raport (patrz Aktualizacja 17.06 w sekcji 5): <strong>GA4</strong> nie da się otagować z poziomu motywu (GA4 działa w sandboxie Web&nbsp;Pixels Shopify), a <strong>Clarity</strong> miał błąd w snippecie — <span class="num-good">naprawiony 17.06</span>, dane per-wariant z Clarity będą dostępne od teraz.</p>
+</div>
+
+<h2>0. Pułapka metodologiczna — per-wariant nie działa</h2>
+<p>Sprawdziłem, czy po fixie tracking z 15.06 da się rozdzielić dane na warianty. Nie da się po stronie klienta:</p>
+<table>
+<thead><tr><th>Źródło</th><th>Stan tagu wariantu (16.06)</th><th>Wniosek</th></tr></thead>
+<tbody>
+<tr><td>GA4 <code>customUser:ab_theme_variant</code></td><td>Otagowane tylko <span class="num-bad">~21% sesji</span> (149 z 725; 576 puste). <strong>Przyczyna (ustalona 17.06):</strong> GTM zakomentowany w obu motywach, GA4 ładuje się wyłącznie przez natywny kanał Google&YouTube → <strong>sandbox Web Pixels</strong>, który nie czyta <code>dataLayer</code> motywu. Snippet ustawia property w oknie motywu → nigdy nie dociera do GA4. <strong>Rozwiązanie (17.06):</strong> używamy zdarzenia Intelligems <code>experience_impression</code> (server-side, pełne pokrycie) + zarejestrowano custom dimensions — patrz sekcja 5.</td><td><span class="tag t-warn">obejście przez Intelligems</span></td></tr>
+<tr><td>Clarity custom tag <code>ab_theme_variant</code></td><td>Było pusto. <strong>Przyczyna:</strong> <code>if (typeof clarity === 'function')</code> w snippecie biegł na górze <code>&lt;head&gt;</code> zanim Clarity się załadował → blok pomijany, brak retry. <span class="num-good">Naprawione 17.06</span> (polling <code>window.clarity</code>, oba motywy).</td><td><span class="tag t-good">fix wdrożony 17.06</span></td></tr>
+<tr><td>Intelligems (server-side)</td><td>Działa niezależnie od client-tagu</td><td><span class="tag t-good">jedyne wiarygodne źródło</span></td></tr>
+</tbody>
+</table>
+<p class="muted">Skutek: błędy JS i bounce z Clarity/GA4 są zdominowane przez GEN-6 (80% ruchu). Podważa to hipotezę raportu „JS errors blokują add-to-cart na NOTO" — błędy są głównie na starym temacie.</p>
+
+<h2>1. Bounce rate per strona</h2>
+<p class="muted">GA4, 9–16.06.2026, oparte na landing page, oba warianty łącznie.</p>
+
+<h3>Karty produktowe — średnia ważona ≈ 47%, duży rozrzut</h3>
+<table>
+<thead><tr><th>Karta produktowa</th><th>Sesje</th><th>Bounce</th></tr></thead>
+<tbody>
+<tr><td><strong>Fiberbiom</strong> <code>/products/fiberbiom-blonnik-colostrum</code></td><td>158</td><td><span class="num-bad">64.6%</span> ⚠ główny produkt na paid</td></tr>
+<tr><td>Colostrum Junior czarny bez (zawiesina)</td><td>49</td><td><span class="num-bad">65.3%</span> ⚠</td></tr>
+<tr><td>Colostrum proszek</td><td>68</td><td>51.5%</td></tr>
+<tr><td>Colostrum 120 kaps</td><td>64</td><td>42.2%</td></tr>
+<tr><td>Krem z colostrum</td><td>127</td><td><span class="num-good">29.1%</span> dobry</td></tr>
+</tbody>
+</table>
+
+<h3>LP Fiberbiom <code>/pages/fiberbiom</code></h3>
+<ul>
+<li>Wejścia <strong>bezpośrednie</strong>: 5 sesji, bounce 20% (mała próba, OK).</li>
+<li>Ruch <strong>płatny Meta</strong> (fbclid): kilkanaście sesji rozbitych na wiele wariantów linku — <span class="num-bad">dominują sesje z bounce 100%</span>.</li>
+<li><code>/pages/fiberbiom-regularne-wyproznianie</code>: 6 sesji, bounce 66.7%.</li>
+</ul>
+
+<h3>Kolekcje wsparcie jelit</h3>
+<table>
+<thead><tr><th>Kolekcja</th><th>Sesje</th><th>Bounce</th></tr></thead>
+<tbody>
+<tr><td><code>/collections/wsparcie-jelit</code> (dedykowana, paid)</td><td>3 bezpośrednie + ~8 fbclid</td><td><span class="num-bad">~100%</span> na bezpośrednich, wysoki na paid ⚠</td></tr>
+<tr><td><code>/collections/zdrowe-jelita</code> (stara, organiczna)</td><td>12</td><td><span class="num-good">16.7%</span> bardzo dobry</td></tr>
+<tr><td>blog <code>choroby-jelit…</code></td><td>19</td><td>52.6%</td></tr>
+</tbody>
+</table>
+<p class="muted">Kontrast: dedykowana <strong>paid</strong> kolekcja <code>wsparcie-jelit</code> ma znikomy ruch i skrajny bounce; organiczna <code>zdrowe-jelita</code> utrzymuje uwagę dobrze.</p>
+
+<h2>2. Dlaczego konwersja spadła — Intelligems (per wariant, wiarygodne)</h2>
+<div class="kpi">
+  <div class="card"><div class="v num-bad">−23%</div><div class="l">Conversion Rate NOTO vs GEN-6 (p2bc ~9%)</div></div>
+  <div class="card"><div class="v num-good">+6.9%</div><div class="l">view_product_page_rate — NOTO wyższy</div></div>
+  <div class="card"><div class="v num-bad">+42.7%</div><div class="l">abandoned_checkout_rate na NOTO</div></div>
+  <div class="card"><div class="v num-bad">−68 297 zł</div><div class="l">szac. wpływ NOTO / mies.</div></div>
+</div>
+<table>
+<thead><tr><th>Metryka</th><th>GEN-6</th><th>NOTO</th><th>Δ</th><th>Istotność (Bayes)</th></tr></thead>
+<tbody>
+<tr><td>Conversion Rate</td><td>2.55%</td><td>1.95%</td><td><span class="num-bad">−23%</span></td><td>p2bc ~9% (≈91% szans, że NOTO gorszy)</td></tr>
+<tr><td>view_product_page_rate</td><td>30.6%</td><td><strong>32.7%</strong></td><td><span class="num-good">+6.9%</span></td><td>p2bb 96% (NOTO lepszy)</td></tr>
+<tr><td>add_to_cart_rate</td><td>5.63%</td><td>5.08%</td><td>−9.7%</td><td>nieistotne</td></tr>
+<tr><td>checkout_begin_rate</td><td>3.62%</td><td>3.32%</td><td>−8%</td><td>mała próba</td></tr>
+<tr><td>checkout_address_submitted</td><td>3.06%</td><td>2.54%</td><td><span class="num-bad">−17%</span></td><td>mała próba</td></tr>
+<tr><td>abandoned_checkout_rate</td><td>30.2%</td><td>43.1%</td><td><span class="num-bad">+42.7%</span></td><td>brak CI (n=22)</td></tr>
+<tr><td>net_revenue / visitor</td><td>6.16 zł</td><td>4.89 zł</td><td>−20.7%</td><td>nieistotne</td></tr>
+<tr><td>AOV (net rev / order)</td><td>242 zł</td><td>250 zł</td><td>+3.4%</td><td>nieistotne</td></tr>
+</tbody>
+</table>
+<div class="box box-warn">
+<h3>Korekta wniosku z poprzedniego raportu</h3>
+<p>Raport (sekcja 6) wskazał <em>„Add to Cart = GŁÓWNY PROBLEM (71% mniej)"</em> — ale to było oparte na mikropróbie GA4 (2 vs 56 eventów). Na większej próbie Intelligems:</p>
+<ul>
+<li>NOTO <strong>nie ma problemu z dotarciem do produktów</strong> — ma wyższy view_product_page_rate.</li>
+<li>Add-to-cart tylko nieznacznie niższy (−10%, nieistotne).</li>
+<li>Główny przeciek jest <strong>niżej w lejku — w checkoucie</strong> (porzucenia +43%, address submitted −17%).</li>
+</ul>
+<p style="margin-bottom:0"><strong>Zastrzeżenie:</strong> próby na etapie checkout są małe (NOTO: 51 rozpoczętych, 22 porzucone) → sygnał <strong>kierunkowy, nie istotny</strong>. CR −23% jest blisko istotności; mechanizm jeszcze nie potwierdzony twardo.</p>
+</div>
+
+<h2>3. Z czym mają problem użytkownicy — Clarity (sitewide, 2 dni)</h2>
+<table>
+<thead><tr><th>Strona</th><th>JS errors</th><th>Dead clicks</th></tr></thead>
+<tbody>
+<tr><td><code>/collections/colostrum</code></td><td>70</td><td>25</td></tr>
+<tr><td><strong><code>/pages/fiberbiom</code></strong> (LP)</td><td><span class="num-bad">55</span></td><td>13</td></tr>
+<tr><td><code>/collections/maseczki-z-colostrum</code></td><td>55</td><td>5</td></tr>
+<tr><td><code>/pages/colostrum-dla-juniora</code></td><td>41</td><td>26</td></tr>
+<tr><td>homepage</td><td>38</td><td>19</td></tr>
+<tr><td><strong><code>/products/fiberbiom-blonnik-colostrum</code></strong> (PDP)</td><td>15</td><td><span class="num-bad">16</span></td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>LP <code>/pages/fiberbiom</code></strong>: 55 błędów JS + wysoki bounce na ruchu płatnym → realny problem techniczny/UX, nie tylko złe dopasowanie ruchu.</li>
+<li><strong>PDP Fiberbiom</strong>: 16 dead clicks + bounce 64.6% → użytkownicy klikają element, który nie reaguje, i wychodzą.</li>
+</ul>
+<p class="muted">Uwaga (patrz sekcja 0): większość tych błędów to ruch GEN-6 (80% splitu) → <strong>nie tłumaczą gorszej konwersji NOTO</strong>. To osobny problem dotykający kampanii płatnych Fiberbiom.</p>
+
+<h2>4. Rozbieżności z poprzednim raportem (do poprawienia)</h2>
+<table>
+<thead><tr><th>Element</th><th>Raport mówił</th><th>Stan na żywo</th></tr></thead>
+<tbody>
+<tr><td>Split ruchu</td><td>90 / 10</td><td><span class="num-warn">80 / 20</span> (zmiana 15.06 21:12)</td></tr>
+<tr><td>Start testu</td><td>~12.06</td><td><span class="num-warn">08.06 10:00</span></td></tr>
+<tr><td>Conversion Rate NOTO</td><td>1.74% (−33%, p=0.032)</td><td>1.95% (−23%, p2bc ~9%)</td></tr>
+<tr><td>Główny przeciek</td><td>Add-to-cart (−71%)</td><td><span class="num-bad">Checkout</span> (abandoned +43%)</td></tr>
+<tr><td>Pokrycie tagiem po fixie</td><td>~100%</td><td><span class="num-bad">~21%</span></td></tr>
+</tbody>
+</table>
+
+<h2>5. Rekomendacje</h2>
+<div class="box box-key">
+<h3>Aktualizacja 17.06 — faktyczna przyczyna i co naprawiono</h3>
+<p>Pierwotna hipoteza („property ustawiane zbyt późno vs Pandectes consent mode") <strong>okazała się błędna</strong>. Weryfikacja kodu obu motywów na żywo (GEN-6 <code>199333609804</code>, NOTOAGENCY <code>190479794508</code>) wykazała <strong>dwa osobne mechanizmy</strong>:</p>
+<ul>
+<li><strong>GA4 — problem architektoniczny, nienaprawialny z motywu.</strong> GTM (<code>GTM-5W5Z2ML</code>) jest zakomentowany w obu motywach, a ID GA4 nie występuje w <code>theme.liquid</code> — GA4 ładuje się wyłącznie przez kanał Google&YouTube w <strong>sandboxie Web Pixels</strong>. Snippet definiuje własny <code>gtag</code> i pisze do <code>dataLayer</code> okna motywu, którego sandbox nigdy nie czyta. Tagowanie GA4 z poziomu motywu jest więc niemożliwe — <strong>ale okazało się zbędne</strong>: integracja <strong>Intelligems → GA4 już działa</strong> (zdarzenie <code>experience_impression</code>, 3129 zdarzeń / 28 dni, server-side, pełne pokrycie). Brakowało tylko rejestracji parametrów wariantu jako <strong>custom dimensions</strong> w GA4 — <span class="num-good">zrobione 17.06</span> (zestaw pokrywający: <code>variant_name</code>, <code>variant</code>, <code>experience_name</code>, <code>experiment_name</code>, scope Event). Per-wariant w GA4 będzie dostępne dla <em>nowych</em> danych za ~24–48 h (rejestracja wymiaru nie działa wstecz). <strong>Dane historyczne</strong> są w eksporcie BigQuery (projekt <code>277470194697</code>, dataset <code>analytics_279858535</code>) — odblokowanie wymaga nadania dostępu przez właściciela projektu (agencja).</li>
+<li><strong>Clarity — błąd w snippecie, NAPRAWIONY 17.06.</strong> Wywołanie <code>clarity("set", …)</code> było pod guardem <code>if (typeof clarity === 'function')</code>, który biegł na górze <code>&lt;head&gt;</code> zanim loader Clarity wystartował → blok pomijany bez retry → tag pusty. Zastąpiono pollingiem <code>window.clarity</code> (co 500&nbsp;ms, do ~30&nbsp;s), wdrożone w obu motywach (skrypt <code>fix_clarity_tagging.py</code>, backupy w <code>theme_backups/</code>).</li>
+</ul>
+<p style="margin-bottom:0"><strong>Skutek:</strong> Clarity zacznie tagować <em>nowe</em> sesje per-wariant (nie wstecz) — po 24–48&nbsp;h da się filtrować nagrania/heatmapy po <code>ab_theme_variant&nbsp;=&nbsp;NOTOAGENCY</code>. <span class="num-warn">Uwaga:</span> Clarity prawdopodobnie nie nagrywa hostowanego checkoutu Shopify, więc da wgląd do zachowania <em>przed</em> checkoutem (PDP/koszyk), a sam przeciek checkout dalej diagnozujemy z Intelligems.</p>
+</div>
+<div class="box box-warn">
+<h3>Krok #2 — płatne LP Fiberbiom (niezależnie od testu)</h3>
+<p style="margin-bottom:0">Bounce + 55 błędów JS uderzają w kampanie Meta tu i teraz. Przejrzeć console errors i nagrania sesji Clarity dla <code>/pages/fiberbiom</code> i PDP Fiberbiom (dane dostępne od ręki, sitewide) — zlokalizować skrypt rzucający błędy.</p>
+</div>
+<p><strong>Opcjonalnie #3:</strong> rozbić lejek Intelligems per device (mobile vs desktop) — przy 82% ruchu mobilnego problem checkout NOTO może być wyłącznie mobilny.</p>
+<p class="muted">Sugerowana kolejność: zacząć od #2 (bez działającego tagu każda analiza per-wariant to zgadywanie).</p>
+
+<div class="foot">Weryfikacja wygenerowana 16.06.2026 na danych na żywo (Intelligems · GA4 · Clarity). Liczby bounce/UX są sitewide (oba warianty łącznie); per-wariant — wyłącznie Intelligems.<br>Aktualizacja 17.06.2026: ustalono faktyczną przyczynę zepsutego tagowania (GA4 sandbox / Clarity guard) i wdrożono fix Clarity w obu motywach. Clarity per-wariant dostępne dla nowych sesji.</div>
+
+</div></body></html>
