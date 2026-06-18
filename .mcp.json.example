@@ -1,9 +1,25 @@
 {
   "mcpServers": {
+    "klaviyo-segments": {
+      "type": "stdio",
+      "command": "__PROJECT_DIR__/venv/bin/fastmcp",
+      "args": [
+        "run",
+        "__PROJECT_DIR__/klaviyo-mcp/server.py"
+      ],
+      "cwd": "__PROJECT_DIR__/klaviyo-mcp",
+      "env": {
+        "KLAVIYO_API_KEY": "__KLAVIYO_API_KEY__"
+      }
+    },
     "klaviyo": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["--with", "fastmcp>=2.8.0,<3.0.0", "klaviyo-mcp-server@0.4.0"],
+      "args": [
+        "--with",
+        "fastmcp>=2.8.0,<3.0.0",
+        "klaviyo-mcp-server@0.4.0"
+      ],
       "env": {
         "PRIVATE_API_KEY": "__KLAVIYO_API_KEY__",
         "READ_ONLY": "false",
@@ -13,7 +29,9 @@
     "shopify-extended": {
       "type": "stdio",
       "command": "node",
-      "args": ["__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"],
+      "args": [
+        "__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"
+      ],
       "env": {
         "SHOPIFY_ACCESS_TOKEN": "__SHOPIFY_ACCESS_TOKEN__",
         "MYSHOPIFY_DOMAIN": "genactiv.myshopify.com"
@@ -22,7 +40,9 @@
     "shopify-standard": {
       "type": "stdio",
       "command": "node",
-      "args": ["__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"],
+      "args": [
+        "__PROJECT_DIR__/shopify-mcp-extended/dist/index.js"
+      ],
       "env": {
         "SHOPIFY_ACCESS_TOKEN": "__SHOPIFY_ACCESS_TOKEN__",
         "MYSHOPIFY_DOMAIN": "genactiv.myshopify.com"
@@ -60,7 +80,10 @@
     "tiktok-ads": {
       "type": "stdio",
       "command": "python3",
-      "args": ["-m", "tiktok_ads_mcp"],
+      "args": [
+        "-m",
+        "tiktok_ads_mcp"
+      ],
       "env": {
         "TIKTOK_APP_ID": "__TIKTOK_APP_ID__",
         "TIKTOK_SECRET": "__TIKTOK_SECRET__",
@@ -70,7 +93,10 @@
     "senuto": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "senuto-mcp"],
+      "args": [
+        "-y",
+        "senuto-mcp"
+      ],
       "env": {
         "SENUTO_API_KEY": "__SENUTO_API_KEY__"
       }

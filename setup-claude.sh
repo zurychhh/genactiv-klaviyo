@@ -103,7 +103,7 @@ source venv/bin/activate
 pip install --quiet --upgrade pip
 
 # Root-level Python deps
-pip install --quiet python-dotenv requests 2>/dev/null && ok "pip: dotenv, requests" || warn "pip install czesciowo nie powiodl sie"
+pip install --quiet python-dotenv requests "fastmcp>=2.8.0,<3.0.0" 2>/dev/null && ok "pip: dotenv, requests" || warn "pip install czesciowo nie powiodl sie"
 
 # Google Ads MCP deps
 if [ -f google-ads-mcp/google-ads-mcp-server/requirements.txt ]; then
@@ -215,7 +215,7 @@ else
             -e "s|__CLARITY_API_TOKEN__|${CLARITY_TOKEN}|g" \
             .mcp.json.example > .mcp.json
 
-        ok ".mcp.json wygenerowany z szablonu (9 serwerow MCP)"
+        ok ".mcp.json wygenerowany z szablonu (10 serwerow MCP — z klaviyo-segments)"
 
         # Count remaining placeholders
         REMAINING=$(grep -c "__[A-Z_]*__" .mcp.json 2>/dev/null || echo "0")
