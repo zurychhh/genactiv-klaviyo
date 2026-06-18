@@ -288,7 +288,8 @@ See `genactiv-online/.env.example` for full list. Key groups:
 ## Known Issues
 
 - **Google OAuth tokens** expire in 7 days when Google Cloud consent screen is in "Testing" mode. After publication, tokens don't expire. Regenerate with `python generate_refresh_token.py` (Ads) or `python generate_ga4_token.py` (GA4).
-- **Meta Ads MCP** sometimes fails to connect locally (Python module issue). Works on Railway.
+- **Meta Ads MCP — locally use `npx -y meta-ads-mcp` (Node), NOT the Python package.** The PyPI `meta-ads-mcp` pins `mcp==1.23.0`, which conflicts with `fastmcp 3.x` and breaks the root-venv servers (klaviyo-segments). Do NOT `pip install meta-ads-mcp` into the root `venv/`. Works on Railway (installed globally there, isolated from the root venv).
+- **Root `venv/` must stay on `fastmcp==3.4.2` + `mcp==1.27.2`** (required by `klaviyo-segments`, run via `venv/bin/fastmcp run klaviyo-mcp/server.py`). Symptom if broken: `/doctor` → "1 setup issue: MCP", klaviyo-segments "Failed to connect", ImportError on `streamable_http_client` / "FastMCP client support is not installed". Fix: `./venv/bin/pip install fastmcp==3.4.2 mcp==1.27.2` then `./venv/bin/pip uninstall -y meta-ads-mcp`; verify with `./venv/bin/pip check`. Pinned in `setup-claude.sh` and `klaviyo-mcp/requirements.txt`. Restart Claude Code after fixing (MCP connections are cached at startup).
 - **Railway CLI** reads token from `~/.railway/config.json`, but `RAILWAY_TOKEN` env var overrides it. Always `unset RAILWAY_TOKEN` before CLI use.
 - **Pandectes consent banner** `cookiesBlockedByDefault=7` blocks all optional cookies by default, causing low attribution rates. Config in Shopify theme: `assets/pandectes-settings.json`, `snippets/pandectes-rules.liquid`.
 - **Shopify Order API** does NOT store `gclid` — only UTM params.

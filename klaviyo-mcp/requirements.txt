@@ -1,1 +1,4 @@
-fastmcp>=2.8.0,<3.0.0
+# klaviyo-segments MCP — wymaga fastmcp 3.x (serwer uruchamiany przez `fastmcp run server.py`).
+# Pinned do działającego zestawu (2026-06-18). NIE schodzić do fastmcp 2.x ani mcp 1.23.0.
+fastmcp==3.4.2
+mcp==1.27.2

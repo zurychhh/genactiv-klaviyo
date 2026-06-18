@@ -103,7 +103,9 @@ source venv/bin/activate
 pip install --quiet --upgrade pip
 
 # Root-level Python deps
-pip install --quiet python-dotenv requests "fastmcp>=2.8.0,<3.0.0" 2>/dev/null && ok "pip: dotenv, requests" || warn "pip install czesciowo nie powiodl sie"
+pip install --quiet python-dotenv requests "fastmcp==3.4.2" "mcp==1.27.2" 2>/dev/null && ok "pip: dotenv, requests, fastmcp 3.4.2" || warn "pip install czesciowo nie powiodl sie"
+# UWAGA: NIE instalowac pythonowego meta-ads-mcp do tego venv — pinuje mcp==1.23.0
+# i psuje fastmcp 3.x (klaviyo-segments). meta-ads leci przez `npx -y meta-ads-mcp`.
 
 # Google Ads MCP deps
 if [ -f google-ads-mcp/google-ads-mcp-server/requirements.txt ]; then

@@ -42,6 +42,7 @@ SCHEMAT definition.condition_groups (zweryfikowany na zywym koncie GENACTIV):
 import json
 import os
 import urllib.error
+import urllib.parse
 import urllib.request
 
 from fastmcp import FastMCP
@@ -61,7 +62,6 @@ def request(method: str, path: str, body: dict | None = None, params: dict | Non
         return {"status": "ERROR", "error_message": "Brak KLAVIYO_API_KEY (klucz prywatny pk_) w srodowisku."}
     url = API + path
     if params:
-        import urllib.parse
         url += "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v is not None})
     headers = {
         "Authorization": f"Klaviyo-API-Key {API_KEY}",
@@ -107,6 +107,15 @@ def _tf_in_last(days: int) -> dict:
     return {"type": "date", "operator": "in-the-last", "unit": "day", "quantity": days}
 
 
+# Klaviyo profile-metric WYMAGA timeframe_filter (null/pominiecie = blad 400) i nie ma
+# operatora "ever"/"all-time". "Cala historia" = bardzo dlugie okno in-the-last (10 lat).
+ALL_TIME_DAYS = 3650
+
+
+def _tf_all_time() -> dict:
+    return _tf_in_last(ALL_TIME_DAYS)
+
+
 def build_rfm_condition_groups(
     ordered_within_days: int | None = None,
     not_ordered_within_days: int | None = None,
@@ -136,19 +145,19 @@ def build_rfm_condition_groups(
         ]})
     if min_orders is not None:
         groups.append({"conditions": [
-            _metric_condition("count", "greater-than-or-equal", min_orders, None, metric_id)
+            _metric_condition("count", "greater-than-or-equal", min_orders, _tf_all_time(), metric_id)
         ]})
     if order_counts_any:
         groups.append({"conditions": [
-            _metric_condition("count", "equals", c, None, metric_id) for c in order_counts_any
+            _metric_condition("count", "equals", c, _tf_all_time(), metric_id) for c in order_counts_any
         ]})
     if min_total_value is not None:
         groups.append({"conditions": [
-            _metric_condition("sum", "greater-than-or-equal", min_total_value, None, metric_id)
+            _metric_condition("sum", "greater-than-or-equal", min_total_value, _tf_all_time(), metric_id)
         ]})
     if ever_purchased:
         groups.append({"conditions": [
-            _metric_condition("count", "greater-than-or-equal", 1, None, metric_id)
+            _metric_condition("count", "greater-than-or-equal", 1, _tf_all_time(), metric_id)
         ]})
     return groups
 
