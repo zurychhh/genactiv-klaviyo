@@ -16,6 +16,8 @@ client_secret.json
 google_ads_token.json
 application_default_credentials.json
 *_token.json
+*_tokens.json
+allegro_tokens.json
 *_secret.json
 
 # Claude Code
