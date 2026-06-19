@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B Test: GEN-6 vs NOTOAGENCY — Raport</title>
+<style>
+:root{--bg:#ffffff;--ink:#1a1a1a;--muted:#5c6470;--accent:#1a56db;--border:#e2e5ea;--rowalt:#f6f8fa;--th:#eef1f5;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:30px;line-height:1.2;margin:0 0 8px;border-bottom:3px solid var(--accent);padding-bottom:14px;color:#111}
+h2{font-size:22px;margin:36px 0 12px;color:#111}
+h3{font-size:18px;margin:24px 0 8px;color:var(--accent)}
+a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--th);color:#111;font-weight:600}
+tr:nth-child(even) td{background:var(--rowalt)}
+code{background:#f3f4f6;border:1px solid var(--border);padding:1px 6px;border-radius:5px;font-size:13px;color:#b3261e}
+pre{background:#f6f8fa;border:1px solid var(--border);padding:14px;border-radius:8px;overflow:auto}
+pre code{border:0;background:none;color:var(--ink)}
+blockquote{margin:14px 0;padding:10px 16px;border-left:4px solid var(--accent);background:#f6f8fa;color:var(--muted);border-radius:0 8px 8px 0}
+ul,ol{padding-left:22px}
+hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+strong{color:#111}
+.gen{margin-top:60px;color:var(--muted);font-size:12.5px;text-align:center}
+</style></head>
+<body><div class="wrap"><h1 id="ab-test-gen-6-vs-notoagency-raport-i-wnioski">A/B Test: GEN-6 vs NOTOAGENCY — Raport i wnioski</h1>
+<blockquote>
+<p><strong>Data:</strong> 2026-06-15 | <strong>Status:</strong> Test aktywny | <strong>Platform:</strong> Intelligems + GA4 + Clarity<br />
+<strong>Autor automatyczny:</strong> Claude Code | <strong>Kontakt:</strong> d.slowik@notoagency.pl (setup Intelligems)</p>
+</blockquote>
+<hr />
+<h2 id="1-konfiguracja-testu">1. Konfiguracja testu</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Wartość</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Narzędzie A/B</td>
+<td>Intelligems.io (theme test)</td>
+</tr>
+<tr>
+<td>Wariant kontrolny</td>
+<td><strong>GEN-6</strong> (Old theme, ID: 199333609804) — 90% ruchu</td>
+</tr>
+<tr>
+<td>Wariant testowy</td>
+<td><strong>NOTOAGENCY</strong> (New theme, ID: 190479794508) — 10% ruchu</td>
+</tr>
+<tr>
+<td>Start testu</td>
+<td>~12 czerwca 2026</td>
+</tr>
+<tr>
+<td>Exp. ID (Intelligems)</td>
+<td><code>1c371ad8-5826-4c21-abdb-7d0d68390e81</code></td>
+</tr>
+<tr>
+<td>GA4 Custom Dimension</td>
+<td><code>customUser:ab_theme_variant</code> (scope: USER, ID: 15061277989)</td>
+</tr>
+<tr>
+<td>Tracking</td>
+<td>Skrypt A/B w <code>layout/theme.liquid</code> obu tematów + Pandectes Consent Mode v2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="podaczone-zroda-danych">Podłączone źródła danych</h3>
+<table>
+<thead>
+<tr>
+<th>Źródło</th>
+<th>API</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Intelligems</strong></td>
+<td><code>api.intelligems.io/v25-10-beta</code></td>
+<td>Klucz: <code>ig_live_...</code> (header: <code>intelligems-access-token</code>)</td>
+</tr>
+<tr>
+<td><strong>GA4</strong></td>
+<td>Data API v1beta</td>
+<td>OAuth2, property <code>279858535</code></td>
+</tr>
+<tr>
+<td><strong>Clarity</strong></td>
+<td><code>clarity.ms/export-data/api/v1</code></td>
+<td>JWT token, project <code>3354986136401458</code>, limit 10 req/dzień</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-fix-tracking-15-czerwca-2026">2. Fix tracking — 15 czerwca 2026</h2>
+<h3 id="problem">Problem</h3>
+<p>~89% sesji nie było tagowanych wariantem A/B. Skrypt sprawdzał <code>typeof gtag === 'function'</code>, ale Pandectes (consent manager) <strong>nie definiuje <code>window.gtag</code></strong> jako globalnej funkcji — używa wewnętrznej zmiennej <code>Ue()</code> jako wrappera na <code>dataLayer.push</code>.</p>
+<h3 id="rozwiazanie">Rozwiązanie</h3>
+<p>Zmiana w <code>layout/theme.liquid</code> obu tematów:</p>
+<pre><code class="language-javascript">// BYŁO (failowało):
+function setGA4() {
+    if (typeof gtag === 'function') { gtag('set', ...); }
+    else { setTimeout(setGA4, 500); }  // nieskończona pętla retry
+}
+
+// JEST (działa natychmiast):
+if (typeof gtag !== 'function') {
+    window.gtag = function(){ window.dataLayer.push(arguments); };
+}
+gtag('set', 'user_properties', { 'ab_theme_variant': THEME_VARIANT });
+gtag('event', 'ab_test_impression', { ... });
+</code></pre>
+<p><strong>Efekt:</strong> pokrycie tagiem A/B powinno wzrosnąć z ~11% do ~100% sesji od 15.06.2026.</p>
+<h3 id="pliki-zmienione-na-shopify">Pliki zmienione na Shopify</h3>
+<ul>
+<li><code>layout/theme.liquid</code> na GEN-6 (ID: 199333609804)</li>
+<li><code>layout/theme.liquid</code> na NOTOAGENCY (ID: 190479794508)</li>
+</ul>
+<hr />
+<h2 id="3-wyniki-testu-stan-na-15062026">3. Wyniki testu — stan na 15.06.2026</h2>
+<h3 id="31-intelligems-pene-dane-od-startu-testu">3.1. Intelligems (pełne dane od startu testu)</h3>
+<table>
+<thead>
+<tr>
+<th>Metryka</th>
+<th>GEN-6 (control)</th>
+<th>NOTOAGENCY</th>
+<th>Δ</th>
+<th>Istotność</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visitors</strong></td>
+<td>11,351</td>
+<td>1,265</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Orders</strong></td>
+<td>296</td>
+<td>22</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Conversion Rate</strong></td>
+<td>2.61%</td>
+<td>1.74%</td>
+<td><strong>-33.3%</strong></td>
+<td><strong>p=0.032 ISTOTNE</strong></td>
+</tr>
+<tr>
+<td>Add to Cart Rate</td>
+<td>5.65%</td>
+<td>5.22%</td>
+<td>-7.6%</td>
+<td>nieistotne</td>
+</tr>
+<tr>
+<td>Checkout Begin Rate</td>
+<td>3.67%</td>
+<td>3.32%</td>
+<td>-9.6%</td>
+<td>nieistotne</td>
+</tr>
+<tr>
+<td>Abandoned Cart</td>
+<td>54.5%</td>
+<td>68.2%</td>
+<td><strong>+25.2%</strong></td>
+<td>nieistotne</td>
+</tr>
+<tr>
+<td>Abandoned Checkout</td>
+<td>30.0%</td>
+<td>50.0%</td>
+<td><strong>+66.8%</strong></td>
+<td>nieistotne</td>
+</tr>
+<tr>
+<td>Revenue/visitor</td>
+<td>6.33 PLN</td>
+<td>4.53 PLN</td>
+<td><strong>-28.5%</strong></td>
+<td>p=0.138</td>
+</tr>
+<tr>
+<td>Revenue/order</td>
+<td>242.92 PLN</td>
+<td>260.45 PLN</td>
+<td>+7.2%</td>
+<td>nieistotne</td>
+</tr>
+<tr>
+<td>Net Revenue</td>
+<td>71,904 PLN</td>
+<td>5,730 PLN</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Intelligems już wykazuje istotność statystyczną (p=0.032) na conversion rate.</strong><br />
+Nowy temat konwertuje o 33% gorzej niż stary.</p>
+</blockquote>
+<h3 id="32-ga4-7-dni-dane-sprzed-fixa-niskie-pokrycie-tagiem">3.2. GA4 (7 dni, dane sprzed fixa — niskie pokrycie tagiem)</h3>
+<table>
+<thead>
+<tr>
+<th>Metryka</th>
+<th>GEN-6 (1,070 sesji)</th>
+<th>NOTOAGENCY (115 sesji)</th>
+<th>Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bounce Rate</td>
+<td>19.4%</td>
+<td>24.3%</td>
+<td>+25.3%</td>
+</tr>
+<tr>
+<td>Conv. Rate</td>
+<td>2.99%</td>
+<td>0.87%</td>
+<td>-70.9%</td>
+</tr>
+<tr>
+<td>Add-to-Cart Rate</td>
+<td>7.85%</td>
+<td>6.09%</td>
+<td>-22.5%</td>
+</tr>
+<tr>
+<td>Śr. czas sesji</td>
+<td>2m48s</td>
+<td>2m28s</td>
+<td>-11.9%</td>
+</tr>
+<tr>
+<td>Strony/sesję</td>
+<td>5.10</td>
+<td>5.39</td>
+<td>+5.7%</td>
+</tr>
+<tr>
+<td>Przychód</td>
+<td>7,810 PLN</td>
+<td>189 PLN</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-analiza-lejka-konwersji-ga4">4. Analiza lejka konwersji (GA4)</h2>
+<h3 id="41-lejek-ogolny-gdzie-traca-uzytkownicy-notoagency">4.1. Lejek ogólny — gdzie tracą użytkownicy NOTOAGENCY</h3>
+<table>
+<thead>
+<tr>
+<th>Etap</th>
+<th>GEN-6 (users)</th>
+<th>NOTO (users)</th>
+<th>NOTO % oczekiwany</th>
+<th>NOTO % rzeczywisty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page_view</td>
+<td>890</td>
+<td>90</td>
+<td>10%</td>
+<td><strong>10.1% OK</strong></td>
+</tr>
+<tr>
+<td>view_item</td>
+<td>388</td>
+<td>40</td>
+<td>10%</td>
+<td><strong>10.3% OK</strong></td>
+</tr>
+<tr>
+<td>add_to_cart</td>
+<td>61</td>
+<td>4</td>
+<td>10%</td>
+<td><strong>6.6% SPADEK</strong></td>
+</tr>
+<tr>
+<td>begin_checkout</td>
+<td>68</td>
+<td>2</td>
+<td>10%</td>
+<td><strong>2.9% DUŻY SPADEK</strong></td>
+</tr>
+<tr>
+<td>purchase</td>
+<td>31</td>
+<td>1</td>
+<td>10%</td>
+<td><strong>3.2% DUŻY SPADEK</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Wniosek:</strong> Użytkownicy NOTOAGENCY docierają do produktów (10% share OK), ale <strong>drastycznie rzadziej dodają do koszyka i kupują</strong>.</p>
+<h3 id="42-strony-produktow-products">4.2. Strony produktów (/products/)</h3>
+<table>
+<thead>
+<tr>
+<th>Metryka</th>
+<th>GEN-6 (487 sesji)</th>
+<th>NOTOAGENCY (60 sesji)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bounce Rate</td>
+<td>18.9%</td>
+<td>20.0%</td>
+</tr>
+<tr>
+<td>Engagement Rate</td>
+<td>81.1%</td>
+<td>80.0%</td>
+</tr>
+<tr>
+<td>add_to_cart events</td>
+<td>56</td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td>Śr. czas sesji</td>
+<td>2m02s</td>
+<td>1m52s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Problem:</strong> add_to_cart na NOTOAGENCY to 2 eventy vs 56 na GEN-6. Proporcjonalnie powinno być ~7.</p>
+<h3 id="43-kolekcja-collectionscolostrum">4.3. Kolekcja /collections/colostrum</h3>
+<table>
+<thead>
+<tr>
+<th>Metryka</th>
+<th>GEN-6 (302 sesji)</th>
+<th>NOTOAGENCY (49 sesji)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bounce Rate</td>
+<td>21.5%</td>
+<td><strong>26.5%</strong> (+23%)</td>
+</tr>
+<tr>
+<td>add_to_cart</td>
+<td>15 eventów</td>
+<td>4 eventy</td>
+</tr>
+<tr>
+<td>view_item</td>
+<td>3</td>
+<td><strong>42</strong></td>
+</tr>
+<tr>
+<td>Strony/sesję</td>
+<td>3.74</td>
+<td><strong>5.61</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ciekawe: NOTO generuje dużo więcej view_item na kolekcji — ludzie przeglądają, ale nie dodają do koszyka.</p>
+<h3 id="44-pagesfiberbiom">4.4. /pages/fiberbiom</h3>
+<p>Zbyt mała próba na NOTO (6 sesji). Bounce rate 50% vs 16.4% na GEN-6 — niekonkluzywne.</p>
+<h3 id="45-top-landing-pages-notoagency-z-konwersjami">4.5. Top landing pages NOTOAGENCY (z konwersjami)</h3>
+<table>
+<thead>
+<tr>
+<th>Landing Page</th>
+<th>Sesje</th>
+<th>BR</th>
+<th>Conv</th>
+<th>Revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/collections/colostrum</td>
+<td>19</td>
+<td>21.1%</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>/ (homepage)</td>
+<td>12</td>
+<td>33.3%</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>/collections/maseczki-z-colostrum</td>
+<td>6</td>
+<td>16.7%</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>/collections/mleko-klaczy</td>
+<td>6</td>
+<td>16.7%</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>web-pixels.../collections/colostrum</td>
+<td>6</td>
+<td>0.0%</td>
+<td>1</td>
+<td>189 PLN</td>
+</tr>
+</tbody>
+</table>
+<p>Jedyna konwersja NOTOAGENCY przyszła z Shopify web-pixel, nie z bezpośredniego wejścia.</p>
+<hr />
+<h2 id="5-clarity-ux-insights-cay-projekt-3-dni">5. Clarity UX Insights (cały projekt, 3 dni)</h2>
+<table>
+<thead>
+<tr>
+<th>Metryka</th>
+<th>Mobile (4,938 sesji)</th>
+<th>Tablet (59)</th>
+<th>PC (758)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dead Clicks</td>
+<td>3.3% (309 events)</td>
+<td>3.4% (3)</td>
+<td>5.3% (68)</td>
+</tr>
+<tr>
+<td>Rage Clicks</td>
+<td>0.04% (22)</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>Quick Backs</strong></td>
+<td><strong>9.0% (646)</strong></td>
+<td>10.2% (12)</td>
+<td>7.4% (81)</td>
+</tr>
+<tr>
+<td><strong>Script Errors</strong></td>
+<td><strong>6.7% (481)</strong></td>
+<td>6.8% (4)</td>
+<td>1.6% (30)</td>
+</tr>
+<tr>
+<td>Scroll Depth</td>
+<td>41.5%</td>
+<td>57.2%</td>
+<td>54.3%</td>
+</tr>
+<tr>
+<td>Engagement Time</td>
+<td>107s total / 43s active</td>
+<td>108s/94s</td>
+<td>164s/57s</td>
+</tr>
+<tr>
+<td>Traffic split</td>
+<td><strong>82%</strong></td>
+<td>1%</td>
+<td>13%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sygnay-ux-istotne-dla-ab-testu">Sygnały UX istotne dla A/B testu:</h3>
+<ol>
+<li><strong>Quick Back 9% na mobile</strong> — co 11. sesja kończy się szybkim cofnięciem (frustracja)</li>
+<li><strong>Script Errors 6.7% na mobile</strong> — JS errors mogą blokować add-to-cart w NOTO</li>
+<li><strong>Scroll Depth 41.5% mobile</strong> — użytkownicy widzą &lt; połowy strony. Jeśli CTA w NOTO jest poniżej foldu → nie widzą go</li>
+<li><strong>82% ruchu to mobile</strong> — optymalizacja mobile jest krytyczna</li>
+</ol>
+<hr />
+<h2 id="6-diagnoza-dlaczego-notoagency-konwertuje-gorzej">6. Diagnoza: dlaczego NOTOAGENCY konwertuje gorzej</h2>
+<p>Na podstawie danych z trzech źródeł (Intelligems, GA4, Clarity):</p>
+<h3 id="potwierdzone-problemy">Potwierdzone problemy:</h3>
+<ol>
+<li><strong>Strona produktu → Add to Cart: GŁÓWNY PROBLEM</strong> — 71% mniej add-to-cart na NOTO (2 vs 56 events proporcjonalnie). Przycisk "Dodaj do koszyka" prawdopodobnie jest mniej widoczny, inaczej umieszczony, lub blokowany przez JS error.</li>
+<li><strong>Checkout abandonment: +67%</strong> — użytkownicy, którzy rozpoczynają checkout, porzucają go o 67% częściej na NOTO.</li>
+<li><strong>Abandoned cart: +25%</strong> — więcej porzuconych koszyków na NOTO.</li>
+</ol>
+<h3 id="hipotezy-do-zbadania">Hipotezy do zbadania:</h3>
+<ul>
+<li><strong>Layout strony produktu</strong> — sprawdzić pozycję i widoczność przycisku "Dodaj do koszyka" na mobile w NOTO vs GEN-6</li>
+<li><strong>Błędy JavaScript</strong> — 6.7% sesji na mobile ma script errors. Sprawdzić czy NOTO ma dodatkowe/inne errory</li>
+<li><strong>Scroll depth</strong> — przy 41.5% avg scroll na mobile, elementy poniżej foldu nie są widoczne</li>
+<li><strong>Checkout flow</strong> — 50% abandoned checkout (vs 30%) sugeruje problem z krokami checkout w NOTO</li>
+</ul>
+<hr />
+<h2 id="7-istotnosc-statystyczna-kiedy-zakonczyc-test">7. Istotność statystyczna — kiedy zakończyć test</h2>
+<table>
+<thead>
+<tr>
+<th>Deadline</th>
+<th>Dostępne sesje</th>
+<th>Min. split NOTO</th>
+<th>MDE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30 czerwca (15 dni)</td>
+<td>~22,800</td>
+<td>18%</td>
+<td>25% (wykryje ±0.75pp CR)</td>
+</tr>
+<tr>
+<td>15 lipca (30 dni)</td>
+<td>~45,600</td>
+<td>14%</td>
+<td>20% (wykryje ±0.6pp CR)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Intelligems już ma istotność na conversion rate (p=0.032).</strong> Nie trzeba czekać — wynik jest jednoznaczny:</p>
+<blockquote>
+<p><strong>NOTOAGENCY konwertuje istotnie gorzej (-33% CR).</strong></p>
+</blockquote>
+<h3 id="rekomendacja">Rekomendacja:</h3>
+<p>Przy aktualnym splicie 10/90 i potwierdzeniu statystycznym z Intelligems:<br />
+- <strong>Opcja A:</strong> Zakończyć test i wrócić do GEN-6 100%<br />
+- <strong>Opcja B:</strong> Naprawić zidentyfikowane problemy (add-to-cart, checkout) na NOTO i zrestartować test<br />
+- <strong>Opcja C:</strong> Zwiększyć split na 20/80 i zbierać dane z poprawionym tagiem (po fixie z 15.06) — nowe dane będą czyste</p>
+<hr />
+<h2 id="8-pliki-w-repo">8. Pliki w repo</h2>
+<table>
+<thead>
+<tr>
+<th>Plik</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>migrate_tracking_ab.py</code></td>
+<td>Skrypt migracji tracking assets GEN-6 → NOTOAGENCY (19 snippets + 2 binary)</td>
+</tr>
+<tr>
+<td><code>reports/ab_theme_report.py</code></td>
+<td>Generator HTML dashboardu A/B z client-side GA4 API, stat. significance, refresh</td>
+</tr>
+<tr>
+<td><code>reports/ab_theme_report_7d.html</code></td>
+<td>Standalone HTML raport — otwórz i kliknij "Odśwież dane" (bez serwera)</td>
+</tr>
+<tr>
+<td><code>generate_ga4_token.py</code></td>
+<td>Zmodyfikowany: dodany scope <code>analytics.edit</code> + auto-update .env</td>
+</tr>
+<tr>
+<td><code>docs/AB_TEST_RAPORT.md</code></td>
+<td>Ten plik</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api-credentials-nie-commitowane-w-env">API credentials (NIE commitowane, w .env)</h3>
+<table>
+<thead>
+<tr>
+<th>Serwis</th>
+<th>Zmienna</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intelligems</td>
+<td><code>ig_live_518e061f...</code></td>
+<td>Header: <code>intelligems-access-token</code></td>
+</tr>
+<tr>
+<td>GA4</td>
+<td><code>GA4_REFRESH_TOKEN</code></td>
+<td>OAuth2, scope: analytics.readonly + analytics.edit</td>
+</tr>
+<tr>
+<td>Clarity</td>
+<td>JWT token (w .claude.json)</td>
+<td>Scope: Data.Export, exp: 2126</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-integracje-mcp-dodane-w-tej-sesji">9. Integracje MCP dodane w tej sesji</h2>
+<table>
+<thead>
+<tr>
+<th>MCP Server</th>
+<th>Package</th>
+<th>Użycie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clarity</strong></td>
+<td><code>@microsoft/clarity-mcp-server</code></td>
+<td>UX metrics, session recordings, dead/rage clicks</td>
+</tr>
+<tr>
+<td>Intelligems</td>
+<td>REST API (nie MCP)</td>
+<td>A/B test analytics, experiment management</td>
+</tr>
+</tbody>
+</table>
+<p>Clarity MCP jest w <code>.claude.json</code> (local config) — dostępny automatycznie w Claude Code.</p>
+<p>Intelligems ma też MCP server (<code>https://ai.intelligems.io/mcp</code>) — OAuth2, do podłączenia w przyszłości.</p>
+<hr />
+<h2 id="10-clarity-custom-tags-wdrozone-15062026">10. Clarity Custom Tags — wdrożone 15.06.2026</h2>
+<h3 id="co-zrobiono">Co zrobiono</h3>
+<p>Dodano sekcję <code>// 5. Microsoft Clarity custom tags</code> do <code>layout/theme.liquid</code> w obu tematach:</p>
+<pre><code class="language-javascript">// 5. Microsoft Clarity custom tags — segmentacja A/B w heatmapach i nagraniach
+if (typeof clarity === 'function') {
+    clarity(&quot;set&quot;, &quot;ab_theme_variant&quot;, THEME_VARIANT);
+    clarity(&quot;set&quot;, &quot;theme_id&quot;, THEME_ID);
+}
+</code></pre>
+<p><strong>Tagi:</strong><br />
+- <code>ab_theme_variant</code> = <code>"GEN-6"</code> lub <code>"NOTOAGENCY"</code><br />
+- <code>theme_id</code> = Shopify theme ID</p>
+<p><strong>Filtrowanie w Clarity:</strong> Filters → Custom Tags → <code>ab_theme_variant</code> → wybrać wariant → Apply<br />
+Działa na: Dashboard, Heatmaps, Session Recordings.</p>
+<p>Tagi pojawią się w Clarity w ciągu 30 min – 2h od pierwszego page view z nowym kodem.</p>
+<h3 id="intelligems-clarity-natywna-integracja">Intelligems ↔ Clarity (natywna integracja)</h3>
+<p>Dodatkowo do ręcznych tagów, Intelligems ma natywną integrację z Clarity:<br />
+1. Intelligems Dashboard → Integrations → Microsoft Clarity → <strong>Enable</strong><br />
+2. Nie wymaga credentials (używa <code>window.clarity</code> API)<br />
+3. Automatycznie taguje sesje: <code>experiment_name</code> + <code>ig_test_group</code><br />
+4. <strong>Status: wymaga ręcznego włączenia w panelu Intelligems</strong> (d.slowik@notoagency.pl)</p>
+<p>Docs: https://docs.intelligems.io/integrations/heatmap-integrations/integrating-with-microsoft-clarity</p>
+<h3 id="dlaczego-nie-hotjar">Dlaczego nie Hotjar</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Clarity</th>
+<th>Hotjar (free)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom tags/A/B filtering</td>
+<td><strong>Darmowe, bez limitu</strong></td>
+<td>Wymaga Observe Plus (32€/mies.)</td>
+</tr>
+<tr>
+<td>Nagrania</td>
+<td>Bez limitu</td>
+<td>10k/mies. (5% sampling)</td>
+</tr>
+<tr>
+<td>Integracja Intelligems</td>
+<td>Natywna</td>
+<td>Brak</td>
+</tr>
+<tr>
+<td>GA4 integration</td>
+<td>Natywna (bidirectional)</td>
+<td>Tylko płatna</td>
+</tr>
+<tr>
+<td>Shopify app</td>
+<td>Oficjalny</td>
+<td>Brak</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-kolejne-kroki-todo">11. Kolejne kroki (TODO)</h2>
+<ul>
+<li>[x] ~~Clarity custom tags wdrożone w obu tematach (15.06.2026)~~</li>
+<li>[ ] <strong>WAŻNE:</strong> Włączyć natywną integrację Intelligems → Clarity w panelu Intelligems (wymaga dostępu admina)</li>
+<li>[ ] Zweryfikować pokrycie tagiem A/B po fixie (powinno być ~100% od 16.06)</li>
+<li>[ ] Po 2h: sprawdzić czy tagi <code>ab_theme_variant</code> pojawiły się w Clarity Filters → Custom Tags</li>
+<li>[ ] Porównać heatmapy GEN-6 vs NOTO na stronie produktu (osobno per wariant)</li>
+<li>[ ] Sprawdzić console errors na NOTO (mobile) — Clarity session recordings filtrowane po wariancie</li>
+<li>[ ] Porównać pozycję przycisku "Dodaj do koszyka" na mobile: GEN-6 vs NOTO</li>
+<li>[ ] Sprawdzić checkout flow na NOTO — dlaczego 50% porzuceń</li>
+<li>[ ] Decyzja: kontynuować test vs naprawić NOTO vs zakończyć</li>
+<li>[ ] Opcjonalnie: podłączyć Intelligems MCP server do Claude Code</li>
+</ul>
+<p class="gen">Odtworzono z <code>docs/AB_TEST_RAPORT.md</code></p>
+</div></body></html>

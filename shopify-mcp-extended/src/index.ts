@@ -23,6 +23,7 @@ import { updateCollectionSeo } from "./tools/updateCollectionSeo.js";
 import { updateProductImages } from "./tools/updateProductImages.js";
 import { updateProductContent } from "./tools/updateProductContent.js";
 import { bulkUpdateSeo } from "./tools/bulkUpdateSeo.js";
+import { bulkUpdateAltText } from "./tools/bulkUpdateAltText.js";
 import { getSeoAudit } from "./tools/getSeoAudit.js";
 import { getRevenueReconciliation } from "./tools/getRevenueReconciliation.js";
 // Analytics tools
@@ -88,6 +89,7 @@ updateCollectionSeo.initialize(shopifyClient);
 updateProductImages.initialize(shopifyClient);
 updateProductContent.initialize(shopifyClient);
 bulkUpdateSeo.initialize(shopifyClient);
+bulkUpdateAltText.initialize(shopifyClient);
 getSeoAudit.initialize(shopifyClient);
 getRevenueReconciliation.initialize(shopifyClient);
 // Initialize analytics tools
@@ -385,6 +387,25 @@ server.tool(
   },
   async (args) => {
     const result = await bulkUpdateSeo.execute(args);
+    return {
+      content: [{ type: "text", text: JSON.stringify(result) }]
+    };
+  }
+);
+
+// Bulk Update ALT Text - batch image ALT text across products
+server.tool(
+  "bulk-update-alt-text",
+  {
+    items: z.array(z.object({
+      productId: z.string().min(1).describe("Shopify product ID (numeric, without gid prefix)"),
+      imageId: z.string().min(1).describe("Shopify image/media ID (numeric, without gid prefix)"),
+      altText: z.string().describe("New ALT text for the image (SEO-friendly description)"),
+    })).min(1).max(25).describe("Array of images to update (max 25 per batch)"),
+    dryRun: z.boolean().default(false).describe("If true, preview before/after without applying changes"),
+  },
+  async (args) => {
+    const result = await bulkUpdateAltText.execute(args);
     return {
       content: [{ type: "text", text: JSON.stringify(result) }]
     };
