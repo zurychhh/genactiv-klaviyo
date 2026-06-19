@@ -135,6 +135,29 @@ TASKS = [
    None),
 ]
 
+# Brama ręczna: czy zadanie wymaga człowieka zanim ruszy / zanim zostanie zamknięte.
+# "start" = wymaga ręcznej interwencji ZANIM ruszy; "verify" = CC/auto wynik -> weryfikacja ZANIM Done; "" = brak bramki.
+GATE = {
+ "A1": "verify", "A2": "verify", "E1": "verify", "B1": "verify", "C1": "verify", "D1": "",
+ "A3": "verify", "A4": "verify", "E2": "verify", "B2": "", "C2": "verify",
+ "A5": "verify", "A6": "start", "B3": "verify", "C3": "verify", "D2": "verify",
+ "A7": "start", "C4": "verify", "E3": "verify", "B4": "verify", "D3": "start",
+ "OPS1": "verify", "OPS2": "start",
+}
+GATE_LABEL = {"start": "Wymaga ręcznej interwencji przed startem",
+              "verify": "Weryfikacja ręczna przed Done", "": ""}
+GATE_COLOR = {"start": "#EF3340", "verify": "#8b5cf6", "": ""}
+
+# Status początkowy na start sprintu: odblokowane = zadania W1 bez zależności.
+def _init_status(t):
+    if t["dep"] in ("—", ""):
+        return "Do zrobienia"
+    return "Zablokowane (zależność)"
+STATUS_COLOR = {"Do zrobienia": "#6b7280", "Zablokowane (zależność)": "#b45309"}
+# Pełny zestaw statusów (dla kolumny Status w Monday/Arkuszu):
+STATUS_SET = ["Do zrobienia", "Zablokowane (zależność)", "W toku",
+              "Wymaga ręcznej interwencji", "Czeka na weryfikację (CC done)", "Done"]
+
 def esc(s): return html.escape(str(s), quote=True)
 
 def card(t):
@@ -146,7 +169,14 @@ def card(t):
     h += f'<span class="bot" style="background:{b[2]}" title="{esc(b[1])}">{b[0]}</span></div>'
     h += f'<div class="ctitle">{esc(t["title"])}</div>'
     h += f'<div class="cmeta"><span>⏱ {esc(t["est"])}</span><span class="kpi">↑ {esc(t["kpi"])}</span></div>'
-    h += f'<div class="cdep">⛓ zależy od: {esc(t["dep"])}</div>'
+    st = _init_status(t)
+    h += '<div class="tags">'
+    h += f'<span class="deptag">⛓ Zależność: {esc(t["dep"])}</span>'
+    h += f'<span class="stag" style="background:{STATUS_COLOR.get(st,"#6b7280")}">{esc(st)}</span>'
+    g = GATE[t["id"]]
+    if g:
+        h += f'<span class="gate" style="background:{GATE_COLOR[g]}" title="{esc(GATE_LABEL[g])}">{"⚑ ręczna: start" if g=="start" else "⚑ ręczna: weryfikacja"}</span>'
+    h += '</div>'
     h += f'<details><summary>Definition of Done {"+ prompt CC" if t["prompt"] else ""}</summary>'
     h += f'<p class="dod"><b>DoD:</b> {esc(t["dod"])}</p>'
     if t["prompt"]:
@@ -197,6 +227,9 @@ body{{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(-
 .cmeta span{{background:var(--line-2);border-radius:5px;padding:2px 7px;color:var(--ink-2);font-weight:600}}
 .cmeta .kpi{{background:#eafaf1;color:#1b7a43;border:1px solid #bfe9cf}}
 .cdep{{font-size:.64rem;color:var(--ink-3);font-weight:600;margin-bottom:5px}}
+.tags{{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}}
+.deptag{{font-size:.6rem;font-weight:700;color:var(--ink-2);background:#fff;border:1px dashed #b9c4d0;border-radius:5px;padding:2px 6px}}
+.stag,.gate{{font-size:.58rem;font-weight:700;color:#fff;border-radius:5px;padding:2px 6px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}}
 details{{margin-top:4px}}
 summary{{cursor:pointer;font-size:.66rem;color:var(--blue);font-weight:700;list-style:none}}
 summary::-webkit-details-marker{{display:none}}
@@ -225,6 +258,7 @@ footer{{padding:24px 0 44px;color:var(--ink-3);font-size:.76rem}}
              '<span><span class="sdot" style="background:#1A3B5D"></span>OPS</span>'
              '<span style="margin-left:8px"><span class="tagb" style="background:#EF3340">P1</span> <span class="tagb" style="background:#f59e0b">P2</span> <span class="tagb" style="background:#9ca3af">P3</span> priorytet</span>'
              '<span><span class="tagb" style="background:#0066CC">CC</span> Claude Code · <span class="tagb" style="background:#8b5cf6">CC+</span> hybryda · <span class="tagb" style="background:#6b7280">MAN</span> ręcznie</span>'
+             '<span style="margin-left:8px"><span class="tagb" style="background:#EF3340">⚑ start</span> wymaga ręcznej interwencji przed startem · <span class="tagb" style="background:#8b5cf6">⚑ weryfikacja</span> ręczna weryfikacja przed Done</span>'
              '</div>')
     H.append('<div class="toolbar"><button class="btn" onclick="document.querySelectorAll(\'details\').forEach(d=>d.open=true)">Rozwiń wszystkie (DoD + prompty)</button><button class="btn sec" onclick="document.querySelectorAll(\'details\').forEach(d=>d.open=false)">Zwiń</button></div>')
 
