@@ -1,0 +1,709 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark e-mail marketingu — GenActiv</title></head><body>
+<style>
+  :root {
+    --ground: #15191B; --ground-2: #1C2225; --panel: #1F262A;
+    --text: #ECE7DC; --muted: #9AA3A1; --line: #313A3D; --accent: #D9A441;
+    --seed: #BEF264; --armra: #8FB3DD; --im8: #FF8A3D; --space: #9B7BF0; --ag1: #3FB69A;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--text); font-family: var(--serif); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  h1, h2, h3, h4 { font-family: var(--sans); font-weight: 700; }
+  h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px; }
+  p { margin: 0 0 18px; }
+  .lead { font-size: clamp(18px, 2vw, 22px); max-width: 760px; }
+  .muted { color: var(--muted); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin: 0 0 22px; display: flex; align-items: center; gap: 14px; }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+
+  header.top { position: sticky; top: 0; z-index: 50; background: rgba(21,25,27,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .top-inner { max-width: 1080px; margin: 0 auto; padding: 14px 32px; }
+  .brandline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 100px; padding: 8px 16px; cursor: pointer; transition: all .15s ease; display: flex; align-items: center; gap: 8px; }
+  .tab:hover { color: var(--text); border-color: var(--muted); }
+  .tab .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .tab .ct { font-family: var(--mono); font-size: 10px; opacity: 0.7; }
+  .tab.active { color: var(--ground); background: var(--text); border-color: var(--text); }
+  .tab[data-tab="rec"].active { background: var(--accent); border-color: var(--accent); }
+  .tab[data-tab="seed"].active { background: var(--seed); border-color: var(--seed); }
+  .tab[data-tab="armra"].active { background: var(--armra); border-color: var(--armra); }
+  .tab[data-tab="im8"].active { background: var(--im8); border-color: var(--im8); }
+  .tab[data-tab="space"].active { background: var(--space); border-color: var(--space); }
+  .tab[data-tab="ag1"].active { background: var(--ag1); border-color: var(--ag1); }
+
+  .panel-view { display: none; padding: 60px 0 100px; animation: fade .35s ease; }
+  .panel-view.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .panel-view { animation: none; } }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+  .step { background: var(--ground-2); padding: 26px 22px; }
+  .step .n { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; }
+  .step h3 { font-size: 16px; margin: 12px 0 8px; }
+  .step p { font-size: 13.5px; line-height: 1.5; color: var(--muted); margin: 0; }
+
+  .scroll-x { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 13px; }
+  th, td { text-align: left; padding: 13px 15px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); vertical-align: top; }
+  th:last-child, td:last-child { border-right: none; }
+  thead th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ground-2); position: sticky; top: 0; }
+  tbody th { font-family: var(--sans); font-size: 13px; background: var(--ground-2); color: var(--text); white-space: nowrap; }
+  td { color: var(--muted); font-family: var(--serif); line-height: 1.45; }
+  .dash { color: var(--line); }
+  .brand-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+
+  .recs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+  .rec { background: var(--ground-2); padding: 28px 26px; }
+  .rec .num { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.08em; }
+  .rec h3 { font-size: 18px; margin: 11px 0 9px; }
+  .rec p { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 0; }
+  .rec .src { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 13px; display: block; opacity: 0.8; }
+
+  /* expanded playbook recommendations */
+  .play { border: 1px solid var(--line); border-radius: 12px; background: var(--ground-2); padding: 26px 28px; margin-top: 18px; }
+  .play-top { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+  .play .pnum { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1; padding-top: 4px; }
+  .play .prio { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .play h3 { font-size: 21px; margin: 0; letter-spacing: -0.01em; }
+  .diag { font-size: 14.5px; line-height: 1.55; color: var(--muted); margin: 0 0 18px; }
+  .diag b { color: var(--text); }
+  .prompt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pbox { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #0F1416; }
+  .pbox-head { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; border-bottom: 1px solid var(--line); background: #12181A; }
+  .pbox-head span { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .copy-btn { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 5px; padding: 4px 10px; cursor: pointer; transition: all .15s ease; }
+  .copy-btn:hover { color: var(--text); border-color: var(--muted); }
+  .copy-btn.done { color: var(--seed); border-color: var(--seed); }
+  .pbox pre { font-family: var(--mono); font-size: 12px; line-height: 1.55; color: #cdd6d4; margin: 0; padding: 14px; white-space: pre-wrap; word-break: break-word; }
+  @media (max-width: 860px) { .prompt-grid { grid-template-columns: 1fr; } }
+
+  .brand-head { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: start; margin-bottom: 44px; }
+  .brand-id .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ground); padding: 5px 12px; border-radius: 4px; display: inline-block; font-weight: 700; }
+  .brand-id h2 { font-size: 40px; margin: 18px 0 6px; }
+  .brand-id .prod { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .brand-id .sender { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 16px; word-break: break-all; }
+  .brand-id .cadence { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .brand-body .voice { font-size: 18px; margin-bottom: 20px; }
+  .signature { border-left: 2px solid; padding: 6px 0 6px 18px; font-size: 15px; }
+  .signature span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
+
+  /* hero mockups */
+  .mails-title { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin: 0 0 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .mailgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 56px; }
+  .email { background: var(--ground-2); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .email-meta { padding: 14px 18px 12px; border-bottom: 1px solid var(--line); }
+  .email-flowtype { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; color: var(--ground); font-weight: 700; display: inline-block; margin-bottom: 11px; }
+  .email-from { font-family: var(--mono); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; margin-bottom: 7px; }
+  .email-subject { font-family: var(--sans); font-size: 15.5px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+  .email-preview { font-family: var(--sans); font-size: 12.5px; color: var(--muted); margin-top: 5px; }
+  .email-canvas { padding: 22px 20px; flex: 1; }
+  .email-canvas h4 { font-size: 19px; margin: 0 0 10px; line-height: 1.2; }
+  .email-canvas p { font-size: 13.5px; line-height: 1.5; margin: 0 0 12px; }
+  .email-canvas p:last-child { margin-bottom: 0; }
+  .email-canvas ul { font-size: 12.5px; line-height: 1.45; color: var(--muted); margin: 0 0 12px; padding-left: 18px; }
+  .code-chip { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; padding: 7px 14px; border: 1px dashed currentColor; border-radius: 6px; display: inline-block; }
+  .cta { font-family: var(--sans); font-size: 13px; font-weight: 700; padding: 10px 22px; border-radius: 100px; display: inline-block; color: var(--ground); }
+  .offer-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 14px; }
+  .offer-card { border: 1px solid var(--line); border-radius: 8px; padding: 12px; text-align: center; }
+  .offer-card .big { font-family: var(--sans); font-weight: 700; font-size: 20px; }
+  .offer-card .lbl { font-size: 11px; color: var(--muted); }
+  .offer-card .code { font-family: var(--mono); font-size: 11px; margin-top: 6px; display: block; }
+  .plain p { font-family: var(--mono); font-size: 12.5px; }
+  .takeaway { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--line); padding: 11px 18px; font-family: var(--sans); }
+  .takeaway b { color: var(--text); font-weight: 700; }
+
+  /* full inbox list */
+  .phase-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 30px 0 10px; }
+  .inbox { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .mrow { display: grid; grid-template-columns: 116px 52px 1fr; gap: 14px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--ground-2); }
+  .mrow:last-child { border-bottom: none; }
+  .mtype { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 0; text-align: center; border: 1px solid currentColor; border-radius: 4px; font-weight: 700; }
+  .mdate { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .msubj { font-family: var(--sans); font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .mprev { font-size: 12.5px; color: var(--muted); font-family: var(--sans); margin-top: 2px; }
+
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr 1fr; }
+    .recs { grid-template-columns: 1fr; }
+    .brand-head { grid-template-columns: 1fr; gap: 22px; }
+    .mailgrid { grid-template-columns: 1fr; }
+    .mrow { grid-template-columns: 92px 1fr; }
+    .mdate { display: none; }
+  }
+</style>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brandline">
+      <span>Benchmark e-mail marketingu · GenActiv</span>
+      <span>5 marek · ~94 maile · próba maj–czerwiec 2026</span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="rec"><span class="dot" style="background:var(--accent)"></span>Rekomendacje</button>
+      <button class="tab" data-tab="seed"><span class="dot" style="background:var(--seed)"></span>Seed <span class="ct">26</span></button>
+      <button class="tab" data-tab="armra"><span class="dot" style="background:var(--armra)"></span>ARMRA <span class="ct">21</span></button>
+      <button class="tab" data-tab="im8"><span class="dot" style="background:var(--im8)"></span>IM8 <span class="ct">24</span></button>
+      <button class="tab" data-tab="space"><span class="dot" style="background:var(--space)"></span>Spacegoods <span class="ct">16</span></button>
+      <button class="tab" data-tab="ag1"><span class="dot" style="background:var(--ag1)"></span>AG1 <span class="ct">6</span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ REKOMENDACJE ============ -->
+<section class="panel-view active" id="view-rec">
+  <div class="wrap">
+    <p class="eyebrow">Synteza · co bierzemy do siebie</p>
+    <h2>5 marek gra tę samą partyturę —<br>wygrywa głos</h2>
+    <p class="lead muted">Powitanie z kodem w dniu zapisu, ratowanie koszyka, onboarding, edukacja, kampanie. Szkielet jest do skopiowania; przewagę daje jeden konsekwentny głos. Zakładki u góry pokazują <b style="color:var(--text)">pełne listy realnych maili</b> każdej marki ze skrzynki — tu jest wniosek.</p>
+
+    <div style="margin-top:48px">
+      <p class="eyebrow">Wspólny szkielet</p>
+      <div class="steps">
+        <div class="step"><div class="n">01</div><h3>Powitanie + kod</h3><p>Rabat w minuty po zapisie, potem 2–4 przypomnienia. 5/5 marek.</p></div>
+        <div class="step"><div class="n">02</div><h3>Porzucony koszyk</h3><p>Sekwencja 1–4 touchy z rosnącą pilnością, ten sam kod.</p></div>
+        <div class="step"><div class="n">03</div><h3>Onboarding + edukacja</h3><p>„Czego się spodziewać", tłumaczenie kategorii, dowód naukowy.</p></div>
+        <div class="step"><div class="n">04</div><h3>Kampanie</h3><p>Promo, święta, launche, social proof, gry — na evergreen flow.</p></div>
+      </div>
+    </div>
+
+    <div style="margin-top:64px">
+      <p class="eyebrow">Mapa flow — kto kładzie gdzie akcent</p>
+      <div class="scroll-x">
+        <table>
+          <thead><tr>
+            <th>Typ</th>
+            <th><span class="brand-dot" style="background:var(--seed)"></span>Seed</th>
+            <th><span class="brand-dot" style="background:var(--armra)"></span>ARMRA</th>
+            <th><span class="brand-dot" style="background:var(--im8)"></span>IM8</th>
+            <th><span class="brand-dot" style="background:var(--space)"></span>Spacegoods</th>
+            <th><span class="brand-dot" style="background:var(--ag1)"></span>AG1</th>
+          </tr></thead>
+          <tbody>
+            <tr><th>Welcome + kod</th><td>WELCOME25 · 25%, 4 przypomnienia</td><td>30% na subskrypcję</td><td>30% + Welcome Kit $89</td><td>„Choose your offer" 10%/20%</td><td>WELCOME-AG1-10 · 10€</td></tr>
+            <tr><th>Porzucony koszyk</th><td>„Your cart is waiting"</td><td>4 touche w 2 dni</td><td>„Re: Your Cart" + Shopify</td><td class="dash">— brak</td><td>„Last chance 10€ ⏳"</td></tr>
+            <tr><th>Onboarding</th><td>„Welcome, Superorganism"</td><td>„List założycielki"</td><td>„Week 1 / Week 2" plain-text</td><td>„Your reset in 3 sips"</td><td>„One scoop"</td></tr>
+            <tr><th>Edukacja</th><td>9+ maili (mikrobiom, stolec, szczepy)</td><td>Hot takes dr Rahal</td><td>12 hallmarks, B12, składniki</td><td>„3 things matcha…", grzyby</td><td>1 miarka, 70+ składników</td></tr>
+            <tr><th>Dowód społ.</th><td>„saved my life"</td><td>Ciara Miller (UGC)</td><td>Beckham, Giannis, Bearman</td><td>„150 000+"</td><td>Chatterjee + Hamilton</td></tr>
+            <tr><th>Promo / urgency</th><td>5 maili „30% ends…"</td><td>„Summer Strong" countdown</td><td>Father's Day „$6 a day"</td><td>„Buy 2 get 2", „25% off"</td><td>„Save 69€"</td></tr>
+            <tr><th>Launch / cross-sell</th><td class="dash">—</td><td>„Colostrum Soda"</td><td>„Complete Set"</td><td>puszka „ready to drink"</td><td class="dash">—</td></tr>
+            <tr><th>Wspólnota / gra</th><td>tożsamość</td><td class="dash">—</td><td>Strava + Inter Miami</td><td>„mushroom movement"</td><td class="dash">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:64px">
+      <p class="eyebrow">Rekomendacje dla GenActiv · kolejność = priorytet</p>
+      <p class="lead muted" style="margin-bottom:8px">Każda pozycja ma diagnozę na naszych danych + dwa gotowe prompty: <b style="color:var(--text)">do Claude Code</b> (wykonanie przez Klaviyo/Shopify MCP) i <b style="color:var(--text)">do Claude (design)</b> (szablon maila). Kliknij „kopiuj" i wklej.</p>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">01</span><div><div class="prio">Priorytet · źródło: Seed + wszystkie 5</div><h3>Welcome series zamiast pojedynczego maila</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> nasz welcome (flow <b>STdfpu</b>) to JEDEN mail na generycznym szablonie „[Trimmed] Newsletter #1", a generuje ~<b>273 tys. PLN/rok</b> (≈81% przychodu z flow, open 61% / CTR 17%). Seed wysyła 5 maili w 4 dni. Każdy dobrze zrobiony kolejny mail to niemal czysty zysk.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Użyj klaviyo MCP. Przeanalizuj welcome flow STdfpu (get_flow + get_flow_report za 12 mies., conversion metric Placed Order R6aTMS) i wypisz obecną strukturę oraz wyniki.
+Zaproponuj serię 4 maili: 1) powitanie + kod (jest), 2) dowód społeczny + edukacja produktu, 3) plain-text od założyciela, 4) last-chance 24h przed wygaśnięciem kodu. Timing 0h / +24h / +72h / +120h.
+Dla każdego: temat PL (3 warianty), preview, treść. Wygeneruj 3 nowe szablony przez create_email_template i daj instrukcję złożenia serii w Klaviyo UI. Warunek wejścia MUSI zawierać consent „subscribed". Pokaż plan, zanim coś utworzysz.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj responsywny (mobile-first, max 600px) szablon HTML maila powitalnego GENACTIV:
+- kolory i logo marki, kod rabatowy jako TEKST w ramce (nie grafika), jeden duży CTA „Odbierz rabat",
+- sekcja „Czego się spodziewać" (3 punkty) + pasek zaufania (opinie / gwarancja),
+- stopka: adres firmy, wypis, disclaimer suplementowy EU.
+Zwróć czysty HTML z inline CSS, gotowy do wklejenia w edytorze Code w Klaviyo.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">02</span><div><div class="prio">Priorytet · źródło: ARMRA (×4), IM8 („Re:")</div><h3>Porzucony koszyk — przepisz copy i dodaj trik „Re:"</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> flow <b>YkhmXm</b> ma 4 maile (dobra liczba), ale CTR <b>1,7–6,7%</b> (nisko) i czysto transakcyjny temat „Sprawdź! Te produkty nadal czekają w koszyku". ARMRA gra 4 touche z narastającą pilnością; IM8 otwiera tematem „Re: Your Cart", który mimikuje odpowiedź.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Użyj klaviyo MCP. Dla flow porzuconego koszyka YkhmXm pobierz get_flow_report (CTR per mail) i wypisz tematy obecnych 4 maili.
+Przepisz je: mail 1 w stylu „Re: Twoje zamówienie" (mimikra odpowiedzi, trik IM8) + 3 warianty A/B; maile 2–4 z rosnącą pilnością, ostatni z deadline.
+Zwróć copy PL gotowe do wklejenia, przenieś główny CTA wyżej i wskaż, który temat maila 1 testować jako pierwszy.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj szablon maila porzuconego koszyka GENACTIV (HTML, mobile-first):
+- dynamiczny blok produktu (zdjęcie/nazwa/cena) na placeholderach Klaviyo,
+- jeden CTA „Dokończ zamówienie" + pasek darmowej dostawy / gwarancji,
+- osobny wariant ostatniego maila z licznikiem czasu (urgency).
+Inline CSS, gotowe do edytora Code w Klaviyo.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">03</span><div><div class="prio">Priorytet · źródło: IM8, ARMRA</div><h3>List założyciela + onboarding plain-text</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> nie mamy tego w ogóle; draft onboardingu <b>UXajkz (ROC_Onboarding)</b> jest w budowie. IM8 robi plain-text „Week 1: Energy. Week 2: Clarity" i mail o kierowcy F1; ARMRA „A Letter From ARMRA's Founder". Plain-text = wyższe zaufanie i lepsza dostarczalność niż ciężki HTML.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Użyj klaviyo MCP. W drafcie onboardingu UXajkz przygotuj 2 maile PLAIN-TEXT (nadawca: imię z zespołu GENACTIV, nie „GENACTIV®"):
+1) „List od założyciela" — historia marki, dlaczego powstała, czego oczekiwać,
+2) „Tydzień 1 / Tydzień 2 / Tydzień 4" — oś czasu efektów produktu (zarządza oczekiwaniami, tnie zwroty i churn subskrypcji).
+Napisz pełną treść PL czystym tekstem (bez ciężkiego HTML), jeden link CTA, podpis imieniem. Utwórz jako szablony i opisz, gdzie wpiąć w flow.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>To mają być maile PLAIN-TEXT — NIE projektuj ciężkiej grafiki (chodzi o dostarczalność i ton osobisty).
+Zwróć minimalny układ: akapity tekstu, jeden link tekstowy, podpis imieniem, maks. jedno małe logo na górze. Zero banerów i kolumn.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">04</span><div><div class="prio">Najwyższy zwrot · brakujący money-flow</div><h3>Replenishment — uzupełnienie zapasu</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> <b>nie mamy</b> flow uzupełnienia zapasu, a produkt jest konsumowalny (AOV ~285 PLN, model powtarzalny). Draft „Post buy_refreshments" (<b>WgXWvU</b>) leży nieuruchomiony. Dla suplementów to zwykle <b>#1 brakujący przychód</b> z automatyzacji.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Cel: uruchomić flow replenishment — brakujący money-flow #1.
+1) Przez shopify MCP (get-customer-orders / get-orders) policz medianę odstępu dni między kolejnymi zamówieniami tego samego klienta dla top produktów = realny cykl zużycia.
+2) Przez klaviyo MCP sprawdź draft WgXWvU i raport, czy coś już działa.
+3) Zaproponuj flow: trigger Placed Order, opóźnienie = cykl zużycia minus 7 dni (osobno per produkt, np. 30/45/60 dni), 2 maile: „Czas uzupełnić zapas" + przypomnienie z linkiem 1-click reorder.
+Napisz copy PL, utwórz szablony. Pokaż wyliczony interwał z danych PRZED budową.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj mail „Czas uzupełnić zapas" GENACTIV (HTML, mobile-first):
+- nagłówek „Twój zapas się kończy", zdjęcie produktu klienta (placeholder Klaviyo),
+- duży CTA „Zamów ponownie" (1 klik) + opcja subskrypcji ze zniżką,
+- ton pomocny, nie nachalny.
+Inline CSS, gotowe do Klaviyo.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">05</span><div><div class="prio">Naprawa · źródło: porównanie z welcome</div><h3>Browse abandonment — diagnoza 20% open rate</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> flow <b>Browse_test (VfCSbb)</b> ma open rate <b>~20%</b> — połowa zdrowego (welcome ma 61%). To sygnał problemu z deliverability, zbyt szerokim triggerem albo segmentem niezaangażowanych.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Użyj klaviyo MCP. Zdiagnozuj flow Browse_test (VfCSbb): open ~20% vs welcome 61%.
+Sprawdź: filtr wejścia (czy nie łapie niezaangażowanych), warunek consent/subscribed, smart sending, bounce/spam vs inne flow, oraz czy temat/preview nie wyglądają na spam.
+Zwróć listę przyczyn w kolejności prawdopodobieństwa + konkretne poprawki (np. zawęź trigger do zaangażowanych z ostatnich 30–60 dni) i 3 nowe tematy maili.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Przeprojektuj mail browse-abandonment na lekki, szybko ładujący się układ (mniej grafik = lepsza dostarczalność):
+1 oglądany produkt + 2–3 rekomendacje, jeden CTA „Wróć i zobacz", krótki nagłówek. Inline CSS, mobile-first.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">06</span><div><div class="prio">Priorytet · źródło: IM8, Spacegoods</div><h3>Reframing ceny + oferta tierowana w welcome</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> komunikujemy ceną pakietu. IM8 reframuje na „$6 dziennie"; Spacegoods w powitaniu daje „Choose your offer" — single −10% (HELLO10) vs zestaw −20% (BUNDLE20), czyli upsell od pierwszego maila.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Użyj klaviyo + shopify MCP.
+1) Policz cenę dzienną głównych produktów (cena / liczba porcji) i przygotuj komunikat „już od X zł dziennie".
+2) Zaproponuj w mailu powitalnym wariant „Wybierz ofertę": pojedynczy produkt (kod −10%) vs zestaw (kod −20%). Wygeneruj 2 kody przez Shopify discount i wstaw do copy.
+Zwróć gotowe bloki tekstu PL do maila powitalnego.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj w mailu powitalnym blok „Wybierz ofertę": dwie karty obok siebie (single −10% / zestaw −20%) z kodami jako tekst i dwoma CTA. Pod spodem pasek „już od X zł dziennie".
+HTML inline, mobile-first (na telefonie karty układają się w pion).</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">07</span><div><div class="prio">Priorytet · źródło: IM8, Spacegoods</div><h3>Gra / wspólnota zamiast kolejnego rabatu</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> zespół sam sygnalizuje „Don't do another 20% OFF". IM8 robi Strava Challenge z nagrodą Inter Miami (6+ maili), Spacegoods buduje „mushroom movement". Wartość i wspólnota zamiast erozji marży.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Zaproponuj 1 kampanię budującą wartość zamiast rabatu (zgodnie z „Don't do another 20% off"):
+- mechanika dopasowana do GENACTIV (wyzwanie / quiz / program poleceń),
+- sekwencja 3 maili (zapowiedź / start / last call) — tematy i copy PL,
+- metryka sukcesu (uczestnicy, udostępnienia, zamówienia z kodu poleceń).
+Przygotuj szablony przez klaviyo MCP i segment uczestników z warunkiem consent.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj mail zapraszający do wyzwania/programu GENACTIV: energetyczny baner (key visual), zasady w 3 krokach, jeden CTA „Dołączam".
+Spójny z marką, HTML inline, mobile-first.</pre></div>
+        </div>
+      </div>
+
+      <div class="play">
+        <div class="play-top"><span class="pnum">08</span><div><div class="prio">Higiena konta · źródło: AG1 (compliance)</div><h3>Wzorcowa stopka EU + porządek w draftach</h3></div></div>
+        <p class="diag"><b>Diagnoza:</b> AG1 ma wzorcową stopkę EU (oznaczenia zdrowotne ¹²³⁴ + disclaimer suplementowy). My mamy 3 puste drafty „Essential Flow Recommendation" (RjR6ms, UvyzDs, X4f2iP) i inne martwe drafty zaśmiecające konto.</p>
+        <div class="prompt-grid">
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude Code</span><button class="copy-btn">kopiuj</button></div><pre>Dwa zadania, klaviyo MCP:
+1) Stwórz uniwersalny blok stopki zgodny z EU dla suplementów (oznaczenia zdrowotne ¹²³⁴, disclaimer „nie zastępuje zróżnicowanej diety…", adres firmy, wypis) i zapisz jako universal content do użycia we wszystkich szablonach.
+2) Porządek: wylistuj flow (get_flows), wskaż 3 puste „Essential Flow Recommendation" (RjR6ms, UvyzDs, X4f2iP) i inne martwe drafty. Zaproponuj, co zarchiwizować, a co dokończyć.</pre></div>
+          <div class="pbox"><div class="pbox-head"><span>Prompt → Claude (design)</span><button class="copy-btn">kopiuj</button></div><pre>Zaprojektuj stopkę maila GENACTIV: logo, adres firmy (Polna 13/3, Dąbrówka), linki (regulamin, prywatność, wypis), disclaimer suplementowy EU drobnym drukiem.
+HTML inline, neutralna kolorystyka, gotowe jako blok wielokrotnego użytku.</pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEED ============ -->
+<section class="panel-view" id="view-seed">
+  <div class="wrap">
+    <div class="brand-head">
+      <div class="brand-id">
+        <span class="tag" style="background:var(--seed)">Seed</span>
+        <h2>Seed</h2>
+        <div class="prod">DS-01® · probiotyk</div>
+        <div class="sender">hi@mail.seed.com · hello@care.seed.com</div>
+        <div class="cadence">~codziennie, wysyłki ~00:30 · font Seed Sans</div>
+      </div>
+      <div class="brand-body">
+        <p class="voice"><b>Ton:</b> naukowo-tożsamościowy. Subskrybent to „Superorganizm". Najwięcej maili w próbie i najgęstsza kadencja — niemal codzienna edukacja mikrobiomu, dopiero potem mocny blok promocyjny (5× „30% off") w czerwcu.</p>
+        <div class="signature" style="border-color:var(--seed)">
+          <span>Sygnaturowy ruch</span>
+          <b>Edukacja jako rdzeń</b> (~9 maili: „You're 50% microbial", „Evacuation education", „are your probiotics alive?") + warstwowanie rabatu 25% → 30% przez zapis SMS.
+        </div>
+      </div>
+    </div>
+
+    <div class="mailgrid">
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--seed)">Welcome</span><div class="email-from"><span>Seed</span><span>7 maja</span></div><div class="email-subject">Your code enclosed.</div><div class="email-preview">Enjoy 25% off your first order.</div></div>
+        <div class="email-canvas" style="background:#1C3A13;color:#FCFCF7"><h4 style="color:#D3FA99">25% Off Your First Month of DS-01®</h4><p style="color:#dfe9d2">Witaj, Superorganizmie. Twój kod czeka.</p><span class="code-chip" style="color:#D3FA99">WELCOME25</span><p style="color:#aab89a;font-size:12px;margin-top:14px">↑ Upsell: dokończ zapis SMS → 30% off</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> warstwowanie rabatu zamiast jednego „-25%".</div>
+      </div>
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--seed)">Edukacja</span><div class="email-from"><span>Seed</span><span>16 maja</span></div><div class="email-subject">Evacuation education. 🚽</div><div class="email-preview">What's your stool saying about your health?</div></div>
+        <div class="email-canvas" style="background:#FCFCF7;color:#1C3A13"><h4>What's your stool saying?</h4><p style="color:#3a5230">Odważny, zapadający w pamięć temat. Edukacja, która jednocześnie buduje rozpoznawalny głos marki — sprzedaż schodzi na drugi plan.</p><span class="cta" style="background:#1C3A13;color:#D3FA99">Poznaj naukę</span></div>
+        <div class="takeaway"><b>Bierzemy:</b> odwaga w temacie = wyróżnienie w inboxie.</div>
+      </div>
+    </div>
+
+    <p class="mails-title"><span>Pełna lista ze skrzynki</span><span>26 maili · 7 maja – 23 czerwca</span></p>
+
+    <p class="phase-label">Powitanie + przypomnienia (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Welcome</span><span class="mdate">7.05</span><div><div class="msubj">Your code enclosed.</div><div class="mprev">Enjoy 25% off your first order. · kod WELCOME25</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Welcome</span><span class="mdate">9.05</span><div><div class="msubj">Enjoy 25% off your first purchase.</div><div class="mprev">Take the next step in your health journey.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Reminder</span><span class="mdate">9.05</span><div><div class="msubj">Reminder → 25% off your first order.</div><div class="mprev">Your microbes will thank you.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Reminder</span><span class="mdate">10.05</span><div><div class="msubj">Don't forget your 25% off.</div><div class="mprev">Unlock what's possible.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Tożsamość</span><span class="mdate">11.05</span><div><div class="msubj">Welcome, Superorganism.</div><div class="mprev">We're so glad you joined our ecosystem.</div></div></div>
+    </div>
+
+    <p class="phase-label">Porzucony koszyk (1)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Koszyk</span><span class="mdate">7.05</span><div><div class="msubj">Your cart is waiting.</div><div class="mprev">Turn intention into transformation.</div></div></div>
+    </div>
+
+    <p class="phase-label">Edukacja i jakość (10)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">13.05</span><div><div class="msubj">Not all probiotics are created equal. 🔬</div><div class="mprev">DS-01® is designed for you and our Earth.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">13.05</span><div><div class="msubj">Seed standards &gt; industry standards.</div><div class="mprev">Dedicated to superior quality and efficacy.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">15.05</span><div><div class="msubj">Have you met your other half?</div><div class="mprev">You're 50% microbial.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Wartości</span><span class="mdate">15.05</span><div><div class="msubj">Sustainably delivered.</div><div class="mprev">Designed to be gentler on Earth. (care.seed.com)</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">16.05</span><div><div class="msubj">Evacuation education. 🚽</div><div class="mprev">What's your stool saying about your health?</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">18.05</span><div><div class="msubj">Bacteria basics.</div><div class="mprev">24 strains to support your overall health.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">20.05</span><div><div class="msubj">Bloated? Try this.</div><div class="mprev">Shown to help after two weeks.*</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">24.05</span><div><div class="msubj">Quality m̶a̶y̶ does vary.</div><div class="mprev">Learn why DS-01® is superior.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">26.05</span><div><div class="msubj">Gut check: are your probiotics alive?</div><div class="mprev">Engineered to make it to your colon.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">28.05</span><div><div class="msubj">There's a better way to manage bloating.</div><div class="mprev">Designed to help you feel lighter.</div></div></div>
+    </div>
+
+    <p class="phase-label">Dowód społeczny (1)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Dowód</span><span class="mdate">22.05</span><div><div class="msubj">"Not to be dramatic but Seed has saved my life."</div><div class="mprev">See(d) for yourself.</div></div></div>
+    </div>
+
+    <p class="phase-label">Blok promocyjny (5) + re-engage (4)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Promo</span><span class="mdate">8.06</span><div><div class="msubj">30% off → starts now.</div><div class="mprev">Save on 3 months of DS-01®.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Promo</span><span class="mdate">9.06</span><div><div class="msubj">$45 off to transform your gut.</div><div class="mprev">Only with DS-01®, on sale now.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Promo</span><span class="mdate">11.06</span><div><div class="msubj">30% off 3 months of DS-01®.</div><div class="mprev">Limited time only.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Urgency</span><span class="mdate">12.06</span><div><div class="msubj">30% off ends TODAY.</div><div class="mprev">Save on 3 months of DS-01®.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Urgency</span><span class="mdate">13.06</span><div><div class="msubj">30% off DS-01® ends at midnight.</div><div class="mprev">Make your move.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Edukacja</span><span class="mdate">16.06</span><div><div class="msubj">4 signs your gut needs support.</div><div class="mprev">Time to start DS-01®.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Quiz</span><span class="mdate">19.06</span><div><div class="msubj">Quiz time.</div><div class="mprev">A matter of gut health.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Seasonal</span><span class="mdate">22.06</span><div><div class="msubj">Is your gut ready for summer?</div><div class="mprev">We can help with that.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--seed)">Re-engage</span><span class="mdate">23.06</span><div><div class="msubj">Your gut deserves more.</div><div class="mprev">Try the probiotic backed by science.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARMRA ============ -->
+<section class="panel-view" id="view-armra">
+  <div class="wrap">
+    <div class="brand-head">
+      <div class="brand-id">
+        <span class="tag" style="background:var(--armra)">ARMRA</span>
+        <h2>ARMRA</h2>
+        <div class="prod">Colostrum</div>
+        <div class="sender">hello@tryarmra.com</div>
+        <div class="cadence">model subskrypcyjny · głos założycielki</div>
+      </div>
+      <div class="brand-body">
+        <p class="voice"><b>Ton:</b> głos dr Sarah Rahal — emocjonalny, „wellness-duchowy" („To You, Beautiful Soul") przeplatany językiem performance'u („Beast mode is an inside job"). Tematy budują ciekawość („Your stomach isn't sensitive").</p>
+        <div class="signature" style="border-color:var(--armra)">
+          <span>Sygnaturowy ruch</span>
+          <b>Porzucony koszyk na 4 touche</b> w 2 dni („Saved This For You" → „Excellent Choice" → „This Is Meant For You") oraz piętrzenie pilności na promo: „UP TO 30%" → „LAST CALL" → „ENDS TONIGHT".
+        </div>
+      </div>
+    </div>
+
+    <div class="mailgrid">
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--armra)">Founder</span><div class="email-from"><span>ARMRA</span><span>8 maja</span></div><div class="email-subject">A Letter From ARMRA's Founder</div><div class="email-preview">To You, Beautiful Soul</div></div>
+        <div class="email-canvas plain" style="background:#fbf9f6;color:#2b3a2b"><p>To You, Beautiful Soul,</p><p>List od dr Sarah Rahal — osobista historia założenia marki, misja, „dlaczego". Buduje więź zanim padnie jakakolwiek oferta.</p><p>— Dr. Sarah Rahal</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> osobisty list założyciela w 2. dniu cyklu (rekomendacja #03).</div>
+      </div>
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--armra)">Koszyk ×4</span><div class="email-from"><span>ARMRA</span><span>7–9 maja</span></div><div class="email-subject">Saved This For You → This Is Meant For You</div><div class="email-preview">Complete Your ARMRA Purchase</div></div>
+        <div class="email-canvas" style="background:#fff;color:#2b3a2b"><h4 style="color:#3a5a78">4 touche w 2 dni</h4><p style="color:#52624f">„Saved This For You" (×2) → „Excellent Choice" → „This Is Meant For You". Najdłuższa sekwencja koszykowa w całej próbie.</p><span class="cta" style="background:#3a5a78;color:#fff">Complete purchase</span></div>
+        <div class="takeaway"><b>Bierzemy:</b> 4 touche zamiast 1, z narastającą pilnością.</div>
+      </div>
+    </div>
+
+    <p class="mails-title"><span>Pełna lista ze skrzynki</span><span>21 maili · 7 maja – 22 czerwca</span></p>
+
+    <p class="phase-label">Powitanie + porzucony koszyk (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Welcome</span><span class="mdate">7.05</span><div><div class="msubj">Welcome To Your Revival</div><div class="mprev">30% Off Your First ARMRA Subscription</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Koszyk 1</span><span class="mdate">7.05</span><div><div class="msubj">Saved This For You</div><div class="mprev">Complete Your ARMRA Purchase</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Koszyk 2</span><span class="mdate">8.05</span><div><div class="msubj">Excellent Choice</div><div class="mprev">Finish Your Purchase And Secure Our Bestseller</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Koszyk 3</span><span class="mdate">9.05</span><div><div class="msubj">This Is Meant For You</div><div class="mprev">Finish Your Purchase Of Our Top Seller</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Founder</span><span class="mdate">8.05</span><div><div class="msubj">A Letter From ARMRA's Founder</div><div class="mprev">To You, Beautiful Soul</div></div></div>
+    </div>
+
+    <p class="phase-label">Edukacja i „hot takes" założycielki (6)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Edukacja</span><span class="mdate">10.05</span><div><div class="msubj">Your Health Routine Just Got Simpler</div><div class="mprev">Transform Yourself In 4 Scoops</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Ciekawość</span><span class="mdate">20.05</span><div><div class="msubj">Your Home Passed Inspection</div><div class="mprev">Your Sinuses Didn't</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Edukacja</span><span class="mdate">27.05</span><div><div class="msubj">The 23-Hour Athlete</div><div class="mprev">Most of the Work Happens Outside the Gym</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Hot take</span><span class="mdate">31.05</span><div><div class="msubj">Hot Take: Dr. Rahal on Energy Drinks</div><div class="mprev">You borrowed energy. Now you owe it back.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Founder</span><span class="mdate">10.06</span><div><div class="msubj">Dr. Sarah Rahal — ARMRA Founder</div><div class="mprev">My hot take: Your cells aren't getting the water you drink.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Edukacja</span><span class="mdate">14.06</span><div><div class="msubj">Your stomach isn't sensitive</div><div class="mprev">ARMRA gives it to you straight.</div></div></div>
+    </div>
+
+    <p class="phase-label">Dowód społeczny / UGC (2)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">UGC</span><span class="mdate">29.05</span><div><div class="msubj">CIARA MILLER IS ON IT</div><div class="mprev">ARE YOU</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Performance</span><span class="mdate">12.06</span><div><div class="msubj">Beast mode is an inside job.</div><div class="mprev">Not a spotter. Just biology.</div></div></div>
+    </div>
+
+    <p class="phase-label">Promo z piętrzeniem pilności (6)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Urgency</span><span class="mdate">12.05</span><div><div class="msubj">Accept No Substitutes</div><div class="mprev">LAST CHANCE For 30% Off</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Promo</span><span class="mdate">21.05</span><div><div class="msubj">UP TO 30% OFF SITEWIDE</div><div class="mprev">Our Biggest Sale of the Season</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Urgency</span><span class="mdate">24.05</span><div><div class="msubj">TIME'S (ALMOST) UP ON 20% OFF</div><div class="mprev">The Summer Strong Event Ends Tomorrow</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Urgency</span><span class="mdate">25.05</span><div><div class="msubj">THE SUMMER STRONG EVENT ENDS TONIGHT</div><div class="mprev">Return With up to 30% Off Sitewide</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Last call</span><span class="mdate">25.05</span><div><div class="msubj">LAST CALL: UP TO 30% OFF SITEWIDE</div><div class="mprev">Strong. Unstoppable. Only Just Getting Started.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">GWP</span><span class="mdate">8.06</span><div><div class="msubj">100 orders. 1 mystery gift. Today only.</div><div class="mprev">When it's gone, it's gone.</div></div></div>
+    </div>
+
+    <p class="phase-label">Święto + launch (2)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Father's Day</span><span class="mdate">16.06</span><div><div class="msubj">Need a hand? Ask Dad.</div><div class="mprev">Need a foundation? Ask ARMRA.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--armra)">Launch</span><span class="mdate">22.06</span><div><div class="msubj">NEW DROP ALERT: ARMRA Colostrum Soda</div><div class="mprev">Single flavor or variety pack</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IM8 ============ -->
+<section class="panel-view" id="view-im8">
+  <div class="wrap">
+    <div class="brand-head">
+      <div class="brand-id">
+        <span class="tag" style="background:var(--im8)">IM8</span>
+        <h2>IM8</h2>
+        <div class="prod">Essentials · longevity (Beckham)</div>
+        <div class="sender">Care@IM8Health.com</div>
+        <div class="cadence">bordo #50010A / pomarańcz · głos „Team IM8"</div>
+      </div>
+      <div class="brand-body">
+        <p class="voice"><b>Ton:</b> autorytet celebrytów (Beckham, Giannis, Bearman/F1) + osobiste plain-texty zespołu. Najlepszy onboarding z osią czasu efektów i najbardziej rozbudowana gamifikacja (Strava × Inter Miami, 6+ maili).</p>
+        <div class="signature" style="border-color:var(--im8)">
+          <span>Sygnaturowy ruch</span>
+          <b>„Re: Your Cart"</b> (mimikra odpowiedzi) + onboarding „Week 1 / Week 2" + reframing ceny „$6 a day" + Welcome Kit $89 + Strava Challenge z nagrodą Inter Miami.
+        </div>
+      </div>
+    </div>
+
+    <div class="mailgrid">
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--im8)">Onboarding</span><div class="email-from"><span>IM8</span><span>8 maja</span></div><div class="email-subject">Week 1: Energy lifts. Week 2: Clarity.</div><div class="email-preview">Two weeks. That is how long it takes…</div></div>
+        <div class="email-canvas plain" style="background:#fbf8f4;color:#2a2a2a"><p>Two weeks. That is how long it takes for most people to notice the benefits of Essentials Pro.</p><p>I've heard it from hundreds of customers, and I've seen it in the data: Week 1 — energy. Week 2 — clarity.</p><p>— Team IM8</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> oś czasu efektów zarządza oczekiwaniami i tnie churn (rekomendacja #03+04).</div>
+      </div>
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--im8)">Plain-text · F1</span><div class="email-from"><span>IM8</span><span>2 czerwca</span></div><div class="email-subject">Why an F1 driver takes IM8 🏎️</div><div class="email-preview">Claim Your Free $89 Welcome Kit today.</div></div>
+        <div class="email-canvas plain" style="background:#fbf8f4;color:#2a2a2a"><p>Hey Dominik,</p><p>F1: decisions at 320 km/h. Ollie Bearman's morning includes Essentials Pro:</p><ul><li>Saffron Extract (30mg) → focus pod presją</li><li>Adaptogens &amp; mushrooms (200mg)</li><li>Hydra Electrolytes (2 500mg) — kierowcy tracą 2–4 kg/wyścig</li></ul><p>→ [Start with what Ollie takes] · Team IM8</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> plain-text + rozpiska składu = autorytet i dostarczalność.</div>
+      </div>
+    </div>
+
+    <p class="mails-title"><span>Pełna lista ze skrzynki</span><span>24 maile · 7 maja – 21 czerwca</span></p>
+
+    <p class="phase-label">Powitanie + porzucony koszyk (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Welcome</span><span class="mdate">7.05</span><div><div class="msubj">Welcome to IM8</div><div class="mprev">Save up to 30% + claim your free Welcome Kit today</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Koszyk</span><span class="mdate">7.05</span><div><div class="msubj">Re: Your Cart</div><div class="mprev">Just one step left! · temat mimikuje odpowiedź</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Koszyk</span><span class="mdate">7.05</span><div><div class="msubj">Complete your Purchase</div><div class="mprev">natywny mail Shopify — drugi kanał ratowania koszyka</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Welcome</span><span class="mdate">9.05</span><div><div class="msubj">Claim Your Free Welcome Kit!</div><div class="mprev">Order while stocks last.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Value prop</span><span class="mdate">7.05</span><div><div class="msubj">Less Supplements, Better Results</div><div class="mprev">The best version of yourself is almost here.</div></div></div>
+    </div>
+
+    <p class="phase-label">Onboarding plain-text (2)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Onboarding</span><span class="mdate">8.05</span><div><div class="msubj">Week 1: Energy lifts. Week 2: Clarity.</div><div class="mprev">Two weeks. That is how long it takes…</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Cross-sell</span><span class="mdate">10.05</span><div><div class="msubj">Get Your Complete Set Today!</div><div class="mprev">Grab it while stocks last.</div></div></div>
+    </div>
+
+    <p class="phase-label">Edukacja składu / longevity (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Edukacja</span><span class="mdate">20.05</span><div><div class="msubj">The endurance ingredients with real evidence.</div><div class="mprev">Beetroot extract + nitric oxide.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Edukacja</span><span class="mdate">30.05</span><div><div class="msubj">Your B12 might be working against you…</div><div class="mprev">Here's why it matters.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Edukacja</span><span class="mdate">31.05</span><div><div class="msubj">The 12 hallmarks of aging 🧬</div><div class="mprev">Claim Your Free Longevity Welcome Kit today.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Plain-text</span><span class="mdate">2.06</span><div><div class="msubj">Why an F1 driver takes IM8 🏎️</div><div class="mprev">Rozpiska składu + Welcome Kit $89.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Edukacja</span><span class="mdate">9.06</span><div><div class="msubj">Target the 12 hallmarks of aging in one drink 🧬</div><div class="mprev">30% off + Welcome Kit Worth $89.</div></div></div>
+    </div>
+
+    <p class="phase-label">Autorytet celebrytów (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Atleta</span><span class="mdate">7.06</span><div><div class="msubj">How Ollie Bearman keeps his edge with IM8 🏎️</div><div class="mprev">It's Monaco F1 Race Weekend.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Atleta</span><span class="mdate">11.06</span><div><div class="msubj">The MVP's Most Valuable Routine 🏀</div><div class="mprev">Giannis Chooses IM8.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Atleta</span><span class="mdate">13.06</span><div><div class="msubj">One thing. Every morning. Giannis swears by it.</div><div class="mprev">If it's good enough for the Greek Freak…</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Atleta</span><span class="mdate">19.06</span><div><div class="msubj">"I wish I had that…"</div><div class="mprev">Why Giannis Chooses IM8.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Founder</span><span class="mdate">20.06</span><div><div class="msubj">What Dad actually wants…</div><div class="mprev">Why David Beckham co-founded IM8.</div></div></div>
+    </div>
+
+    <p class="phase-label">Gamifikacja: Strava × Inter Miami (4)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Wspólnota</span><span class="mdate">17.05</span><div><div class="msubj">Join our community on Strava 🏃</div><div class="mprev">Connect with athletes who share your goals.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Gra</span><span class="mdate">27.05</span><div><div class="msubj">Win An Inter Miami CF Experience ⚽</div><div class="mprev">The IM8 x IMCF Strava Challenge is here.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Gra</span><span class="mdate">1.06</span><div><div class="msubj">Our Strava Challenge is now LIVE 🟢</div><div class="mprev">Win $50 + An Inter Miami CF Experience.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Gra</span><span class="mdate">14.06</span><div><div class="msubj">Win An Inter Miami CF Experience ⚽</div><div class="mprev">Your $50 Reward Is Waiting.</div></div></div>
+    </div>
+
+    <p class="phase-label">Promo + reframing ceny (3)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Welcome Kit</span><span class="mdate">6.06</span><div><div class="msubj">Claim Your Daily Ultimate Essentials Pro Welcome Kit 🧬</div><div class="mprev">30% Off + Gifts Worth $89.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Reframing</span><span class="mdate">17.06</span><div><div class="msubj">How to simplify your supplement routine…</div><div class="mprev">16 bottles → 1 drink.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--im8)">Father's Day</span><span class="mdate">21.06</span><div><div class="msubj">30% Off All Subscriptions For Father's Day</div><div class="mprev">From just $6 a day.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPACEGOODS ============ -->
+<section class="panel-view" id="view-space">
+  <div class="wrap">
+    <div class="brand-head">
+      <div class="brand-id">
+        <span class="tag" style="background:var(--space)">Spacegoods</span>
+        <h2>Spacegoods</h2>
+        <div class="prod">Adaptogeny · Rainbow Dust</div>
+        <div class="sender">support@spacegoods.com</div>
+        <div class="cadence">fiolet #724CE9 · font DM Sans · ton lifestyle</div>
+      </div>
+      <div class="brand-body">
+        <p class="voice"><b>Ton:</b> przyjazny, kolorowy, korzyściowy (focus / energia / spokój). Tłumaczy nieznaną kategorię prostym językiem i przeplata edukację z mocnym GWP zamiast samego rabatu.</p>
+        <div class="signature" style="border-color:var(--space)">
+          <span>Sygnaturowy ruch</span>
+          <b>Tierowana oferta w powitaniu</b> — „Choose your offer": single 10% (HELLO10) vs zestawy 20% (BUNDLE20). Upsell wbudowany w pierwszy mail; potem launch puszki w 3 mailach.
+        </div>
+      </div>
+    </div>
+
+    <div class="mailgrid">
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--space)">Welcome</span><div class="email-from"><span>Spacegoods</span><span>7 maja</span></div><div class="email-subject">Welcome to Spacegoods</div><div class="email-preview">Your discount code is inside…</div></div>
+        <div class="email-canvas" style="background:#fff;color:#222"><h4 style="color:#724CE9">Choose your offer</h4><div class="offer-split"><div class="offer-card"><div class="big">10%</div><div class="lbl">Try single bags</div><span class="code" style="color:#724CE9">HELLO10</span></div><div class="offer-card"><div class="big">20%</div><div class="lbl">Save with bundles</div><span class="code" style="color:#724CE9">BUNDLE20</span></div></div><p style="color:#666;font-size:12px">Bestsellery: Rainbow Dust, Astro Dust, Matcha, Glow.</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> wybór single vs bundle = upsell od pierwszego maila (rekomendacja #06).</div>
+      </div>
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--space)">Launch</span><div class="email-from"><span>Spacegoods</span><span>13–18 cz.</span></div><div class="email-subject">The rumour's true → ready to drink!</div><div class="email-preview">Meet our new canned iced coffee</div></div>
+        <div class="email-canvas" style="background:#f4f0ff;color:#2a1f4d"><h4 style="color:#724CE9">Launch w 3 aktach</h4><p style="color:#574a7a">Teaser („The rumour's true") → reveal („It's ready to drink") → korzyść („Focus + Energy now in a can"). Nowy format jako wydarzenie.</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> launch rozbity na teaser → reveal → benefit, nie jeden mail.</div>
+      </div>
+    </div>
+
+    <p class="mails-title"><span>Pełna lista ze skrzynki</span><span>16 maili · 7 maja – 18 czerwca</span></p>
+
+    <p class="phase-label">Powitanie (3)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Welcome</span><span class="mdate">7.05</span><div><div class="msubj">Welcome to Spacegoods</div><div class="mprev">Your discount code is inside… · HELLO10 / BUNDLE20</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Dowód</span><span class="mdate">8.05</span><div><div class="msubj">Less noise, more focus</div><div class="mprev">See why 150,000+ people love us.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Reminder</span><span class="mdate">10.05</span><div><div class="msubj">Don't Miss Your Potential</div><div class="mprev">Save on your first taste of Spacegoods.</div></div></div>
+    </div>
+
+    <p class="phase-label">Edukacja kategorii (5)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Edukacja</span><span class="mdate">11.05</span><div><div class="msubj">3 things matcha does that coffee can't</div><div class="mprev">It's not just green tea.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Edukacja</span><span class="mdate">15.05</span><div><div class="msubj">Stressed? Read this.</div><div class="mprev">The fix nobody's talking about.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Edukacja</span><span class="mdate">19.05</span><div><div class="msubj">Why matcha hits different</div><div class="mprev">Try it for 10% off.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Onboarding</span><span class="mdate">21.05</span><div><div class="msubj">Your spring reset, in 3 sips</div><div class="mprev">Focus, hydrate, wind down.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Wspólnota</span><span class="mdate">22.05</span><div><div class="msubj">Join the mushroom movement</div><div class="mprev">Food as medicine isn't a trend.</div></div></div>
+    </div>
+
+    <p class="phase-label">Promo / GWP / subskrypcja (4)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Promo</span><span class="mdate">25.05</span><div><div class="msubj">Buy 2, get 2 free</div><div class="mprev">Limited time offer.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Subskrypcja</span><span class="mdate">27.05</span><div><div class="msubj">Your Summer Glow — now just £19</div><div class="mprev">Locked in for as long as you want.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">GWP</span><span class="mdate">29.05</span><div><div class="msubj">Free hydration AND free Rainbow Dust?</div><div class="mprev">Your Summer reset.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Promo</span><span class="mdate">8.06</span><div><div class="msubj">Summer Sale! 25% off everything</div><div class="mprev">Plus loads of free gifts.</div></div></div>
+    </div>
+
+    <p class="phase-label">Subskrypcja + launch puszki (4)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Subskrypcja</span><span class="mdate">11.06</span><div><div class="msubj">Save every month on Rainbow Dust.</div><div class="mprev">Make the most of the summer.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Teaser</span><span class="mdate">13.06</span><div><div class="msubj">The rumour's true…</div><div class="mprev">We can't wait to show you.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Launch</span><span class="mdate">16.06</span><div><div class="msubj">It's ready to drink!</div><div class="mprev">Meet our new canned iced coffee.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--space)">Launch</span><span class="mdate">18.06</span><div><div class="msubj">⚡️ Focus + Energy — now in a can</div><div class="mprev">Try it while stocks last.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AG1 ============ -->
+<section class="panel-view" id="view-ag1">
+  <div class="wrap">
+    <div class="brand-head">
+      <div class="brand-id">
+        <span class="tag" style="background:var(--ag1)">AG1</span>
+        <h2>AG1</h2>
+        <div class="prod">Athletic Greens · greens</div>
+        <div class="sender">support.eu@drinkag1.com</div>
+        <div class="cadence">teal #0C3D3D · font ABC Diatype · 1 stały kod</div>
+      </div>
+      <div class="brand-body">
+        <p class="voice"><b>Ton:</b> premium, autorytatywny, oszczędny. „Jeden produkt, jedna miarka". Najmniej maili i największa dyscyplina — jeden powtarzalny kod zamiast piętrzenia ofert, plus wzorcowa zgodność prawna EU.</p>
+        <div class="signature" style="border-color:var(--ag1)">
+          <span>Sygnaturowy ruch</span>
+          <b>Podwójny autorytet</b> — ekspert (dr Chatterjee) + atleta (Lewis Hamilton) — oraz <b>stopka zgodna z EU</b> z oznaczeniami zdrowotnymi (¹²³⁴) i disclaimerami. Wprost relevantne dla GenActiv.
+        </div>
+      </div>
+    </div>
+
+    <div class="mailgrid">
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--ag1)">Welcome</span><div class="email-from"><span>AG1®</span><span>7 maja</span></div><div class="email-subject">Welcome to AG1 🌿</div><div class="email-preview">Start today &amp; get an extra 10€ off</div></div>
+        <div class="email-canvas" style="background:#fff;color:#222427"><div style="background:#0C3D3D;color:#fff;padding:10px;border-radius:6px;text-align:center;font-size:13px;margin-bottom:14px">Get 10€ off* with code <b>WELCOME-AG1-10</b></div><p style="color:#444">Hi there, thanks for signing up! AG1 is your daily nutrient boost with 70+ ingredients. And best of all — it tastes great too. 🌿</p><span class="cta" style="background:#023D3D;color:#fff">Shop AG1</span></div>
+        <div class="takeaway"><b>Bierzemy:</b> jeden stały kod + prosty, ludzki copy.</div>
+      </div>
+      <div class="email">
+        <div class="email-meta"><span class="email-flowtype" style="background:var(--ag1)">Compliance</span><div class="email-from"><span>AG1®</span><span>wzór EU</span></div><div class="email-subject">Stopka zgodna z EU — wzorzec</div><div class="email-preview">Oznaczenia zdrowotne + disclaimer suplementowy</div></div>
+        <div class="email-canvas" style="background:#fafafa;color:#444"><p style="font-size:11.5px;line-height:1.5">² Z witaminami A, C, B6, B12, folianem, cynkiem, miedzią i selenem AG1 wspiera prawidłowe funkcjonowanie układu odpornościowego.</p><p style="font-size:11.5px;line-height:1.5;color:#767676">*Suplementy diety nie zastępują zróżnicowanej diety. Nie dla dzieci, kobiet w ciąży i karmiących. Skonsultuj z lekarzem…</p></div>
+        <div class="takeaway"><b>Bierzemy:</b> gotowy wzór stopki suplementowej EU (rekomendacja #08).</div>
+      </div>
+    </div>
+
+    <p class="mails-title"><span>Pełna lista ze skrzynki</span><span>6 maili · 7 maja – 16 czerwca</span></p>
+
+    <p class="phase-label">Powitanie + przypomnienia (4)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Welcome</span><span class="mdate">7.05</span><div><div class="msubj">Welcome to AG1 🌿</div><div class="mprev">Start today &amp; get an extra 10€ off · WELCOME-AG1-10</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Onboarding</span><span class="mdate">9.05</span><div><div class="msubj">One scoop — all the difference ✨</div><div class="mprev">Claim your AG1 Welcome Pack.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Reminder</span><span class="mdate">15.05</span><div><div class="msubj">Last chance for an extra 10€ off ⏳</div><div class="mprev">Claim your AG1 Welcome Pack.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Promo</span><span class="mdate">21.05</span><div><div class="msubj">The one thing worth adding to your routine this May</div><div class="mprev">Save 69€ on AG1.</div></div></div>
+    </div>
+
+    <p class="phase-label">Autorytet: atleta + ekspert (2)</p>
+    <div class="inbox">
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Atleta</span><span class="mdate">12.05</span><div><div class="msubj">Why elite performers drink AG1 🏆</div><div class="mprev">Including Sir Lewis Hamilton and Philipp Pflieger.</div></div></div>
+      <div class="mrow"><span class="mtype" style="color:var(--ag1)">Ekspert</span><span class="mdate">16.06</span><div><div class="msubj">Why Dr Rangan Chatterjee drinks AG1</div><div class="mprev">With 20+ years' experience in clinical medicine.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var views = document.querySelectorAll('.panel-view');
+    function show(id) {
+      tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.tab === id); });
+      views.forEach(function (v) { v.classList.toggle('active', v.id === 'view-' + id); });
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+    tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.tab); }); });
+
+    document.querySelectorAll('.copy-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var pre = b.closest('.pbox').querySelector('pre');
+        var done = function () {
+          var t = b.textContent; b.textContent = 'skopiowano ✓'; b.classList.add('done');
+          setTimeout(function () { b.textContent = t; b.classList.remove('done'); }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(pre.textContent).then(done, function () {});
+        }
+      });
+    });
+  })();
+</script>
+
+</body></html>
