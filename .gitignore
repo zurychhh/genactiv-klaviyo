@@ -46,3 +46,4 @@ Thumbs.db
 *.png
 !templates/**/*.png
 google-ads-mcp/google_ads_credentials.json
+.tiktok-shop.env
