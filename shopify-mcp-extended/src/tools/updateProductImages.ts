@@ -30,7 +30,8 @@ const updateProductImages = {
         ? productId
         : `gid://shopify/Product/${productId}`;
 
-      // First, get current product images to validate IDs
+      // Fetch both images (ProductImage GIDs) and media (MediaImage GIDs)
+      // productUpdateMedia requires MediaImage GIDs, but audits/get-product return ProductImage GIDs
       const getQuery = gql`
         query GetProductImages($id: ID!) {
           product(id: $id) {
@@ -42,6 +43,19 @@ const updateProductImages = {
                   id
                   altText
                   url
+                }
+              }
+            }
+            media(first: 50) {
+              edges {
+                node {
+                  ... on MediaImage {
+                    id
+                    alt
+                    image {
+                      url
+                    }
+                  }
                 }
               }
             }
@@ -59,6 +73,26 @@ const updateProductImages = {
 
       const existingImages = productData.product.images.edges.map((e: any) => e.node);
 
+      // Build ProductImage URL → MediaImage GID mapping
+      const mediaNodes = (productData.product.media?.edges || [])
+        .map((e: any) => e.node)
+        .filter((n: any) => n.id && n.id.includes("MediaImage"));
+      const urlToMediaGid = new Map<string, string>();
+      for (const m of mediaNodes) {
+        if (m.image?.url) {
+          urlToMediaGid.set(m.image.url, m.id);
+        }
+      }
+      // Also build ProductImage numeric ID → MediaImage GID via URL match
+      const productImageIdToMediaGid = new Map<string, string>();
+      for (const pi of existingImages) {
+        const piNumericId = pi.id.split("/").pop();
+        const mediaGid = urlToMediaGid.get(pi.url);
+        if (piNumericId && mediaGid) {
+          productImageIdToMediaGid.set(piNumericId, mediaGid);
+        }
+      }
+
       // Update each image ALT text using productUpdateMedia
       const results: Array<{
         imageId: string;
@@ -69,14 +103,28 @@ const updateProductImages = {
       }> = [];
 
       for (const img of images) {
-        const imageGid = img.imageId.startsWith("gid://")
-          ? img.imageId
-          : `gid://shopify/MediaImage/${img.imageId}`;
+        const inputNumericId = img.imageId.replace(/^gid:\/\/shopify\/\w+\//, "");
+
+        // Resolve to MediaImage GID: try mapping first, then direct construction
+        let imageGid: string;
+        if (img.imageId.startsWith("gid://shopify/MediaImage/")) {
+          imageGid = img.imageId;
+        } else if (productImageIdToMediaGid.has(inputNumericId)) {
+          // Input was a ProductImage ID — resolve via URL mapping
+          imageGid = productImageIdToMediaGid.get(inputNumericId)!;
+        } else if (img.imageId.startsWith("gid://")) {
+          // Some other GID format — try to find by numeric part
+          const mapped = productImageIdToMediaGid.get(inputNumericId);
+          imageGid = mapped || `gid://shopify/MediaImage/${inputNumericId}`;
+        } else {
+          // Bare numeric ID — try mapping, fallback to MediaImage construction
+          const mapped = productImageIdToMediaGid.get(inputNumericId);
+          imageGid = mapped || `gid://shopify/MediaImage/${inputNumericId}`;
+        }
 
         // Check if image exists on this product
         const existingImage = existingImages.find((ei: any) => {
           const existingNumericId = ei.id.split("/").pop();
-          const inputNumericId = img.imageId.replace(/^gid:\/\/shopify\/\w+\//, "");
           return existingNumericId === inputNumericId || ei.id === imageGid;
         });
 
