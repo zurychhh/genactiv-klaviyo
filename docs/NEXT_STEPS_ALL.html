@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GenActiv — Co dalej: Biznes · Developer · Grafik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A3B5D; --blue: #0066CC; --green: #27ae60; --red: #EF3340;
+    --orange: #F97316; --purple: #7C3AED; --amber: #F59E0B; --pink: #EC4899;
+    --bg: #F4F7FA; --card: #FFFFFF; --line: #E3EAF1;
+    --ink: #1A3B5D; --body: #46586B; --muted: #8A99A8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { font-family: 'Montserrat', system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+
+  /* ── page wrapper ── */
+  .page { max-width: 1140px; margin: 0 auto; padding: 0 28px 80px; }
+
+  /* ── header hero ── */
+  .hero { background: var(--navy); color: #fff; padding: 64px 0 56px; margin-bottom: 40px; }
+  .hero .inner { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+  .hero .logo { font-weight: 800; letter-spacing: .22em; font-size: 18px; margin-bottom: 32px; opacity: .7; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+  .hero .sub { font-size: 18px; font-weight: 500; color: #93B8E0; margin-top: 14px; line-height: 1.5; }
+  .hero .kpis { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .hero .kpi { flex: 1; min-width: 140px; background: rgba(255,255,255,.08); backdrop-filter: blur(4px); border-radius: 14px; padding: 18px 20px; text-align: center; }
+  .hero .kpi .v { font-size: 28px; font-weight: 800; line-height: 1; }
+  .hero .kpi .l { font-size: 11px; font-weight: 600; margin-top: 6px; color: #7FB3FF; line-height: 1.35; }
+
+  /* ── nav tabs ── */
+  .tabs { display: flex; gap: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 36px; position: sticky; top: 0; z-index: 100; }
+  .tabs a { flex: 1; text-align: center; padding: 16px 12px; font-weight: 700; font-size: 14px; letter-spacing: .02em; text-decoration: none; color: var(--muted); border-bottom: 3px solid transparent; transition: all .2s; }
+  .tabs a:hover { color: var(--ink); background: #F8FAFC; }
+  .tabs a.biz { border-bottom-color: var(--blue); color: var(--blue); }
+  .tabs a.dev { border-bottom-color: var(--red); color: var(--red); }
+  .tabs a.gfx { border-bottom-color: var(--orange); color: var(--orange); }
+  .tabs a.tl  { border-bottom-color: var(--green); color: var(--green); }
+
+  /* ── section ── */
+  .section { margin-bottom: 48px; scroll-margin-top: 80px; }
+  .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--line); }
+  .section-head .icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: #fff; flex: none; }
+  .section-head h2 { font-size: 24px; font-weight: 800; }
+  .section-head .badge { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 6px; margin-left: auto; }
+
+  /* ── cards ── */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .cards { grid-template-columns: 1fr; } }
+  .card { background: #fff; border-radius: 14px; padding: 22px 24px; border-left: 4px solid var(--line); box-shadow: 0 1px 4px rgba(0,0,0,.04); position: relative; }
+  .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .card p, .card li { font-size: 13px; color: var(--body); line-height: 1.55; }
+  .card ul { padding-left: 18px; margin-top: 6px; }
+  .card .lift { position: absolute; top: 16px; right: 18px; font-size: 16px; font-weight: 800; }
+  .card .tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+  .tag--d  { background: #DBEAFE; color: #1E40AF; }
+  .tag--g  { background: #FFEDD5; color: #C2410C; }
+  .tag--b  { background: #D1FAE5; color: #065F46; }
+  .tag--biz { background: #EDE9FE; color: #5B21B6; }
+  .tag--e1 { background: #FEE2E2; color: #991B1B; }
+  .tag--e2 { background: #DBEAFE; color: #1E40AF; }
+  .tag--e3 { background: #D1FAE5; color: #065F46; }
+
+  /* ── card border colors ── */
+  .card--p1 { border-left-color: var(--red); }
+  .card--p2 { border-left-color: var(--orange); }
+  .card--p3 { border-left-color: var(--blue); }
+  .card--p4 { border-left-color: var(--green); }
+  .card--p5 { border-left-color: var(--pink); }
+  .card--p6 { border-left-color: var(--purple); }
+  .card--p7 { border-left-color: #0EA5E9; }
+  .card--p8 { border-left-color: #84CC16; }
+  .card--p9 { border-left-color: var(--amber); }
+  .card--biz { border-left-color: var(--blue); }
+  .card--auto { border-left-color: var(--purple); }
+  .card--seo { border-left-color: var(--green); }
+  .card--ret { border-left-color: var(--pink); }
+  .card--prod { border-left-color: var(--amber); }
+
+  /* ── full-width card ── */
+  .card--full { grid-column: 1 / -1; }
+
+  /* ── callouts ── */
+  .call { padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin: 14px 0; }
+  .call--warn { background: #FEF3C7; border-left: 4px solid var(--amber); color: #78350F; }
+  .call--info { background: #DBEAFE; border-left: 4px solid var(--blue); color: #1E3A5F; }
+  .call--ok   { background: #D1FAE5; border-left: 4px solid var(--green); color: #064E3B; }
+  .call--err  { background: #FFF1F2; border-left: 4px solid var(--red); color: #881337; }
+
+  /* ── tables ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { background: var(--navy); color: #fff; font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+  tr:nth-child(even) td { background: #F8FAFC; }
+  .hi { color: var(--red); font-weight: 700; }
+  .ok { color: var(--green); font-weight: 700; }
+
+  /* ── timeline ── */
+  .timeline { margin: 16px 0; }
+  .tl-step { display: flex; gap: 16px; margin-bottom: 20px; position: relative; }
+  .tl-step::before { content:''; position: absolute; left: 19px; top: 42px; bottom: -20px; width: 2px; background: var(--line); }
+  .tl-step:last-child::before { display: none; }
+  .tl-num { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex: none; color: #fff; }
+  .tl-body { flex: 1; padding-top: 4px; }
+  .tl-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .tl-body p { font-size: 13px; color: var(--body); line-height: 1.55; }
+
+  /* ── blueprint ── */
+  .bp { background: #0F172A; color: #CBD5E1; border-radius: 14px; padding: 20px 24px; font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; font-size: 12px; line-height: 1.7; white-space: pre; overflow-x: auto; margin: 10px 0; }
+  .bp .o { color: var(--orange); font-weight: 700; }
+  .bp .g { color: #4ADE80; }
+  .bp .r { color: #FB7185; }
+  .bp .b { color: #60A5FA; }
+  .bp .c { color: #475569; }
+
+  /* ── pill mockup ── */
+  .pills { display: flex; gap: 12px; margin: 12px 0; }
+  .pill { border: 2px solid var(--line); border-radius: 12px; padding: 12px 20px; text-align: center; flex: 1; }
+  .pill--on { border-color: var(--navy); background: #EFF6FF; box-shadow: 0 0 0 2px var(--navy); }
+  .pill b { font-size: 14px; display: block; }
+  .pill .pr { font-size: 17px; font-weight: 800; margin-top: 2px; }
+  .pill .un { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .pill .bd { font-size: 9.5px; font-weight: 700; color: var(--green); margin-top: 3px; }
+
+  /* ── sticky bar mockup ── */
+  .stk { background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; margin: 10px 0; box-shadow: 0 -2px 12px rgba(0,0,0,.06); }
+  .stk span { font-weight: 600; font-size: 13px; }
+  .stk strong { font-weight: 800; font-size: 17px; margin-left: 10px; }
+  .stk button { background: var(--red); color: #fff; border: none; border-radius: 10px; padding: 12px 28px; font-weight: 700; font-size: 13px; font-family: inherit; cursor: default; }
+
+  /* ── bottom nav mockup ── */
+  .bnav { background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 8px 0 6px; display: flex; justify-content: space-around; margin: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,.05); }
+  .bnav div { text-align: center; font-size: 9.5px; font-weight: 600; color: var(--muted); }
+  .bnav .on { color: var(--blue); }
+  .bnav i { font-style: normal; font-size: 20px; display: block; margin-bottom: 1px; }
+
+  /* ── roadmap table ── */
+  .road-grid { display: grid; grid-template-columns: 120px repeat(6, 1fr); gap: 1px; background: var(--line); border-radius: 14px; overflow: hidden; margin: 14px 0; font-size: 11.5px; }
+  .road-grid > div { padding: 10px 12px; background: #fff; }
+  .road-grid .rh { background: var(--navy); color: #fff; font-weight: 700; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+  .road-grid .rl { background: #F8FAFC; font-weight: 700; color: var(--ink); }
+  .road-grid .rm { background: #FEF3C7; font-weight: 700; }
+
+  /* ── KPI row ── */
+  .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 14px 0; }
+  .kpi-box { flex: 1; min-width: 100px; background: #fff; border-radius: 12px; padding: 14px 16px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .kpi-box .v { font-size: 22px; font-weight: 800; }
+  .kpi-box .l { font-size: 10px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+
+  /* ── footer ── */
+  .foot { margin-top: 60px; text-align: center; color: var(--muted); font-size: 12px; padding: 20px 0; border-top: 1px solid var(--line); }
+
+  /* ── print ── */
+  @media print {
+    body { background: #fff; }
+    .tabs { position: static; box-shadow: none; }
+    .hero { padding: 32px 0; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="inner">
+    <div class="logo">GENACTIV&reg;</div>
+    <h1>Co dalej &mdash; plan prac<br>po tescie A/B</h1>
+    <p class="sub">Biznes &middot; Developer &middot; Grafik &amp; Content &mdash; wszystkie zadania w jednym dokumencie<br>Stan na: 6 lipca 2026 &middot; Kontekst: test A/B GEN-6 vs NOTOAGENCY (08&ndash;30.06.2026, 28 195 wizyt, p=0,025)</p>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="v" style="color:var(--red)">&minus;20,9%</div>
+        <div class="l">Konwersja NOTO<br>vs GEN-6</div>
+      </div>
+      <div class="kpi">
+        <div class="v" style="color:var(--red)">&minus;47%</div>
+        <div class="l">Kapsulki 120 szt.<br>mobile</div>
+      </div>
+      <div class="kpi">
+        <div class="v" style="color:var(--green)">+15%</div>
+        <div class="l">Homepage<br>NOTO</div>
+      </div>
+      <div class="kpi">
+        <div class="v" style="color:#fff">1</div>
+        <div class="l">Ekran do naprawy<br>(karta produktu)</div>
+      </div>
+      <div class="kpi">
+        <div class="v" style="color:var(--amber)">PLN 334K</div>
+        <div class="l">Cel sr. przychod/mies.<br>H2 2026 (+50%)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     NAV
+     ════════════════════════════════════════════════ -->
+<div class="page">
+
+<div class="tabs">
+  <a href="#biznes" class="biz">Biznes (My)</a>
+  <a href="#developer" class="dev">Developer</a>
+  <a href="#grafik" class="gfx">Grafik &amp; Content</a>
+  <a href="#timeline" class="tl">Timeline</a>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION: BIZNES
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section" id="biznes">
+  <div class="section-head">
+    <div class="icon" style="background:var(--blue)">B</div>
+    <h2>Biznes (My)</h2>
+    <span class="badge" style="background:#EDE9FE;color:#5B21B6">Decyzje + koordynacja</span>
+  </div>
+
+  <div class="call call--info">
+    <strong>Kontekst:</strong> Test A/B zamkniety 30.06. GEN-6 na 100% ruchu. NOTO wstrzymany &mdash; motyw Shopify wdraza sie w calosci, nie mozna mieszac. Naprawiamy karte produktu w NOTO, re-testujemy calosc, wdrazamy naraz.
+  </div>
+
+  <!-- Decyzje pilne -->
+  <h3 style="font-size:17px; margin: 24px 0 14px; color:var(--red)">Decyzje pilne (lipiec)</h3>
+  <div class="cards">
+
+    <div class="card card--biz">
+      <div class="tags"><span class="tag tag--biz">DECYZJA</span><span class="tag tag--e1">PILNE</span></div>
+      <h3>Potwierdzic zamkniecie testu w Intelligems</h3>
+      <p>Sprawdzic w panelu Intelligems, ze eksperyment jest WYLACZONY i 100% ruchu idzie na GEN-6. Test w incognito &mdash; nie powinien serwowac NOTO.</p>
+      <ul>
+        <li>Panel Intelligems &rarr; Experiments &rarr; Status: Completed/Off</li>
+        <li>Kontakt: d.slowik@notoagency.pl (setup Intelligems)</li>
+      </ul>
+    </div>
+
+    <div class="card card--biz">
+      <div class="tags"><span class="tag tag--biz">DECYZJA</span><span class="tag tag--e1">PILNE</span></div>
+      <h3>Zlecic przebudowe karty produktu NOTO</h3>
+      <p>Formalnie zlecic NOTOAGENCY przebudowe karty wg dokumentu rekomendacji (9 priorytetow). Ustalenia:</p>
+      <ul>
+        <li>Zakres: P1-P7 (karta + nawigacja) + P9 (PageSpeed) przed re-testem</li>
+        <li>Deliverables: 6 mockupow Figma (grafik) + 13 zadan dev</li>
+        <li>Kryterium akceptacji: re-test NOTO vs GEN-6 z CR &ge; 2,42%</li>
+      </ul>
+    </div>
+
+    <div class="card card--biz">
+      <div class="tags"><span class="tag tag--biz">DECYZJA</span><span class="tag tag--e1">PILNE</span></div>
+      <h3>Wybor platformy subskrypcji</h3>
+      <p>Research: Recharge vs Bold vs Skio &rarr; decyzja go/no-go do konca lipca. Top 3 produkty na sub: Kapsulki 120, Fiberbiom, Proszek.</p>
+      <ul>
+        <li>Cel: launch subskrypcji w sierpniu (-10% przy sub)</li>
+        <li>Baseline: PLN 33K/mies z top 3 produktow &rarr; target 5% adoption do grudnia</li>
+        <li>Kryteria: koszt, integracja Shopify+Klaviyo, UX mobilny, pause/cancel</li>
+      </ul>
+    </div>
+
+    <div class="card card--biz">
+      <div class="tags"><span class="tag tag--biz">DECYZJA</span><span class="tag tag--e2">LIPIEC</span></div>
+      <h3>Wlaczyc natywna integracje Intelligems &rarr; Clarity</h3>
+      <p>Integracja nigdy nie zostala wlaczona. Wymaga recznego toggle w panelu Intelligems (Integrations &rarr; Microsoft Clarity &rarr; Enable).</p>
+      <ul>
+        <li>Kontakt: d.slowik@notoagency.pl</li>
+        <li>Efekt: automatyczne tagowanie sesji w Clarity wg wariantu A/B</li>
+        <li>Potrzebne na re-test &mdash; pozwoli analizowac heatmapy per wariant</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Marketing Automation -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--purple)">Marketing Automation (lipiec&ndash;grudzien)</h3>
+  <div class="cards">
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--biz">KLAVIYO</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Post-purchase cross-sell flow</h3>
+      <p>3 emaile, top 5 par produktowych. Cel: +PLN 4K/mies. Obecnie post-purchase i win-back nie istnieja &mdash; Welcome generuje PLN 259K (62% calego rev Klaviyo).</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--biz">KLAVIYO</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Porzucony koszyk v2: split per kategorie</h3>
+      <p>Rozdzielic na: colostrum / fiberbiom / dermokosmetyki. Cel: CR z 4,1% &rarr; 6%. Obecny flow: 2247 odbiorcow, 92 konwersje, PLN 27,8K &mdash; potencjal 3&times;.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--biz">KLAVIYO</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Kampanie 2&times;/tydzien + segmentacja RFM</h3>
+      <p>Konfiguracja RFM w Klaviyo Segments (metric R6aTMS). Layout per persona. Kadencja dzis: 2-3/mies, sr. PLN 3,2K/kamp. Target: 8-12/mies do wrzesnia.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--biz">SMS</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>SMS pilot: porzucony koszyk + flash sale</h3>
+      <p>Cel: 500 numerow, 15% CTR. Integracja SMS z RODO. A/B testy subject lines.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--biz">KLAVIYO</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>Replenishment flow: auto-przypomnienie 30/60/90 dni</h3>
+      <p>Cel: +PLN 3K/mies. Uzupelnienie zapasow &mdash; kluczowy flow dla repeat purchase.</p>
+    </div>
+
+    <div class="card card--auto card--full">
+      <div class="tags"><span class="tag tag--biz">BF</span><span class="tag tag--e1">LISTOPAD</span></div>
+      <h3>Black Friday sequence</h3>
+      <p>Teaser &rarr; VIP &rarr; Launch &rarr; Reminder &rarr; CM &rarr; Last Chance (6 emaili + 3 SMS). Cel: PLN 400K+ w listopadzie. Wymaga: IP warmup w pazdzierniku (10K+ wolumen), 5 szablonow swiatecznych, pre-BF popup (+2000 sub).</p>
+    </div>
+
+  </div>
+
+  <!-- Retencja i subskrypcje -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--pink)">Retencja, subskrypcje, lojalnosc</h3>
+  <div class="cards">
+
+    <div class="card card--ret">
+      <div class="tags"><span class="tag tag--biz">SUB</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>LAUNCH subskrypcji &mdash; top 3 produkty</h3>
+      <p>Kapsulki 120, Fiberbiom, Proszek &mdash; rabat -10% przy sub. Konfiguracja platformy (z decyzji lipcowej) + Klaviyo flows subskrypcyjne.</p>
+    </div>
+
+    <div class="card card--ret">
+      <div class="tags"><span class="tag tag--biz">REFERRAL</span><span class="tag tag--e2">WRZESIEN</span></div>
+      <h3>Referral: &bdquo;Daj 20 zl, Dostaj 20 zl&rdquo;</h3>
+      <p>Program polecen. Sub: pause zamiast cancel (redukcja churn). LTV cohort analysis + referral tracking.</p>
+    </div>
+
+    <div class="card card--ret">
+      <div class="tags"><span class="tag tag--biz">LOYALTY</span><span class="tag tag--e3">GRUDZIEN</span></div>
+      <h3>LAUNCH programu lojalnosciowego</h3>
+      <p>Bronze &rarr; Silver &rarr; Gold &rarr; Platinum. 1 PLN = 1 pkt, 100 pkt = 5 zl. Beta na top 100 klientow (pazdziernik), open launch (grudzien). Cel: repeat 62% (z 55%).</p>
+    </div>
+
+  </div>
+
+  <!-- Oferta / Produkt -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--amber)">Oferta i produkt</h3>
+  <div class="cards">
+
+    <div class="card card--prod">
+      <div class="tags"><span class="tag tag--biz">PRODUKT</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Analiza marzy per produkt + pary cross-sell</h3>
+      <p>Identyfikacja top 5 par cross-sell. Fotografie produktowe do bundli.</p>
+    </div>
+
+    <div class="card card--prod">
+      <div class="tags"><span class="tag tag--biz">PRODUKT</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>3 bundle zestawy LIVE</h3>
+      <p>Colostrum+Fiberbiom, Family Pack, Starter Kit. Cel: AOV z 272 &rarr; 305 PLN, items/order z 1,5 &rarr; 1,8.</p>
+    </div>
+
+    <div class="card card--prod">
+      <div class="tags"><span class="tag tag--biz">PRODUKT</span><span class="tag tag--e2">PAZDZIERNIK</span></div>
+      <h3>Gift sets swiateczne + gift cards</h3>
+      <p>3 warianty gift setow. Gift cards live + LP. Sub jako prezent &bdquo;3 miesiace zdrowia&rdquo;.</p>
+    </div>
+
+  </div>
+
+  <!-- SEO -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--green)">SEO / Organic</h3>
+  <div class="cards">
+
+    <div class="card card--seo">
+      <div class="tags"><span class="tag tag--b">SEO</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Strategia SEO finalna + 4 artykuly pod LLM</h3>
+      <p>Keyword &times; product mapping. Cel: +2K sesji organicznych. Weryfikacja fix-ow z czerwca (alt, meta titles, descriptions). Schema Product+FAQ+Breadcrumb na PDP.</p>
+    </div>
+
+    <div class="card card--seo">
+      <div class="tags"><span class="tag tag--b">SEO</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>Content hub: 6 artykulow (SIBO, IBS, probiotyki vs colostrum)</h3>
+      <p>Cel: +3K sesji. Programmatic SEO: 10 stron /colostrum-na-[dolegliwosc]. Backlink outreach PL health blogi.</p>
+    </div>
+
+    <div class="card card--seo">
+      <div class="tags"><span class="tag tag--b">SEO</span><span class="tag tag--e2">WRZESIEN</span></div>
+      <h3>&bdquo;Back to Health&rdquo; content: 8 artykulow</h3>
+      <p>Top 25 LP pod featured snippets. Video embed YT na blog (dwell time +30%). Link building: 10 guest posts.</p>
+    </div>
+
+  </div>
+
+  <!-- KPI -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--navy)">KPI Dashboard &mdash; cele miesieczne H2 2026</h3>
+  <div style="overflow-x:auto">
+    <table>
+      <tr>
+        <th>KPI</th><th>Lip</th><th>Sie</th><th>Wrz</th><th>Paz</th><th>Lis</th><th>Gru</th>
+      </tr>
+      <tr><td><strong>Revenue</strong></td><td>254K</td><td>275K</td><td>310K</td><td>310K</td><td class="hi">400K</td><td>310K</td></tr>
+      <tr><td>Email list</td><td>9,2K</td><td>10K</td><td>10,8K</td><td>12K</td><td>13,2K</td><td>14K</td></tr>
+      <tr><td>CR overall</td><td>2,46%</td><td>2,52%</td><td>2,60%</td><td>2,65%</td><td>2,70%</td><td>2,80%</td></tr>
+      <tr><td>Mobile CR</td><td>2,30%</td><td>2,40%</td><td>2,50%</td><td>2,55%</td><td>2,60%</td><td>2,80%</td></tr>
+      <tr><td>AOV</td><td>278</td><td>282</td><td>285</td><td>290</td><td>295</td><td>305</td></tr>
+      <tr><td>Active flows</td><td>10</td><td>12</td><td>13</td><td>14</td><td>14</td><td>14</td></tr>
+      <tr><td>Sub adoption</td><td>0%</td><td>1%</td><td>2%</td><td>3%</td><td>4%</td><td>5%</td></tr>
+      <tr><td>SMS baza</td><td>0</td><td>500</td><td>1,2K</td><td>2K</td><td>2,8K</td><td>3,5K</td></tr>
+    </table>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION: DEVELOPER
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section" id="developer">
+  <div class="section-head">
+    <div class="icon" style="background:var(--red)">D</div>
+    <h2>Developer</h2>
+    <span class="badge" style="background:#FEE2E2;color:#991B1B">13 zadan &middot; 3 etapy</span>
+  </div>
+
+  <div class="call call--err">
+    <strong>Glowna przyczyna straty:</strong> Na karcie NOTO klikniecie wariantu (60/120/dwupak) powoduje pelne przeladowanie strony. Na mobile LTE = 2-4s bialego ekranu. Uzytkownik traci kontekst i odpada. Dowod: proszek (bez wyboru wariantu) ma +9%, kapsulki -47/-63%.
+  </div>
+
+  <!-- Etap 1 -->
+  <h3 style="font-size:17px; margin: 24px 0 14px; color:var(--red)">Etap 1 &mdash; Krytyczny (przed re-testem)</h3>
+  <div class="cards">
+
+    <div class="card card--p1 card--full">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e1">ETAP 1</span></div>
+      <span class="lift" style="color:var(--green)">+25-40% ATC</span>
+      <h3>D1 &middot; Section Rendering API &mdash; zero reload na zmianie wariantu</h3>
+      <p>To jest JEDYNA przyczyna spadku -47/-63%. Transfer: 2-5 KB vs 200-500 KB przy reload.</p>
+      <div class="bp"><span class="c">// Schemat dzialania:</span>
+Uzytkownik klika wariant
+  <span class="b">&rarr;</span> JavaScript przechwytuje event (<span class="r">preventDefault</span>)
+  <span class="b">&rarr;</span> <span class="b">fetch</span>(<span class="g">`/products/${handle}?variant=${variantId}&amp;sections=${sectionId}`</span>)
+  <span class="b">&rarr;</span> API zwraca JSON z renderowanym HTML sekcji
+  <span class="b">&rarr;</span> JS podmienia elementy DOM: cena, zdjecia, dostepnosc, stan ATC
+  <span class="b">&rarr;</span> <span class="b">history.pushState()</span> aktualizuje URL bez nawigacji</div>
+      <table>
+        <tr><th>Wymaganie</th><th>Szczegol</th></tr>
+        <tr><td>Zero page reload</td><td>Section Rendering API + fetch() + DOM swap</td></tr>
+        <tr><td>URL update</td><td>history.pushState() z parametrem ?variant=ID</td></tr>
+        <tr><td>Aktualizacja ceny</td><td>Podmiana innerHTML elementu ceny z odpowiedzi sekcji</td></tr>
+        <tr><td>Aktualizacja galerii</td><td>Zdjecia tagowane do wariantow w Shopify admin; swap z odpowiedzi</td></tr>
+        <tr><td>Stan ATC</td><td>Enable/disable na podstawie dostepnosci wariantu</td></tr>
+        <tr><td>Fetch URL</td><td>Uzyc <code>/products/{handle}</code> (nie /product/), parametr <code>variant</code> (nie variant_id)</td></tr>
+        <tr><td>Czas reakcji</td><td class="hi">&lt; 300ms od klikniecia do renderowania</td></tr>
+      </table>
+      <p style="margin-top:10px"><strong>Wzor:</strong> Shopify Dawn &mdash; <code>snippets/product-variant-picker.liquid</code> (web components &lt;variant-radios&gt;, &lt;variant-selects&gt;)</p>
+      <div class="call call--warn" style="margin-top:10px">
+        <strong>Test akceptacyjny:</strong> Chrome DevTools &rarr; Fast 3G. Zmiana 60/120 kaps. &lt; 500ms. Zero bialego ekranu. Scroll position bez zmian. Cena + zdjecie + URL aktualizuja sie. ATC aktywny i klikalny.
+      </div>
+    </div>
+
+    <div class="card card--p5">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e1">ETAP 1</span></div>
+      <span class="lift" style="color:var(--red)">553 fix</span>
+      <h3>D2 &middot; Fix dead clicks &bdquo;Dodaj do koszyka&rdquo;</h3>
+      <p>Clarity: 553 dead clicks na ATC, 6,7% sesji mobile z JS errors, 34 rage clicks na /products/colostrum-genactiv-120-kapsulek.</p>
+      <ul>
+        <li>Sprawdzic: event listener podpiety po DOM ready?</li>
+        <li>Pandectes consent blokuje skrypt?</li>
+        <li>Intelligems A/B konflikt z theme JS?</li>
+        <li>Race condition: przycisk renderowany przed handlerem?</li>
+        <li><strong>Fallback:</strong> setTimeout 3000ms &rarr; prosty addEventListener na .product-form__submit</li>
+        <li>Przetestowac z wylaczonym Pandectes i Intelligems osobno</li>
+      </ul>
+      <div class="call call--warn">
+        <strong>Test:</strong> 100 klikniec ATC na roznych produktach = 0 dead clicks. Chrome Android, Safari iOS, Samsung Internet.
+      </div>
+    </div>
+
+    <div class="card card--p2">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e1">ETAP 1</span></div>
+      <h3>D3 &middot; Implementacja pill buttons wg mockupu grafika</h3>
+      <p>Liquid + CSS. Zachowac AJAX zmiane wariantu (D1). Animacja zmiany stanu 150-200ms transition. Elementy na kazdym buttonie: nazwa + cena + cena/kaps. Pre-selekcja najpopularniejszego.</p>
+    </div>
+
+    <div class="card card--p3">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e1">ETAP 1</span></div>
+      <h3>D4 &middot; Sticky ATC bar &mdash; Intersection Observer</h3>
+      <p>Observer na oryginalnym ATC button. Toggle class .visible na sticky bar. Sync z variant selector (zmiana wariantu = update ceny w sticky). Z-index pod modalami.</p>
+      <div class="bp"><span class="c">// Intersection Observer na oryginalnym ATC</span>
+const atcButton = document.querySelector(<span class="g">'.product-form__submit'</span>);
+const stickyBar = document.querySelector(<span class="g">'.sticky-atc-bar'</span>);
+
+const observer = new <span class="b">IntersectionObserver</span>((entries) =&gt; {
+  entries.forEach(entry =&gt; {
+    stickyBar.classList.toggle(<span class="g">'visible'</span>, !entry.isIntersecting);
+  });
+}, { threshold: 0 });
+
+observer.observe(atcButton);</div>
+    </div>
+
+    <div class="card card--p9 card--full">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e1">ETAP 1-2</span></div>
+      <span class="lift" style="color:var(--green)">CWV &check;</span>
+      <h3>D7-D13 &middot; PageSpeed + Core Web Vitals</h3>
+      <table>
+        <tr><th>#</th><th>Zadanie</th><th>Cel</th></tr>
+        <tr><td>D7</td><td><strong>Lazy loading zdjec</strong> &mdash; loading=lazy ponizej fold; eager + fetchpriority=high na 1. zdjeciu karuzeli. srcset 320/640/960px.</td><td class="hi">LCP &lt; 2,5s</td></tr>
+        <tr><td>D8</td><td><strong>Critical CSS inline</strong> &mdash; above-fold CSS inline w &lt;head&gt;. Reszta: media=print onload hack. Zero render-blocking.</td><td class="hi">FCP &lt; 1,8s</td></tr>
+        <tr><td>D9</td><td><strong>Defer third-party JS</strong> &mdash; Pandectes / Intelligems / Clarity / GA4: defer lub async. Sprawdzic czy Pandectes blokuje ATC handler.</td><td class="hi">INP &lt; 200ms</td></tr>
+        <tr><td>D10</td><td><strong>WebP/AVIF obrazki</strong> &mdash; Shopify CDN = auto WebP. Sprawdzic format: 'webp' w Liquid image_tag. Quality 80. Max 1200px szer.</td><td>Transfer &minus;40-60%</td></tr>
+        <tr><td>D11</td><td><strong>Preconnect + preload</strong> &mdash; preconnect: cdn.shopify.com / fonts.googleapis.com / clarity.ms. Preload: hero image + Montserrat woff2.</td><td>TTFB &minus;100-200ms</td></tr>
+        <tr><td>D12</td><td><strong>Touch target audit</strong> &mdash; WSZYSTKIE interaktywne elementy PDP: min 48x48px. Variant buttons / ATC / gwiazdki / akordeon / linki.</td><td>Zero tiny taps</td></tr>
+        <tr><td>D13</td><td><strong>Pomiar przed i po</strong> &mdash; PageSpeed Insights + Chrome UX Report. LCP/INP/CLS przed zmianami i po kazdym etapie.</td><td class="ok">Pass CWV</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Etap 2 -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--blue)">Etap 2 &mdash; Wazny (przed re-testem)</h3>
+  <div class="cards">
+
+    <div class="card card--p6">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e2">ETAP 2</span></div>
+      <span class="lift" style="color:var(--red)">4944 fix</span>
+      <h3>D5 &middot; Klikalnosc nazw produktow na listingach</h3>
+      <p>Clarity: 3 526 dead clicks na &bdquo;COLOSTRUM GENACTIV&rdquo; + 1 418 na &bdquo;COLOSTRUM Z MALINA&rdquo;. Uzytkownicy klikaja nazwe &mdash; jest &lt;span&gt;, nie &lt;a&gt;.</p>
+      <div class="bp"><span class="c">&lt;!-- BYLO: --&gt;</span>
+<span class="r">&lt;span class="product-card__title"&gt;</span>{{ product.title }}<span class="r">&lt;/span&gt;</span>
+
+<span class="c">&lt;!-- MA BYC: --&gt;</span>
+<span class="g">&lt;a href="{{ product.url }}" class="product-card__title-link"&gt;</span>
+  {{ product.title }}
+<span class="g">&lt;/a&gt;</span></div>
+    </div>
+
+    <div class="card card--p7">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e2">ETAP 2</span></div>
+      <h3>D6 &middot; Bottom navigation bar</h3>
+      <p>Fixed bottom. Z-index pod modalami. Intersection Observer przelacza miedzy bottom nav a sticky ATC na PDP. Badge koszyka: AJAX update po dodaniu produktu. Deep link &bdquo;Produkty&rdquo; otwiera drawer z kategoriami. iOS safe area +34px.</p>
+    </div>
+
+  </div>
+
+  <!-- Etap 3 -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--green)">Etap 3 &mdash; Po re-tescie, przy wdrozeniu</h3>
+  <div class="cards">
+    <div class="card card--p8">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e3">ETAP 3</span></div>
+      <h3>Homepage above-the-fold poprawki</h3>
+      <p>Implementacja wg mockupu grafika. Kompaktowy hero + kafelki kategorii.</p>
+    </div>
+    <div class="card" style="border-left-color:var(--muted)">
+      <div class="tags"><span class="tag tag--d">DEV</span><span class="tag tag--e3">ETAP 3</span></div>
+      <h3>Optymalizacja slabszych kolekcji</h3>
+      <p>Colostrum -30%, Maseczki -31% &mdash; strata zniknie po naprawie karty (ten sam mechanizm). Weryfikacja po wdrozeniu.</p>
+    </div>
+  </div>
+
+  <div class="call call--ok" style="margin-top:20px">
+    <strong>Scenariusz konserwatywny:</strong> Tylko D1 (zero reload) + D4 (sticky ATC) = wyzerowanie straty -20,9% &rarr; NOTO = GEN-6.<br>
+    <strong>Scenariusz optymistyczny:</strong> D1-D6 + PageSpeed = NOTO +10-15% vs GEN-6 &rarr; pelne wdrozenie z zyskiem.
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION: GRAFIK & CONTENT
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section" id="grafik">
+  <div class="section-head">
+    <div class="icon" style="background:var(--orange)">G</div>
+    <h2>Grafik &amp; Content</h2>
+    <span class="badge" style="background:#FFEDD5;color:#C2410C">6 mockupow Figma + content</span>
+  </div>
+
+  <div class="call call--info">
+    <strong>Cel:</strong> Przygotowac mockupy Figma dla przebudowanej karty produktu, nawigacji i homepage. Dodatkowo &mdash; content (tresci artykulow, copy emaili, opisy bundli) do calego H2.
+  </div>
+
+  <!-- Mockupy -->
+  <h3 style="font-size:17px; margin: 24px 0 14px; color:var(--orange)">Mockupy Figma &mdash; checklist</h3>
+  <div class="cards">
+
+    <div class="card card--p1 card--full">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e1">M1 &middot; GLOWNY</span></div>
+      <span class="lift" style="color:var(--green)">P1-P4</span>
+      <h3>M1 &middot; Karta produktu mobile (PDP) &mdash; layout above-the-fold</h3>
+      <p>Hierarchia w 550px uzytecznej przestrzeni (390&times;550-600px po browser chrome):</p>
+      <div class="bp"><span class="c">// Viewport: 390 x 550px</span>
+
+<span class="o">[0-300px]</span>   <span class="b">Karuzela zdjec</span> (swipe, 4:3)
+            <span class="c">Kropki wskaznikowe. Peek nastepnego.
+            BEZ auto-play. Min 3 foto: produkt / opakowanie / lifestyle</span>
+
+<span class="o">[300-340px]</span> <span class="g">Tytul</span>: Colostrum Bovinum GenActiv
+            <span class="g">&#9733;&#9733;&#9733;&#9733;&#9733;</span> (4.8) &middot; 247 opinii
+
+<span class="o">[340-370px]</span> <span class="r">Cena: 249 zl</span>  <span class="c">~~299 zl~~</span>
+
+<span class="o">[370-450px]</span> <span class="b">Pill buttons wariantow:</span>
+            [ 60 kaps. ]  [<span class="g">&#9733;</span> 120 kaps. ]
+              149 zl          249 zl
+              2,48/kaps.      2,08/kaps.
+
+<span class="o">[450-500px]</span> <span class="r">[ DODAJ DO KOSZYKA ]</span>  full-width, 48px
+
+<span class="o">[500-540px]</span> <span class="g">&#10003;</span> Darmowa dostawa od 300 zl
+            <span class="g">&#10003;</span> Nr 1 w polskich aptekach</div>
+      <p style="margin-top:10px"><strong>Below the fold:</strong> 3 korzysci (ikona+tekst) &rarr; Opis (akordeon) &rarr; Sklad (akordeon) &rarr; Trust badges &rarr; Opinie z filtrami &rarr; Cross-sell</p>
+      <p style="margin-top:6px"><strong>NIE umieszczac above fold:</strong> dlugich opisow, bannerow promo, wielu CTA, social share, breadcrumbs (max 1 linia), widgetow chatbota</p>
+    </div>
+
+    <div class="card card--p2">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e1">M2</span></div>
+      <span class="lift" style="color:var(--green)">+15-20%</span>
+      <h3>M2 &middot; Selektor wariantow &mdash; pill buttons</h3>
+      <p>Warianty do zaprojektowania:</p>
+      <ul>
+        <li>2-opcje (60/120 kaps.) &mdash; wersja podstawowa</li>
+        <li>3-opcje (60/120/dwupak) &mdash; wersja rozszerzona</li>
+        <li>Stany: wybrany / niewybrany / niedostepny (OOS)</li>
+      </ul>
+      <div class="pills" style="margin-top:14px">
+        <div class="pill">
+          <b>60 kapsulek</b>
+          <div class="pr">149 zl</div>
+          <div class="un">2,48 zl/kaps.</div>
+        </div>
+        <div class="pill pill--on">
+          <b>120 kapsulek</b>
+          <div class="pr">249 zl</div>
+          <div class="un">2,08 zl/kaps.</div>
+          <div class="bd">&#9733; Najczesciej wybierane</div>
+        </div>
+      </div>
+      <table style="margin-top:10px">
+        <tr><th>Parametr</th><th>Wartosc</th></tr>
+        <tr><td>Tap target</td><td>min 48 &times; 48 px</td></tr>
+        <tr><td>Odstep</td><td>8-12 px</td></tr>
+        <tr><td>Wybrany</td><td>Border 2-3px + fill + ew. checkmark</td></tr>
+        <tr><td>Niewybrany</td><td>Border 1px, brak fill</td></tr>
+        <tr><td>OOS</td><td>Szary + przekreslenie + &bdquo;Powiadom&rdquo;</td></tr>
+        <tr><td>Animacja</td><td>150-200ms transition</td></tr>
+        <tr><td>Pre-selekcja</td><td>Najpopularniejszy (120 kaps.)</td></tr>
+      </table>
+      <div class="call call--warn" style="margin-top:10px">
+        <strong>Obowiazkowo na kazdym pill:</strong> 1) Nazwa wariantu 2) Cena 3) Cena za jednostke (zl/kaps.) 4) Badge na 120 kaps. 5) Domyslna pre-selekcja
+      </div>
+    </div>
+
+    <div class="card card--p3">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e1">M3</span></div>
+      <span class="lift" style="color:var(--green)">+8-15%</span>
+      <h3>M3 &middot; Sticky ATC bar</h3>
+      <div class="stk">
+        <div><span>Colostrum 120 kaps.</span> <strong>249 zl</strong></div>
+        <button>DODAJ DO KOSZYKA</button>
+      </div>
+      <table style="margin-top:10px">
+        <tr><th>Parametr</th><th>Wartosc</th></tr>
+        <tr><td>Pozycja</td><td>Fixed bottom viewport</td></tr>
+        <tr><td>Wysokosc</td><td>56px min + 34px iOS safe area</td></tr>
+        <tr><td>Przycisk ATC</td><td>GenActiv Red #F5333F, tekst bialy, min 48px</td></tr>
+        <tr><td>Tlo</td><td>Biale z cieniem gornym</td></tr>
+        <tr><td>Animacja</td><td>Slide-up 250ms ease-out (gdy ATC poza viewport)</td></tr>
+        <tr><td>Po dodaniu</td><td>Checkmark + &bdquo;Dodano!&rdquo;</td></tr>
+      </table>
+      <p style="margin-top:8px">Wersje: 1) Minimum: cena + ATC &nbsp; 2) Pelna: nazwa + wariant + cena + ATC</p>
+    </div>
+
+    <div class="card card--p7">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e2">M4</span></div>
+      <span class="lift" style="color:var(--green)">+15-20% nav</span>
+      <h3>M4 &middot; Bottom navigation bar</h3>
+      <div class="bnav">
+        <div class="on"><i>&#127968;</i> Sklep</div>
+        <div><i>&#9638;</i> Produkty</div>
+        <div><i>&#128269;</i> Szukaj</div>
+        <div><i>&#128722;</i> Koszyk</div>
+        <div><i>&#128100;</i> Konto</div>
+      </div>
+      <table style="margin-top:10px">
+        <tr><th>Parametr</th><th>Wartosc</th></tr>
+        <tr><td>Wysokosc</td><td>56-60px + 34px iOS safe area</td></tr>
+        <tr><td>Ikona</td><td>24x24px</td></tr>
+        <tr><td>Etykieta</td><td>10-12px</td></tr>
+        <tr><td>Aktywny</td><td>Brand Blue #0066CC</td></tr>
+        <tr><td>Koszyk badge</td><td>Czerwona kropka + liczba</td></tr>
+        <tr><td>Na PDP</td><td>Transition do sticky ATC (250ms)</td></tr>
+      </table>
+    </div>
+
+    <div class="card card--p6">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e2">M5</span></div>
+      <h3>M5 &middot; Listing kolekcji &mdash; karta produktu w siatce</h3>
+      <ul>
+        <li>Nazwa produktu jako klikalny link (nie tylko obrazek)</li>
+        <li>Cena widoczna na karcie</li>
+        <li>Opcjonalnie: Quick ATC button</li>
+      </ul>
+    </div>
+
+    <div class="card card--p8">
+      <div class="tags"><span class="tag tag--g">GRAFIK</span><span class="tag tag--e3">M6</span></div>
+      <span class="lift" style="color:var(--red)">&minus;16% QB</span>
+      <h3>M6 &middot; Homepage mobile above-the-fold</h3>
+      <ul>
+        <li>Kompaktowy hero max 250px z CTA</li>
+        <li>3-4 kafelki top kategorii pod hero (Colostrum, Fiberbiom, Dla dzieci, Dermokosmetyki) z ikonami i linkami</li>
+        <li>Pierwszych 400px = odpowiedz na &bdquo;Co tu kupie? Dlaczego tu?&rdquo;</li>
+      </ul>
+      <p style="margin-top:8px">Homepage NOTO ma juz +15% konwersje vs GEN-6 &mdash; poprawki maja zredukowac 16% quick back rate.</p>
+    </div>
+
+  </div>
+
+  <!-- Content / Tresc -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--purple)">Content &amp; Tresc</h3>
+  <div class="cards">
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>4 artykuly pod LLM / SEO</h3>
+      <p>Strategia SEO finalna: keyword &times; product mapping. Tresci zoptymalizowane pod LLM (AI Overviews). Tematy: colostrum + odpornosc, suplementy dla dzieci, probiotyki vs colostrum, colostrum w aptekach.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>Content hub: 6 artykulow (SIBO, IBS, probiotyki vs colostrum)</h3>
+      <p>Dlugie formy (2000+ slow). Internal linking do produktow. Schema FAQ na kazdym. Backlink outreach: PL health blogi.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e2">WRZESIEN</span></div>
+      <h3>&bdquo;Back to Health&rdquo; &mdash; 8 artykulow</h3>
+      <p>Kampania content &bdquo;Powrot do zdrowia&rdquo;. Top 25 LP pod featured snippets. Video embed YT. 10 guest posts (link building).</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Copy templates kampanii cyklicznych Klaviyo</h3>
+      <p>Szablony copy do kampanii 2&times;/tyg: subject lines (A/B testy), preview text, CTA. Segmentacja: RFM persona + kategoria produktu. Jezyk: PL, styl apteczny-przyjazny.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e1">LIPIEC</span></div>
+      <h3>Copy do 3 emaili post-purchase cross-sell</h3>
+      <p>Top 5 par produktowych. Flow: Dziekujemy &rarr; Komplementarny produkt &rarr; Edukacja + social proof. Zmienne Klaviyo: {{ event.ProductName }}, {{ first_name }}.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e2">SIERPIEN</span></div>
+      <h3>Opisy 3 bundli + fotografie</h3>
+      <p>Colostrum+Fiberbiom, Family Pack, Starter Kit. Opisy PDP (benefit-first), porownanie cen jednostkowych, lifestyle copy.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e2">PAZDZIERNIK</span></div>
+      <h3>5 szablonow email swiatecznych + gift set copy</h3>
+      <p>BF Teaser, VIP Early Access, Launch, Reminder, Last Chance. Copy gift setow: &bdquo;3 miesiace zdrowia&rdquo;, gift cards.</p>
+    </div>
+
+    <div class="card card--auto">
+      <div class="tags"><span class="tag tag--g">CONTENT</span><span class="tag tag--e2">PAZDZIERNIK-LISTOPAD</span></div>
+      <h3>Programmatic SEO: 10 stron + holiday keywords</h3>
+      <p>Szablony /colostrum-na-[dolegliwosc] i /colostrum-vs-[competitor]. Holiday: &bdquo;Colostrum Black Friday&rdquo;, &bdquo;suplementy na prezent&rdquo;, gift guides.</p>
+    </div>
+
+  </div>
+
+  <!-- Benchmarki -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--navy)">Benchmarki &mdash; wzorce z top marek suplementow</h3>
+  <div class="cards">
+    <div class="card card--full" style="border-left-color: var(--navy)">
+      <table>
+        <tr><th>Marka</th><th>Co robia dobrze</th><th>Zastosowanie dla GenActiv</th></tr>
+        <tr><td><strong>Ritual</strong></td><td>Minimalistyczny PDP, transparentnosc skladnikow, sub domyslna</td><td>Transparentnosc zrodla colostrum</td></tr>
+        <tr><td><strong>AG1</strong></td><td>Silna hierarchia above-fold, benefit-led copy</td><td>Korzysci (odpornosc) przed cechami</td></tr>
+        <tr><td><strong>Vital Proteins</strong></td><td>Czyste selektory wariantow, lifestyle imagery</td><td>Wzorzec dla rozmiaru proszku</td></tr>
+        <tr><td><strong>Huel</strong></td><td>Per-serving pricing, multi-pack options</td><td>Cena za kapsluke, dwupaki</td></tr>
+        <tr><td><strong>Absolute Collagen</strong></td><td>Dawkowanie w naglowku, timeline rezultatow</td><td>Dane kliniczne o colostrum</td></tr>
+      </table>
+      <p style="margin-top:10px"><strong>5 wzorcow:</strong> 1) Benefit-first headlines 2) Per-unit pricing 3) Social proof above fold 4) 1 klik = 1 akcja 5) Subskrypcja jako domyslna</p>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION: TIMELINE
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section" id="timeline">
+  <div class="section-head">
+    <div class="icon" style="background:var(--green)">T</div>
+    <h2>Timeline &amp; Kamienie milowe</h2>
+    <span class="badge" style="background:#D1FAE5;color:#065F46">H2 2026</span>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--red)">1</div>
+      <div class="tl-body">
+        <h4>Etap krytyczny &mdash; Lipiec <span class="tag tag--d">DEV</span> <span class="tag tag--g">GRAFIK</span> <span class="tag tag--biz">BIZNES</span></h4>
+        <p>
+          <strong>NOTO rebuild:</strong> Section Rendering API (D1) &middot; Fix dead clicks (D2) &middot; Pill buttons mockup (M2) + implementacja (D3) &middot; Sticky ATC mockup (M3) + implementacja (D4) &middot; Layout PDP (M1) &middot; PageSpeed: lazy load + critical CSS + defer JS (D7-D9)<br>
+          <strong>Biznes:</strong> Zamkniecie testu potwierdzone &middot; Zlecenie przebudowy &middot; Wybor platformy sub &middot; RFM live &middot; Kampanie 2&times;/tyg<br>
+          <strong>Content:</strong> 4 artykuly SEO &middot; Copy post-purchase flow &middot; Copy kampanii cyklicznych
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--blue)">2</div>
+      <div class="tl-body">
+        <h4>Etap wazny &mdash; Sierpien <span class="tag tag--d">DEV</span> <span class="tag tag--g">GRAFIK</span> <span class="tag tag--biz">BIZNES</span></h4>
+        <p>
+          <strong>NOTO rebuild:</strong> Klikalnosc nazw (D5) &middot; Bottom nav mockup (M4) + implementacja (D6) &middot; Listing mockup (M5) &middot; PageSpeed: WebP + preconnect + touch audit (D10-D12)<br>
+          <strong>Biznes:</strong> LAUNCH subskrypcji top 3 &middot; SMS pilot (500 numerow) &middot; 3 bundle zestawy LIVE &middot; Browse abandonment v2 &middot; Replenishment flow<br>
+          <strong>Content:</strong> 6 artykulow content hub &middot; Opisy bundli &middot; Copy SMS
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--amber)">3</div>
+      <div class="tl-body">
+        <h4>Pomiar + QA + Re-test &mdash; Wrzesien</h4>
+        <p>
+          <strong>QA:</strong> Core Web Vitals pomiar (D13) &middot; 100 klikniec ATC = 0 dead &middot; PageSpeed Insights &ge; 70 mobile &middot; Test na Chrome/Safari/Samsung<br>
+          <strong>Re-test:</strong> NOTO (z nowa karta + PageSpeed) vs GEN-6, split 80/20 &middot; Cel: CR &ge; 2,42% (GEN-6 baseline)<br>
+          <strong>Biznes:</strong> Referral launch &middot; &bdquo;Back to Health&rdquo; kampania &middot; Predykcyjny churn + win-back &middot; A/B test homepage
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--purple)">4</div>
+      <div class="tl-body">
+        <h4>Pre-BF prep &mdash; Pazdziernik</h4>
+        <p>
+          <strong>Biznes:</strong> Pre-BF popup (+2000 sub) &middot; Gift sets + gift cards &middot; IP warmup na BF wolumen (10K+) &middot; Loyalty BETA (top 100 klientow) &middot; VIP early access flow &middot; Cart cross-sell widget + prog darmowej dostawy PLN 250<br>
+          <strong>Content:</strong> 5 szablonow email swiatecznych &middot; Programmatic SEO: holiday keywords
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--red)">5</div>
+      <div class="tl-body">
+        <h4>BLACK FRIDAY &mdash; Listopad &middot; <span style="color:var(--red); font-weight:800">Cel: PLN 400K+</span></h4>
+        <p>
+          BF sequence: 6 emaili + 3 SMS &middot; Tiered discounts &middot; BF landing page &middot; Exit-intent popup &middot; Real-time monitoring &middot; Post-BF: konwersja 150 jednorazowych &rarr; subskrybenci<br>
+          <strong>Jesli re-test wygrywa:</strong> Wdrozenie calego motywu NOTO (karta + kolekcje + homepage + nawigacja) &mdash; jedno przelaczenie
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-step">
+      <div class="tl-num" style="background:var(--green)">6</div>
+      <div class="tl-body">
+        <h4>Launch + zamkniecie roku &mdash; Grudzien</h4>
+        <p>
+          LAUNCH programu lojalnosciowego (Bronze&rarr;Silver&rarr;Gold&rarr;Plat) &middot; &bdquo;Nowy Rok Nowe Zdrowie&rdquo; push &middot; Sub noworoczna -15% &middot; Sunset flow (180d nieaktywni) &middot; Audyt roczny &middot; Strategia 2027
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Kamienie milowe -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--navy)">Kamienie milowe</h3>
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="v" style="color:var(--blue)">LIP</div>
+      <div class="l">RFM live<br>Kampanie 2&times;/tyg<br>Platforma sub wybrana</div>
+    </div>
+    <div class="kpi-box">
+      <div class="v" style="color:var(--blue)">SIE</div>
+      <div class="l">SUB LIVE (3 prod.)<br>SMS pilot<br>Bundki LIVE</div>
+    </div>
+    <div class="kpi-box">
+      <div class="v" style="color:var(--amber)">WRZ</div>
+      <div class="l">REFERRAL LIVE<br>&bdquo;Back to Health&rdquo;<br>Re-test NOTO</div>
+    </div>
+    <div class="kpi-box">
+      <div class="v" style="color:var(--purple)">PAZ</div>
+      <div class="l">Pre-BF +2K sub<br>Gift cards<br>Loyalty BETA</div>
+    </div>
+    <div class="kpi-box">
+      <div class="v" style="color:var(--red)">LIS</div>
+      <div class="l">BLACK FRIDAY<br>PLN 400K+<br>150 nowych sub</div>
+    </div>
+    <div class="kpi-box">
+      <div class="v" style="color:var(--green)">GRU</div>
+      <div class="l">LOJALNOSC LAUNCH<br>5% sub adoption<br>Lista 14K</div>
+    </div>
+  </div>
+
+  <!-- Oczekiwane efekty -->
+  <h3 style="font-size:17px; margin: 28px 0 14px; color:var(--navy)">Oczekiwane efekty zmian na karcie produktu</h3>
+  <table>
+    <tr><th>Zmiana</th><th>Oczekiwany lift</th><th>Zrodlo</th></tr>
+    <tr><td>Eliminacja reload na wariancie</td><td class="ok">+25-40% add-to-cart</td><td>Shopify Dev, Baymard</td></tr>
+    <tr><td>Pill buttons zamiast dropdown</td><td class="ok">+15-20% add-to-cart</td><td>EasyApps, Baymard Institute</td></tr>
+    <tr><td>Sticky ATC bar mobile</td><td class="ok">+8-15% add-to-cart</td><td>CartyLabs, GrowthRock</td></tr>
+    <tr><td>Restructure above-the-fold</td><td class="ok">+14-19% add-to-cart</td><td>Sacha Goureau (1M sesji)</td></tr>
+    <tr><td>Bottom navigation bar</td><td class="ok">+15-20% nawigacji</td><td>AppMySite, UXPin</td></tr>
+    <tr><td>Per-capsule pricing</td><td class="ok">+5-10% wieksze opakowanie</td><td>Huel, Ritual</td></tr>
+    <tr><td>Badge &bdquo;Najczesciej wybierane&rdquo;</td><td class="ok">+3-5% wieksze opakowanie</td><td>PagePilot</td></tr>
+  </table>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════ -->
+<div class="foot">
+  GENACTIV&reg; &middot; Plan prac H2 2026 &middot; Wygenerowano 6 lipca 2026<br>
+  Zrodla: Intelligems API (28 195 wizyt), GA4, Microsoft Clarity, roadmapa H2 2026<br>
+  Kontakt: d.slowik@notoagency.pl (Intelligems/theme) &middot; Repozytorium: genactiv-klaviyo
+</div>
+
+</div><!-- .page -->
+
+</body>
+</html>

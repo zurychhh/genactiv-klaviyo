@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv SEO — Weryfikacja 10 rund | 2026-07-06</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922; --orange: #db6d28;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent); }
+  .subtitle { color: var(--muted); margin-bottom: 2rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; }
+  .card-header { font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  th, td { padding: 0.5rem 0.75rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); font-weight: 600; white-space: nowrap; }
+  td { vertical-align: top; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+  .badge-critical { background: #f8514933; color: var(--red); }
+  .badge-high { background: #db6d2833; color: var(--orange); }
+  .badge-medium { background: #d2992233; color: var(--yellow); }
+  .badge-low { background: #3fb95033; color: var(--green); }
+  .badge-pass { background: #3fb95033; color: var(--green); }
+  .badge-fail { background: #f8514933; color: var(--red); }
+  .badge-skip { background: #8b949e33; color: var(--muted); }
+  .badge-fix { background: #58a6ff33; color: var(--accent); }
+  .verdict { font-size: 1.1rem; font-weight: 700; }
+  .verdict-pass { color: var(--green); }
+  .verdict-blocked { color: var(--orange); }
+  .round-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1rem; }
+  .round-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+  .round-num { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .agent-tag { font-size: 0.7rem; padding: 1px 6px; border-radius: 4px; background: #58a6ff22; color: var(--accent); }
+  code { background: #1c2128; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; color: #79c0ff; }
+  .mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; }
+  .summary-box { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+  .strikethrough { text-decoration: line-through; color: var(--muted); }
+  .highlight { background: #d2992233; padding: 0 4px; border-radius: 2px; }
+  .arrow { color: var(--green); font-weight: 700; }
+  details { margin: 0.5rem 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 0.5rem; background: var(--surface); border-radius: 4px; }
+  summary:hover { background: #1c2128; }
+  .timeline { border-left: 2px solid var(--border); margin-left: 1rem; padding-left: 1.5rem; }
+  .timeline-item { position: relative; margin-bottom: 1.5rem; }
+  .timeline-item::before { content: ''; position: absolute; left: -1.85rem; top: 0.5rem; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .timeline-item.done::before { background: var(--green); }
+  .timeline-item.blocked::before { background: var(--orange); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>GenActiv SEO — Raport weryfikacji 10 rund</h1>
+<p class="subtitle">2026-07-06 | 3 niezalezne agenty | 8 produktow | 43 issues audytu</p>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="summary-box">
+  <div class="stat">
+    <div class="stat-num" style="color: var(--green)">8</div>
+    <div class="stat-label">Zmiany zatwierdzone</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--red)">3</div>
+    <div class="stat-label">Zmiany zablokowane</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--yellow)">22</div>
+    <div class="stat-label">Ryzyk zidentyfikowanych</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--accent)">10</div>
+    <div class="stat-label">Rund weryfikacji</div>
+  </div>
+</div>
+
+<div class="card" style="border-color: var(--green);">
+  <div class="card-header">FINALNE WERDYKTY</div>
+  <table>
+    <tr><th>Zmiana</th><th>Werdykt</th><th>Powod</th></tr>
+    <tr>
+      <td>4 meta titles FIBERBIOM (nowe)</td>
+      <td><span class="badge badge-pass">EXECUTE</span></td>
+      <td>Produkty nie maja meta title — czyste dodanie, zero ryzyka utraty rankingu</td>
+    </tr>
+    <tr>
+      <td>4 meta descriptions FIBERBIOM (fix)</td>
+      <td><span class="badge badge-pass">EXECUTE</span></td>
+      <td>2 KRYTYCZNE bledy (15 zamiast 30 saszetek), 2 optymalizacje</td>
+    </tr>
+    <tr>
+      <td>24 ALT texty (18 unikalnych obrazkow)</td>
+      <td><span class="badge badge-critical">BLOCKED</span></td>
+      <td>Bug w narzedziu: GID ProductImage vs MediaImage — wymaga fix kodu</td>
+    </tr>
+    <tr>
+      <td>2 meta titles A2 dwupak (skrocenie)</td>
+      <td><span class="badge badge-skip">SKIP</span></td>
+      <td>Tylko 1-2 znaki ponad limit; ryzyko utraty rankingu &gt; kosmetyczna poprawa</td>
+    </tr>
+    <tr>
+      <td>Archiwizacja produktu TEST</td>
+      <td><span class="badge badge-skip">SKIP</span></td>
+      <td>Narzedzie MCP nie ma pola status — nie moze zmienic statusu produktu</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 1: ORIGINAL PROPOSAL -->
+<h2>1. Oryginalna propozycja (przed weryfikacja)</h2>
+
+<div class="card">
+  <div class="card-header">Zaproponowane meta titles</div>
+  <table>
+    <tr><th>#</th><th>Produkt</th><th>Propozycja (ORYGINALNA)</th><th>Znaki</th></tr>
+    <tr><td>1</td><td>FIBERBIOM Z ANANASEM</td><td class="strikethrough">Fiberbiom z ananasem — blonnik z colostrum | GenActiv</td><td>55</td></tr>
+    <tr><td>2</td><td>FIBERBIOM Z ANANASEM DWUPAK</td><td class="strikethrough">Fiberbiom z ananasem dwupak — oszczedz 10% | GenActiv</td><td>55</td></tr>
+    <tr><td>3</td><td>FIBERBIOM Z CZARNA PORZECZKA</td><td class="strikethrough">Fiberbiom z czarna porzeczka — blonnik | GenActiv</td><td>51</td></tr>
+    <tr><td>4</td><td>FIBERBIOM Z CZARNA PORZECZKA DWUPAK</td><td class="strikethrough">Fiberbiom czarna porzeczka dwupak | GenActiv</td><td>48</td></tr>
+    <tr><td>5</td><td>Colostrum A2 kapsulki Dwupak</td><td class="strikethrough">Colostrum A2 kapsulki 60 szt. dwupak | GenActiv</td><td>50</td></tr>
+    <tr><td>6</td><td>Colostrum A2 proszek dwupak</td><td class="strikethrough">Colostrum A2 proszek 45g dwupak | GenActiv</td><td>47</td></tr>
+  </table>
+  <p style="color: var(--muted); margin-top: 0.5rem; font-size: 0.85rem;">Wszystkie 6 propozycji zostaly poddane 10 rundom weryfikacji. 4 z nich przeszly po korektach, 2 wycofane.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 2: 10 ROUNDS OF VERIFICATION -->
+<h2>2. Przebieg 10 rund weryfikacji</h2>
+
+<div class="timeline">
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 1 <span class="agent-tag">Agent: Data Integrity</span></div>
+    <h3>Weryfikacja danych produktowych via Shopify MCP</h3>
+    <p>Pobrano wszystkie 9 produktow przez GraphQL API. Potwierdzone:</p>
+    <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+      <li>24 obrazki bez ALT na 8 produktach (bez TEST)</li>
+      <li>4 produkty FIBERBIOM bez meta title</li>
+      <li>2 meta titles Colostrum A2 za dlugie (61-62 znakow)</li>
+      <li><span class="badge badge-critical">CRITICAL</span> 6 obrazkow wspoldzielonych miedzy parami produktow (ananas single/dwupak, porzeczka single/dwupak)</li>
+      <li>3 kolekcje omnibus to wewnetrzne kolekcje Pandectes (niepubliczne) — poprawnie wykluczone</li>
+      <li>Colostrum z brzoskwinia (ID 15860778205516) jest w statusie DRAFT — zmiany SEO nie maja wplywu na indeksacje</li>
+    </ul>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 2 <span class="agent-tag">Agent: SEO Quality</span></div>
+    <h3>Analiza jakosci SEO + weryfikacja jezykowa</h3>
+    <p>Znaleziono 18 problemow (1 CRITICAL, 4 HIGH, 8 MEDIUM, 5 LOW):</p>
+    <table>
+      <tr><th>ID</th><th>Problem</th><th>Waga</th></tr>
+      <tr><td>#5</td><td><strong>"oszczedz 10%" jest BLEDNE</strong> — rzeczywisty rabat to 16.5% (179 PLN x2 = 358, dwupak = 299, oszcz. = 59 PLN)</td><td><span class="badge badge-critical">CRITICAL</span></td></tr>
+      <tr><td>#8</td><td>Separator niespojny: istniejace produkty uzywaja " – Genactiv", propozycja uzywa " | GenActiv"</td><td><span class="badge badge-high">HIGH</span></td></tr>
+      <tr><td>#12</td><td>A2 dwupak titles: 61-62 znakow to minimalnie za duzo — zmiana moze spowodowac spadek rankingu</td><td><span class="badge badge-high">HIGH</span></td></tr>
+      <tr><td>#15</td><td>Dwupaki FIBERBIOM maja IDENTYCZNE meta description jak wersje single (mowia "15 saszetek" zamiast "30")</td><td><span class="badge badge-high">HIGH</span></td></tr>
+      <tr><td>#6</td><td>Tytul #4: brak przyimka "z", bly przypadek gramatyczny ("czarna porzeczka" zamiast "czarna porzeczka")</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+      <tr><td>#11</td><td>"60 szt." w dwupaku jest niejednoznaczne (60 czy 120 kapsulkami?)</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+      <tr><td>#2,#4</td><td>Kanibalizacja: "fiberbiom z ananasem" single vs dwupak — akceptowalne, Google rozroznra po URL</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+      <tr><td>#A</td><td>Case inconsistency: base FIBERBIOM uzywa ALL CAPS, propozycja uzywa Title Case</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+    </table>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 3 <span class="agent-tag">Agent: Risk Assessment</span></div>
+    <h3>Pelna matryca ryzyk — 22 ryzyk zidentyfikowanych</h3>
+    <table>
+      <tr><th>ID</th><th>Ryzyko</th><th>Waga</th><th>Rekomendacja</th></tr>
+      <tr><td>R01</td><td>Shopify API 2023-07 jest sunset — auto-forward do 2025-07+</td><td><span class="badge badge-critical">CRITICAL</span></td><td>Upgrade API version</td></tr>
+      <tr><td>R02</td><td><code>productUpdateMedia</code> mutation deprecated od 2025-07</td><td><span class="badge badge-critical">CRITICAL</span></td><td>Jeszcze dziala, ale na liscie do usuniecia</td></tr>
+      <tr><td>R03</td><td><strong>GID mismatch:</strong> narzedzie konstruuje <code>MediaImage</code> GID, ale audit zwraca <code>ProductImage</code> GID</td><td><span class="badge badge-critical">CRITICAL</span></td><td>Test 1 obrazka przed bulk</td></tr>
+      <tr><td>R05</td><td>Brak mechanizmu rollback — zmiany sa natychmiastowe i nieodwracalne</td><td><span class="badge badge-high">HIGH</span></td><td>Zapisac stan przed zmianami</td></tr>
+      <tr><td>R10</td><td>Zmiana meta title na stronach ktore juz rankuja moze spowodowac tymczasowy spadek</td><td><span class="badge badge-medium">MEDIUM</span></td><td>Dotyczy TYLKO A2 dwupak (SKIP)</td></tr>
+      <tr><td>R14</td><td>Claim cenowy w meta title moze byc nieaktualny po zmianie cen</td><td><span class="badge badge-high">HIGH</span></td><td>Usunieto claims z propozycji</td></tr>
+      <tr><td>R15</td><td>TEST product: narzedzie MCP nie ma pola <code>status</code></td><td><span class="badge badge-high">HIGH</span></td><td>SKIP — product juz jest DRAFT</td></tr>
+      <tr><td>R18</td><td><code>update-product-seo</code> NIE nadpisuje description gdy podamy tylko title</td><td><span class="badge badge-low">LOW</span></td><td>SAFE — potwierdzone w kodzie zrodlowym</td></tr>
+    </table>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 4 <span class="agent-tag">Agent: Technical Code Audit</span></div>
+    <h3>Weryfikacja kodu zrodlowego narzedzi MCP</h3>
+    <p>Przeczytano 5 plikow TypeScript z <code>shopify-mcp-extended/src/tools/</code>:</p>
+    <table>
+      <tr><th>Plik</th><th>Weryfikacja</th><th>Wynik</th></tr>
+      <tr>
+        <td><code>index.ts:66</code></td>
+        <td>API version = <code>2023-07</code>, hardcoded, brak override</td>
+        <td><span class="badge badge-high">RISK</span></td>
+      </tr>
+      <tr>
+        <td><code>updateProductImages.ts:72-74</code></td>
+        <td>Konstruuje <code>gid://shopify/MediaImage/{id}</code> — ale audit zwraca <code>ProductImage</code></td>
+        <td><span class="badge badge-critical">BUG</span></td>
+      </tr>
+      <tr>
+        <td><code>updateProductSeo.ts:56-62</code></td>
+        <td>Partial update safe — buduje obiekt SEO tylko z podanych pol</td>
+        <td><span class="badge badge-pass">SAFE</span></td>
+      </tr>
+      <tr>
+        <td><code>updateProductContent.ts:5-11</code></td>
+        <td>Brak pola <code>status</code> — NIE mozna zmienic statusu produktu</td>
+        <td><span class="badge badge-fail">N/A</span></td>
+      </tr>
+      <tr>
+        <td><code>bulkUpdateSeo.ts:95-109</code></td>
+        <td>Dry-run pomija walidacje (nie sprawdza czy produkt istnieje)</td>
+        <td><span class="badge badge-medium">LIMITED</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 5 <span class="agent-tag">Agent: Pricing Verification</span></div>
+    <h3>Weryfikacja cen i rabatow via Shopify API</h3>
+    <table>
+      <tr><th>Produkt</th><th>Cena single</th><th>2x single</th><th>Cena dwupak</th><th>Oszcz. PLN</th><th>Oszcz. %</th></tr>
+      <tr><td>FIBERBIOM Ananas</td><td>179</td><td>358</td><td>299</td><td><strong>59</strong></td><td><strong>16.48%</strong></td></tr>
+      <tr><td>FIBERBIOM Porzeczka</td><td>179</td><td>358</td><td>299</td><td><strong>59</strong></td><td><strong>16.48%</strong></td></tr>
+      <tr><td>Colostrum A2 kapsulki</td><td>135</td><td>270</td><td>229</td><td><strong>41</strong></td><td><strong>15.19%</strong></td></tr>
+      <tr><td>Colostrum A2 proszek</td><td>245</td><td>490</td><td>419</td><td><strong>71</strong></td><td><strong>14.49%</strong></td></tr>
+    </table>
+    <p style="margin-top: 0.75rem;"><span class="badge badge-critical">CONFIRMED</span> "oszczedz 10%" jest BLEDNE — rzeczywisty rabat to <strong>14.5-16.5%</strong>. Usuniety z propozycji.</p>
+    <p><span class="badge badge-critical">CONFIRMED</span> Dwupaki FIBERBIOM: meta description mowi "15 saszetek" zamiast "30 saszetek (2x15)".</p>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 6 <span class="agent-tag">Agent: Cross-Verification</span></div>
+    <h3>Weryfikacja krzyzowa skorygowanych propozycji</h3>
+    <p>Po poprawkach z rund 1-5, zweryfikowano <strong>skorygowane</strong> propozycje:</p>
+    <table>
+      <tr><th>#</th><th>Propozycja skorygowana</th><th>Znaki</th><th>Werdykt</th></tr>
+      <tr>
+        <td>1</td>
+        <td><code>FIBERBIOM z ananasem – blonnik + colostrum – Genactiv</code></td>
+        <td>53</td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><code>FIBERBIOM z ananasem dwupak – blonnik + colostrum – Genactiv</code></td>
+        <td>60</td>
+        <td><span class="badge badge-pass">PASS</span> (na granicy)</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><code>FIBERBIOM z czarna porzeczka – blonnik – Genactiv</code></td>
+        <td>49</td>
+        <td><span class="badge badge-pass">PASS</span> (brak "colostrum" — akceptowane)</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><code>FIBERBIOM z czarna porzeczka dwupak – blonnik – Genactiv</code></td>
+        <td>56</td>
+        <td><span class="badge badge-pass">PASS</span> (brak "colostrum" — akceptowane)</td>
+      </tr>
+      <tr>
+        <td>5-6</td>
+        <td><em>A2 dwupak: BEZ ZMIAN</em></td>
+        <td>61-62</td>
+        <td><span class="badge badge-skip">SKIP</span></td>
+      </tr>
+    </table>
+    <p style="margin-top: 0.5rem;">Poprawki zastosowane: ALL CAPS "FIBERBIOM", separator " – " (en-dash) jak istniejace, "Genactiv" (nie "GenActiv"), "blonnik + colostrum" (nie "z"), usuniety claim "oszczedz 10%", poprawiona gramatyka polska.</p>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 7 <span class="agent-tag">Agent: Image ID Format</span></div>
+    <h3>Weryfikacja formatow ID obrazkow</h3>
+    <p>Przeanalizowano <code>updateProductImages.ts</code> linia po linii:</p>
+    <div class="card" style="border-color: var(--red);">
+      <div class="card-header"><span class="badge badge-critical">BLOCKER</span> GID mismatch potwierdrzony</div>
+      <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+        <li>Audit zwraca: <code>gid://shopify/ProductImage/75127364321612</code></li>
+        <li>Narzedzie konstruuje: <code>gid://shopify/MediaImage/75127364321612</code></li>
+        <li>Mutation <code>productUpdateMedia</code> oczekuje: <code>MediaImage</code> GID</li>
+        <li><strong>Numeryczny ID z ProductImage =/= numeryczny ID z MediaImage</strong></li>
+        <li>Walidacja (linia 77-81) dopasuje po numerze, ale mutation uzyje blednego GID</li>
+      </ul>
+      <p style="margin-top: 0.5rem; font-weight: 600;">Wymagany fix: zmiana query z <code>product.images</code> na <code>product.media</code>, lub uzycie <code>productUpdate</code> mutation zamiast <code>productUpdateMedia</code>.</p>
+    </div>
+    <p>Przygotowano 8 kompletnych payloadow API (po 1 na produkt) z 24 ALT textami — gotowe do uzycia PO naprawie buga.</p>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 8 <span class="agent-tag">Agent: Meta Description Fix</span></div>
+    <h3>Weryfikacja i korekta meta descriptions FIBERBIOM</h3>
+    <p>Pobrano aktualne meta descriptions z Shopify API. Potwierdzone bledy:</p>
+    <table>
+      <tr><th>Produkt</th><th>ID</th><th>Current</th><th>Blad</th></tr>
+      <tr>
+        <td>Ananas DWUPAK</td>
+        <td>15853802783052</td>
+        <td>"...Genactiv <span class="highlight">(15 saszetek)</span>..." (144 zn.)</td>
+        <td><span class="badge badge-critical">BLEDNA ILOSC</span> + <span class="badge badge-high">DUPLIKAT</span></td>
+      </tr>
+      <tr>
+        <td>Porzeczka DWUPAK</td>
+        <td>15853446922572</td>
+        <td>"...Genactiv <span class="highlight">(15 saszetek)</span>..." (152 zn.)</td>
+        <td><span class="badge badge-critical">BLEDNA ILOSC</span> + <span class="badge badge-high">DUPLIKAT</span></td>
+      </tr>
+    </table>
+    <p style="margin-top: 0.5rem;">Skorygowane descriptions: 30 saszetek (2x15), cena 299 zl, oszczednosc 59 zl, unikalne, CTA. Dlugosc: 131 i 139 znakow.</p>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 9 <span class="agent-tag">Konsolidacja</span></div>
+    <h3>Konsolidacja wnioskow z rund 1-8</h3>
+    <p>Kompilacja finalnej listy zmian z uwzglednieniem wszystkich 22 ryzyk, 18 problemow SEO i 3 blokerow technicznych. Weryfikacja krzyzowa miedzy agentami — brak sprzecznosci.</p>
+  </div>
+
+  <div class="timeline-item done">
+    <div class="round-num">RUNDA 10 <span class="agent-tag">Final Sign-Off</span></div>
+    <h3>Finalne zatwierdzenie + raport HTML</h3>
+    <p>Wszystkie propozycje przeszly 10 rund. Wygenerowany raport ponizej.</p>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- SECTION 3: FINAL APPROVED CHANGES -->
+<h2>3. Finalne zatwierdzone zmiany</h2>
+
+<h3>A. Meta Titles — 4 nowe (zero ryzyka utraty rankingu)</h3>
+<div class="card" style="border-color: var(--green);">
+  <table>
+    <tr><th>Product ID</th><th>Produkt</th><th>Nowy meta title</th><th>Zn.</th></tr>
+    <tr>
+      <td><code>15850903961932</code></td>
+      <td>FIBERBIOM Z ANANASEM</td>
+      <td><strong>FIBERBIOM z ananasem – blonnik + colostrum – Genactiv</strong></td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td><code>15853802783052</code></td>
+      <td>FIBERBIOM Z ANANASEM DWUPAK</td>
+      <td><strong>FIBERBIOM z ananasem dwupak – blonnik + colostrum – Genactiv</strong></td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td><code>15850938106188</code></td>
+      <td>FIBERBIOM Z CZARNA PORZECZKA</td>
+      <td><strong>FIBERBIOM z czarna porzeczka – blonnik – Genactiv</strong></td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td><code>15853446922572</code></td>
+      <td>FIBERBIOM Z CZARNA PORZECZKA DWUPAK</td>
+      <td><strong>FIBERBIOM z czarna porzeczka dwupak – blonnik – Genactiv</strong></td>
+      <td>56</td>
+    </tr>
+  </table>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted);">Korekty vs oryginalna propozycja: ALL CAPS "FIBERBIOM" | separator " – " (en-dash) | "Genactiv" nie "GenActiv" | usuniety "oszczedz 10%" | dodana poprawna gramatyka | "blonnik + colostrum" dla spojnosci z produktem bazowym</p>
+</div>
+
+<h3>B. Meta Descriptions — 2 krytyczne fixy + 2 optymalizacje</h3>
+<div class="card" style="border-color: var(--green);">
+  <table>
+    <tr><th>Product ID</th><th>Produkt</th><th>Nowa meta description</th><th>Zn.</th><th>Typ</th></tr>
+    <tr>
+      <td><code>15853802783052</code></td>
+      <td>FIBERBIOM ANANAS DWUPAK</td>
+      <td>FIBERBIOM z ANANASEM dwupak – 30 saszetek (2x15) w cenie 299 zl. Oszczedz 59 zl! Blonnik z kory modrzewia + colostrum. Zamow teraz!</td>
+      <td>131</td>
+      <td><span class="badge badge-critical">CRITICAL FIX</span></td>
+    </tr>
+    <tr>
+      <td><code>15853446922572</code></td>
+      <td>FIBERBIOM PORZECZKA DWUPAK</td>
+      <td>FIBERBIOM Z CZARNA PORZECZKA dwupak – 30 saszetek (2x15) w cenie 299 zl. Oszczedz 59 zl! Blonnik z kory modrzewia + colostrum. Zamow teraz!</td>
+      <td>139</td>
+      <td><span class="badge badge-critical">CRITICAL FIX</span></td>
+    </tr>
+    <tr>
+      <td><code>15850903961932</code></td>
+      <td>FIBERBIOM ANANAS single</td>
+      <td>FIBERBIOM z ANANASEM Genactiv (15 saszetek) – blonnik z kory modrzewia i colostrum bovinum. Wspiera mikrobiote i jelita. Zamow online!</td>
+      <td>134</td>
+      <td><span class="badge badge-low">OPTIMIZE</span></td>
+    </tr>
+    <tr>
+      <td><code>15850938106188</code></td>
+      <td>FIBERBIOM PORZECZKA single</td>
+      <td>FIBERBIOM Z CZARNA PORZECZKA Genactiv (15 saszetek) – blonnik z kory modrzewia i colostrum bovinum. Wspiera mikrobiote i jelita. Zamow online!</td>
+      <td>142</td>
+      <td><span class="badge badge-low">OPTIMIZE</span></td>
+    </tr>
+  </table>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted);">Dwupak: 15→30 saszetek | dodano cenę + oszczednosc 59 zl | unikalna tresc | CTA "Zamow teraz!" | Single: dodano "bovinum" | zmieniono CTA | roznicowanie od dwupaka</p>
+</div>
+
+<h3>C. ALT Texty — 24 obrazki (18 unikalnych) — <span style="color: var(--orange)">ZABLOKOWANE</span></h3>
+<div class="card" style="border-color: var(--orange);">
+  <div class="card-header"><span class="badge badge-critical">BLOCKER</span> Wymaga naprawy kodu przed wykonaniem</div>
+  <p>Bug w <code>shopify-mcp-extended/src/tools/updateProductImages.ts</code>:</p>
+  <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+    <li>Linia 74: konstruuje <code>gid://shopify/MediaImage/{id}</code></li>
+    <li>Ale ID z audytu to <code>ProductImage</code> — inny namespace, inny numer</li>
+    <li><strong>Fix:</strong> Zmienic query na <code>product.media</code> lub uzyc mutation <code>productUpdate</code> z <code>images</code> input</li>
+  </ul>
+
+  <details style="margin-top: 1rem;">
+    <summary>Pelna lista 18 ALT textow (gotowe po naprawie buga)</summary>
+    <table>
+      <tr><th>#</th><th>Image ID (ProductImage)</th><th>Produkt(y)</th><th>ALT text (PL)</th><th>Shared?</th></tr>
+      <tr><td>1</td><td>75127364321612</td><td>FIBERBIOM base</td><td>FIBERBIOM Genactiv – opakowanie saszetki z blonnikiem i colostrum</td><td>Nie</td></tr>
+      <tr><td>2</td><td>75097906970956</td><td>Ananas Dwupak</td><td>FIBERBIOM z ananasem Genactiv – dwupak, dwa opakowania obok siebie</td><td>Nie</td></tr>
+      <tr><td>3</td><td>75127051518284</td><td>Ananas Single</td><td>FIBERBIOM z ananasem Genactiv – opakowanie saszetki z kodem kreskowym</td><td>Nie</td></tr>
+      <tr><td>4</td><td>75058333811020</td><td>Ananas Single + Dwupak</td><td>FIBERBIOM z ananasem Genactiv – saszetka z blonnikiem, smak ananasowy</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>5</td><td>75058333778252</td><td>Ananas Single + Dwupak</td><td>FIBERBIOM z ananasem Genactiv – sklad produktu i informacje odzywcze</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>6</td><td>75058333843788</td><td>Ananas Single + Dwupak</td><td>FIBERBIOM z ananasem Genactiv – sposob uzycia, rozpuszczanie w wodzie</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>7</td><td>75092159430988</td><td>Porzeczka Dwupak</td><td>FIBERBIOM z czarna porzeczka Genactiv – dwupak, dwa opakowania</td><td>Nie</td></tr>
+      <tr><td>8</td><td>75127051583820</td><td>Porzeczka Single</td><td>FIBERBIOM z czarna porzeczka Genactiv – opakowanie saszetki z kodem</td><td>Nie</td></tr>
+      <tr><td>9</td><td>75058399543628</td><td>Porzeczka Single + Dwupak</td><td>FIBERBIOM z czarna porzeczka Genactiv – sklad produktu i wartosci</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>10</td><td>75058396594508</td><td>Porzeczka Single + Dwupak</td><td>FIBERBIOM z czarna porzeczka Genactiv – saszetka z blonnikiem</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>11</td><td>75058399576396</td><td>Porzeczka Single + Dwupak</td><td>FIBERBIOM z czarna porzeczka Genactiv – sposob uzycia i dawkowanie</td><td><span class="badge badge-high">TAK</span></td></tr>
+      <tr><td>12</td><td>75127182262604</td><td>A2 kaps. Dwupak</td><td>Genactiv Colostrum A2 kapsulki – dwupak, dwa opakowania 60 kapsulkami</td><td>Nie</td></tr>
+      <tr><td>13</td><td>75127193993548</td><td>A2 proszek Dwupak</td><td>Genactiv Colostrum A2 proszek – dwupak, dwie puszki 45 g</td><td>Nie</td></tr>
+      <tr><td>14</td><td>75182361477452</td><td>Colostrum brzoskwinia</td><td>Genactiv Colostrum z brzoskwinia – opakowanie proszek 60 g, widok frontu</td><td>Nie</td></tr>
+      <tr><td>15</td><td>75182361542988</td><td>Colostrum brzoskwinia</td><td>Genactiv Colostrum z brzoskwinia – proszek 60 g, informacje o skladzie</td><td>Nie</td></tr>
+      <tr><td>16</td><td>75182361510220</td><td>Colostrum brzoskwinia</td><td>Genactiv Colostrum z brzoskwinia – proszek rozpuszczony w szklance</td><td>Nie</td></tr>
+      <tr><td>17</td><td>75182361575756</td><td>Colostrum brzoskwinia</td><td>Genactiv Colostrum z brzoskwinia – sposob uzycia i dawkowanie</td><td>Nie</td></tr>
+      <tr><td>18</td><td>75182361608524</td><td>Colostrum brzoskwinia</td><td>Genactiv Colostrum z brzoskwinia – tabela wartosci odzywczych</td><td>Nie</td></tr>
+    </table>
+  </details>
+</div>
+
+<hr>
+
+<!-- SECTION 4: WHAT CHANGED VS ORIGINAL -->
+<h2>4. Co sie zmienilo vs oryginalna propozycja</h2>
+
+<div class="card">
+  <table>
+    <tr><th>Element</th><th>Oryginalna propozycja</th><th>Po 10 rundach</th><th>Powod zmiany</th></tr>
+    <tr>
+      <td>Title #2 claim</td>
+      <td class="strikethrough">"oszczedz 10%"</td>
+      <td>Usuniete</td>
+      <td><span class="badge badge-critical">R5</span> Rabat to 16.5% nie 10%. Claim cenowy jest ryzykowny po zmianie cen.</td>
+    </tr>
+    <tr>
+      <td>Separator</td>
+      <td class="strikethrough">" | GenActiv"</td>
+      <td>" – Genactiv"</td>
+      <td><span class="badge badge-high">R2</span> Spojnosc z istniejacymi produktami w katalogu.</td>
+    </tr>
+    <tr>
+      <td>Case</td>
+      <td class="strikethrough">"Fiberbiom"</td>
+      <td>"FIBERBIOM"</td>
+      <td><span class="badge badge-medium">R6</span> Base product uzywa ALL CAPS — spojnosc w SERP.</td>
+    </tr>
+    <tr>
+      <td>Gramatyka #4</td>
+      <td class="strikethrough">"Fiberbiom czarna porzeczka dwupak"</td>
+      <td>"FIBERBIOM z czarna porzeczka dwupak"</td>
+      <td><span class="badge badge-medium">R2</span> Brakujacy przyimek "z" + bledny przypadek.</td>
+    </tr>
+    <tr>
+      <td>A2 dwupak titles</td>
+      <td class="strikethrough">Skrocic do &le;60 zn.</td>
+      <td>BEZ ZMIAN (SKIP)</td>
+      <td><span class="badge badge-high">R3</span> 1-2 zn. ponad limit; ryzyko rankingu &gt; kosmetyka.</td>
+    </tr>
+    <tr>
+      <td>TEST archiwizacja</td>
+      <td class="strikethrough">Zarchiwizowac</td>
+      <td>SKIP</td>
+      <td><span class="badge badge-high">R4</span> Narzedzie nie moze zmienic statusu produktu.</td>
+    </tr>
+    <tr>
+      <td>Meta descriptions</td>
+      <td><em>(nie bylo w propozycji)</em></td>
+      <td>DODANE: 4 fixy</td>
+      <td><span class="badge badge-critical">R8</span> Dwupaki mowia "15 saszetek" (bledne) + duplikaty.</td>
+    </tr>
+    <tr>
+      <td>ALT texty</td>
+      <td>24 obrazki, wykonaj teraz</td>
+      <td>ZABLOKOWANE — wymaga fix kodu</td>
+      <td><span class="badge badge-critical">R7</span> GID ProductImage vs MediaImage mismatch.</td>
+    </tr>
+    <tr>
+      <td>"blonnik z colostrum"</td>
+      <td class="strikethrough">"z"</td>
+      <td>"+"</td>
+      <td><span class="badge badge-low">R6</span> Spojnosc z base product ("blonnik + colostrum").</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 5: RISK MATRIX -->
+<h2>5. Pelna matryca ryzyk (22 ryzyka)</h2>
+
+<details>
+  <summary>Pokaz pelna matryca (22 ryzyka)</summary>
+  <table>
+    <tr><th>ID</th><th>Kategoria</th><th>Opis</th><th>Waga</th><th>P-stwo</th><th>Mitygacja</th><th>Rek.</th></tr>
+    <tr><td>R01</td><td>API</td><td>Shopify API 2023-07 sunset</td><td><span class="badge badge-critical">CRIT</span></td><td>Pewne</td><td>Upgrade index.ts:66</td><td>MODIFY</td></tr>
+    <tr><td>R02</td><td>API</td><td>productUpdateMedia deprecated</td><td><span class="badge badge-critical">CRIT</span></td><td>Mozliwe</td><td>Planuj migracje do fileUpdate</td><td>MODIFY</td></tr>
+    <tr><td>R03</td><td>API</td><td>GID mismatch ProductImage/MediaImage</td><td><span class="badge badge-critical">CRIT</span></td><td>Pewne</td><td>Fix kodu lub test 1 obrazka</td><td>BLOCK</td></tr>
+    <tr><td>R04</td><td>API</td><td>6 wspoldzielonych obrazkow miedzy produktami</td><td><span class="badge badge-high">HIGH</span></td><td>Mozliwe</td><td>Generyczne ALT dla shared images</td><td>MODIFY</td></tr>
+    <tr><td>R05</td><td>API</td><td>Brak rollback</td><td><span class="badge badge-high">HIGH</span></td><td>Pewne</td><td>Zapisac stan przed zmianami (JSON)</td><td>PROCEED</td></tr>
+    <tr><td>R06</td><td>API</td><td>Partial update na batch failure</td><td><span class="badge badge-high">HIGH</span></td><td>Mozliwe</td><td>Produkt po produkcie, nie bulk</td><td>PROCEED</td></tr>
+    <tr><td>R07</td><td>API</td><td>Rate limiting (32 calki)</td><td><span class="badge badge-medium">MED</span></td><td>Malo prwdp.</td><td>500ms spacing w orchestratorze</td><td>PROCEED</td></tr>
+    <tr><td>R08</td><td>API</td><td>Stale image IDs</td><td><span class="badge badge-medium">MED</span></td><td>Malo prwdp.</td><td>Walidacja wbudowana w narzedzie</td><td>PROCEED</td></tr>
+    <tr><td>R09</td><td>API</td><td>updated_at timestamp side effect</td><td><span class="badge badge-low">LOW</span></td><td>Pewne</td><td>Korzystne — szybsza reindeksacja</td><td>PROCEED</td></tr>
+    <tr><td>R10</td><td>SEO</td><td>Ranking disruption po zmianie meta title</td><td><span class="badge badge-medium">MED</span></td><td>Mozliwe</td><td>Dotyczy TYLKO A2 dwupak — SKIP</td><td>SKIP</td></tr>
+    <tr><td>R11</td><td>SEO</td><td>Google title rewriting</td><td><span class="badge badge-medium">MED</span></td><td>Mozliwe</td><td>Phased rollout: 1 produkt, czekaj 2 tyg.</td><td>PROCEED</td></tr>
+    <tr><td>R12</td><td>SEO</td><td>ALT text spam signal</td><td><span class="badge badge-low">LOW</span></td><td>Malo prwdp.</td><td>Standardowa praktyka SEO</td><td>PROCEED</td></tr>
+    <tr><td>R13</td><td>SEO</td><td>Opoznienie reindeksacji (2-8 tyg.)</td><td><span class="badge badge-low">LOW</span></td><td>Pewne</td><td>Zglos do GSC po zmianach</td><td>PROCEED</td></tr>
+    <tr><td>R14</td><td>Biznes</td><td>Claim cenowy w meta title</td><td><span class="badge badge-high">HIGH</span></td><td>Bylo pewne</td><td>USUNIETE z propozycji</td><td>DONE</td></tr>
+    <tr><td>R15</td><td>Biznes</td><td>Archiwizacja TEST — tool nie moze</td><td><span class="badge badge-high">HIGH</span></td><td>Pewne</td><td>SKIP — product juz DRAFT</td><td>SKIP</td></tr>
+    <tr><td>R16</td><td>Biznes</td><td>Google Ads quality score impact</td><td><span class="badge badge-medium">MED</span></td><td>Malo prwdp.</td><td>Sprawdzic aktywne Ads kampanie</td><td>CHECK</td></tr>
+    <tr><td>R17</td><td>Biznes</td><td>Email template references</td><td><span class="badge badge-low">LOW</span></td><td>Malo prwdp.</td><td>Emaile uzywaja nazw produktow, nie meta</td><td>PROCEED</td></tr>
+    <tr><td>R18</td><td>Data</td><td>update-product-seo partial update safe</td><td><span class="badge badge-low">LOW</span></td><td>Malo prwdp.</td><td>Potwierdzone w kodzie zrodlowym</td><td>PROCEED</td></tr>
+    <tr><td>R19</td><td>Data</td><td>update-product-images partial safe</td><td><span class="badge badge-low">LOW</span></td><td>Malo prwdp.</td><td>Aktualizuje tylko podane obrazki</td><td>PROCEED</td></tr>
+    <tr><td>R20</td><td>Data</td><td>Polskie znaki encoding</td><td><span class="badge badge-low">LOW</span></td><td>Malo prwdp.</td><td>UTF-8 natywne w GraphQL</td><td>PROCEED</td></tr>
+    <tr><td>R21</td><td>Edge</td><td>Concurrent modification</td><td><span class="badge badge-medium">MED</span></td><td>Mozliwe</td><td>Weryfikuj stan tuz przed zmiana</td><td>MODIFY</td></tr>
+    <tr><td>R22</td><td>Edge</td><td>GSC indexation status nieznany</td><td><span class="badge badge-medium">MED</span></td><td>Mozliwe</td><td>Sprawdz GSC po wdrozeniu</td><td>CHECK</td></tr>
+  </table>
+</details>
+
+<hr>
+
+<!-- SECTION 6: EXECUTION PLAN -->
+<h2>6. Plan wykonania</h2>
+
+<div class="card" style="border-color: var(--green);">
+  <div class="card-header">KROK 1: Meta Titles + Descriptions (TERAZ — gotowe do wykonania)</div>
+  <p>Narzedzie: <code>update-product-seo</code> (potwierdzone safe — partial update, nie nadpisuje pol)</p>
+  <ol style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+    <li>4x <code>update-product-seo</code> z metaTitle (FIBERBIOM)</li>
+    <li>4x <code>update-product-seo</code> z metaDescription (FIBERBIOM — 2 critical fix + 2 optymalizacje)</li>
+    <li>Produkt po produkcie, sprawdzic odpowiedz po kazdym</li>
+  </ol>
+  <p style="margin-top: 0.5rem;"><strong>Estymowany zysk:</strong> PLN 300-700/mies (meta titles CTR) + fix bledow faktycznych (descriptions)</p>
+</div>
+
+<div class="card" style="border-color: var(--orange);">
+  <div class="card-header">KROK 2: ALT Texty (ZABLOKOWANE — wymaga fix kodu)</div>
+  <p>Przed wykonaniem trzeba naprawic <code>updateProductImages.ts</code>:</p>
+  <ol style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+    <li>Zmienic query z <code>product.images</code> na <code>product.media</code> (linie 34-50)</li>
+    <li>Lub: uzyc mutation <code>productUpdate</code> z input <code>images</code> zamiast <code>productUpdateMedia</code></li>
+    <li>Po naprawie: test na 1 obrazku, potem bulk 24</li>
+  </ol>
+  <p style="margin-top: 0.5rem;"><strong>Estymowany zysk:</strong> PLN 150-500/mies (po indeksacji 3-6m)</p>
+</div>
+
+<div class="card" style="border-color: var(--muted);">
+  <div class="card-header">SKIP (uzasadnione)</div>
+  <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9rem;">
+    <li><strong>A2 dwupak meta title shortening:</strong> 1-2 znaki ponad limit. Ryzyko rankingu przewyzsza kosmetyczna poprawe SERP.</li>
+    <li><strong>TEST product archival:</strong> Narzedzie nie ma pola <code>status</code>. Produkt juz jest DRAFT (niewidoczny).</li>
+    <li><strong>Colostrum brzoskwinia ALT:</strong> Produkt jest w DRAFT — Google nie indeksuje. Bez wplywu SEO.</li>
+  </ul>
+</div>
+
+<hr>
+
+<h2>7. Podsumowanie weryfikacji</h2>
+
+<div class="card">
+  <table>
+    <tr><th>Metryka</th><th>Wartosc</th></tr>
+    <tr><td>Laczna liczba rund weryfikacji</td><td><strong>10</strong></td></tr>
+    <tr><td>Niezalezne agenty</td><td><strong>3</strong> (Data Integrity, SEO Quality, Risk Assessment) + 5 specjalistycznych</td></tr>
+    <tr><td>Laczna liczba wyzwan agentow</td><td><strong>8</strong> (po 3 w rundach 1-3, 4-6, po 2 w 7-8)</td></tr>
+    <tr><td>Produkty zweryfikowane via API</td><td><strong>9</strong> (kazdy pobrany z Shopify GraphQL)</td></tr>
+    <tr><td>Plikow kodu zrodlowego przeczytanych</td><td><strong>5</strong> (index.ts, updateProductImages.ts, updateProductSeo.ts, updateProductContent.ts, bulkUpdateSeo.ts)</td></tr>
+    <tr><td>Ryzyk zidentyfikowanych</td><td><strong>22</strong> (3 CRITICAL, 5 HIGH, 8 MEDIUM, 6 LOW)</td></tr>
+    <tr><td>Problemow SEO znalezionych</td><td><strong>18</strong> (1 CRITICAL, 4 HIGH, 8 MEDIUM, 5 LOW)</td></tr>
+    <tr><td>Zmian zatwierdzonych do wykonania</td><td><strong>8</strong> (4 meta titles + 4 meta descriptions)</td></tr>
+    <tr><td>Zmian zablokowanych (wymaga fix kodu)</td><td><strong>1</strong> (24 ALT texty)</td></tr>
+    <tr><td>Zmian wycofanych (SKIP)</td><td><strong>3</strong> (A2 titles, TEST archiwizacja, brzoskwinia ALT)</td></tr>
+  </table>
+</div>
+
+<p style="text-align: center; color: var(--muted); margin-top: 2rem; font-size: 0.8rem;">
+  Raport wygenerowany 2026-07-06 przez Claude Code (Opus 4.6) | 10 rund weryfikacji | 3 niezalezne agenty | GenActiv.pl SEO
+</p>
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+{
+  "products": {
+    "15091398934860": {
+      "title": "FIBERBIOM - Błonnik + Colostrum",
+      "handle": "fiberbiom-blonnik-colostrum",
+      "status": "ACTIVE",
+      "seo_title": "FIBERBIOM – błonnik + colostrum – Genactiv",
+      "seo_title_len": 42,
+      "seo_desc": "FIBERBIOM Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!",
+      "seo_desc_len": 133,
+      "total_images": 4,
+      "images_without_alt": 1,
+      "images_with_alt": 3,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75127364321612"
+      ],
+      "image_ids_have_alt": [
+        [
+          "gid://shopify/ProductImage/66129287414092",
+          "FIBERBIOM Genactiv – błonnik z colostrum, informacje o produkcie"
+        ],
+        [
+          "gid://shopify/ProductImage/66129287184716",
+          "FIBERBIOM Genactiv – błonnik z colostrum, sposób użycia"
+        ],
+        [
+          "gid://shopify/ProductImage/66129287086412",
+          "FIBERBIOM Genactiv – błonnik z colostrum, skład produktu"
+        ]
+      ],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75127364321612",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/fiberbiom_zwykly_zdj_1_ko...",
+          "width": 2000,
+          "height": 3000
+        },
+        {
+          "id": "gid://shopify/ProductImage/66129287414092",
+          "alt": "FIBERBIOM Genactiv – błonnik z colostrum, informacje o produkcie",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Fiberbiom_www_5.jpg?v=175...",
+          "width": 2000,
+          "height": 3000
+        },
+        {
+          "id": "gid://shopify/ProductImage/66129287184716",
+          "alt": "FIBERBIOM Genactiv – błonnik z colostrum, sposób użycia",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Fiberbiom_www_7.jpg?v=175...",
+          "width": 1280,
+          "height": 1280
+        },
+        {
+          "id": "gid://shopify/ProductImage/66129287086412",
+          "alt": "FIBERBIOM Genactiv – błonnik z colostrum, skład produktu",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Fiberbiom_www_8.jpg?v=175...",
+          "width": 1280,
+          "height": 1280
+        }
+      ]
+    },
+    "15853802783052": {
+      "title": "FIBERBIOM Z ANANASEM DWUPAK",
+      "handle": "fiberbiom-z-ananasem-dwupak",
+      "status": "ACTIVE",
+      "seo_title": null,
+      "seo_title_len": 0,
+      "seo_desc": "FIBERBIOM z ANANASEM Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!",
+      "seo_desc_len": 144,
+      "total_images": 4,
+      "images_without_alt": 4,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75097906970956",
+        "gid://shopify/ProductImage/75058333811020",
+        "gid://shopify/ProductImage/75058333778252",
+        "gid://shopify/ProductImage/75058333843788"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75097906970956",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/dwupakfiberbiomananas_5f1...",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333811020",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria21_42fbfce9...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333778252",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria3_9502742d-...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333843788",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria41_527a9e72...",
+          "width": 1080,
+          "height": 1080
+        }
+      ]
+    },
+    "15850903961932": {
+      "title": "FIBERBIOM Z ANANASEM",
+      "handle": "fiberbiom-z-ananasem",
+      "status": "ACTIVE",
+      "seo_title": null,
+      "seo_title_len": 0,
+      "seo_desc": "FIBERBIOM z ANANASEM Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!",
+      "seo_desc_len": 144,
+      "total_images": 4,
+      "images_without_alt": 4,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75127051518284",
+        "gid://shopify/ProductImage/75058333843788",
+        "gid://shopify/ProductImage/75058333778252",
+        "gid://shopify/ProductImage/75058333811020"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75127051518284",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/fiberbiom_anan_zdj_1_kod_...",
+          "width": 2000,
+          "height": 3000
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333843788",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria41_527a9e72...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333778252",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria3_9502742d-...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058333811020",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/ananas_galeria21_42fbfce9...",
+          "width": 1080,
+          "height": 1080
+        }
+      ]
+    },
+    "15853446922572": {
+      "title": "FIBERBIOM Z CZARNĄ PORZECZKĄ DWUPAK",
+      "handle": "fiberbiom-z-czarna-porzeczka-dwupak",
+      "status": "ACTIVE",
+      "seo_title": null,
+      "seo_title_len": 0,
+      "seo_desc": "FIBERBIOM Z CZARNĄ PORZECZKĄ Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!",
+      "seo_desc_len": 152,
+      "total_images": 4,
+      "images_without_alt": 4,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75092159430988",
+        "gid://shopify/ProductImage/75058399543628",
+        "gid://shopify/ProductImage/75058396594508",
+        "gid://shopify/ProductImage/75058399576396"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75092159430988",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/dwupakfiberbiomczarnaporz...",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058399543628",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria3.png?v=...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058396594508",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria2.png?v=...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058399576396",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria4.png?v=...",
+          "width": 1080,
+          "height": 1080
+        }
+      ]
+    },
+    "15850938106188": {
+      "title": "FIBERBIOM Z CZARNĄ PORZECZKĄ",
+      "handle": "fiberbiom-z-czarna-porzeczka",
+      "status": "ACTIVE",
+      "seo_title": null,
+      "seo_title_len": 0,
+      "seo_desc": "FIBERBIOM Z CZARNĄ PORZECZKĄ Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!",
+      "seo_desc_len": 152,
+      "total_images": 4,
+      "images_without_alt": 4,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75127051583820",
+        "gid://shopify/ProductImage/75058399576396",
+        "gid://shopify/ProductImage/75058396594508",
+        "gid://shopify/ProductImage/75058399543628"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75127051583820",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/fiberbiom_czp_zdj_1_kod_n...",
+          "width": 2000,
+          "height": 3000
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058399576396",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria4.png?v=...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058396594508",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria2.png?v=...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75058399543628",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/porzeczka_galeria3.png?v=...",
+          "width": 1080,
+          "height": 1080
+        }
+      ]
+    },
+    "15856105980236": {
+      "title": "Genactiv Colostrum A2, kapsułki Dwupak",
+      "handle": "genactiv-colostrum-a2-kapsulki-dwupak",
+      "status": "ACTIVE",
+      "seo_title": "Kapsułki z Colostrum Genactiv A2 60 kapsułek dwupak – Genactiv",
+      "seo_title_len": 62,
+      "seo_desc": "Kup Colostrum Genactiv A2 - dwupak 60 kapsułek! Wartościowe uzupełnienie diety dla osób, które chcą zachować zdrowie swojego organizmu. Wzmocnij naturalnie swoją odporność!",
+      "seo_desc_len": 172,
+      "total_images": 1,
+      "images_without_alt": 1,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75127182262604"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75127182262604",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/colostruma2kapsulkidwupak...",
+          "width": 2000,
+          "height": 3000
+        }
+      ]
+    },
+    "15856113320268": {
+      "title": "Genactiv Colostrum A2, proszek dwupak",
+      "handle": "genactiv-colostrum-a2-proszek-dwupak",
+      "status": "ACTIVE",
+      "seo_title": "Colostrum Genactiv A2, proszek, puszka 45 g dwupak – Genactiv",
+      "seo_title_len": 61,
+      "seo_desc": "Kup Colostrum Genactiv A2, proszek, puszka 45 g dwupak! Wartościowe uzupełnienie diety dla osób, które chcą zachować zdrowie swojego organizmu. Wzmocnij naturalnie swoją odporność!",
+      "seo_desc_len": 180,
+      "total_images": 1,
+      "images_without_alt": 1,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75127193993548"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75127193993548",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/genactiva2proszekdwupak.p...",
+          "width": 2000,
+          "height": 3000
+        }
+      ]
+    },
+    "15860778205516": {
+      "title": "Colostrum z brzoskwinią, proszek 60 g",
+      "handle": "colostrum-z-brzoskwinia-proszek-60-g",
+      "status": "DRAFT",
+      "seo_title": "Colostrum z brzoskwinią, proszek, puszka 60 g – Genactiv",
+      "seo_title_len": 56,
+      "seo_desc": "Kup Colostrum z brzoskwinią Genactiv, proszek, puszka 60 g! Wartościowe uzupełnienie diety dla osób, które chcą zachować zdrowie swojego organizmu. Wzmocnij naturalnie swoją odporność!",
+      "seo_desc_len": 184,
+      "total_images": 5,
+      "images_without_alt": 5,
+      "images_with_alt": 0,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/75182361477452",
+        "gid://shopify/ProductImage/75182361542988",
+        "gid://shopify/ProductImage/75182361510220",
+        "gid://shopify/ProductImage/75182361575756",
+        "gid://shopify/ProductImage/75182361608524"
+      ],
+      "image_ids_have_alt": [],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/75182361477452",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Galeria1.png?v=1783072106...",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "id": "gid://shopify/ProductImage/75182361542988",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/galeria3_d0c6e5a4-79d0-4e...",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "id": "gid://shopify/ProductImage/75182361510220",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/galeria2_3ad084cf-4a45-47...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75182361575756",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Galeria5.png?v=1783072105...",
+          "width": 1080,
+          "height": 1080
+        },
+        {
+          "id": "gid://shopify/ProductImage/75182361608524",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Galeria4_3a60678d-9681-40...",
+          "width": 1080,
+          "height": 1080
+        }
+      ]
+    },
+    "15463785759052": {
+      "title": "TEST",
+      "handle": "test",
+      "status": "DRAFT",
+      "seo_title": null,
+      "seo_title_len": 0,
+      "seo_desc": null,
+      "seo_desc_len": 0,
+      "total_images": 6,
+      "images_without_alt": 4,
+      "images_with_alt": 2,
+      "image_ids_need_alt": [
+        "gid://shopify/ProductImage/68466123538764",
+        "gid://shopify/ProductImage/68466123440460",
+        "gid://shopify/ProductImage/68466123571532",
+        "gid://shopify/ProductImage/68466123473228"
+      ],
+      "image_ids_have_alt": [
+        [
+          "gid://shopify/ProductImage/69768710652236",
+          "Genactiv colostrum – naturalne wsparcie odporności organizmu"
+        ],
+        [
+          "gid://shopify/ProductImage/69768710685004",
+          "Genactiv colostrum – filary jakości: czystość, skuteczność, bezpieczeństwo"
+        ]
+      ],
+      "all_images": [
+        {
+          "id": "gid://shopify/ProductImage/68466123538764",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/60kaps_galeria1.png?v=176...",
+          "width": 1080,
+          "height": 1350
+        },
+        {
+          "id": "gid://shopify/ProductImage/68466123440460",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Wizerunek_2_galeria.png?v...",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "id": "gid://shopify/ProductImage/68466123571532",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/galeria_3.jpg?v=176596444...",
+          "width": 1800,
+          "height": 2700
+        },
+        {
+          "id": "gid://shopify/ProductImage/68466123473228",
+          "alt": "",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/kapsulki_60_ed2fdf9b-0a06...",
+          "width": 2000,
+          "height": 3000
+        },
+        {
+          "id": "gid://shopify/ProductImage/69768710652236",
+          "alt": "Genactiv colostrum – naturalne wsparcie odporności organizmu",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Genactiv_Secondary_20imag...",
+          "width": 2000,
+          "height": 2000
+        },
+        {
+          "id": "gid://shopify/ProductImage/69768710685004",
+          "alt": "Genactiv colostrum – filary jakości: czystość, skuteczność, bezpieczeństwo",
+          "url": "https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Secondary_20images_www_fi...",
+          "width": 2000,
+          "height": 2000
+        }
+      ]
+    }
+  },
+  "shared_images": {
+    "gid://shopify/ProductImage/75058333811020": [
+      15853802783052,
+      15850903961932
+    ],
+    "gid://shopify/ProductImage/75058333778252": [
+      15853802783052,
+      15850903961932
+    ],
+    "gid://shopify/ProductImage/75058333843788": [
+      15853802783052,
+      15850903961932
+    ],
+    "gid://shopify/ProductImage/75058399543628": [
+      15853446922572,
+      15850938106188
+    ],
+    "gid://shopify/ProductImage/75058396594508": [
+      15853446922572,
+      15850938106188
+    ],
+    "gid://shopify/ProductImage/75058399576396": [
+      15853446922572,
+      15850938106188
+    ]
+  },
+  "total_images_need_alt": 28,
+  "products_need_meta_title": [
+    [
+      15853802783052,
+      "FIBERBIOM Z ANANASEM DWUPAK"
+    ],
+    [
+      15850903961932,
+      "FIBERBIOM Z ANANASEM"
+    ],
+    [
+      15853446922572,
+      "FIBERBIOM Z CZARNĄ PORZECZKĄ DWUPAK"
+    ],
+    [
+      15850938106188,
+      "FIBERBIOM Z CZARNĄ PORZECZKĄ"
+    ],
+    [
+      15463785759052,
+      "TEST"
+    ]
+  ],
+  "products_long_meta_title": [
+    [
+      15856105980236,
+      "Genactiv Colostrum A2, kapsułki Dwupak",
+      "Kapsułki z Colostrum Genactiv A2 60 kapsułek dwupak – Genactiv",
+      62
+    ],
+    [
+      15856113320268,
+      "Genactiv Colostrum A2, proszek dwupak",
+      "Colostrum Genactiv A2, proszek, puszka 45 g dwupak – Genactiv",
+      61
+    ]
+  ]
+}

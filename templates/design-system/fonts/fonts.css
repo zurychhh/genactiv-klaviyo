@@ -1,0 +1,28 @@
+/* ============================================================
+   Genactiv — Webfonts
+   Display + UI face: Montserrat (variable, self-hosted woff2).
+   NOTE: Montserrat is a CLOSE SUBSTITUTE for the geometric sans
+   used on genactiv.pl. The exact licensed brand webfont could not
+   be extracted from the live Shopify theme. Swap these files if
+   you have the original (likely a geometric grotesque such as
+   Gilroy / Mont / Sofia Pro). See README.md › Visual Foundations.
+
+   The latin woff2 already carries full Latin-Extended coverage
+   (Polish ą ć ę ł ń ó ś ź ż), so one face per style is enough —
+   no unicode-range subset split required.
+   ============================================================ */
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("montserrat-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("montserrat-italic-latin.woff2") format("woff2");
+}

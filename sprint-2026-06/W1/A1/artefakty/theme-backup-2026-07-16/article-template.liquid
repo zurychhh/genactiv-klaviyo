@@ -1,0 +1,447 @@
+<div class="page-width">
+  {%- include 'breadcrumbs' -%}
+</div>
+{% if article.metafields.global.post_img != blank %}
+  <div class="article__main-img">
+    <img src="{{ article.metafields.global.post_img }}" alt="{{ article.title }}" loading="lazy">
+  </div>
+{% endif %}
+
+<div class="page-width page-width--article">
+
+  <div class="article__info-wrap">
+    <div class="article__info-col">
+      {%- for tag in article.tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__single-tags">
+          {{ tag }}
+          {%- unless forloop.last == true -%}, &nbsp;{%- endunless -%}
+        </a>
+      {%- endfor -%}
+    </div>
+    <div class="article__info-col article__info-col--right">
+      {% if section.settings.blog_show_author %}
+        <span class="article__single-author">{{ article.author }}</span>
+      {% endif %}
+      {% if section.settings.blog_show_author and section.settings.blog_show_date%}
+        <span class="article__single-separator">|</span>
+      {% endif %}
+      {% if section.settings.blog_show_date %}
+        <span class="article__single-date"> 
+          {{ article.published_at | date: "%b %d, %y" }}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+
+  <h1 class="h3 article__main-title" id="title-0">{{ article.title }}</h1>
+  
+  <div class="rte article__rte shpotyfy-section-searchanise-recommendations"> 
+    {%- comment -%}
+      <!-- backup content blog -->
+      <p>
+        <b>Celiakia jest schorzeniem związanym z jelitem cienkim. Przede wszystkim charakteryzuje się zaburzeniami, które wynikają z przewlekłego stanu zapalnego błony śluzowej. Możemy wyróżnić kilka przyczyn celiakii - jedną z najbardziej powszechnych jest spożywanie glutenu u osób, które genetycznie cierpią na nietolerancję tej substancji. Czasami celiakię trudno jest zdiagnozować, ponieważ występować może pod różnymi postaciami (np. niepełnoobjawowo). Warto zapoznać się bliżej z objawami i przyczynami powstania celiakii, aby móc wprowadzić odpowiednie zmiany w swojej diecie i stylu życia.</b>
+      </p>
+      <h2>Celiakia - charakterystyka</h2>
+      <p>
+        Celiakia, to choroba trzewna, autoimmunologiczna o podłożu genetycznym, która może występować w kilku formach - pełnoobjawowej, ubogoobjawowej i latentnej. O ile tą pierwszą łatwo rozpoznać, to w pozostałych przypadkach, musimy zwracać uwagę na objawy nieco mniej charakterystyczne. Jeszcze jakiś czas temu, celiakia była uważana za chorobę typową dla dzieci. Jednak dzisiaj wiemy, że spotkać może osoby w bardzo różnym wieku. Zauważono również tendencję wzrostową tej choroby zarówno u dorosłych jak i właśnie u dzieci. Badania epidemiologiczne pokazują, że na celiakię cierpi około 0,18-1,2% populacji na świecie. Również warto zwrócić uwagę na fakt, że ponad 70% cierpiących na tę chorobę, to kobiety.
+      </p>
+      <p>
+        Objawy celiakii są bardzo silnie związane ze spożywaniem glutenu.
+      </p>
+      Gluten jest substancją białkową, w której skład wchodzi gliadyna - to właśnie ona jest odpowiedzialna za wywoływanie objawów choroby. Jakie produkty są bogate w gluten? Przede wszystkim mąka pszenna, żytnia, makaron, biały i razowy chleb, kasza jęczmienna, płatki owsiane i słodycze zawierające mąkę pszenną.
+      </p>
+      <img src="https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Rectangle_116_480x480.jpg?v=1633940820" alt="" />
+      <h2>Celiakia - jakie są objawy?</h2>
+      <p>
+        Jak już wspomnieliśmy symptomy celiakii mogą być różne,w zależności od tego czy jest to celiakia pełnoobjawowa, czy forma utajona. Dlatego najlepszym rozwiązaniem jest podzielenie objawów ze względu właśnie na formę celiakii:
+      </p>
+      <p>
+        <b>Postać pełnoobjawowa</b> - tutaj najczęstszymi objawami są: przewlekła biegunka, ból brzucha, utrata masy ciała, wzdęcia, częste uczucie zmęczenia. Również takie, które nie dotyczą bezpośrednio układu pokarmowego tj. niedokrwistość, objawy neurologiczne, zmiany skórne czy zaburzenia hormonalne.
+      </p>
+      <p>
+        <b>Postać ubogoobjawowa</b> - często występuje tutaj niedokrwistość, zaburzenia neurologiczne, próchnica zębów czy hipercholesterolemia.
+      </p>
+      <p>
+        
+        <b>Postać latentna</b> - rozpoznaje się ją, gdy u osób, które mają prawidłowy wynik biopsji jelita cienkiego, stwierdza się obecność przeciwciał antyendomyzjalnych w klasie Iga.
+        W charakterystyce objawów, bardzo ważny jest wiek chorego. Przykładowo u nastolatków, najczęściej można zauważyć dolegliwości jelitowo - żołądkowe. Osoby po 30 roku życia, bardzo często skarża się na przewlekłe zmęczenie i depresję. Z kolei u osób po 40 roku życia można wyróżnić objawy osteoporozy lub osteopenii.
+      </p>
+      <h3>
+        Celiakia - co jeść a czego unikać?
+      </h3>
+      <p>
+        Nieprzyjemne objawy celiakii związane są z spożywaniem glutenu. Dlatego, to właśnie dieta bezglutenowa jest najbardziej polecana osobom, które cierpią na to kłopotliwe schorzenie. Jak dokładnie wygląda dieta przy celiakii? Przede wszystkim, najważniejsze są tutaj zalecenia lekarza, który powinien dokładnie wskazać jakich produktów unikać, aby nie zaognić objawów. Możemy jednak wyróżnić kilka zasad, które z pewnością zwiększą komfort życia osób cierpiących na celiakię.
+      </p>
+      <p>
+        W diecie bezglutenowej zabronione są zboża: pszenica, jęczmień czy żyto, a także produkty z ich dodatkiem. Jeśli szukamy naturalnie bezglutenowych produktów, to tutaj powinniśmy zwrócić uwagę na zboża naturalnie bezglutenowe: ryż, kukurydza, gryka, proso, amarantus, quinoa, teff, sorgo.
+      </p>
+      <p>
+        Dodatkowo, kasze ze zbóż naturalnie bezglutenowych (np. kasza jaglana z prosa) zaleca się w diecie bezglutenowej. Opisane lub oznaczone jako bezglutenowe: mąki, płatki ryżowe, skrobia kukurydziana i ryżowa, pieczywo i makarony, popcorn bez dodatków, certyfikowany owies, bułka tarta.
+      </p>
+      <p>
+        Również takie produkty jak mleko świeże, zagęszczone, w proszku, kefir, maślanka, śmietana, jogurt naturalny, twaróg naturalny, ser żółty, a także świeże, nieprzetworzone mięso, ryby i jaja. Warto raz na jakiś czas sprawdzać skład naszych ulubionych produktów - wielu producentów często zmienia recepturę.
+      </p>
+      <p>
+        Dieta bezglutenowa z pewnością wymaga więcej uwagi przy wybieraniu odpowiednich produktów, ale może znacznie zwiększyć komfort życia ludzi cierpiących na celiakię.
+      </p>
+      <img src="https://cdn.shopify.com/s/files/1/0584/6184/7726/files/Rectangle_117_480x480.jpg?v=1633940840" alt="" />
+      <h3>
+        “Nieszczelność bariery jelitowej, może być jedną z przyczyn, dlaczego osoby cierpiące na celiakię częściej łapią wszelkiego rodzaju infekcję.”
+      </h3>
+      <p>
+        Nieszczelność bariery jelitowej, może być jedną z przyczyn, dlaczego osoby cierpiące na celiakię częściej łapią wszelkiego rodzaju infekcję. Przy nieszczelności, dochodzi do rozluźnienia połączeń bariery jelitowej, przez co tworzą się szpary między komórkami nabłonka jelitowego. W efekcie tworzą się tunele, przez które wiele cząsteczek może przekroczyć barierę i dostać się do naszego krwiobiegu. Problem polega na tym, że przez nieszczelną barierę mogą przedostać się szkodliwe drobnoustroje, chorobotwórcze mikroorganizmy i niestrawione resztki jedzenia. To z kolei może wywołać infekcję. Właśnie dlatego, aby zapewnić szczelność jelit, powinniśmy sięgnąć po odpowiednią suplementację.
+      </p>
+      <p>
+        <b>Nasze badanie wykazało, że zastosowanie colostrum o wysokiej jakości</b> (stosowano colostrum firmy Genactiv, pobrane w ciągu pierwszych 2 godzin laktacji, suszone metodą liofilizacji) 
+        <b>już w małych dawkach i stosunkowo krótkim okresie suplementacji prowadzi do skutecznego uszczelnienia bariery jelitowej.</b> Może to tłumaczyć bardzo wiele pozytywnych efektów zdrowotnych, które przypisuje się temu naturalnemu suplementowi. Badania wykazują, że colostrum jest środkiem zupełnie bezpiecznym, jedyne przeciwwskazania do jego stosowania wiążą się z poważnymi alergiami na mleko krowie.
+      </p>
+    {%- endcomment -%}
+    {{ article.content }}
+    
+    {% if section.settings.show_share_buttons %}
+      {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+    {% endif %}
+  </div>
+
+  {% if article.metafields.global.text != blank %}   
+    <div class="article__short-text">
+      {{ article.metafields.global.text }}
+    </div>
+  {% endif %}
+
+  {% if section.blocks != blank %}  
+    <div class="article__category-wrap">
+      {{ block.settings.blog.url }}
+      {%- for block in section.blocks -%}
+        <a class="article__category-link" href={{ block.settings.blog.url }}>
+          #{{ block.settings.title }}
+        </a>
+      {%- endfor -%}
+    </div>
+  {% endif %}
+
+</div>
+{% assign postID = article.id %}
+{% assign i = 0 %}
+<div class="page-width page-width--article recommended-articles">
+  {% if section.settings.title %}
+    <h2 class="h3 text-center recommended-articles__title">
+      {{ section.settings.title }}
+    </h2>
+  {% endif %}
+  <ul class="grid grid--blog-small grid--uniform grid--blog">
+    {%- for article in blog.articles limit: 3 -%}
+      {% if postID != article.id and i != 2 %} 
+      {% assign i = i | plus: 1 %}
+        <li class="grid__item medium-up--one-third grid__item--blog-small">
+          <article aria-labelledby="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+            <header> 
+              <a href="{{ article.url }}" class="article__link">
+                {% if article.image %}
+                  {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+                  {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+                  {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                  {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+                  <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+                    <div class="article__grid-image-container" data-image-loading-animation>
+                      <img id="{{ img_id }}"
+                          class="article__grid-image lazyload"
+                          data-src="{{ img_url }}"
+                          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                          data-aspectratio="{{ article.image.aspect_ratio }}"
+                          data-sizes="auto"
+                          alt="Zdjęcie wyróżniające wpis na temat {{ article.title }}">
+                    </div>
+                  </div>
+                  <noscript>
+                    <div class="article__grid-image-wrapper">
+                      {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+                    </div>
+                  </noscript>
+                {% endif %}
+              </a>
+
+              <div class="article__info">
+                {%- if section.settings.blog_show_author or section.settings.blog_show_date -%}
+                  <span class="article__info{%- if section.settings.blog_show_date -%}-date{%- endif -%}{%- if section.settings.blog_show_author -%}-author{%- endif -%}">
+                    {%- if section.settings.blog_show_author -%}
+                      <span class="article__author">{{ article.author }}</span>
+                    {%- endif -%}
+                    {%- if section.settings.blog_show_date -%}
+                      <span class="article__date">
+                        {{ article.published_at | date: "%b %d, %y" }}
+                      </span>
+                    {%- endif -%}
+                    </span>
+                {%- endif -%}
+                {%- if article.tags.size > 0 -%}
+                  {%- for tag in article.tags -%}
+                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__tag">{{ tag }}</a>
+                  {%- endfor -%}
+                {%- endif -%} 
+              </div>
+
+              <a href="{{ article.url }}">
+                <h3 class="article__title" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  {{ article.title }}
+                </h3>
+              </a>
+            </header>
+
+            <div class="article__grid-meta">
+              <div class="rte article__grid-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </div>
+
+              <ul class="list--inline article__meta-buttons">
+                <li>
+                  <a href="{{ article.url }}" class="link-read-more" aria-label="{{ 'blogs.article.read_more_title' | t: title: article.title }}">
+                    {{ 'blogs.article.read_more' | t }}
+                  </a>
+                </li>
+
+                {% if blog.comments_enabled? and article.comments_count > 0 %}
+                  <li>
+                    <a href="{{ article.url }}#comments" class="article__comment-count btn btn--tertiary btn--small">
+                      {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
+                    </a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </article>
+        </li>
+      {% endif %} 
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": {
+    "cs": "Příspěvky",
+    "da": "Opslag",
+    "de": "Posts",
+    "en": "Posts",
+    "es": "Publicaciones",
+    "fi": "Julkaisut",
+    "fr": "Articles",
+    "it": "Articoli",
+    "ja": "投稿",
+    "ko": "게시물",
+    "nb": "Innlegg",
+    "nl": "Berichten",
+    "pl": "Posty",
+    "pt-BR": "Posts",
+    "pt-PT": "Publicações",
+    "sv": "Inlägg",
+    "th": "โพสต์",
+    "tr": "Gönderiler",
+    "vi": "Bài viết",
+    "zh-CN": "文章",
+    "zh-TW": "貼文"
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "cs": "Zobrazit autora",
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pl": "Pokaż autora",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "tr": "Yazarı göster",
+        "vi": "Hiển thị tác giả",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "cs": "Zobrazit datum",
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pl": "Pokaż datę",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "tr": "Tarihi göster",
+        "vi": "Hiển thị ngày",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": {
+        "cs": "Zobrazit tlačítka pro sdílení na sociálních sítích",
+        "da": "Vis knapper til deling på sociale medier",
+        "de": "Buttons für Social Media anzeigen",
+        "en": "Show social sharing buttons",
+        "es": "Mostrar botones para compartir en redes sociales",
+        "fi": "Näytä sosiaalisen median jakamispainikkeet",
+        "fr": "Afficher les boutons de partage sur les médias sociaux",
+        "it": "Mostra i pulsanti per la condivisione sui social",
+        "ja": "ソーシャルメディアでの共有ボタンを表示する",
+        "ko": "소셜 공유 버튼 표시",
+        "nb": "Vis knapper for deling på sosiale medier",
+        "nl": "Knoppen voor sociaal delen weergeven",
+        "pl": "Pokaż przyciski udostępniania w mediach społecznościowych",
+        "pt-BR": "Exibir botões de compartilhamento em redes sociais",
+        "pt-PT": "Mostrar botões de partilha nas redes sociais",
+        "sv": "Visa knappar för delning i sociala medier",
+        "th": "แสดงปุ่มสำหรับแชร์ลงโซเชียล",
+        "tr": "Sosyal medya paylaşım düğmelerini göster",
+        "vi": "Hiển thị nút chia sẻ qua mạng xã hội",
+        "zh-CN": "显示社交分享按钮",
+        "zh-TW": "顯示社群分享按鈕"
+      },
+      "default": true
+    }  
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": {
+        "cs": "Blog",
+        "da": "Blog",
+        "de": "Blog",
+        "en": "Blog",
+        "es": "Blog",
+        "fi": "Blogi",
+        "fr": "Blog",
+        "it": "Blog",
+        "ja": "ブログ",
+        "ko": "블로그",
+        "nb": "Blogg",
+        "nl": "Blog",
+        "pl": "Blog",
+        "pt-BR": "Blog",
+        "pt-PT": "Blogue",
+        "sv": "Blogg",
+        "th": "บล็อก",
+        "tr": "Blog",
+        "vi": "Blog",
+        "zh-CN": "博客",
+        "zh-TW": "部落格"
+      },
+      "settings": [
+        {
+          "id": "blog",
+          "type": "blog",
+          "label": {
+            "cs": "Blog",
+            "da": "Blog",
+            "de": "Blog",
+            "en": "Blog",
+            "es": "Blog",
+            "fi": "Blogi",
+            "fr": "Blog",
+            "it": "Blog",
+            "ja": "ブログ",
+            "ko": "블로그",
+            "nb": "Blogg",
+            "nl": "Blog",
+            "pl": "Blog",
+            "pt-BR": "Blog",
+            "pt-PT": "Blogue",
+            "sv": "Blogg",
+            "th": "บล็อก",
+            "tr": "Blog",
+            "vi": "Blog",
+            "zh-CN": "博客",
+            "zh-TW": "網誌"
+          }
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "cs": "Nadpis",
+            "da": "Overskrift",
+            "de": "Titel",
+            "en": "Heading",
+            "es": "Título",
+            "fi": "Otsake",
+            "fr": "En-tête",
+            "it": "Heading",
+            "ja": "見出し",
+            "ko": "제목",
+            "nb": "Overskrift",
+            "nl": "Kop",
+            "pl": "Nagłówek",
+            "pt-BR": "Título",
+            "pt-PT": "Título",
+            "sv": "Rubrik",
+            "th": "ส่วนหัว",
+            "tr": "Başlık",
+            "vi": "Tiêu đề",
+            "zh-CN": "标题",
+            "zh-TW": "標題"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

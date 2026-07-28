@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Product Cards" subtitle="Colostrum + Fiberbiom commerce cards" viewport="700x340" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+body{ background:var(--ga-gray-100); }
+.wrap{ display:flex; gap:18px; }
+.pc { width:230px; background:#fff; border-radius:18px; overflow:hidden; box-shadow:var(--ga-shadow-md); display:flex; flex-direction:column; }
+.pc .img{ position:relative; aspect-ratio:1/1; background:var(--ga-red); }
+.pc .img img{ width:100%; height:100%; object-fit:cover; }
+.flag{ position:absolute; top:10px; left:10px; background:#fff; color:var(--ga-red); font-size:10px; font-weight:800; letter-spacing:.06em; padding:5px 10px; border-radius:999px; }
+.pc .body{ padding:14px 15px 16px; display:flex; flex-direction:column; gap:7px; }
+.eye{ font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ga-gray-500); }
+.ttl{ font-family:var(--ga-font-display); font-weight:700; font-size:15px; color:var(--ga-ink); line-height:1.2; }
+.stars{ color:var(--ga-gold); font-size:12px; letter-spacing:1px; }
+.priceRow{ display:flex; align-items:center; justify-content:space-between; margin-top:3px; }
+.price{ font-family:var(--ga-font-display); font-weight:800; font-size:19px; color:var(--ga-ink); }
+.add{ border:0; background:var(--ga-red); color:#fff; border-radius:999px; padding:9px 16px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+</style></head>
+<body><div class="card"><div class="wrap">
+  <div class="pc">
+    <div class="img"><span class="flag">NR 1 W APTEKACH</span><img src="../assets/photo-colostrum-nr1.png" alt=""></div>
+    <div class="body">
+      <span class="eye">Suplement diety · 45 g</span>
+      <span class="ttl">Colostrum Genactiv, proszek</span>
+      <span class="stars">★★★★★ <span style="color:var(--ga-gray-500)">(214)</span></span>
+      <div class="priceRow"><span class="price">79,00 zł</span><button class="add">Do koszyka</button></div>
+    </div>
+  </div>
+  <div class="pc">
+    <div class="img" style="background:var(--ga-pink)"><img src="../assets/photo-fiberbiom.jpg" alt=""></div>
+    <div class="body">
+      <span class="eye">Suplement diety · 15 saszetek</span>
+      <span class="ttl">Fiberbiom</span>
+      <span class="stars">★★★★★ <span style="color:var(--ga-gray-500)">(88)</span></span>
+      <div class="priceRow"><span class="price">89,00 zł</span><button class="add" style="background:var(--ga-pink)">Do koszyka</button></div>
+    </div>
+  </div>
+</div></div></body></html>

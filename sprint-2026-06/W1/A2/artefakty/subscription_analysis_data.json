@@ -1,0 +1,1770 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/7291940700334",
+      "title": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 200g",
+      "handle": "colostrum-i-mleko-klaczy-200g",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 56,
+      "min_price": 399.0,
+      "max_price": 399.0,
+      "variants": [
+        {
+          "title": "200 g",
+          "price": 399.0,
+          "compareAtPrice": null,
+          "sku": "CIMK200G",
+          "inventory": 56
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365289509038",
+      "title": "MLEKO KLACZY GENACTIV, proszek 150g",
+      "handle": "mleko-klaczy-150g",
+      "type": "Health Care",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 385.0,
+      "max_price": 385.0,
+      "variants": [
+        {
+          "title": "150 gram",
+          "price": 385.0,
+          "compareAtPrice": null,
+          "sku": "MK150G",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365297111214",
+      "title": "COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania",
+      "handle": "colostrum-z-malina-genactiv-tabletki-do-ssania-60-sztuk",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 80,
+      "min_price": 85.0,
+      "max_price": 85.0,
+      "variants": [
+        {
+          "title": "tabletki do ssania 60 sztuk",
+          "price": 85.0,
+          "compareAtPrice": null,
+          "sku": "CZM60TABLETEK",
+          "inventory": 80
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365298094254",
+      "title": "COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania - Trójpak",
+      "handle": "malinowa-odpornosc-tabletki-do-ssania",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 45,
+      "min_price": 229.0,
+      "max_price": 229.0,
+      "variants": [
+        {
+          "title": "180 tabletek do ssania",
+          "price": 229.0,
+          "compareAtPrice": 255.0,
+          "sku": "CZM60TABLETEKX3",
+          "inventory": 45
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365299175598",
+      "title": "COLOSTRUM GENACTIV, 60 kapsułek",
+      "handle": "colostrum-genactiv-60-kapsulek",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 152,
+      "min_price": 105.0,
+      "max_price": 105.0,
+      "variants": [
+        {
+          "title": "60 kapsułek",
+          "price": 105.0,
+          "compareAtPrice": null,
+          "sku": "CG60KAPSUŁEK",
+          "inventory": 152
+        }
+      ],
+      "tags": [
+        "bestseller",
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365301338286",
+      "title": "COLOSTRUM GENACTIV, kapsułki - Trójpak",
+      "handle": "potrojna-odpornosc",
+      "type": "",
+      "status": "ACTIVE",
+      "inventory": 18,
+      "min_price": 283.0,
+      "max_price": 283.0,
+      "variants": [
+        {
+          "title": "180 kapsułek",
+          "price": 283.0,
+          "compareAtPrice": 315.0,
+          "sku": "CG60KAPSUŁEKX3",
+          "inventory": 18
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant",
+        "sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365302223022",
+      "title": "COLOSTRUM Z BANANEM, proszek - Dwupak",
+      "handle": "dwupak-colostrum-z-bananem-200g",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 12,
+      "min_price": 629.0,
+      "max_price": 629.0,
+      "variants": [
+        {
+          "title": "proszek 400 g",
+          "price": 629.0,
+          "compareAtPrice": 639.0,
+          "sku": "CZB200GX2",
+          "inventory": 12
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365304582318",
+      "title": "Zestaw promocyjny - COLOSTRUM GENACTIV, 120 kapsułek i COLOSTRUM Z MALINĄ GENACTIV, 60 tabletek do ssania",
+      "handle": "wzmocniona-odpornosc",
+      "type": "Opieka zdrowotna",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 229.0,
+      "max_price": 229.0,
+      "variants": [
+        {
+          "title": "120 kapsułek i 60 tabletek",
+          "price": 229.0,
+          "compareAtPrice": 239.0,
+          "sku": "CG120KAPSICZM60TABS",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365305499822",
+      "title": "KREM Z COLOSTRUM GENACTIV, 40 ml - dwupak",
+      "handle": "krem-z-colostrum-genactiv-dwupak",
+      "type": "Health Care",
+      "status": "ACTIVE",
+      "inventory": 0,
+      "min_price": 100.0,
+      "max_price": 100.0,
+      "variants": [
+        {
+          "title": "80 ml",
+          "price": 100.0,
+          "compareAtPrice": 110.0,
+          "sku": "KREMZCOLOSTRUMX2",
+          "inventory": 0
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "gid://shopify/Product/7365307170990",
+      "title": "Silne włosy - Serum z Colostrum Genactiv i Colostrum Genactiv 120 kapsułek",
+      "handle": "zestaw-promocyjny-zdrowe-i-silne-wlosy",
+      "type": "Opieka zdrowotna",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 299.0,
+      "max_price": 299.0,
+      "variants": [
+        {
+          "title": "Default Title",
+          "price": 299.0,
+          "compareAtPrice": 345.0,
+          "sku": "SERCG120KAPSULEK",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365308973230",
+      "title": "SERUM Z COLOSTRUM GENACTIV",
+      "handle": "serum-z-colostrum-genactiv-100-ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 121,
+      "min_price": 179.0,
+      "max_price": 179.0,
+      "variants": [
+        {
+          "title": "100 ml",
+          "price": 179.0,
+          "compareAtPrice": null,
+          "sku": "SERUMZCOLOSTRUM",
+          "inventory": 121
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365312676014",
+      "title": "Colostrum dla pięknej skóry - Maseczka z Colostrum Genactiv 50 ml i Colostrum z bananem Genactiv saszetki",
+      "handle": "colostrum-dla-pieknej-skory",
+      "type": "Health Care",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 169.0,
+      "max_price": 169.0,
+      "variants": [
+        {
+          "title": "Default Title",
+          "price": 169.0,
+          "compareAtPrice": 187.0,
+          "sku": "CZB30MAS50X1",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365316313262",
+      "title": "MLEKO KLACZY GENACTIV, 30 saszetek",
+      "handle": "mleko-klaczy-w-30-saszetkach",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 85,
+      "min_price": 135.0,
+      "max_price": 135.0,
+      "variants": [
+        {
+          "title": "30 saszetek",
+          "price": 135.0,
+          "compareAtPrice": null,
+          "sku": "MK30SASZETEK",
+          "inventory": 85
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7365318803630",
+      "title": "MASECZKA Z COLOSTRUM GENACTIV 150ml",
+      "handle": "maseczka-z-colostrum-genactiv-150ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 98,
+      "min_price": 195.0,
+      "max_price": 195.0,
+      "variants": [
+        {
+          "title": "150 ml",
+          "price": 195.0,
+          "compareAtPrice": null,
+          "sku": "MASECZKAZCOL150ML",
+          "inventory": 98
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7376158589102",
+      "title": "COLOSTRUM Z BANANEM GENACTIV, 30 saszetek",
+      "handle": "colostrum-z-bananem-genactiv-30-saszetek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 290,
+      "min_price": 115.0,
+      "max_price": 115.0,
+      "variants": [
+        {
+          "title": "30 saszetek",
+          "price": 115.0,
+          "compareAtPrice": null,
+          "sku": "CZB30SASZETEK",
+          "inventory": 290
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382561095854",
+      "title": "COLOSTRUM GENACTIV, kapsułki - Dwupak",
+      "handle": "colostrum-genactiv-120-kapsulek-dwupak",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 47,
+      "min_price": 340.0,
+      "max_price": 340.0,
+      "variants": [
+        {
+          "title": "240 kapsułek",
+          "price": 340.0,
+          "compareAtPrice": 378.0,
+          "sku": "CG120KAPSUŁEKX2",
+          "inventory": 47
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382562635950",
+      "title": "BLOKER Z COLOSTRUM GENACTIV",
+      "handle": "bloker-z-colostrum-genactiv-90-ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 110,
+      "min_price": 135.0,
+      "max_price": 135.0,
+      "variants": [
+        {
+          "title": "9 x 10 ml",
+          "price": 135.0,
+          "compareAtPrice": null,
+          "sku": "BLOKERZCOLOSTRUM",
+          "inventory": 110
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382563520686",
+      "title": "SZAMPON Z COLOSTRUM GENACTIV",
+      "handle": "szampon-z-colostrum-genactiv-150-ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 98,
+      "min_price": 89.0,
+      "max_price": 89.0,
+      "variants": [
+        {
+          "title": "150 ml",
+          "price": 89.0,
+          "compareAtPrice": null,
+          "sku": "SZAMPONZCOLOSTRUM",
+          "inventory": 98
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382565879982",
+      "title": "MASKA Z COLOSTRUM GENACTIV",
+      "handle": "maska-z-colostrum-genactiv-250-ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 65,
+      "min_price": 159.0,
+      "max_price": 159.0,
+      "variants": [
+        {
+          "title": "250 ml",
+          "price": 159.0,
+          "compareAtPrice": null,
+          "sku": "MASKAZCOLOSTRUM",
+          "inventory": 65
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382566633646",
+      "title": "COLOSTRUM Z BANANEM GENACTIV, proszek - Trójpak",
+      "handle": "mega-odpornosc-colostrum-z-bananem-genactiv",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 14,
+      "min_price": 310.0,
+      "max_price": 310.0,
+      "variants": [
+        {
+          "title": "90 saszetek",
+          "price": 310.0,
+          "compareAtPrice": 345.0,
+          "sku": "CZB30SASZETEKX3",
+          "inventory": 14
+        }
+      ],
+      "tags": [
+        "bestseller",
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382567321774",
+      "title": "COLOSTRUM JUNIOR GENACTIV, zawiesina 150 ml",
+      "handle": "colostrum-junior-genactiv-zawiesina-150-ml",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 160.0,
+      "max_price": 160.0,
+      "variants": [
+        {
+          "title": "zawiesina 150 ml",
+          "price": 160.0,
+          "compareAtPrice": null,
+          "sku": "CJZAWIESINA",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382568108206",
+      "title": "COLOSTRUM JUNIOR GENACTIV - Dwupakkk",
+      "handle": "odpornosc-dla-najmlodszych-colostrum-junior-genactiv-zawiesina-150-ml",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 259.0,
+      "max_price": 259.0,
+      "variants": [
+        {
+          "title": "zawiesina 150 ml",
+          "price": 259.0,
+          "compareAtPrice": 279.0,
+          "sku": "CJZAWIESINAX2",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Not enough data yet  27 / 30"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7382569975982",
+      "title": "MASECZKA Z COLOSTRUM GENACTIV 50ml",
+      "handle": "maseczka-z-colostrum-50-ml",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 94,
+      "min_price": 90.0,
+      "max_price": 90.0,
+      "variants": [
+        {
+          "title": "50 ml",
+          "price": 90.0,
+          "compareAtPrice": null,
+          "sku": "MASECZKAZCOL50ML",
+          "inventory": 94
+        }
+      ],
+      "tags": [
+        "nowe opakowanie",
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418096976046",
+      "title": "COLOSTRUM Z CZARNĄ PORZECZKĄ GENACTIV, proszek",
+      "handle": "colostrum-z-czarna-porzeczka-genactiv-30-saszetek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 127,
+      "min_price": 183.0,
+      "max_price": 183.0,
+      "variants": [
+        {
+          "title": "30 saszetek",
+          "price": 183.0,
+          "compareAtPrice": null,
+          "sku": "CZCP30SASZETEK",
+          "inventory": 127
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418100089006",
+      "title": "COLOSTRUM GENACTIV 120 kapsułek I MLEKO KLACZY GENACTIV 120 kapsułek",
+      "handle": "podwojna-regeneracja-colostrum-genactiv-i-mleko-klaczy-genactiv",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 0,
+      "min_price": 309.0,
+      "max_price": 309.0,
+      "variants": [
+        {
+          "title": "120 kapsułek",
+          "price": 309.0,
+          "compareAtPrice": 299.0,
+          "sku": "CGIMK120",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418106282158",
+      "title": "MLEKO KLACZY GENACTIV, proszek - Dwupak",
+      "handle": "super-regeneracja-dwupak-mleko-klaczy-genactiv-150g",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 619.0,
+      "max_price": 619.0,
+      "variants": [
+        {
+          "title": "proszek 300 g",
+          "price": 619.0,
+          "compareAtPrice": 698.0,
+          "sku": "MK150GX2",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418110705838",
+      "title": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek - Dwupak",
+      "handle": "wzmocniona-kondycja-dwupak-colostrum-i-mleko-klaczy-genactiv-200g",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 17,
+      "min_price": 658.0,
+      "max_price": 658.0,
+      "variants": [
+        {
+          "title": "400 g",
+          "price": 658.0,
+          "compareAtPrice": null,
+          "sku": "CIMK200GX2",
+          "inventory": 17
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418117390510",
+      "title": "KREM Z COLOSTRUM GENACTIV",
+      "handle": "krem-z-colostrum-genactiv",
+      "type": "Zdrowie i uroda",
+      "status": "ACTIVE",
+      "inventory": 257,
+      "min_price": 55.0,
+      "max_price": 55.0,
+      "variants": [
+        {
+          "title": "40 ml",
+          "price": 55.0,
+          "compareAtPrice": null,
+          "sku": "KREMZCOLOSTRUM",
+          "inventory": 257
+        }
+      ],
+      "tags": [
+        "bestseller",
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7418120863918",
+      "title": "Trzy kroki do pięknych włosów",
+      "handle": "trzy-kroki-do-pieknych-wlosow",
+      "type": "Zdrowie i uroda",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 319.0,
+      "max_price": 319.0,
+      "variants": [
+        {
+          "title": "Default Title",
+          "price": 319.0,
+          "compareAtPrice": 379.0,
+          "sku": "SZAMSERMASKA",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7434253467822",
+      "title": "MLEKO KLACZY GENACTIV, kapsułki",
+      "handle": "mleko-klaczy-genactiv-120-kapsulek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 127,
+      "min_price": 183.0,
+      "max_price": 183.0,
+      "variants": [
+        {
+          "title": "120 kapsułek",
+          "price": 183.0,
+          "compareAtPrice": null,
+          "sku": "MK120KAPSUŁEK",
+          "inventory": 127
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant",
+        "promocja"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7435535286446",
+      "title": "COLOSTRUM Z BANANEM GENACTIV, proszek 200g",
+      "handle": "colostrum-z-bananem-genactiv-proszek-200g",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 37,
+      "min_price": 395.0,
+      "max_price": 395.0,
+      "variants": [
+        {
+          "title": "proszek 200g",
+          "price": 395.0,
+          "compareAtPrice": null,
+          "sku": "CZB200G",
+          "inventory": 37
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7435927355566",
+      "title": "COLOSTRUM GENACTIV, 120 kapsułek",
+      "handle": "colostrum-genactiv-120-kapsulek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 108,
+      "min_price": 189.0,
+      "max_price": 189.0,
+      "variants": [
+        {
+          "title": "120 kapsułek",
+          "price": 189.0,
+          "compareAtPrice": null,
+          "sku": "CG120KAPSUŁEK",
+          "inventory": 108
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7558779273390",
+      "title": "COLOSTRUM Z CZARNĄ PORZECZKĄ GENACTIV, proszek - Dwupak",
+      "handle": "dwupak-colostrum-z-czarna-porzeczka-genactiv",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 21,
+      "min_price": 329.0,
+      "max_price": 329.0,
+      "variants": [
+        {
+          "title": "60 saszetek",
+          "price": 329.0,
+          "compareAtPrice": 366.0,
+          "sku": "CZCP30SASZETEKX2",
+          "inventory": 21
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7570245058734",
+      "title": "COLOSTRUM Z BANANEM GENACTIV saszetki i COLOSTRUM Z MALINĄ GENACTIV tabletki",
+      "handle": "zestaw-promocyjny-colostrum-z-bananem-genactiv-saszetki-i-mleko-klaczy-genactiv-saszetki",
+      "type": "Opieka zdrowotna",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 159.0,
+      "max_price": 159.0,
+      "variants": [
+        {
+          "title": "30 Saszetek i 60 tabletek",
+          "price": 159.0,
+          "compareAtPrice": 165.0,
+          "sku": "COLBANMAL",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7647040962734",
+      "title": "KREM DO STÓP Z COLOSTRUM GENACTIV",
+      "handle": "krem-do-stop-z-colostrum-genactiv",
+      "type": "Zdrowie i uroda",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 54.5,
+      "max_price": 54.5,
+      "variants": [
+        {
+          "title": "75 ml",
+          "price": 54.5,
+          "compareAtPrice": 109.0,
+          "sku": "KREMDOSTÓP",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7647218663598",
+      "title": "KREM Z MLEKIEM KLACZY GENACTIV",
+      "handle": "krem-z-mlekiem-klaczy-genactiv",
+      "type": "Zdrowie i uroda",
+      "status": "DRAFT",
+      "inventory": 105,
+      "min_price": 65.0,
+      "max_price": 65.0,
+      "variants": [
+        {
+          "title": "40 ml",
+          "price": 65.0,
+          "compareAtPrice": 65.0,
+          "sku": "KREMZMK",
+          "inventory": 105
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7666916819118",
+      "title": "Zestaw promocyjny - COLOSTRUM JUNIOR GENACTIV, zawiesina i COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania",
+      "handle": "zestaw-promocyjny-colostrum-junior-genactiv-zawiesina-i-colostrum-z-malina-genactiv",
+      "type": "Opieka zdrowotna",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 209.0,
+      "max_price": 209.0,
+      "variants": [
+        {
+          "title": "150 ml zawiesiny i 60 tabletek",
+          "price": 209.0,
+          "compareAtPrice": 218.0,
+          "sku": "CJZX1CZMX1",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7700656816302",
+      "title": "Mocne włosy - Maska z Colostrum Genactiv i Colostrum Genactiv 120 kapsułek",
+      "handle": "mocne-wlosy-serum-z-colostrum-genactiv-i-kapsulki-z-colostrum-genactiv",
+      "type": "Opieka zdrowotna",
+      "status": "DRAFT",
+      "inventory": 0,
+      "min_price": 269.0,
+      "max_price": 269.0,
+      "variants": [
+        {
+          "title": "Default Title",
+          "price": 269.0,
+          "compareAtPrice": 325.0,
+          "sku": "COL120KAPSIMASKA",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7782326632622",
+      "title": "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki",
+      "handle": "colostrum-i-mleko-klaczy-genactiv-180-kapsulek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 95,
+      "min_price": 299.0,
+      "max_price": 299.0,
+      "variants": [
+        {
+          "title": "180 kapsułek",
+          "price": 299.0,
+          "compareAtPrice": null,
+          "sku": "CIMK180KAPSUŁEK",
+          "inventory": 95
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7782370279598",
+      "title": "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki - dwupak",
+      "handle": "dwupak-colostrum-i-mleko-klaczy-genactiv-180-kapsulek",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 16,
+      "min_price": 498.0,
+      "max_price": 498.0,
+      "variants": [
+        {
+          "title": "360 kapsułek",
+          "price": 498.0,
+          "compareAtPrice": 459.0,
+          "sku": "CIMK180KAPSUŁEKX2",
+          "inventory": 16
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7818282533038",
+      "title": "COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania",
+      "handle": "colostrum-z-malina-genactiv-20-tabletek",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 20.0,
+      "max_price": 20.0,
+      "variants": [
+        {
+          "title": "tabletki do ssania 20 sztuk",
+          "price": 20.0,
+          "compareAtPrice": 33.0,
+          "sku": "CZM20TABLETEK",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8356739252556",
+      "title": "COLOSTRUM GENACTIV, zawiesina, 150 ml",
+      "handle": "colostrum-genactiv-zawiesina",
+      "type": "Opieka zdrowotna",
+      "status": "ACTIVE",
+      "inventory": 966,
+      "min_price": 175.0,
+      "max_price": 175.0,
+      "variants": [
+        {
+          "title": "zawiesina 150 ml",
+          "price": 175.0,
+          "compareAtPrice": null,
+          "sku": "CGZAWIESINA",
+          "inventory": 966
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8358508691788",
+      "title": "COLOSTRUM JUNIOR GENACTIV, zawiesina, płyn - Dwupak",
+      "handle": "colostrum-junior-genactiv-dwupak",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 269.0,
+      "max_price": 269.0,
+      "variants": [
+        {
+          "title": "zawiesina 300 ml",
+          "price": 269.0,
+          "compareAtPrice": null,
+          "sku": "CJZAWIESINASALX2",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Not compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8591120171340",
+      "title": "KREM DO STÓP Z COLOSTRUM GENACTIV - dwupak",
+      "handle": "krem-do-stop-z-colostrum-genactiv-dwupak",
+      "type": "Zdrowie i uroda",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 200.0,
+      "max_price": 200.0,
+      "variants": [
+        {
+          "title": "150 ml",
+          "price": 200.0,
+          "compareAtPrice": null,
+          "sku": "KREMDOSTÓPX2",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8644489216332",
+      "title": "COLOSTRUM GENACTIV, proszek",
+      "handle": "colostrum-genactiv-proszek",
+      "type": "Health Care",
+      "status": "ACTIVE",
+      "inventory": 99,
+      "min_price": 189.0,
+      "max_price": 189.0,
+      "variants": [
+        {
+          "title": "Puszka 45 gram",
+          "price": 189.0,
+          "compareAtPrice": null,
+          "sku": "CG45G",
+          "inventory": 99
+        }
+      ],
+      "tags": [
+        "new",
+        "Omnibus: Not on sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8662581936460",
+      "title": "Promocja! COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki-krótka data przydatności 31.01.2024r.",
+      "handle": "kopia-colostrum-i-mleko-klaczy-genactiv-kapsulki",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 170.0,
+      "max_price": 170.0,
+      "variants": [
+        {
+          "title": "180 kapsułek",
+          "price": 170.0,
+          "compareAtPrice": 299.0,
+          "sku": "CIMK180KAPSUŁEK",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8663352082764",
+      "title": "Wyprzedaż! COLOSTRUM Z CZARNĄ PORZECZKĄ GENACTIV, proszek-krótka data przydatności 31.01.2024r.",
+      "handle": "kopia-colostrum-z-czarna-porzeczka-genactiv-proszek",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 135.0,
+      "max_price": 135.0,
+      "variants": [
+        {
+          "title": "30 saszetek",
+          "price": 135.0,
+          "compareAtPrice": 183.0,
+          "sku": "CZCP30SASZETEK",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant",
+        "sale"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8678171705676",
+      "title": "ZESTAW PROMOCYJNY \"BACK2SCHOOL\"",
+      "handle": "zestaw-promocyjny-colostrum-junior-genactiv-zawiesina-i-colostrum-z-malina-genactiv-tabletki-do-ssania-colostrum-z-malina-saszetki-colostrum-z-bananem",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 339.0,
+      "max_price": 339.0,
+      "variants": [
+        {
+          "title": "3 produkty",
+          "price": 339.0,
+          "compareAtPrice": 218.0,
+          "sku": "BANMALJUN",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8678264504652",
+      "title": "COLOSTRUM JUNIOR GENACTIV, zawiesina, płyn - Trójpak",
+      "handle": "kopia-colostrum-junior-genactiv-zawiesina-plyn-trojpak",
+      "type": "Opieka zdrowotna",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 479.0,
+      "max_price": 479.0,
+      "variants": [
+        {
+          "title": "zawiesina 450 ml",
+          "price": 479.0,
+          "compareAtPrice": 279.0,
+          "sku": "CJZAWIESINAX3",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8875315528012",
+      "title": "Colostrum dla pięknej skóry - Maseczka z Colostrum Genactiv 50 ml i 2 x Colostrum z bananem Genactiv saszetki",
+      "handle": "colostrum-dla-pieknej-skory-maseczka-z-2-colostrum-genactiv-50-ml-i-colostrum-z-bananem-genactiv-saszetki",
+      "type": "Health Care",
+      "status": "ARCHIVED",
+      "inventory": 0,
+      "min_price": 269.0,
+      "max_price": 269.0,
+      "variants": [
+        {
+          "title": "60 saszetek i 50 ml",
+          "price": 269.0,
+          "compareAtPrice": 292.0,
+          "sku": "CZB30MAS50X2",
+          "inventory": 0
+        }
+      ],
+      "tags": [
+        "Omnibus: Compliant"
+      ]
+    }
+  ],
+  "order_summary": {
+    "total_orders": 1500,
+    "total_revenue": 368302.8,
+    "avg_order_value": 245.54,
+    "date_range": {
+      "from": "2026-06-21T13:55:23+00:00",
+      "to": "2026-07-17T13:20:27+00:00",
+      "days": 25
+    }
+  },
+  "product_popularity": [
+    {
+      "product": "FIBERBIOM - Błonnik + Colostrum",
+      "order_count": 287,
+      "total_quantity": 375,
+      "total_revenue": 67125.0,
+      "pct_of_orders": 19.1
+    },
+    {
+      "product": "KREM Z COLOSTRUM GENACTIV",
+      "order_count": 145,
+      "total_quantity": 228,
+      "total_revenue": 12540.0,
+      "pct_of_orders": 9.7
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, proszek",
+      "order_count": 139,
+      "total_quantity": 170,
+      "total_revenue": 32130.0,
+      "pct_of_orders": 9.3
+    },
+    {
+      "product": "Colostrum z brzoskwinią, proszek 60 g",
+      "order_count": 138,
+      "total_quantity": 186,
+      "total_revenue": 18414.0,
+      "pct_of_orders": 9.2
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, 120 kapsułek",
+      "order_count": 125,
+      "total_quantity": 138,
+      "total_revenue": 26082.0,
+      "pct_of_orders": 8.3
+    },
+    {
+      "product": "FIBERBIOM Z ANANASEM",
+      "order_count": 99,
+      "total_quantity": 122,
+      "total_revenue": 21838.0,
+      "pct_of_orders": 6.6
+    },
+    {
+      "product": "MASECZKA Z COLOSTRUM GENACTIV 50ml",
+      "order_count": 81,
+      "total_quantity": 89,
+      "total_revenue": 8010.0,
+      "pct_of_orders": 5.4
+    },
+    {
+      "product": "FIBERBIOM Z CZARNĄ PORZECZKĄ",
+      "order_count": 79,
+      "total_quantity": 95,
+      "total_revenue": 17005.0,
+      "pct_of_orders": 5.3
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, 60 kapsułek",
+      "order_count": 78,
+      "total_quantity": 87,
+      "total_revenue": 9135.0,
+      "pct_of_orders": 5.2
+    },
+    {
+      "product": "FIBERBIOM - Błonnik + Colostrum - Dwupak",
+      "order_count": 52,
+      "total_quantity": 58,
+      "total_revenue": 17342.0,
+      "pct_of_orders": 3.5
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, kapsułki - Dwupak",
+      "order_count": 45,
+      "total_quantity": 53,
+      "total_revenue": 18020.0,
+      "pct_of_orders": 3.0
+    },
+    {
+      "product": "MASECZKA Z COLOSTRUM GENACTIV 150ml",
+      "order_count": 43,
+      "total_quantity": 49,
+      "total_revenue": 9555.0,
+      "pct_of_orders": 2.9
+    },
+    {
+      "product": "COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania",
+      "order_count": 39,
+      "total_quantity": 50,
+      "total_revenue": 4250.0,
+      "pct_of_orders": 2.6
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, zawiesina, 150 ml",
+      "order_count": 37,
+      "total_quantity": 42,
+      "total_revenue": 7350.0,
+      "pct_of_orders": 2.5
+    },
+    {
+      "product": "MASKA Z COLOSTRUM GENACTIV",
+      "order_count": 33,
+      "total_quantity": 40,
+      "total_revenue": 6360.0,
+      "pct_of_orders": 2.2
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 200g",
+      "order_count": 31,
+      "total_quantity": 33,
+      "total_revenue": 13167.0,
+      "pct_of_orders": 2.1
+    },
+    {
+      "product": "COLOSTRUM  GENACTIV, zawiesina, płyn - dwupak",
+      "order_count": 30,
+      "total_quantity": 33,
+      "total_revenue": 8877.0,
+      "pct_of_orders": 2.0
+    },
+    {
+      "product": "FUREVER DOG 120 kapsułek",
+      "order_count": 29,
+      "total_quantity": 37,
+      "total_revenue": 2960.0,
+      "pct_of_orders": 1.9
+    },
+    {
+      "product": "SZAMPON Z COLOSTRUM GENACTIV",
+      "order_count": 27,
+      "total_quantity": 31,
+      "total_revenue": 2759.0,
+      "pct_of_orders": 1.8
+    },
+    {
+      "product": "COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, zawiesina",
+      "order_count": 26,
+      "total_quantity": 33,
+      "total_revenue": 5577.0,
+      "pct_of_orders": 1.7
+    },
+    {
+      "product": "COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, proszek",
+      "order_count": 24,
+      "total_quantity": 32,
+      "total_revenue": 4128.0,
+      "pct_of_orders": 1.6
+    },
+    {
+      "product": "COLOSTRUM Z BANANEM GENACTIV, proszek 200g",
+      "order_count": 23,
+      "total_quantity": 23,
+      "total_revenue": 9085.0,
+      "pct_of_orders": 1.5
+    },
+    {
+      "product": "COLOSTRUM Z BANANEM GENACTIV, 30 saszetek",
+      "order_count": 22,
+      "total_quantity": 34,
+      "total_revenue": 3910.0,
+      "pct_of_orders": 1.5
+    },
+    {
+      "product": "SERUM Z COLOSTRUM GENACTIV",
+      "order_count": 22,
+      "total_quantity": 25,
+      "total_revenue": 4475.0,
+      "pct_of_orders": 1.5
+    },
+    {
+      "product": "Genactiv Colostrum A2, kapsułki",
+      "order_count": 22,
+      "total_quantity": 25,
+      "total_revenue": 3375.0,
+      "pct_of_orders": 1.5
+    },
+    {
+      "product": "FUREVER DOG 30 kapsułek",
+      "order_count": 19,
+      "total_quantity": 24,
+      "total_revenue": 648.0,
+      "pct_of_orders": 1.3
+    },
+    {
+      "product": "COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, tabletki do ssania",
+      "order_count": 18,
+      "total_quantity": 20,
+      "total_revenue": 1780.0,
+      "pct_of_orders": 1.2
+    },
+    {
+      "product": "COLOSTRUM  GENACTIV, proszek - dwupak",
+      "order_count": 18,
+      "total_quantity": 28,
+      "total_revenue": 9520.0,
+      "pct_of_orders": 1.2
+    },
+    {
+      "product": "Genactiv Colostrum A2, proszek",
+      "order_count": 16,
+      "total_quantity": 19,
+      "total_revenue": 4655.0,
+      "pct_of_orders": 1.1
+    },
+    {
+      "product": "Colostrum z brzoskwinią i Fiberbiom z Ananasem",
+      "order_count": 15,
+      "total_quantity": 19,
+      "total_revenue": 4275.0,
+      "pct_of_orders": 1.0
+    },
+    {
+      "product": "Zestaw Colostrum z brzoskwinią i Fiberbiom z czarną porzeczką",
+      "order_count": 14,
+      "total_quantity": 14,
+      "total_revenue": 3150.0,
+      "pct_of_orders": 0.9
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki",
+      "order_count": 13,
+      "total_quantity": 14,
+      "total_revenue": 4186.0,
+      "pct_of_orders": 0.9
+    },
+    {
+      "product": "COLOSTRUM GENACTIV, kapsułki - Trójpak",
+      "order_count": 13,
+      "total_quantity": 16,
+      "total_revenue": 4528.0,
+      "pct_of_orders": 0.9
+    },
+    {
+      "product": "COLOSTRUM Z MALINĄ  GENACTIV, tabletki do ssania - dwupak",
+      "order_count": 13,
+      "total_quantity": 16,
+      "total_revenue": 2576.0,
+      "pct_of_orders": 0.9
+    },
+    {
+      "product": "GENACTIV COLOSTRUM JUNIOR Z CZARNYM BZEM, tabletki do ssania - dwupak",
+      "order_count": 11,
+      "total_quantity": 12,
+      "total_revenue": 2028.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "MLEKO KLACZY GENACTIV, 30 saszetek",
+      "order_count": 11,
+      "total_quantity": 12,
+      "total_revenue": 1620.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "FIBERBIOM Z CZARNĄ PORZECZKĄ DWUPAK",
+      "order_count": 10,
+      "total_quantity": 10,
+      "total_revenue": 2990.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 50g  - Dwupak",
+      "order_count": 10,
+      "total_quantity": 10,
+      "total_revenue": 2990.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "FIBERBIOM Z ANANASEM DWUPAK",
+      "order_count": 10,
+      "total_quantity": 11,
+      "total_revenue": 3289.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "GENACTIV COLOSTRUM JUNIOR Z CZARNYM BZEM,  proszek - dwupak",
+      "order_count": 10,
+      "total_quantity": 11,
+      "total_revenue": 2695.0,
+      "pct_of_orders": 0.7
+    },
+    {
+      "product": "COLOSTRUM GENACTIV ZAWIESINA + JUNIOR COLOSTRUM GENACTIV ZAWIESINA",
+      "order_count": 9,
+      "total_quantity": 9,
+      "total_revenue": 2475.0,
+      "pct_of_orders": 0.6
+    },
+    {
+      "product": "FUREVER CAT 90 kapsułek",
+      "order_count": 9,
+      "total_quantity": 13,
+      "total_revenue": 780.0,
+      "pct_of_orders": 0.6
+    },
+    {
+      "product": "BLOKER Z COLOSTRUM GENACTIV",
+      "order_count": 8,
+      "total_quantity": 8,
+      "total_revenue": 1080.0,
+      "pct_of_orders": 0.5
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 50g",
+      "order_count": 7,
+      "total_quantity": 7,
+      "total_revenue": 1603.0,
+      "pct_of_orders": 0.5
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, proszek - Dwupak",
+      "order_count": 7,
+      "total_quantity": 8,
+      "total_revenue": 5264.0,
+      "pct_of_orders": 0.5
+    },
+    {
+      "product": "COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, zawiesina, dwupak",
+      "order_count": 7,
+      "total_quantity": 8,
+      "total_revenue": 2312.0,
+      "pct_of_orders": 0.5
+    },
+    {
+      "product": "Genactiv Colostrum A2, kapsułki Dwupak",
+      "order_count": 6,
+      "total_quantity": 6,
+      "total_revenue": 1374.0,
+      "pct_of_orders": 0.4
+    },
+    {
+      "product": "COLOSTRUM Z CZARNĄ PORZECZKĄ GENACTIV, proszek",
+      "order_count": 6,
+      "total_quantity": 7,
+      "total_revenue": 1281.0,
+      "pct_of_orders": 0.4
+    },
+    {
+      "product": "COLOSTRUM Z BANANEM GENACTIV, proszek - Trójpak",
+      "order_count": 5,
+      "total_quantity": 5,
+      "total_revenue": 1550.0,
+      "pct_of_orders": 0.3
+    },
+    {
+      "product": "FUREVER CAT proszek 75 g",
+      "order_count": 5,
+      "total_quantity": 5,
+      "total_revenue": 450.0,
+      "pct_of_orders": 0.3
+    },
+    {
+      "product": "Genactiv Colostrum A2, proszek dwupak",
+      "order_count": 4,
+      "total_quantity": 4,
+      "total_revenue": 1676.0,
+      "pct_of_orders": 0.3
+    },
+    {
+      "product": "MLEKO KLACZY GENACTIV, kapsułki",
+      "order_count": 4,
+      "total_quantity": 6,
+      "total_revenue": 1098.0,
+      "pct_of_orders": 0.3
+    },
+    {
+      "product": "COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania - Trójpak",
+      "order_count": 4,
+      "total_quantity": 5,
+      "total_revenue": 1145.0,
+      "pct_of_orders": 0.3
+    },
+    {
+      "product": "FUREVER DOG 60 kapsułek",
+      "order_count": 3,
+      "total_quantity": 4,
+      "total_revenue": 192.0,
+      "pct_of_orders": 0.2
+    },
+    {
+      "product": "COLOSTRUM Z BANANEM, proszek - Dwupak",
+      "order_count": 3,
+      "total_quantity": 3,
+      "total_revenue": 1887.0,
+      "pct_of_orders": 0.2
+    },
+    {
+      "product": "Zestaw Colostrum z brzoskwinią i Fiberbiom z Ananasem",
+      "order_count": 2,
+      "total_quantity": 2,
+      "total_revenue": 450.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "Książka Colostrum Naturalny regulator układu odpornościowego",
+      "order_count": 2,
+      "total_quantity": 2,
+      "total_revenue": 78.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki - dwupak",
+      "order_count": 2,
+      "total_quantity": 2,
+      "total_revenue": 996.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "COLOSTRUM GENACTIV,, kapsułki - dwupak",
+      "order_count": 2,
+      "total_quantity": 2,
+      "total_revenue": 398.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "FUREVER HORSE, proszek 500 g",
+      "order_count": 1,
+      "total_quantity": 1,
+      "total_revenue": 20.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "COLOSTRUM Z BANANEM GENACTIV, proszek - dwupak",
+      "order_count": 1,
+      "total_quantity": 1,
+      "total_revenue": 218.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "FUREVER HORSE, proszek 5500 g",
+      "order_count": 1,
+      "total_quantity": 2,
+      "total_revenue": 478.0,
+      "pct_of_orders": 0.1
+    },
+    {
+      "product": "Drapak dla Kota",
+      "order_count": 1,
+      "total_quantity": 1,
+      "total_revenue": 69.0,
+      "pct_of_orders": 0.1
+    }
+  ],
+  "customer_segmentation": {
+    "total_customers": 1435,
+    "repeat_customers": 58,
+    "repeat_rate": 4.0,
+    "orders_per_customer_avg": 1.05,
+    "orders_distribution": {
+      "1": 1377,
+      "2": 53,
+      "3": 4,
+      "5": 1
+    },
+    "top_20pct_revenue_share": 39.8,
+    "avg_customer_revenue": 256.66
+  },
+  "reorder_analysis": [
+    {
+      "product": "FIBERBIOM - Błonnik + Colostrum",
+      "repeat_buyers": 8,
+      "total_reorders": 8,
+      "avg_interval_days": 12.0,
+      "median_interval_days": 15,
+      "min_interval_days": 1,
+      "max_interval_days": 18,
+      "intervals": [
+        1,
+        8,
+        8,
+        13,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "product": "KREM Z COLOSTRUM GENACTIV",
+      "repeat_buyers": 4,
+      "total_reorders": 4,
+      "avg_interval_days": 5.5,
+      "median_interval_days": 7,
+      "min_interval_days": 0,
+      "max_interval_days": 15,
+      "intervals": [
+        0,
+        0,
+        7,
+        15
+      ]
+    }
+  ],
+  "product_combinations": [
+    {
+      "products": [
+        "FIBERBIOM Z ANANASEM",
+        "FIBERBIOM Z CZARNĄ PORZECZKĄ"
+      ],
+      "co_purchase_count": 42
+    },
+    {
+      "products": [
+        "KREM Z COLOSTRUM GENACTIV",
+        "MASECZKA Z COLOSTRUM GENACTIV 50ml"
+      ],
+      "co_purchase_count": 20
+    },
+    {
+      "products": [
+        "FIBERBIOM - Błonnik + Colostrum",
+        "FIBERBIOM Z ANANASEM"
+      ],
+      "co_purchase_count": 17
+    },
+    {
+      "products": [
+        "FIBERBIOM - Błonnik + Colostrum",
+        "FIBERBIOM Z CZARNĄ PORZECZKĄ"
+      ],
+      "co_purchase_count": 15
+    },
+    {
+      "products": [
+        "MASKA Z COLOSTRUM GENACTIV",
+        "SZAMPON Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 12
+    },
+    {
+      "products": [
+        "MASECZKA Z COLOSTRUM GENACTIV 50ml",
+        "SZAMPON Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 8
+    },
+    {
+      "products": [
+        "FIBERBIOM - Błonnik + Colostrum",
+        "MASECZKA Z COLOSTRUM GENACTIV 50ml"
+      ],
+      "co_purchase_count": 8
+    },
+    {
+      "products": [
+        "COLOSTRUM GENACTIV, 120 kapsułek",
+        "FIBERBIOM - Błonnik + Colostrum"
+      ],
+      "co_purchase_count": 7
+    },
+    {
+      "products": [
+        "FIBERBIOM - Błonnik + Colostrum",
+        "KREM Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 6
+    },
+    {
+      "products": [
+        "COLOSTRUM GENACTIV, 60 kapsułek",
+        "MASECZKA Z COLOSTRUM GENACTIV 50ml"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "KREM Z COLOSTRUM GENACTIV",
+        "MASECZKA Z COLOSTRUM GENACTIV 150ml"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "MASECZKA Z COLOSTRUM GENACTIV 50ml",
+        "MASKA Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "MASECZKA Z COLOSTRUM GENACTIV 150ml",
+        "SZAMPON Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "MASECZKA Z COLOSTRUM GENACTIV 150ml",
+        "MASKA Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "COLOSTRUM GENACTIV, 120 kapsułek",
+        "COLOSTRUM GENACTIV, proszek"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "Colostrum z brzoskwinią, proszek 60 g",
+        "FUREVER DOG 30 kapsułek"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "Colostrum z brzoskwinią, proszek 60 g",
+        "FIBERBIOM Z ANANASEM"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "Colostrum z brzoskwinią, proszek 60 g",
+        "KREM Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "MASKA Z COLOSTRUM GENACTIV",
+        "SERUM Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    },
+    {
+      "products": [
+        "COLOSTRUM GENACTIV, 60 kapsułek",
+        "KREM Z COLOSTRUM GENACTIV"
+      ],
+      "co_purchase_count": 5
+    }
+  ],
+  "high_value_customers": {
+    "count": 248,
+    "avg_orders": 12.7,
+    "avg_spend": 5421.21,
+    "total_spend": 1344459.4
+  },
+  "ltv_distribution": {
+    "0-200": 0,
+    "200-500": 0,
+    "500-1000": 0,
+    "1000-2000": 0,
+    "2000-5000": 149,
+    "5000+": 101
+  },
+  "customer_detail_count": 250
+}

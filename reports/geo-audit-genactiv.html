@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv GEO Audit — Generative Engine Optimization | 2026-07-08</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922; --orange: #db6d28;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent); }
+  h4 { font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--purple); }
+  .subtitle { color: var(--muted); margin-bottom: 2rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; }
+  .card-header { font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  th, td { padding: 0.5rem 0.75rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); font-weight: 600; }
+  td { vertical-align: top; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+  .badge-critical { background: #f8514933; color: var(--red); }
+  .badge-high { background: #db6d2833; color: var(--orange); }
+  .badge-medium { background: #d2992233; color: var(--yellow); }
+  .badge-low { background: #3fb95033; color: var(--green); }
+  .badge-pass { background: #3fb95033; color: var(--green); }
+  .badge-fail { background: #f8514933; color: var(--red); }
+  .badge-missing { background: #8b949e33; color: var(--muted); }
+  .badge-geo { background: #bc8cff33; color: var(--purple); }
+  code { background: #1c2128; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; color: #79c0ff; }
+  .summary-box { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+  details { margin: 0.5rem 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 0.5rem; background: var(--surface); border-radius: 4px; }
+  summary:hover { background: #1c2128; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  ul, ol { margin: 0.5rem 0 0.5rem 1.5rem; font-size: 0.9rem; }
+  li { margin-bottom: 0.3rem; }
+  .grade-box { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 12px; font-size: 1.8rem; font-weight: 800; }
+  .grade-d { background: #db6d2844; color: var(--orange); border: 2px solid var(--orange); }
+  .highlight-red { background: #f8514922; border-left: 3px solid var(--red); padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
+  .highlight-orange { background: #db6d2822; border-left: 3px solid var(--orange); padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
+  .highlight-green { background: #3fb95022; border-left: 3px solid var(--green); padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 768px) { .summary-box, .two-col { grid-template-columns: 1fr; } }
+  pre { background: #1c2128; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.8rem; line-height: 1.5; color: #e6edf3; margin: 0.5rem 0; }
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc ol { counter-reset: toc; list-style: none; margin: 0.5rem 0 0; padding: 0; }
+  .toc li { counter-increment: toc; margin: 0.3rem 0; }
+  .toc li::before { content: counter(toc) ". "; color: var(--muted); font-weight: 600; }
+  .q-row-yes { background: #3fb95011; }
+  .q-row-no { background: #f8514911; }
+  .q-row-neg { background: #f8514922; }
+</style>
+</head>
+<body>
+
+<h1>GenActiv GEO Audit</h1>
+<p class="subtitle">Generative Engine Optimization | 2026-07-08 | 3 agenty analityczne | genactiv.pl</p>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="summary-box">
+  <div class="stat">
+    <div class="stat-num" style="color: var(--orange)"><span class="grade-box grade-d">D+</span></div>
+    <div class="stat-label">Ocena AI visibility</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--red)">2/7</div>
+    <div class="stat-label">Zapytan z widocznoscia</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--red)">0/7</div>
+    <div class="stat-label">Pozytywne cytaty AI</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" style="color: var(--yellow)">23</div>
+    <div class="stat-label">Problemow schema.org</div>
+  </div>
+</div>
+
+<div class="highlight-red">
+  <strong>Kluczowe odkrycie:</strong> Na zapytanie brandowe "GenActiv colostrum opinie" odpowiedz AI prowadzi z <strong>krytyka</strong>: "nie podaje zawartosci IgG", "stosunkowo wysoka cena", "ocena 3.5/5", "istnieja tansze suplementy o porownywalna lub wyzsza jakoscia". GenActiv nie kontroluje wlasnej narracji w AI.
+</div>
+
+<nav class="toc">
+  <strong>Spis tresci</strong>
+  <ol>
+    <li><a href="#s1">Widocznosc AI — analiza 7 zapytan</a></li>
+    <li><a href="#s2">Mapa konkurencji w AI</a></li>
+    <li><a href="#s3">Audyt Structured Data (JSON-LD)</a></li>
+    <li><a href="#s4">Pliki discovery (llms.txt, robots.txt, agents.md)</a></li>
+    <li><a href="#s5">Content gap — zapytania bez odpowiedzi</a></li>
+    <li><a href="#s6">GEO best practices 2026 — co robic</a></li>
+    <li><a href="#s7">Priorytetowy plan wdrozenia</a></li>
+    <li><a href="#s8">Zrodla</a></li>
+  </ol>
+</nav>
+
+<hr>
+
+<!-- SECTION 1: AI VISIBILITY -->
+<h2 id="s1">1. Widocznosc AI — analiza 7 zapytan</h2>
+
+<p style="margin-bottom: 1rem;">Sprawdzono 7 kluczowych zapytan (branded + generic + informational). Dla kazdego zweryfikowano: czy GenActiv pojawia sie w organicznych wynikach, kto dominuje, oraz czy GenActiv jest cytowany w AI-generowanych odpowiedziach (Google AI Overviews, Perplexity-style summaries).</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Zapytanie</th>
+    <th>Typ</th>
+    <th>GenActiv widoczny?</th>
+    <th>Pozycja</th>
+    <th>W AI summary?</th>
+    <th>Sentyment AI</th>
+    <th>Kto dominuje</th>
+  </tr>
+  <tr class="q-row-yes">
+    <td>Q1</td>
+    <td>colostrum bovinum suplementy Polska</td>
+    <td>Commercial</td>
+    <td><span class="badge badge-medium">SLABO</span></td>
+    <td>9-10</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td>Colostrum Polska, Domowa Apteczka, Gemini</td>
+  </tr>
+  <tr class="q-row-no">
+    <td>Q2</td>
+    <td>najlepsze colostrum bovinum</td>
+    <td>Commercial</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td>natu.care, wybieramykolagen.pl, Genoscope</td>
+  </tr>
+  <tr class="q-row-no">
+    <td>Q3</td>
+    <td>colostrum dla dzieci suplementy</td>
+    <td>Commercial</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td>Colostrum Polska (Colostrum Junior), DOZ</td>
+  </tr>
+  <tr class="q-row-no">
+    <td>Q4</td>
+    <td>najlepsze colostrum dla dzieci</td>
+    <td>Commercial</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td>DOZ, Genoscope (2 poz.), wybieramykolagen.pl</td>
+  </tr>
+  <tr class="q-row-no">
+    <td>Q5</td>
+    <td>colostrum vs probiotyki</td>
+    <td>Informational</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>—</td>
+    <td>Colvia, Colostrum Active, Labify</td>
+  </tr>
+  <tr class="q-row-yes">
+    <td>Q6</td>
+    <td>colostrum na odpornosc opinie</td>
+    <td>Commercial</td>
+    <td><span class="badge badge-pass">TAK</span></td>
+    <td>4</td>
+    <td><span class="badge badge-fail">NIE</span></td>
+    <td>Neutralny</td>
+    <td>polakuleczsiesam.pl, leki.pl, Pan Tabletka</td>
+  </tr>
+  <tr class="q-row-neg">
+    <td>Q7</td>
+    <td>GenActiv colostrum opinie</td>
+    <td>Branded</td>
+    <td><span class="badge badge-pass">TAK</span></td>
+    <td>3</td>
+    <td><span class="badge badge-critical">TAK — NEGATYWNY</span></td>
+    <td style="color: var(--red); font-weight: 700;">NEGATYWNY</td>
+    <td>pro-farm.pl, Ceneo, wybieramykolagen.pl (3.5/5)</td>
+  </tr>
+</table>
+
+<div class="card" style="border-color: var(--red);">
+  <div class="card-header"><span class="badge badge-critical">ALARM</span> Zapytanie brandowe Q7 — AI generuje negatywna narracje</div>
+  <p style="font-size: 0.9rem;">AI-generowana odpowiedz na "GenActiv colostrum opinie" zawiera:</p>
+  <ul>
+    <li><strong>"GenActiv nie podaje informacji o zawartosci przeciwcial IgG"</strong> — kluczowy zarzut konkurencji</li>
+    <li><strong>"Stosunkowo wysoka cena"</strong></li>
+    <li><strong>"Ocena 3.5/5"</strong> (zrodlo: wybieramykolagen.pl)</li>
+    <li><strong>"Istnieja tansze suplementy o porownywalna lub wyzsza jakoscia"</strong></li>
+  </ul>
+  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">GenActiv.pl/pages/opinie-o-colostrum jest na pozycji 3, ale strony krytyczne (pro-farm.pl, Ceneo, wybieramykolagen.pl) sa wyzej i kontroluja narracje AI.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 2: COMPETITOR MAP -->
+<h2 id="s2">2. Mapa konkurencji w AI</h2>
+
+<table>
+  <tr>
+    <th>Konkurent</th>
+    <th>AI visibility</th>
+    <th>Obecnosc (z 7 zapytan)</th>
+    <th>Przewaga</th>
+    <th>Poziom zagrozenia</th>
+  </tr>
+  <tr>
+    <td><strong>Genoscope</strong></td>
+    <td><span class="badge badge-critical">WYSOKA</span></td>
+    <td>4/7</td>
+    <td>60% IgG standaryzacja, dedykowane artykuly per segment (dzieci, dorosli), blog targetujacy zapytania</td>
+    <td><span class="badge badge-critical">KRYTYCZNY</span></td>
+  </tr>
+  <tr>
+    <td><strong>wybieramykolagen.pl</strong></td>
+    <td><span class="badge badge-critical">WYSOKA</span></td>
+    <td>5/7</td>
+    <td>Multi-formatowe recenzje, kontroluje rating GenActiv (3.5/5), afiliacyjny ale dominujacy</td>
+    <td><span class="badge badge-critical">KRYTYCZNY</span></td>
+  </tr>
+  <tr>
+    <td><strong>Colostrum Polska</strong></td>
+    <td><span class="badge badge-high">WYSOKA</span></td>
+    <td>3/7</td>
+    <td>Exact-match domena (colostrumpolska.pl), Colostrum Junior (dzieci), wiele form produktu</td>
+    <td><span class="badge badge-high">WYSOKI</span></td>
+  </tr>
+  <tr>
+    <td><strong>Colostrum Active</strong></td>
+    <td><span class="badge badge-medium">UMIARKOWANA</span></td>
+    <td>3/7</td>
+    <td>35-40% IgG standaryzacja, dedykowane porownania ("co jest lepsze probiotyk czy colostrum")</td>
+    <td><span class="badge badge-medium">SREDNI</span></td>
+  </tr>
+  <tr>
+    <td><strong>natu.care</strong></td>
+    <td><span class="badge badge-medium">UMIARKOWANA</span></td>
+    <td>2/7</td>
+    <td>Afiliacyjne rankingi — #1 na "najlepsze colostrum"</td>
+    <td><span class="badge badge-medium">SREDNI</span></td>
+  </tr>
+  <tr>
+    <td><strong>DOZ / Gemini</strong></td>
+    <td><span class="badge badge-medium">UMIARKOWANA</span></td>
+    <td>2-3/7</td>
+    <td>Autorytet apteczny, rankingi roczne</td>
+    <td><span class="badge badge-low">NISKI</span></td>
+  </tr>
+  <tr style="background: #f8514911;">
+    <td><strong>GenActiv</strong></td>
+    <td><span class="badge badge-fail">NISKA</span></td>
+    <td>2/7</td>
+    <td>#1 na "colostrum" (do obrony), strona opinii, blog poradnik</td>
+    <td>—</td>
+  </tr>
+</table>
+
+<div class="highlight-orange">
+  <strong>Dlaczego konkurencja wygrywa w AI:</strong>
+  <ol>
+    <li><strong>Transparentnosc IgG</strong> — Genoscope (60%), Colostrum Active (35-40%) publikuja dokladna zawartosc. GenActiv nie ujawnia, co AI cytuje jako slabosca.</li>
+    <li><strong>Content-for-queries</strong> — Genoscope tworzy artykuly targetujace konkretne zapytania ("Jakie colostrum dla dzieci wybrac?"). GenActiv nie ma takich artykulow.</li>
+    <li><strong>Relacje z serwisami recenzji</strong> — Konkurenci dostarczaja ustandaryzowane dane, ktore serwisy rankingowe moga latwo cytowac.</li>
+    <li><strong>Exact-match domeny</strong> — colostrumpolska.pl ma naturalna przewage na frazy "colostrum Polska".</li>
+  </ol>
+</div>
+
+<hr>
+
+<!-- SECTION 3: STRUCTURED DATA AUDIT -->
+<h2 id="s3">3. Audyt Structured Data (JSON-LD)</h2>
+
+<p style="margin-bottom: 1rem;">Pobrano i przeanalizowano JSON-LD z 6 typow stron genactiv.pl. Ponizej pelna lista obecnych schematow i problemow.</p>
+
+<h3>3.1 Co jest obecne</h3>
+
+<table>
+  <tr>
+    <th>Typ strony</th>
+    <th>JSON-LD obecne</th>
+    <th>Brakujace/zalecane</th>
+  </tr>
+  <tr>
+    <td>Homepage</td>
+    <td><code>Organization</code>, <code>WebSite</code> + <code>SearchAction</code></td>
+    <td><span class="badge badge-missing">SiteNavigationElement</span></td>
+  </tr>
+  <tr>
+    <td>Product (PDP)</td>
+    <td><code>Organization</code>, <code>BreadcrumbList</code>, <code>Product</code> + <code>Offer</code>, <code>FAQPage</code> (9 pytan)</td>
+    <td><span class="badge badge-missing">AggregateRating</span> <span class="badge badge-missing">gtin13</span> <span class="badge badge-missing">Brand (fix Thing)</span></td>
+  </tr>
+  <tr>
+    <td>Blog Article</td>
+    <td><code>Organization</code>, <code>BreadcrumbList</code>, <code>Article</code> + FAQ via microdata</td>
+    <td><span class="badge badge-missing">speakable</span> <span class="badge badge-missing">citation</span> <span class="badge badge-missing">prawidlowy author</span></td>
+  </tr>
+  <tr>
+    <td>Blog Listing</td>
+    <td><code>Organization</code>, <code>BreadcrumbList</code></td>
+    <td><span class="badge badge-missing">CollectionPage</span> <span class="badge badge-missing">ItemList</span></td>
+  </tr>
+  <tr>
+    <td>Collection</td>
+    <td><code>Organization</code>, <code>BreadcrumbList</code></td>
+    <td><span class="badge badge-missing">CollectionPage</span> <span class="badge badge-missing">ItemList</span> <span class="badge badge-missing">OfferCatalog</span></td>
+  </tr>
+  <tr>
+    <td>About Page</td>
+    <td><code>Organization</code> (z blednym URL)</td>
+    <td><span class="badge badge-missing">AboutPage</span> <span class="badge badge-missing">foundingDate</span> <span class="badge badge-missing">founders</span></td>
+  </tr>
+</table>
+
+<h3>3.2 Pelna lista problemow (23)</h3>
+
+<table>
+  <tr><th>#</th><th>Problem</th><th>Waga</th><th>Dotyczy</th><th>Szczegoly</th></tr>
+  <tr>
+    <td>S01</td>
+    <td>Author artykulow = "Sklep Genactiv"</td>
+    <td><span class="badge badge-critical">CRIT</span></td>
+    <td>Wszystkie artykuly blog</td>
+    <td>YMYL content wymaga autora z imieniem, nazwiskiem i kwalifikacjami. "Sklep Genactiv" nie jest osoba — red flag E-E-A-T.</td>
+  </tr>
+  <tr>
+    <td>S02</td>
+    <td><code>brand</code> uzywa <code>@type: "Thing"</code> zamiast <code>"Brand"</code></td>
+    <td><span class="badge badge-critical">CRIT</span></td>
+    <td>Wszystkie PDP</td>
+    <td>Google zaleca <code>@type: Brand</code>. Uzycie "Thing" traci semantyke i moze redukowac eligibility do rich results.</td>
+  </tr>
+  <tr>
+    <td>S03</td>
+    <td>Brand name lowercase "genactiv"</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Wszystkie PDP</td>
+    <td>Powinno byc "Genactiv" (proper case) dla spojnosci marki.</td>
+  </tr>
+  <tr>
+    <td>S04</td>
+    <td>Review author = "Genactiv customers"</td>
+    <td><span class="badge badge-critical">CRIT</span></td>
+    <td>PDP z recenzjami</td>
+    <td>Generyczna/fikcyjna nazwa. Google review guidelines wymagaja prawdziwych imion. Ryzyko manual action.</td>
+  </tr>
+  <tr>
+    <td>S05</td>
+    <td>Brak <code>gtin13</code> / <code>mpn</code> w Product</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Wszystkie PDP</td>
+    <td>Kody kreskowe istnieja w Shopify (np. 2010000000304) ale nie sa w schema. Google wymaga min. jednego identyfikatora.</td>
+  </tr>
+  <tr>
+    <td>S06</td>
+    <td><code>sameAs</code> zawiera 5 pustych stringow</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td>Tablica: <code>["", "https://facebook...", "", "https://instagram...", "", "", "https://youtube...", ""]</code>. Google moze oznaczyc jako malformed.</td>
+  </tr>
+  <tr>
+    <td>S07</td>
+    <td><code>publisher.logo</code> w Article uzywa obrazka artykulu</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Wszystkie artykuly blog</td>
+    <td>Bug w szablonie Liquid — powinno uzywac logo firmy, nie featured image artykulu.</td>
+  </tr>
+  <tr>
+    <td>S08</td>
+    <td><code>mainEntityOfPage.@id</code> wskazuje na homepage</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Wszystkie artykuly blog</td>
+    <td>Powinno wskazywac na URL artykulu, nie <code>https://genactiv.pl</code>.</td>
+  </tr>
+  <tr>
+    <td>S09</td>
+    <td>Podwojna przecinek w nazwie produktu (<code>,,</code>)</td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Colostrum kapsulki dwupak</td>
+    <td>"COLOSTRUM GENACTIV,, kapsulki - dwupak" — literowka propagowana do schema, breadcrumbs, OG.</td>
+  </tr>
+  <tr>
+    <td>S10</td>
+    <td>Brak <code>CollectionPage</code> / <code>ItemList</code></td>
+    <td><span class="badge badge-high">HIGH</span></td>
+    <td>Blog listing + Collection pages</td>
+    <td>Strony listingowe nie maja schematu reprezentujacego liste elementow.</td>
+  </tr>
+  <tr>
+    <td>S11</td>
+    <td>Brak <code>contactPoint</code> na Organization</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td>Brak telefonu/emailu obslugi klienta w schema.</td>
+  </tr>
+  <tr>
+    <td>S12</td>
+    <td>Brak <code>address</code> (PostalAddress)</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td>Brak adresu siedziby w Organization schema.</td>
+  </tr>
+  <tr>
+    <td>S13</td>
+    <td>Logo URL zbyt male (126px)</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td><code>logo_new2_126x.png</code> — Google zaleca min. 112x112, idealnie 600px+ dla Knowledge Panel.</td>
+  </tr>
+  <tr>
+    <td>S14</td>
+    <td>Brak <code>dateModified</code> w Article</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>Artykuly blog</td>
+    <td>Tylko <code>datePublished</code> i <code>dateCreated</code>. <code>dateModified</code> jest zalecany.</td>
+  </tr>
+  <tr>
+    <td>S15</td>
+    <td>Brak <code>speakable</code></td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>Artykuly blog</td>
+    <td>Brak oznaczenia kluczowych sekcji dla voice search / AI extraction. Aktualnie US/EN only, ale warto przygotowac.</td>
+  </tr>
+  <tr>
+    <td>S16</td>
+    <td>Brak <code>Offer.shippingDetails</code></td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>PDP</td>
+    <td>Google coraz bardziej waloryzuje informacje o dostawie w Product schema.</td>
+  </tr>
+  <tr>
+    <td>S17</td>
+    <td>Brak <code>hasMerchantReturnPolicy</code></td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>PDP</td>
+    <td>Polityka zwrotow w schema poprawia eligibility do rich results.</td>
+  </tr>
+  <tr>
+    <td>S18</td>
+    <td>Pusty blok <code>FAQPage</code> (<code>"mainEntity": []</code>)</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>Niektore PDP</td>
+    <td>Blok z pusta tablica pytan — powinien byc usuniety.</td>
+  </tr>
+  <tr>
+    <td>S19</td>
+    <td>Organization URL na About = URL strony, nie root</td>
+    <td><span class="badge badge-medium">MED</span></td>
+    <td>/pages/poznajgenactiv</td>
+    <td><code>"url": "/pages/poznajgenactiv"</code> zamiast <code>"url": "https://genactiv.pl"</code></td>
+  </tr>
+  <tr>
+    <td>S20</td>
+    <td><code>@context</code> uzywa <code>http://</code></td>
+    <td><span class="badge badge-low">LOW</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td>Powinno byc <code>https://schema.org</code> konsekwentnie.</td>
+  </tr>
+  <tr>
+    <td>S21</td>
+    <td>Brak <code>Offer.priceValidUntil</code></td>
+    <td><span class="badge badge-low">LOW</span></td>
+    <td>PDP</td>
+    <td>Zalecane dla Product rich results.</td>
+  </tr>
+  <tr>
+    <td>S22</td>
+    <td>Brak <code>Product.countryOfOrigin</code></td>
+    <td><span class="badge badge-low">LOW</span></td>
+    <td>PDP</td>
+    <td>Istotne dla suplementow zdrowotnych — "Made in Poland" to USP.</td>
+  </tr>
+  <tr>
+    <td>S23</td>
+    <td>Brak <code>description</code> w Organization</td>
+    <td><span class="badge badge-low">LOW</span></td>
+    <td>WSZYSTKIE strony</td>
+    <td>Brak opisu firmy w schema Organization.</td>
+  </tr>
+</table>
+
+<h3>3.3 Przyklad obecnego Product JSON-LD (FIBERBIOM z ananasem)</h3>
+
+<details>
+  <summary>Pokaz aktualny Product JSON-LD</summary>
+<pre>{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "FIBERBIOM Z ANANASEM",
+  "url": "https://genactiv.pl/products/fiberbiom-z-ananasem",
+  "image": ["https://genactiv.pl/cdn/shop/files/ananas_galeria2_800x.png?v=1782726659"],
+  "description": "Fiberbiom z ananasem to suplement diety w saszetkach (15 sztuk)...",
+  "sku": "FIBERBIOMANANAS",
+  <strong style="color: var(--red);">"brand": { "@type": "Thing", "name": "genactiv" },</strong>  // <-- PROBLEM: Thing, nie Brand; lowercase
+  "offers": [{
+    "@type": "Offer",
+    "sku": "FIBERBIOMANANAS",
+    "availability": "http://schema.org/InStock",
+    "price": 179,
+    "priceCurrency": "PLN",
+    "url": "...?variant=57920248021324"
+  }]
+  // BRAK: gtin13, aggregateRating, shippingDetails, returnPolicy, countryOfOrigin
+}</pre>
+</details>
+
+<h3>3.4 Przyklad obecnego Article JSON-LD (blog)</h3>
+
+<details>
+  <summary>Pokaz aktualny Article JSON-LD</summary>
+<pre>{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "headline": "Czym jest mikrobiom?",
+  "articleBody": "[pelny tekst artykulu...]",
+  <strong style="color: var(--red);">"mainEntityOfPage": { "@type": "WebPage", "@id": "https://genactiv.pl" },</strong>  // <-- PROBLEM: homepage zamiast artykulu
+  "datePublished": "2025-07-17T15:42:27Z",
+  "dateCreated": "2021-10-01T13:47:03Z",
+  // BRAK: dateModified
+  <strong style="color: var(--red);">"author": { "@type": "Person", "name": "Sklep Genactiv" },</strong>  // <-- PROBLEM: "Sklep" nie jest osoba
+  "publisher": {
+    "@type": "Organization",
+    <strong style="color: var(--red);">"logo": { "url": "[OBRAZEK ARTYKULU, nie logo firmy]" },</strong>  // <-- PROBLEM: bug w szablonie
+    "name": "Genactiv"
+  }
+  // BRAK: speakable, citation, author.url, author.jobTitle
+}</pre>
+</details>
+
+<hr>
+
+<!-- SECTION 4: DISCOVERY FILES -->
+<h2 id="s4">4. Pliki discovery (llms.txt, robots.txt, agents.md)</h2>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-header"><code>/robots.txt</code> <span class="badge badge-pass">ISTNIEJE</span></div>
+    <ul>
+      <li>Standardowy Shopify + customowe blokady</li>
+      <li>Blokuje: admin, cart, checkout, account, search, policy, wishlist</li>
+      <li>Blokuje filtry kolekcji (dobre dla duplicate content)</li>
+      <li>Bot-specific: Nutch (zablokowany), AhrefsBot (10s delay), Pinterest (1s delay)</li>
+      <li>Sitemap: <code>/sitemap.xml</code></li>
+    </ul>
+    <div class="highlight-orange" style="margin-top: 0.5rem;">
+      <strong>Brak regul AI botow!</strong> Nie ma wpisow dla GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot, Applebot-Extended. Jezeli Cloudflare blokuje AI crawlery domyslnie, genactiv.pl moze byc niewidoczna dla AI.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><code>/llms.txt</code> <span class="badge badge-medium">AUTO-SHOPIFY</span></div>
+    <ul>
+      <li>Plik istnieje ale jest <strong>generowany automatycznie przez Shopify</strong></li>
+      <li>Zawiera wylacznie informacje o Universal Commerce Protocol (UCP)</li>
+      <li>Odnosi sie do <code>shop.app/SKILL.md</code> (Shopify Shop skill)</li>
+      <li>Endpointy MCP: <code>POST /api/ucp/mcp</code></li>
+      <li><strong>Brak informacji o GenActiv jako marce</strong> — zero brand identity</li>
+      <li><strong>Brak linkow do kluczowych tresci</strong> (blog, eksperci, badania)</li>
+    </ul>
+    <div class="highlight-red" style="margin-top: 0.5rem;">
+      <strong>Potrzebny custom llms.txt!</strong> Obecny plik mowi AI tylko o funkcjach sklepu Shopify. Powinien opisywac GenActiv jako marke, ekspertow, produkty i kluczowe zasoby.
+    </div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-header"><code>/agents.md</code> <span class="badge badge-medium">AUTO-SHOPIFY</span></div>
+    <ul>
+      <li>Generowany automatycznie przez Shopify</li>
+      <li>Informacje o UCP, Shop skill, read-only browsing</li>
+      <li>Endpointy: collections JSON, products JSON, search</li>
+      <li>Linki do polityk sklepu</li>
+      <li><strong>Brak brand identity GenActiv</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><code>/.well-known/llms.txt</code> <span class="badge badge-fail">NIE ISTNIEJE</span></div>
+    <ul>
+      <li>Zwraca 404</li>
+      <li>Niektorzy AI crawlerzy sprawdzaja tez te sciezke</li>
+    </ul>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Dodatkowe: <code>/sitemap_agentic_discovery.xml</code> istnieje (Shopify auto) — wskazuje na <code>/agents.md</code>.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5: CONTENT GAP -->
+<h2 id="s5">5. Content gap — zapytania bez odpowiedzi</h2>
+
+<p style="margin-bottom: 1rem;">GenActiv ma blog (<code>/blogs/poradnik/</code>) i sekcje badania (<code>/blogs/badania/</code>), ale zadna z istniejacych tresci nie odpowiada na zapytania, na ktore ludzie (i systemy AI) rzeczywiscie szukaja:</p>
+
+<table>
+  <tr>
+    <th>Zapytanie docelowe</th>
+    <th>Tresc GenActiv</th>
+    <th>Tresc konkurencji</th>
+    <th>Priorytet</th>
+  </tr>
+  <tr>
+    <td>"najlepsze colostrum bovinum"</td>
+    <td><span class="badge badge-fail">BRAK</span></td>
+    <td>natu.care: artykul rankingowy, wybieramykolagen.pl: ranking</td>
+    <td><span class="badge badge-critical">P1</span></td>
+  </tr>
+  <tr>
+    <td>"colostrum dla dzieci"</td>
+    <td><span class="badge badge-fail">BRAK</span> (brak artykulu o dzieciach)</td>
+    <td>Genoscope: dedykowany blog + produkt, Colostrum Polska: Colostrum Junior</td>
+    <td><span class="badge badge-critical">P1</span></td>
+  </tr>
+  <tr>
+    <td>"colostrum vs probiotyki"</td>
+    <td><span class="badge badge-fail">BRAK</span></td>
+    <td>Colvia, Colostrum Active: dedykowane artykuly porownawcze</td>
+    <td><span class="badge badge-high">P2</span></td>
+  </tr>
+  <tr>
+    <td>"jakie colostrum wybrac"</td>
+    <td><span class="badge badge-fail">BRAK</span></td>
+    <td>Gemini, biozdrowy.pl, DOZ: poradniki z kryteriami wyboru</td>
+    <td><span class="badge badge-high">P2</span></td>
+  </tr>
+  <tr>
+    <td>"colostrum dawkowanie"</td>
+    <td><span class="badge badge-fail">BRAK</span> (info jest w FAQ produktu, ale nie jako artykul)</td>
+    <td>Wiele artykulow konkurencji</td>
+    <td><span class="badge badge-medium">P3</span></td>
+  </tr>
+  <tr>
+    <td>"colostrum IgG zawartosc"</td>
+    <td><span class="badge badge-medium">CZESCIOWO</span> ("Falszywy mit IgG" — ton defensywny)</td>
+    <td>Genoscope, natu.care: transparentne dane IgG na produktach</td>
+    <td><span class="badge badge-critical">P1</span></td>
+  </tr>
+</table>
+
+<div class="highlight-orange">
+  <strong>Kluczowa obserwacja:</strong> GenActiv ma <code>/pages/eksperci</code> (strona ekspertow) i <code>/blogs/badania/</code> (badania naukowe), ale te zasoby <strong>nie sa polaczone z artykulami</strong> jako autorzy ani cytowania. Eksperci istnieja — nie sa wykorzystywani w schema ani content strategy.
+</div>
+
+<hr>
+
+<!-- SECTION 6: GEO BEST PRACTICES 2026 -->
+<h2 id="s6">6. GEO best practices 2026 — co robic</h2>
+
+<div class="card">
+  <div class="card-header"><span class="badge badge-geo">GEO</span> Stan wiedzy 2026</div>
+  <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Na podstawie badania Search Engine Land, SEOTuners, GenOptima, Princeton research i Google AI Overviews statistics:</p>
+  <ul>
+    <li><strong>AI Overviews</strong> pojawiaja sie w ~47-64% wszystkich zapytan (desktop + mobile)</li>
+    <li><strong>Organiczny CTR</strong> spada do 61% na zapytaniach informacyjnych po pojawieniu sie AI Overviews</li>
+    <li>Tresc <strong>NIE musi rankować #1</strong> zeby byc cytowana — struktura i autorytet sa wazniejsze</li>
+    <li>Tresc z <strong>oryginalnymi statystykami</strong> widzi 30-40% wyzsza widocznosc w AI</li>
+    <li><strong>llms.txt</strong> nie jest jeszcze czynnikiem rankingowym Google, ale AI (ChatGPT, Perplexity, Claude) coraz czesciej go uzywaja</li>
+    <li><strong>speakable</strong> — aktualnie US/EN only, nie ma zastosowania w PL</li>
+  </ul>
+</div>
+
+<h3>6.1 Co robic — 6 strategii GEO</h3>
+
+<div class="two-col">
+  <div class="card">
+    <h4>S1: Strukturuj tresc dla AI extraction</h4>
+    <ul>
+      <li>Kazdy akapit powinien odpowiadac na jedno pytanie</li>
+      <li>Uzyj formatow listkowych i rankingowych</li>
+      <li>Wstaw "quick answer" bloki nad foldem</li>
+      <li>Dodaj FAQ ze strukturalnymi danymi</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>S2: Cytowalne elementy</h4>
+    <ul>
+      <li>Cytuj zrodla naukowe (Princeton: +30-40% AI visibility)</li>
+      <li>Wstawiaj statystyki z wlasnymi danymi</li>
+      <li>Dodawaj wypowiedzi ekspertow (z imieniem i kwalifikacjami)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>S3: Oryginalne badania</h4>
+    <ul>
+      <li>Publikuj wlasne dane (badania kliniczne, ankiety)</li>
+      <li>Tworzenie benchmark studies, zestawien</li>
+      <li>AI cytuje unikalne dane, ktorych nie ma u konkurencji</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>S4: Swiezosc</h4>
+    <ul>
+      <li>Dodaj "Ostatnia aktualizacja" timestamps</li>
+      <li>Cykl odswiezania 7-14 dni dla cornerstone pages</li>
+      <li><code>dateModified</code> w Article schema</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>S5: Custom llms.txt</h4>
+    <ul>
+      <li>Nadpisz Shopify default wlasnym plikiem</li>
+      <li>Opisz marke, ekspertow, produkty, kluczowe zasoby</li>
+      <li>Format: Markdown z H1 (nazwa), blockquote (opis), H2 (sekcje), linki</li>
+      <li>30-80 linii; nie wiecej niz 200</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>S6: Dostepnosc AI crawlerow</h4>
+    <ul>
+      <li>Sprawdz robots.txt — dodaj reguly dla GPTBot, ClaudeBot etc.</li>
+      <li>Sprawdz Cloudflare/CDN — domyslnie moze blokowac AI boty</li>
+      <li>Uzyj <code>sitemap_agentic_discovery.xml</code></li>
+    </ul>
+  </div>
+</div>
+
+<h3>6.2 Trzy KPI do mierzenia GEO</h3>
+
+<table>
+  <tr><th>KPI</th><th>Definicja</th><th>GenActiv baseline</th><th>Cel</th></tr>
+  <tr>
+    <td><strong>Mention Rate</strong></td>
+    <td>% odpowiedzi AI wymieniajacych marke na target prompts</td>
+    <td>2/7 = 29%</td>
+    <td>5/7 = 71%</td>
+  </tr>
+  <tr>
+    <td><strong>Citation Rate</strong></td>
+    <td>% odpowiedzi AI linkujacych do domeny</td>
+    <td>0/7 = 0%</td>
+    <td>3/7 = 43%</td>
+  </tr>
+  <tr>
+    <td><strong>Sentiment</strong></td>
+    <td>Pozytywny/neutralny/negatywny ton w AI</td>
+    <td>1 negatywny (Q7)</td>
+    <td>0 negatywnych</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- SECTION 7: IMPLEMENTATION PLAN -->
+<h2 id="s7">7. Priorytetowy plan wdrozenia</h2>
+
+<div class="card" style="border-color: var(--red);">
+  <div class="card-header"><span class="badge badge-critical">FAZA 0 — KRYTYCZNE</span> Napraw to zanim cokolwiek innego</div>
+  <table>
+    <tr><th>#</th><th>Zadanie</th><th>Typ</th><th>Wplyw</th></tr>
+    <tr>
+      <td>F0.1</td>
+      <td><strong>Napraw author na artykulach blog</strong> — zmien "Sklep Genactiv" na prawdziwego eksperta z <code>/pages/eksperci</code>. Dodaj <code>author.url</code>, <code>author.jobTitle</code>, <code>author.affiliation</code></td>
+      <td>Liquid template</td>
+      <td>E-E-A-T YMYL compliance, warunkuje wszystkie artykuly</td>
+    </tr>
+    <tr>
+      <td>F0.2</td>
+      <td><strong>Napraw <code>brand</code>: Thing → Brand</strong>, "genactiv" → "Genactiv"</td>
+      <td>Liquid template</td>
+      <td>Product rich results eligibility</td>
+    </tr>
+    <tr>
+      <td>F0.3</td>
+      <td><strong>Napraw <code>publisher.logo</code></strong> — uzyj logo firmy, nie featured image artykulu</td>
+      <td>Liquid template</td>
+      <td>Article rich results</td>
+    </tr>
+    <tr>
+      <td>F0.4</td>
+      <td><strong>Napraw <code>mainEntityOfPage.@id</code></strong> — uzyj URL artykulu, nie homepage</td>
+      <td>Liquid template</td>
+      <td>Article rich results</td>
+    </tr>
+    <tr>
+      <td>F0.5</td>
+      <td><strong>Usun puste stringi z <code>sameAs</code></strong></td>
+      <td>Liquid template</td>
+      <td>Organization schema health</td>
+    </tr>
+    <tr>
+      <td>F0.6</td>
+      <td><strong>Napraw podwojna przecinek</strong> w "COLOSTRUM GENACTIV,, kapsulki"</td>
+      <td>Shopify Admin</td>
+      <td>Product data integrity</td>
+    </tr>
+  </table>
+  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Wymaga dostepu do Shopify Theme Editor (pliki Liquid). Zmiany F0.1-F0.5 to edycje szablonow — wplywaja na WSZYSTKIE strony danego typu.</p>
+</div>
+
+<div class="card" style="border-color: var(--orange);">
+  <div class="card-header"><span class="badge badge-high">FAZA 1 — QUICK WINS GEO</span> Infrastruktura techniczna</div>
+  <table>
+    <tr><th>#</th><th>Zadanie</th><th>Typ</th><th>Wplyw</th></tr>
+    <tr>
+      <td>F1.1</td>
+      <td><strong>Custom <code>/llms.txt</code></strong> — nadpisz Shopify default. Opisz GenActiv, produkty, ekspertow, badania, blog.</td>
+      <td>Shopify Theme / Liquid page</td>
+      <td>AI brand identity</td>
+    </tr>
+    <tr>
+      <td>F1.2</td>
+      <td><strong>Dodaj <code>gtin13</code></strong> do Product schema z Shopify variant barcode</td>
+      <td>Liquid template</td>
+      <td>Product rich results</td>
+    </tr>
+    <tr>
+      <td>F1.3</td>
+      <td><strong>Rozszerz Organization schema</strong> — dodaj <code>description</code>, <code>address</code>, <code>contactPoint</code>, <code>foundingDate</code>, <code>legalName</code>, logo 600px+</td>
+      <td>Liquid template</td>
+      <td>Knowledge Panel, entity recognition</td>
+    </tr>
+    <tr>
+      <td>F1.4</td>
+      <td><strong>Dodaj <code>dateModified</code></strong> do Article schema</td>
+      <td>Liquid template</td>
+      <td>Freshness signal</td>
+    </tr>
+    <tr>
+      <td>F1.5</td>
+      <td><strong>Zweryfikuj dostep AI crawlerow</strong> — sprawdz robots.txt (brak regul AI botow), Cloudflare settings</td>
+      <td>Shopify / Cloudflare</td>
+      <td>AI crawlability</td>
+    </tr>
+    <tr>
+      <td>F1.6</td>
+      <td><strong>Usun pusty blok FAQPage</strong> (<code>"mainEntity": []</code>) z PDP</td>
+      <td>Liquid template</td>
+      <td>Schema quality</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card" style="border-color: var(--yellow);">
+  <div class="card-header"><span class="badge badge-medium">FAZA 2 — CONTENT</span> Artykuly targetujace zapytania AI</div>
+  <table>
+    <tr><th>#</th><th>Artykul</th><th>Zapytanie docelowe</th><th>Format</th><th>Priorytet</th></tr>
+    <tr>
+      <td>F2.1</td>
+      <td>"Najlepsze colostrum bovinum — jak wybrac suplement?"</td>
+      <td>najlepsze colostrum bovinum</td>
+      <td>Ranking/poradnik z kryteriami wyboru, FAQ, ekspert jako autor</td>
+      <td><span class="badge badge-critical">P1</span></td>
+    </tr>
+    <tr>
+      <td>F2.2</td>
+      <td>"Colostrum dla dzieci — poradnik dla rodzicow"</td>
+      <td>colostrum dla dzieci, najlepsze colostrum dla dzieci</td>
+      <td>Poradnik + FAQ + wypowiedz pediatry, ekspert jako autor</td>
+      <td><span class="badge badge-critical">P1</span></td>
+    </tr>
+    <tr>
+      <td>F2.3</td>
+      <td>"Colostrum vs probiotyki — co jest lepsze?"</td>
+      <td>colostrum vs probiotyki</td>
+      <td>Porownanie tabelaryczne + synergia, cytaty naukowe</td>
+      <td><span class="badge badge-high">P2</span></td>
+    </tr>
+    <tr>
+      <td>F2.4</td>
+      <td>"Jakie colostrum wybrac? Kryteria jakosci colostrum bovinum"</td>
+      <td>jakie colostrum wybrac</td>
+      <td>Poradnik z checklist, czas pozyskania &lt;2h jako USP GenActiv</td>
+      <td><span class="badge badge-high">P2</span></td>
+    </tr>
+    <tr>
+      <td>F2.5</td>
+      <td>"Colostrum — dawkowanie, stosowanie, odpowiedzi na pytania"</td>
+      <td>colostrum dawkowanie</td>
+      <td>FAQ + HowTo schema, wypowiedz eksperta</td>
+      <td><span class="badge badge-medium">P3</span></td>
+    </tr>
+  </table>
+  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">UWAGA YMYL: Artykuly o suplementach diety wymagaja review medycznego. Nie auto-publikowac. Kazdy artykul musi miec realnego autora z kwalifikacjami.</p>
+</div>
+
+<div class="card" style="border-color: var(--purple);">
+  <div class="card-header"><span class="badge badge-geo">FAZA 3 — NARRACJA</span> Przejecie kontroli nad wizerunkiem w AI</div>
+  <table>
+    <tr><th>#</th><th>Zadanie</th><th>Cel</th></tr>
+    <tr>
+      <td>F3.1</td>
+      <td><strong>Proaktywna odpowiedz na zarzut IgG</strong> — artykul edukacyjny dlaczego czas pozyskania &lt;2h jest lepszym wskaznikiem jakosci niz % IgG. Z danymi naukowymi.</td>
+      <td>Zmiana narracji AI z "nie podaje IgG" na "uzywa lepszego wskaznika jakosci"</td>
+    </tr>
+    <tr>
+      <td>F3.2</td>
+      <td><strong>Outreach do serwisow recenzji</strong> — zaktualizuj dane u wybieramykolagen.pl, pro-farm.pl. Dostarcz brakujace informacje.</td>
+      <td>Poprawa ratingu 3.5/5 i negatywnej narracji</td>
+    </tr>
+    <tr>
+      <td>F3.3</td>
+      <td><strong>Polacz ekspertow z artykulami</strong> — strona /pages/eksperci istnieje, ale eksperci nie sa linkowany do artykulow jako autorzy</td>
+      <td>E-E-A-T signals dla AI i Google</td>
+    </tr>
+    <tr>
+      <td>F3.4</td>
+      <td><strong>Struktura cytowan naukowych</strong> — /blogs/badania/ ma badania naukowe ale nie sa ustrukturyzowane dla AI extraction (brak JSON-LD citation, brak statystyk w formatach listkowych)</td>
+      <td>Citation-worthy content dla AI</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 8: SOURCES -->
+<h2 id="s8">8. Zrodla</h2>
+
+<details>
+  <summary>Pokaz zrodla (badania, best practices, specyfikacje)</summary>
+  <h4>GEO Best Practices</h4>
+  <ul>
+    <li>Search Engine Land — Mastering GEO 2026</li>
+    <li>SEOTuners — GEO Best Practices</li>
+    <li>GenOptima — GEO Playbook 2026</li>
+    <li>Princeton Research — Citation impact on AI visibility (+30-40%)</li>
+  </ul>
+  <h4>llms.txt</h4>
+  <ul>
+    <li>llmstxt.org — Official Specification (Jeremy Howard, Answer.AI, Sep 2024)</li>
+    <li>Semrush — What Is LLMs.txt</li>
+    <li>Ahrefs — What is llms.txt</li>
+  </ul>
+  <h4>Google AI Overviews</h4>
+  <ul>
+    <li>QuickSEO — AI Overviews Statistics 2026 (47-64% zapytan, -61% CTR informational)</li>
+    <li>Kreativa Group — How to Optimize for AI Overviews 2026</li>
+  </ul>
+  <h4>Schema / Structured Data</h4>
+  <ul>
+    <li>Google Search Central — Speakable (US/EN only, BETA)</li>
+    <li>Frase.io — FAQ Schema for AI/GEO</li>
+    <li>SEOTuners — Schema for AEO/GEO</li>
+  </ul>
+  <h4>Analiza konkurencji</h4>
+  <ul>
+    <li>genoscope.pl/pl/blog/ — 4 artykuly targetujace zapytania AI</li>
+    <li>colostrumpolska.pl — exact-match domena</li>
+    <li>colostrumactive.pl — porownania i % IgG</li>
+    <li>wybieramykolagen.pl — controlling GenActiv rating 3.5/5</li>
+    <li>pro-farm.pl — recenzja GenActiv</li>
+    <li>natu.care — ranking "najlepsze colostrum"</li>
+  </ul>
+  <h4>Dane genactiv.pl</h4>
+  <ul>
+    <li>6 stron pobrane i przeanalizowane (homepage, PDP, blog listing, blog article, about page, collection)</li>
+    <li>JSON-LD z kazdej strony wyekstrahowane i zweryfikowane</li>
+    <li>robots.txt, llms.txt, agents.md, sitemap_agentic_discovery.xml pobrane i przeanalizowane</li>
+  </ul>
+</details>
+
+<hr>
+
+<p style="text-align: center; color: var(--muted); margin-top: 2rem; font-size: 0.8rem;">
+  Raport wygenerowany 2026-07-08 przez Claude Code (Opus 4.6) | 3 agenty analityczne | GenActiv.pl GEO Audit<br>
+  Powiazany raport: <a href="seo-verification-10-rounds.html" style="color: var(--accent);">SEO Weryfikacja 10 rund (2026-07-06)</a>
+</p>
+
+</body>
+</html>

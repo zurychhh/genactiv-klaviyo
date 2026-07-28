@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Form Inputs" subtitle="Field, quantity stepper, checkbox" viewport="700x180" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.field { display:flex; flex-direction:column; gap:6px; max-width:340px; }
+.field label { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ga-fg3); }
+.field input { font-family:var(--ga-font-body); font-size:14px; padding:13px 16px; border:1.5px solid var(--ga-gray-300); border-radius:12px; outline:none; transition:border-color .15s; }
+.field input:focus { border-color:var(--ga-red); }
+.field input::placeholder{ color:var(--ga-gray-500); }
+.qty { display:inline-flex; align-items:center; border:1.5px solid var(--ga-gray-300); border-radius:999px; overflow:hidden; }
+.qty button{ border:0; background:#fff; width:42px; height:42px; font-size:18px; color:var(--ga-ink); cursor:pointer; }
+.qty button:hover{ background:var(--ga-red-soft); color:var(--ga-red); }
+.qty span{ width:40px; text-align:center; font-weight:700; font-size:15px; }
+.chk{ display:flex; align-items:center; gap:9px; font-size:13px; color:var(--ga-fg2); }
+.chk i{ width:20px; height:20px; border-radius:6px; background:var(--ga-red); display:inline-flex; align-items:center; justify-content:center; color:#fff; font-style:normal; font-size:13px; }
+</style></head>
+<body><div class="card">
+  <div class="row" style="gap:28px; align-items:flex-end;">
+    <div class="field"><label>E-mail</label><input placeholder="twoj@email.pl"></div>
+    <div class="col" style="gap:10px;">
+      <span class="lbl">Ilość</span>
+      <div class="qty"><button>−</button><span>2</span><button>+</button></div>
+    </div>
+  </div>
+  <div class="chk"><i>✓</i> Zapoznałem/am się z polityką prywatności.</div>
+</div></body></html>

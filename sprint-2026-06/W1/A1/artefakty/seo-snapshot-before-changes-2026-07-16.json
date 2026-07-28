@@ -1,0 +1,82 @@
+{
+  "snapshot_date": "2026-07-16T14:30:00+02:00",
+  "purpose": "Rollback snapshot before SEO changes (tasks A1, A2, A5, A4)",
+  "products": {
+    "fiberbiom_ananas_single": {
+      "id": "gid://shopify/Product/15850903961932",
+      "numeric_id": "15850903961932",
+      "title": "FIBERBIOM Z ANANASEM",
+      "handle": "fiberbiom-z-ananasem",
+      "status": "ACTIVE",
+      "seo": {
+        "title": null,
+        "description": "FIBERBIOM z ANANASEM Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!"
+      }
+    },
+    "fiberbiom_ananas_dwupak": {
+      "id": "gid://shopify/Product/15853802783052",
+      "numeric_id": "15853802783052",
+      "title": "FIBERBIOM Z ANANASEM DWUPAK",
+      "handle": "fiberbiom-z-ananasem-dwupak",
+      "status": "ACTIVE",
+      "seo": {
+        "title": null,
+        "description": "FIBERBIOM z ANANASEM Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!"
+      },
+      "note": "CRITICAL BUG: description says '15 saszetek' but should be 30 (dwupak = 2x15)"
+    },
+    "fiberbiom_porzeczka_single": {
+      "id": "gid://shopify/Product/15850938106188",
+      "numeric_id": "15850938106188",
+      "title": "FIBERBIOM Z CZARNĄ PORZECZKĄ",
+      "handle": "fiberbiom-z-czarna-porzeczka",
+      "status": "ACTIVE",
+      "seo": {
+        "title": null,
+        "description": "FIBERBIOM Z CZARNĄ PORZECZKĄ Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!"
+      }
+    },
+    "fiberbiom_porzeczka_dwupak": {
+      "id": "gid://shopify/Product/15853446922572",
+      "numeric_id": "15853446922572",
+      "title": "FIBERBIOM Z CZARNĄ PORZECZKĄ DWUPAK",
+      "handle": "fiberbiom-z-czarna-porzeczka-dwupak",
+      "status": "ACTIVE",
+      "seo": {
+        "title": null,
+        "description": "FIBERBIOM Z CZARNĄ PORZECZKĄ Genactiv (15 saszetek) – rozpuszczalny błonnik z kory modrzewia i colostrum. Wsparcie mikrobioty i jelit. Zamów w Genactiv!"
+      },
+      "note": "CRITICAL BUG: description says '15 saszetek' but should be 30 (dwupak = 2x15)"
+    },
+    "colostrum_kapsulki_dwupak_double_comma": {
+      "id": "gid://shopify/Product/14930175131980",
+      "numeric_id": "14930175131980",
+      "title": "COLOSTRUM GENACTIV,, kapsułki - dwupak",
+      "handle": "colostrum-genactiv-kapsulki-dwupak",
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Kapsułki z Colostrum Genactiv 60 kapsułek – dwupak",
+        "description": "Kup Colostrum Genactiv - 60 kapsułek! Wartościowe uzupełnienie diety dla osób, które chcą zachować zdrowie swojego organizmu. Wzmocnij naturalnie swoją odporność!"
+      },
+      "note": "BUG: double comma in product title 'GENACTIV,, kapsulki'"
+    },
+    "colostrum_brzoskwinia": {
+      "id": "gid://shopify/Product/15860778205516",
+      "numeric_id": "15860778205516",
+      "title": "Colostrum z brzoskwinią, proszek 60 g",
+      "handle": "colostrum-z-brzoskwinia-proszek-60-g",
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Colostrum z brzoskwinią, proszek, puszka 60 g – Genactiv",
+        "description": "Kup Colostrum z brzoskwinią Genactiv, proszek, puszka 60 g! Wartościowe uzupełnienie diety dla osób, które chcą zachować zdrowie swojego organizmu. Wzmocnij naturalnie swoją odporność!"
+      },
+      "media_images": [
+        {"id": "gid://shopify/MediaImage/74247235993932", "alt": "", "filename": "Galeria1.png", "planned_alt": "Colostrum z brzoskwinią Genactiv, proszek 60 g – opakowanie edycji limitowanej wśród świeżych brzoskwiń"},
+        {"id": "gid://shopify/MediaImage/74247236059468", "alt": "", "filename": "galeria3.png", "planned_alt": "Kobieta trzymająca opakowanie Colostrum z brzoskwinią Genactiv i połówkę świeżej brzoskwini"},
+        {"id": "gid://shopify/MediaImage/74402801844556", "alt": "", "filename": "galeria_4.png", "planned_alt": "Colostrum z brzoskwinią Genactiv – liofilizowane colostrum, wysoka biodostępność, szybkie pobieranie, liofilizowana brzoskwinia"},
+        {"id": "gid://shopify/MediaImage/74247236092236", "alt": "", "filename": "Galeria5.png", "planned_alt": "Colostrum z brzoskwinią Genactiv – 50% liofilizowanej brzoskwini, prawdziwy owoc zamiast aromatu, bez dodatku cukru"},
+        {"id": "gid://shopify/MediaImage/74247236125004", "alt": "", "filename": "Galeria4.png", "planned_alt": "Colostrum z brzoskwinią Genactiv – proszek w przekroju puszki, naturalne różnice koloru między partiami"}
+      ]
+    }
+  }
+}

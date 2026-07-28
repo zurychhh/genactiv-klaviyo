@@ -1,0 +1,183 @@
+/* ============================================================
+   GENACTIV — Colors & Type tokens
+   Source of truth: genactiv.pl (Shopify storefront)
+   Brand: producent suplementów z colostrum i mlekiem klaczy
+   ------------------------------------------------------------
+   Import order:  @import "fonts/fonts.css";  then this file.
+   ============================================================ */
+
+:root {
+  /* ---------- BRAND COLORS ---------- */
+  /* Primary brand red — meta theme-color of the live site.            */
+  /* Photographic hero red runs a touch hotter (#FF3E49); use that     */
+  /* only for full-bleed photo backgrounds, not UI.                    */
+  --ga-red:            #F5333F;   /* primary action / brand */
+  --ga-red-hover:      #DB2A36;   /* hover / pressed darker */
+  --ga-red-soft:       #FFE7E8;   /* tinted fill, badges, hovers */
+  --ga-red-photo:      #FF3E49;   /* full-bleed photo background only */
+
+  /* Secondary — Fiberbiom / gut-health line */
+  --ga-pink:           #F5669C;
+  --ga-pink-hover:     #E5508A;
+  --ga-pink-soft:      #FDE4EE;
+
+  /* Colostrum powder / warm cream — used in packaging + soft sections */
+  --ga-cream:          #FBEFE2;
+  --ga-gold:           #E9B872;   /* colostrum powder accent */
+
+  /* ---------- NEUTRALS ---------- */
+  --ga-ink:            #1C1B1B;   /* primary text on light */
+  --ga-graphite:       #3D3A3A;   /* strong body text */
+  --ga-gray-700:       #5C5757;   /* secondary text */
+  --ga-gray-500:       #8B8585;   /* muted / captions */
+  --ga-gray-300:       #D8D3D0;   /* borders, dividers */
+  --ga-gray-150:       #ECE8E5;   /* hairlines, track fills */
+  --ga-gray-100:       #F4F1EE;   /* section background (warm off-white) */
+  --ga-white:          #FFFFFF;
+  --ga-black:          #000000;
+
+  /* ---------- SEMANTIC ---------- */
+  --ga-bg:             var(--ga-white);
+  --ga-bg-alt:         var(--ga-gray-100);
+  --ga-fg1:            var(--ga-ink);     /* headings / primary */
+  --ga-fg2:            var(--ga-gray-700);/* body */
+  --ga-fg3:            var(--ga-gray-500);/* muted */
+  --ga-line:           var(--ga-gray-300);
+  --ga-accent:         var(--ga-red);
+  --ga-on-accent:      var(--ga-white);
+
+  --ga-success:        #2FA36B;
+  --ga-info:           #2B7FB8;
+  --ga-warning:        #E0922A;
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --ga-font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --ga-font-body:    "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  /* Weights (the brand leans heavy: 700/800 for display, 400/500 body) */
+  --ga-w-regular: 400;
+  --ga-w-medium:  500;
+  --ga-w-semi:    600;
+  --ga-w-bold:    700;
+  --ga-w-black:   800;
+
+  /* Type scale — tuned for the storefront. rem base = 16px */
+  --ga-text-xs:   0.75rem;   /* 12 — legal, micro-labels */
+  --ga-text-sm:   0.875rem;  /* 14 — captions, meta */
+  --ga-text-base: 1rem;      /* 16 — body */
+  --ga-text-md:   1.125rem;  /* 18 — lead body */
+  --ga-text-lg:   1.375rem;  /* 22 — small headings */
+  --ga-text-xl:   1.75rem;   /* 28 — H3 */
+  --ga-text-2xl:  2.25rem;   /* 36 — H2 */
+  --ga-text-3xl:  3rem;      /* 48 — H1 */
+  --ga-text-4xl:  4rem;      /* 64 — hero display */
+
+  --ga-leading-tight:  1.1;
+  --ga-leading-snug:   1.25;
+  --ga-leading-normal: 1.55;
+
+  /* Eyebrow / overline tracking — used a lot in section labels & nav */
+  --ga-tracking-eyebrow: 0.16em;
+  --ga-tracking-wordmark: 0.22em;  /* GENACTIV lockup spacing */
+
+  /* ---------- RADII ---------- */
+  /* The brand pairs soft pill buttons with crisp, low-radius cards.   */
+  --ga-radius-sm:   8px;
+  --ga-radius-md:   14px;
+  --ga-radius-lg:   22px;
+  --ga-radius-xl:   32px;
+  --ga-radius-pill: 999px;
+
+  /* ---------- SHADOWS / ELEVATION ---------- */
+  /* Light, diffuse, warm-neutral — never heavy or blue.               */
+  --ga-shadow-sm:  0 1px 2px rgba(28,27,27,.06), 0 1px 3px rgba(28,27,27,.05);
+  --ga-shadow-md:  0 4px 14px rgba(28,27,27,.08);
+  --ga-shadow-lg:  0 14px 40px rgba(28,27,27,.12);
+  --ga-shadow-red: 0 10px 26px rgba(245,51,63,.28);  /* lifted CTA */
+
+  /* ---------- SPACING (4px base) ---------- */
+  --ga-space-1: 4px;
+  --ga-space-2: 8px;
+  --ga-space-3: 12px;
+  --ga-space-4: 16px;
+  --ga-space-5: 24px;
+  --ga-space-6: 32px;
+  --ga-space-7: 48px;
+  --ga-space-8: 64px;
+  --ga-space-9: 96px;
+
+  /* ---------- LAYOUT ---------- */
+  --ga-container: 1240px;
+  --ga-gutter: 24px;
+}
+
+/* ============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================ */
+.ga-display {
+  font-family: var(--ga-font-display);
+  font-weight: var(--ga-w-black);
+  font-size: var(--ga-text-4xl);
+  line-height: var(--ga-leading-tight);
+  letter-spacing: -0.01em;
+  color: var(--ga-fg1);
+}
+.ga-h1 {
+  font-family: var(--ga-font-display);
+  font-weight: var(--ga-w-bold);
+  font-size: var(--ga-text-3xl);
+  line-height: var(--ga-leading-tight);
+  letter-spacing: -0.005em;
+  color: var(--ga-fg1);
+}
+.ga-h2 {
+  font-family: var(--ga-font-display);
+  font-weight: var(--ga-w-bold);
+  font-size: var(--ga-text-2xl);
+  line-height: var(--ga-leading-snug);
+  color: var(--ga-fg1);
+}
+.ga-h3 {
+  font-family: var(--ga-font-display);
+  font-weight: var(--ga-w-bold);
+  font-size: var(--ga-text-xl);
+  line-height: var(--ga-leading-snug);
+  color: var(--ga-fg1);
+}
+.ga-lead {
+  font-family: var(--ga-font-body);
+  font-weight: var(--ga-w-regular);
+  font-size: var(--ga-text-md);
+  line-height: var(--ga-leading-normal);
+  color: var(--ga-fg2);
+}
+.ga-body {
+  font-family: var(--ga-font-body);
+  font-weight: var(--ga-w-regular);
+  font-size: var(--ga-text-base);
+  line-height: var(--ga-leading-normal);
+  color: var(--ga-fg2);
+}
+.ga-small {
+  font-family: var(--ga-font-body);
+  font-weight: var(--ga-w-regular);
+  font-size: var(--ga-text-sm);
+  line-height: var(--ga-leading-normal);
+  color: var(--ga-fg3);
+}
+/* Eyebrow / overline — uppercase, tracked, often red */
+.ga-eyebrow {
+  font-family: var(--ga-font-display);
+  font-weight: var(--ga-w-bold);
+  font-size: var(--ga-text-sm);
+  letter-spacing: var(--ga-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--ga-red);
+}
+.ga-legal {
+  font-family: var(--ga-font-body);
+  font-weight: var(--ga-w-regular);
+  font-size: var(--ga-text-xs);
+  line-height: 1.5;
+  color: var(--ga-fg3);
+}

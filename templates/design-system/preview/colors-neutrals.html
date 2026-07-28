@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- @dsCard group="Colors" name="Neutrals — Warm Gray Scale" subtitle="Ink → white, warm (not blue) greys" viewport="700x150" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.scale { display:grid; grid-template-columns: repeat(8, 1fr); gap:0; border-radius:12px; overflow:hidden; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+.step { height:84px; display:flex; align-items:flex-end; padding:7px 8px; }
+.step span { font-size:10px; font-weight:700; }
+.cap { display:grid; grid-template-columns: repeat(8, 1fr); gap:0; }
+.cap div { font-size:9.5px; color:var(--ga-fg3); padding:4px 8px; text-align:left; }
+</style></head>
+<body><div class="card">
+  <div class="scale">
+    <div class="step" style="background:var(--ga-ink)"><span style="color:#fff">1C1B1B</span></div>
+    <div class="step" style="background:var(--ga-graphite)"><span style="color:#fff">3D3A3A</span></div>
+    <div class="step" style="background:var(--ga-gray-700)"><span style="color:#fff">5C5757</span></div>
+    <div class="step" style="background:var(--ga-gray-500)"><span style="color:#fff">8B8585</span></div>
+    <div class="step" style="background:var(--ga-gray-300)"><span style="color:#3d3a3a">D8D3D0</span></div>
+    <div class="step" style="background:var(--ga-gray-150)"><span style="color:#3d3a3a">ECE8E5</span></div>
+    <div class="step" style="background:var(--ga-gray-100)"><span style="color:#3d3a3a">F4F1EE</span></div>
+    <div class="step" style="background:var(--ga-white); box-shadow: inset 0 0 0 1px var(--ga-gray-150)"><span style="color:#8b8585">FFFFFF</span></div>
+  </div>
+  <div class="cap">
+    <div>ink</div><div>graphite</div><div>gray-700</div><div>gray-500</div><div>gray-300</div><div>gray-150</div><div>gray-100</div><div>white</div>
+  </div>
+</div></body></html>

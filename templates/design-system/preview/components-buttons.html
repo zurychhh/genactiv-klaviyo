@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Buttons" subtitle="Pill CTAs, outline, pink, link, disabled" viewport="700x215" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.btn { font-family:var(--ga-font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; border:0; border-radius:999px; padding:14px 30px; cursor:pointer; transition:all .18s ease; }
+.primary { background:var(--ga-red); color:#fff; box-shadow:var(--ga-shadow-red); }
+.primary:hover { background:var(--ga-red-hover); }
+.ghost { background:transparent; color:var(--ga-red); box-shadow: inset 0 0 0 2px var(--ga-red); }
+.ghost:hover { background:var(--ga-red-soft); }
+.pink { background:var(--ga-pink); color:#fff; }
+.pink:hover{ background:var(--ga-pink-hover); }
+.link { background:none; color:var(--ga-red); border:0; font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.dis { background:var(--ga-gray-300); color:#fff; box-shadow:none; cursor:not-allowed; }
+.lbl2{ font-size:10px; color:var(--ga-fg3); margin-top:7px; letter-spacing:.04em; }
+.col2{ display:flex; flex-direction:column; align-items:center; }
+</style></head>
+<body><div class="card">
+  <div class="row" style="gap:18px; align-items:flex-start;">
+    <div class="col2"><button class="btn primary">Kup teraz</button><span class="lbl2">primary</span></div>
+    <div class="col2"><button class="btn primary" style="background:var(--ga-red-hover)">Kup teraz</button><span class="lbl2">hover</span></div>
+    <div class="col2"><button class="btn ghost">Poznaj</button><span class="lbl2">outline</span></div>
+    <div class="col2"><button class="btn pink">Odkryj</button><span class="lbl2">fiberbiom</span></div>
+  </div>
+  <div class="row" style="gap:22px; align-items:flex-start;">
+    <div class="col2"><button class="link">Dowiedz się więcej</button><span class="lbl2">text link</span></div>
+    <div class="col2"><button class="btn dis">Niedostępne</button><span class="lbl2">disabled</span></div>
+  </div>
+</div></body></html>

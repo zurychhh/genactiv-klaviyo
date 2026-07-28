@@ -1,0 +1,4525 @@
+{
+  "metadata": {
+    "generated_at": "2026-07-17T16:37:28.295939",
+    "total_orders": 3026,
+    "unique_customers": 2753,
+    "date_range": {
+      "from": "2026-05-18",
+      "to": "2026-07-17",
+      "span_days": 59
+    }
+  },
+  "product_reorder_analysis": {
+    "FIBERBIOM (original)": {
+      "repeat_buyers": 49,
+      "single_buyers": 599,
+      "total_purchases": 707,
+      "multi_unit_purchases": 180,
+      "repeat_rate_pct": 7.6,
+      "interval_stats": {
+        "count": 59,
+        "mean_days": 20.7,
+        "median_days": 18,
+        "min_days": 0,
+        "max_days": 49,
+        "stdev_days": 11.2,
+        "all_intervals": [
+          0,
+          1,
+          3,
+          4,
+          6,
+          8,
+          8,
+          8,
+          9,
+          9,
+          12,
+          13,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          15,
+          15,
+          15,
+          16,
+          16,
+          16,
+          16,
+          17,
+          17,
+          18,
+          18,
+          18,
+          18,
+          19,
+          20,
+          22,
+          23,
+          24,
+          24,
+          26,
+          27,
+          27,
+          27,
+          28,
+          28,
+          29,
+          30,
+          31,
+          31,
+          31,
+          31,
+          33,
+          34,
+          34,
+          36,
+          40,
+          40,
+          42,
+          44,
+          49
+        ],
+        "mode_days": 14
+      },
+      "histogram": {
+        "0-14": 19,
+        "15-29": 26,
+        "30-44": 13,
+        "45-59": 1,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "mon***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            12
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-06-23",
+          "total_span_days": 12,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "ani***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            13
+          ],
+          "first_purchase": "2026-07-02",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 13,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "mar***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-17",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 28,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "ama***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            17
+          ],
+          "first_purchase": "2026-06-28",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 17,
+          "quantities": [
+            2,
+            6
+          ],
+          "total_units": [
+            60,
+            180
+          ]
+        },
+        {
+          "customer": "bw.***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            29
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 29,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "biu***procent.szczecin.pl",
+          "purchase_count": 3,
+          "intervals": [
+            14,
+            15
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 29,
+          "quantities": [
+            1,
+            2,
+            1
+          ],
+          "total_units": [
+            30,
+            60,
+            30
+          ]
+        },
+        {
+          "customer": "m.p***wp.pl",
+          "purchase_count": 3,
+          "intervals": [
+            14,
+            18
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 33,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "ola***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            49
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-14",
+          "total_span_days": 49,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "agn***bejnar-bejnarowicz.pl",
+          "purchase_count": 3,
+          "intervals": [
+            17,
+            27
+          ],
+          "first_purchase": "2026-05-30",
+          "last_purchase": "2026-07-14",
+          "total_span_days": 44,
+          "quantities": [
+            1,
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "ela***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            42
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-14",
+          "total_span_days": 42,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "19m***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            14
+          ],
+          "first_purchase": "2026-06-29",
+          "last_purchase": "2026-07-14",
+          "total_span_days": 14,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "joa***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-06-03",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 40,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "msw***yahoo.com",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-07-04",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 8,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "bho***poczta.onet.pl",
+          "purchase_count": 4,
+          "intervals": [
+            15,
+            14,
+            16
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-12",
+          "total_span_days": 46,
+          "quantities": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "jwa***poczta.onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-12",
+          "last_purchase": "2026-07-11",
+          "total_span_days": 28,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "mar***onet.eu",
+          "purchase_count": 4,
+          "intervals": [
+            3,
+            26,
+            19
+          ],
+          "first_purchase": "2026-05-21",
+          "last_purchase": "2026-07-10",
+          "total_span_days": 49,
+          "quantities": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30,
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "bas***gmail.com",
+          "purchase_count": 3,
+          "intervals": [
+            18,
+            6
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-07-10",
+          "total_span_days": 24,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "mag***o2.pl",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-06-09",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 30,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "maz***vp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            44
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 44,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "gmg***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            1
+          ],
+          "first_purchase": "2026-07-03",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 1,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "dom***hotmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            22
+          ],
+          "first_purchase": "2026-06-13",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 22,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "gro***poczta.fm",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 40,
+          "quantities": [
+            2,
+            3
+          ],
+          "total_units": [
+            60,
+            90
+          ]
+        },
+        {
+          "customer": "kor***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            34
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 34,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "mak***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-06-27",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 8,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "ewa***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            34
+          ],
+          "first_purchase": "2026-05-31",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 34,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "kas***vp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            14
+          ],
+          "first_purchase": "2026-06-20",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 14,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "iza***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-03",
+          "last_purchase": "2026-07-04",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "bas***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 31,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            30
+          ]
+        },
+        {
+          "customer": "edy***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            36
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 36,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ela***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-05-30",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "mag***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-05-30",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 31,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "dor***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            24
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-06-17",
+          "total_span_days": 24,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "mon***o2.pl",
+          "purchase_count": 3,
+          "intervals": [
+            9,
+            24
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-06-27",
+          "total_span_days": 34,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "syl***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            16
+          ],
+          "first_purchase": "2026-06-08",
+          "last_purchase": "2026-06-24",
+          "total_span_days": 16,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "jol***poczta.onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-06-04",
+          "last_purchase": "2026-06-13",
+          "total_span_days": 8,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "kar***gmail.com",
+          "purchase_count": 3,
+          "intervals": [
+            14,
+            20
+          ],
+          "first_purchase": "2026-05-20",
+          "last_purchase": "2026-06-24",
+          "total_span_days": 35,
+          "quantities": [
+            1,
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "ann***hotmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            18
+          ],
+          "first_purchase": "2026-06-05",
+          "last_purchase": "2026-06-23",
+          "total_span_days": 18,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "joa***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            33
+          ],
+          "first_purchase": "2026-05-20",
+          "last_purchase": "2026-06-23",
+          "total_span_days": 33,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ali***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            16
+          ],
+          "first_purchase": "2026-06-06",
+          "last_purchase": "2026-06-22",
+          "total_span_days": 16,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "agn***o2.pl",
+          "purchase_count": 2,
+          "intervals": [
+            4
+          ],
+          "first_purchase": "2026-06-16",
+          "last_purchase": "2026-06-21",
+          "total_span_days": 4,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "mil***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            23
+          ],
+          "first_purchase": "2026-05-25",
+          "last_purchase": "2026-06-18",
+          "total_span_days": 23,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "nat***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            16
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-06-18",
+          "total_span_days": 16,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "aga***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            9
+          ],
+          "first_purchase": "2026-06-07",
+          "last_purchase": "2026-06-17",
+          "total_span_days": 9,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ela***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            18
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-06-17",
+          "total_span_days": 18,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "mag***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            15
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-06-16",
+          "total_span_days": 15,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "dku***poczta.fm",
+          "purchase_count": 2,
+          "intervals": [
+            27
+          ],
+          "first_purchase": "2026-05-18",
+          "last_purchase": "2026-06-15",
+          "total_span_days": 27,
+          "quantities": [
+            2,
+            3
+          ],
+          "total_units": [
+            60,
+            90
+          ]
+        },
+        {
+          "customer": "ale***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            27
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-06-15",
+          "total_span_days": 27,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        },
+        {
+          "customer": "m.r***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            14
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-06-15",
+          "total_span_days": 14,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "ani***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-31",
+          "last_purchase": "2026-05-31",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM GENACTIV kapsulki": {
+      "repeat_buyers": 31,
+      "single_buyers": 582,
+      "total_purchases": 644,
+      "multi_unit_purchases": 70,
+      "repeat_rate_pct": 5.1,
+      "interval_stats": {
+        "count": 31,
+        "mean_days": 22.8,
+        "median_days": 26,
+        "min_days": 0,
+        "max_days": 52,
+        "stdev_days": 17.1,
+        "all_intervals": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          8,
+          8,
+          11,
+          19,
+          20,
+          21,
+          25,
+          26,
+          30,
+          31,
+          32,
+          32,
+          33,
+          34,
+          35,
+          36,
+          40,
+          41,
+          41,
+          42,
+          44,
+          46,
+          52
+        ],
+        "mode_days": 0
+      },
+      "histogram": {
+        "0-14": 11,
+        "15-29": 5,
+        "30-44": 13,
+        "45-59": 2,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "bec***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            52
+          ],
+          "first_purchase": "2026-05-25",
+          "last_purchase": "2026-07-17",
+          "total_span_days": 52,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "mil***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            36
+          ],
+          "first_purchase": "2026-06-08",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 36,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "kbp***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            33
+          ],
+          "first_purchase": "2026-06-09",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 33,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ewe***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-13",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            60
+          ]
+        },
+        {
+          "customer": "ani***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-06-10",
+          "last_purchase": "2026-07-12",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        },
+        {
+          "customer": "agn***poczta.onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-06-17",
+          "last_purchase": "2026-06-25",
+          "total_span_days": 8,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            60
+          ]
+        },
+        {
+          "customer": "sig***icloud.com",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 40,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ewa***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            41
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 41,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            120,
+            360
+          ]
+        },
+        {
+          "customer": "gal***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-06-29",
+          "last_purchase": "2026-07-07",
+          "total_span_days": 8,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        },
+        {
+          "customer": "kl.***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            21
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-07-07",
+          "total_span_days": 21,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        },
+        {
+          "customer": "kru***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-06",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "iza***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            44
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 44,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "d.z***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            46
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-07-04",
+          "total_span_days": 46,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            120
+          ]
+        },
+        {
+          "customer": "kre***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            41
+          ],
+          "first_purchase": "2026-05-23",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 41,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            60,
+            240
+          ]
+        },
+        {
+          "customer": "jus***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            60
+          ]
+        },
+        {
+          "customer": "j.s***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            42
+          ],
+          "first_purchase": "2026-05-20",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 42,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ewe***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            1
+          ],
+          "first_purchase": "2026-06-29",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 1,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "gos***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            19
+          ],
+          "first_purchase": "2026-06-10",
+          "last_purchase": "2026-06-30",
+          "total_span_days": 19,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        },
+        {
+          "customer": "szy***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-06-30",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "ann***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            26
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 26,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            60
+          ]
+        },
+        {
+          "customer": "ann***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            35
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-06-27",
+          "total_span_days": 35,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            120
+          ]
+        },
+        {
+          "customer": "wal***vp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            34
+          ],
+          "first_purchase": "2026-05-21",
+          "last_purchase": "2026-06-25",
+          "total_span_days": 34,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            120,
+            120
+          ]
+        },
+        {
+          "customer": "lun***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-23",
+          "last_purchase": "2026-06-23",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            180,
+            120
+          ]
+        },
+        {
+          "customer": "aga***autograf.pl",
+          "purchase_count": 2,
+          "intervals": [
+            20
+          ],
+          "first_purchase": "2026-05-31",
+          "last_purchase": "2026-06-21",
+          "total_span_days": 20,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "kja***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-05-18",
+          "last_purchase": "2026-06-18",
+          "total_span_days": 30,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            120
+          ]
+        },
+        {
+          "customer": "jol***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            25
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-06-17",
+          "total_span_days": 25,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        },
+        {
+          "customer": "mo.***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            11
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-06-13",
+          "total_span_days": 11,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            120,
+            120
+          ]
+        },
+        {
+          "customer": "tom***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-09",
+          "last_purchase": "2026-06-09",
+          "total_span_days": 0,
+          "quantities": [
+            5,
+            5
+          ],
+          "total_units": [
+            600,
+            600
+          ]
+        },
+        {
+          "customer": "ejp***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-07",
+          "last_purchase": "2026-06-07",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            120,
+            60
+          ]
+        },
+        {
+          "customer": "szc***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-05",
+          "last_purchase": "2026-06-05",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "wia***poczta.onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-05-27",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            180,
+            120
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM JUNIOR": {
+      "repeat_buyers": 24,
+      "single_buyers": 206,
+      "total_purchases": 255,
+      "multi_unit_purchases": 32,
+      "repeat_rate_pct": 10.4,
+      "interval_stats": {
+        "count": 25,
+        "mean_days": 15.4,
+        "median_days": 0,
+        "min_days": 0,
+        "max_days": 51,
+        "stdev_days": 18.7,
+        "all_intervals": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          23,
+          25,
+          29,
+          30,
+          32,
+          32,
+          33,
+          40,
+          40,
+          50,
+          51
+        ],
+        "mode_days": 0
+      },
+      "histogram": {
+        "0-14": 14,
+        "15-29": 3,
+        "30-44": 6,
+        "45-59": 2,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "e.s***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-16",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            3
+          ],
+          "total_units": [
+            2,
+            3
+          ]
+        },
+        {
+          "customer": "eip***gmail.com",
+          "purchase_count": 3,
+          "intervals": [
+            50,
+            0
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 50,
+          "quantities": [
+            2,
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "ewe***onet.com.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-15",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "iza***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-02",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "pch***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "bie***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-11",
+          "last_purchase": "2026-07-11",
+          "total_span_days": 0,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            4,
+            1
+          ]
+        },
+        {
+          "customer": "sig***icloud.com",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 40,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "ann***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            51
+          ],
+          "first_purchase": "2026-05-18",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 51,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "gro***poczta.fm",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 40,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "ise***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            33
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 33,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "j.t***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-02",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "szy***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-06-30",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "aga***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-29",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "wce***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            23
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-06-22",
+          "total_span_days": 23,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "dag***outlook.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-22",
+          "last_purchase": "2026-06-22",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "kar***poczta.fm",
+          "purchase_count": 2,
+          "intervals": [
+            29
+          ],
+          "first_purchase": "2026-05-21",
+          "last_purchase": "2026-06-19",
+          "total_span_days": 29,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "bea***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-06-19",
+          "total_span_days": 30,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "toj***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            25
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-06-19",
+          "total_span_days": 25,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        },
+        {
+          "customer": "iva***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-16",
+          "last_purchase": "2026-06-16",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "mar***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-06-15",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "bio***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-04",
+          "last_purchase": "2026-06-04",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            2,
+            1
+          ]
+        },
+        {
+          "customer": "biu***gabinet-twojezdrowie.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-05-26",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "mat***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-25",
+          "last_purchase": "2026-05-25",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "izk***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-25",
+          "last_purchase": "2026-05-25",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM GENACTIV proszek": {
+      "repeat_buyers": 14,
+      "single_buyers": 305,
+      "total_purchases": 334,
+      "multi_unit_purchases": 53,
+      "repeat_rate_pct": 4.4,
+      "interval_stats": {
+        "count": 15,
+        "mean_days": 28.7,
+        "median_days": 31,
+        "min_days": 6,
+        "max_days": 46,
+        "stdev_days": 11.6,
+        "all_intervals": [
+          6,
+          15,
+          16,
+          18,
+          20,
+          26,
+          28,
+          31,
+          32,
+          35,
+          36,
+          37,
+          41,
+          43,
+          46
+        ],
+        "mode_days": 35
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 6,
+        "30-44": 7,
+        "45-59": 1,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "nee***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            35
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-07-17",
+          "total_span_days": 35,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            90,
+            90
+          ]
+        },
+        {
+          "customer": "aka***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-14",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 28,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "pch***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "mk.***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            18
+          ],
+          "first_purchase": "2026-06-24",
+          "last_purchase": "2026-07-12",
+          "total_span_days": 18,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "sta***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-09",
+          "last_purchase": "2026-07-10",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "eli***icloud.com",
+          "purchase_count": 2,
+          "intervals": [
+            37
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 37,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "mar***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            41
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 41,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "mol***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            36
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 36,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "d.z***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            46
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-07-04",
+          "total_span_days": 46,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "syl***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            43
+          ],
+          "first_purchase": "2026-05-20",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 43,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "kor***onet.eu",
+          "purchase_count": 2,
+          "intervals": [
+            16
+          ],
+          "first_purchase": "2026-06-15",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 16,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "mon***gmail.com",
+          "purchase_count": 3,
+          "intervals": [
+            20,
+            15
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 35,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "pau***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            26
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-06-15",
+          "total_span_days": 26,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        },
+        {
+          "customer": "fli***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            6
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-05-29",
+          "total_span_days": 6,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            45,
+            45
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM GENACTIV zawiesina": {
+      "repeat_buyers": 10,
+      "single_buyers": 111,
+      "total_purchases": 131,
+      "multi_unit_purchases": 22,
+      "repeat_rate_pct": 8.3,
+      "interval_stats": {
+        "count": 10,
+        "mean_days": 27.9,
+        "median_days": 28.0,
+        "min_days": 9,
+        "max_days": 55,
+        "stdev_days": 13.6,
+        "all_intervals": [
+          9,
+          13,
+          18,
+          25,
+          28,
+          28,
+          29,
+          31,
+          43,
+          55
+        ],
+        "mode_days": 28
+      },
+      "histogram": {
+        "0-14": 2,
+        "15-29": 5,
+        "30-44": 2,
+        "45-59": 1,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "mar***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            43
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 43,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            150
+          ]
+        },
+        {
+          "customer": "w.n***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            55
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-07-14",
+          "total_span_days": 55,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            300,
+            300
+          ]
+        },
+        {
+          "customer": "mal***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-06",
+          "last_purchase": "2026-07-05",
+          "total_span_days": 28,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            300,
+            300
+          ]
+        },
+        {
+          "customer": "tip***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            150
+          ]
+        },
+        {
+          "customer": "syl***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-05",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 28,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            150
+          ]
+        },
+        {
+          "customer": "ela***onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            13
+          ],
+          "first_purchase": "2026-06-19",
+          "last_purchase": "2026-07-03",
+          "total_span_days": 13,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            300
+          ]
+        },
+        {
+          "customer": "pat***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            25
+          ],
+          "first_purchase": "2026-06-03",
+          "last_purchase": "2026-06-28",
+          "total_span_days": 25,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            300
+          ]
+        },
+        {
+          "customer": "gra***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            29
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-06-25",
+          "total_span_days": 29,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            150,
+            150
+          ]
+        },
+        {
+          "customer": "emi***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            9
+          ],
+          "first_purchase": "2026-06-06",
+          "last_purchase": "2026-06-16",
+          "total_span_days": 9,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            300,
+            300
+          ]
+        },
+        {
+          "customer": "pjo***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            18
+          ],
+          "first_purchase": "2026-05-18",
+          "last_purchase": "2026-06-06",
+          "total_span_days": 18,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            300,
+            300
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM I MLEKO KLACZY proszek": {
+      "repeat_buyers": 7,
+      "single_buyers": 113,
+      "total_purchases": 127,
+      "multi_unit_purchases": 9,
+      "repeat_rate_pct": 5.8,
+      "interval_stats": {
+        "count": 7,
+        "mean_days": 13,
+        "median_days": 8,
+        "min_days": 0,
+        "max_days": 39,
+        "stdev_days": 15.7,
+        "all_intervals": [
+          0,
+          0,
+          2,
+          8,
+          11,
+          31,
+          39
+        ],
+        "mode_days": 0
+      },
+      "histogram": {
+        "0-14": 5,
+        "15-29": 0,
+        "30-44": 2,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "tus***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-10",
+          "last_purchase": "2026-07-12",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        },
+        {
+          "customer": "ann***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            39
+          ],
+          "first_purchase": "2026-05-18",
+          "last_purchase": "2026-06-27",
+          "total_span_days": 39,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        },
+        {
+          "customer": "gmg***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            2
+          ],
+          "first_purchase": "2026-07-05",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 2,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            400,
+            200
+          ]
+        },
+        {
+          "customer": "jol***poczta.onet.pl",
+          "purchase_count": 2,
+          "intervals": [
+            11
+          ],
+          "first_purchase": "2026-06-13",
+          "last_purchase": "2026-06-24",
+          "total_span_days": 11,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            200,
+            400
+          ]
+        },
+        {
+          "customer": "bab***interia.pl",
+          "purchase_count": 2,
+          "intervals": [
+            8
+          ],
+          "first_purchase": "2026-06-13",
+          "last_purchase": "2026-06-21",
+          "total_span_days": 8,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            50,
+            400
+          ]
+        },
+        {
+          "customer": "mag***o2.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-20",
+          "last_purchase": "2026-05-20",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            50,
+            200
+          ]
+        },
+        {
+          "customer": "r.k***genactiv.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-05-20",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        }
+      ]
+    },
+    "Colostrum A2 proszek": {
+      "repeat_buyers": 5,
+      "single_buyers": 54,
+      "total_purchases": 64,
+      "multi_unit_purchases": 7,
+      "repeat_rate_pct": 8.5,
+      "interval_stats": {
+        "count": 5,
+        "mean_days": 29.8,
+        "median_days": 30,
+        "min_days": 22,
+        "max_days": 40,
+        "stdev_days": 6.6,
+        "all_intervals": [
+          22,
+          27,
+          30,
+          30,
+          40
+        ],
+        "mode_days": 30
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 2,
+        "30-44": 3,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "jus***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            40
+          ],
+          "first_purchase": "2026-06-06",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 40,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "m.t***icloud.com",
+          "purchase_count": 2,
+          "intervals": [
+            27
+          ],
+          "first_purchase": "2026-05-25",
+          "last_purchase": "2026-06-22",
+          "total_span_days": 27,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "ang***o2.pl",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 30,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "ilo***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-05-31",
+          "last_purchase": "2026-07-01",
+          "total_span_days": 30,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "szp***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            22
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-06-18",
+          "total_span_days": 22,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "Colostrum A2 kapsulki": {
+      "repeat_buyers": 5,
+      "single_buyers": 61,
+      "total_purchases": 71,
+      "multi_unit_purchases": 15,
+      "repeat_rate_pct": 7.6,
+      "interval_stats": {
+        "count": 5,
+        "mean_days": 17.6,
+        "median_days": 20,
+        "min_days": 0,
+        "max_days": 31,
+        "stdev_days": 11.8,
+        "all_intervals": [
+          0,
+          13,
+          20,
+          24,
+          31
+        ],
+        "mode_days": 0
+      },
+      "histogram": {
+        "0-14": 2,
+        "15-29": 2,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "dag***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-13",
+          "last_purchase": "2026-07-13",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "mru***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            31
+          ],
+          "first_purchase": "2026-06-04",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 31,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "laa***o2.pl",
+          "purchase_count": 2,
+          "intervals": [
+            13
+          ],
+          "first_purchase": "2026-06-16",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 13,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "k.n***interia.eu",
+          "purchase_count": 2,
+          "intervals": [
+            24
+          ],
+          "first_purchase": "2026-06-04",
+          "last_purchase": "2026-06-28",
+          "total_span_days": 24,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "bas***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            20
+          ],
+          "first_purchase": "2026-05-29",
+          "last_purchase": "2026-06-19",
+          "total_span_days": 20,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "FUREVER DOG 120 kapsułek": {
+      "repeat_buyers": 4,
+      "single_buyers": 56,
+      "total_purchases": 64,
+      "multi_unit_purchases": 20,
+      "repeat_rate_pct": 6.7,
+      "interval_stats": {
+        "count": 4,
+        "mean_days": 31.2,
+        "median_days": 38.5,
+        "min_days": 0,
+        "max_days": 48,
+        "stdev_days": 22.7,
+        "all_intervals": [
+          0,
+          29,
+          48,
+          48
+        ],
+        "mode_days": 48
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 1,
+        "30-44": 0,
+        "45-59": 2,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "kon***dodgconsulting.eu",
+          "purchase_count": 2,
+          "intervals": [
+            48
+          ],
+          "first_purchase": "2026-05-28",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 48,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            2,
+            1
+          ]
+        },
+        {
+          "customer": "olk***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-07-07",
+          "last_purchase": "2026-07-07",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "jus***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            48
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 48,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        },
+        {
+          "customer": "pau***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            29
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 29,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "KREM Z COLOSTRUM GENACTIV": {
+      "repeat_buyers": 3,
+      "single_buyers": 138,
+      "total_purchases": 144,
+      "multi_unit_purchases": 51,
+      "repeat_rate_pct": 2.1,
+      "interval_stats": {
+        "count": 3,
+        "mean_days": 7.3,
+        "median_days": 7,
+        "min_days": 0,
+        "max_days": 15,
+        "stdev_days": 7.5,
+        "all_intervals": [
+          0,
+          7,
+          15
+        ],
+        "mode_days": 15
+      },
+      "histogram": {
+        "0-14": 2,
+        "15-29": 1,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "aga***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            15
+          ],
+          "first_purchase": "2026-06-29",
+          "last_purchase": "2026-07-15",
+          "total_span_days": 15,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "mak***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            7
+          ],
+          "first_purchase": "2026-06-28",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 7,
+          "quantities": [
+            2,
+            1
+          ],
+          "total_units": [
+            2,
+            1
+          ]
+        },
+        {
+          "customer": "pat***mdx.com.pl",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-06-26",
+          "last_purchase": "2026-06-26",
+          "total_span_days": 0,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM Z BANANEM proszek": {
+      "repeat_buyers": 3,
+      "single_buyers": 50,
+      "total_purchases": 56,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 5.7,
+      "interval_stats": {
+        "count": 3,
+        "mean_days": 21,
+        "median_days": 18,
+        "min_days": 0,
+        "max_days": 45,
+        "stdev_days": 22.6,
+        "all_intervals": [
+          0,
+          18,
+          45
+        ],
+        "mode_days": 18
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 1,
+        "30-44": 0,
+        "45-59": 1,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "mon***epoczta.pl",
+          "purchase_count": 2,
+          "intervals": [
+            18
+          ],
+          "first_purchase": "2026-06-28",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 18,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        },
+        {
+          "customer": "kin***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-05-22",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        },
+        {
+          "customer": "tym***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            45
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-07-04",
+          "total_span_days": 45,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            200,
+            200
+          ]
+        }
+      ]
+    },
+    "MASKA Z COLOSTRUM GENACTIV": {
+      "repeat_buyers": 3,
+      "single_buyers": 74,
+      "total_purchases": 80,
+      "multi_unit_purchases": 7,
+      "repeat_rate_pct": 3.9,
+      "interval_stats": {
+        "count": 3,
+        "mean_days": 33.7,
+        "median_days": 35,
+        "min_days": 29,
+        "max_days": 37,
+        "stdev_days": 4.2,
+        "all_intervals": [
+          29,
+          35,
+          37
+        ],
+        "mode_days": 37
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 1,
+        "30-44": 2,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "joa***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            37
+          ],
+          "first_purchase": "2026-06-08",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 37,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "nat***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            29
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 29,
+          "quantities": [
+            3,
+            2
+          ],
+          "total_units": [
+            3,
+            2
+          ]
+        },
+        {
+          "customer": "ann***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            35
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-06-30",
+          "total_span_days": 35,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "FUREVER CAT 90 kapsułek": {
+      "repeat_buyers": 2,
+      "single_buyers": 26,
+      "total_purchases": 31,
+      "multi_unit_purchases": 8,
+      "repeat_rate_pct": 7.1,
+      "interval_stats": {
+        "count": 3,
+        "mean_days": 12.7,
+        "median_days": 7,
+        "min_days": 1,
+        "max_days": 30,
+        "stdev_days": 15.3,
+        "all_intervals": [
+          1,
+          7,
+          30
+        ],
+        "mode_days": 1
+      },
+      "histogram": {
+        "0-14": 2,
+        "15-29": 0,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "kie***icloud.com",
+          "purchase_count": 2,
+          "intervals": [
+            1
+          ],
+          "first_purchase": "2026-07-15",
+          "last_purchase": "2026-07-17",
+          "total_span_days": 1,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "mal***gmail.com",
+          "purchase_count": 3,
+          "intervals": [
+            7,
+            30
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 37,
+          "quantities": [
+            2,
+            3,
+            1
+          ],
+          "total_units": [
+            2,
+            3,
+            1
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM Z MALINA tabletki": {
+      "repeat_buyers": 2,
+      "single_buyers": 116,
+      "total_purchases": 120,
+      "multi_unit_purchases": 22,
+      "repeat_rate_pct": 1.7,
+      "interval_stats": {
+        "count": 2,
+        "mean_days": 16,
+        "median_days": 16.0,
+        "min_days": 0,
+        "max_days": 32,
+        "stdev_days": 22.6,
+        "all_intervals": [
+          0,
+          32
+        ],
+        "mode_days": 32
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "dom***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            60
+          ]
+        },
+        {
+          "customer": "syl***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            0
+          ],
+          "first_purchase": "2026-05-19",
+          "last_purchase": "2026-05-19",
+          "total_span_days": 0,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            60,
+            120
+          ]
+        }
+      ]
+    },
+    "MASECZKA Z COLOSTRUM GENACTIV 150ml": {
+      "repeat_buyers": 2,
+      "single_buyers": 90,
+      "total_purchases": 94,
+      "multi_unit_purchases": 10,
+      "repeat_rate_pct": 2.2,
+      "interval_stats": {
+        "count": 2,
+        "mean_days": 15.5,
+        "median_days": 15.5,
+        "min_days": 6,
+        "max_days": 25,
+        "stdev_days": 13.4,
+        "all_intervals": [
+          6,
+          25
+        ],
+        "mode_days": 6
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 1,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "a.f***genactiv.pl",
+          "purchase_count": 2,
+          "intervals": [
+            6
+          ],
+          "first_purchase": "2026-07-10",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 6,
+          "quantities": [
+            3,
+            1
+          ],
+          "total_units": [
+            3,
+            1
+          ]
+        },
+        {
+          "customer": "dda***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            25
+          ],
+          "first_purchase": "2026-06-13",
+          "last_purchase": "2026-07-08",
+          "total_span_days": 25,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "SERUM Z COLOSTRUM GENACTIV": {
+      "repeat_buyers": 2,
+      "single_buyers": 59,
+      "total_purchases": 63,
+      "multi_unit_purchases": 7,
+      "repeat_rate_pct": 3.3,
+      "interval_stats": {
+        "count": 2,
+        "mean_days": 31.5,
+        "median_days": 31.5,
+        "min_days": 28,
+        "max_days": 35,
+        "stdev_days": 4.9,
+        "all_intervals": [
+          28,
+          35
+        ],
+        "mode_days": 28
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 1,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "mag***vp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            28
+          ],
+          "first_purchase": "2026-06-05",
+          "last_purchase": "2026-07-04",
+          "total_span_days": 28,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        },
+        {
+          "customer": "ann***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            35
+          ],
+          "first_purchase": "2026-05-26",
+          "last_purchase": "2026-06-30",
+          "total_span_days": 35,
+          "quantities": [
+            2,
+            2
+          ],
+          "total_units": [
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    "MLEKO KLACZY saszetki": {
+      "repeat_buyers": 2,
+      "single_buyers": 16,
+      "total_purchases": 20,
+      "multi_unit_purchases": 6,
+      "repeat_rate_pct": 11.1,
+      "interval_stats": {
+        "count": 2,
+        "mean_days": 33.5,
+        "median_days": 33.5,
+        "min_days": 32,
+        "max_days": 35,
+        "stdev_days": 2.1,
+        "all_intervals": [
+          32,
+          35
+        ],
+        "mode_days": 35
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 0,
+        "30-44": 2,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "wio***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            35
+          ],
+          "first_purchase": "2026-06-01",
+          "last_purchase": "2026-07-06",
+          "total_span_days": 35,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        },
+        {
+          "customer": "dom***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            32
+          ],
+          "first_purchase": "2026-05-27",
+          "last_purchase": "2026-06-29",
+          "total_span_days": 32,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        }
+      ]
+    },
+    "FIBERBIOM Z ANANASEM": {
+      "repeat_buyers": 1,
+      "single_buyers": 124,
+      "total_purchases": 126,
+      "multi_unit_purchases": 25,
+      "repeat_rate_pct": 0.8,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 14,
+        "median_days": 14,
+        "min_days": 14,
+        "max_days": 14,
+        "stdev_days": 0,
+        "all_intervals": [
+          14
+        ],
+        "mode_days": 14
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "ann***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            14
+          ],
+          "first_purchase": "2026-07-02",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 14,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            30
+          ]
+        }
+      ]
+    },
+    "MASECZKA Z COLOSTRUM GENACTIV 50ml": {
+      "repeat_buyers": 1,
+      "single_buyers": 195,
+      "total_purchases": 197,
+      "multi_unit_purchases": 15,
+      "repeat_rate_pct": 0.5,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 2,
+        "median_days": 2,
+        "min_days": 2,
+        "max_days": 2,
+        "stdev_days": 0,
+        "all_intervals": [
+          2
+        ],
+        "mode_days": 2
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "gmg***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            2
+          ],
+          "first_purchase": "2026-07-05",
+          "last_purchase": "2026-07-07",
+          "total_span_days": 2,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM Z BANANEM saszetki": {
+      "repeat_buyers": 1,
+      "single_buyers": 66,
+      "total_purchases": 68,
+      "multi_unit_purchases": 11,
+      "repeat_rate_pct": 1.5,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 48,
+        "median_days": 48,
+        "min_days": 48,
+        "max_days": 48,
+        "stdev_days": 0,
+        "all_intervals": [
+          48
+        ],
+        "mode_days": 48
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 1,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "kin***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            48
+          ],
+          "first_purchase": "2026-05-22",
+          "last_purchase": "2026-07-09",
+          "total_span_days": 48,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        }
+      ]
+    },
+    "Colostrum z brzoskwinia": {
+      "repeat_buyers": 1,
+      "single_buyers": 136,
+      "total_purchases": 138,
+      "multi_unit_purchases": 42,
+      "repeat_rate_pct": 0.7,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 4,
+        "median_days": 4,
+        "min_days": 4,
+        "max_days": 4,
+        "stdev_days": 0,
+        "all_intervals": [
+          4
+        ],
+        "mode_days": 4
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "wie***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            4
+          ],
+          "first_purchase": "2026-07-08",
+          "last_purchase": "2026-07-12",
+          "total_span_days": 4,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "FUREVER DOG 30 kapsułek": {
+      "repeat_buyers": 1,
+      "single_buyers": 46,
+      "total_purchases": 48,
+      "multi_unit_purchases": 14,
+      "repeat_rate_pct": 2.1,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 5,
+        "median_days": 5,
+        "min_days": 5,
+        "max_days": 5,
+        "stdev_days": 0,
+        "all_intervals": [
+          5
+        ],
+        "mode_days": 5
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "pau***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            5
+          ],
+          "first_purchase": "2026-06-11",
+          "last_purchase": "2026-06-16",
+          "total_span_days": 5,
+          "quantities": [
+            1,
+            2
+          ],
+          "total_units": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "SZAMPON Z COLOSTRUM GENACTIV": {
+      "repeat_buyers": 1,
+      "single_buyers": 58,
+      "total_purchases": 60,
+      "multi_unit_purchases": 8,
+      "repeat_rate_pct": 1.7,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 37,
+        "median_days": 37,
+        "min_days": 37,
+        "max_days": 37,
+        "stdev_days": 0,
+        "all_intervals": [
+          37
+        ],
+        "mode_days": 37
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 0,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "joa***op.pl",
+          "purchase_count": 2,
+          "intervals": [
+            37
+          ],
+          "first_purchase": "2026-06-08",
+          "last_purchase": "2026-07-16",
+          "total_span_days": 37,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "COLOSTRUM Z CZARNA PORZECZKA": {
+      "repeat_buyers": 1,
+      "single_buyers": 16,
+      "total_purchases": 18,
+      "multi_unit_purchases": 2,
+      "repeat_rate_pct": 5.9,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 2,
+        "median_days": 2,
+        "min_days": 2,
+        "max_days": 2,
+        "stdev_days": 0,
+        "all_intervals": [
+          2
+        ],
+        "mode_days": 2
+      },
+      "histogram": {
+        "0-14": 1,
+        "15-29": 0,
+        "30-44": 0,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "oty***wp.pl",
+          "purchase_count": 2,
+          "intervals": [
+            2
+          ],
+          "first_purchase": "2026-05-24",
+          "last_purchase": "2026-05-26",
+          "total_span_days": 2,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            30,
+            60
+          ]
+        }
+      ]
+    },
+    "FUREVER CAT proszek 75 g": {
+      "repeat_buyers": 1,
+      "single_buyers": 15,
+      "total_purchases": 17,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 6.2,
+      "interval_stats": {
+        "count": 1,
+        "mean_days": 30,
+        "median_days": 30,
+        "min_days": 30,
+        "max_days": 30,
+        "stdev_days": 0,
+        "all_intervals": [
+          30
+        ],
+        "mode_days": 30
+      },
+      "histogram": {
+        "0-14": 0,
+        "15-29": 0,
+        "30-44": 1,
+        "45-59": 0,
+        "60-74": 0,
+        "75-89": 0,
+        "90-119": 0,
+        "120-179": 0,
+        "180-365": 0,
+        "366+": 0
+      },
+      "customer_details": [
+        {
+          "customer": "mal***gmail.com",
+          "purchase_count": 2,
+          "intervals": [
+            30
+          ],
+          "first_purchase": "2026-06-02",
+          "last_purchase": "2026-07-02",
+          "total_span_days": 30,
+          "quantities": [
+            1,
+            1
+          ],
+          "total_units": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "FIBERBIOM Z CZARNA PORZECZKA": {
+      "repeat_buyers": 0,
+      "single_buyers": 103,
+      "total_purchases": 103,
+      "multi_unit_purchases": 12,
+      "repeat_rate_pct": 0.0
+    },
+    "FUREVER HORSE, proszek 500 g": {
+      "repeat_buyers": 0,
+      "single_buyers": 1,
+      "total_purchases": 1,
+      "multi_unit_purchases": 0,
+      "repeat_rate_pct": 0.0
+    },
+    "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki": {
+      "repeat_buyers": 0,
+      "single_buyers": 29,
+      "total_purchases": 29,
+      "multi_unit_purchases": 4,
+      "repeat_rate_pct": 0.0
+    },
+    "Książka Colostrum Naturalny regulator układu odpornościowego": {
+      "repeat_buyers": 0,
+      "single_buyers": 7,
+      "total_purchases": 7,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 0.0
+    },
+    "FUREVER DOG 60 kapsułek": {
+      "repeat_buyers": 0,
+      "single_buyers": 9,
+      "total_purchases": 9,
+      "multi_unit_purchases": 2,
+      "repeat_rate_pct": 0.0
+    },
+    "MLEKO KLACZY kapsulki": {
+      "repeat_buyers": 0,
+      "single_buyers": 8,
+      "total_purchases": 8,
+      "multi_unit_purchases": 2,
+      "repeat_rate_pct": 0.0
+    },
+    "COLOSTRUM  GENACTIV, proszek - dwupak": {
+      "repeat_buyers": 0,
+      "single_buyers": 53,
+      "total_purchases": 53,
+      "multi_unit_purchases": 12,
+      "repeat_rate_pct": 0.0
+    },
+    "BLOKER Z COLOSTRUM GENACTIV": {
+      "repeat_buyers": 0,
+      "single_buyers": 24,
+      "total_purchases": 24,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 0.0
+    },
+    "FUREVER CAT 30 kapsułek": {
+      "repeat_buyers": 0,
+      "single_buyers": 6,
+      "total_purchases": 6,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 0.0
+    },
+    "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki - dwupak": {
+      "repeat_buyers": 0,
+      "single_buyers": 5,
+      "total_purchases": 5,
+      "multi_unit_purchases": 0,
+      "repeat_rate_pct": 0.0
+    },
+    "FUREVER HORSE, proszek 5500 g": {
+      "repeat_buyers": 0,
+      "single_buyers": 1,
+      "total_purchases": 1,
+      "multi_unit_purchases": 1,
+      "repeat_rate_pct": 0.0
+    },
+    "Zabawka myszka dla kota": {
+      "repeat_buyers": 0,
+      "single_buyers": 1,
+      "total_purchases": 1,
+      "multi_unit_purchases": 0,
+      "repeat_rate_pct": 0.0
+    }
+  },
+  "overall_reorder": {
+    "customers_with_2plus_orders": 235,
+    "customers_with_3plus_orders": 33,
+    "customers_with_5plus_orders": 1,
+    "total_reorder_intervals": 273,
+    "stats": {
+      "mean_days": 21.3,
+      "median_days": 20,
+      "min_days": 0,
+      "max_days": 55,
+      "stdev_days": 14.2
+    },
+    "histogram": {
+      "0-14": 102,
+      "15-29": 86,
+      "30-44": 67,
+      "45-59": 18,
+      "60-74": 0,
+      "75-89": 0,
+      "90-119": 0,
+      "120-179": 0,
+      "180-365": 0,
+      "366+": 0
+    }
+  },
+  "multi_unit_purchasing": {
+    "FIBERBIOM (original)": {
+      "total_line_items": 707,
+      "single_unit_pct": 74.5,
+      "multi_unit_pct": 25.5,
+      "avg_quantity": 1.31
+    },
+    "COLOSTRUM GENACTIV kapsulki": {
+      "total_line_items": 644,
+      "single_unit_pct": 89.1,
+      "multi_unit_pct": 10.9,
+      "avg_quantity": 1.13
+    },
+    "COLOSTRUM GENACTIV proszek": {
+      "total_line_items": 334,
+      "single_unit_pct": 84.1,
+      "multi_unit_pct": 15.9,
+      "avg_quantity": 1.2
+    },
+    "COLOSTRUM JUNIOR": {
+      "total_line_items": 255,
+      "single_unit_pct": 87.5,
+      "multi_unit_pct": 12.5,
+      "avg_quantity": 1.16
+    },
+    "KREM Z COLOSTRUM GENACTIV": {
+      "total_line_items": 144,
+      "single_unit_pct": 64.6,
+      "multi_unit_pct": 35.4,
+      "avg_quantity": 1.58
+    },
+    "MASECZKA Z COLOSTRUM GENACTIV 50ml": {
+      "total_line_items": 197,
+      "single_unit_pct": 92.4,
+      "multi_unit_pct": 7.6,
+      "avg_quantity": 1.09
+    },
+    "Colostrum z brzoskwinia": {
+      "total_line_items": 138,
+      "single_unit_pct": 69.6,
+      "multi_unit_pct": 30.4,
+      "avg_quantity": 1.35
+    },
+    "COLOSTRUM GENACTIV zawiesina": {
+      "total_line_items": 131,
+      "single_unit_pct": 83.2,
+      "multi_unit_pct": 16.8,
+      "avg_quantity": 1.18
+    },
+    "FIBERBIOM Z ANANASEM": {
+      "total_line_items": 126,
+      "single_unit_pct": 80.2,
+      "multi_unit_pct": 19.8,
+      "avg_quantity": 1.22
+    },
+    "COLOSTRUM Z MALINA tabletki": {
+      "total_line_items": 120,
+      "single_unit_pct": 81.7,
+      "multi_unit_pct": 18.3,
+      "avg_quantity": 1.26
+    },
+    "COLOSTRUM I MLEKO KLACZY proszek": {
+      "total_line_items": 127,
+      "single_unit_pct": 92.9,
+      "multi_unit_pct": 7.1,
+      "avg_quantity": 1.09
+    },
+    "FIBERBIOM Z CZARNA PORZECZKA": {
+      "total_line_items": 103,
+      "single_unit_pct": 88.3,
+      "multi_unit_pct": 11.7,
+      "avg_quantity": 1.16
+    },
+    "MASECZKA Z COLOSTRUM GENACTIV 150ml": {
+      "total_line_items": 94,
+      "single_unit_pct": 89.4,
+      "multi_unit_pct": 10.6,
+      "avg_quantity": 1.12
+    },
+    "MASKA Z COLOSTRUM GENACTIV": {
+      "total_line_items": 80,
+      "single_unit_pct": 91.2,
+      "multi_unit_pct": 8.8,
+      "avg_quantity": 1.14
+    },
+    "Colostrum A2 kapsulki": {
+      "total_line_items": 71,
+      "single_unit_pct": 78.9,
+      "multi_unit_pct": 21.1,
+      "avg_quantity": 1.25
+    },
+    "COLOSTRUM Z BANANEM saszetki": {
+      "total_line_items": 68,
+      "single_unit_pct": 83.8,
+      "multi_unit_pct": 16.2,
+      "avg_quantity": 1.26
+    },
+    "FUREVER DOG 120 kapsułek": {
+      "total_line_items": 64,
+      "single_unit_pct": 68.8,
+      "multi_unit_pct": 31.2,
+      "avg_quantity": 1.34
+    },
+    "SERUM Z COLOSTRUM GENACTIV": {
+      "total_line_items": 63,
+      "single_unit_pct": 88.9,
+      "multi_unit_pct": 11.1,
+      "avg_quantity": 1.13
+    },
+    "Colostrum A2 proszek": {
+      "total_line_items": 64,
+      "single_unit_pct": 89.1,
+      "multi_unit_pct": 10.9,
+      "avg_quantity": 1.11
+    },
+    "COLOSTRUM  GENACTIV, proszek - dwupak": {
+      "total_line_items": 53,
+      "single_unit_pct": 77.4,
+      "multi_unit_pct": 22.6,
+      "avg_quantity": 1.34
+    },
+    "FUREVER DOG 30 kapsułek": {
+      "total_line_items": 48,
+      "single_unit_pct": 70.8,
+      "multi_unit_pct": 29.2,
+      "avg_quantity": 1.46
+    },
+    "SZAMPON Z COLOSTRUM GENACTIV": {
+      "total_line_items": 60,
+      "single_unit_pct": 86.7,
+      "multi_unit_pct": 13.3,
+      "avg_quantity": 1.17
+    },
+    "COLOSTRUM Z BANANEM proszek": {
+      "total_line_items": 56,
+      "single_unit_pct": 98.2,
+      "multi_unit_pct": 1.8,
+      "avg_quantity": 1.02
+    },
+    "FUREVER CAT 90 kapsułek": {
+      "total_line_items": 31,
+      "single_unit_pct": 74.2,
+      "multi_unit_pct": 25.8,
+      "avg_quantity": 1.52
+    },
+    "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki": {
+      "total_line_items": 29,
+      "single_unit_pct": 86.2,
+      "multi_unit_pct": 13.8,
+      "avg_quantity": 1.14
+    },
+    "MLEKO KLACZY saszetki": {
+      "total_line_items": 20,
+      "single_unit_pct": 70.0,
+      "multi_unit_pct": 30.0,
+      "avg_quantity": 1.35
+    },
+    "BLOKER Z COLOSTRUM GENACTIV": {
+      "total_line_items": 24,
+      "single_unit_pct": 95.8,
+      "multi_unit_pct": 4.2,
+      "avg_quantity": 1.04
+    },
+    "COLOSTRUM Z CZARNA PORZECZKA": {
+      "total_line_items": 18,
+      "single_unit_pct": 88.9,
+      "multi_unit_pct": 11.1,
+      "avg_quantity": 1.11
+    },
+    "FUREVER CAT proszek 75 g": {
+      "total_line_items": 17,
+      "single_unit_pct": 94.1,
+      "multi_unit_pct": 5.9,
+      "avg_quantity": 1.06
+    },
+    "FUREVER DOG 60 kapsułek": {
+      "total_line_items": 9,
+      "single_unit_pct": 77.8,
+      "multi_unit_pct": 22.2,
+      "avg_quantity": 1.22
+    },
+    "MLEKO KLACZY kapsulki": {
+      "total_line_items": 8,
+      "single_unit_pct": 75.0,
+      "multi_unit_pct": 25.0,
+      "avg_quantity": 1.25
+    },
+    "Książka Colostrum Naturalny regulator układu odpornościowego": {
+      "total_line_items": 7,
+      "single_unit_pct": 85.7,
+      "multi_unit_pct": 14.3,
+      "avg_quantity": 1.14
+    },
+    "FUREVER CAT 30 kapsułek": {
+      "total_line_items": 6,
+      "single_unit_pct": 83.3,
+      "multi_unit_pct": 16.7,
+      "avg_quantity": 1.17
+    },
+    "COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki - dwupak": {
+      "total_line_items": 5,
+      "single_unit_pct": 100.0,
+      "multi_unit_pct": 0.0,
+      "avg_quantity": 1
+    }
+  }
+}

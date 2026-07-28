@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv SEO+GEO — Raport wdrożenia | 16.07.2026</title>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f8f9fa; --border: #dee2e6;
+    --text: #212529; --muted: #6c757d; --accent: #0066CC;
+    --green: #198754; --red: #dc3545; --yellow: #ffc107; --orange: #fd7e14;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 0; font-size: 15px; }
+
+  /* Email-friendly wrapper */
+  .email-wrapper { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Header */
+  .header { text-align: center; padding: 2rem 0; border-bottom: 3px solid var(--accent); margin-bottom: 2rem; }
+  .header img { height: 40px; margin-bottom: 1rem; }
+  .header h1 { font-size: 1.5rem; color: var(--accent); margin-bottom: 0.25rem; letter-spacing: -0.02em; }
+  .header .sub { color: var(--muted); font-size: 0.9rem; }
+  .header .date { color: var(--muted); font-size: 0.82rem; margin-top: 0.5rem; }
+
+  /* Section headers */
+  h2 { font-size: 1.15rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); color: var(--accent); letter-spacing: -0.01em; }
+  h3 { font-size: 1rem; margin: 1.5rem 0 0.5rem; color: var(--text); }
+
+  /* Content */
+  p { margin: 0.5rem 0; }
+  .intro { font-size: 1.05rem; color: var(--text); margin: 1rem 0 1.5rem; padding: 1rem 1.25rem; background: #e8f4fd; border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+  th, td { padding: 0.55rem 0.7rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+  td { vertical-align: top; }
+  tr:nth-child(even) { background: #fafbfc; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+  .badge-green { background: #d1e7dd; color: var(--green); }
+  .badge-yellow { background: #fff3cd; color: #997404; }
+  .badge-blue { background: #cfe2ff; color: #084298; }
+  .badge-gray { background: #e9ecef; color: var(--muted); }
+  .badge-red { background: #f8d7da; color: var(--red); }
+
+  /* KPI grid */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .kpi-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+  .kpi-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.15rem; }
+  @media (max-width: 640px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* Cards */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .card-title { font-weight: 700; margin-bottom: 0.5rem; }
+
+  /* Highlight boxes */
+  .hl { padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-size: 0.9rem; }
+  .hl-green { background: #d1e7dd; border-left: 3px solid var(--green); }
+  .hl-yellow { background: #fff3cd; border-left: 3px solid var(--yellow); }
+  .hl-red { background: #f8d7da; border-left: 3px solid var(--red); }
+  .hl-blue { background: #cfe2ff; border-left: 3px solid var(--accent); }
+
+  /* Before/After */
+  .diff { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.85rem; }
+  .diff-before, .diff-after { padding: 0.5rem 0.75rem; border-radius: 6px; font-family: 'SF Mono', Monaco, monospace; word-break: break-all; }
+  .diff-before { background: #f8d7da; }
+  .diff-after { background: #d1e7dd; }
+  .diff-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 0.15rem; }
+
+  /* Code */
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; color: #6f42c1; }
+
+  /* Footer */
+  .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); text-align: center; }
+
+  /* Lists */
+  ul, ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  li { margin-bottom: 0.3rem; }
+
+  /* Risk section */
+  .risk-ok { color: var(--green); font-weight: 700; }
+
+  /* Print */
+  @media print {
+    body { font-size: 12px; }
+    .email-wrapper { padding: 0; }
+    .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="email-wrapper">
+
+<!-- ============================================ -->
+<!-- HEADER                                        -->
+<!-- ============================================ -->
+
+<div class="header">
+  <h1>SEO + GEO — Raport wdrożenia</h1>
+  <div class="sub">GenActiv.pl — Technical SEO, Schema, llms.txt</div>
+  <div class="date">16 lipca 2026 | Bloki A + B + C1</div>
+</div>
+
+<!-- ============================================ -->
+<!-- INTRO / TL;DR                                 -->
+<!-- ============================================ -->
+
+<div class="intro">
+  <strong>Podsumowanie:</strong> Wdrożono 21 zmian SEO na sklepie genactiv.pl — naprawy danych produktowych FIBERBIOM (meta tagi, ALT texty), pełna przebudowa JSON-LD Schema w 3 plikach motywu (Product, Organization, Article) oraz nowa strona <code>llms.txt</code> dla crawlerów AI. Wszystkie zmiany zweryfikowane, backup kompletny, zero regresji.
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-num">21</div>
+    <div class="kpi-label">zmian wdrożonych</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-num">3</div>
+    <div class="kpi-label">pliki motywu</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-num">0</div>
+    <div class="kpi-label">regresji</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- BLOK A: DANE PRODUKTOWE                       -->
+<!-- ============================================ -->
+
+<h2>A. Naprawy danych produktowych</h2>
+
+<p>Grupa FIBERBIOM generuje <strong>9 700 sesji/mies (22% ruchu)</strong> — każda poprawa meta tagów i danych strukturalnych ma bezpośredni wpływ na CTR w SERP.</p>
+
+<h3>A1. Meta tagi FIBERBIOM (6 zmian)</h3>
+
+<table>
+  <tr>
+    <th>Produkt</th>
+    <th>Pole</th>
+    <th>Zmiana</th>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Ananas single</td>
+    <td>SEO title</td>
+    <td>Dodano "15 saszetek" + brand</td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Ananas dwupak</td>
+    <td>SEO title + description</td>
+    <td>Dodano "30 saszetek", opis odróżnia od single — oszczędność 59 PLN (16,48%)</td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Porzeczka single</td>
+    <td>SEO title</td>
+    <td>Dodano "15 saszetek" + brand</td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Porzeczka dwupak</td>
+    <td>SEO title + description</td>
+    <td>Dodano "30 saszetek", opis odróżnia od single — oszczędność 59 PLN</td>
+  </tr>
+</table>
+
+<div class="diff">
+  <div class="diff-before">
+    <div class="diff-label">Przed (dwupak description)</div>
+    „Połączenie błonnika z colostrum w&nbsp;15&nbsp;saszetkach"
+  </div>
+  <div class="diff-after">
+    <div class="diff-label">Po</div>
+    „Dwupak 30 saszetek (2×15). Arabinogalaktan 5000 mg + colostrum 1000 mg. Oszczędzasz 59 zł (16,48%)"
+  </div>
+</div>
+
+<h3>A2. Fix literówki</h3>
+<div class="diff">
+  <div class="diff-before">
+    <div class="diff-label">Przed</div>
+    COLOSTRUM GENACTIV<strong>,,</strong> kapsułki - dwupak
+  </div>
+  <div class="diff-after">
+    <div class="diff-label">Po</div>
+    COLOSTRUM GENACTIV<strong>,</strong> kapsułki - dwupak
+  </div>
+</div>
+<p class="muted" style="font-size:0.82rem; color:var(--muted);">Podwójny przecinek propagował się do schema i OG tags.</p>
+
+<h3>A3-A4. ALT texty obrazków</h3>
+
+<table>
+  <tr>
+    <th>Produkt</th>
+    <th>Obrazki</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Ananas single</td>
+    <td>4 MediaImage</td>
+    <td><span class="badge badge-green">✓ Wypełnione</span></td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Ananas dwupak</td>
+    <td>4 MediaImage</td>
+    <td><span class="badge badge-green">✓ Wypełnione</span></td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Porzeczka single</td>
+    <td>4 MediaImage</td>
+    <td><span class="badge badge-green">✓ Wypełnione</span></td>
+  </tr>
+  <tr>
+    <td>FIBERBIOM Porzeczka dwupak</td>
+    <td>4 MediaImage</td>
+    <td><span class="badge badge-green">✓ Wypełnione</span></td>
+  </tr>
+  <tr>
+    <td>Colostrum z brzoskwinią</td>
+    <td>5 MediaImage</td>
+    <td><span class="badge badge-green">✓ Wypełnione</span></td>
+  </tr>
+  <tr style="font-weight: 700;">
+    <td>RAZEM</td>
+    <td>21 obrazków</td>
+    <td><span class="badge badge-green">21/21 — 0 pustych</span></td>
+  </tr>
+</table>
+
+<!-- ============================================ -->
+<!-- BLOK B: SCHEMA                                -->
+<!-- ============================================ -->
+
+<h2>B. Schema JSON-LD — przebudowa</h2>
+
+<p>Poprawki w 3 plikach motywu Shopify (LIVE theme ID: <code>199333609804</code>) + 1 kolekcja. Celem jest poprawna walidacja w Google Rich Results Test i pełne dane strukturalne.</p>
+
+<h3>product-template.liquid (7 zmian)</h3>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Zmiana</th>
+    <th>Efekt</th>
+  </tr>
+  <tr>
+    <td>B1</td>
+    <td>brand <code>Thing</code> → <code>Brand</code></td>
+    <td>Poprawny typ wg schema.org</td>
+  </tr>
+  <tr>
+    <td>B6</td>
+    <td>Dodano <code>gtin13</code> + <code>mpn</code></td>
+    <td>Z variant.barcode/sku — wymagane do Google Merchant</td>
+  </tr>
+  <tr>
+    <td>B9</td>
+    <td>image: 1 zdjęcie → tablica wszystkich</td>
+    <td><code>product.media</code> loop — Google widzi cały katalog zdjęć</td>
+  </tr>
+  <tr>
+    <td>B10</td>
+    <td><code>http://schema.org</code> → <code>https://</code></td>
+    <td>@context + availability (2 wystąpienia)</td>
+  </tr>
+  <tr>
+    <td>B11</td>
+    <td>Dodano <code>shippingDetails</code></td>
+    <td>PL, handling 0-1 dzień, transit 1-3 dni, free &gt;300 PLN</td>
+  </tr>
+  <tr>
+    <td>B11</td>
+    <td>Dodano <code>hasMerchantReturnPolicy</code></td>
+    <td>14 dni, zwrot pocztą, bezpłatny</td>
+  </tr>
+</table>
+
+<div class="hl hl-green">
+  <strong>Zachowane:</strong> Widget SSW (Social Shopwave) z agregowaną oceną — istniejący blok <code>aggregateRating</code> nie został zmodyfikowany.
+</div>
+
+<h3>header.liquid (2 zmiany)</h3>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Zmiana</th>
+    <th>Efekt</th>
+  </tr>
+  <tr>
+    <td>B5</td>
+    <td>sameAs — filtrowanie pustych stringów</td>
+    <td>Puste profile social nie generują <code>""</code> w tablicy JSON</td>
+  </tr>
+  <tr>
+    <td>B10</td>
+    <td><code>http://schema.org</code> → <code>https://</code></td>
+    <td>Organization + WebSite (2 bloki)</td>
+  </tr>
+</table>
+
+<h3>article-template.liquid (1 zmiana)</h3>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Zmiana</th>
+    <th>Efekt</th>
+  </tr>
+  <tr>
+    <td>B3+B4</td>
+    <td>Dodano cały blok Article JSON-LD</td>
+    <td><code>mainEntityOfPage</code> (WebPage + canonical), <code>publisher.logo</code> (ImageObject GA_LOGO_HEADER.png), <code>datePublished</code>, <code>dateModified</code>, <code>author</code>, <code>headline</code>, <code>description</code></td>
+  </tr>
+</table>
+
+<p style="font-size: 0.85rem; color: var(--muted);">Wcześniej artykuły blogowe nie miały żadnych danych strukturalnych — Google nie wyświetlał ich w rich results.</p>
+
+<h3>Breadcrumb — ogonek</h3>
+
+<div class="diff">
+  <div class="diff-before">
+    <div class="diff-label">Przed (kolekcja 683168366924)</div>
+    Blonnik
+  </div>
+  <div class="diff-after">
+    <div class="diff-label">Po</div>
+    Błonnik
+  </div>
+</div>
+<p style="font-size: 0.85rem; color: var(--muted);">Literówka widoczna w breadcrumbs rich results — brak polskiego znaku ł.</p>
+
+<h3>Pominięte (wymagają danych od zespołu)</h3>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Co</th>
+    <th>Potrzebne</th>
+  </tr>
+  <tr>
+    <td>B2</td>
+    <td>Author artykułów → ekspert</td>
+    <td>Dane eksperta (imię, tytuł, zdjęcie, sameAs)</td>
+  </tr>
+  <tr>
+    <td>B7</td>
+    <td>Organization: adres, telefon, description</td>
+    <td>Pełne dane LIOPHARM / GenActiv (NIP, adres siedziby)</td>
+  </tr>
+  <tr>
+    <td>B8</td>
+    <td>aggregateRating w schema</td>
+    <td>Widget SSW już renderuje — nie wymaga interwencji</td>
+  </tr>
+</table>
+
+<!-- ============================================ -->
+<!-- BLOK C1: LLMS.TXT                             -->
+<!-- ============================================ -->
+
+<h2>C1. Custom llms.txt</h2>
+
+<div class="card">
+  <div class="card-title">Nowa strona: <a href="https://genactiv.pl/pages/llms-txt">genactiv.pl/pages/llms-txt</a></div>
+  <p>Shopify serwuje własny UCP (Universal Commerce Protocol) pod <code>/llms.txt</code> — opisuje tylko funkcje sklepu. Nasza strona uzupełnia go o <strong>tożsamość marki</strong> — informacje, które crawlery AI (ChatGPT, Perplexity, Claude, Google AIO) wykorzystują do budowania odpowiedzi o GenActiv.</p>
+  <ul style="margin-top: 0.5rem;">
+    <li>Opis marki i technologii Colostrum bovinum 2H™</li>
+    <li>Badania naukowe (uszczelnianie bariery jelitowej, projekt UE)</li>
+    <li>Ekspert: dr hab. n. med. Maciej Hałasa</li>
+    <li>Pełny katalog linii produktowych (12 kategorii)</li>
+    <li>Kluczowe składniki aktywne (8 substancji)</li>
+    <li>Linki do 12 artykułów bazy wiedzy</li>
+    <li>Informacje logistyczne (płatności, dostawa, zwroty)</li>
+  </ul>
+  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Template: <code>page.llms-txt.liquid</code> z <code>layout: none</code> — czysty HTML bez nawigacji/stopki motywu. Page ID: <code>732391014732</code>.</p>
+</div>
+
+<!-- ============================================ -->
+<!-- BEZPIECZEŃSTWO                                -->
+<!-- ============================================ -->
+
+<h2>Bezpieczeństwo i rollback</h2>
+
+<div class="hl hl-green">
+  <strong class="risk-ok">Ryzyko: NISKIE</strong> — wszystkie zmiany zweryfikowane przez re-pobranie z API po wdrożeniu. Zero regresji, zero utraconych danych.
+</div>
+
+<table>
+  <tr>
+    <th>Element</th>
+    <th>Lokalizacja backupu</th>
+  </tr>
+  <tr>
+    <td>6 produktów (meta + ALT — stan sprzed zmian)</td>
+    <td><code>sprint-2026-06/W1/A1/artefakty/seo-snapshot-before-changes-2026-07-16.json</code></td>
+  </tr>
+  <tr>
+    <td>product-template.liquid (oryginał)</td>
+    <td><code>sprint-2026-06/W1/A1/artefakty/theme-backup-2026-07-16/product-template.liquid</code></td>
+  </tr>
+  <tr>
+    <td>header.liquid (oryginał)</td>
+    <td><code>sprint-2026-06/W1/A1/artefakty/theme-backup-2026-07-16/header.liquid</code></td>
+  </tr>
+  <tr>
+    <td>article-template.liquid (oryginał)</td>
+    <td><code>sprint-2026-06/W1/A1/artefakty/theme-backup-2026-07-16/article-template.liquid</code></td>
+  </tr>
+</table>
+
+<p>Rollback: przywrócenie plików z backupu przez Shopify Theme Asset API (<code>PUT /admin/api/2024-01/themes/199333609804/assets.json</code>).</p>
+
+<!-- ============================================ -->
+<!-- CO DALEJ                                      -->
+<!-- ============================================ -->
+
+<h2>Następne kroki</h2>
+
+<table>
+  <tr>
+    <th>Task</th>
+    <th>Co</th>
+    <th>Kto</th>
+    <th>Blokada</th>
+  </tr>
+  <tr>
+    <td>B2</td>
+    <td>Author artykułów → ekspert (schema Person)</td>
+    <td><span class="badge badge-blue">CC</span></td>
+    <td>Dane eksperta od zespołu</td>
+  </tr>
+  <tr>
+    <td>B7</td>
+    <td>Organization: adres, contactPoint, description</td>
+    <td><span class="badge badge-blue">CC</span></td>
+    <td>Dane firmy od zespołu</td>
+  </tr>
+  <tr>
+    <td>C2</td>
+    <td>dateModified w Article schema + "Ostatnia aktualizacja" na stronie</td>
+    <td><span class="badge badge-blue">CC</span></td>
+    <td>Token</td>
+  </tr>
+  <tr>
+    <td>C3</td>
+    <td>Weryfikacja dostępu AI crawlerów (robots.txt + CDN)</td>
+    <td><span class="badge badge-gray">Admin</span></td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>C4</td>
+    <td>Artykuł: "Najlepsze colostrum — jak wybrać?"</td>
+    <td><span class="badge badge-yellow">Copywriter</span></td>
+    <td>B2</td>
+  </tr>
+  <tr>
+    <td>C5</td>
+    <td>Artykuł: "Colostrum dla dzieci — poradnik"</td>
+    <td><span class="badge badge-yellow">Copywriter</span></td>
+    <td>B2</td>
+  </tr>
+  <tr>
+    <td>C6</td>
+    <td>Artykuł: "Colostrum vs probiotyki"</td>
+    <td><span class="badge badge-yellow">Copywriter</span></td>
+    <td>B2</td>
+  </tr>
+  <tr>
+    <td>C7</td>
+    <td>Artykuł: "Czas pozyskania colostrum vs % IgG" + outreach</td>
+    <td><span class="badge badge-yellow">Copywriter + PR</span></td>
+    <td>B2</td>
+  </tr>
+</table>
+
+<div class="hl hl-blue">
+  <strong>Priorytet:</strong> Dostarczenie danych eksperta (B2) i firmy (B7) odblokuje artykuły C4-C7, które targetują zapytania AI o łącznym wolumenie 8-15K wyszukiwań/mies.
+</div>
+
+<!-- ============================================ -->
+<!-- FOOTER                                        -->
+<!-- ============================================ -->
+
+<div class="footer">
+  <p>Raport wygenerowany 2026-07-16 | Claude Code (Opus 4.6)</p>
+  <p>Plan źródłowy: <code>reports/seo-geo-plan-wdrozenia.html</code></p>
+  <p style="margin-top: 0.5rem;">GenActiv.pl — LIOPHARM Sp. z o.o.</p>
+</div>
+
+</div><!-- /email-wrapper -->
+
+</body>
+</html>

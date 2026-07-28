@@ -1,0 +1,159 @@
+# JSON-LD Structured Data Audit — Shopify Theme GEN-6
+**Date:** 2026-07-08
+**Method:** curl analysis of live site + local file review (Shopify Theme API returned 403 — token lacks `read_themes` scope)
+**Theme:** GEN-6 global - slideshow (ID: 162539340108)
+
+---
+
+## IMPORTANT: API Access Limitation
+
+The Shopify access token (`shpat_e431...`) does NOT have the `read_themes` scope.
+All five `shopify_theme_api.py search` commands failed with 403 error.
+The data below was gathered from:
+- curl requests to the live site (genactiv.pl)
+- Local file backups and SEO documentation in the repository
+
+---
+
+## 1. Search: "ld+json" — JSON-LD Blocks by Page Type
+
+### Homepage (genactiv.pl) — 2 JSON-LD blocks
+| # | @type | Theme File (inferred) |
+|---|-------|-----------------------|
+| 1 | **Organization** | `sections/header.liquid` (rendered inside `{% section 'header' %}`) |
+| 2 | **WebSite** (SearchAction) | `sections/header.liquid` or `layout/theme.liquid` |
+
+### Product Page (e.g. /products/colostrum-genactiv-60-kapsulek) — 5 JSON-LD blocks
+| # | @type | Theme File (inferred) |
+|---|-------|-----------------------|
+| 1 | **Organization** | `sections/header.liquid` |
+| 2 | **BreadcrumbList** | `snippets/breadcrumbs.liquid` |
+| 3 | **Product** (with offers, aggregateRating, review) | `sections/product-template.liquid` or `templates/product.liquid` |
+| 4 | **FAQPage** (product-level FAQ) | `sections/product-template.liquid` (section-level FAQ schema) |
+| 5 | (unknown — possibly another FAQPage or Review block) | Needs API access to confirm |
+
+### Blog Article Page (e.g. /blogs/poradnik/czym-jest-mikrobiom) — 3 JSON-LD blocks
+| # | @type | Theme File (inferred) |
+|---|-------|-----------------------|
+| 1 | **Organization** | `sections/header.liquid` |
+| 2 | **BreadcrumbList** | `snippets/breadcrumbs.liquid` |
+| 3 | **Article** (with author, publisher, datePublished) | `templates/article.liquid` or `sections/article-template.liquid` |
+
+### FAQ Page (/pages/faq) — 4 JSON-LD blocks
+| # | @type | Theme File (inferred) |
+|---|-------|-----------------------|
+| 1 | **Organization** | `sections/header.liquid` |
+| 2 | **FAQPage** (O Colostrum) | `sections/faq.liquid` (section-level) |
+| 3 | **FAQPage** (O mleku klaczy) | `sections/faq.liquid` (section-level) |
+| 4 | **FAQPage** (Dermokosmetyki Genactiv) | `sections/faq.liquid` (section-level) |
+
+### Collection Page (e.g. /collections/colostrum) — 2 JSON-LD blocks
+| # | @type | Theme File (inferred) |
+|---|-------|-----------------------|
+| 1 | **Organization** | `sections/header.liquid` |
+| 2 | **BreadcrumbList** | `snippets/breadcrumbs.liquid` |
+
+---
+
+## 2. Search: "schema.org" — All Schema.org References
+
+All JSON-LD blocks reference schema.org. Two different protocols are used:
+- `"@context": "http://schema.org"` — used in Organization, WebSite, Product, Article schemas (OLDER, non-HTTPS)
+- `"@context": "https://schema.org"` — used in BreadcrumbList, FAQPage schemas (NEWER, correct)
+
+**Issue:** Mixed http/https in @context URLs. Google accepts both, but https is the canonical recommendation.
+
+---
+
+## 3. Search: "sameAs" — Organization Schema Location
+
+**File:** `sections/header.liquid` (inferred from HTML output position — rendered inside shopify-section-header)
+
+**Current sameAs value (LIVE):**
+```json
+"sameAs": [
+  "",
+  "https://www.facebook.com/Genactiv",
+  "",
+  "https://www.instagram.com/genactiv_colostrum/",
+  "",
+  "",
+  "https://www.youtube.com/channel/UCITuRZBlEG_nxbH9Bnc-gLA",
+  ""
+]
+```
+
+**Issues found:**
+- Contains 5 empty string values (`""`) — these are placeholder social links not filled in (Twitter, Pinterest, Tumblr, Snapchat, etc.)
+- Empty strings are invalid for sameAs and may cause schema validation warnings
+- The Organization schema uses `http://schema.org` (should be `https://schema.org`)
+- Organization schema URL on FAQ page has wrong URL (`"url": "https://genactiv.pl/pages/faq"` instead of `"url": "https://genactiv.pl"`)
+
+---
+
+## 4. Search: "Sklep Genactiv" — Article Author
+
+**Found in:** Article JSON-LD on blog pages (e.g. /blogs/poradnik/czym-jest-mikrobiom)
+
+```json
+"author": {
+  "@type": "Person",
+  "name": "Sklep Genactiv"
+}
+```
+
+**Theme File (inferred):** `templates/article.liquid` or `sections/article-template.liquid`
+
+**Issues:**
+- Author @type is "Person" but "Sklep Genactiv" is not a person — should be @type "Organization"
+- Author name "Sklep Genactiv" is generic store name, not a real author
+- This uses Shopify's `article.author` variable, which defaults to the staff account name that created the article
+
+---
+
+## 5. Search: "llms" — llms.txt
+
+**Result:** llms.txt EXISTS at `https://genactiv.pl/llms.txt` (HTTP 200)
+
+**Content:** Standard Shopify-generated llms.txt file (from Shop app). Contains:
+- Agent instructions for AI shopping assistants
+- Recommendation to install Shop skill (`https://shop.app/SKILL.md`)
+- This is NOT a custom file — it's auto-generated by Shopify
+
+**Theme File:** No corresponding template in theme — this is served by Shopify's platform layer (not editable via Theme API).
+
+---
+
+## Summary of Theme Files Containing JSON-LD
+
+| Theme File (Shopify key) | Schema Types | Issues |
+|--------------------------|-------------|--------|
+| `sections/header.liquid` | Organization, WebSite (SearchAction) | Empty sameAs strings, http:// instead of https://, URL error on FAQ page |
+| `snippets/breadcrumbs.liquid` | BreadcrumbList | OK (uses https://schema.org) |
+| `sections/product-template.liquid` (or equivalent) | Product, FAQPage (product FAQ) | Uses http://schema.org/; brand @type is "Thing" not "Brand" |
+| `templates/article.liquid` (or `sections/article-template.liquid`) | Article | Author is @type "Person" named "Sklep Genactiv"; publisher logo uses article image not site logo |
+| `sections/faq.liquid` (section) | FAQPage (per-section) | Multiple FAQPage schemas per page (one per FAQ section) — valid but unusual |
+
+### Local Files with Relevant Content
+
+| Local File | Description |
+|------------|-------------|
+| `seo/breadcrumbs-with-schema-full.liquid` | Full BreadcrumbList implementation (deployed to `snippets/breadcrumbs.liquid`) |
+| `seo/breadcrumbs-with-schema-test.liquid` | Test version of breadcrumbs |
+| `theme_backups/snippets_breadcrumbs.liquid_20260128_113522.backup` | Latest backup of breadcrumbs.liquid |
+| `theme_backups/theme_liquid_GEN-6_before_clarity.backup` | Backup of layout/theme.liquid (no JSON-LD directly — includes header section) |
+
+---
+
+## Recommended Fixes (for future tasks)
+
+1. **Organization sameAs**: Remove empty strings from the sameAs array in `sections/header.liquid`
+2. **Protocol consistency**: Change all `http://schema.org` to `https://schema.org`
+3. **Article author**: Change @type from "Person" to "Organization" for "Sklep Genactiv", or set proper author names per article
+4. **Publisher logo**: Article publisher logo should be the site logo, not the article's featured image
+5. **Product brand**: Change @type from "Thing" to "Brand" in Product schema
+6. **Organization URL on FAQ**: Fix dynamic URL to always be the root domain
+
+### Prerequisite
+
+The Shopify access token needs `read_themes` and `write_themes` scopes added before any theme modifications can be made via API. Current token only has product/order/collection scopes.

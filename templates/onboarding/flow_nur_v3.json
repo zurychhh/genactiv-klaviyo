@@ -1,0 +1,574 @@
+{
+  "data": {
+    "type": "flow",
+    "attributes": {
+      "name": "Newsletter Nurture Onboarding v3",
+      "definition": {
+        "triggers": [
+          {
+            "type": "list",
+            "id": "VT3KTz"
+          }
+        ],
+        "profile_filter": {
+          "condition_groups": [
+            {
+              "conditions": [
+                {
+                  "type": "profile-metric",
+                  "metric_id": "R6aTMS",
+                  "measurement": "count",
+                  "measurement_filter": {
+                    "type": "numeric",
+                    "operator": "equals",
+                    "value": 0
+                  },
+                  "timeframe_filter": {
+                    "type": "date",
+                    "operator": "alltime"
+                  },
+                  "metric_filters": null
+                }
+              ]
+            }
+          ]
+        },
+        "reentry_criteria": {
+          "duration": 0,
+          "unit": "alltime"
+        },
+        "entry_action_id": "ab-split-entry",
+        "actions": [
+          {
+            "temporary_id": "ab-split-entry",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-sample",
+                        "percentage": 50
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": "nur1a-bold",
+              "next_if_false": "nur1b-editorial"
+            }
+          },
+
+          {
+            "temporary_id": "nur1a-bold",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Twój −15% na start",
+                "preview_text": "Witaj w Genactiv — masz kod na pierwsze zamówienie",
+                "template_id": "UqrSmc",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 1 | Welcome (Bold) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-1d-a"
+            }
+          },
+          {
+            "temporary_id": "delay-1d-a",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 1,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "nur2a-bold"
+            }
+          },
+          {
+            "temporary_id": "nur2a-bold",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Dlaczego colostrum?",
+                "preview_text": "250 aktywnych składników w jednej substancji",
+                "template_id": "WWhNWL",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 2 | Education (Bold) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-a1"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-a1",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "nur3a-bold"
+            }
+          },
+          {
+            "temporary_id": "nur3a-bold",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Nr 1 w aptekach w Polsce",
+                "preview_text": "Zaufały nam tysiące polskich rodzin",
+                "template_id": "URHUe9",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 3 | Social Proof (Bold) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-a2"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-a2",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "check-purchase-a1"
+            }
+          },
+          {
+            "temporary_id": "check-purchase-a1",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-metric",
+                        "metric_id": "R6aTMS",
+                        "measurement": "count",
+                        "measurement_filter": {
+                          "type": "numeric",
+                          "operator": "greater-than",
+                          "value": 0
+                        },
+                        "timeframe_filter": {
+                          "type": "date",
+                          "operator": "alltime"
+                        },
+                        "metric_filters": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": null,
+              "next_if_false": "nur4a-bold"
+            }
+          },
+          {
+            "temporary_id": "nur4a-bold",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Twój kod −15% wciąż czeka",
+                "preview_text": "Zostało 48 godzin — nie przegap START15",
+                "template_id": "Xsc72A",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 4 | Reminder (Bold) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-a3"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-a3",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "check-purchase-a2"
+            }
+          },
+          {
+            "temporary_id": "check-purchase-a2",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-metric",
+                        "metric_id": "R6aTMS",
+                        "measurement": "count",
+                        "measurement_filter": {
+                          "type": "numeric",
+                          "operator": "greater-than",
+                          "value": 0
+                        },
+                        "timeframe_filter": {
+                          "type": "date",
+                          "operator": "alltime"
+                        },
+                        "metric_filters": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": null,
+              "next_if_false": "nur5a-bold"
+            }
+          },
+          {
+            "temporary_id": "nur5a-bold",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Kod −15% znika dziś o północy",
+                "preview_text": "Ostatnia szansa na START15 — zacznij swój plan na zdrowie",
+                "template_id": "T6fgLV",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 5 | Last Call (Bold) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": null
+            }
+          },
+
+          {
+            "temporary_id": "nur1b-editorial",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Twój −15% na start",
+                "preview_text": "Witaj w Genactiv — masz kod na pierwsze zamówienie",
+                "template_id": "WV7iS4",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 1 | Welcome (Editorial) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-1d-b"
+            }
+          },
+          {
+            "temporary_id": "delay-1d-b",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 1,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "nur2b-editorial"
+            }
+          },
+          {
+            "temporary_id": "nur2b-editorial",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Dlaczego colostrum?",
+                "preview_text": "250 aktywnych składników w jednej substancji",
+                "template_id": "Yfxqrf",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 2 | Education (Editorial) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-b1"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-b1",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "nur3b-editorial"
+            }
+          },
+          {
+            "temporary_id": "nur3b-editorial",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Nr 1 w aptekach w Polsce",
+                "preview_text": "Zaufały nam tysiące polskich rodzin",
+                "template_id": "SSBKUH",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 3 | Social Proof (Editorial) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-b2"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-b2",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "check-purchase-b1"
+            }
+          },
+          {
+            "temporary_id": "check-purchase-b1",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-metric",
+                        "metric_id": "R6aTMS",
+                        "measurement": "count",
+                        "measurement_filter": {
+                          "type": "numeric",
+                          "operator": "greater-than",
+                          "value": 0
+                        },
+                        "timeframe_filter": {
+                          "type": "date",
+                          "operator": "alltime"
+                        },
+                        "metric_filters": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": null,
+              "next_if_false": "nur4b-editorial"
+            }
+          },
+          {
+            "temporary_id": "nur4b-editorial",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Twój kod −15% wciąż czeka",
+                "preview_text": "Zostało 48 godzin — nie przegap START15",
+                "template_id": "UarBh3",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 4 | Reminder (Editorial) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-2d-b3"
+            }
+          },
+          {
+            "temporary_id": "delay-2d-b3",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 2,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "check-purchase-b2"
+            }
+          },
+          {
+            "temporary_id": "check-purchase-b2",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-metric",
+                        "metric_id": "R6aTMS",
+                        "measurement": "count",
+                        "measurement_filter": {
+                          "type": "numeric",
+                          "operator": "greater-than",
+                          "value": 0
+                        },
+                        "timeframe_filter": {
+                          "type": "date",
+                          "operator": "alltime"
+                        },
+                        "metric_filters": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": null,
+              "next_if_false": "nur5b-editorial"
+            }
+          },
+          {
+            "temporary_id": "nur5b-editorial",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV®",
+                "reply_to_email": null,
+                "cc_email": null,
+                "bcc_email": null,
+                "subject_line": "Kod −15% znika dziś o północy",
+                "preview_text": "Ostatnia szansa na START15 — zacznij swój plan na zdrowie",
+                "template_id": "VY3YSe",
+                "smart_sending_enabled": true,
+                "transactional": false,
+                "add_tracking_params": true,
+                "custom_tracking_params": null,
+                "additional_filters": null,
+                "name": "NUR | Krok 5 | Last Call (Editorial) v3"
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": null
+            }
+          }
+        ]
+      }
+    }
+  }
+}

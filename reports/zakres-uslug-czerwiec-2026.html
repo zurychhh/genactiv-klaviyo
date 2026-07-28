@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zakres Wykonanych Usług — Czerwiec 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --purple: #6C3FA0;
+    --purple-light: #8B5FBF;
+    --purple-dark: #4A2875;
+    --purple-bg: #F5F0FA;
+    --navy: #1A1F36;
+    --navy-light: #2D3250;
+    --text: #333340;
+    --text-light: #6B7094;
+    --bg: #FAFAFC;
+    --white: #FFFFFF;
+    --border: #E4E6EF;
+    --green: #10B981;
+    --amber: #F59E0B;
+    --red: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 48px 56px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    background: var(--purple);
+    opacity: 0.15;
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+  }
+  .doc-type {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span { color: var(--purple-light); }
+  .header .subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── INFO BAR ─── */
+  .info-bar {
+    background: var(--purple);
+    color: #fff;
+    padding: 20px 56px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    padding: 40px 56px 48px;
+  }
+
+  /* ─── SUMMARY BOX ─── */
+  .summary-box {
+    background: var(--purple-bg);
+    border-left: 4px solid var(--purple);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    border-radius: 0 8px 8px 0;
+  }
+  .summary-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 12px;
+  }
+  .summary-box p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .summary-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .summary-stat {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 12px 20px;
+    min-width: 110px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .summary-stat .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1.1;
+  }
+  .summary-stat .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    background: var(--purple);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .tag-new { background: #ECFDF5; color: #059669; }
+  .tag-analysis { background: #EFF6FF; color: #2563EB; }
+  .tag-infra { background: #FFF7ED; color: #D97706; }
+  .tag-design { background: #FDF2F8; color: #DB2777; }
+
+  /* ─── ITEMS ─── */
+  .items {
+    list-style: none;
+    padding: 0;
+  }
+  .items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .items li::before {
+    content: '→';
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .items li strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .items .sub {
+    color: var(--text-light);
+    font-size: 12.5px;
+  }
+
+  /* ─── DELIVERABLES TABLE ─── */
+  .del-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+  .del-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .del-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .del-table tr:nth-child(even) td { background: #FAFAFC; }
+  .del-table .count {
+    font-weight: 700;
+    color: var(--purple);
+    text-align: center;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    padding: 20px 56px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ─── SEPARATOR ─── */
+  .sep {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; max-width: 100%; }
+    .header { padding: 32px 40px 28px; }
+    .info-bar { padding: 16px 40px; }
+    .content { padding: 28px 40px 36px; }
+    .footer { padding: 16px 40px; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-text">Oleksiak Consult</div>
+      <div class="doc-type">Zalacznik do faktury</div>
+    </div>
+    <h1>Zakres Wykonanych <span>Uslug</span></h1>
+    <div class="subtitle">Marketing Automation, Analytics, E-commerce, Infrastruktura AI</div>
+  </div>
+
+  <!-- ═══ INFO BAR ═══ -->
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">Klient</div>
+      <div class="info-value">GenActiv Sp. z o.o.</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Okres</div>
+      <div class="info-value">Czerwiec 2026</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Pakiet</div>
+      <div class="info-value">20h / miesiac</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Platformy</div>
+      <div class="info-value">Klaviyo, Shopify, GA4, Clarity, Intelligems</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ SUMMARY ═══ -->
+    <div class="summary-box">
+      <h3>Zakres realizacji pakietu 20h</h3>
+      <p>
+        W czerwcu skoncentrowalismy sie na 4 glownych obszarach: (1)&nbsp;pelna analiza testu A/B motywow Shopify (GEN-6 vs NOTOAGENCY) z diagnoza przyczynowa i planem naprawczym, (2)&nbsp;budowa systemu onboardingu email (20 szablonow, 2 flow, architektura v2), (3)&nbsp;segmentacja RFM w Klaviyo (7 segmentow + wlasny serwer MCP), (4)&nbsp;infrastruktura automatyzacji (codzienny agent AI, sprint system, integracja Clarity/GA4).
+      </p>
+      <div class="summary-stats">
+        <div class="summary-stat">
+          <div class="num">7</div>
+          <div class="lbl">Commitow</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">20</div>
+          <div class="lbl">Szablonow email</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">7</div>
+          <div class="lbl">Segmentow RFM</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">23</div>
+          <div class="lbl">Zadan w sprincie</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">9</div>
+          <div class="lbl">Priorytetow PDP</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 1. A/B TEST ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Test A/B: GEN-6 vs NOTOAGENCY (analiza i wnioski)</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>Naprawa trackingu A/B</strong> — wykryto, ze 89% sesji nie mialo tagu wariantu. Przyczyna: Pandectes consent manager nie eksportuje <code>window.gtag</code>. Fix: polyfill gtag + direct dataLayer.push w obu motywach (GEN-6 ID&nbsp;199333609804, NOTOAGENCY ID&nbsp;190479794508)</li>
+        <li><strong>Pelny raport A/B</strong> (<code>docs/AB_TEST_RAPORT.md</code>, 14.7 KB) — 28 195 wizyt, 661 zamowien, 14 dni. Wynik: NOTOAGENCY <strong>-20.9% CR</strong> (p=0.025, istotne statystycznie), -20.7% revenue/visitor, +21.1% abandoned checkout</li>
+        <li><strong>Diagnoza przyczynowa</strong> — strata skoncentrowana na karcie produktu mobile: wariant kapsulki 120&nbsp;szt. <strong>-47% CR</strong>, 60&nbsp;szt. <strong>-63% CR</strong>. Przyczyna: zmiana wariantu wymusza pelny reload strony w NOTO. Dowod: proszek (bez wyboru wariantu) <strong>+9%</strong></li>
+        <li><strong>9 priorytetow naprawczych</strong> (<code>docs/REKOMENDACJE_KARTA_PRODUKTU_MENU.md</code>, 23.3 KB) — spec dla GRAFIK + DEV: Section Rendering API (P1, +25-40% ATC), pill buttons (P2), sticky ATC (P3), above-the-fold PDP (P4), fix dead clicks (P5-P6), bottom nav bar (P7), homepage (P8), PageSpeed (P9)</li>
+        <li><strong>Integracja Clarity UX</strong> — custom tags <code>ab_theme_variant</code> i <code>theme_id</code> wdrozone w obu motywach. Analiza: 553 dead clicks ATC/mies., 4 944 dead clicks na nazwach produktow, 34 rage clicks colostrum-120</li>
+        <li><strong>Raport weryfikacyjny</strong> (<code>reports/AB_TEST_WERYFIKACJA_2026-06-16.html</code>) — walidacja danych Intelligems vs GA4 vs Clarity po naprawie trackingu</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 2. ONBOARDING EMAIL ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">System Onboardingu Email (Klaviyo)</div>
+        <span class="section-tag tag-new">Nowy system</span>
+      </div>
+      <ul class="items">
+        <li><strong>Architektura v2</strong> (<code>ONBOARDING_PLAN_v2.md</code>) — decyzja: rozdzial na 2 niezalezne flow zamiast jednego z conditional split. Flow A: Newsletter Nurture (trigger: Added to List, filtr: zero zakupow). Flow B: Post-Purchase (trigger: Placed Order, filtr: 1. zakup). Auto-przejscie z A do B przy zakupie</li>
+        <li><strong>20 szablonow HTML skompilowanych</strong> — gotowe do wgrania do Klaviyo:
+          <table class="del-table">
+            <thead><tr><th>Flow</th><th>Krokow</th><th>Wariantow A/B</th><th>Szablonow</th><th>Pliki</th></tr></thead>
+            <tbody>
+              <tr><td>Newsletter Nurture (NUR)</td><td>5 (Welcome+kod &rarr; Edukacja &rarr; Social Proof &rarr; Reminder &rarr; Last Call)</td><td>Bold + Editorial</td><td class="count">10</td><td>NurOnb1A-5B.html</td></tr>
+              <tr><td>Post-Purchase (PUR)</td><td>5 (Welcome &rarr; Rytual &rarr; Efekty &rarr; Cross-sell &rarr; Loyalty)</td><td>Bold + Editorial</td><td class="count">10</td><td>PurOnb1A-5B.html</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Flow drafty w Klaviyo</strong> — Newsletter Nurture Onboarding v3 (ID:&nbsp;R7q8bj) i Post-Purchase Onboarding v3 (ID:&nbsp;UNETEK) skonfigurowane jako draft z filtrami, A/B split 50/50, Smart Sending ON</li>
+        <li><strong>Audyt P0 bledow</strong> (<code>ONBOARDING_REVIEW.md</code>) — zidentyfikowano: bledna cena Fiberbiom (79 vs 179 PLN), bledna gramatura (30 vs 15 saszetek), sfabrykowane 128 opinii, zly prog darmowej dostawy (99 vs 300 zl), nieistniejaca ekspertka "Magda (Farmaceuta)"</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 3. SEGMENTACJA RFM ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Segmentacja RFM + Klaviyo MCP Server</div>
+        <span class="section-tag tag-new">Nowa infrastruktura</span>
+      </div>
+      <ul class="items">
+        <li><strong>7 segmentow RFM zbudowanych</strong> w Klaviyo (metryka: Placed Order, ID:&nbsp;R6aTMS):
+          <table class="del-table">
+            <thead><tr><th>Segment</th><th>Definicja</th><th>ID</th></tr></thead>
+            <tbody>
+              <tr><td>Champions</td><td>3+ zakupy w 90d, 450+ PLN total</td><td>V7hCgF</td></tr>
+              <tr><td>Potential Loyalist</td><td>2 zakupy w 90d</td><td>SwAbsM</td></tr>
+              <tr><td>Loyal</td><td>3+ zakupy w 180d, 0 w 90d</td><td>S4PDwW</td></tr>
+              <tr><td>At-Risk</td><td>1+ w roku, 0 w 180d, 3+ total</td><td>UenNBS</td></tr>
+              <tr><td>New</td><td>1 zakup w 30d, 1 total</td><td>TZFxEq</td></tr>
+              <tr><td>Hibernating - reaktywacja</td><td>0 w roku, 2+ ever</td><td>XDY4W4</td></tr>
+              <tr><td>Hibernating - sunset</td><td>0 w roku, 1 ever</td><td>WjiHmq</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Wlasny serwer MCP</strong> (<code>klaviyo-mcp/server.py</code>, 249 linii) — FastMCP z 6 narzediami: <code>list_segments</code>, <code>get_segment</code>, <code>create_segment</code>, <code>create_rfm_segment</code> (builder), <code>update_segment</code>, <code>delete_segment</code>. Wypelnia luke oficjalnego <code>klaviyo-mcp-server</code> (brak operacji zapisu)</li>
+        <li><strong>5 segmentow produktowych</strong> — Fiberbiom (SKU), nie kupil w 60d: Colostrum, Dermokosmetyki, Fiberbiom + segment ogolny 30d</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 4. DESIGN SYSTEM ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Design System marki GenActiv</div>
+        <span class="section-tag tag-design">Design</span>
+      </div>
+      <ul class="items">
+        <li><strong>Pelna rekonstrukcja systemu marki</strong> (<code>templates/design-system/</code>) z genactiv.pl: tokeny kolorow (Brand Red #F5333F, Fiberbiom Pink #F5669C, Trust Navy #1A3B5D, Cream #F4F1EE), typografia (Branding-medium / Montserrat substitute), voice & tone</li>
+        <li><strong>Biblioteka assetow</strong> — 21 plikow: logotypy (5 wariantow), fotografie produktowe (Colostrum, Fiberbiom, Dermo, Zooggies), portrety ekspertow (3), ikony platnosci (Blik, Przelewy24, pobranie), ikony dostawy (DHL, InPost)</li>
+        <li><strong>33 komponenty email</strong> — JSX/HTML: onboarding (NurOnb1-5, PurOnb1-5), cross-sell (CS1-3), Zooggies A/B (ZA-ZC), recurring (editorial, reminder, subscription)</li>
+        <li><strong>Standard kodowania email Klaviyo</strong> (<code>KLAVIYO_CODING_STANDARD.md</code>) — boilerplate HTML, inline CSS, bulletproof buttons, dark mode, pre-publish checklist</li>
+        <li><strong>Skill Claude Code</strong> (<code>SKILL.md</code>) — user-invocable <code>genactiv-design</code>, linkuje assety + UI kit do natychmiastowego uzycia</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 5. FIBERBIOM LP ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Landing Page FIBERBIOM (Shopify Liquid)</div>
+        <span class="section-tag tag-new">Nowy</span>
+      </div>
+      <ul class="items">
+        <li><strong>9 sekcji Liquid</strong> (<code>fiberbiom/sections/</code>) — hero, problem, solution, how-it-works, how-to-use, stats, FAQ, bibliography, CTA banner</li>
+        <li><strong>Dedykowane assety</strong> — CSS (876 linii), JS (52 linie) + template JSON (<code>page.fiberbiom.json</code>)</li>
+        <li><strong>Skrypt deploy</strong> (<code>deploy.py</code>, 168 linii) — automatyczne wgranie sekcji + assetow przez Shopify Theme API</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 6. INTEGRACJE ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Integracje analityczne i tracking</div>
+        <span class="section-tag tag-infra">Integracja</span>
+      </div>
+      <ul class="items">
+        <li><strong>Microsoft Clarity MCP</strong> — podlaczenie serwera <code>@microsoft/clarity-mcp-server</code> (projekt 3354986136401458). Metryki: dead clicks, rage clicks, scroll depth, quickback, device breakdown. JWT token (exp 2126)</li>
+        <li><strong>GA4 custom dimensions</strong> — rejestracja wymiarow A/B: <code>ab_theme_variant</code> (user-level), <code>exp_variant_string</code> (event-level). Integracja Intelligems &rarr; GA4 przez event <code>experience_impression</code></li>
+        <li><strong>MCP ecosystem rozszerzony z 4 do 10 serwerow</strong> — dodano: Klaviyo (oficjalny), Klaviyo-Segments (wlasny), Shopify-Standard, TikTok Ads, Senuto, Clarity. Konfiguracja w <code>.mcp.json.example</code> z placeholder tokenami</li>
+        <li><strong>Setup automation</strong> (<code>setup-claude.sh</code>) — generowanie <code>.mcp.json</code> z <code>.env</code> + budowanie venv dla FastMCP + auto-generowanie credential JSON (Google Ads, GA4)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 7. AGENT SYSTEM ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">Autonomiczny Agent Operacyjny (Claude Code)</div>
+        <span class="section-tag tag-infra">Infrastruktura</span>
+      </div>
+      <ul class="items">
+        <li><strong>Orchestrator</strong> (<code>.claude/agents/orchestrator.md</code>) — 6-krokowy cykl: pull zadan z Monday.com &rarr; triage (GOTOWE / BLOKADA_CZLOWIEK / BLOKADA_ZALEZNOSC) &rarr; eskalacja na Teams webhook &rarr; wykonanie przez subagenta &rarr; update Monday &rarr; raport dnia</li>
+        <li><strong>Task-Runner</strong> (<code>.claude/agents/task-runner.md</code>) — izolowany subagent per zadanie. Guardrails: SEO bulk-update zawsze dry-run first, theme changes zawsze backup, YMYL content nigdy auto-publish</li>
+        <li><strong>Infrastruktura</strong> — <code>runner.sh</code> (git worktree + headless Claude), <code>notify.sh</code> (Teams Adaptive Cards), <code>scaffold-sprint.py</code> (generator drzewa sprintu z CSV), launchd plist (07:00 daily). DRY_RUN=1 domyslnie</li>
+        <li><strong>Sprint Czerwiec 2026</strong> — 23 zadania w drzewie W1-W5, 5 strumieni (A:&nbsp;SEO, B:&nbsp;CRO, C:&nbsp;Klaviyo, D:&nbsp;Subscriptions, E:&nbsp;LP Generator). Kazde z <code>task.md</code> (definicja + prompt) + <code>status.txt</code></li>
+      </ul>
+    </div>
+
+    <!-- ═══ 8. TESTY & DOKUMENTACJA ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">Testy automatyczne i dokumentacja</div>
+        <span class="section-tag tag-infra">Quality</span>
+      </div>
+      <ul class="items">
+        <li><strong>Test suites</strong> — Jest/Python unittest dla wszystkich kluczowych modulow:
+          <table class="del-table">
+            <thead><tr><th>Modul</th><th>Framework</th><th>Plik</th></tr></thead>
+            <tbody>
+              <tr><td>GenActiv Online (web terminal)</td><td>Jest ESM</td><td><code>server/__tests__/crash.test.js</code></td></tr>
+              <tr><td>Shopify MCP Extended</td><td>Jest TS</td><td><code>src/__tests__/crash.test.ts</code></td></tr>
+              <tr><td>Google Ads MCP</td><td>Python unittest</td><td><code>tests/test_crash.py</code> + <code>test_helpers.py</code> + <code>test_write_tools.py</code></td></tr>
+              <tr><td>Baselinker API</td><td>Python unittest</td><td><code>tests/test_baselinker_api.py</code></td></tr>
+              <tr><td>Shopify GraphQL</td><td>Python unittest</td><td><code>tests/test_shopify_graphql.py</code></td></tr>
+              <tr><td>Shopify Theme API</td><td>Python unittest</td><td><code>tests/test_shopify_theme_api.py</code></td></tr>
+              <tr><td>Sync Payment ID</td><td>Python unittest</td><td><code>tests/test_sync_payment_id.py</code></td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Dokumentacja projektu</strong> — <code>CLAUDE.md</code> zaktualizowany (pelna architektura: MCP, A/B test, segmenty, theme IDs, known issues), <code>GITHUB_SETUP.md</code> (onboarding nowej maszyny), <code>.env.example</code> (wszystkie zmienne)</li>
+      </ul>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- ═══ STRATEGIC DELIVERABLES ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">+</div>
+        <div class="section-title">Dokumenty strategiczne (dodatkowe)</div>
+        <span class="section-tag tag-analysis">Strategia</span>
+      </div>
+      <ul class="items">
+        <li><strong>Roadmapa H2 2026</strong> (<code>reports/roadmapa-H2-2026.tsv</code>) — 5 strumieni (MA, SEO, CRO, Retention, Produkt), cel +50% e-commerce (222K &rarr; 334K PLN/mies.), KPI dashboard miesiac po miesiacu, kamienie milowe lip-gru</li>
+        <li><strong>Plan wzrostu ecommerce 2026</strong> (<code>PLAN_WZROSTU_ECOMMERCE_2026.md</code>) — analiza baselinu, identyfikacja dzwigni przychodowych, projekcje per kanal</li>
+        <li><strong>Raport A/B do zarzadu</strong> — decyzja: NOTO on hold, plan rebuild karty produktu (9 priorytetow z estymacja uplift), timeline H2</li>
+      </ul>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- ═══ DELIVERABLES COUNT ═══ -->
+    <div class="summary-box" style="border-left-color: var(--navy);">
+      <h3>Podsumowanie deliverables — Czerwiec 2026</h3>
+      <table class="del-table" style="margin-top:0;">
+        <thead>
+          <tr>
+            <th style="width:45%">Kategoria</th>
+            <th style="width:35%">Deliverable</th>
+            <th style="width:20%; text-align:center;">Ilosc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Email Marketing</td><td>Szablony HTML onboarding (A/B)</td><td class="count">20</td></tr>
+          <tr><td>Email Marketing</td><td>Flow Klaviyo (draft)</td><td class="count">2</td></tr>
+          <tr><td>Segmentacja</td><td>Segmenty RFM</td><td class="count">7</td></tr>
+          <tr><td>Segmentacja</td><td>Segmenty produktowe</td><td class="count">5</td></tr>
+          <tr><td>Infrastruktura MCP</td><td>Serwery MCP (nowe/rozszerzone)</td><td class="count">6</td></tr>
+          <tr><td>Infrastruktura AI</td><td>Agenty (orchestrator + task-runner)</td><td class="count">2</td></tr>
+          <tr><td>Landing Page</td><td>Sekcje Liquid (Fiberbiom)</td><td class="count">9</td></tr>
+          <tr><td>Design System</td><td>Komponenty email + assety</td><td class="count">33 + 21</td></tr>
+          <tr><td>Analityka</td><td>Raporty (A/B, weryfikacja, roadmapa)</td><td class="count">6</td></tr>
+          <tr><td>Testing</td><td>Test suites (modulow)</td><td class="count">7</td></tr>
+          <tr><td>Dokumentacja</td><td>Dokumenty strategiczne + tech</td><td class="count">8</td></tr>
+          <tr><td>Tracking</td><td>Fix A/B + custom dimensions GA4/Clarity</td><td class="count">4</td></tr>
+          <tr><td>Sprint</td><td>Zadania zdefiniowane (task.md)</td><td class="count">23</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <div>&copy; 2026 Oleksiak Consult. Dokument poufny.</div>
+    <div>GenActiv Sp. z o.o. | Czerwiec 2026 | Strona 1/1</div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

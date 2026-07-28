@@ -1,0 +1,135 @@
+	ROADMAPA H2 2026 v4 — 14 RUND WERYFIKACJI + POPRAWKI BLEDOW
+	Cel: 50%. Realnie: 25-35% z Ads ramp + optymalizacjami.
+
+	SEKCJA 1: GOOGLE ADS — FAKTYCZNY RAMP-UP + PRAWDZIWA INKREMENTALNOSC
+	Miesiac	Spend (PLN)	Revenue GA4 total	Cross-net GA4	ROAS (Ads panel)	Komentarz
+	Kwi 2026	2 468	180 282	70 815	32.9x	Brand defense: 2.5K spend a 81K 'konwersji' — wiekszosc by kupila bez reklam
+	Maj 2026	6 530	ok. 206K (proj.)	ok. 50K (proj.)	ok. 10x	Budzet zaczal wracac
+	Cze 2026	10 700	brak danych	brak danych	brak	Blisko poziomu cze 2025 9K. Revenue powinno byc ok. 190-200K.
+	Lip 2026 proj.	12-15K	projekcja	—	—	Kontynuacja ramp. Powinno byc blisko lip 2025 172K z 8pct organic growth.
+	Sie-Gru 2026 proj.	15-20K	projekcja	—	—	Powrot do historycznych 15-20K. BF: 25-30K.
+
+	DOWODY NA NISKA INKREMENTALNOSC
+	Porownanie	Spend roznica	Revenue roznica	Prawdziwy incr. ROAS	Wniosek
+	Cze 2025 (9K) vs Kwi 2026 (2.5K)	minus 72%	179K vs 180K: 0%	Bliski 0x	Ta sama revenue mimo 72% mniej spend!
+	Mar 2026 (18.6K) vs Kwi 2026 (2.5K)	minus 86%	237K vs 180K: minus 24%	Spadek 57K z 16K mniej spend	3.6x BRUTTO (ale sezonowosc mar wiekszy niz kwi)
+	Po korekcie sezonowej, mar jest natur. 15pct wiekszy niz kwi	—	57K minus 36K seasonal: 21K z Ads	21K z 16K spend: 1.3x	Prawdziwy inkrementalny ROAS po korekcie
+	Srednia z analiz	—	—	1.3 do 2.0x	Panel Google Ads mowi 8-12x — to 4-6 razy zawyzone
+
+	CO TO OZNACZA DLA BUDZETU?
+	Scenariusz Ads	Spend/mies	Incr. revenue vs spend 3K	Optymalizacje	Total przyrost	Wzrost vs 222K
+	Ads zostaje na 3-5K	3-5K	0	21-27K do gru	21-27K	10-12%
+	Ads ramp do 15K (aktualny trend)	15K	15-24K	21-27K do gru	36-51K	16-23%
+	Ads ramp do 18-20K (historyczny)	18-20K	20-30K	21-27K do gru	41-57K	18-26%
+	Ads 25K + Meta 10K (agresywny)	35K total	30-45K (Ads) + 5-15K (Meta)	21-27K	56-87K	25-39%
+	Target 50% wymaga	???	112K przyrostu	27K max	112K	50% nieosiagalne srednia roczna
+
+	SEKCJA 2: ROADMAPA — DELIVERABLES Z ESTYMATAMI I FLAGA AI
+	Strumien	Deliverable	Build	Revenue od (lag)	PLN/mies expected	PLN/mies conserv.	P-stwo	Egzekucja AI/Manual	Co wymaga czlowieka	Kalkulacja
+
+	GOOGLE ADS	Kontynuacja ramp-up (cze 10.7K, cel lip 15K, sie+ 18K)	Lipiec	Lipiec	15-24K incr vs 3K spend	10-15K	75%	AI 80pct — Ads MCP: bidding, kampanie, raporty	ZARZAD: zatwierdzenie budzetu. PAID: strategia PMax.	Incr ROAS 1.5-2x. Delta 15K spend (z 3K do 18K) x 1.5x netto po sezonowosci.
+	GOOGLE ADS	Przebudowa PMax na non-brand (suplementy odpornosc, colostrum kupic)	Sierpien	Pazdziernik (2m)	5-15K extra	0	35%	AI 60pct — MCP: keyword planner, nowe kampanie	PAID SPECIALIST: strategia non-brand (8h). GRAFIK: kreacje (4h).	Non-brand: wyzszy CPA ale prawdziwie inkrementalny. ROAS 3-5x max.
+	GOOGLE ADS	BF skalowanie do 25-30K spend	Listopad	Listopad	15-25K extra vs 18K	10K	60%	AI 70pct — MCP: BF kampanie, audiences, bidding	PAID: BF strategia (8h). ZARZAD: budget BF.	BF 2025: 30K spend, GA4 Cross-net 106K. Incr. BF z wyzszym spend: 40-60K total.
+
+	MARKETING AUTOMATION	Kadencja kampanii z 3 na 6-8/mies plus segmentacja RFM	Lipiec	Lipiec	3 do 5K	2K	80%	AI 90pct — Klaviyo MCP: create_campaign, create_rfm_segment (metric R6aTMS)	COPYWRITER: tekst PL 2h/kamp, 16h/mies. GRAFIK: hero images 1h/kamp.	Bazowe: 3/mies x 3.2K avg RPE. 8/mies: RPE spada 30-40pct (lista 8K fatigue). 8 x 2K netto.
+	MARKETING AUTOMATION	Post-purchase cross-sell flow (3 emaile)	Lipiec	Wrzesien (2m ramp)	1 do 2K	500	65%	AI 95pct — Klaviyo MCP: flow + templates. Shopify MCP: analiza par produktowych.	COPYWRITER: review copy PL (2h total)	Benchmark: post-purchase flow to 3-8pct flow revenue. Flow rev 25.8K/mies. 5pct to 1.3K.
+	MARKETING AUTOMATION	Porzucony koszyk v2 — split per grupa produktowa	Lipiec	Sierpien	400 do 700	250	70%	AI 100pct — Klaviyo MCP: segmenty, templates, flow rebuild	ZERO — pelna automatyzacja	Bazowe: 2.3K/mies, 4.1pct CR. Split layout to 15-30pct improvement. 2.3K x 25pct netto.
+	MARKETING AUTOMATION	Browse abandonment v2	Sierpien	Wrzesien	400 do 600	250	55%	AI 100pct — Klaviyo MCP: flow rebuild, segmentacja	ZERO — pelna automatyzacja	Bazowe: 815/mies, 0.9pct CR. Poprawa do 1.4-1.6pct realnie (50-70pct wzrost).
+	MARKETING AUTOMATION	Win-back flow (90d inactive)	Sierpien	Pazdziernik (2m)	1 do 1.5K	600	60%	AI 95pct — Klaviyo MCP: segment 90d, flow, templates	COPYWRITER: win-back copy z incentive (1h)	ok 2000 inactive x 3pct reaktywacja to 60 zamow x 272 to 16K burst, potem 1-1.5K ongoing.
+	MARKETING AUTOMATION	Replenishment flow (30/60/90d)	Wrzesien	Listopad (2m)	800 do 1.5K	400	50%	AI 90pct — Shopify MCP: dane cyklu zakupowego. Klaviyo: flow per SKU.	MANAGER: review logiki timing (1h)	Repeat 55pct. Flow przyspiesza 5pct repeaterow. 430 x 5pct x 272 to 5.8K max. Realnie 15-25pct.
+	MARKETING AUTOMATION	Sunset flow (180d nieaktywni)	Pazdziernik	Pazdziernik	0 (list health)	0	85%	AI 100pct — Klaviyo MCP: segment plus suppress flow	ZERO — pelna automatyzacja	Brak bezposredni revenue. Deliverability poprawa 5-10pct OR posrednio.
+	MARKETING AUTOMATION	SMS pilot	Sierpien	2027	0	0	30%	AI 30pct — Klaviyo SMS wymaga manualnej konfiguracji	PRAWNIK: RODO PL (4h). DEV: consent (4h). MARKETING: strategia.	500 bazy to max 50-100 PLN/mies. Revenue dopiero w 2027.
+	MARKETING AUTOMATION	Pre-BF popup (list growth)	Pazdziernik	Grudzien (2m)	800	400	70%	AI 70pct — Klaviyo Forms: popup, A/B test trigger	GRAFIK: design (2h). COPYWRITER: copy PL incentive (1h).	800-1000 sub realnie (nie 2000). 12.5pct list growth.
+	MARKETING AUTOMATION	BF email sequence (6 emaili zamiast 4 jak w 2025)	Listopad	Listopad	8 do 12K ponad BF 2025	5K	70%	AI 80pct — Klaviyo MCP: kampanie, segmenty VIP/active/at-risk	COPYWRITER: 6x copy BF (6h). GRAFIK: kreacje (8h). MANAGER: strategia rabatowa.	BF 2025: 37.6K z 4 kamp (fatigue). 6 kamp plus segmentacja: 45-50K realnie.
+	MA SUMA (gru bez BF)	—	—	—	7 do 9K	4 do 5K	—	AI ok. 85pct	Copywriter PL, grafik, review	—
+
+	SEO	Tech fixes z czerwca — efekt opozniony	Cze (done)	Wrz-Paz	1.5 do 2.5K	800	60%	AI 100pct — Shopify Extended MCP: get-seo-audit monitoring	ZERO — juz zrobione i monitorowane automatycznie	Indexacja 3-6m. Plus 5-7pct organic. 7pct x 9.7K to 679 sesji x 4.74 to 3.2K opt.
+	SEO	Schema markup Product plus FAQ plus Breadcrumb	Lipiec	Pazdziernik (3m)	800 do 1.5K	500	55%	AI 90pct — Shopify Theme API: JSON-LD inject do product.liquid	DEV: review Liquid template (1-2h). QA: test rich results.	Google 2-4m lag. CTR plus 5-15pct na 40pct produktow. 388 sesji x 4.74 to 1.8K.
+	SEO	4 artykuly/mies content hub	Lipiec onward	Lis-Gru (4-6m lag!)	2 do 4K	1K	45%	AI 20pct — research, outline, meta suggestions	COPYWRITER plus SME: 8-12h/artykul (claims medyczne YMCA). SEO: keywords.	Art lip rankuje od lis. 4 x 150 sesji x 4.74 to 2.8K. WYSOKA NIEPEWNOSC.
+	SEO	Programmatic SEO (colostrum-na-X strony)	Sierpien	Sty 2027 najwczesniej	0 w 2026	0	35%	AI 80pct — Shopify Pages API: auto-generate	COPYWRITER: unique intro (thin content penalty). DEV: Liquid template.	6 plus mies do rankingu. Zero impact 2026. Inwestycja 2027.
+	SEO	Internal linking audit plus fix	Lip-Sie	Pazdziernik	300 do 500	200	50%	AI 70pct — MCP: crawl produktow, orphan pages	SEO: strategia linkowania (2h). DEV: Liquid (3h).	Posredni: crawl budget plus page authority. Plus 2-3pct organic.
+	SEO	Backlink outreach health blogi PL	Sie onward	Gru onward	200 do 500	0	30%	AI 10pct — identyfikacja target blogow	SEO SPECIALIST: outreach relacyjny (ongoing). COPYWRITER: guest posts.	3-5 backlinks w 6m realnie. Kazdy to 50-100 sesji w 3m. Powolne.
+	SEO	CWV optymalizacja	Wrz-Paz	Listopad	500 do 1K	300	50%	AI 20pct — audyt PageSpeed	DEV: Liquid/JS opt (8-16h). Image WebP, lazy load, critical CSS.	CWV ranking signal. Efekt marginalny ale potrzebny dla NOTO re-test.
+	SEO SUMA (grudzien)	—	—	—	5 do 7K	2 do 3K	—	AI ok. 50pct	Copywriter, SEO specialist, dev	—
+
+	ECOMMERCE CRO	Mobile quick wins (3 z audytu Clarity)	Lipiec	Sie-Wrz	2 do 4K	1K	55%	AI 30pct — Clarity MCP: heatmap data, session recordings	DEV: Liquid changes (4-8h). GRAFIK: mobile layout adjustments.	0.05-0.1pp mobile CR. 28.8K mob sesji x 0.075pct to 21.6 zamow x 272 to 5.9K opt.
+	ECOMMERCE CRO	A/B test PDP: trust badges plus sticky ATC	Sie (start)	Paz (jesli wygra)	0 do 8K (oczekiwane: 2K)	0	25%	AI 20pct — Intelligems: setup testu, analiza	DEV: sticky ATC IntersectionObserver, badges (8-12h). GRAFIK: design (4h). Test 4-6 tyg.	Win rate A/B: 20-30pct. Wygrana to plus 0.1-0.2pp CR. Przegrana to 0. BINARNE.
+	ECOMMERCE CRO	A/B test checkout	Wrzesien	Lis (jesli wygra)	0 do 6K (oczekiwane: 1.5K)	0	20%	AI 10pct — Shopify Checkout ograniczone	DEV: checkout modifications (8h). Moze potrzebowac Shopify Plus.	Win rate 20pct. Checkout changes ryzykowne — moga pogorszyc CR.
+	ECOMMERCE CRO	Pop-up exit-intent	Lipiec	Paz (2-3m lag)	800 do 1.2K	400	75%	AI 80pct — Klaviyo Forms: popup build, A/B trigger/timing	GRAFIK: design (2h). COPYWRITER: copy PL.	400-600 nowych sub/mies. Konwersja via flows po 2-3m. 500 x 10pct x 272 to 1.4K.
+	ECOMMERCE CRO	NOTO product card rebuild (P1-P3)	Lip-Wrz	Paz onward (re-test)	0 do 15K (oczekiwane: 4.5K)	0	30%	AI 5pct — jedynie analiza A/B danych	DEV: Section Rendering API, pill buttons (40-60h). GRAFIK: PDP layout (16-24h).	NOTO przegral minus 20.9pct CR. Problem to karta. Fix i re-test. Wysoki potencjal ale koszt.
+	CRO SUMA (grudzien)	—	—	—	5 do 7K	2 do 3K	—	AI ok. 30pct	DEV (Liquid/JS), grafik, A/B testing	—
+
+	RETENTION SUB LOYALTY	3 bundle zestawy	Lip-Sie	Wrzesien	2 do 3K	1.5K	70%	AI 80pct — Shopify MCP: create-product, manage-variants, update-seo	MANAGER: sklad bundli, pricing (2h). FOTOGRAF: zdjecia zestawow (4h).	AOV plus 1-2pct. 862 zamow x 4 PLN to 3.4K opt. 10-20pct adoption netto 1.5-2.5K.
+	RETENTION SUB LOYALTY	Cross-sell Thank You page	Lipiec	Sierpien	800 do 1.5K	500	65%	AI 60pct — Shopify MCP: analiza par produktowych	DEV: Liquid TY page modification (2-4h).	TY cross-sell: 2-5pct klientow. 862 x 3pct x 80 PLN avg to 2K opt.
+	RETENTION SUB LOYALTY	Subskrypcja top 3 produkty (minus 10pct rabat)	Sie (launch)	Lis (3m ramp)	400 do 800	200	50%	AI 15pct — analiza danych, raportowanie	DEV: app integracja Recharge/Bold (16-24h). PRAWNIK: regulamin PL. MANAGER: pricing.	PL sub suplementy ponizej 5pct rynku. 3pct adoption x 135 zamow to 4 sub x 245 to 980. Net nowe 300-500.
+	RETENTION SUB LOYALTY	Referral 'Daj 20zl Dostaj 20zl'	Wrzesien	Grudzien (3m)	500 do 1K	300	45%	AI 15pct — raportowanie	DEV: app integracja ReferralCandy (8-12h). PRAWNIK: regulamin. MANAGER: design.	0.5-1pct revenue po 3m. 0.5pct x 222K to 1.1K. Slow start.
+	RETENTION SUB LOYALTY	Gift cards	Pazdziernik	Pazdziernik	300 do 500	200	80%	AI 90pct — Shopify natywne gift cards, MCP: enable	GRAFIK: design gift card (2h).	Natywna funkcja Shopify. Niski effort, niski ale pewny rev.
+	RETENTION SUB LOYALTY	Loyalty program (Bronze do Platinum)	Paz-Gru build	Mar 2027	0 w 2026	0	N/A	AI 10pct — analiza RFM	DEV: Smile.io integracja (24-40h). GRAFIK: UI (8h). MANAGER: tiers design.	ROI loyalty to 6-12m po launch. Grudzien launch to efekt Q2-Q3 2027.
+	RETENTION SUMA (gru)	—	—	—	4 do 5K	2 do 3K	—	AI ok. 40pct	DEV (app integracje), manager, prawnik	—
+
+	SEKCJA 3: MONTHLY TIMELINE — KIEDY KAZDY PLN WCHODZI
+	Dzialanie	Lip	Sie	Wrz	Paz	Lis	Gru	AI pct
+	Ads ramp (incr. vs 3K baseline)	10K	18K	22K	22K	35K (BF)	22K	80
+	Kampanie 2x/tyg	1.5K	2.5K	3.5K	3.5K	5K	3.5K	90
+	Post-purchase flow	0	400	800	1.2K	1.5K	1.5K	95
+	Cart v2 split	0	300	500	550	600	600	100
+	Browse v2	0	0	300	450	500	500	100
+	Win-back flow	0	0	0	800	1.2K	1.2K	95
+	Replenishment	0	0	0	0	500	800	90
+	BF email sequence	0	0	0	0	8K	0	80
+	SEO tech (done jun)	0	0	500	1K	1.5K	2K	100
+	Schema markup	0	0	0	500	800	1.2K	90
+	Content artykuly	0	0	0	0	500	1.5K	20
+	Mobile quick wins	0	1K	2K	2.5K	3K	3K	30
+	A/B PDP (expected val)	0	0	0	750	750	750	20
+	Pop-up list growth	0	0	0	400	800	1K	80
+	Bundles	0	0	1K	2K	3K	2.5K	80
+	Cross-sell TY	0	500	800	1K	1K	1K	60
+	Subskrypcja	0	0	0	200	400	500	15
+	Referral	0	0	0	0	300	500	15
+	Gift cards	0	0	0	300	400	300	90
+	SUMA optymalizacje (bez Ads)	1.5K	4.7K	9.4K	15.1K	27.8K	22.4K	—
+	SUMA z Ads ramp	11.5K	22.7K	31.4K	37.1K	62.8K	44.4K	—
+
+	SEKCJA 4: REVENUE PROJECTION
+	Scenariusz	Lip	Sie	Wrz	Paz	Lis	Gru	Sr. H2	vs 222K
+	2025 same month	172K	212K	333K	301K	348K	198K	261K	—
+	Organic growth 8pct YoY	186K	229K	360K	325K	376K	214K	282K	plus 27pct
+	Plus optymalizacje (bez Ads)	188K	234K	369K	340K	404K	236K	295K	plus 33pct
+	Plus Ads ramp 15 do 20K (real trend)	198K	252K	391K	362K	439K	258K	317K	plus 43pct
+	Plus non-brand PMax rebuild	203K	257K	401K	372K	449K	268K	325K	plus 46pct
+	Target 50pct	334K	334K	334K	334K	334K	334K	334K	plus 50pct
+
+	WNIOSKI:
+	Nr	Wniosek	Dowod
+	1	Google Ads inkrementalnosc to 1.3-2.0x (NIE 8-12x z panelu)	Cze 2025 (9K) to 179K vs Kwi 2026 (2.5K) to 180K. Ta sama revenue mimo 72pct mniej spend.
+	2	Budzet juz wraca (2.5K kwi, 6.5K maj, 10.7K cze)	Nie trzeba 'decyzji' — trend ramp-up jest w toku.
+	3	Ads ramp daje 10-22K/mies incr (rosnaco z budzetem)	Delta spend x 1.5-2.0x real ROAS. Lipiec ok 10K incr, grudzien ok 22K.
+	4	Optymalizacje daja 21-27K/mies po full ramp (gru)	Per-deliverable kalkulacja z benchmarkami.
+	5	Realistyczny wzrost H2: plus 30-46pct w peak months	Wrz-lis: 391-449K. Lip-sie: 198-257K. Srednia H2: 317-325K.
+	6	50pct srednia roczna: bardzo trudne	Wymaga lato 270K plus (vs historyczne 170-210K). Ale wrz-lis moze przekroczyc 50pct.
+	7	Najwazniejsza dzwignia to non-brand PMax	Obecny PMax to brand defense. Non-brand to nowy popyt ale ROAS 3-5x.
+
+	SEKCJA 5: PRIORYTET — PLN PER GODZINA PRACY LUDZKIEJ
+	Poz.	Deliverable	PLN/mies	Godz czlowieka	PLN per h	AI pct	Priorytet
+	1	Cart v2 split (100pct AI)	400-700	0h	max (zero ludzi)	100	QUICK WIN AI
+	2	Browse abandonment v2 (100pct AI)	400-600	0h	max (zero ludzi)	100	QUICK WIN AI
+	3	Sunset flow 100pct AI	0 list health	0h	—	100	QUICK WIN AI
+	4	SEO monitoring (100pct AI)	1.5-2.5K	0h	max (zero ludzi)	100	BACKGROUND AI
+	5	Win-back flow	1-1.5K	1h	1000-1500	95	WYSOKI
+	6	Replenishment flow	800-1.5K	1h	800-1500	90	WYSOKI
+	7	Post-purchase flow	1-2K	2h	500-1000	95	WYSOKI
+	8	Schema markup	800-1.5K	2h	400-750	90	WYSOKI
+	9	Kampanie 2x/tyg	3-5K	16h/mies	188-313	90	WYSOKI (ongoing)
+	10	Bundles (3 zestawy)	2-3K	6h	333-500	80	SREDNI
+	11	Pop-up exit-intent	800-1.2K	3h	267-400	80	SREDNI
+	12	Cross-sell TY page	800-1.5K	3h	267-500	60	SREDNI
+	13	Gift cards	300-500	2h	150-250	90	NISKI ALE LATWY
+	14	Google Ads ramp	15-24K	6h/tyg paid	625-1000	80	KRYTYCZNY
+	15	Mobile quick wins CRO	2-4K	8h	250-500	30	POTRZEBA DEV
+	16	Content artykuly	2-4K	40-50h/mies	40-100	20	DROGI W LUDZI
+	17	A/B test PDP	0-8K (exp 2K)	16h	0-500	20	RYZYKOWNE
+	18	NOTO rebuild	0-15K (exp 4.5K)	80h	0-188	5	DUZE ALE RYZYKOWNE
+	19	Subskrypcja	400-800	28h	14-29	15	FUNDACYJNE
+	20	Referral	500-1K	14h	36-71	15	NISKI ROI TERAZ
+	21	Loyalty program	0 w 2026	48h	0 w 2026	10	INWESTYCJA 2027

@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- @dsCard group="Spacing" name="Elevation / Shadows" subtitle="Warm diffuse steps + red CTA glow" viewport="700x170" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+body{background:var(--ga-gray-100);}
+.grid { display:flex; gap:22px; flex-wrap:wrap; }
+.sw { display:flex; flex-direction:column; gap:9px; align-items:center; }
+.box { width:120px; height:74px; background:#fff; border-radius:14px; }
+.name { font-size:11px; font-weight:600; }
+.val { font-size:10px; color:var(--ga-fg3); }
+</style></head>
+<body><div class="card">
+  <div class="grid">
+    <div class="sw"><div class="box" style="box-shadow:var(--ga-shadow-sm)"></div><div class="name">shadow-sm</div><div class="val">resting hairline</div></div>
+    <div class="sw"><div class="box" style="box-shadow:var(--ga-shadow-md)"></div><div class="name">shadow-md</div><div class="val">card · hover</div></div>
+    <div class="sw"><div class="box" style="box-shadow:var(--ga-shadow-lg)"></div><div class="name">shadow-lg</div><div class="val">drawer · modal</div></div>
+    <div class="sw"><div class="box" style="box-shadow:var(--ga-shadow-red); background:var(--ga-red)"></div><div class="name">shadow-red</div><div class="val">lifted CTA glow</div></div>
+  </div>
+</div></body></html>

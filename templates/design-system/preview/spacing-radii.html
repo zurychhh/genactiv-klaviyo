@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- @dsCard group="Spacing" name="Corner Radii" subtitle="8 / 14 / 22 / 32 / pill" viewport="700x150" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.grid { display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; }
+.sw { display:flex; flex-direction:column; gap:7px; align-items:center; }
+.box { width:84px; height:64px; background:var(--ga-red-soft); box-shadow: inset 0 0 0 1.5px var(--ga-red); }
+.name { font-size:11px; font-weight:600; }
+.val { font-size:10px; color:var(--ga-fg3); }
+.pill { width:104px; height:44px; border-radius:999px; background:var(--ga-red); }
+</style></head>
+<body><div class="card">
+  <div class="grid">
+    <div class="sw"><div class="box" style="border-radius:8px"></div><div class="name">sm</div><div class="val">8px</div></div>
+    <div class="sw"><div class="box" style="border-radius:14px"></div><div class="name">md · cards</div><div class="val">14px</div></div>
+    <div class="sw"><div class="box" style="border-radius:22px"></div><div class="name">lg</div><div class="val">22px</div></div>
+    <div class="sw"><div class="box" style="border-radius:32px"></div><div class="name">xl</div><div class="val">32px</div></div>
+    <div class="sw"><div class="pill"></div><div class="name">pill · CTA</div><div class="val">999px</div></div>
+  </div>
+</div></body></html>

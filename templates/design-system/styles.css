@@ -1,0 +1,15 @@
+/* ============================================================
+   Genactiv — Design System root stylesheet.
+   Single entry point for consumers: link this one file and you
+   get the brand fonts + all color/type/spacing/radius/shadow
+   tokens (and the semantic type classes).
+
+       <link rel="stylesheet" href="styles.css">
+
+   Page-/surface-scoped styles (email mocks, storefront UI kit,
+   DS preview cards) are intentionally NOT imported here — link
+   those alongside this file only on the pages that use them.
+   ============================================================ */
+
+@import "fonts/fonts.css";
+@import "colors_and_type.css";

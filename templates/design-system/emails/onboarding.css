@@ -1,0 +1,102 @@
+/* Genactiv ONBOARDING emails — extra modules on top of email.css.
+   Design mock (div/flex). For deployment port to table-based inline HTML
+   per KLAVIYO_CODING_STANDARD.md. */
+
+/* step progress rail — "Krok n / 5" + dots */
+.onb-rail { display: flex; align-items: center; gap: 10px; }
+.onb-rail__label { font-family: var(--ga-font-display); font-weight: 800; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ga-gray-500); white-space: nowrap; }
+.onb-rail__dots { display: flex; gap: 5px; }
+.onb-rail__dot { display: block; width: 7px; height: 7px; border-radius: 999px; background: var(--ga-gray-300); }
+.onb-rail__dot--on { background: var(--ga-red); transform: scale(1.15); }
+.onb-rail__dot--done { background: var(--ga-red); opacity: .4; }
+
+/* discount code box */
+.onb-code { border: 2px dashed var(--ga-red); border-radius: 16px; background: var(--ga-red-soft); padding: 18px 20px; text-align: center; }
+.onb-code__label { font-family: var(--ga-font-display); font-weight: 700; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ga-red); margin: 0 0 7px; }
+.onb-code__value { font-family: var(--ga-font-display); font-weight: 800; font-size: 30px; letter-spacing: .1em; color: var(--ga-ink); line-height: 1; }
+.onb-code__sub { font-size: 12px; color: var(--ga-gray-700); margin: 8px 0 0; }
+
+/* effect timeline */
+.onb-tl { position: relative; padding-left: 32px; }
+.onb-tl::before { content: ''; position: absolute; left: 9px; top: 8px; bottom: 8px; width: 2px; background: var(--ga-gray-150); }
+.onb-tl__item { position: relative; padding-bottom: 20px; }
+.onb-tl__item:last-child { padding-bottom: 0; }
+.onb-tl__dot { position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 999px; background: var(--ga-red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; font-family: var(--ga-font-display); }
+.onb-tl__when { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ga-red); margin: 1px 0 2px; }
+.onb-tl__t { font-family: var(--ga-font-display); font-weight: 800; font-size: 15px; color: var(--ga-ink); margin: 0; }
+.onb-tl__d { font-size: 13px; line-height: 1.55; color: var(--ga-gray-700); margin: 3px 0 0; }
+
+/* numbered ritual steps */
+.onb-ritual { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.onb-ritual__row { display: flex; gap: 14px; align-items: flex-start; }
+.onb-ritual__num { flex: none; width: 34px; height: 34px; border-radius: 999px; background: var(--ga-cream); color: var(--ga-red); font-family: var(--ga-font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.onb-ritual__t { font-family: var(--ga-font-display); font-weight: 700; font-size: 15px; margin: 0; color: var(--ga-ink); }
+.onb-ritual__d { font-size: 13px; line-height: 1.5; color: var(--ga-gray-700); margin: 3px 0 0; }
+
+/* order status strip */
+.onb-order { display: flex; align-items: center; gap: 14px; background: var(--ga-gray-100); border-radius: 14px; padding: 16px 18px; }
+.onb-order__ic { flex: none; width: 38px; height: 38px; border-radius: 999px; background: #fff; display: flex; align-items: center; justify-content: center; }
+.onb-order__logos { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.onb-order__logos img { height: 16px; width: auto; opacity: .85; }
+
+/* expert quote card */
+.onb-expert { display: flex; gap: 16px; align-items: center; background: var(--ga-cream); border-radius: 18px; padding: 20px; }
+.onb-expert img { width: 64px; height: 64px; border-radius: 999px; object-fit: cover; flex: none; }
+.onb-expert__q { font-size: 14px; line-height: 1.55; font-style: italic; color: var(--ga-graphite); margin: 0; }
+.onb-expert__n { font-size: 12px; font-weight: 700; color: var(--ga-red); margin: 9px 0 0; }
+.onb-expert__n span { color: var(--ga-gray-500); font-weight: 600; }
+
+/* family / cross-sell grid */
+.onb-fam { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.onb-fam__card { border-radius: 16px; overflow: hidden; background: var(--ga-gray-100); }
+.onb-fam__img { width: 100%; height: 124px; object-fit: cover; display: block; }
+.onb-fam__body { padding: 14px 16px 16px; }
+.onb-fam__name { font-family: var(--ga-font-display); font-weight: 800; font-size: 14px; margin: 0; color: var(--ga-ink); }
+.onb-fam__desc { font-size: 12px; line-height: 1.45; color: var(--ga-gray-700); margin: 4px 0 10px; }
+.onb-fam__lnk { font-family: var(--ga-font-display); font-weight: 800; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ga-red); text-decoration: none; }
+
+/* nr 1 badge */
+.onb-badge1 { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--ga-red); color: var(--ga-red); border-radius: 999px; padding: 9px 18px; font-family: var(--ga-font-display); font-weight: 800; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+
+/* review tile */
+.onb-rev { background: var(--ga-gray-100); border-radius: 14px; padding: 16px 18px; }
+.onb-rev__stars { color: var(--ga-gold); letter-spacing: 2px; font-size: 13px; }
+.onb-rev__txt { font-size: 13px; line-height: 1.55; color: var(--ga-graphite); margin: 8px 0 7px; }
+.onb-rev__who { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ga-gray-500); margin: 0; }
+
+/* urgency top bar */
+.onb-urg { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--ga-ink); color: #fff; padding: 13px; text-align: center; font-family: var(--ga-font-display); font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.onb-urg b { color: var(--ga-gold); }
+
+/* experts row */
+.onb-experts { display: flex; gap: 12px; }
+.onb-experts__c { flex: 1; text-align: center; }
+.onb-experts__c img { width: 58px; height: 58px; border-radius: 999px; object-fit: cover; margin: 0 auto 8px; display: block; }
+.onb-experts__n { font-family: var(--ga-font-display); font-weight: 700; font-size: 12px; color: var(--ga-ink); margin: 0; line-height: 1.25; }
+.onb-experts__r { font-size: 11px; color: var(--ga-gray-500); margin: 2px 0 0; }
+
+/* reason list (icon + title + desc) */
+.onb-reasons { display: flex; flex-direction: column; gap: 14px; }
+.onb-reason { display: flex; gap: 14px; align-items: flex-start; }
+.onb-reason__ic { flex: none; width: 38px; height: 38px; border-radius: 999px; background: var(--ga-red-soft); display: flex; align-items: center; justify-content: center; }
+.onb-reason__t { margin: 0; font-family: var(--ga-font-display); font-weight: 700; font-size: 15px; color: var(--ga-ink); }
+.onb-reason__d { margin: 2px 0 0; font-size: 13px; line-height: 1.5; color: var(--ga-gray-700); }
+
+/* trust line */
+.onb-trust { border-top: 1px solid var(--ga-gray-300); margin: 0 40px; padding: 22px 0 28px; text-align: center; }
+.onb-trust__t { font-family: var(--ga-font-display); font-weight: 800; font-size: 13px; letter-spacing: .04em; color: var(--ga-ink); margin: 9px 0 0; }
+.onb-trust__s { font-size: 11px; color: var(--ga-gray-500); margin: 4px 0 0; }
+
+/* big pull quote (editorial social proof) */
+.onb-pull { font-family: var(--ga-font-display); font-weight: 800; font-size: 24px; line-height: 1.3; letter-spacing: -.01em; color: var(--ga-ink); margin: 0; }
+.onb-pull em { font-style: italic; color: var(--ga-red); }
+
+/* synergy note */
+.onb-synergy { display: flex; align-items: center; gap: 12px; background: var(--ga-pink-soft); border-radius: 14px; padding: 14px 18px; }
+.onb-synergy span { font-size: 13px; line-height: 1.45; color: var(--ga-graphite); font-weight: 600; }
+.onb-synergy strong { color: var(--ga-ink); }
+
+/* centered editorial helpers */
+.onb-c { text-align: center; }
+.onb-narrow { max-width: 380px; margin-left: auto; margin-right: auto; }
+.em-btn--pink { background: var(--ga-pink); color: #fff; box-shadow: 0 8px 20px rgba(245,102,156,.30); }

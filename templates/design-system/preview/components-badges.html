@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Badges & Progress" subtitle="Shipping, sale, hex 'nr 1', free-ship bar" viewport="700x180" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.row{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.ship{ background:var(--ga-red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.04em; padding:9px 16px; border-radius:999px; }
+.sale{ background:var(--ga-ink); color:#fff; font-size:11px; font-weight:800; letter-spacing:.06em; padding:7px 12px; border-radius:8px; }
+.soft{ background:var(--ga-red-soft); color:var(--ga-red); font-size:11px; font-weight:700; letter-spacing:.04em; padding:7px 13px; border-radius:999px; }
+.hex{ width:120px; height:88px; position:relative; display:flex; align-items:center; justify-content:center; }
+.hex svg{ position:absolute; inset:0; width:100%; height:100%; }
+.hex .t{ position:relative; text-align:center; color:var(--ga-red); font-weight:800; line-height:1; }
+.hex .t b{ display:block; font-size:26px; }
+.hex .t small{ font-size:9px; letter-spacing:.1em; }
+.progress{ width:260px; }
+.progress .bar{ height:8px; background:var(--ga-gray-150); border-radius:999px; overflow:hidden; }
+.progress .bar i{ display:block; height:100%; width:72%; background:var(--ga-red); }
+.progress .cap{ font-size:11px; color:var(--ga-fg2); margin-top:6px; font-weight:600; }
+</style></head>
+<body><div class="card">
+  <div class="row">
+    <span class="ship">🚚 Darmowa wysyłka</span>
+    <span class="sale">−20%</span>
+    <span class="soft">NOWOŚĆ</span>
+    <div class="hex">
+      <svg viewBox="0 0 120 88" fill="none"><path d="M30 6 H90 L114 44 L90 82 H30 L6 44 Z" stroke="#F5333F" stroke-width="3" stroke-linejoin="round"/></svg>
+      <div class="t"><small>NR</small><b>1</b><small>W APTEKACH</small></div>
+    </div>
+    <div class="progress">
+      <div class="bar"><i></i></div>
+      <div class="cap">Jeszcze 18 zł do darmowej dostawy</div>
+    </div>
+  </div>
+</div></body></html>

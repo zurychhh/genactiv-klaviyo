@@ -1,0 +1,210 @@
+ANALIZA PROMOCJI GenActiv — 12 miesiecy (2025-07-21 do 2026-07-21)
+
+=== PODSUMOWANIE OGOLNE ===
+Metryka,Wartosc,Jednostka
+Zamowienia oplacone,3065,szt
+Revenue (totalPrice),775579.0,PLN
+Suma rabatow,118054.0,PLN
+AOV (srednia wartosc zamowienia),253.0,PLN
+Items per order,1.58,szt
+Srednia cena 1 produktu,160.0,PLN
+Discount rate (rabaty/revenue+rabaty),13.2%,
+
+=== SEGMENTACJA: RABAT vs BEZ RABATU ===
+Segment,Zamowienia,% zamowien,Revenue PLN,AOV PLN,Items/order
+Z rabatem/kodem,2263,73.8%,577157,255,1.62
+Bez rabatu,802,26.2%,198422,247,1.48
+Sredni rabat/zam (disc only),52,PLN
+
+=== SEGMENTACJA: DARMOWA vs PLATNA DOSTAWA ===
+Segment,Zamowienia,% zamowien,Revenue PLN,AOV PLN,Items/order,Sr. koszt dostawy PLN
+Darmowa dostawa (>=300 PLN),799,26.1%,346008,433,2.41,0
+Platna dostawa,2266,73.9%,429571,190,1.29,15
+
+=== PLATNA DOSTAWA — SZCZEGOLY (bez grupy free shipping) ===
+Metryka,Wartosc
+Zamowienia,2266
+Produktow (szt),2922
+Srednia cena 1 produktu,147
+AOV (subtotal bez dostawy),177
+AOV (z dostawa),190
+Items/order,1.29
+Brak do progu darmowej dostawy (300 PLN),123
+
+=== NOWY vs POWRACAJACY KLIENT ===
+Segment,Nowy klient,% nowy,Powracajacy,% powracajacy
+Z rabatem,1147,50.7%,1116,49.3%
+Bez rabatu,456,56.9%,346,43.1%
+TOTAL,1603,52.3%,1462,47.7%
+
+=== TYPY RABATOW ===
+Typ,Zamowienia,% udzial
+15% na LINE_ITEM,1637,63.1%
+100% na SHIPPING_LINE,460,17.7%
+20% na LINE_ITEM,283,10.9%
+30% na LINE_ITEM,193,7.4%
+50% na LINE_ITEM,18,0.7%
+fixed 0.0 na SHIPPING_LINE,1,0.0%
+fixed 72.0 na SHIPPING_LINE,1,0.0%
+25% na LINE_ITEM,1,0.0%
+
+
+=== TOP KODY RABATOWE (wszystkie) ===
+Kod,Typ rabatu,Zamowienia,Revenue PLN,Rabat total PLN,AOV PLN,Items total,Items/order,Sr. rabat PLN,Nowy klient,Powracajacy,% nowy,Darmowa dostawa,% darmowa dost.
+FIBERBIOM,15%,296,75714,12554,256,449,1.5,42,157,139,53.0%,89,30.1%
+WELCOME,15%,286,71640,13155,250,474,1.7,46,196,90,68.5%,93,32.5%
+DZIENMAMY,20%,279,83805,20215,300,487,1.7,72,126,153,45.2%,99,35.5%
+NEW,30%,193,48401,17882,251,371,1.9,93,111,82,57.5%,46,23.8%
+GutFixer,15%,164,42423,7016,259,245,1.5,43,106,58,64.6%,43,26.2%
+omatko,15%,67,17403,3122,260,92,1.4,47,19,48,28.4%,18,26.9%
+OZICZKOWA,15%,67,22188,3915,331,112,1.7,58,6,61,9.0%,33,49.3%
+JELITOLOG,15%,63,18240,3286,290,111,1.8,52,21,42,33.3%,27,42.9%
+Pięknaskóra,15%,54,10840,1296,201,89,1.6,24,35,19,64.8%,9,16.7%
+HS15,15%,54,12554,2365,232,76,1.4,44,30,24,55.6%,10,18.5%
+ANIA15,15%,44,12159,2206,276,63,1.4,50,12,32,27.3%,12,27.3%
+makiewicz15,15%,42,9161,1679,218,60,1.4,40,19,23,45.2%,7,16.7%
+kobietarakieta,15%,37,10129,1976,274,78,2.1,53,17,20,45.9%,12,32.4%
+Joanna,15%,37,10313,1803,279,60,1.6,49,6,31,16.2%,11,29.7%
+Pięknewłosy,15%,32,8377,1104,262,62,1.9,35,17,15,53.1%,8,25.0%
+APTEMAMA,15%,29,6704,1160,231,36,1.2,40,19,10,65.5%,6,20.7%
+WYCHOWANIE,15%,29,7875,1397,272,55,1.9,48,11,18,37.9%,11,37.9%
+DARIA15,15%,20,5770,1024,289,35,1.8,51,7,13,35.0%,9,45.0%
+STACHOWSKA,15%,19,5476,936,288,34,1.8,49,8,11,42.1%,7,36.8%
+Mamalife,15%,18,4575,790,254,31,1.7,44,5,13,27.8%,5,27.8%
+LELCIA,15%,17,2469,532,145,24,1.4,31,17,0,100.0%,0,0.0%
+CESAREK,15%,14,2412,429,172,20,1.4,31,5,9,35.7%,0,0.0%
+KASIAROJ,15%,14,3303,571,236,18,1.3,41,3,11,21.4%,3,21.4%
+TOCHA15,15%,13,3035,578,233,16,1.2,44,1,12,7.7%,2,15.4%
+GRUSZECKA,15%,13,1934,408,149,16,1.2,31,8,5,61.5%,0,0.0%
+MARTYNA15,15%,13,2535,506,195,16,1.2,39,8,5,61.5%,0,0.0%
+GODLEWSKA15,15%,10,4008,846,401,23,2.3,85,2,8,20.0%,4,40.0%
+Agnieszka15,15%,10,2488,505,249,14,1.4,51,4,6,40.0%,3,30.0%
+COLOSTRUM,15%,9,2754,474,306,15,1.7,53,5,4,55.6%,4,44.4%
+KFDIET,15%,7,1224,198,175,7,1.0,28,3,4,42.9%,0,0.0%
+MLEKOKLACZY,15%,7,1971,261,282,9,1.3,37,5,2,71.4%,3,42.9%
+ZDROWYBALANS,15%,6,1007,162,168,9,1.5,27,4,2,66.7%,0,0.0%
+DOSTAWAFREE,100%,6,836,85,139,8,1.3,14,2,4,33.3%,0,0.0%
+rosinska15,15%,6,956,170,159,6,1.0,28,6,0,100.0%,0,0.0%
+AGARUN,15%,6,1088,212,181,7,1.2,35,2,4,33.3%,0,0.0%
+TRYCHOLOGPOLA,15%,6,1266,227,211,8,1.3,38,1,5,16.7%,1,16.7%
+truskawka,15%,5,829,133,166,7,1.4,27,2,3,40.0%,0,0.0%
+tarczyca,15%,5,1453,268,291,10,2.0,54,3,2,60.0%,3,60.0%
+dietbybelle,15%,5,1046,189,209,7,1.4,38,1,4,20.0%,0,0.0%
+HOLISTYCZNIE,15%,4,1002,169,251,6,1.5,42,0,4,0.0%,1,25.0%
+ROSLIK,15%,4,1010,190,253,7,1.8,47,3,1,75.0%,2,50.0%
+OLA&TOMEK,15%,4,734,152,183,4,1.0,38,0,4,0.0%,0,0.0%
+KETOSFERA,15%,4,682,110,170,5,1.2,28,0,4,0.0%,0,0.0%
+Trychologholistycznie15,15%,3,406,64,135,3,1.0,21,3,0,100.0%,0,0.0%
+ANNA15,15%,3,553,107,184,3,1.0,36,1,2,33.3%,0,0.0%
+LIZAK,15%,3,494,96,165,4,1.3,32,0,3,0.0%,0,0.0%
+ZDROWIE,15%,3,711,121,237,5,1.7,40,1,2,33.3%,1,33.3%
+ANKA15,15%,3,624,138,208,6,2.0,46,1,2,33.3%,0,0.0%
+JUSTTRYCHO,20%,3,712,171,237,5,1.7,57,3,0,100.0%,1,33.3%
+PAULINA15,15%,3,1383,242,461,6,2.0,81,1,2,33.3%,2,66.7%
+Genactiv,15%,3,979,167,326,5,1.7,56,0,3,0.0%,1,33.3%
+TRYCHO15,15%,3,653,126,218,4,1.3,42,1,2,33.3%,1,33.3%
+PAULA15,15%,3,738,125,246,4,1.3,42,1,2,33.3%,1,33.3%
+GENACTIV50,50%,2,356,328,178,4,2.0,164,2,0,100.0%,0,0.0%
+dietetykdaria,15%,2,198,29,99,2,1.0,15,0,2,0.0%,0,0.0%
+WB15,15%,2,836,147,418,5,2.5,74,1,1,50.0%,2,100.0%
+MED-DIETA,15%,2,368,59,184,3,1.5,30,1,1,50.0%,0,0.0%
+dietetyk15,15%,2,516,88,258,2,1.0,44,1,1,50.0%,1,50.0%
+KORCZ,15%,2,701,124,351,3,1.5,62,0,2,0.0%,2,100.0%
+Piękne włosy,15%,1,304,54,304,2,2.0,54,0,1,0.0%,1,100.0%
+OLIMPIA,15%,1,228,38,228,2,2.0,38,0,1,0.0%,0,0.0%
+PSIECZYTANKI,15%,1,37,4,37,1,1.0,4,1,0,100.0%,0,0.0%
+ICETIGER,25%,1,359,120,359,3,3.0,120,1,0,100.0%,1,100.0%
+FULLCHATA,15%,1,177,28,177,1,1.0,28,0,1,0.0%,0,0.0%
+COLOSTRIGEN2020,15%,1,491,87,491,2,2.0,87,0,1,0.0%,1,100.0%
+BERDYS,15%,1,175,28,175,1,1.0,28,0,1,0.0%,0,0.0%
+FMB15,15%,1,457,81,457,2,2.0,81,0,1,0.0%,1,100.0%
+RJURASIK,20%,1,1268,317,1268,3,3.0,317,0,1,0.0%,1,100.0%
+tax8,50%,1,1174,1174,1174,18,18.0,1174,0,1,0.0%,1,100.0%
+PROBONO,15%,1,535,94,535,1,1.0,94,0,1,0.0%,1,100.0%
+oknanatury,15%,1,491,87,491,2,2.0,87,0,1,0.0%,1,100.0%
+JUICE15,15%,1,289,67,289,1,1.0,67,0,1,0.0%,0,0.0%
+PoznajColostrum,15%,1,622,110,622,4,4.0,110,1,0,100.0%,1,100.0%
+BIOREZONANSTYCHY,15%,1,112,17,112,1,1.0,17,1,0,100.0%,0,0.0%
+EXCELMED,15%,1,437,77,437,3,3.0,77,1,0,100.0%,1,100.0%
+pracowniazdrowia,15%,1,313,55,313,2,2.0,55,0,1,0.0%,1,100.0%
+Gabinetdietetyki,15%,1,175,28,175,1,1.0,28,1,0,100.0%,0,0.0%
+
+
+=== RANKING PRODUKTOW (top 30) ===
+Produkt,Units sold,Revenue PLN,Zamowienia,Sr. cena PLN,Z rabatem (zam),% z rabatem,Z rabatem (units),% units z rabatem
+FIBERBIOM - Błonnik + Colostrum,819,146601,615,179,581,94.5%,782,95.5%
+"COLOSTRUM GENACTIV, proszek",398,75222,328,189,237,72.3%,293,73.6%
+"COLOSTRUM GENACTIV, 120 kapsułek",332,62748,295,189,222,75.3%,247,74.4%
+"COLOSTRUM GENACTIV, kapsułki - Dwupak",145,49300,128,340,93,72.7%,106,73.1%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 200g",83,33117,74,399,62,83.8%,68,81.9%
+FIBERBIOM - Błonnik + Colostrum - Dwupak,103,31037,93,301,66,71.0%,75,72.8%
+FIBERBIOM Z ANANASEM,129,23091,106,179,99,93.4%,122,94.6%
+"COLOSTRUM Z BANANEM GENACTIV, proszek 200g",58,22910,57,395,41,71.9%,42,72.4%
+"COLOSTRUM  GENACTIV, proszek - dwupak",66,22440,49,340,39,79.6%,55,83.3%
+MASECZKA Z COLOSTRUM GENACTIV 150ml,105,20475,95,195,68,71.6%,76,72.4%
+"Colostrum z brzoskwinią, proszek 60 g",204,20196,152,99,144,94.7%,194,95.1%
+MASECZKA Z COLOSTRUM GENACTIV 50ml,219,19710,203,90,140,69.0%,151,68.9%
+"COLOSTRUM GENACTIV, 60 kapsułek",185,19425,162,105,91,56.2%,101,54.6%
+FIBERBIOM Z CZARNĄ PORZECZKĄ,100,17900,84,179,80,95.2%,96,96.0%
+"COLOSTRUM GENACTIV, zawiesina, 150 ml",95,16625,77,175,50,64.9%,60,63.2%
+"COLOSTRUM  GENACTIV, zawiesina, płyn - dwupak",58,16078,53,277,38,71.7%,42,72.4%
+"Genactiv Colostrum A2, proszek",65,15925,58,245,43,74.1%,46,70.8%
+MASKA Z COLOSTRUM GENACTIV,92,14628,80,159,62,77.5%,72,78.3%
+KREM Z COLOSTRUM GENACTIV,251,13805,157,55,78,49.7%,114,45.4%
+SERUM Z COLOSTRUM GENACTIV,72,12888,64,179,51,79.7%,59,81.9%
+"COLOSTRUM GENACTIV, kapsułki - Trójpak",45,12735,40,283,32,80.0%,35,77.8%
+"COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, zawiesina",70,11830,60,169,30,50.0%,36,51.4%
+"Genactiv Colostrum A2, kapsułki",87,11745,69,135,48,69.6%,57,65.5%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki",32,9568,28,299,23,82.1%,26,81.2%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, proszek - Dwupak",14,9212,13,658,11,84.6%,12,85.7%
+"COLOSTRUM Z MALINĄ  GENACTIV, tabletki do ssania - dwupak",51,8211,43,161,32,74.4%,38,74.5%
+"COLOSTRUM Z MALINĄ GENACTIV, tabletki do ssania",96,8160,76,85,54,71.1%,70,72.9%
+"COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, proszek",63,8127,50,129,38,76.0%,49,77.8%
+"COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, zawiesina, dwupak",26,7514,24,289,22,91.7%,24,92.3%
+"COLOSTRUM Z BANANEM GENACTIV, 30 saszetek",65,7475,46,115,30,65.2%,42,64.6%
+
+
+=== DWUPAKI / ZESTAWY ===
+Nazwa,Units,Revenue PLN,Zamowienia,Sr. cena PLN,Z rabatem (zam),% z rabatem
+"COLOSTRUM GENACTIV, kapsułki - Dwupak",145,49300,128,340,93,72.7%
+FIBERBIOM - Błonnik + Colostrum - Dwupak,103,31037,93,301,66,71.0%
+"COLOSTRUM  GENACTIV, proszek - dwupak",66,22440,49,340,39,79.6%
+"COLOSTRUM  GENACTIV, zawiesina, płyn - dwupak",58,16078,53,277,38,71.7%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, proszek - Dwupak",14,9212,13,658,11,84.6%
+"COLOSTRUM Z MALINĄ  GENACTIV, tabletki do ssania - dwupak",51,8211,43,161,32,74.4%
+"COLOSTRUM JUNIOR Z CZARNYM BZEM GENACTIV, zawiesina, dwupak",26,7514,24,289,22,91.7%
+Zestaw Colostrum z brzoskwinią i Fiberbiom z Ananasem,30,6750,28,225,26,92.9%
+Zestaw Colostrum z brzoskwinią i Fiberbiom z czarną porzeczką,27,6075,26,225,19,73.1%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, proszek 50g  - Dwupak",19,5786,18,305,12,66.7%
+"GENACTIV COLOSTRUM JUNIOR Z CZARNYM BZEM,  proszek - dwupak",23,5635,21,245,20,95.2%
+"COLOSTRUM Z BANANEM, proszek - Dwupak",8,5032,8,629,5,62.5%
+"GENACTIV COLOSTRUM JUNIOR Z CZARNYM BZEM, tabletki do ssania - dwupak",22,3718,21,169,15,71.4%
+FIBERBIOM Z ANANASEM DWUPAK,11,3289,10,299,7,70.0%
+FIBERBIOM Z CZARNĄ PORZECZKĄ DWUPAK,11,3289,11,299,9,81.8%
+"Genactiv Colostrum A2, kapsułki Dwupak",12,2748,11,229,6,54.5%
+"Genactiv Colostrum A2, proszek dwupak",6,2514,6,419,5,83.3%
+"COLOSTRUM I MLEKO KLACZY GENACTIV, kapsułki - dwupak",5,2490,5,498,4,80.0%
+"COLOSTRUM GENACTIV,, kapsułki - dwupak",11,2189,11,199,9,81.8%
+"COLOSTRUM Z BANANEM GENACTIV, proszek - dwupak",8,1744,7,218,6,85.7%
+"COLOSTRUM Z CZARNĄ PORZECZKĄ GENACTIV, proszek - Dwupak",5,1645,4,329,3,75.0%
+
+TOTAL DWUPAKI/ZESTAWY,661,196696,590,298,,
+% calej sprzedazy (revenue),,25.4%,19.2%,,,
+
+
+=== TRENDY MIESIECZNE ===
+Miesiac,Zamowienia,Revenue PLN,AOV PLN,Rabaty PLN,Items,Items/order,Z rabatem,% z rabatem,Darmowa dost.,% darmowa,Nowy klient,Powracajacy,% nowy
+2026-05,517,139358,270,27266,841,1.63,450,87.0%,161,31.1%,245,272,47.4%
+2026-06,1233,310978,252,35952,1875,1.52,811,65.8%,302,24.5%,631,602,51.2%
+2026-07,1315,325243,247,54835,2134,1.62,1002,76.2%,336,25.6%,727,588,55.3%
+
+
+=== REKOMENDACJE ===
+#,Rekomendacja,Uzasadnienie (dane),Oczekiwany efekt
+1,Zlikwidowac NEW (30%) — zostawic WELCOME (15%),"NEW kosztuje sr.93 PLN/zam vs WELCOME 46 PLN/zam, ten sam AOV (251 vs 250). Total koszt NEW: 17882 PLN",Oszczednosc ~18K PLN/rok bez utraty konwersji
+2,Obnizyc prog darmowej dostawy z 300 na 250 PLN (test),"Darmowa dostawa: AOV 433 PLN, 2.4 items/order. Platna: AOV 190 PLN, 1.3 items/order. Prog 300 osiaga tylko 26% zamowien. Sredni subtotal platnej: 177 PLN — brakuje 123 PLN do progu",Wiecej zamowien z free ship = wyzszy AOV i items/order
+3,Kampanie sezonowe z 20% = sweet spot,"DZIENMAMY (20%): AOV 300 PLN (+19% vs baseline 253). 15% nie daje efektu okazji, 30% nie podnosi AOV",Wyzszy AOV przy kampaniach sezonowych
+4,Tiered influencer program,"Top: OZICZKOWA AOV 331, JELITOLOG 290. Low: LELCIA 145, GRUSZECKA 149. Wszyscy maja 15% ale efekt zupelnie inny",Lepsza alokacja budzetu influencer
+5,Dedykowany kod retencyjny (10% loyalty),49% zamowien z rabatem to powracajacy klienci uzywajacy kodow influencerskich. Brak dedykowanego mechanizmu retencji,Retencja bez kanibalizacji budzetu influencer
+6,Bundle pricing zamiast kodu rabatowego,Zestawy cross-category kupowane w 93% z kodem. Cena zestawowa bez kodu = prostsze + wyzszy perceived value,Wyzsze marze na zestawach
+7,Cross-sell w koszyku do progu 300 PLN,Platna dostawa: subtotal 177 PLN — brakuje 123 PLN do free ship. Mediana produktu 179 PLN — idealnie 1 dodatkowy produkt,"Shift zamowien z platnej do darmowej dostawy, +128% AOV"

@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- @dsCard group="Colors" name="Semantic States" subtitle="Success / info / warning (kept muted)" viewport="700x150" --><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+.grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+.sw { display:flex; flex-direction:column; gap:8px; }
+.chip { height:70px; border-radius:12px; display:flex; align-items:flex-end; padding:8px 10px; }
+.hex { font-size:11px; font-weight:700; color:#fff; }
+.name { font-size:12px; font-weight:600; }
+.sub { font-size:11px; color:var(--ga-fg3); }
+</style></head>
+<body><div class="card">
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:var(--ga-success)"><span class="hex">#2FA36B</span></div><div class="name">Success</div><div class="sub">confirmations</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ga-info)"><span class="hex">#2B7FB8</span></div><div class="name">Info</div><div class="sub">neutral notices</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ga-warning)"><span class="hex">#E0922A</span></div><div class="name">Warning</div><div class="sub">low stock / alerts</div></div>
+  </div>
+  <div class="muted">Semantic states are kept muted &amp; warm — the storefront leans on brand red for nearly all signalling.</div>
+</div></body></html>

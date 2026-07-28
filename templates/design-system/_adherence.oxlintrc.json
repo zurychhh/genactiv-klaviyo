@@ -1,0 +1,204 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "emails/**",
+              "emails/design_handoff_recurring_emails/design_reference/**",
+              "ui_kits/storefront/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Montserrat))/i]",
+        "message": "Font not provided by the design system. Available: Montserrat."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--ga-accent",
+      "--ga-bg",
+      "--ga-bg-alt",
+      "--ga-black",
+      "--ga-container",
+      "--ga-cream",
+      "--ga-fg1",
+      "--ga-fg2",
+      "--ga-fg3",
+      "--ga-font-body",
+      "--ga-font-display",
+      "--ga-gold",
+      "--ga-graphite",
+      "--ga-gray-100",
+      "--ga-gray-150",
+      "--ga-gray-300",
+      "--ga-gray-500",
+      "--ga-gray-700",
+      "--ga-gutter",
+      "--ga-info",
+      "--ga-ink",
+      "--ga-leading-normal",
+      "--ga-leading-snug",
+      "--ga-leading-tight",
+      "--ga-line",
+      "--ga-on-accent",
+      "--ga-pink",
+      "--ga-pink-hover",
+      "--ga-pink-soft",
+      "--ga-radius-lg",
+      "--ga-radius-md",
+      "--ga-radius-pill",
+      "--ga-radius-sm",
+      "--ga-radius-xl",
+      "--ga-red",
+      "--ga-red-hover",
+      "--ga-red-photo",
+      "--ga-red-soft",
+      "--ga-shadow-lg",
+      "--ga-shadow-md",
+      "--ga-shadow-red",
+      "--ga-shadow-sm",
+      "--ga-space-1",
+      "--ga-space-2",
+      "--ga-space-3",
+      "--ga-space-4",
+      "--ga-space-5",
+      "--ga-space-6",
+      "--ga-space-7",
+      "--ga-space-8",
+      "--ga-space-9",
+      "--ga-success",
+      "--ga-text-2xl",
+      "--ga-text-3xl",
+      "--ga-text-4xl",
+      "--ga-text-base",
+      "--ga-text-lg",
+      "--ga-text-md",
+      "--ga-text-sm",
+      "--ga-text-xl",
+      "--ga-text-xs",
+      "--ga-tracking-eyebrow",
+      "--ga-tracking-wordmark",
+      "--ga-w-black",
+      "--ga-w-bold",
+      "--ga-w-medium",
+      "--ga-w-regular",
+      "--ga-w-semi",
+      "--ga-warning",
+      "--ga-white"
+    ],
+    "tokenKinds": {
+      "--ga-red": "color",
+      "--ga-red-hover": "color",
+      "--ga-red-soft": "color",
+      "--ga-red-photo": "color",
+      "--ga-pink": "color",
+      "--ga-pink-hover": "color",
+      "--ga-pink-soft": "color",
+      "--ga-cream": "color",
+      "--ga-gold": "color",
+      "--ga-ink": "color",
+      "--ga-graphite": "color",
+      "--ga-gray-700": "color",
+      "--ga-gray-500": "color",
+      "--ga-gray-300": "color",
+      "--ga-gray-150": "color",
+      "--ga-gray-100": "color",
+      "--ga-white": "color",
+      "--ga-black": "color",
+      "--ga-bg": "color",
+      "--ga-bg-alt": "color",
+      "--ga-fg1": "color",
+      "--ga-fg2": "color",
+      "--ga-fg3": "color",
+      "--ga-line": "color",
+      "--ga-accent": "color",
+      "--ga-on-accent": "color",
+      "--ga-success": "color",
+      "--ga-info": "color",
+      "--ga-warning": "color",
+      "--ga-font-display": "font",
+      "--ga-font-body": "font",
+      "--ga-w-regular": "font",
+      "--ga-w-medium": "font",
+      "--ga-w-semi": "font",
+      "--ga-w-bold": "font",
+      "--ga-w-black": "font",
+      "--ga-text-xs": "font",
+      "--ga-text-sm": "font",
+      "--ga-text-base": "font",
+      "--ga-text-md": "font",
+      "--ga-text-lg": "font",
+      "--ga-text-xl": "font",
+      "--ga-text-2xl": "font",
+      "--ga-text-3xl": "font",
+      "--ga-text-4xl": "font",
+      "--ga-leading-tight": "font",
+      "--ga-leading-snug": "font",
+      "--ga-leading-normal": "font",
+      "--ga-tracking-eyebrow": "font",
+      "--ga-tracking-wordmark": "font",
+      "--ga-radius-sm": "radius",
+      "--ga-radius-md": "radius",
+      "--ga-radius-lg": "radius",
+      "--ga-radius-xl": "radius",
+      "--ga-radius-pill": "radius",
+      "--ga-shadow-sm": "shadow",
+      "--ga-shadow-md": "shadow",
+      "--ga-shadow-lg": "shadow",
+      "--ga-shadow-red": "shadow",
+      "--ga-space-1": "spacing",
+      "--ga-space-2": "spacing",
+      "--ga-space-3": "spacing",
+      "--ga-space-4": "spacing",
+      "--ga-space-5": "spacing",
+      "--ga-space-6": "spacing",
+      "--ga-space-7": "spacing",
+      "--ga-space-8": "spacing",
+      "--ga-space-9": "spacing",
+      "--ga-container": "spacing",
+      "--ga-gutter": "spacing"
+    },
+    "fontFamilies": [
+      "Montserrat"
+    ]
+  }
+}

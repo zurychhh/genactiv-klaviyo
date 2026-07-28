@@ -1,0 +1,376 @@
+{
+  "data": {
+    "type": "flow",
+    "attributes": {
+      "name": "Post-Purchase Onboarding v3",
+      "definition": {
+        "triggers": [
+          {
+            "type": "metric",
+            "id": "R6aTMS"
+          }
+        ],
+        "profile_filter": {
+          "condition_groups": [
+            {
+              "conditions": [
+                {
+                  "type": "profile-metric",
+                  "metric_id": "R6aTMS",
+                  "measurement": "count",
+                  "measurement_filter": {
+                    "type": "numeric",
+                    "operator": "equals",
+                    "value": 1
+                  },
+                  "timeframe_filter": {
+                    "type": "date",
+                    "operator": "alltime"
+                  },
+                  "metric_filters": null
+                }
+              ]
+            }
+          ]
+        },
+        "entry_action_id": "ab-split-entry",
+        "reentry_criteria": {
+          "duration": 0,
+          "unit": "alltime"
+        },
+        "actions": [
+          {
+            "temporary_id": "ab-split-entry",
+            "type": "conditional-split",
+            "data": {
+              "profile_filter": {
+                "condition_groups": [
+                  {
+                    "conditions": [
+                      {
+                        "type": "profile-sample",
+                        "percentage": 50
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "links": {
+              "next_if_true": "pur1a-email",
+              "next_if_false": "pur1b-email"
+            }
+          },
+
+          {
+            "temporary_id": "pur1a-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 1 | Welcome (Bold) v3",
+                "template_id": "QUdmFC",
+                "subject_line": "Dobry wyb\u00f3r, {{ first_name|default:'' }}!",
+                "preview_text": "Zam\u00f3wienie przyj\u0119te \u2014 witaj w planie na zdrowie",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-3d-a"
+            }
+          },
+          {
+            "temporary_id": "delay-3d-a",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 3,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur2a-email"
+            }
+          },
+          {
+            "temporary_id": "pur2a-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 2 | Ritual (Bold) v3",
+                "template_id": "VqkWwP",
+                "subject_line": "3 kroki, by Colostrum dzia\u0142a\u0142o najlepiej",
+                "preview_text": "Rano, na czczo, codziennie \u2014 tak dzia\u0142a rytm",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-4d-a"
+            }
+          },
+          {
+            "temporary_id": "delay-4d-a",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 4,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur3a-email"
+            }
+          },
+          {
+            "temporary_id": "pur3a-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 3 | Effects (Bold) v3",
+                "template_id": "TWN6qP",
+                "subject_line": "Twoje 8 tygodni z Colostrum",
+                "preview_text": "Czego si\u0119 spodziewa\u0107 tydzie\u0144 po tygodniu",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-5d-a"
+            }
+          },
+          {
+            "temporary_id": "delay-5d-a",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 5,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur4a-email"
+            }
+          },
+          {
+            "temporary_id": "pur4a-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 4 | Cross-sell (Bold) v3",
+                "template_id": "XJG8fD",
+                "subject_line": "Dodaj rytm swoim jelitom",
+                "preview_text": "Colostrum dba o odporno\u015b\u0107. Czas zadba\u0107 o jelita",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-7d-a"
+            }
+          },
+          {
+            "temporary_id": "delay-7d-a",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 7,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur5a-email"
+            }
+          },
+          {
+            "temporary_id": "pur5a-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 5 | Loyalty (Bold) v3",
+                "template_id": "RQNrA3",
+                "subject_line": "Zdrowie ca\u0142ej rodziny",
+                "preview_text": "Poznaj ca\u0142y plan na zdrowie \u2014 dla Ciebie, bliskich, sk\u00f3ry i pupila",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            }
+          },
+
+          {
+            "temporary_id": "pur1b-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 1 | Welcome (Editorial) v3",
+                "template_id": "WpiLDb",
+                "subject_line": "Dobry wyb\u00f3r, {{ first_name|default:'' }}!",
+                "preview_text": "Zam\u00f3wienie przyj\u0119te \u2014 witaj w planie na zdrowie",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-3d-b"
+            }
+          },
+          {
+            "temporary_id": "delay-3d-b",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 3,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur2b-email"
+            }
+          },
+          {
+            "temporary_id": "pur2b-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 2 | Ritual (Editorial) v3",
+                "template_id": "UnLSdA",
+                "subject_line": "3 kroki, by Colostrum dzia\u0142a\u0142o najlepiej",
+                "preview_text": "Rano, na czczo, codziennie \u2014 tak dzia\u0142a rytm",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-4d-b"
+            }
+          },
+          {
+            "temporary_id": "delay-4d-b",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 4,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur3b-email"
+            }
+          },
+          {
+            "temporary_id": "pur3b-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 3 | Effects (Editorial) v3",
+                "template_id": "Ww5M8y",
+                "subject_line": "Twoje 8 tygodni z Colostrum",
+                "preview_text": "Czego si\u0119 spodziewa\u0107 tydzie\u0144 po tygodniu",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-5d-b"
+            }
+          },
+          {
+            "temporary_id": "delay-5d-b",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 5,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur4b-email"
+            }
+          },
+          {
+            "temporary_id": "pur4b-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 4 | Cross-sell (Editorial) v3",
+                "template_id": "XvpBfP",
+                "subject_line": "Dodaj rytm swoim jelitom",
+                "preview_text": "Colostrum dba o odporno\u015b\u0107. Czas zadba\u0107 o jelita",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            },
+            "links": {
+              "next": "delay-7d-b"
+            }
+          },
+          {
+            "temporary_id": "delay-7d-b",
+            "type": "time-delay",
+            "data": {
+              "unit": "days",
+              "value": 7,
+              "secondary_value": null,
+              "timezone": "profile",
+              "delay_until_weekdays": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+            },
+            "links": {
+              "next": "pur5b-email"
+            }
+          },
+          {
+            "temporary_id": "pur5b-email",
+            "type": "send-email",
+            "data": {
+              "message": {
+                "name": "PUR | Krok 5 | Loyalty (Editorial) v3",
+                "template_id": "UJB9Fk",
+                "subject_line": "Zdrowie ca\u0142ej rodziny",
+                "preview_text": "Poznaj ca\u0142y plan na zdrowie \u2014 dla Ciebie, bliskich, sk\u00f3ry i pupila",
+                "from_email": "sklep@genactiv.pl",
+                "from_label": "GENACTIV\u00ae",
+                "smart_sending_enabled": true,
+                "add_tracking_params": true
+              },
+              "status": "draft"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

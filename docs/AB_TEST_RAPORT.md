@@ -1,6 +1,6 @@
 # A/B Test: GEN-6 vs NOTOAGENCY — Raport i wnioski
 
-> **Data:** 2026-06-15 | **Status:** Test aktywny | **Platform:** Intelligems + GA4 + Clarity
+> **Data:** 2026-06-15 → aktualizacja **2026-06-26** | **Status:** Test aktywny (do zakończenia) | **Platform:** Intelligems + GA4 + Clarity
 > **Autor automatyczny:** Claude Code | **Kontakt:** d.slowik@notoagency.pl (setup Intelligems)
 
 ---
@@ -10,11 +10,12 @@
 | Element | Wartość |
 |---------|--------|
 | Narzędzie A/B | Intelligems.io (theme test) |
-| Wariant kontrolny | **GEN-6** (Old theme, ID: 199333609804) — 90% ruchu |
-| Wariant testowy | **NOTOAGENCY** (New theme, ID: 190479794508) — 10% ruchu |
+| Wariant kontrolny | **GEN-6** (Old theme, ID: 199333609804) — ~~90%~~ **80% ruchu** |
+| Wariant testowy | **NOTOAGENCY** (New theme, ID: 190479794508) — ~~10%~~ **20% ruchu** |
 | Start testu | ~12 czerwca 2026 |
+| Zmiana splitu | ~17-18.06: 90/10 → **80/20** |
 | Exp. ID (Intelligems) | `1c371ad8-5826-4c21-abdb-7d0d68390e81` |
-| GA4 Custom Dimension | `customUser:ab_theme_variant` (scope: USER, ID: 15061277989) |
+| GA4 Custom Dimensions | `customUser:ab_theme_variant` (USER, ID: 15061277989), `customEvent:exp_variant_string` (EVENT) |
 | Tracking | Skrypt A/B w `layout/theme.liquid` obu tematów + Pandectes Consent Mode v2 |
 
 ### Podłączone źródła danych
@@ -58,27 +59,40 @@ gtag('event', 'ab_test_impression', { ... });
 
 ---
 
-## 3. Wyniki testu — stan na 15.06.2026
+## 3. Wyniki testu — AKTUALIZACJA 26.06.2026
 
-### 3.1. Intelligems (pełne dane od startu testu)
+### 3.1. Intelligems (pełne dane, server-side, 100% pokrycie)
 
-| Metryka | GEN-6 (control) | NOTOAGENCY | Δ | Istotność |
-|---------|-----------------|------------|---|-----------|
-| **Visitors** | 11,351 | 1,265 | — | — |
-| **Orders** | 296 | 22 | — | — |
-| **Conversion Rate** | 2.61% | 1.74% | **-33.3%** | **p=0.032 ISTOTNE** |
-| Add to Cart Rate | 5.65% | 5.22% | -7.6% | nieistotne |
-| Checkout Begin Rate | 3.67% | 3.32% | -9.6% | nieistotne |
-| Abandoned Cart | 54.5% | 68.2% | **+25.2%** | nieistotne |
-| Abandoned Checkout | 30.0% | 50.0% | **+66.8%** | nieistotne |
-| Revenue/visitor | 6.33 PLN | 4.53 PLN | **-28.5%** | p=0.138 |
-| Revenue/order | 242.92 PLN | 260.45 PLN | +7.2% | nieistotne |
-| Net Revenue | 71,904 PLN | 5,730 PLN | — | — |
+**Dane z API Intelligems — pobrane 26.06.2026** (28,195 visitors łącznie, ~14 dni testu)
 
-> **Intelligems już wykazuje istotność statystyczną (p=0.032) na conversion rate.**
-> Nowy temat konwertuje o 33% gorzej niż stary.
+| Metryka | GEN-6 (control, 80%) | NOTOAGENCY (20%) | Δ | Istotność |
+|---------|----------------------|------------------|---|-----------|
+| **Visitors** | 23,927 | 4,268 | — | — |
+| **Orders** | 581 | 82 | — | — |
+| **Conversion Rate** | 2.43% | 1.92% | **-20.9%** | **p2bb=0.025 ISTOTNE** |
+| Add to Cart Rate | 5.46% | 4.92% | -9.9% | nieistotne |
+| Checkout Begin Rate | 3.55% | 3.07% | -13.5% | borderline |
+| Abandoned Cart | 55.9% | 61.9% | **+10.7%** | — |
+| Abandoned Checkout | 32.2% | 38.9% | **+21.1%** | — |
+| Revenue/visitor | 5.82 PLN | 4.61 PLN | **-20.7%** | p2bb=0.085 borderline |
+| Net Revenue | 139,180 PLN | 19,680 PLN | — | — |
 
-### 3.2. GA4 (7 dni, dane sprzed fixa — niskie pokrycie tagiem)
+> **Wynik jednoznaczny:** NOTOAGENCY konwertuje o **-20.9%** gorzej (p=0.025, istotne statystycznie).
+> Szacowany miesięczny koszt utrzymywania NOTO w teście: **-56,630 PLN** utraconego przychodu.
+
+#### Porównanie z danymi z 15.06 (split 90/10):
+
+| | 15.06 (90/10) | 26.06 (80/20) | Trend |
+|---|---|---|---|
+| CR uplift | -33.3% (p=0.032) | -20.9% (p=0.025) | Mniej dramatyczny spadek, ale wciąż istotny |
+| Visitors NOTO | 1,265 | 4,268 | 3.4x więcej danych |
+| Rev/visitor uplift | -28.5% (p=0.138) | -20.7% (p=0.085) | Zbliża się do istotności |
+
+Większa próba (4,268 vs 1,265 visitors NOTO) potwierdza trend z mniejszą zmiennością.
+
+### 3.2. GA4 (custom dimension, ~29% pokrycie tagiem)
+
+GA4 tag coverage ograniczone — GA4 ładuje się przez sandbox Web Pixels (kanał Google & YouTube), nie czyta `dataLayer` z motywu. Dane z `customUser:ab_theme_variant`:
 
 | Metryka | GEN-6 (1,070 sesji) | NOTOAGENCY (115 sesji) | Δ |
 |---------|---------------------|----------------------|---|
@@ -88,6 +102,11 @@ gtag('event', 'ab_test_impression', { ... });
 | Śr. czas sesji | 2m48s | 2m28s | -11.9% |
 | Strony/sesję | 5.10 | 5.39 | +5.7% |
 | Przychód | 7,810 PLN | 189 PLN | — |
+
+**Uwaga:** Dane GA4 per-wariant mają niskie pokrycie (~29%), ponieważ:
+- GA4 jest w sandboxie Web Pixels → nie czyta `window.dataLayer` z motywu
+- Zdarzenie `experience_impression` (Intelligems server-side) działa, ale custom dimensions zarejestrowano dopiero 17.06
+- Intelligems jest jedynym wiarygodnym źródłem dla danych per-wariant
 
 ---
 
@@ -182,22 +201,25 @@ Na podstawie danych z trzech źródeł (Intelligems, GA4, Clarity):
 
 ---
 
-## 7. Istotność statystyczna — kiedy zakończyć test
+## 7. Istotność statystyczna i decyzja
 
-| Deadline | Dostępne sesje | Min. split NOTO | MDE |
-|----------|---------------|-----------------|-----|
-| 30 czerwca (15 dni) | ~22,800 | 18% | 25% (wykryje ±0.75pp CR) |
-| 15 lipca (30 dni) | ~45,600 | 14% | 20% (wykryje ±0.6pp CR) |
+**Intelligems potwierdza istotność statystyczną** z dwóch niezależnych pomiarów:
+- 15.06 (90/10, 1,265 visitors NOTO): CR uplift -33.3%, p=0.032
+- 26.06 (80/20, 4,268 visitors NOTO): CR uplift -20.9%, p=0.025
 
-**Intelligems już ma istotność na conversion rate (p=0.032).** Nie trzeba czekać — wynik jest jednoznaczny:
+> **NOTOAGENCY konwertuje istotnie gorzej. Test powinien zostać zakończony.**
 
-> **NOTOAGENCY konwertuje istotnie gorzej (-33% CR).**
+### Rekomendacja (zaktualizowana 26.06):
 
-### Rekomendacja:
-Przy aktualnym splicie 10/90 i potwierdzeniu statystycznym z Intelligems:
-- **Opcja A:** Zakończyć test i wrócić do GEN-6 100%
-- **Opcja B:** Naprawić zidentyfikowane problemy (add-to-cart, checkout) na NOTO i zrestartować test
-- **Opcja C:** Zwiększyć split na 20/80 i zbierać dane z poprawionym tagiem (po fixie z 15.06) — nowe dane będą czyste
+**Opcja A (REKOMENDOWANA): Zakończyć test NATYCHMIAST i wrócić do GEN-6 100%.**
+- Każdy dzień testu kosztuje ~1,888 PLN utraconego przychodu (56,630 PLN / 30 dni)
+- Przy 20% ruchu na NOTO, to ~377 PLN/dzień straty netto
+
+**Opcja B:** Naprawić zidentyfikowane problemy na NOTO (patrz sekcja 6) i zrestartować test od zera.
+- Wymaga: naprawy strony produktu (CTA, JS errors), checkout flow, mobile UX
+- Szacowany zakres: znaczące zmiany w theme NOTO, nie kosmetyka
+
+**Opcja C:** ODRZUCONA — split 20/80 już wdrożony i potwierdził wynik z 90/10.
 
 ---
 
@@ -213,11 +235,11 @@ Przy aktualnym splicie 10/90 i potwierdzeniu statystycznym z Intelligems:
 
 ### API credentials (NIE commitowane, w .env)
 
-| Serwis | Zmienna | Uwagi |
-|--------|---------|-------|
-| Intelligems | `ig_live_518e061f...` | Header: `intelligems-access-token` |
+| Serwis | Zmienna w .env | Uwagi |
+|--------|----------------|-------|
+| Intelligems | `INTELLIGEMS_API_KEY` | Header: `intelligems-access-token`, endpoint: `api.intelligems.io/v25-10-beta` |
 | GA4 | `GA4_REFRESH_TOKEN` | OAuth2, scope: analytics.readonly + analytics.edit |
-| Clarity | JWT token (w .claude.json) | Scope: Data.Export, exp: 2126 |
+| Clarity | `CLARITY_API_TOKEN` | JWT, Scope: Data.Export, exp: 2126, project `3354986136401458` |
 
 ---
 
@@ -261,9 +283,17 @@ Dodatkowo do ręcznych tagów, Intelligems ma natywną integrację z Clarity:
 1. Intelligems Dashboard → Integrations → Microsoft Clarity → **Enable**
 2. Nie wymaga credentials (używa `window.clarity` API)
 3. Automatycznie taguje sesje: `experiment_name` + `ig_test_group`
-4. **Status: wymaga ręcznego włączenia w panelu Intelligems** (d.slowik@notoagency.pl)
+4. **Status (26.06): NIGDY NIE WŁĄCZONE** — wymaga ręcznego włączenia (d.slowik@notoagency.pl)
 
 Docs: https://docs.intelligems.io/integrations/heatmap-integrations/integrating-with-microsoft-clarity
+
+### Clarity API — ograniczenia (ustalone 26.06)
+
+Custom tags (`ab_theme_variant`, `theme_id`) **NIE są dostępne przez Clarity MCP/API**.
+- API `query-analytics-dashboard` nie wspiera filtrowania po custom tags
+- Custom tags są widoczne TYLKO w UI Clarity (Filters → Custom Tags)
+- Limit API: 10 req/dzień
+- Wniosek: do weryfikacji tagowania A/B w Clarity trzeba użyć UI, nie API
 
 ### Dlaczego nie Hotjar
 | | Clarity | Hotjar (free) |
@@ -276,15 +306,24 @@ Docs: https://docs.intelligems.io/integrations/heatmap-integrations/integrating-
 
 ---
 
-## 11. Kolejne kroki (TODO)
+## 11. Kolejne kroki (TODO) — aktualizacja 26.06
 
+### Pilne (przed 30.06):
+- [ ] **ZAKOŃCZYĆ TEST** — zatrzymać eksperyment w panelu Intelligems, przywrócić GEN-6 na 100%
+- [ ] Upewnić się, że Intelligems nie serwuje NOTO po wyłączeniu (sprawdzić z incognito)
+
+### Zrealizowane:
 - [x] ~~Clarity custom tags wdrożone w obu tematach (15.06.2026)~~
-- [ ] **WAŻNE:** Włączyć natywną integrację Intelligems → Clarity w panelu Intelligems (wymaga dostępu admina)
-- [ ] Zweryfikować pokrycie tagiem A/B po fixie (powinno być ~100% od 16.06)
-- [ ] Po 2h: sprawdzić czy tagi `ab_theme_variant` pojawiły się w Clarity Filters → Custom Tags
-- [ ] Porównać heatmapy GEN-6 vs NOTO na stronie produktu (osobno per wariant)
-- [ ] Sprawdzić console errors na NOTO (mobile) — Clarity session recordings filtrowane po wariancie
-- [ ] Porównać pozycję przycisku "Dodaj do koszyka" na mobile: GEN-6 vs NOTO
-- [ ] Sprawdzić checkout flow na NOTO — dlaczego 50% porzuceń
-- [ ] Decyzja: kontynuować test vs naprawić NOTO vs zakończyć
-- [ ] Opcjonalnie: podłączyć Intelligems MCP server do Claude Code
+- [x] ~~Fix tracking GA4: `gtag` polyfill + `dataLayer.push` (15.06)~~
+- [x] ~~Fix tracking Clarity: polling `window.clarity` zamiast `typeof clarity` (17.06)~~
+- [x] ~~Rejestracja GA4 custom dimensions: `variant_name`, `variant`, `experience_name`, `experiment_name` (17.06)~~
+- [x] ~~Pobranie i analiza pełnych danych Intelligems API (26.06)~~
+- [x] ~~Zmiana splitu 90/10 → 80/20 (zidentyfikowane 26.06)~~
+- [x] ~~Decyzja: ZAKOŃCZYĆ TEST (rekomendacja na podstawie p=0.025)~~
+
+### Do zrobienia po zakończeniu testu:
+- [ ] Audyt UX motywu NOTO: porównanie strony produktu mobile (pozycja CTA, JS errors)
+- [ ] Analiza abandoned checkout NOTO (38.9% vs 32.2%) — sprawdzić kroki checkout
+- [ ] Natywna integracja Intelligems → Clarity **nigdy nie włączona** (d.slowik@notoagency.pl)
+- [ ] Opcjonalnie: podłączyć Intelligems MCP server (`https://ai.intelligems.io/mcp`, OAuth2)
+- [ ] Opcjonalnie: BigQuery export GA4 — IAM access do projektu GCP `277470194697`
