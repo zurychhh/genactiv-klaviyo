@@ -80,9 +80,12 @@ ENGINES = {
         "model": "sonar",
         "url": "https://api.perplexity.ai/chat/completions",
     },
+    # UWAGA: modele 2.5 nie są już dostępne dla nowych kluczy ("no longer available
+    # to new users"). Grounding wymaga włączonego billingu — na czystym free tierze
+    # google_search zwraca 429, choć samo generowanie działa. Szczegóły: KOSZTY_API.md.
     "gemini": {
         "env": "GEMINI_API_KEY",
-        "model": "gemini-2.5-flash",
+        "model": "gemini-3.6-flash",
         "url": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
     },
 }
