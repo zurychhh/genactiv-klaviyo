@@ -29,17 +29,7 @@ Pelna instrukcja (konto GitHub, rotacja tokenow, deploy): `GITHUB_SETUP.md`
 genactiv-klaviyo/
 ├── genactiv-online/           # ★ Web AI terminal (Express + SSE + MCP, deployed on Railway)
 │   ├── client/                #   Frontend: HTML, CSS, JS (dark terminal theme)
-│   │   ├── index.html         #   Main page (Polish UI) + capabilities panel
-│   │   ├── seo.html           #   SEO Command Center dashboard
-│   │   ├── style.css          #   Dark terminal theme
-│   │   └── terminal.js        #   SSE client, markdown rendering, thinking indicator
 │   └── server/                #   Backend: Express, Anthropic API, MCP orchestrator
-│       ├── index.js           #   Express: auth, SSE streaming, health check, SEO API mount
-│       ├── config.js          #   MCP server defs, models, system prompts, constants
-│       ├── auth.js            #   Login (bcrypt + session, 24h expiry)
-│       ├── mcp-orchestrator.js #  MCP connections, tool caching, result compression
-│       ├── seo-api.js         #   SEO Command Center REST API
-│       └── anthropic-bridge.js #  Two-phase routing, retry logic, rate limiting
 ├── shopify-mcp-extended/      # Extended Shopify MCP with analytics (TypeScript)
 ├── google-ads-mcp/            # Google Ads MCP server (Python/FastMCP)
 ├── klaviyo-mcp/               # Custom klaviyo-segments MCP server (Python/FastMCP)
@@ -53,7 +43,6 @@ genactiv-klaviyo/
 ├── docs/                      # Documentation (audit checklists, migration plan, Meta Ads)
 ├── .github/workflows/         # GitHub Actions (automated payment sync)
 ├── Dockerfile                 # Railway Docker build (Node 18 + Python 3 + uv)
-├── railway.json               # Railway.app deployment config
 ├── baselinker_api.py          # Baselinker API client
 ├── shopify_graphql.py         # Shopify GraphQL client (transactions)
 ├── shopify_theme_api.py       # Shopify Theme API client
@@ -180,7 +169,7 @@ GA4 failures return partial results (`200` with `partial: true`) instead of 5xx.
 
 ## MCP Server Configuration
 
-10 MCP servers configured in `.mcp.json`. Notable: **shopify-standard** and **shopify-extended** both run the same `shopify-mcp-extended/dist/index.js` binary (same tools, different routing labels). The web terminal (`config.js`) routes across 8 of these; `klaviyo-segments` is Claude Code-only.
+11 MCP servers configured in `.mcp.json`. Notable: **shopify-standard** and **shopify-extended** both run the same `shopify-mcp-extended/dist/index.js` binary (same tools, different routing labels). The web terminal (`config.js`) routes across 8 of these; `klaviyo-segments` and `monday` are Claude Code-only.
 
 | Server | Runtime | Command |
 |--------|---------|---------|
@@ -194,6 +183,7 @@ GA4 failures return partial results (`200` with `partial: true`) instead of 5xx.
 | tiktok-ads | Python | `python3 -m tiktok_ads_mcp` |
 | senuto | Node.js/npx | `npx -y senuto-mcp` |
 | clarity | Node.js/npx | `npx @microsoft/clarity-mcp-server` |
+| monday | Remote | Monday.com MCP (used by orchestrator agent for sprint board) |
 
 **Startup behavior:** `config.js` auto-generates Google Ads and GA4 credential JSON files from environment variables at startup (lines 9-59). Missing tokens trigger console warnings but don't block other servers.
 
@@ -204,7 +194,7 @@ GA4 failures return partial results (`200` with `partial: true`) instead of 5xx.
 2. Run `./setup-claude.sh` — generates `.mcp.json` from `.mcp.json.example` + `.env` tokens
 3. Clarity MCP also loads from `.mcp.json` (token from `CLARITY_API_TOKEN` env var)
 
-All 10 MCP servers are configured in `.mcp.json.example` with `__PLACEHOLDER__` format.
+All MCP servers are configured in `.mcp.json.example` with `__PLACEHOLDER__` format.
 
 ### MCP Tool Usage Notes
 
@@ -358,25 +348,23 @@ See `genactiv-online/.env.example` for full list. Key groups:
 - **Railway CLI** reads token from `~/.railway/config.json`, but `RAILWAY_TOKEN` env var overrides it. Always `unset RAILWAY_TOKEN` before CLI use.
 - **Pandectes consent banner** `cookiesBlockedByDefault=7` blocks all optional cookies by default, causing low attribution rates. Config in Shopify theme: `assets/pandectes-settings.json`, `snippets/pandectes-rules.liquid`.
 - **Shopify Order API** does NOT store `gclid` — only UTM params.
+- **UpPromote auto-discount nadpisuje kody afiliacyjne.** UpPromote JS (`uppromote.js`) auto-aplikuje kody rabatowe przez ukryty iframe ładujący `/discount/CODE`. Shopify pozwala na jeden kod per zamówienie (last-write-wins). Jeśli UpPromote ma "Defined coupon" (jeden wspólny kod dla wszystkich afiliacji), nadpisze indywidualne kody influencerów. Fix: UpPromote → Programs → zmień z "Defined coupon" na "Affiliate coupon". Revy Upsell (`upsell.js`) też potrafi nadpisywać kody przy checkout — sprawdź Revy przy każdym problemie z kodami.
+- **Shopify Discounts API — brak scope.** Nasz token (`Claude MCP`) nie ma `read_discounts` / `write_discounts`. Kody rabatowe i automatic discounts można zarządzać TYLKO przez Shopify Admin UI. Dotyczy to też sekcji Combinations.
+
+## Debugging Client Issues
+
+Przy diagnozowaniu problemów klienta:
+1. **Nie zgaduj, nie proponuj rozwiązań bez dowodów.** Najpierw zbierz dane, potem formułuj hipotezy, potem weryfikuj.
+2. **Sprawdź WSZYSTKIE aplikacje Shopify, które mogą wchodzić w interakcję** — nie tylko te oczywiste. UpPromote, Revy, Trustisto i inne apki mają własny JS wstrzykiwany na storefront.
+3. **Sprawdź dane historyczne (CSV, zamówienia)** zanim stwierdzisz że problem jest rzadki lub częsty.
+4. **Nie proponuj rozwiązań, których nie możesz wdrożyć** — jasno komunikuj ograniczenia (brak scope API, konfiguracja tylko w UI).
+5. **Przy kodach rabatowych Shopify:** Shopify pozwala na JEDEN kod per zamówienie. Automatic discounts nie zajmują slotu na kod. Aplikacje (UpPromote, Revy) mogą nadpisywać kody przez `/discount/CODE` redirect lub ukryty iframe.
 
 ## GitHub Actions
 
 `.github/workflows/sync-payment-id.yml` — Payment ID sync Shopify → Baselinker
 - Schedule: hourly (`0 * * * *`) + manual dispatch
 - Secrets: `SHOPIFY_DOMAIN`, `SHOPIFY_TOKEN`, `BASELINKER_TOKEN`
-
-## Local Python Scripts
-
-All require `source venv/bin/activate`.
-
-```bash
-python3 shopify_theme_api.py themes|assets|get|backup|update|search
-python3 shopify_graphql.py orders|order|apps
-python baselinker_api.py orders|payments|sources|full
-python sync_payment_id.py [--live]
-```
-
-Active Theme: GEN-6 fix payment icons 2026-05-20 (ID: 199333609804)
 
 ## SEO Project
 
@@ -385,21 +373,11 @@ Remaining: ~530 punctuation errors in scientific citations, footer typo "Cookkie
 
 ### SEO+GEO Sprint (July 2026)
 
-Full plan: `reports/seo-geo-plan-wdrozenia.html`. Blocks A+B+C1 completed 2026-07-16:
+Full plan: `reports/seo-geo-plan-wdrozenia.html`. Blocks A+B+C1 completed 2026-07-16. Rollback snapshot: `sprint-2026-06/W1/A1/artefakty/seo-snapshot-before-changes-2026-07-16.json`. Theme backups: `sprint-2026-06/W1/A1/artefakty/theme-backup-2026-07-16/`.
 
-**Block A (product data):** 6x FIBERBIOM meta fixes (4 titles + 2 descriptions — dwupak "30 saszetek"), double-comma fix Colostrum kapsulki, 21 ALT texts (5 Colostrum brzoskwinia + 16 FIBERBIOM). Rollback snapshot: `sprint-2026-06/W1/A1/artefakty/seo-snapshot-before-changes-2026-07-16.json`.
+**Key dev note from Block A+:** `shopify-mcp-extended/src/tools/updateProductImages.ts` has ProductImage → MediaImage GID auto-mapping (queries `media` alongside `images`, matches by URL). Without this, ALT updates via `productUpdateMedia` fail silently because audit/get-product return ProductImage GIDs, not MediaImage GIDs.
 
-**Block A+ (2026-07-17):** Additional SEO fixes deployed via `genactiv-seo` framework:
-- 4 missing ALT texts: 2 zestawy (Colostrum brzoskwinia + Fiberbiom), 2 dwupaki Colostrum A2. ALT coverage: 97% → 99%.
-- 4 meta titles shortened to ≤60 chars: zestawy + dwupaki A2 (were 61-68 chars).
-- 1 meta title bug fix: Zestaw porzeczka had wrong flavor ("ananasem" → "porzeczka").
-- Bug fix in `shopify-mcp-extended/src/tools/updateProductImages.ts`: added ProductImage → MediaImage GID auto-mapping (query `media` alongside `images`, match by URL). Without this fix, ALT updates fail silently because `productUpdateMedia` requires MediaImage GIDs but audit/get-product return ProductImage GIDs.
-
-**Block B (schema):** JSON-LD fixes in 3 theme files (product-template, header, article-template): brand Brand, gtin13+mpn, all images, http→https, sameAs filter, shippingDetails (PL, free >300 PLN), returnPolicy (14 days, free), Article schema with publisher.logo + mainEntityOfPage. Breadcrumb ogonek: collection "Blonnik" → "Błonnik". Backups: `sprint-2026-06/W1/A1/artefakty/theme-backup-2026-07-16/`. Skipped: B2 (author expert — needs data), B7 (Organization details — needs data), B8 (aggregateRating — SSW widget handles).
-
-**Block C1 (llms.txt):** Custom brand page at `https://genactiv.pl/pages/llms-txt` (template `page.llms-txt.liquid` with `layout: none`). Page ID: 732391014732. Shopify's own UCP at `/llms.txt` is not overridable.
-
-**Remaining:** C2 (dateModified), C3 (robots.txt check — admin), C4-C7 (4 articles — copywriter + review). Audyt kolekcji (SEO) jeszcze nie uruchomiony. Blok B do wdrożenia (wymaga theme write scope).
+**Remaining:** C2 (dateModified), C3 (robots.txt check — admin), C4-C7 (4 articles — copywriter + review). Audyt kolekcji (SEO) jeszcze nie uruchomiony.
 
 ### Shopify GraphQL SEOInput — CRITICAL
 
@@ -413,45 +391,7 @@ productUpdate(input: { id: "...", seo: { title: "new title", description: "exist
 
 ## A/B Test: GEN-6 vs NOTOAGENCY (June 2026) — COMPLETED
 
-Test of old theme (GEN-6) vs new theme (NOTOAGENCY) ran June 8-30, 2026 via Intelligems. **28,195 visitors, 661 orders, 80/20 split.** Test is now **closed** — GEN-6 at 100%.
-
-### Result
-
-| Metric | GEN-6 (control) | NOTOAGENCY | Δ | Significance |
-|--------|-----------------|------------|---|-------------|
-| Conversion Rate | 2.43% | 1.92% | **-20.9%** | **p=0.025 SIGNIFICANT** |
-| Add to Cart | 5.46% | 4.92% | -9.9% | not significant |
-| Abandoned Checkout | 32.2% | 38.9% | **+21.1%** | — |
-| Revenue/visitor | 5.82 PLN | 4.61 PLN | **-20.7%** | p=0.085 borderline |
-
-**Loss is concentrated in one screen — the product card with variant selection:**
-- Capsules 120 pcs mobile: **-47%** (variant change triggers full page reload)
-- Capsules 60 pcs mobile: **-63%** (same cause)
-- Powder (no variant choice): **+9%** (proof the variant selector is the problem)
-- Homepage: **+15%** (NOTO wins)
-- Meta Ads (main budget): **parity / +5%** (safe)
-
-### Decision & Next Steps
-
-NOTO theme **on hold** — not deployable in parts (Shopify themes are all-or-nothing). Plan:
-1. Rebuild product card inside NOTO theme (fix variant selector, add sticky ATC, pill buttons)
-2. Optimize PageSpeed / Core Web Vitals
-3. Re-test entire NOTO theme vs GEN-6
-4. Deploy entire theme at once after confirmed win
-
-### 9 Priorities for NOTO Rebuild
-
-| P | Change | Owner | Expected Lift |
-|---|--------|-------|--------------|
-| P1 | **Section Rendering API** — zero reload on variant change | DEV | +25-40% ATC |
-| P2 | **Pill buttons** instead of dropdown | GRAFIK | +15-20% ATC |
-| P3 | **Sticky ATC bar** mobile (IntersectionObserver) | GRAFIK+DEV | +8-15% ATC |
-| P4 | **Above-the-fold layout** PDP mobile (550px rule) | GRAFIK | +14-19% ATC |
-| P5 | **Fix dead clicks ATC** (553/month, JS error) | DEV | fix |
-| P6 | **Clickable product names** on listings (4,944 dead clicks) | DEV | fix |
-| P7 | **Bottom navigation bar** (5 items, replaces hamburger 1.5% usage) | GRAFIK+DEV | +15-20% nav |
-| P8 | **Homepage above-the-fold** (compact hero + category tiles) | GRAFIK | -16% quick back |
-| P9 | **PageSpeed + Core Web Vitals** (LCP<2.5s, INP<200ms, CLS<0.1) | DEV | CWV pass |
+Test closed — GEN-6 at 100%. NOTO CR was **-20.9%** (p=0.025), root cause: variant selector triggers full page reload on mobile. NOTO theme **on hold** pending product card rebuild. Full report: `docs/AB_TEST_RAPORT.md`. Rebuild specs (9 priorities): `docs/REKOMENDACJE_KARTA_PRODUKTU_MENU.md`.
 
 ### Theme IDs
 
@@ -461,41 +401,13 @@ NOTO theme **on hold** — not deployable in parts (Shopify themes are all-or-no
 | GEN-6 global - slideshow (original) | 162539340108 | Inactive |
 | NOTOAGENCY | 190479794508 | On hold, needs product card rebuild |
 
-### Key Artifacts
-
-| File | Description |
-|------|-------------|
-| `docs/AB_TEST_RAPORT.md` | Full A/B test report (config, tracking fixes, results, funnel analysis, diagnosis) |
-| `docs/REKOMENDACJE_KARTA_PRODUKTU_MENU.md` | 9 priorities with specs for GRAFIK + DEV (Section Rendering API, pill buttons, sticky ATC, bottom nav, PageSpeed) |
-| `reports/AB_TEST_WERYFIKACJA_2026-06-16.html` | Data verification report (tracking fix validation) |
-| `reports/roadmapa-H2-2026.tsv` | H2 2026 strategic roadmap (revenue targets, Marketing Automation, SEO, CRO, Retention) |
-
 ### Intelligems Integration
 
-| Setting | Value |
-|---------|-------|
-| Experiment ID | `1c371ad8-5826-4c21-abdb-7d0d68390e81` |
-| API | `api.intelligems.io/v25-10-beta`, header: `intelligems-access-token` |
-| Env var | `INTELLIGEMS_API_KEY` (`ig_live_...`) |
-| MCP server | Available at `https://ai.intelligems.io/mcp` (OAuth2, not yet connected) |
-
-### Clarity A/B Limitations
-
-Custom tags (`ab_theme_variant`, `theme_id`) are **NOT available via Clarity API** — only visible in Clarity UI (Filters → Custom Tags). The native Intelligems → Clarity integration was **never enabled** (requires manual toggle by d.slowik@notoagency.pl).
+Experiment ID: `1c371ad8-5826-4c21-abdb-7d0d68390e81`. API: `api.intelligems.io/v25-10-beta`, header `intelligems-access-token`. MCP server at `https://ai.intelligems.io/mcp` (OAuth2, not yet connected). Clarity custom tags (`ab_theme_variant`, `theme_id`) are NOT available via Clarity API — only in Clarity UI.
 
 ## H2 2026 Roadmap (Strategic Context)
 
-**Goal:** +50% e-commerce revenue (PLN 222K/mo → PLN 334K/mo average). Full roadmap: `reports/roadmapa-H2-2026.tsv`.
-
-| Stream | July Focus | H2 End Goal |
-|--------|-----------|-------------|
-| Marketing Automation | Post-purchase flow, RFM, campaigns 2×/wk | Lista 14K (from 7.9K), rev share 12% (from 5.1%), 14 flows |
-| SEO | Content hub (4 articles), keyword×product mapping | Organic +65% (9.7K→16K sessions), CR 2.3% |
-| eCommerce / CRO | Mobile CR 2.09%→2.30%, trust badges, sticky ATC A/B | CR 3.10% (from 2.34%), Mobile 2.80%, AOV 305 |
-| Retention / Sub | Platform selection (Recharge/Bold/Skio), 3 bundles | Loyalty LIVE, sub 3+ products, repeat 62% (from 55%) |
-| Product | Margin analysis, cross-sell pairs | AOV 305 (from 272), items/order 1.8 |
-
-**Key milestones:** Sub launch (Aug), Referral launch (Sep), Pre-BF +2K subs (Oct), BF PLN 400K+ (Nov), Loyalty launch (Dec).
+**Goal:** +50% e-commerce revenue (PLN 222K/mo → PLN 334K/mo average). Full roadmap: `reports/roadmapa-H2-2026.tsv`. Key milestones: Sub launch (Aug), Referral launch (Sep), Pre-BF +2K subs (Oct), BF PLN 400K+ (Nov), Loyalty launch (Dec).
 
 ## Reports
 
