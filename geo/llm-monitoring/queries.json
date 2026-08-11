@@ -1,0 +1,186 @@
+{
+  "_meta": {
+    "version": "0.1-provisional",
+    "created": "2026-08-11",
+    "task": "VIII-A3 · Monitoring cytowań w LLM",
+    "status": "PROWIZORYCZNY — priorytet i volume do uzupełnienia z Senuto",
+    "blocker": "senuto-mcp nie jest skonfigurowany lokalnie (SENUTO_API_KEY brak w .env, w .mcp.json placeholder __SENUTO_API_KEY__). Klucz istnieje wyłącznie jako zmienna środowiskowa Railway.",
+    "zasada": "Set jest STAŁY między pomiarami. Po ustaleniu wersji 1.0 nie zmieniamy brzmienia zapytań — inaczej pomiary miesiąc do miesiąca przestają być porównywalne. Nowe zapytania dopisujemy na końcu z nowym id i oznaczamy 'added' — nie podmieniamy istniejących.",
+    "clusters": [
+      "wzdecia",
+      "regularnosc",
+      "wybor-blonnika",
+      "ferrytyna",
+      "wybor-colostrum"
+    ],
+    "intents": [
+      "problem",
+      "rozwiazanie",
+      "decyzyjny",
+      "porownawczy",
+      "long-tail"
+    ]
+  },
+  "queries": [
+    {
+      "id": "Q01",
+      "query": "skąd biorą się wzdęcia brzucha",
+      "cluster": "wzdecia",
+      "intent": "problem",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q02",
+      "query": "co robić na wzdęcia po jedzeniu",
+      "cluster": "wzdecia",
+      "intent": "rozwiazanie",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q03",
+      "query": "wzdęty brzuch i uczucie ciężkości co pomaga",
+      "cluster": "wzdecia",
+      "intent": "rozwiazanie",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q04",
+      "query": "czy błonnik pomaga na wzdęcia",
+      "cluster": "wzdecia",
+      "intent": "decyzyjny",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q05",
+      "query": "jaki suplement na wzdęcia i gazy",
+      "cluster": "wzdecia",
+      "intent": "decyzyjny",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q06",
+      "query": "jak poprawić regularne wypróżnianie",
+      "cluster": "regularnosc",
+      "intent": "rozwiazanie",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q07",
+      "query": "domowe sposoby na zaparcia u dorosłych",
+      "cluster": "regularnosc",
+      "intent": "rozwiazanie",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q08",
+      "query": "co jeść żeby jelita pracowały lepiej",
+      "cluster": "regularnosc",
+      "intent": "problem",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q09",
+      "query": "suplement na leniwe jelita ranking",
+      "cluster": "regularnosc",
+      "intent": "porownawczy",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q10",
+      "query": "jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny",
+      "cluster": "wybor-blonnika",
+      "intent": "decyzyjny",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q11",
+      "query": "arabinogalaktan co to jest i jak działa",
+      "cluster": "wybor-blonnika",
+      "intent": "problem",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q12",
+      "query": "najlepszy błonnik rozpuszczalny w proszku",
+      "cluster": "wybor-blonnika",
+      "intent": "porownawczy",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q13",
+      "query": "ile błonnika dziennie suplementacja",
+      "cluster": "wybor-blonnika",
+      "intent": "long-tail",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q14",
+      "query": "błonnik z kory modrzewia opinie",
+      "cluster": "wybor-blonnika",
+      "intent": "porownawczy",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q15",
+      "query": "niska ferrytyna objawy co robić",
+      "cluster": "ferrytyna",
+      "intent": "problem",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q16",
+      "query": "jak podnieść ferrytynę naturalnie",
+      "cluster": "ferrytyna",
+      "intent": "rozwiazanie",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q17",
+      "query": "laktoferyna a ferrytyna suplementacja",
+      "cluster": "ferrytyna",
+      "intent": "decyzyjny",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q18",
+      "query": "jak wybrać dobre colostrum bovinum",
+      "cluster": "wybor-colostrum",
+      "intent": "decyzyjny",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q19",
+      "query": "colostrum w proszku czy w kapsułkach co lepsze",
+      "cluster": "wybor-colostrum",
+      "intent": "porownawczy",
+      "priority": null,
+      "added": "2026-08-11"
+    },
+    {
+      "id": "Q20",
+      "query": "colostrum dla dorosłych na co pomaga",
+      "cluster": "wybor-colostrum",
+      "intent": "long-tail",
+      "priority": null,
+      "added": "2026-08-11"
+    }
+  ]
+}
