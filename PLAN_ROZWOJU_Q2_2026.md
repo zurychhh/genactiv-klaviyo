@@ -288,9 +288,19 @@ Blok 3: Optymalizacja kontekstu
 
 ## 5. SENUTO + BING KONEKTORY
 
-### 5A. Senuto MCP Server
+### 5A. Senuto MCP Server — ✅ ZAMKNIĘTE (2026-08-17)
 
 Senuto to polskie narzędzie SEO (senuto.com) z REST API.
+
+> **Zrealizowane inaczej niż w planie:** nie budowaliśmy własnego serwera MCP (Task 5.2).
+> Istnieje gotowy pakiet **`senuto-mcp` (npm, v1.3.1)** z 15 narzędziami — pokrywa
+> visibility analysis, keyword explorer, kanibalizację, historię pozycji i rank tracker,
+> czyli więcej niż zakładał plan. Wpięty przez `npx -y senuto-mcp` w `.mcp.json` i w
+> `genactiv-online/server/config.js` (Task 5.3 zrobiony). Zaoszczędzone ~10h.
+>
+> Konektor stał martwy do 2026-08-17 z powodu wygasłego klucza (JWT ważny 30 dni,
+> ten z Railway wygasł 2026-05-08). Klucz odnowiony, lokalnie i na produkcji.
+> Pułapki API i tryb rotacji klucza: `CLAUDE.md` → Known Issues + `WYMAGANIA_SENUTO_BING.md`.
 
 ```
 Task 5.1: Research Senuto API
@@ -434,7 +444,7 @@ Task 5.6: Integracja z routerem + Dockerfile
 ## DECYZJE DO PODJĘCIA PRZED STARTEM
 
 1. **Baza danych:** SQLite (proste, lokalne) vs PostgreSQL (Railway addon, ~$7/mies.) — rekomenduję **PG na produkcji, SQLite na dev**
-2. **Senuto:** Czy klient ma konto Senuto z API access? Potrzebny API key
+2. ~~**Senuto:** Czy klient ma konto Senuto z API access? Potrzebny API key~~ → **ROZSTRZYGNIĘTE 2026-08-17:** tak, konto id 25830 z API. Klucz dostarczony i wdrożony. Otwarte pozostaje tylko odnawianie tokena co 30 dni (patrz `WYMAGANIA_SENUTO_BING.md`).
 3. **Bing Ads:** Czy klient ma konto Microsoft Advertising? Potrzebne credentials
 4. **File upload limit:** 10MB wystarczy? Czy potrzebne duże pliki (video, heavy PDFs)?
 5. **Theme editing:** Czy chcemy dać terminalowi write access do Shopify theme? (ryzyko vs. wygoda)

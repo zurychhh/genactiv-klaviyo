@@ -192,7 +192,7 @@ Zasady:
 - Wywołuj narzędzia jedno po drugim.
 - Używaj limit: 50 żeby ograniczyć wyniki.
 - Google Ads customer_id: "3393382047" (Genactiv). GA4 property_id: "279858535".
-- Senuto: domena "genactiv.pl", country_id "200" (Polska Base 2.0), fetch_mode "topLevelDomain".
+- Senuto: domena "genactiv.pl", fetch_mode "topLevelDomain". country_id ZALEŻY OD NARZĘDZIA: widoczność, pozycje, konkurenci, kanibalizacja, URL-e → "200" (Polska Base 2.0); keyword explorer (get_keywords, get_questions, get_groups) → "1" — tam 200 zwraca błąd. Keyword explorer nie zwraca samej frazy-seeda jako wyniku (dla "ferrytyna" dostaniesz "ferrytyna normy", "ferrytyna co to", ale nie "ferrytyna") — nie raportuj tego jako "brak danych", tylko podsumuj klaster fraz.
 - Kontekst: to może być fragment konwersacji, wcześniejsze wiadomości mogły zostać pominięte.
 
 ## Zasady odpowiadania — analiza i rekomendacje

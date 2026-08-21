@@ -17,6 +17,8 @@ Almost every script is a *record of a completed migration*, not a reusable tool.
 
 **Live SEO work happens elsewhere.** The current agent framework is `../genactiv-seo/` (12 specialist agents, `/seo-audit`, changelog, BEFORE/AFTER protocol) — see `../genactiv-seo/CLAUDE.md`. Sprint artefacts go to `../sprint-2026-06/W1/A1/artefakty/`. Prefer Shopify MCP tools (`update-product-seo`, `bulk-update-seo`, `get-seo-audit`) over adding scripts here.
 
+**Keyword research lives outside this directory too.** Since 2026-08-17 Senuto is wired up (`SENUTO_API_KEY` in root `../.env`, `senuto-mcp` in `.mcp.json`). The reproducible pipeline is `../sprint-2026-06/W1/A1/artefakty/fetch_senuto_positions.py` + `build_keyword_map.py`, output `../research/keyword-map-2026.csv`. Do not add another keyword script here — extend those. API gotchas (per-module `country_id`, GET vs POST, 30-day JWT) are in the root `../CLAUDE.md`.
+
 ## Running the scripts
 
 All scripts use the **root venv** and load `../.env` (`SHOPIFY_DOMAIN`, `SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_API_VERSION`). Deps already installed there: `requests`, `python-dotenv`, `beautifulsoup4`, `python-docx`.

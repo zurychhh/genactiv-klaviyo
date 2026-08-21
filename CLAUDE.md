@@ -480,3 +480,4 @@ Ostatnie deliverables (lipiec–sierpień 2026):
 - `genactiv-seo/CLAUDE.md` — Live SEO agent framework (12 specialists, `/seo-audit`, BEFORE/AFTER protocol)
 - `sprint-2026-06/W1/A1/artefakty/README-A1.md` — Keyword research + gap analysis + competitor verification
 - `geo/llm-monitoring/README.md` — LLM citation monitoring methodology (frozen query set)
+- `WYMAGANIA_SENUTO_BING.md` — Client-facing connector status: Senuto live since 2026-08-17 (**token expires 2026-09-17, rotation is manual**), Bing Ads still awaiting credentials

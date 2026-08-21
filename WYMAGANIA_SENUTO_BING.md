@@ -1,23 +1,31 @@
 # Co potrzebujemy do uruchomienia Senuto i Bing Ads w terminalu
 
-## 1. Senuto (SEO monitoring)
+> **Status na 2026-08-21:** Senuto — **URUCHOMIONE** (klucz dostarczony 2026-08-17).
+> Bing Ads — nadal czeka na dane od klienta.
+
+## 1. Senuto (SEO monitoring) — ✅ URUCHOMIONE 2026-08-17
 
 **Co zyskujemy:** Widoczność domeny w Google, pozycje fraz kluczowych, analiza konkurencji, monitoring zmian pozycji — wszystko z poziomu terminala GenActiv Online.
 
-**Wymagania:**
+**Wymagania — zamknięte:**
 
-| Do zrobienia | Kto | Szczegóły |
-|-------------|-----|-----------|
-| Plan Professional w Senuto | Klient | Jedyny plan z dostępem do API. Koszt: ~29 EUR/mies. Dostępny 14-dniowy trial. |
-| Wygenerować Bearer Token | Klient | Panel Senuto → ustawienia API → wygeneruj token. Token to ciąg znaków, który przekazujecie nam. |
+| Do zrobienia | Kto | Status |
+|-------------|-----|--------|
+| Plan Professional w Senuto | Klient | ✅ Aktywny (konto id 25830) |
+| Wygenerować Bearer Token | Klient | ✅ Dostarczony 2026-08-17, ważny do **2026-09-17** |
 
-**Ważna informacja o tokenie:** Token Senuto jest ważny 30 dni. Po tym czasie trzeba wygenerować nowy. Zbudujemy mechanizm auto-odnawiania (skrypt logujący się email+hasłem i generujący nowy token), więc po pierwszym ustawieniu nie trzeba będzie robić tego ręcznie.
+**Co zostało wdrożone:**
+- Klucz w głównym `.env` i podstawiony do `.mcp.json` — Senuto działa w lokalnym Claude Code.
+- Klucz ustawiony na Railway + redeploy — Senuto działa też w terminalu GenActiv Online (produkcja miała martwy klucz od 2026-05-08, czyli konektor był tam nieczynny przez 3 miesiące).
+- Pierwsze zadania na danych Senuto: mapa fraz dla 20 kart produktowych + gap analysis (`research/keyword-map-2026.csv`, `sprint-2026-06/W1/A1/artefakty/`) oraz priorytetyzacja setu zapytań GEO (`geo/llm-monitoring/queries.json` v1.0).
 
-**Co dostarczyć nam (developerom):**
-1. Bearer Token z panelu Senuto
-2. Email i hasło do konta Senuto (potrzebne do auto-odnawiania tokena)
+**⚠️ Rotacja tokena jest na razie RĘCZNA.** Token Senuto jest ważny 30 dni. Mechanizm auto-odnawiania (skrypt logujący się email+hasłem) **nie został zbudowany** — nie dostaliśmy danych logowania do konta, a sam token to za mało, żeby wygenerować kolejny.
 
-**Czas wdrożenia po otrzymaniu danych:** ~1-2 dni robocze.
+**Do zrobienia przed 2026-09-17 — jedna z dwóch ścieżek:**
+1. **Ręcznie:** klient generuje nowy token (panel Senuto → ustawienia API) i przekazuje nam; my aktualizujemy `.env` + Railway. Nakład: ~15 min raz w miesiącu.
+2. **Automatycznie:** klient przekazuje email i hasło do konta Senuto — wtedy budujemy auto-odnawianie (~4h roboczo) i temat znika na stałe.
+
+Objaw wygasłego tokena: wszystkie zapytania do Senuto zwracają pusty błąd `404`, a terminal odpowiada „brak danych" zamiast komunikatu o autoryzacji — dlatego nie da się tego zauważyć bez świadomego sprawdzenia.
 
 ---
 
@@ -47,9 +55,9 @@
 
 ## Podsumowanie
 
-| Konektor | Co potrzebujemy od klienta | Koszt dodatkowy | Czas wdrożenia |
-|----------|---------------------------|-----------------|----------------|
-| **Senuto** | Plan Professional + Bearer Token + dane logowania | ~29 EUR/mies | 1-2 dni |
-| **Bing Ads** | Login Super Admin + zgoda na Azure app | 0 PLN (API darmowe) | 3-5 dni |
+| Konektor | Status | Co jeszcze potrzebujemy od klienta | Koszt dodatkowy |
+|----------|--------|------------------------------------|-----------------|
+| **Senuto** | ✅ Działa od 2026-08-17 | Nowy token do 2026-09-17 **albo** email+hasło do auto-odnawiania | ~29 EUR/mies |
+| **Bing Ads** | ⏳ Czeka | Login Super Admin + zgoda na Azure app | 0 PLN (API darmowe) |
 
-**Rekomendacja:** Zaczynamy od Senuto — szybsze do wdrożenia i daje natychmiastową wartość SEO. Bing Ads robimy równolegle lub zaraz po.
+**Następny krok:** Bing Ads — zakres 3-5 dni roboczych po otrzymaniu dostępów.

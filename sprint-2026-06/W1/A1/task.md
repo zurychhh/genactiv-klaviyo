@@ -1,4 +1,16 @@
-# A1 — Keyword research top 20 PDP + gap analysis (Colostrigen, Immuno Lab) + mapa sezonowa fraz
+# A1 — Keyword research top 20 PDP + gap analysis + mapa sezonowa fraz
+
+> **WYKONANE 2026-08-17 — status `needs-verify` (brama ręczna, owner CC+).**
+> Wyniki i pełny opis: [`artefakty/README-A1.md`](artefakty/README-A1.md).
+> DoD: `research/keyword-map-2026.csv` + `artefakty/gap-analysis-2026-08-17.csv` (882 luki).
+>
+> **Korekta briefu:** oryginalny tytuł zadania brzmiał „gap analysis (Colostrigen, Immuno Lab)".
+> Obie nazwy okazały się błędne — **Colostrigen to nasza własna marka**
+> („Colostrum Genactiv (Colostrigen)", producent GENACTIV TRADE), a `immunolab.com.pl`
+> to firma mikrobiologiczna bez pokrycia tematycznego. Gap analysis zrobiona na realnych
+> konkurentach z Senuto `competitors/getData`: **genoscope.pl** (134 wspólne frazy),
+> colostrumactive.pl, colostrumpolska.pl. Prompt poniżej jest oryginalny — zostawiony
+> jako zapis tego, co zlecono; wykonanie odbiegło od niego świadomie.
 
 **Sprint:** Tydzień 1 (W1)
 **Daty:** 1–7 cze (pon–niedz)
