@@ -1,0 +1,350 @@
+<title>Program afiliacyjny GenActiv — nota decyzyjna</title>
+
+<style>
+  :root {
+    --paper:#F4F1EE; --surface:#FBFAF8; --ink:#17212B; --ink-2:#4A5763;
+    --rule:#DDD7D0; --rule-soft:#E8E3DC;
+    --accent:#0B5FAE; --accent-soft:#E4EDF7; --navy:#1A3B5D;
+    --alert:#B62630; --stripe:#F5333F; --good:#1B7340;
+    --shadow:0 1px 2px rgba(23,33,43,.05), 0 8px 24px -18px rgba(23,33,43,.35);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#11181F; --surface:#18212A; --ink:#E9E7E3; --ink-2:#98A5B1;
+      --rule:#2B3844; --rule-soft:#222D38;
+      --accent:#63ADF2; --accent-soft:#152A3E; --navy:#A9C7E5;
+      --alert:#FF7A80; --stripe:#F5333F; --good:#54C384;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#11181F; --surface:#18212A; --ink:#E9E7E3; --ink-2:#98A5B1;
+    --rule:#2B3844; --rule-soft:#222D38;
+    --accent:#63ADF2; --accent-soft:#152A3E; --navy:#A9C7E5;
+    --alert:#FF7A80; --stripe:#F5333F; --good:#54C384;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+  }
+  :root[data-theme="light"] {
+    --paper:#F4F1EE; --surface:#FBFAF8; --ink:#17212B; --ink-2:#4A5763;
+    --rule:#DDD7D0; --rule-soft:#E8E3DC;
+    --accent:#0B5FAE; --accent-soft:#E4EDF7; --navy:#1A3B5D;
+    --alert:#B62630; --stripe:#F5333F; --good:#1B7340;
+    --shadow:0 1px 2px rgba(23,33,43,.05), 0 8px 24px -18px rgba(23,33,43,.35);
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.6 Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  .prose { max-width: 65ch; }
+
+  /* ---- masthead ---- */
+  .mast { border-top: 3px solid var(--accent); padding-top: 22px; margin-top: 34px; }
+  .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 10px;
+  }
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: clamp(28px, 4.4vw, 40px); font-weight: 700; letter-spacing: -.021em;
+    line-height: 1.12; text-wrap: balance; margin: 0 0 14px; max-width: 20ch;
+  }
+  .standfirst { font-size: 19px; line-height: 1.5; color: var(--ink-2); margin: 0; max-width: 60ch; }
+  .meta {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px; color: var(--ink-2); letter-spacing: .01em;
+    margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; gap: 6px 26px;
+  }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---- sections ---- */
+  section { margin-top: 46px; }
+  h2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--ink-2); margin: 0 0 18px; padding-bottom: 9px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 17px; font-weight: 650; letter-spacing: -.01em; margin: 0 0 7px; color: var(--ink);
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 700; }
+
+  /* ---- headline stats ---- */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .stat { background: var(--surface); padding: 20px 22px 22px; }
+  .stat .fig {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums; font-size: 38px; font-weight: 680;
+    letter-spacing: -.03em; line-height: 1; color: var(--accent); display: block;
+  }
+  .stat .fig.neutral { color: var(--ink); }
+  .stat .cap {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 13px; line-height: 1.4; color: var(--ink-2); margin-top: 11px; display: block;
+  }
+
+  /* ---- tables ---- */
+  .scroll { overflow-x: auto; margin-top: 4px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 14.5px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule-soft); vertical-align: baseline; }
+  thead th {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-2); border-bottom: 1px solid var(--rule); padding-bottom: 9px;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tbody tr.total td { border-top: 1px solid var(--rule); border-bottom: none; font-weight: 650; }
+  td .sub { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; padding: 3px 7px; border-radius: 3px; white-space: nowrap;
+  }
+  .tag.tracked { background: var(--accent-soft); color: var(--accent); }
+  .tag.dark-zone { background: color-mix(in srgb, var(--stripe) 14%, transparent); color: var(--alert); }
+  .tag.house { background: var(--rule-soft); color: var(--ink-2); }
+
+  /* ---- callout ---- */
+  .callout {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--stripe);
+    padding: 20px 24px; box-shadow: var(--shadow); margin-bottom: 18px;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout p { font-size: 16px; }
+  .callout .was {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px; color: var(--ink-2); margin-top: 10px; display: block;
+  }
+  .callout .was b { color: var(--alert); font-weight: 600; }
+
+  /* ---- options ---- */
+  .opt {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+    border: 1px solid var(--rule); background: var(--surface);
+    padding: 20px 24px; margin-bottom: 12px;
+  }
+  .opt.pick { border-color: var(--accent); border-left: 3px solid var(--accent); box-shadow: var(--shadow); }
+  .opt-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; }
+  .opt-head .lab {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .pill {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--accent); color: var(--surface); padding: 4px 9px; border-radius: 3px;
+  }
+  .opt dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px 24px; margin: 0; }
+  .opt dt {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-2); margin-bottom: 4px;
+  }
+  .opt dd { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 14.5px; line-height: 1.45; }
+  .opt p { font-size: 16px; margin: 0; }
+
+  /* ---- asks ---- */
+  ol.asks { list-style: none; margin: 0; padding: 0; counter-reset: ask; }
+  ol.asks li {
+    counter-increment: ask; position: relative; padding: 16px 0 16px 46px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  ol.asks li:last-child { border-bottom: none; }
+  ol.asks li::before {
+    content: counter(ask); position: absolute; left: 0; top: 15px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; font-weight: 600; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 50%;
+    width: 24px; height: 24px; display: grid; place-items: center;
+  }
+  ol.asks .who {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 12px; color: var(--ink-2); display: block; margin-top: 5px;
+  }
+  ol.asks .who b { color: var(--ink); font-weight: 650; }
+
+  footer {
+    margin-top: 54px; padding-top: 18px; border-top: 1px solid var(--rule);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 12.5px; line-height: 1.6; color: var(--ink-2);
+  }
+  footer code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; }
+  a { color: var(--accent); }
+  a:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Nota decyzyjna · Program afiliacyjny</p>
+    <h1>Jedna trzecia afiliacji GenActiv działa poza jakimkolwiek narzędziem</h1>
+    <p class="standfirst">UpPromote obsługuje 62% przychodu afiliacyjnego. Pozostałe 48 kodów to ręcznie wydane kupony Shopify — bez trackingu, bez raportu, bez automatycznego rozliczenia prowizji.</p>
+    <p class="meta">
+      <span>Data: <b>17.08.2026</b></span>
+      <span>Okno danych: <b>18.06 – 17.08.2026 (61 dni)</b></span>
+      <span>Próba: <b>3 281 opłaconych zamówień · 831 428 PLN</b></span>
+      <span>Źródło: <b>Shopify GraphQL Admin API</b></span>
+    </p>
+  </header>
+
+  <section>
+    <h2>Ustalenie</h2>
+    <div class="stats">
+      <div class="stat">
+        <span class="fig">62%</span>
+        <span class="cap">przychodu afiliacyjnego przechodzi przez UpPromote<br>(65% zamówień)</span>
+      </div>
+      <div class="stat">
+        <span class="fig neutral">15 / 63</span>
+        <span class="cap">kodów afiliacyjnych jest w UpPromote — czyli 24%</span>
+      </div>
+      <div class="stat">
+        <span class="fig neutral">91 883 PLN</span>
+        <span class="cap">obrotu w 61 dni na kodach poza narzędziem (~550 tys. PLN w skali roku)</span>
+      </div>
+    </div>
+    <div class="prose" style="margin-top:22px">
+      <p>Pociągnąłem z Shopify zamówienia z kodami rabatowymi <em>i</em> tagami jednocześnie — czego wcześniejsza analiza nie miała. Dzięki temu tag <code style="font-family:ui-monospace,Menlo,monospace;font-size:14px">UpPromote_order</code> daje twarde rozróżnienie: kod jest albo w 100% obsługiwany przez UpPromote, albo w 0%. Nie ma przypadków pośrednich.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Struktura kodów rabatowych — 61 dni</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Grupa</th>
+            <th class="num">Kodów</th>
+            <th class="num">Zamówień</th>
+            <th class="num">Udział zam.</th>
+            <th class="num">Przychód PLN</th>
+            <th class="num">Udział przych.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tracked">UpPromote</span>
+              <span class="sub">HS15, JELITOLOG, omatko, APTEMAMA, kobietarakieta, WYCHOWANIE, Joanna, makiewicz15 + 7</span></td>
+            <td class="num">15</td>
+            <td class="num">610</td>
+            <td class="num">18,6%</td>
+            <td class="num">151 001</td>
+            <td class="num">18,2%</td>
+          </tr>
+          <tr>
+            <td><span class="tag dark-zone">Poza narzędziem</span>
+              <span class="sub">OZICZKOWA, ANIA15, MLEKOKLACZY, STACHOWSKA, ZDROWYBALANS, DARIA15, ROSLIK, Mamalife + 40</span></td>
+            <td class="num">48</td>
+            <td class="num">329</td>
+            <td class="num">10,0%</td>
+            <td class="num">91 883</td>
+            <td class="num">11,1%</td>
+          </tr>
+          <tr>
+            <td><span class="tag house">Kody własne</span>
+              <span class="sub">FIBERBIOM, GutFixer, WELCOME, NEW, Pięknaskóra, Pięknewłosy + 18</span></td>
+            <td class="num">24</td>
+            <td class="num">1 639</td>
+            <td class="num">50,0%</td>
+            <td class="num">417 726</td>
+            <td class="num">50,2%</td>
+          </tr>
+          <tr class="total">
+            <td>Afiliacja razem <span class="sub" style="font-weight:400">UpPromote = 62,2% przychodu, 65,0% zamówień</span></td>
+            <td class="num">63</td>
+            <td class="num">939</td>
+            <td class="num">28,6%</td>
+            <td class="num">242 884</td>
+            <td class="num">29,2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top:20px">
+      <p>Największy afiliant spoza UpPromote — <strong>OZICZKOWA</strong> — zrobił 67 zamówień i 22 740 PLN w 61 dni. To trzeci największy kod afiliacyjny w całej firmie i nie widzi go żadne narzędzie. Kody poza UpPromote mają przy tym wyższy koszyk: <strong>AOV 279 PLN wobec 248 PLN</strong> w UpPromote.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dwie korekty do liczb wysłanych wcześniej</h2>
+    <div class="callout">
+      <h3>Program afiliacyjny jest ok. 6× większy, niż raportowaliśmy</h3>
+      <p>Plik <code style="font-family:ui-monospace,Menlo,monospace;font-size:14px">analiza-promocji-12m.csv</code> opisany jako 12 miesięcy zawiera w rzeczywistości ok. 2–3 miesiące. Shopify oddaje naszej aplikacji tylko ostatnie 60 dni — brakuje uprawnienia <code style="font-family:ui-monospace,Menlo,monospace;font-size:14px">read_all_orders</code>. Potwierdzenie: kod OZICZKOWA ma 67 zamówień w obu zestawieniach, a deklarowane 775 tys. PLN „rocznie" nie zgadza się z bazą 222 tys. PLN miesięcznie z roadmapy H2.</p>
+      <span class="was">Było: <b>207 685 PLN afiliacji rocznie</b>  →  Jest: ~1,45 mln PLN rocznie (ekstrapolacja z 61 dni, okno letnie)</span>
+    </div>
+    <div class="callout">
+      <h3>Kod „Pięknewłosy" nie jest marginalny — ale też nie jest przyczyną problemu</h3>
+      <p>W 61 dni zrobił <strong>86 zamówień i 25 158 PLN</strong>, a nie „32 zamówienia rocznie, 2–3 miesięcznie". Jednocześnie realnych przypadków, w których ruch afiliacyjny wpisał w checkout cudzy kod, jest <strong>7 na 3 281 zamówień (0,2%)</strong>. Zgłoszenie było prawdziwe, ale skala jest znikoma — a 105 zamówień, które wyglądały na „przejęcie", to zwykłe stackowanie kodu FIBERBIOM na kod afiliacyjny HS15.</p>
+      <span class="was">Wniosek: <b>wyłączanie „Pięknewłosy" nie rozwiązuje niczego istotnego</b> i kosztuje realną sprzedaż</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Opcje</h2>
+
+    <div class="opt">
+      <div class="opt-head"><span class="lab">Opcja A</span><h3>Zostawić jak jest</h3></div>
+      <dl>
+        <dt>Koszt</dt><dd>0 PLN</dd>
+        <dt>Konsekwencja</dt><dd>~550 tys. PLN rocznego obrotu bez trackingu i rozliczenia</dd>
+        <dt>Ryzyko</dt><dd>Prowizje liczone ręcznie; sporów z influencerami nie da się rozstrzygnąć danymi</dd>
+      </dl>
+    </div>
+
+    <div class="opt">
+      <div class="opt-head"><span class="lab">Opcja B</span><h3>Zmigrować 48 kodów do UpPromote</h3></div>
+      <dl>
+        <dt>Koszt (do potwierdzenia)</dt><dd>abonament + prowizja ok. 1,5% od obrotu afiliacyjnego → rzędu 26 tys. PLN rocznie przy pełnym pokryciu</dd>
+        <dt>Zaleta</dt><dd>Jedno narzędzie, program już działa, zespół go zna</dd>
+        <dt>Wada</dt><dd>Model prowizyjny skaluje się z obrotem — im lepiej idzie, tym drożej</dd>
+      </dl>
+    </div>
+
+    <div class="opt pick">
+      <div class="opt-head"><span class="lab">Opcja C</span><h3>Najpierw inwentaryzacja, potem wybór narzędzia</h3><span class="pill">Rekomendacja</span></div>
+      <p>Zanim wydamy złotówkę na narzędzie, trzeba ustalić, kto stoi za 48 kodami i na jakich warunkach. Dziś nikt tego nie wie — a to determinuje, czy potrzebujemy platformy prowizyjnej, czy wystarczy tańsze rozwiązanie z opłatą stałą. Migracja 63 kodów do złego narzędzia kosztuje więcej niż tydzień zwłoki.</p>
+      <dl>
+        <dt>Koszt</dt><dd>0 PLN — praca własna, ok. 1 tydzień</dd>
+        <dt>Efekt</dt><dd>Lista afiliantów z warunkami; dopiero na tym realny wybór narzędzia i realny biznes case</dd>
+        <dt>Równolegle</dt><dd>Dodać uprawnienie <code style="font-family:ui-monospace,Menlo,monospace;font-size:13.5px">read_all_orders</code>, żeby w ogóle móc liczyć rok zamiast 60 dni</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <h2>Czego potrzebuję, żeby ruszyć dalej</h2>
+    <ol class="asks">
+      <li>
+        Czy 48 kodów poza UpPromote to świadoma decyzja (barter, rozliczenie ręczne), czy dryf, o którym nikt nie pamięta?
+        <span class="who">Decyduje: <b>Antoni</b> · potrzebne do wyboru między opcją B i C</span>
+      </li>
+      <li>
+        Zgoda na dodanie uprawnienia <code style="font-family:ui-monospace,Menlo,monospace;font-size:13.5px">read_all_orders</code> w aplikacji Claude MCP w Shopify Admin — bez tego każda analiza afiliacji jest oparta na 60 dniach.
+        <span class="who">Decyduje: <b>Antoni</b> · wykonanie: <b>Rafał</b> · ok. 15 minut</span>
+      </li>
+      <li>
+        Czy wysyłamy korektę wcześniejszych liczb? Mail z kwotą 207 685 PLN już poszedł i jest zaniżony ok. 6×.
+        <span class="who">Decyduje: <b>Rafał</b> · rekomendacja: tak, wraz z tą notą</span>
+      </li>
+      <li>
+        Wstrzymać decyzję o wyłączeniu kodu „Pięknewłosy" do czasu inwentaryzacji — kosztuje realną sprzedaż, a naprawia 0,2% zamówień.
+        <span class="who">Decyduje: <b>Antoni</b> · rekomendacja: nie wyłączać</span>
+      </li>
+    </ol>
+  </section>
+
+  <footer>
+    <p><strong>Metoda.</strong> Zamówienia pobrane przez Shopify GraphQL Admin API (<code>discountApplications</code> + <code>tags</code> + <code>customerJourneySummary</code>), okno 18.06–17.08.2026, 3 316 zamówień, z czego 3 281 opłaconych i nieanulowanych. Przypisanie do UpPromote na podstawie tagu <code>UpPromote_order</code> — rozdzielczość na poziomie kodu wynosi 100% albo 0%, bez przypadków spornych.</p>
+    <p><strong>Zastrzeżenia.</strong> Podział kodów spoza UpPromote na „afiliacyjne" i „własne" opiera się na nazwie kodu — 5 pozycji jest niejednoznacznych. Przy węższej definicji udział UpPromote rośnie z 62% do 68%, czyli wniosek nie zmienia się jakościowo. Wartości roczne to ekstrapolacja ×6 z okna letniego, nie pomiar. Ceny UpPromote i rozwiązań alternatywnych pochodzą z wcześniejszego researchu i wymagają potwierdzenia u dostawcy przed decyzją zakupową.</p>
+  </footer>
+
+</div>

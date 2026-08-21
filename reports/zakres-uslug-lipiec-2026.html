@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zakres Wykonanych Usług — Lipiec 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --purple: #6C3FA0;
+    --purple-light: #8B5FBF;
+    --purple-dark: #4A2875;
+    --purple-bg: #F5F0FA;
+    --navy: #1A1F36;
+    --navy-light: #2D3250;
+    --text: #333340;
+    --text-light: #6B7094;
+    --bg: #FAFAFC;
+    --white: #FFFFFF;
+    --border: #E4E6EF;
+    --green: #10B981;
+    --amber: #F59E0B;
+    --red: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 48px 56px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    background: var(--purple);
+    opacity: 0.15;
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+  }
+  .doc-type {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span { color: var(--purple-light); }
+  .header .subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── INFO BAR ─── */
+  .info-bar {
+    background: var(--purple);
+    color: #fff;
+    padding: 20px 56px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    padding: 40px 56px 48px;
+  }
+
+  /* ─── SUMMARY BOX ─── */
+  .summary-box {
+    background: var(--purple-bg);
+    border-left: 4px solid var(--purple);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    border-radius: 0 8px 8px 0;
+  }
+  .summary-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 12px;
+  }
+  .summary-box p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .summary-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .summary-stat {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 12px 20px;
+    min-width: 110px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .summary-stat .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1.1;
+  }
+  .summary-stat .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    background: var(--purple);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .tag-new { background: #ECFDF5; color: #059669; }
+  .tag-analysis { background: #EFF6FF; color: #2563EB; }
+  .tag-infra { background: #FFF7ED; color: #D97706; }
+  .tag-design { background: #FDF2F8; color: #DB2777; }
+  .tag-live { background: #FEF2F2; color: #DC2626; }
+
+  /* ─── ITEMS ─── */
+  .items {
+    list-style: none;
+    padding: 0;
+  }
+  .items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .items li::before {
+    content: '→';
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .items li strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .items .sub {
+    color: var(--text-light);
+    font-size: 12.5px;
+  }
+
+  /* ─── DELIVERABLES TABLE ─── */
+  .del-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+  .del-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .del-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .del-table tr:nth-child(even) td { background: #FAFAFC; }
+  .del-table .count {
+    font-weight: 700;
+    color: var(--purple);
+    text-align: center;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    padding: 20px 56px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ─── SEPARATOR ─── */
+  .sep {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; max-width: 100%; }
+    .header { padding: 32px 40px 28px; }
+    .info-bar { padding: 16px 40px; }
+    .content { padding: 28px 40px 36px; }
+    .footer { padding: 16px 40px; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-text">Oleksiak Consult</div>
+      <div class="doc-type">Zalacznik do faktury</div>
+    </div>
+    <h1>Zakres Wykonanych <span>Uslug</span></h1>
+    <div class="subtitle">SEO + GEO, Model subskrypcyjny, Marketing Automation, Infrastruktura AI</div>
+  </div>
+
+  <!-- ═══ INFO BAR ═══ -->
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">Klient</div>
+      <div class="info-value">GenActiv Sp. z o.o.</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Okres</div>
+      <div class="info-value">Lipiec 2026</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Pakiet</div>
+      <div class="info-value">20h / miesiac</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Platformy</div>
+      <div class="info-value">Shopify, Klaviyo, GA4, Senuto, TikTok Shop</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ SUMMARY ═══ -->
+    <div class="summary-box">
+      <h3>Zakres realizacji pakietu 20h</h3>
+      <p>
+        Lipiec skoncentrowany na 5 obszarach: (1)&nbsp;audyt GEO (widocznosc marki w AI) i pierwsze wdrozenie SEO+GEO na zywym sklepie &mdash; 21 zmian, zero regresji, (2)&nbsp;pelna analiza modelu subskrypcyjnego &mdash; 4 niezalezne audyty zakonczone rekomendacja wykonawcza, (3)&nbsp;roadmapa Marketing Automation H2 2026 wraz z audytem stanu Klaviyo, (4)&nbsp;plany naprawcze po tescie A/B (karta produktu NOTO) i roadmapa przychodowa H2, (5)&nbsp;nowa infrastruktura &mdash; framework agentow SEO/GEO, MCP TikTok Shop, naprawa bledu w MCP Shopify blokujacego ALT texty.
+      </p>
+      <div class="summary-stats">
+        <div class="summary-stat">
+          <div class="num">39</div>
+          <div class="lbl">Artefaktow</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">21</div>
+          <div class="lbl">Zmian SEO na LIVE</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">4</div>
+          <div class="lbl">Audyty subskrypcji</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">12</div>
+          <div class="lbl">Agentow SEO</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">20</div>
+          <div class="lbl">Narzedzi TikTok Shop</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 1. GEO AUDIT ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Audyt GEO — widocznosc marki w wyszukiwarkach AI</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>Pelny audyt GEO</strong> (<code>reports/geo-audit-genactiv.html</code>, 08.07) &mdash; ocena AI visibility: <strong>D+</strong>. Sprawdzono 7 kluczowych zapytan (brandowe, komercyjne, informacyjne): GenActiv widoczny w 2/7, cytowany pozytywnie w AI w <strong>0/7</strong></li>
+        <li><strong>Alarm na zapytaniu brandowym</strong> &mdash; na "GenActiv colostrum opinie" odpowiedz AI prowadzi z krytyka: brak deklarowanej zawartosci IgG, "stosunkowo wysoka cena", ocena 3.5/5 (zrodlo: wybieramykolagen.pl), "istnieja tansze suplementy o porownywalnej jakosci". Marka nie kontroluje wlasnej narracji w AI</li>
+        <li><strong>Mapa konkurencji w AI</strong> &mdash; zagrozenie krytyczne: Genoscope (4/7 zapytan, standaryzacja 60% IgG), wybieramykolagen.pl (5/7, kontroluje rating marki), Colostrum Polska (3/7, domena exact-match), Colostrum Active</li>
+        <li><strong>Audyt structured data</strong> &mdash; zidentyfikowano <strong>23 problemy schema.org</strong>, w tym bledny <code>author</code> na artykulach blog ("Sklep Genactiv" zamiast eksperta &mdash; krytyczne dla E-E-A-T w niszy YMYL), <code>brand: Thing</code> zamiast <code>Brand</code>, zly <code>publisher.logo</code>, pusty blok <code>FAQPage</code></li>
+        <li><strong>Audyt JSON-LD w motywie</strong> (<code>json-ld-theme-audit.md</code>) &mdash; inwentaryzacja blokow per typ strony (homepage, PDP, artykul, FAQ, kolekcja) z mapowaniem na pliki Liquid</li>
+        <li><strong>Priorytetowy plan wdrozenia</strong> &mdash; Faza 0 (krytyczne, 6 zadan), Faza 1 (quick wins GEO, 6 zadan), Faza 2 (content: 4 artykuly targetujace zapytania bez odpowiedzi)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 2. WDROZENIE SEO+GEO ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Wdrozenie SEO + GEO na zywym sklepie (16.07)</div>
+        <span class="section-tag tag-live">Wdrozenie LIVE</span>
+      </div>
+      <ul class="items">
+        <li><strong>Plan wdrozenia</strong> (<code>reports/seo-geo-plan-wdrozenia.html</code>, 09.07) &mdash; 3 bloki z estymacja przychodowa:
+          <table class="del-table">
+            <thead><tr><th>Blok</th><th>Zakres</th><th>Szacowany efekt</th><th>Kiedy widac</th></tr></thead>
+            <tbody>
+              <tr><td>A. Technical SEO</td><td>Meta tagi FIBERBIOM, ALT texty, dane produktowe</td><td>+450 &ndash; 1&nbsp;300 PLN/mies</td><td>2&ndash;6 tyg.</td></tr>
+              <tr><td>B. Structured Data</td><td>JSON-LD w szablonach &mdash; efekt na wszystkie strony (43K sesji/mies)</td><td>+1&nbsp;500 &ndash; 3&nbsp;000 PLN/mies</td><td>4&ndash;8 tyg.</td></tr>
+              <tr><td>C. GEO + Content</td><td>llms.txt, 4 artykuly AI, odpowiedz na zarzut IgG</td><td>+2&nbsp;700 &ndash; 10&nbsp;000 PLN/mies</td><td>2&ndash;6 mies.</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Blok A &mdash; 6 poprawek meta FIBERBIOM</strong> &mdash; dodano brakujace "15 saszetek" / "30 saszetek" w SEO title, przepisano opisy dwupakow (odroznienie od single, komunikacja oszczednosci <strong>59 PLN / 16,48%</strong>). Fix literowki: podwojny przecinek w "COLOSTRUM GENACTIV,, kapsulki" &mdash; propagowal sie do schema i OG tags</li>
+        <li><strong>21 ALT textow uzupelnionych</strong> &mdash; 16 obrazkow FIBERBIOM (4 produkty x 4 zdjecia) + 5 obrazkow Colostrum brzoskwinia. Wynik: <strong>21/21, zero pustych ALT</strong></li>
+        <li><strong>Blok B &mdash; przebudowa JSON-LD w 3 plikach motywu</strong> (LIVE theme GEN-6, ID 199333609804):
+          <table class="del-table">
+            <thead><tr><th>Plik</th><th>Zmiany</th><th>Zakres</th></tr></thead>
+            <tbody>
+              <tr><td><code>product-template.liquid</code></td><td class="count">7</td><td>brand Thing &rarr; Brand, gtin13 + mpn, image: 1 &rarr; tablica wszystkich, http &rarr; https, shippingDetails (PL, handling 0-1d, transit 1-3d, free &gt;300 PLN), hasMerchantReturnPolicy (14 dni)</td></tr>
+              <tr><td><code>header.liquid</code></td><td class="count">2</td><td>Organization: filtrowanie pustych <code>sameAs</code>, contactPoint z numerem telefonu, https</td></tr>
+              <tr><td><code>article-template.liquid</code></td><td class="count">1</td><td>Pelny blok Article: mainEntityOfPage, publisher.logo, datePublished</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Blok C1 &mdash; llms.txt dla crawlerow AI</strong> &mdash; utworzono strone <code>genactiv.pl/pages/llms-txt</code> (template <code>page.llms-txt.liquid</code>, layout: none, page ID 732391014732). Shopify nie pozwala nadpisac systemowego <code>/llms.txt</code> &mdash; custom page jest zweryfikowanym obejsciem</li>
+        <li><strong>Zabezpieczenia przed zmianami</strong> &mdash; backup 3 plikow motywu (<code>theme-backup-2026-07-16/</code>) + snapshot SEO (<code>seo-snapshot-before-changes-2026-07-16.json</code>). Raport wdrozenia z pelnym before/after: <code>reports/seo-geo-wdrozenie-2026-07-16.html</code>. <strong>21/21 zmian zweryfikowanych, zero regresji</strong></li>
+      </ul>
+    </div>
+
+    <!-- ═══ 3. WERYFIKACJA DANYCH ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Weryfikacja danych przed wdrozeniem — 10 rund kontroli</div>
+        <span class="section-tag tag-analysis">Quality</span>
+      </div>
+      <ul class="items">
+        <li><strong>Raport weryfikacji 10 rund</strong> (<code>reports/seo-verification-10-rounds.html</code>, 06.07) &mdash; 3 niezalezne agenty kontrolne, 8 produktow, 43 issues audytu. Wynik: <strong>8 zmian zatwierdzonych, 3 zablokowane, 22 ryzyka zidentyfikowane</strong></li>
+        <li><strong>Zatrzymane bledy przed wdrozeniem</strong> &mdash; propozycja meta "oszczedz 10%" byla nieprawdziwa (rzeczywisty rabat 16,5%); 2 tytuly A2 dwupak wycofane (ryzyko utraty rankingu &gt; kosmetyczna poprawa); wykryto 6 obrazkow wspoldzielonych miedzy parami produktow (single/dwupak), co groziło nadpisaniem ALT</li>
+        <li><strong>Raport integralnosci danych</strong> (<code>DATA_INTEGRITY_VERIFICATION_REPORT.md</code>) &mdash; weryfikacja produkt po produkcie przez Shopify GraphQL: ID, handle, status, meta title/description z licznikiem znakow, ALT per obrazek z flaga "HAS ALT &mdash; DO NOT OVERWRITE"</li>
+        <li><strong>Weryfikacja cen i oszczednosci dwupakow</strong> (<code>pricing-verification-report.md</code>) &mdash; pelna tabela 8 produktow z zywych danych Shopify. Wyliczone realne oszczednosci: FIBERBIOM 59 PLN (16,48%), Colostrum A2 kapsulki 41 PLN (15,19%), A2 proszek 71 PLN (14,49%). Ustalenie: zaden produkt nie ma ustawionej ceny compare-at</li>
+        <li><strong>Weryfikacja meta description FIBERBIOM</strong> (<code>fiberbiom-meta-description-verification.md</code> + CSV z poprawkami) &mdash; potwierdzono 3 bledy na obu dwupakach: bledna gramatura (15 zamiast 30 saszetek), duplikat opisu z wersji single, brak informacji o oszczednosci</li>
+        <li><strong>Naprawa bledu w narzedziu MCP</strong> &mdash; ALT texty byly zablokowane, bo <code>productUpdateMedia</code> wymaga GID typu <code>MediaImage</code>, a audyt i <code>get-product</code> zwracaly <code>ProductImage</code> (inne numery dla tego samego zdjecia). Fix w <code>updateProductImages.ts</code>: dodatkowe zapytanie o <code>media()</code> i mapowanie po URL. Bez tego aktualizacje ALT konczyly sie cichym bledem</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 4. SUBSKRYPCJE ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Model subskrypcyjny — 4 audyty + rekomendacja wykonawcza</div>
+        <span class="section-tag tag-analysis">Strategia</span>
+      </div>
+      <ul class="items">
+        <li><strong>Audyt techniczny Shopify</strong> (<code>subscription-technical-audit-2026-07-17.md</code>, 41 KB) &mdash; architektura Selling Plan API / Subscription Contract API / Customer Payment Method API, porownanie aplikacji (Appstle, Recharge, Skio, Bold, Shopify native), wymogi prawne PL, benchmarki churn w branzy suplementow</li>
+        <li><strong>Kluczowy bloker zidentyfikowany</strong> &mdash; <strong>Przelewy24 i BLIK nie obsluguja platnosci cyklicznych na Shopify</strong>. Subskrypcja wymaga karty (tokenizacja przez Shopify Payments), co ogranicza rynek do ~25&ndash;30% polskich kupujacych online. Ustalenie potwierdzone niezaleznie przez wszystkie trzy audyty &mdash; determinuje cala strategie wdrozenia</li>
+        <li><strong>Audyt Klaviyo pod subskrypcje</strong> (<code>klaviyo-subscription-audit-2026-07-17.md</code>, 44 KB) &mdash; macierz integracji platform, 9 mozliwych flow subskrypcyjnych (w tym 4 o bezposrednim wplywie na retencje przychodu: dunning, upcoming charge, cancellation save, churn risk), predictive analytics (CLV, churn, EDNO &mdash; wymagania spelnione), SMS w PL z wymogami RODO</li>
+        <li><strong>Business case na danych sprzedazowych</strong> (<code>subscription-business-case-genactiv.md</code>, 46 KB) &mdash; analiza 1 500 zamowien i 250 najlepszych klientow: <strong>87,8% przychodu z suplementow konsumpcyjnych</strong>, repeat rate 55%, top 250 klientow: srednio 12,7 zamowien i 5 421 PLN LTV. Projekcja konserwatywna: 410 subskrybentow i 94,3K PLN/mies w 12. miesiacu</li>
+        <li><strong>Analiza realnych cykli zakupowych</strong> (<code>reorder-interval-analysis-2026-07-17.md</code> + skrypt <code>scripts/reorder_analysis.py</code>) &mdash; 3 026 zamowien, 2 753 klientow. <strong>Odkrycie korygujace zalozenia:</strong> klienci FIBERBIOM zuzywaja ~2 saszetki dziennie, nie 1 &mdash; mediana reorderu to 16 dni, nie 30. Rekomendacja: domyslny interwal 14 dni dla FIBERBIOM, 30 dni dla kapsulek 60, 45 dni dla kapsulek 120. Raport jawnie raportuje ograniczenie danych (okno 59 dni = right-censoring) i wskazuje, jakie dane domknac</li>
+        <li><strong>Finalna rekomendacja</strong> (<code>subscription-model-final-recommendation-2026-07-17.md</code>, 53 KB) &mdash; synteza trzech audytow z rozstrzygnieciem konfliktow miedzy nimi. Decyzja: <strong>SILNE TAK, start wrzesien 2026</strong>. Platforma: Appstle (start) z migracja do Loop przy MRR &gt; 30K. Model: Subscribe &amp; Save 10% + darmowa dostawa, plus prepaid kwartalny jako obejscie blokera platnosci. Projekcja R1: <strong>162K PLN netto</strong>, cele na grudzien: 180&ndash;250 subskrybentow, 32&ndash;45K PLN/mies, churn &lt;7%</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 5. KLAVIYO / MA ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Marketing Automation — audyt Klaviyo + roadmapa H2 2026</div>
+        <span class="section-tag tag-new">Roadmapa</span>
+      </div>
+      <ul class="items">
+        <li><strong>Pelny przeglad automatyzacji Klaviyo</strong> (16.07) &mdash; zinwentaryzowano <strong>13 flow (5 LIVE, 8 DRAFT), 12 segmentow (7 RFM + 5 produktowych), 17 list</strong></li>
+        <li><strong>Gap analysis 6 obszarow</strong> vs stan faktyczny:
+          <table class="del-table">
+            <thead><tr><th>Obszar</th><th>Stan faktyczny</th></tr></thead>
+            <tbody>
+              <tr><td>Onboarding</td><td>DRAFT gotowy, niewdrozony &mdash; szybki win</td></tr>
+              <tr><td>Post-purchase per produkt</td><td>Kompletna luka</td></tr>
+              <tr><td>Porzucone procesy</td><td>Cart LIVE (generyczny), Browse DRAFT od 12/2025 &mdash; nigdy nieuruchomiony</td></tr>
+              <tr><td>Replenishment</td><td>Zero &mdash; kompletna luka</td></tr>
+              <tr><td>Winback</td><td>Segmenty RFM gotowe, zero flow</td></tr>
+              <tr><td>Lifecycle (LCM)</td><td>12 segmentow istnieje, zero zastosowan &mdash; martwa infrastruktura</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Roadmapa Marketing Automation H2 2026</strong> (<code>reports/klaviyo-automation-roadmapa-H2-2026.html</code>) &mdash; 6 obszarow rozpisanych na 6 miesiecy w formacie 3 deliverable'y + 1 wiersz prac przygotowawczych na miesiac, kompatybilnym z arkuszem klienta. Cele koncowe: 14 flow (z 5), udzial email w przychodzie 12% (z 5,1%), lista 14K (z 7,9K), baza SMS 3,5K, health listy &gt;95%</li>
+        <li><strong>Mapowanie kamieni milowych</strong> &mdash; lipiec: deploy NL Nurture + Cart v2 split per grupa produktowa; sierpien: Post-Purchase deploy + cross-sell + Replenishment; wrzesien: Winback At-Risk + Hibernating; pazdziernik: VIP early access + pre-BF; listopad: sekwencja BF (6 emaili + SMS burst); grudzien: konwersja jednorazowych na subskrypcje + Sunset flow</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 6. PO TESCIE A/B ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Plany naprawcze po tescie A/B + roadmapa przychodowa H2</div>
+        <span class="section-tag tag-analysis">Strategia</span>
+      </div>
+      <ul class="items">
+        <li><strong>Specyfikacja naprawy karty produktu</strong> (<code>docs/REKOMENDACJE_KARTA_PRODUKTU_MENU.md</code>, 23 KB) &mdash; 9 priorytetow dla grafika i developera po zamknieciu testu A/B (28 195 wizyt, 661 zamowien, NOTO -20,9% CR przy p=0,025)</li>
+        <li><strong>Plan prac dla wykonawcow</strong> (<code>docs/PLAN_NAPRAWA_KARTY_PRODUKTU.html</code>) &mdash; dokument roboczy dla NOTOAGENCY: <strong>6 mockupow Figma dla grafika + 13 zadan dla developera</strong>, z kryterium akceptacji re-testu (CR &ge; 2,42%). Diagnoza przyczynowa: zmiana wariantu wymusza pelne przeladowanie strony (2&ndash;4 s bialego ekranu na mobile LTE) &mdash; dowodem jest proszek bez wyboru wariantu z wynikiem +9%</li>
+        <li><strong>Dokument "Co dalej"</strong> (<code>docs/NEXT_STEPS_ALL.html</code>) &mdash; wszystkie zadania w jednym miejscu w 3 sciezkach: Biznes (decyzje pilne), Developer, Grafik &amp; Content, z timeline. Zawiera pilne decyzje lipcowe: potwierdzenie zamkniecia eksperymentu w Intelligems, formalne zlecenie przebudowy karty, wybor platformy subskrypcji, wlaczenie integracji Intelligems &rarr; Clarity (nigdy nie zostala aktywowana)</li>
+        <li><strong>Roadmapa H2 2026 &mdash; 6 iteracji</strong> (<code>reports/roadmapa-H2-2026*.tsv/.csv</code>) &mdash; dokument dopracowywany do wersji finalnej z: 3 scenariuszami wzrostu (bez zmian paid +10&ndash;12% / przywrocenie Ads +30&ndash;40% / agresywny paid +45&ndash;55%), estymatami przychodu per deliverable (expected i konserwatywny), lagiem "build kiedy vs revenue od kiedy", prawdopodobienstwem realizacji, flaga egzekucji AI vs czlowiek oraz jawna kalkulacja zrodlowa dla kazdej pozycji</li>
+        <li><strong>Kluczowy wniosek roadmapy</strong> &mdash; cel +50% jest osiagalny wylacznie przy przywroceniu budzetu Google Ads (18K+/mies). Same optymalizacje marketing automation i SEO daja +10&ndash;12%. Wniosek przedstawiony wraz z danymi zrodlowymi (H2 2025: 18K spend x 8,5 ROAS)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 7. ANALIZY DANYCH ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">Analizy danych sprzedazowych i ruchu</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>Analiza polityki promocyjnej &mdash; 12 miesiecy</strong> (<code>reports/analiza-promocji-12m.csv</code>) &mdash; 3 065 zamowien oplaconych, 775 579 PLN przychodu, 118 054 PLN rabatow (discount rate 13,2%). 11 sekcji analitycznych: segmentacja rabat/bez rabatu, darmowa vs platna dostawa, nowy vs powracajacy, typy rabatow, ranking kodow, ranking produktow, dwupaki, trendy miesieczne</li>
+        <li><strong>7 rekomendacji z uzasadnieniem liczbowym</strong> &mdash; m.in.: likwidacja kodu NEW 30% na rzecz WELCOME 15% (ten sam AOV: 251 vs 250 PLN, koszt 93 vs 46 PLN/zam &mdash; oszczednosc ~18K PLN/rok); obnizenie progu darmowej dostawy z 300 na 250 PLN (darmowa dostawa: AOV 433 PLN i 2,4 items/order vs platna: 190 PLN i 1,3); 20% jako sweet spot kampanii sezonowych (DZIENMAMY: AOV 300 PLN, +19% vs baseline); tiered program influencerski (rozrzut AOV przy tym samym rabacie 15%: od 145 do 331 PLN)</li>
+        <li><strong>Research ruchu i przychodu</strong> (<code>traffic-revenue-research-2026-07-08.md</code>) &mdash; GA4 za 30 dni: 43 835 sesji, 218 072 PLN przychodu, breakdown per kanal z CR i AOV. Zidentyfikowano istniejacy juz kanal <strong>"AI Assistant"</strong> w GA4 (51 sesji, 189 PLN) &mdash; punkt odniesienia do mierzenia efektow GEO</li>
+        <li><strong>Rzetelnosc raportowania</strong> &mdash; w raporcie jawnie oznaczono ograniczenia danych: brak dostepu do Shopify API w dniu analizy (403, token bez uprawnien) oraz fakt, ze GA4 nie atrybuuje konwersji na poziomie strony. Wnioski oparte wylacznie na metrykach wiarygodnych</li>
+        <li><strong>Skrypty analityczne</strong> &mdash; <code>scripts/reorder_analysis.py</code> (547 linii, analiza cykli reorderu przez paginowane zapytania GraphQL) i <code>subscription_data_pull.py</code> (551 linii, pobranie danych do business case) &mdash; obie analizy sa powtarzalne po dolozeniu dluzszej historii zamowien</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 8. INFRASTRUKTURA ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">Nowa infrastruktura — framework SEO/GEO, MCP, integracje</div>
+        <span class="section-tag tag-infra">Infrastruktura</span>
+      </div>
+      <ul class="items">
+        <li><strong>Framework agentow SEO + GEO</strong> (<code>genactiv-seo/</code>) &mdash; dedykowany pakiet: <strong>12 agentow specjalistycznych</strong> (orchestrator, tech-auditor, content-strategist, geo-specialist, schema-specialist, data-analyst, internal-linking, eeat-compliance, reporter, measurement-qa, reviews, product-feed) + 12 komend workflow + baza wiedzy + szablon dashboardu raportowego</li>
+        <li><strong>Bramka compliance dla niszy YMYL</strong> &mdash; <code>health-claims-pl.md</code> jako obowiazkowy filtr: colostrum nie ma dopuszczonych oswiadczen zdrowotnych w UE, zadna tresc zdrowotna nie idzie na produkcje bez przejscia przez agenta <code>seo-eeat-compliance</code>. Protokol wdrozen: PRZED/PO &rarr; potwierdzenie &rarr; zapis &rarr; log zmian, pojedynczo zamiast masowo</li>
+        <li><strong>Sciezka audytu zmian</strong> &mdash; kazda zmiana wdrozona przez MCP zapisuje sie w <code>changelog.jsonl</code>; komenda <code>/report</code> liczy efekt przed/po na danych GA4 per strona i generuje raport markdown + dashboard HTML, sygnalizujac przy tym sezonowosc i okno dojrzewania zmian SEO</li>
+        <li><strong>Serwer MCP TikTok Shop</strong> (<code>tiktok-shop-mcp/</code>) &mdash; integracja z TikTok Shop Partner/Seller Open API (osobne API od TikTok Ads): <strong>20 narzedzi</strong> (produkty odczyt i zapis, kategorie, atrybuty, reguly, marki, magazyny, konto), autoryzacja OAuth z auto-odswiezaniem tokenu, podpis HMAC-SHA256 na kazdym zadaniu, sekrety poza repozytorium</li>
+        <li><strong>Przygotowanie Google Search Console</strong> (<code>generate_gsc_token.py</code>) &mdash; generator tokenu OAuth na tym samym projekcie Google Cloud co GA4 i Google Ads, wraz z instrukcja aktywacji GSC (property typu Domena, weryfikacja DNS, sitemap, podlaczenie do MCP). GSC domknie brakujacy element raportowania: pozycje i CTR</li>
+        <li><strong>Naprawa MCP Shopify</strong> &mdash; opisany w sekcji 3 fix mapowania ProductImage &rarr; MediaImage odblokowal masowe aktualizacje ALT textow przez MCP (wczesniej konczyly sie cichym niepowodzeniem)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 9. DOKUMENTACJA ═══ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <div class="section-title">Dokumentacja i raportowanie</div>
+        <span class="section-tag tag-infra">Dokumentacja</span>
+      </div>
+      <ul class="items">
+        <li><strong>Zakres Uslug Czerwiec 2026</strong> (<code>reports/Zakres_Uslug_Czerwiec_2026.pdf</code> + HTML) &mdash; zalacznik do faktury za poprzedni okres, 8 sekcji, gotowy do wystawienia</li>
+        <li><strong>Raport tygodniowy 14&ndash;17.07</strong> (<code>reports/weekly/2026-07-14_17.md</code>) &mdash; dzien po dniu, z lista deliverables, wygenerowanych plikow i jawnie wskazanym zakresem <strong>niewykonanym</strong> (C2 dateModified, C3 robots.txt wymagajacy dostepu admin, C4&ndash;C7 cztery artykuly wymagajace copywritera)</li>
+        <li><strong>Rozbudowa dokumentacji projektu</strong> (<code>CLAUDE.md</code>, +199 linii) &mdash; dodano sekcje: Claude Code Agent System, Sprint System, Daily Agent Scripts, Design System &amp; Email Standards, SEO+GEO Sprint (July 2026); zaktualizowano theme IDs (GEN-6 fix payment icons jako LIVE) i liste serwerow MCP</li>
+        <li><strong>Zapis krytycznej pulapki technicznej</strong> &mdash; udokumentowano zachowanie Shopify GraphQL <code>SEOInput</code>: przy <code>productUpdate</code> pominiecie pola <code>description</code> <strong>kasuje je do null</strong> zamiast zachowac. Zapisane w dokumentacji, by nie powtorzylo sie przy przyszlych wdrozeniach</li>
+        <li><strong>Synchronizacja repozytorium</strong> &mdash; caly dorobek lipca zsynchronizowany do repozytorium (3 commity, ostatni obejmujacy 188 plikow) &mdash; klient ma pelen dostep do zrodel wszystkich raportow, skryptow i szablonow</li>
+      </ul>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- ═══ DELIVERABLES COUNT ═══ -->
+    <div class="summary-box" style="border-left-color: var(--navy);">
+      <h3>Podsumowanie deliverables — Lipiec 2026</h3>
+      <table class="del-table" style="margin-top:0;">
+        <thead>
+          <tr>
+            <th style="width:45%">Kategoria</th>
+            <th style="width:35%">Deliverable</th>
+            <th style="width:20%; text-align:center;">Ilosc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>SEO / GEO</td><td>Zmiany wdrozone na LIVE (meta, ALT, schema, llms.txt)</td><td class="count">21</td></tr>
+          <tr><td>SEO / GEO</td><td>Pliki motywu przebudowane (JSON-LD)</td><td class="count">3</td></tr>
+          <tr><td>SEO / GEO</td><td>Audyty i plany (GEO, JSON-LD, plan wdrozenia, raport)</td><td class="count">4</td></tr>
+          <tr><td>Subskrypcje</td><td>Audyty eksperckie + finalna rekomendacja</td><td class="count">4 + 1</td></tr>
+          <tr><td>Marketing Automation</td><td>Audyt stanu Klaviyo + roadmapa H2</td><td class="count">2</td></tr>
+          <tr><td>Strategia</td><td>Roadmapa H2 &mdash; iteracje robocze i wersja finalna</td><td class="count">6</td></tr>
+          <tr><td>Strategia</td><td>Dokumenty dla wykonawcow (karta produktu, next steps)</td><td class="count">3</td></tr>
+          <tr><td>Weryfikacja danych</td><td>Raporty kontrolne przed wdrozeniem</td><td class="count">5</td></tr>
+          <tr><td>Analityka</td><td>Analizy danych (promocje 12m, ruch, cykle reorderu)</td><td class="count">3</td></tr>
+          <tr><td>Infrastruktura AI</td><td>Agenci SEO/GEO (framework)</td><td class="count">12</td></tr>
+          <tr><td>Infrastruktura MCP</td><td>Narzedzia TikTok Shop MCP</td><td class="count">20</td></tr>
+          <tr><td>Infrastruktura MCP</td><td>Naprawione bledy blokujace (ALT texty)</td><td class="count">1</td></tr>
+          <tr><td>Skrypty</td><td>Skrypty analityczne i integracyjne (reorder, sub data, GSC)</td><td class="count">3</td></tr>
+          <tr><td>Zabezpieczenia</td><td>Backupy motywu + snapshot SEO przed zmianami</td><td class="count">4</td></tr>
+          <tr><td>Dokumentacja</td><td>Raport tygodniowy, zakres uslug, CLAUDE.md</td><td class="count">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ ZAKRES NIEWYKONANY ═══ -->
+    <div class="section" style="margin-top:36px;">
+      <div class="section-header">
+        <div class="section-num">i</div>
+        <div class="section-title">Zakres przeniesiony na kolejny okres</div>
+        <span class="section-tag tag-infra">Status</span>
+      </div>
+      <ul class="items">
+        <li><strong>C2 &mdash; <code>dateModified</code> w Article schema</strong> &mdash; do wdrozenia razem z kolejna partia zmian w motywie</li>
+        <li><strong>C3 &mdash; weryfikacja robots.txt pod crawlery AI</strong> &mdash; wymaga dostepu administracyjnego po stronie klienta</li>
+        <li><strong>C4&ndash;C7 &mdash; 4 artykuly content hub</strong> targetujace zapytania, na ktore AI dzis nie zna odpowiedzi z GenActiv &mdash; wymaga copywritera i review merytorycznego (nisza YMYL)</li>
+        <li><strong>Audyt SEO kolekcji</strong> &mdash; zaplanowany, nieuruchomiony w lipcu</li>
+      </ul>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <div>&copy; 2026 Oleksiak Consult. Dokument poufny.</div>
+    <div>GenActiv Sp. z o.o. | Lipiec 2026</div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

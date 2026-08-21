@@ -1,0 +1,549 @@
+<title>Sierpień 2026 — czy performuje? | GenActiv</title>
+
+<style>
+:root{
+  --bg:#FBFAF8; --surface:#FFFFFF; --surface-2:#F4F2EE;
+  --ink:#14181D; --ink-2:#4A5460; --ink-3:#7C8794;
+  --rule:#DFDCD6; --rule-strong:#1A3B5D;
+  --accent:#0066CC; --accent-soft:rgba(0,102,204,.10);
+  --prior:#E08A00;
+  --good:#157A45; --good-bg:rgba(21,122,69,.10);
+  --bad:#C22B36; --bad-bg:rgba(194,43,54,.10);
+  --warn:#B36A00; --warn-bg:rgba(179,106,0,.12);
+  --shadow:0 1px 2px rgba(20,24,29,.05), 0 8px 24px -16px rgba(20,24,29,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#101317; --surface:#171B21; --surface-2:#1E232B;
+    --ink:#E9ECF1; --ink-2:#A3ADBA; --ink-3:#77828F;
+    --rule:#2A313A; --rule-strong:#5E86AE;
+    --accent:#3D95E8; --accent-soft:rgba(61,149,232,.14);
+    --prior:#C98314;
+    --good:#58C289; --good-bg:rgba(88,194,137,.14);
+    --bad:#F07179; --bad-bg:rgba(240,113,121,.14);
+    --warn:#DDA53E; --warn-bg:rgba(221,165,62,.14);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101317; --surface:#171B21; --surface-2:#1E232B;
+  --ink:#E9ECF1; --ink-2:#A3ADBA; --ink-3:#77828F;
+  --rule:#2A313A; --rule-strong:#5E86AE;
+  --accent:#3D95E8; --accent-soft:rgba(61,149,232,.14);
+  --prior:#C98314;
+  --good:#58C289; --good-bg:rgba(88,194,137,.14);
+  --bad:#F07179; --bad-bg:rgba(240,113,121,.14);
+  --warn:#DDA53E; --warn-bg:rgba(221,165,62,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+:root[data-theme="light"]{
+  --bg:#FBFAF8; --surface:#FFFFFF; --surface-2:#F4F2EE;
+  --ink:#14181D; --ink-2:#4A5460; --ink-3:#7C8794;
+  --rule:#DFDCD6; --rule-strong:#1A3B5D;
+  --accent:#0066CC; --accent-soft:rgba(0,102,204,.10);
+  --prior:#E08A00;
+  --good:#157A45; --good-bg:rgba(21,122,69,.10);
+  --bad:#C22B36; --bad-bg:rgba(194,43,54,.10);
+  --warn:#B36A00; --warn-bg:rgba(179,106,0,.12);
+  --shadow:0 1px 2px rgba(20,24,29,.05), 0 8px 24px -16px rgba(20,24,29,.25);
+}
+
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1020px; margin:0 auto; padding:40px 24px 72px; display:flex; flex-direction:column; gap:40px;}
+@media (max-width:640px){ .page{padding:28px 16px 56px; gap:32px;} }
+
+/* --- typography --- */
+h1,h2,h3{margin:0; text-wrap:balance; letter-spacing:-.022em; font-weight:700;}
+h1{font-size:clamp(30px,5.2vw,46px); line-height:1.04;}
+h2{font-size:19px; line-height:1.2;}
+h3{font-size:15px; letter-spacing:-.01em;}
+p{margin:0;}
+.eyebrow{
+  font-size:10.5px; font-weight:700; letter-spacing:.19em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;}
+.lede{font-size:17px; line-height:1.5; color:var(--ink-2); max-width:64ch;}
+.note{font-size:12.5px; line-height:1.5; color:var(--ink-3);}
+
+/* --- masthead --- */
+.masthead{display:flex; flex-direction:column; gap:14px; border-bottom:3px solid var(--rule-strong); padding-bottom:22px;}
+.masthead .dateline{font-size:13px; color:var(--ink-2); font-variant-numeric:tabular-nums;}
+
+/* --- verdict --- */
+.verdict{
+  background:var(--surface); border:1px solid var(--rule); border-left:4px solid var(--accent);
+  border-radius:3px; padding:24px 26px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; gap:16px;
+}
+.verdict .headline{font-size:clamp(19px,2.8vw,24px); font-weight:700; line-height:1.3; letter-spacing:-.02em; text-wrap:balance;}
+.pills{display:flex; flex-wrap:wrap; gap:8px;}
+.pill{
+  display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600;
+  padding:5px 11px; border-radius:999px; border:1px solid transparent;
+}
+.pill::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor; flex:none;}
+.pill.ok{color:var(--good); background:var(--good-bg); border-color:color-mix(in srgb, var(--good) 30%, transparent);}
+.pill.warn{color:var(--warn); background:var(--warn-bg); border-color:color-mix(in srgb, var(--warn) 30%, transparent);}
+.pill.bad{color:var(--bad); background:var(--bad-bg); border-color:color-mix(in srgb, var(--bad) 30%, transparent);}
+
+/* --- sections --- */
+section{display:flex; flex-direction:column; gap:16px;}
+.sec-head{display:flex; flex-direction:column; gap:5px; border-top:1px solid var(--rule); padding-top:16px;}
+
+/* --- kpi --- */
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+@media (max-width:820px){ .kpis{grid-template-columns:repeat(2,1fr);} }
+.kpi{
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  padding:16px 16px 14px; display:flex; flex-direction:column; gap:5px; box-shadow:var(--shadow);
+}
+.kpi .label{font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); line-height:1.3;}
+.kpi .value{font-size:27px; font-weight:700; letter-spacing:-.035em; font-variant-numeric:tabular-nums; line-height:1.05;}
+.kpi .value small{font-size:14px; font-weight:600; letter-spacing:-.01em; color:var(--ink-2); margin-left:2px;}
+.kpi .delta{font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums;}
+.up{color:var(--good);} .down{color:var(--bad);} .flat{color:var(--ink-3);}
+.kpi .sub{font-size:11.5px; color:var(--ink-3); font-variant-numeric:tabular-nums;}
+
+/* --- chart --- */
+.chart-card{
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  padding:20px 20px 16px; box-shadow:var(--shadow); position:relative;
+}
+.chart-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:14px;}
+.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:12.5px; color:var(--ink-2);}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.swatch{width:11px; height:11px; border-radius:2px; flex:none;}
+.swatch.line{height:3px; width:16px; border-radius:2px;}
+.chart-scroll{overflow-x:auto;}
+svg{display:block; max-width:100%;}
+.tt{
+  position:absolute; pointer-events:none; opacity:0; transition:opacity .1s;
+  background:var(--ink); color:var(--bg); font-size:12px; line-height:1.4;
+  padding:7px 10px; border-radius:3px; white-space:nowrap; font-variant-numeric:tabular-nums;
+  z-index:5; box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+
+/* --- tables --- */
+.table-wrap{overflow-x:auto; border:1px solid var(--rule); border-radius:3px; background:var(--surface); box-shadow:var(--shadow);}
+table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:600px;}
+th,td{padding:10px 14px; text-align:right; border-bottom:1px solid var(--rule); font-variant-numeric:tabular-nums;}
+th:first-child,td:first-child{text-align:left; font-variant-numeric:normal;}
+thead th{
+  font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); background:var(--surface-2); border-bottom:2px solid var(--rule-strong); white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr.total td{font-weight:700; background:var(--surface-2); border-top:2px solid var(--rule-strong);}
+td .chip{display:inline-block; padding:1px 7px; border-radius:3px; font-size:12px; font-weight:600;}
+.chip.up{background:var(--good-bg);} .chip.down{background:var(--bad-bg);} .chip.warn{background:var(--warn-bg); color:var(--warn);}
+
+/* --- forecast --- */
+.scen{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+@media (max-width:760px){ .scen{grid-template-columns:1fr;} }
+.scen > div{
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:15px 16px;
+  display:flex; flex-direction:column; gap:5px; box-shadow:var(--shadow);
+}
+.scen .mid{border-color:var(--accent); border-width:1px; box-shadow:var(--shadow), inset 0 0 0 1px var(--accent);}
+.scen .t{font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3);}
+.scen .v{font-size:23px; font-weight:700; letter-spacing:-.03em; font-variant-numeric:tabular-nums;}
+
+/* --- actions --- */
+ol.actions{list-style:none; counter-reset:a; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+ol.actions li{
+  counter-increment:a; background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  padding:15px 18px 15px 52px; position:relative; box-shadow:var(--shadow);
+}
+ol.actions li::before{
+  content:counter(a); position:absolute; left:18px; top:15px;
+  font-size:15px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums;
+}
+ol.actions h3{margin-bottom:3px;}
+ol.actions p{font-size:13.5px; color:var(--ink-2);}
+.tag{
+  float:right; margin-left:12px; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 8px; border-radius:3px; background:var(--surface-2); color:var(--ink-3);
+}
+
+footer{border-top:1px solid var(--rule); padding-top:18px; display:flex; flex-direction:column; gap:10px;}
+footer ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:5px;}
+footer li{font-size:12.5px; color:var(--ink-3); line-height:1.5;}
+strong{font-weight:700; color:var(--ink);}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">GenActiv · E-commerce · Ocena okresu</p>
+    <h1>Czy sierpień performuje dobrze czy źle?</h1>
+    <p class="dateline">1–16 sierpnia 2026 · 16 dni pełnych danych · porównanie: 1–16 lipca 2026 (MoM) i 1–16 sierpnia 2025 (YoY)</p>
+  </header>
+
+  <div class="verdict">
+    <p class="eyebrow">Werdykt</p>
+    <p class="headline">Sierpień jest w normie — nie jest słaby, jest po prostu gorszy od wyjątkowego lipca. Realny problem to konwersja, nie ruch.</p>
+    <p class="lede">Rok do roku sierpień rośnie o <strong>+31–43%</strong> i utrzymuje dokładnie ten sam indeks sezonowy względem czerwca co rok temu (1,20 vs 1,18). Spadek widoczny w porównaniu z lipcem to normalizacja po anomalii: lipiec 2026 urósł +36% m/m, podczas gdy rok wcześniej lipiec <em>spadał</em> o 4%. Natomiast od <strong>17 lipca</strong> konwersja całego sklepu spadła z 4,09% do 2,7–2,9% i nie wróciła — mimo że ruchu jest o 12,5% więcej niż w pierwszej połowie lipca.</p>
+    <div class="pills">
+      <span class="pill ok">Rok do roku: mocno na plusie</span>
+      <span class="pill ok">Sezonowość: zgodna z normą</span>
+      <span class="pill warn">Miesiąc do miesiąca: -18% przychodu</span>
+      <span class="pill bad">Konwersja: -1,2 p.p. od 17 lipca</span>
+      <span class="pill bad">E-mail: -85% przychodu m/m</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Wskaźniki dzienne · 1–16.08 vs 1–16.07.2026</p>
+      <h2>Ruch rośnie, sprzedaż spada — to nie jest problem z ruchem</h2>
+    </div>
+    <div class="kpis">
+      <div class="kpi">
+        <span class="label">Przychód / dzień</span>
+        <span class="value">13 746<small> zł</small></span>
+        <span class="delta down">▼ 17,6% m/m</span>
+        <span class="sub">lipiec 1–16: 16 674 zł</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Zamówienia / dzień</span>
+        <span class="value">54,4</span>
+        <span class="delta down">▼ 20,4% m/m</span>
+        <span class="sub">lipiec 1–16: 68,4</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Sesje / dzień</span>
+        <span class="value">1 881</span>
+        <span class="delta up">▲ 12,5% m/m</span>
+        <span class="sub">rok do roku: ▲ 38,3%</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Konwersja</span>
+        <span class="value">2,89<small>%</small></span>
+        <span class="delta down">▼ 1,20 p.p. m/m</span>
+        <span class="sub">zam. Shopify / sesje GA4</span>
+      </div>
+    </div>
+    <p class="note">Średnia wartość zamówienia trzyma się dobrze: <strong>252 zł</strong> vs 244 zł w lipcu (+3,5%), przy niższym poziomie rabatowania (12% vs 15%). Spadek przychodu jest w całości spadkiem liczby zamówień, nie wartości koszyka.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Przychód dzienny · Shopify · 1.07–16.08.2026</p>
+      <h2>Punkt zwrotny to 17 lipca, nie 1 sierpnia</h2>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">
+        <div class="legend">
+          <span><i class="swatch" style="background:var(--accent)"></i>przychód dzienny</span>
+          <span><i class="swatch line" style="background:var(--ink-2)"></i>średnia 7-dniowa</span>
+        </div>
+        <span class="note num">w tys. zł brutto</span>
+      </div>
+      <div class="chart-scroll"><svg id="daily" role="img" aria-label="Wykres dziennego przychodu od 1 lipca do 16 sierpnia 2026 z zaznaczonym załamaniem 17 lipca"></svg></div>
+      <div class="tt" id="tt-daily"></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="note" style="caption-side:bottom; text-align:left; padding:10px 14px;">Shopify (zamówienia, przychód, AOV) + GA4 (sesje). Konwersja = zamówienia Shopify / sesje GA4.</caption>
+        <thead>
+          <tr><th>Okres</th><th>Dni</th><th>Zam./dz.</th><th>Przychód/dz.</th><th>Sesje/dz.</th><th>Konwersja</th><th>AOV</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1–16 lipca</td><td class="num">16</td><td class="num">68,4</td><td class="num">16 674 zł</td><td class="num">1 672</td><td class="num"><span class="chip up">4,09%</span></td><td class="num">244 zł</td></tr>
+          <tr><td>17–31 lipca</td><td class="num">15</td><td class="num">56,8</td><td class="num">15 180 zł</td><td class="num">2 092</td><td class="num"><span class="chip down">2,71%</span></td><td class="num">267 zł</td></tr>
+          <tr><td>1–16 sierpnia</td><td class="num">16</td><td class="num">54,4</td><td class="num">13 746 zł</td><td class="num">1 881</td><td class="num"><span class="chip down">2,89%</span></td><td class="num">252 zł</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Załamanie konwersji nastąpiło <strong>w połowie lipca</strong>, nie na przełomie miesięcy. Sierpień odziedziczył ten stan i nawet lekko go poprawił (2,89% vs 2,71%). Ocenianie sierpnia przez pryzmat całego lipca zawyża skalę problemu — właściwym punktem odniesienia jest druga połowa lipca, wobec której sierpień jest o 4% słabszy w zamówieniach.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Sezonowość · GA4, ta sama metoda pomiaru w obu latach</p>
+      <h2>Sierpień trafia w normę sezonową — to lipiec był odchyleniem</h2>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">
+        <div class="legend">
+          <span><i class="swatch" style="background:var(--prior)"></i>2025</span>
+          <span><i class="swatch" style="background:var(--accent)"></i>2026</span>
+        </div>
+        <span class="note num">czerwiec = 100</span>
+      </div>
+      <div class="chart-scroll"><svg id="season" role="img" aria-label="Indeks przychodu: czerwiec, lipiec, sierpień w latach 2025 i 2026, czerwiec = 100"></svg></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="note" style="caption-side:bottom; text-align:left; padding:10px 14px;">Przychód przypisany w GA4 (property 279858535). Sierpień 2026 = projekcja liniowa z 16 dni.</caption>
+        <thead><tr><th>Miesiąc</th><th>2025</th><th>zmiana m/m</th><th>2026</th><th>zmiana m/m</th></tr></thead>
+        <tbody>
+          <tr><td>Czerwiec</td><td class="num">179 041 zł</td><td class="num flat">—</td><td class="num">193 652 zł</td><td class="num flat">—</td></tr>
+          <tr><td>Lipiec</td><td class="num">172 382 zł</td><td class="num down">▼ 3,7%</td><td class="num">263 261 zł</td><td class="num up">▲ 35,9%</td></tr>
+          <tr><td>Sierpień</td><td class="num">211 741 zł</td><td class="num up">▲ 22,8%</td><td class="num">~232 372 zł</td><td class="num down">▼ 11,7%</td></tr>
+          <tr class="total"><td>Indeks sierpień / czerwiec</td><td class="num">1,18</td><td></td><td class="num">1,20</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Dwa lata z rzędu sierpień kończy się ok. 20% powyżej czerwca. Różnica polega wyłącznie na tym, co robił lipiec. Dodatkowo <strong>sierpień jest miesiącem „tylnonogim”</strong>: w 2025 pierwsze 16 dni dało tylko <strong>43,2%</strong> miesięcznego przychodu, a konwersja w drugiej połowie sierpnia rosła z 1,57% do 1,88% wraz z powrotem z wakacji.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Prognoza całego sierpnia 2026 · Shopify, przychód brutto</p>
+      <h2>Gdzie realnie skończy się miesiąc</h2>
+    </div>
+    <div class="scen">
+      <div>
+        <span class="t">Wariant liniowy</span>
+        <span class="v">426 tys. zł</span>
+        <span class="note">×31/16 z dotychczasowego tempa. <span class="down" style="font-weight:600">−13,8% vs lipiec</span></span>
+      </div>
+      <div class="mid">
+        <span class="t">Wariant realistyczny</span>
+        <span class="v">~465 tys. zł</span>
+        <span class="note">Środek przedziału. <span class="down" style="font-weight:600">−6% vs lipiec</span>, ale wyraźnie powyżej czerwca.</span>
+      </div>
+      <div>
+        <span class="t">Wariant sezonowy</span>
+        <span class="v">509 tys. zł</span>
+        <span class="note">Przy rozkładzie z 2025 (1–16.08 = 43,2% miesiąca). <span class="up" style="font-weight:600">+3,0% vs lipiec</span></span>
+      </div>
+    </div>
+    <p class="note">Lipiec 2026 zamknął się na <strong>494 479 zł</strong> i 1 946 zamówieniach. Druga połowa sierpnia historycznie jest silniejsza od pierwszej — to okno, w którym da się jeszcze dociągnąć miesiąc do poziomu lipca, jeśli wróci e-mail i zostanie ograniczony niekonwertujący ruch płatny.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Kanały · GA4 · 1–16.08 vs 1–16.07.2026</p>
+      <h2>Skąd wziął się spadek konwersji</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kanał</th><th>Sesje</th><th>Sesje m/m</th><th>Konwersja</th><th>Konw. m/m</th><th>Przychód GA4</th><th>Przychód m/m</th></tr></thead>
+        <tbody>
+          <tr><td>Organic Social</td><td class="num">10 673</td><td class="num up">▲ 2,0%</td><td class="num">1,31%</td><td class="num down">▼ 0,49 p.p.</td><td class="num">28 087 zł</td><td class="num down">▼ 34,2%</td></tr>
+          <tr><td>Cross-network (PMax)</td><td class="num">7 508</td><td class="num up">▲ 66,6%</td><td class="num"><span class="chip down">0,89%</span></td><td class="num down">▼ 0,59 p.p.</td><td class="num">17 188 zł</td><td class="num up">▲ 6,7%</td></tr>
+          <tr><td>Organic Search</td><td class="num">4 408</td><td class="num down">▼ 8,5%</td><td class="num">1,84%</td><td class="num up">▲ 0,16 p.p.</td><td class="num">21 272 zł</td><td class="num up">▲ 7,3%</td></tr>
+          <tr><td>Paid Search</td><td class="num">3 040</td><td class="num down">▼ 4,6%</td><td class="num"><span class="chip up">3,75%</span></td><td class="num down">▼ 0,45 p.p.</td><td class="num">34 019 zł</td><td class="num flat">▼ 0,5%</td></tr>
+          <tr><td>Unassigned</td><td class="num">2 082</td><td class="num up">▲ 159%</td><td class="num">0,77%</td><td class="num down">▼ 0,23 p.p.</td><td class="num">3 750 zł</td><td class="num up">▲ 142%</td></tr>
+          <tr><td>Paid Social</td><td class="num">1 891</td><td class="num up">▲ 220%</td><td class="num"><span class="chip down">0,69%</span></td><td class="num flat">—</td><td class="num">3 137 zł</td><td class="num flat">—</td></tr>
+          <tr><td>Direct</td><td class="num">1 228</td><td class="num down">▼ 13,4%</td><td class="num"><span class="chip up">3,66%</span></td><td class="num up">▲ 0,07 p.p.</td><td class="num">9 444 zł</td><td class="num down">▼ 27,0%</td></tr>
+          <tr><td>E-mail</td><td class="num">107</td><td class="num down">▼ 84,1%</td><td class="num"><span class="chip up">6,54%</span></td><td class="num flat">▼ 0,14 p.p.</td><td class="num">1 633 zł</td><td class="num down">▼ 84,9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Wzorzec jest jednoznaczny: <strong>rośnie ruch o najniższej konwersji</strong> (PMax +67% przy CR 0,89%, Paid Social +220% przy CR 0,69%, Unassigned +159% przy CR 0,77%), a <strong>kurczy się ruch o najwyższej konwersji</strong> (e-mail -84% przy CR 6,54%, Direct -13% przy CR 3,66%). To rozwodnienie miksu, a nie pogorszenie sklepu — konwersja w kanałach o wysokiej intencji jest stabilna albo lepsza (Organic Search +0,16 p.p.).</p>
+    <p class="note">Dla kontekstu rok temu Cross-network konwertował na <strong>2,59%</strong> przy 4 281 sesjach. Dziś to 7 508 sesji przy 0,89% — kanał urósł o 75% i stracił dwie trzecie skuteczności.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Google Ads · konto 339-338-2047</p>
+      <h2>Co się stało 17 lipca</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Okres</th><th>Kliknięcia</th><th>CPC</th><th>Koszt</th><th>Konwersje</th><th>ROAS</th></tr></thead>
+        <tbody>
+          <tr><td>1–16 lipca</td><td class="num">8 079</td><td class="num">0,85 zł</td><td class="num">6 901 zł</td><td class="num">394</td><td class="num"><span class="chip up">14,3</span></td></tr>
+          <tr><td>17–31 lipca</td><td class="num">18 181</td><td class="num">0,46 zł</td><td class="num">8 323 zł</td><td class="num">340</td><td class="num">10,5</td></tr>
+          <tr><td>1–16 sierpnia</td><td class="num">15 677</td><td class="num">0,50 zł</td><td class="num">7 872 zł</td><td class="num">310</td><td class="num">11,0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Dokładnie 17 lipca liczba kliknięć skoczyła o <strong>+125%</strong> przy <strong>CPC niższym o 46%</strong>, a liczba konwersji <em>spadła</em> z 394 do 340. To sygnatura przesunięcia budżetu w tani, szeroki ruch (Performance Max / display). Kampanie nadal są rentowne w ujęciu ROAS, ale każda dodatkowa złotówka kupuje coraz gorszy ruch — i to ten ruch obniża konwersję całego sklepu w statystykach.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Rekomendacje · uszeregowane wg spodziewanego zwrotu w tym miesiącu</p>
+      <h2>Co zrobić w drugiej połowie sierpnia</h2>
+    </div>
+    <ol class="actions">
+      <li>
+        <span class="tag">Klaviyo</span>
+        <h3>Wznowić wysyłkę e-mail</h3>
+        <p>Największa i najtańsza dziura: 673 → 107 sesji i 10 782 → 1 633 zł miesiąc do miesiąca, przy najwyższej konwersji ze wszystkich kanałów (6,54%). Odtworzenie lipcowego wolumenu to ok. <strong>+9 tys. zł</strong> przychodu przypisanego w GA4 na 16 dni, realnie ok. dwa razy tyle w Shopify.</p>
+      </li>
+      <li>
+        <span class="tag">Google Ads</span>
+        <h3>Audyt Performance Max</h3>
+        <p>7 508 sesji przy konwersji 0,89% wobec 2,59% rok temu. Sprawdzić wykluczenia miejsc docelowych, grupy zasobów i sygnały odbiorców; rozważyć cofnięcie zmiany z 17 lipca lub przesunięcie budżetu do Paid Search, który konwertuje na 3,75%.</p>
+      </li>
+      <li>
+        <span class="tag">Meta / Paid Social</span>
+        <h3>Zweryfikować Paid Social</h3>
+        <p>1 891 sesji, konwersja 0,69%, 3 137 zł przychodu. Kanał wystartował od zera i na razie nie zarabia. <strong>Nie da się ocenić rentowności</strong> — token Meta Ads API wygasł 29.03.2026, brak danych o wydatkach.</p>
+      </li>
+      <li>
+        <span class="tag">Plan</span>
+        <h3>Zaplanować push na 17–31 sierpnia</h3>
+        <p>Historycznie druga połowa sierpnia to <strong>57% przychodu miesiąca</strong> — powrót z wakacji i start sezonu odpornościowego. Wrzesień 2025 był o 57% wyższy od sierpnia. To okno, w którym miesiąc jeszcze może wyjść na poziom lipca.</p>
+      </li>
+      <li>
+        <span class="tag">Pomiar</span>
+        <h3>Odnowić token Meta Ads</h3>
+        <p>Bez niego każda ocena płatnych kanałów jest niepełna — nie znamy ani wydatku, ani ROAS na Meta.</p>
+      </li>
+    </ol>
+  </section>
+
+  <footer>
+    <p class="eyebrow">Metodyka i zastrzeżenia</p>
+    <ul>
+      <li><strong>Źródła.</strong> Shopify Admin API (zamówienia, przychód brutto, AOV, rabaty), GA4 property 279858535 (sesje, kanały, przychód przypisany), Google Ads 339-338-2047. Dane pobrane 17.08.2026.</li>
+      <li><strong>Dwie różne miary przychodu.</strong> GA4 przypisuje ok. 53–55% przychodu widocznego w Shopify (efekt zgód na cookies — banner Pandectes blokuje opcjonalne ciasteczka domyślnie). Kwoty bezwzględne pochodzą z Shopify; porównania rok do roku i sezonowość z GA4, bo Shopify API udostępnia tylko ostatnie 60 dni zamówień — dane z 2025 są przez API niedostępne.</li>
+      <li><strong>Konwersja liczona krzyżowo.</strong> 2,89% to zamówienia Shopify podzielone przez sesje GA4. Wskaźnik konwersji raportowany wewnątrz GA4 jest niższy (1,62%) i również wzrósł rok do roku z 1,57%. Kierunek zmian jest w obu miarach identyczny.</li>
+      <li><strong>Meta Ads — luka.</strong> Token wygasł 29.03.2026, wydatki i ROAS na Meta nie zostały uwzględnione.</li>
+      <li><strong>Prognozy</strong> są ekstrapolacją z 16 dni i zakładają brak akcji promocyjnych oraz stabilny miks kanałów.</li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var css = function(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+  var fmt = function(n){ return n.toLocaleString("pl-PL"); };
+
+  /* ---------- Chart 1: daily revenue ---------- */
+  var daily = [
+    ["01.07",19801],["02.07",15846],["03.07",19921],["04.07",13139],["05.07",18989],["06.07",24542],["07.07",17817],
+    ["08.07",16366],["09.07",12679],["10.07",13831],["11.07",13371],["12.07",13990],["13.07",21430],["14.07",14465],
+    ["15.07",15700],["16.07",14891],["17.07",10531],["18.07",10764],["19.07",11673],["20.07",16716],["21.07",20141],
+    ["22.07",16509],["23.07",18809],["24.07",15388],["25.07",12305],["26.07",13304],["27.07",21269],["28.07",16815],
+    ["29.07",13892],["30.07",16557],["31.07",13030],
+    ["01.08",12720],["02.08",10513],["03.08",21197],["04.08",12795],["05.08",17352],["06.08",11952],["07.08",11777],
+    ["08.08",10696],["09.08",14117],["10.08",18626],["11.08",16185],["12.08",18190],["13.08",14170],["14.08",8918],
+    ["15.08",8004],["16.08",12721]
+  ];
+
+  function drawDaily(){
+    var svg = document.getElementById("daily");
+    var tt  = document.getElementById("tt-daily");
+    var W = Math.max(720, svg.parentNode.clientWidth), H = 300;
+    var m = {t:22, r:14, b:38, l:44};
+    var iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var max = 26000;
+    var y = function(v){ return m.t + ih - (v/max)*ih; };
+    var bw = iw/daily.length;
+    var bar = Math.min(14, bw*0.62);
+
+    var ink3 = css("--ink-3"), rule = css("--rule"), accent = css("--accent"), ink2 = css("--ink-2");
+    var s = ['<svg id="daily" role="img" aria-label="Przychód dzienny 1.07–16.08.2026" xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">'];
+
+    /* gridlines */
+    [0,5000,10000,15000,20000,25000].forEach(function(v){
+      s.push('<line x1="'+m.l+'" y1="'+y(v)+'" x2="'+(W-m.r)+'" y2="'+y(v)+'" stroke="'+rule+'" stroke-width="1"/>');
+      s.push('<text x="'+(m.l-8)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="10.5" fill="'+ink3+'" font-family="inherit">'+(v/1000)+'</text>');
+    });
+
+    /* break marker at 17.07 (index 16) */
+    var bx = m.l + 16*bw;
+    s.push('<rect x="'+bx+'" y="'+m.t+'" width="'+(iw-16*bw)+'" height="'+ih+'" fill="'+accent+'" opacity="0.05"/>');
+    s.push('<line x1="'+bx+'" y1="'+(m.t-8)+'" x2="'+bx+'" y2="'+(m.t+ih)+'" stroke="'+ink2+'" stroke-width="1.5" stroke-dasharray="3 3"/>');
+    s.push('<text x="'+(bx+6)+'" y="'+(m.t-2)+'" font-size="10.5" font-weight="700" fill="'+ink2+'" font-family="inherit">17.07 — zmiana w Google Ads</text>');
+
+    /* bars */
+    daily.forEach(function(d,i){
+      var x = m.l + i*bw + (bw-bar)/2;
+      var h = Math.max(3,(d[1]/max)*ih);
+      s.push('<rect class="b" data-i="'+i+'" x="'+x+'" y="'+(m.t+ih-h)+'" width="'+bar+'" height="'+h+'" rx="3" fill="'+accent+'"/>');
+    });
+
+    /* 7-day moving average */
+    var pts = [];
+    for (var i=6;i<daily.length;i++){
+      var sum=0; for (var k=i-6;k<=i;k++) sum+=daily[k][1];
+      pts.push([m.l + i*bw + bw/2, y(sum/7)]);
+    }
+    s.push('<polyline fill="none" stroke="'+ink2+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="'+pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" ")+'"/>');
+
+    /* x labels */
+    [0,8,16,23,31,39,45].forEach(function(i){
+      s.push('<text x="'+(m.l + i*bw + bw/2)+'" y="'+(H-16)+'" text-anchor="middle" font-size="10.5" fill="'+ink3+'" font-family="inherit">'+daily[i][0]+'</text>');
+    });
+    /* hover targets */
+    daily.forEach(function(d,i){
+      s.push('<rect class="hit" data-i="'+i+'" x="'+(m.l+i*bw)+'" y="'+m.t+'" width="'+bw+'" height="'+ih+'" fill="transparent"/>');
+    });
+    s.push('</svg>');
+    svg.outerHTML = s.join("");
+
+    var node = document.getElementById("daily");
+    node.addEventListener("mousemove", function(e){
+      var t = e.target;
+      if (t.classList && t.classList.contains("hit")){
+        var d = daily[+t.getAttribute("data-i")];
+        tt.textContent = d[0] + " · " + fmt(d[1]) + " zł";
+        tt.style.opacity = 1;
+        var r = node.parentNode.parentNode.getBoundingClientRect();
+        tt.style.left = Math.min(r.width-140, Math.max(0, e.clientX - r.left + 12)) + "px";
+        tt.style.top  = (e.clientY - r.top - 34) + "px";
+      } else { tt.style.opacity = 0; }
+    });
+    node.addEventListener("mouseleave", function(){ tt.style.opacity = 0; });
+  }
+
+  /* ---------- Chart 2: seasonality index ---------- */
+  function drawSeason(){
+    var svg = document.getElementById("season");
+    var data = [
+      {m:"Czerwiec", a:100.0, b:100.0},
+      {m:"Lipiec",   a:96.3,  b:135.9},
+      {m:"Sierpień", a:118.3, b:120.0}
+    ];
+    var W = Math.max(560, Math.min(880, svg.parentNode.clientWidth)), H = 250;
+    var m = {t:26, r:14, b:44, l:40};
+    var iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var max = 150;
+    var y = function(v){ return m.t + ih - (v/max)*ih; };
+    var gw = iw/data.length, bar = Math.min(56, gw*0.30), gap = 6;
+
+    var ink=css("--ink"), ink2=css("--ink-2"), ink3=css("--ink-3"), rule=css("--rule"),
+        accent=css("--accent"), prior=css("--prior"), surface=css("--surface");
+    var s = ['<svg id="season" role="img" aria-label="Indeks przychodu czerwiec–sierpień, 2025 vs 2026, czerwiec = 100" xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">'];
+
+    [0,50,100,150].forEach(function(v){
+      s.push('<line x1="'+m.l+'" y1="'+y(v)+'" x2="'+(W-m.r)+'" y2="'+y(v)+'" stroke="'+rule+'" stroke-width="'+(v===100?1.5:1)+'"'+(v===100?' stroke-dasharray="4 4"':'')+'/>');
+      s.push('<text x="'+(m.l-8)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="10.5" fill="'+ink3+'" font-family="inherit">'+v+'</text>');
+    });
+
+    data.forEach(function(d,i){
+      var cx = m.l + i*gw + gw/2;
+      [[d.a, prior, "2025"], [d.b, accent, "2026"]].forEach(function(p,j){
+        var x = cx - bar - gap/2 + j*(bar+gap);
+        var h = (p[0]/max)*ih;
+        s.push('<rect x="'+x+'" y="'+y(p[0])+'" width="'+bar+'" height="'+h+'" rx="4" fill="'+p[1]+'" stroke="'+surface+'" stroke-width="2"/>');
+        s.push('<text x="'+(x+bar/2)+'" y="'+(y(p[0])-7)+'" text-anchor="middle" font-size="12" font-weight="700" fill="'+ink+'" font-family="inherit">'+p[0].toFixed(0)+'</text>');
+      });
+      s.push('<text x="'+cx+'" y="'+(H-22)+'" text-anchor="middle" font-size="12" font-weight="600" fill="'+ink2+'" font-family="inherit">'+d.m+'</text>');
+    });
+    s.push('<text x="'+(m.l + 2*gw + gw/2)+'" y="'+(H-7)+'" text-anchor="middle" font-size="10.5" fill="'+ink3+'" font-family="inherit">2026 = projekcja z 16 dni</text>');
+    s.push('</svg>');
+    svg.outerHTML = s.join("");
+  }
+
+  function render(){ drawDaily(); drawSeason(); }
+  render();
+
+  var t;
+  window.addEventListener("resize", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){
+      var a = document.getElementById("daily"), b = document.getElementById("season");
+      if (a) a.outerHTML = '<svg id="daily"></svg>';
+      if (b) b.outerHTML = '<svg id="season"></svg>';
+      render();
+    }, 180);
+  });
+})();
+</script>

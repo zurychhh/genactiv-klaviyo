@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenActiv — Model subskrypcyjny: plan wdrozenia | 2026-08-17</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922; --orange: #db6d28;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; padding: 2rem 2rem 4rem; max-width: 1000px; margin: 0 auto; font-size: 15px; }
+  h1 { font-size: 1.6rem; margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.2rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); letter-spacing: -0.01em; }
+  h3 { font-size: 0.98rem; margin: 1.25rem 0 0.6rem; color: var(--accent); }
+  .sub { color: var(--muted); margin-bottom: 2rem; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.9rem 0; font-size: 0.86rem; }
+  th, td { padding: 0.55rem 0.7rem; text-align: left; border: 1px solid var(--border); }
+  th { background: var(--surface); font-weight: 600; }
+  td { vertical-align: top; }
+  .r { text-align: right; }
+  .b { font-weight: 700; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.82rem; color: var(--muted); }
+  code { background: #1c2128; padding: 2px 6px; border-radius: 4px; font-size: 0.84rem; color: #79c0ff; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; vertical-align: middle; }
+  .badge-red { background: #f8514933; color: var(--red); }
+  .badge-orange { background: #db6d2833; color: var(--orange); }
+  .badge-yellow { background: #d2992233; color: var(--yellow); }
+  .badge-green { background: #3fb95033; color: var(--green); }
+  .badge-blue { background: #58a6ff33; color: var(--accent); }
+  .badge-purple { background: #bc8cff33; color: var(--purple); }
+  ul, ol { margin: 0.4rem 0 0.7rem 1.4rem; }
+  li { margin-bottom: 0.3rem; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; margin: 1.4rem 0; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem; text-align: center; }
+  .kpi-num { font-size: 1.5rem; font-weight: 800; }
+  .kpi-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.15rem; }
+  @media (max-width: 700px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .two-col { grid-template-columns: 1fr !important; } }
+  .hl { padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-size: 0.89rem; }
+  .hl-red { background: #f8514915; border-left: 3px solid var(--red); }
+  .hl-orange { background: #db6d2815; border-left: 3px solid var(--orange); }
+  .hl-green { background: #3fb95015; border-left: 3px solid var(--green); }
+  .hl-blue { background: #58a6ff15; border-left: 3px solid var(--accent); }
+  .bar-wrap { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .bar-label { width: 120px; font-size: 0.82rem; text-align: right; flex-shrink: 0; }
+  .bar { height: 22px; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 0.72rem; font-weight: 700; color: #fff; min-width: 40px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.1rem; }
+  .gate { background: #f8514912; border: 1px solid #f8514955; border-radius: 8px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .tl { border-left: 2px solid var(--border); margin-left: 8px; padding-left: 1.2rem; }
+  .tl-item { position: relative; margin-bottom: 1.1rem; }
+  .tl-item::before { content: ''; position: absolute; left: -1.55rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+  .tl-item.done::before { background: var(--green); }
+  .tl-item.risk::before { background: var(--red); }
+  .tl-date { font-size: 0.76rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .footer { text-align: center; color: var(--muted); margin-top: 3rem; font-size: 0.78rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<h1>Model subskrypcyjny — plan wdrozenia</h1>
+<p class="sub">GenActiv.pl &nbsp;|&nbsp; 17 sierpnia 2026 &nbsp;|&nbsp; VIII-B2 · LTV &amp; Retencja<br>
+<span class="small">Wycena pracochlonnosci na bazie 5 audytow (17.07) + weryfikacji stanu sklepu na danych produkcyjnych (17.08)</span></p>
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-num" style="color:var(--accent);">126–148h</div><div class="kpi-label">Do soft launchu</div></div>
+  <div class="kpi"><div class="kpi-num" style="color:var(--purple);">190–210h</div><div class="kpi-label">Pelny program R1</div></div>
+  <div class="kpi"><div class="kpi-num" style="color:var(--green);">~$30/mc</div><div class="kpi-label">Koszt narzedzia</div></div>
+  <div class="kpi"><div class="kpi-num" style="color:var(--yellow);">30 wrz</div><div class="kpi-label">Realny soft launch</div></div>
+</div>
+
+<div class="gate">
+  <span class="badge badge-red">GO / NO-GO</span> &nbsp;<span class="b">Jedno sprawdzenie decyduje o calym harmonogramie.</span><br>
+  <span style="font-size:0.89rem;">Sklep przyjmuje karty przez <span class="b">Stripe</span>, a Shopify dopuszcza Stripe jako bramke subskrypcyjna — ale <span class="b">„only to select merchants"</span>. Trzeba potwierdzic, ze ta konkretna integracja ma wlaczony vaulting. Koszt sprawdzenia: <span class="b">30 min w Shopify Admin</span> + testowy selling plan.<br>
+  <span style="color:var(--green);">Jesli TAK</span> → plan ponizej, ~130h. &nbsp;&nbsp; <span style="color:var(--red);">Jesli NIE</span> → aktywacja Shopify Payments: <span class="b">+40–60h i +4–6 tygodni</span>.</span>
+</div>
+
+<!-- ================================================================ -->
+<h2>1. Stan faktyczny — weryfikacja na danych produkcyjnych</h2>
+
+<table>
+<tr><th style="width:32%">Element</th><th style="width:26%">Stan</th><th>Wniosek dla wdrozenia</th></tr>
+<tr><td>Rail kartowy</td><td><span class="badge badge-green">JEST</span> Stripe Card Payments</td><td class="b" style="color:var(--green);">Odpada projekt uruchamiania bramki, KYC i przebudowy rozliczen (~20–40h oszczednosci)</td></tr>
+<tr><td>Apple Pay / Google Pay</td><td><span class="badge badge-green">AKTYWNE</span></td><td>Dziala z subskrypcjami — dodatkowy kanal adopcji</td></tr>
+<tr><td>Selling plan groups</td><td><span class="badge badge-red">0</span></td><td>Konfiguracja od zera</td></tr>
+<tr><td>Aplikacja subskrypcyjna</td><td><span class="badge badge-red">BRAK</span></td><td>Instalacja Appstle (free tier na start)</td></tr>
+<tr><td>Flow w Klaviyo</td><td>13, <span class="b">zaden subskrypcyjny</span></td><td>Faza 0 z roadmapy nie ruszyla — 13h zaleglosci</td></tr>
+<tr><td>Shopify Payments</td><td><span class="badge badge-yellow">NIEAKTYWNE</span> (brak Shop Pay)</td><td>Plan B, nie sciezka domyslna</td></tr>
+<tr><td>Plan sklepu</td><td>Advanced, 135 produktow</td><td>Brak ograniczen platformowych</td></tr>
+</table>
+
+<h3>Mix platnosci — 1500 zamowien, 17.06–17.08.2026</h3>
+<div style="margin:0.8rem 0 0.4rem;">
+  <div class="bar-wrap"><div class="bar-label">Przelewy24</div><div class="bar" style="width:71.9%; background:var(--orange);">71,9% &nbsp;·&nbsp; 1078 zam. &nbsp;·&nbsp; 274 695 PLN</div></div>
+  <div class="bar-wrap"><div class="bar-label">Stripe (karta)</div><div class="bar" style="width:27.9%; background:var(--green);">27,9% &nbsp;·&nbsp; 419 zam.</div></div>
+  <div class="bar-wrap"><div class="bar-label">Oba</div><div class="bar" style="width:4%; background:var(--muted);">0,2%</div></div>
+</div>
+<div class="hl hl-green">
+<span class="b">Zalozenie audytu potwierdzone empirycznie.</span> Lipcowa analiza szacowala dostepny rynek subskrypcji na 25–30% kupujacych (tylko karta — P24 i BLIK nie obsluguja platnosci cyklicznych na Shopify). Faktyczny udzial platnosci kartowych: <span class="b">27,9% zamowien / 29,1% przychodu</span>. Baza do projekcji jest solidna.
+</div>
+
+<!-- ================================================================ -->
+<h2>2. Pracochlonnosc</h2>
+
+<table>
+<tr><th style="width:44%">Blok</th><th class="r" style="width:12%">Godziny</th><th style="width:16%">Kto</th><th>Uwaga</th></tr>
+<tr><td>Weryfikacja vaultingu Stripe + test e2e bramki</td><td class="r b">4</td><td>DEV</td><td class="small" style="color:var(--red);">Blokuje wszystko ponizej</td></tr>
+<tr><td>Appstle: instalacja, selling plany per SKU, rabat 10% + darmowa dostawa</td><td class="r b">8</td><td>CC</td><td class="small">Interwaly wg danych, nie wg opakowania</td></tr>
+<tr><td>Widget PDP + badge w koszyku + price update JS (GEN-6)</td><td class="r b">16</td><td>DEV</td><td class="small">Najwiekszy blok frontendowy</td></tr>
+<tr><td>Portal klienta: polonizacja + branding</td><td class="r b">6</td><td>CC</td><td class="small">Wymog prawny: anulowanie musi byc proste</td></tr>
+<tr><td>Klaviyo — <span class="b">zalegla Faza 0</span> (replenishment 3 sciezki, EDNO, upsell draft)</td><td class="r b">13</td><td>CC</td><td class="small" style="color:var(--green);">Nie wymaga Appstle — mozna startowac dzis</td></tr>
+<tr><td>Klaviyo — flow launchowe (welcome, reminder, dunning, segmenty, upsell, adaptacja interwalu, ankieta)</td><td class="r b">30</td><td>CC</td><td class="small">7 flow</td></tr>
+<tr><td>6 maili transakcyjnych w szablonach GenActiv (PL)</td><td class="r b">6</td><td>CC</td><td class="small"></td></tr>
+<tr><td>Cancel-save flows + harmonogram dunningu</td><td class="r b">5</td><td>CC</td><td class="small"></td></tr>
+<tr style="background:#f8514910;"><td><span class="b">Baselinker + KSeF</span> <span class="badge badge-red">NOWE</span></td><td class="r b">12–20</td><td>DEV</td><td class="small">Nie bylo w zadnym z 5 raportow</td></tr>
+<tr style="background:#f8514910;"><td><span class="b">Regulamin + compliance</span> <span class="badge badge-red">NOWE</span></td><td class="r b">8–12</td><td>prawnik</td><td class="small">Nie bylo w zadnym z 5 raportow</td></tr>
+<tr><td>QA end-to-end + 10 testerow wewnetrznych</td><td class="r b">10</td><td>CC + MAN</td><td class="small">Subskrypcja, zmiana, pauza, anulowanie, re-sub</td></tr>
+<tr><td>Kampania launchowa do top 500 repeat buyers + monitoring M1</td><td class="r b">8</td><td>CC</td><td class="small"></td></tr>
+<tr style="background:var(--surface);"><td class="b">RAZEM DO SOFT LAUNCHU</td><td class="r b" style="color:var(--accent); font-size:1rem;">126–148</td><td colspan="2" class="small">~75h CC &nbsp;·&nbsp; 32–40h DEV &nbsp;·&nbsp; 10h QA/MAN &nbsp;·&nbsp; 8–12h prawnik</td></tr>
+<tr><td class="muted">Faza 3–4: retencja, bundle, cross-sell, BF, optymalizacja (paz–gru)</td><td class="r muted">~62</td><td class="muted">CC</td><td class="small">Po launchu</td></tr>
+<tr style="background:var(--surface);"><td class="b">PELNY PROGRAM R1</td><td class="r b" style="color:var(--purple); font-size:1rem;">190–210</td><td colspan="2" class="small">5 miesiecy, koszt platformy ~$150 w R1</td></tr>
+</table>
+
+<div class="hl hl-orange">
+<span class="b">Vs. estymata z 17.07 (114h do launchu / 168h total).</span> Roznica to niemal wylacznie trzy bloki nieuwzglednione w audytach — Baselinker, KSeF i warstwa prawna. Pozostale pozycje trzymaja sie dobrze. <span class="small">(Drobiazg do poprawy w raporcie zrodlowym: tabela Fazy 0 sumuje sie do 22h, a podsumowanie podaje 16h.)</span>
+</div>
+
+<!-- ================================================================ -->
+<h2>3. Czego brakowalo w audytach — trzy luki</h2>
+
+<div class="two-col">
+<div class="box">
+<h3 style="margin-top:0;">1. Baselinker / ERP</h3>
+<p class="small" style="color:var(--text);">Kazdy cykl subskrypcji tworzy <span class="b">nowe zamowienie Shopify</span>, ktore leci do Baselinkera. Skrypt <code>sync_payment_id.py</code> byl pisany pod platnosci jednorazowe — obciazenia recurring ze Stripe wymagaja testu i prawdopodobnie korekty mapowania.</p>
+<p class="small">Nieestymowane w zadnym raporcie. <span class="b">12–20h.</span></p>
+</div>
+<div class="box">
+<h3 style="margin-top:0;">2. KSeF — e-faktura per cykl</h3>
+<p class="small" style="color:var(--text);">Obowiazkowy od 04.2026, okres przejsciowy konczy sie <span class="b" style="color:var(--red);">31.12.2026</span>. Kazdy cykl rozliczeniowy = osobna faktura w strukturze XML. Raport techniczny wymienia to jako <span class="muted">ryzyko</span>, nie jako zadanie z wlascicielem.</p>
+<p class="small">Launch we wrzesniu bez tego = <span class="b">fakturowanie reczne do konca roku</span>.</p>
+</div>
+</div>
+<div class="box" style="margin-top:1.25rem;">
+<h3 style="margin-top:0;">3. Warstwa prawna <span class="badge badge-purple">poza zakresem CC</span></h3>
+<p class="small" style="color:var(--text);">Regulamin subskrypcji &nbsp;·&nbsp; mechanizm anulowania zgodny z <span class="b">Digital Fairness Act</span> (transpozycja czerwiec 2026 — anulowanie musi byc tak proste jak zapis) &nbsp;·&nbsp; zgoda na zmiane ceny (UOKiK zakazuje jednostronnych podwyzek) &nbsp;·&nbsp; 14 dni odstapienia liczone od <span class="b">kazdej</span> dostawy &nbsp;·&nbsp; informacja przedkontraktowa w checkoucie.</p>
+<p class="small">Wymaga prawnika. <span class="b">8–12h.</span></p>
+</div>
+
+<!-- ================================================================ -->
+<h2>4. Harmonogram</h2>
+
+<div class="hl hl-red">
+<span class="b">Obsuniecie: ~4–5 tygodni.</span> Roadmapa zakladala start Fazy 0 w lipcu W3. Jest 17 sierpnia, Faza 0 nie ruszyla (zero flow subskrypcyjnych w Klaviyo, zero selling planow w Shopify).
+</div>
+
+<div class="tl">
+  <div class="tl-item risk">
+    <div class="tl-date">do 24 sierpnia &nbsp;·&nbsp; <span style="color:var(--red);">KRYTYCZNE</span></div>
+    <div class="b">Decyzja + weryfikacja bramki</div>
+    <div class="small">Sprawdzenie vaultingu Stripe (30 min) · zgoda na Appstle · przydzielenie prawnika i wlasciciela KSeF. Rownolegle: <span style="color:var(--green);">start zaleglej Fazy 0 w Klaviyo — nie wymaga Appstle ani decyzji o narzedziu</span>.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">wrzesien &nbsp;·&nbsp; Faza 1</div>
+    <div class="b">Fundament</div>
+    <div class="small">Appstle + selling plany · widget PDP · portal PL · maile transakcyjne · Baselinker/KSeF · QA e2e z 10 testerami.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">koniec wrzesnia / poczatek pazdziernika</div>
+    <div class="b">SOFT LAUNCH — 5 produktow Tier 1</div>
+    <div class="small">Kampania do top 500 repeat buyers · monitoring conversion rate, payment success, churn.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">pazdziernik–listopad &nbsp;·&nbsp; Faza 3</div>
+    <div class="b">Retencja + ekspansja</div>
+    <div class="small">Tier 2 · bundle · cancel-save + winback · churn risk · <span class="b">Black Friday: konwersja jednorazowych kupujacych na subskrypcje</span>.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">grudzien &nbsp;·&nbsp; Faza 4</div>
+    <div class="b">Optymalizacja</div>
+    <div class="small">Milestone flow · A/B testy · RFM + sub layer · ewaluacja migracji Appstle → Loop przy MRR &gt; 30K PLN.</div>
+  </div>
+</div>
+
+<div class="hl hl-blue">
+Wrzesniowy launch z roadmapy H2 jest <span class="b">jeszcze do uratowania</span> — pod warunkiem decyzji o narzedziu w tym tygodniu i rownoleglego startu prac w Klaviyo, ktore nie zaleza od Appstle.
+</div>
+
+<!-- ================================================================ -->
+<h2>5. Model docelowy — decyzje juz podjete</h2>
+
+<table>
+<tr><th style="width:26%">Obszar</th><th style="width:34%">Decyzja</th><th>Uzasadnienie</th></tr>
+<tr><td>Platforma</td><td class="b">Appstle</td><td>0% transaction fee, free do $500/mc przychodu sub, potem ~$30/mc. Migracja do Loop dopiero przy MRR &gt; 30K PLN. Odrzucono Recharge (~$5 220/rok).</td></tr>
+<tr><td>Model</td><td class="b">Subscribe &amp; Save + prepaid kwartalny</td><td>Prepaid omija bloker platnosci — mozna zaplacic BLIK/P24 z gory za 3 miesiace.</td></tr>
+<tr><td>Rabat</td><td class="b">10% ongoing + darmowa dostawa</td><td>Odrzucono 15% na 1. zamowienie — przy ograniczonej puli subskrybentow niewielki uplift vs koszt marzy.</td></tr>
+<tr><td>Interwaly</td><td class="b">Wg danych, nie wg opakowania</td><td>FIBERBIOM: mediana <span class="b">16 dni</span>, nie 30 (klienci bior ~2 saszetki/dzien). Colostrum 60 kaps: 30 dni. To korekta obalajaca pierwotne zalozenie 30/60.</td></tr>
+<tr><td>Start</td><td class="b">5 produktow Tier 1</td><td>87,8% przychodu to suplementy konsumpcyjne, repeat rate 55%.</td></tr>
+</table>
+
+<h3>Cele (grudzien 2026)</h3>
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-num">180–250</div><div class="kpi-label">Aktywnych subskrybentow</div></div>
+  <div class="kpi"><div class="kpi-num">32–45K</div><div class="kpi-label">PLN / mc z subskrypcji</div></div>
+  <div class="kpi"><div class="kpi-num">162K</div><div class="kpi-label">PLN netto — projekcja R1</div></div>
+  <div class="kpi"><div class="kpi-num">4–8×</div><div class="kpi-label">LTV sub vs jednorazowy</div></div>
+</div>
+
+<!-- ================================================================ -->
+<h2>6. Do rozstrzygniecia w tym tygodniu</h2>
+
+<table>
+<tr><th style="width:5%">#</th><th style="width:40%">Decyzja</th><th style="width:15%">Kto</th><th>Konsekwencja zwloki</th></tr>
+<tr><td class="b">1</td><td class="b">Vaulting Stripe — potwierdzic w Shopify Admin</td><td>DEV</td><td>Decyduje, czy to projekt 130h czy 190h. Blokuje cala Faze 1.</td></tr>
+<tr><td class="b">2</td><td class="b">Wlasciciel KSeF dla recurring</td><td>BIZNES</td><td>Launch we wrzesniu bez tego = reczne fakturowanie do 31.12.</td></tr>
+<tr><td class="b">3</td><td class="b">Zgoda na koszt Appstle</td><td>BIZNES</td><td>De facto $0 na starcie — najtanszy element calosci.</td></tr>
+<tr><td class="b">4</td><td class="b">Zlecenie prawnikowi regulaminu subskrypcji</td><td>BIZNES</td><td>Sciezka krytyczna — nie da sie uruchomic bez regulaminu.</td></tr>
+</table>
+
+<div class="hl hl-orange">
+<span class="b">Ograniczenie techniczne:</span> weryfikacji vaultingu nie da sie zrobic przez API — token <code>Claude MCP</code> nie ma scope'u na <code>subscriptionContracts</code> ani na liste aplikacji. Wymaga wejscia w Shopify Admin przez czlowieka.
+</div>
+
+<!-- ================================================================ -->
+<h2>Dokumenty zrodlowe</h2>
+<table>
+<tr><th style="width:52%">Plik</th><th>Zakres</th></tr>
+<tr><td><code>reports/subscription-model-final-recommendation-2026-07-17.md</code></td><td>Finalna rekomendacja — synteza 3 audytow, rozstrzygniecia konfliktow, roadmapa</td></tr>
+<tr><td><code>sprint-2026-06/W1/A2/artefakty/subscription-business-case-genactiv.md</code></td><td>Business case — projekcje 12 mies., unit economics, rabaty, bundle</td></tr>
+<tr><td><code>reports/subscription-technical-audit-2026-07-17.md</code></td><td>Audyt techniczny — 6 narzedzi, bramki platnosci, prawo i podatki PL</td></tr>
+<tr><td><code>reports/klaviyo-subscription-audit-2026-07-17.md</code></td><td>Audyt Klaviyo — 9 flow, segmentacja, orkiestracja SMS+email, RODO</td></tr>
+<tr><td><code>reports/reorder-interval-analysis-2026-07-17.md</code></td><td>Realne interwaly reorder per SKU — korekta zalozenia 30/60 dni</td></tr>
+</table>
+
+<p class="footer">
+GenActiv.pl &nbsp;·&nbsp; VIII-B2 Model subskrypcyjny &nbsp;·&nbsp; 17.08.2026<br>
+Estymaty na bazie audytow z 17.07.2026 i weryfikacji stanu sklepu na danych produkcyjnych z 17.08.2026.<br>
+Widelki godzinowe odzwierciedlaja niepewnosc trzech blokow (bramka, ERP/KSeF, prawo), nie bufor.
+</p>
+
+</body>
+</html>

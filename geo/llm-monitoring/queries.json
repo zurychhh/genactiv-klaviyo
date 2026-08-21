@@ -1,10 +1,9 @@
 {
   "_meta": {
-    "version": "0.1-provisional",
+    "version": "1.0",
     "created": "2026-08-11",
     "task": "VIII-A3 · Monitoring cytowań w LLM",
-    "status": "PROWIZORYCZNY — priorytet i volume do uzupełnienia z Senuto",
-    "blocker": "senuto-mcp nie jest skonfigurowany lokalnie (SENUTO_API_KEY brak w .env, w .mcp.json placeholder __SENUTO_API_KEY__). Klucz istnieje wyłącznie jako zmienna środowiskowa Railway.",
+    "status": "ZAMROZONY — set fraz nie zmienia sie miedzy pomiarami",
     "zasada": "Set jest STAŁY między pomiarami. Po ustaleniu wersji 1.0 nie zmieniamy brzmienia zapytań — inaczej pomiary miesiąc do miesiąca przestają być porównywalne. Nowe zapytania dopisujemy na końcu z nowym id i oznaczamy 'added' — nie podmieniamy istniejących.",
     "clusters": [
       "wzdecia",
@@ -19,168 +18,230 @@
       "decyzyjny",
       "porownawczy",
       "long-tail"
-    ]
+    ],
+    "priority_frozen": "2026-08-17",
+    "priority_method": "priority = ranga 1..N wg popytu klastra (1 = najwiekszy). Zapytania do LLM nie maja wlasnego wolumenu wyszukiwan, wiec dla kazdego wskazano frazy-proxy w Google (stala PROXY w geo/llm-monitoring/senuto_priority.py). demand_volume = suma miesiecznych wyszukiwan TOP-20 fraz zawierajacych wszystkie slowa proxy (Senuto Keyword Explorer, country_id=1, snapshot 2026-08-17); demand_proxy_kw = najsilniejsza fraza klastra, demand_keywords = ile fraz zlozylo sie na sume."
   },
   "queries": [
-    {
-      "id": "Q01",
-      "query": "skąd biorą się wzdęcia brzucha",
-      "cluster": "wzdecia",
-      "intent": "problem",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q02",
-      "query": "co robić na wzdęcia po jedzeniu",
-      "cluster": "wzdecia",
-      "intent": "rozwiazanie",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q03",
-      "query": "wzdęty brzuch i uczucie ciężkości co pomaga",
-      "cluster": "wzdecia",
-      "intent": "rozwiazanie",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q04",
-      "query": "czy błonnik pomaga na wzdęcia",
-      "cluster": "wzdecia",
-      "intent": "decyzyjny",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q05",
-      "query": "jaki suplement na wzdęcia i gazy",
-      "cluster": "wzdecia",
-      "intent": "decyzyjny",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q06",
-      "query": "jak poprawić regularne wypróżnianie",
-      "cluster": "regularnosc",
-      "intent": "rozwiazanie",
-      "priority": null,
-      "added": "2026-08-11"
-    },
     {
       "id": "Q07",
       "query": "domowe sposoby na zaparcia u dorosłych",
       "cluster": "regularnosc",
       "intent": "rozwiazanie",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q08",
-      "query": "co jeść żeby jelita pracowały lepiej",
-      "cluster": "regularnosc",
-      "intent": "problem",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q09",
-      "query": "suplement na leniwe jelita ranking",
-      "cluster": "regularnosc",
-      "intent": "porownawczy",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q10",
-      "query": "jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny",
-      "cluster": "wybor-blonnika",
-      "intent": "decyzyjny",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q11",
-      "query": "arabinogalaktan co to jest i jak działa",
-      "cluster": "wybor-blonnika",
-      "intent": "problem",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q12",
-      "query": "najlepszy błonnik rozpuszczalny w proszku",
-      "cluster": "wybor-blonnika",
-      "intent": "porownawczy",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q13",
-      "query": "ile błonnika dziennie suplementacja",
-      "cluster": "wybor-blonnika",
-      "intent": "long-tail",
-      "priority": null,
-      "added": "2026-08-11"
-    },
-    {
-      "id": "Q14",
-      "query": "błonnik z kory modrzewia opinie",
-      "cluster": "wybor-blonnika",
-      "intent": "porownawczy",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 1,
+      "added": "2026-08-11",
+      "demand_volume": 66200,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "co na zaparcia"
     },
     {
       "id": "Q15",
       "query": "niska ferrytyna objawy co robić",
       "cluster": "ferrytyna",
       "intent": "problem",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 2,
+      "added": "2026-08-11",
+      "demand_volume": 64560,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "ferrytyna co to"
     },
     {
-      "id": "Q16",
-      "query": "jak podnieść ferrytynę naturalnie",
-      "cluster": "ferrytyna",
+      "id": "Q01",
+      "query": "skąd biorą się wzdęcia brzucha",
+      "cluster": "wzdecia",
+      "intent": "problem",
+      "priority": 3,
+      "added": "2026-08-11",
+      "demand_volume": 29100,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "wzdęty brzuch"
+    },
+    {
+      "id": "Q03",
+      "query": "wzdęty brzuch i uczucie ciężkości co pomaga",
+      "cluster": "wzdecia",
       "intent": "rozwiazanie",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 4,
+      "added": "2026-08-11",
+      "demand_volume": 29100,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "wzdęty brzuch"
     },
     {
       "id": "Q17",
       "query": "laktoferyna a ferrytyna suplementacja",
       "cluster": "ferrytyna",
       "intent": "decyzyjny",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 5,
+      "added": "2026-08-11",
+      "demand_volume": 18960,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "laktoferyna dla dzieci"
     },
     {
-      "id": "Q18",
-      "query": "jak wybrać dobre colostrum bovinum",
-      "cluster": "wybor-colostrum",
+      "id": "Q10",
+      "query": "jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny",
+      "cluster": "wybor-blonnika",
       "intent": "decyzyjny",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 6,
+      "added": "2026-08-11",
+      "demand_volume": 9530,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "błonnik rozpuszczalny"
     },
     {
-      "id": "Q19",
-      "query": "colostrum w proszku czy w kapsułkach co lepsze",
-      "cluster": "wybor-colostrum",
+      "id": "Q02",
+      "query": "co robić na wzdęcia po jedzeniu",
+      "cluster": "wzdecia",
+      "intent": "rozwiazanie",
+      "priority": 7,
+      "added": "2026-08-11",
+      "demand_volume": 8790,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "co na wzdęcia"
+    },
+    {
+      "id": "Q06",
+      "query": "jak poprawić regularne wypróżnianie",
+      "cluster": "regularnosc",
+      "intent": "rozwiazanie",
+      "priority": 8,
+      "added": "2026-08-11",
+      "demand_volume": 7750,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "problemy z wypróżnianiem"
+    },
+    {
+      "id": "Q16",
+      "query": "jak podnieść ferrytynę naturalnie",
+      "cluster": "ferrytyna",
+      "intent": "rozwiazanie",
+      "priority": 9,
+      "added": "2026-08-11",
+      "demand_volume": 7180,
+      "demand_keywords": 12,
+      "demand_proxy_kw": "jak podnieść ferrytynę"
+    },
+    {
+      "id": "Q05",
+      "query": "jaki suplement na wzdęcia i gazy",
+      "cluster": "wzdecia",
+      "intent": "decyzyjny",
+      "priority": 10,
+      "added": "2026-08-11",
+      "demand_volume": 3840,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "tabletki na wzdęcia"
+    },
+    {
+      "id": "Q13",
+      "query": "ile błonnika dziennie suplementacja",
+      "cluster": "wybor-blonnika",
+      "intent": "long-tail",
+      "priority": 11,
+      "added": "2026-08-11",
+      "demand_volume": 3430,
+      "demand_keywords": 11,
+      "demand_proxy_kw": "ile błonnika dziennie"
+    },
+    {
+      "id": "Q09",
+      "query": "suplement na leniwe jelita ranking",
+      "cluster": "regularnosc",
       "intent": "porownawczy",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 12,
+      "added": "2026-08-11",
+      "demand_volume": 1770,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "leniwe jelita"
+    },
+    {
+      "id": "Q11",
+      "query": "arabinogalaktan co to jest i jak działa",
+      "cluster": "wybor-blonnika",
+      "intent": "problem",
+      "priority": 13,
+      "added": "2026-08-11",
+      "demand_volume": 1490,
+      "demand_keywords": 15,
+      "demand_proxy_kw": "arabinogalaktan"
+    },
+    {
+      "id": "Q04",
+      "query": "czy błonnik pomaga na wzdęcia",
+      "cluster": "wzdecia",
+      "intent": "decyzyjny",
+      "priority": 14,
+      "added": "2026-08-11",
+      "demand_volume": 1350,
+      "demand_keywords": 13,
+      "demand_proxy_kw": "błonnik na zaparcia"
     },
     {
       "id": "Q20",
       "query": "colostrum dla dorosłych na co pomaga",
       "cluster": "wybor-colostrum",
       "intent": "long-tail",
-      "priority": null,
-      "added": "2026-08-11"
+      "priority": 15,
+      "added": "2026-08-11",
+      "demand_volume": 1320,
+      "demand_keywords": 4,
+      "demand_proxy_kw": "colostrum na co pomaga"
+    },
+    {
+      "id": "Q18",
+      "query": "jak wybrać dobre colostrum bovinum",
+      "cluster": "wybor-colostrum",
+      "intent": "decyzyjny",
+      "priority": 16,
+      "added": "2026-08-11",
+      "demand_volume": 1200,
+      "demand_keywords": 15,
+      "demand_proxy_kw": "colostrum bovinum"
+    },
+    {
+      "id": "Q08",
+      "query": "co jeść żeby jelita pracowały lepiej",
+      "cluster": "regularnosc",
+      "intent": "problem",
+      "priority": 17,
+      "added": "2026-08-11",
+      "demand_volume": 700,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "głośna praca jelit"
+    },
+    {
+      "id": "Q19",
+      "query": "colostrum w proszku czy w kapsułkach co lepsze",
+      "cluster": "wybor-colostrum",
+      "intent": "porownawczy",
+      "priority": 18,
+      "added": "2026-08-11",
+      "demand_volume": 670,
+      "demand_keywords": 11,
+      "demand_proxy_kw": "colostrum kapsułki"
+    },
+    {
+      "id": "Q12",
+      "query": "najlepszy błonnik rozpuszczalny w proszku",
+      "cluster": "wybor-blonnika",
+      "intent": "porownawczy",
+      "priority": 19,
+      "added": "2026-08-11",
+      "demand_volume": 650,
+      "demand_keywords": 20,
+      "demand_proxy_kw": "błonnik w proszku na odchudzanie"
+    },
+    {
+      "id": "Q14",
+      "query": "błonnik z kory modrzewia opinie",
+      "cluster": "wybor-blonnika",
+      "intent": "porownawczy",
+      "priority": 20,
+      "added": "2026-08-11",
+      "demand_volume": 50,
+      "demand_keywords": 1,
+      "demand_proxy_kw": "kora z modrzewia zastosowanie"
     }
   ]
 }

@@ -119,22 +119,44 @@ Generowana automatycznie do `results/<miesiąc>/manual-checklist.md`. Zasady:
 
 ## Status setu zapytań
 
-`queries.json` ma wersję **0.1-provisional**. Zapytania pokrywają pięć klastrów z definicji
-zadania (wzdęcia, regularność, wybór błonnika, ferrytyna, wybór colostrum), ale pole
-`priority` jest puste — priorytetyzacja wg realnego popytu wymaga Senuto.
+`queries.json` ma wersję **1.0 — ZAMROŻONY** (2026-08-17). Zapytania pokrywają pięć klastrów
+z definicji zadania (wzdęcia, regularność, wybór błonnika, ferrytyna, wybór colostrum),
+a `priority` jest wypełnione realnym popytem z Senuto. Od tej wersji **brzmienia zapytań nie
+zmieniamy** — inaczej pomiary miesiąc do miesiąca przestają być porównywalne.
 
-**Blokada:** `senuto-mcp` nie jest skonfigurowany lokalnie. `SENUTO_API_KEY` nie istnieje
-w głównym `.env`, a w `.mcp.json` siedzi niepodstawiony placeholder `__SENUTO_API_KEY__`.
-Klucz istnieje wyłącznie jako zmienna środowiskowa na Railway (Senuto był integrowany
-w commicie `ca84e28` tylko pod `genactiv-online`, nigdy pod lokalne Claude Code).
+### Jak liczony jest `priority`
 
-Sprawdzone zamienniki i dlaczego nie wystarczają:
+Zapytanie do LLM nie ma własnego wolumenu wyszukiwań — LLM to nie wyszukiwarka. Dlatego
+każdemu zapytaniu przypisano **frazy-proxy** w Google (stała `PROXY` w `senuto_priority.py`),
+a `demand_volume` to suma miesięcznych wyszukiwań TOP-20 fraz zawierających wszystkie słowa
+proxy. `priority` = ranga 1..20 wg tej sumy. Mapowanie jest jawne w każdym rekordzie
+(`demand_proxy_kw`, `demand_keywords`), żeby dało się je zakwestionować przy kwartalnym przeglądzie.
+
+```bash
+source venv/bin/activate
+python3 geo/llm-monitoring/senuto_priority.py            # podgląd rankingu
+python3 geo/llm-monitoring/senuto_priority.py --write    # nadpisuje queries.json
+```
+
+Czołówka popytu (snapshot 2026-08-17): zaparcia 66 200/mc, ferrytyna 64 560/mc,
+wzdęcia 29 100/mc. Ogon: `błonnik z kory modrzewia` 50/mc — fraza czysto produktowa,
+utrzymana w secie jako kontrola, nie jako źródło ruchu.
+
+**Uwaga na Senuto Keyword Explorer:** nie zwraca samego seeda jako rekordu (dla `ferrytyna`
+dostajemy `ferrytyna co to`, `ferrytyna normy`… ale nie `ferrytyna` — mimo że ta fraza ma
+74 000/mc i widać ją w module `visibility_analysis`). Stąd suma klastra zamiast pojedynczej
+frazy-head. `keywords_analysis` nie przyjmuje też `country_id=200` — dla Polski jest tam `1`.
+
+### Historia blokady (zamknięta 2026-08-17)
+
+Set stał prowizoryczny od 2026-08-11, bo `SENUTO_API_KEY` nie istniał lokalnie (w `.mcp.json`
+siedział placeholder `__SENUTO_API_KEY__`, a klucz z Railway wygasł 2026-05-08). Klucz
+dostarczono 2026-08-17 i podstawiono do `.env` + `.mcp.json`.
+
+Zamienniki sprawdzone w międzyczasie i odrzucone:
 
 - **Google Ads Keyword Planner** — `DEVELOPER_TOKEN_NOT_APPROVED`, token ma tylko explorer access.
 - **Google Ads search terms (GAQL)** — działa, 109 fraz z ostatnich 90 dni, ale są w praktyce
   wyłącznie brandowe (`colostrum genactiv` 24 771 wyświetleń, `genactiv`, `fiberbiom`).
   Zero zapytań objawowych — kampanie są brandowe, więc to nie jest źródło popytu dla
   klastra objawowego.
-
-Po odblokowaniu Senuto: uzupełnić `priority`, przestawić kolejność wg popytu, podbić wersję
-do `1.0` i **od tego momentu set zamrozić**.

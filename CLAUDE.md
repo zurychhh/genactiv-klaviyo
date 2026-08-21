@@ -38,7 +38,10 @@ genactiv-klaviyo/
 ├── templates/design-system/   # Brand design system (colors, type, assets, email components)
 ├── templates/onboarding/      # 24 compiled onboarding email templates (A/B variants)
 ├── templates/snippets/        # Reusable email HTML components
-├── seo/                       # SEO implementation project
+├── seo/                       # SEO implementation archive (Jan-Mar 2026) — see seo/CLAUDE.md
+├── genactiv-seo/              # ★ Live SEO agent framework (12 specialists, /seo-audit, changelog)
+├── geo/llm-monitoring/        # GEO: monthly measurement of GENACTIV citations in AI search
+├── research/                  # Keyword maps, sprint task CSVs, market research
 ├── reports/                   # Generated reports (dashboards, traffic, consistency)
 ├── docs/                      # Documentation (audit checklists, migration plan, Meta Ads)
 ├── .github/workflows/         # GitHub Actions (automated payment sync)
@@ -203,7 +206,7 @@ All MCP servers are configured in `.mcp.json.example` with `__PLACEHOLDER__` for
 | Klaviyo | `campaign_report` requires `conversion_metric_id`. Templates need full HTML + `{% unsubscribe %}` |
 | Shopify Extended | `bulk-update-seo` max 25 items, has dry-run mode |
 | Google Ads | Customer ID: 10-digit, no dashes. `primaryForGoal` — ALWAYS check explicitly, don't assume ENABLED = Primary |
-| Senuto | Default: domain="genactiv.pl", country_id="200" (Poland Base 2.0), fetch_mode="topLevelDomain" |
+| Senuto | Default: domain="genactiv.pl", fetch_mode="topLevelDomain". **`country_id` differs per module: `visibility_analysis` / `competitors` → `200` (Poland Base 2.0), `keywords_analysis` (Keyword Explorer) → `1`.** Keyword Explorer never returns the seed phrase itself as a record (query `ferrytyna` → `ferrytyna normy`, `ferrytyna co to`, but not `ferrytyna` — despite 74 000/mc); sum the cluster instead of relying on a head term. Volumes are rounded Google buckets |
 | Klaviyo Segments | Custom MCP in `klaviyo-mcp/`. 6 tools: `list_segments`, `get_segment`, `create_segment`, `create_rfm_segment`, `update_segment`, `delete_segment`. API revision `2026-01-15`. Placed Order metric ID: `R6aTMS`. Rate limits: 1/s, 15/min, 100/day for create. Condition logic: within group = OR, between groups = AND |
 | Clarity | Project `3354986136401458`. Custom tags: `ab_theme_variant`, `theme_id`. JWT token (exp 2126). Limit: 10 req/day. Token passed as CLI arg, not env var |
 
@@ -310,6 +313,16 @@ Source CSV: `research/sprint-czerwiec-2026-tasks.csv`. Scaffold: `python3 script
 ### Reusable Snippets
 - `templates/snippets/product-card-abandoned-cart.html` — Product card with price comparison
 
+### Klaviyo SMS — konfiguracja (audyt 2026-08-11)
+
+Kanał SMS jest dziś technicznie nieopomiarowany. Pułapki potwierdzone na produkcji (`reports/raport_sms_klaviyo_2026-08-11.md`):
+
+- **`shorten_links: false` zabija cały tracking.** Bez skracania linków nie ma ani click-trackingu, ani doklejania UTM — `add_tracking_params: true` nic nie daje. To przyczyna źródłowa: zero zarejestrowanych kliknięć, zero ruchu w GA4 i Shopify mimo konwersji raportowanych przez Klaviyo (te pochodzą z atrybucji po odbiorze wiadomości, nie po kliknięciu).
+- **`custom_tracking_params` jest puste** — trzeba uzupełnić `utm_source=klaviyo`, `utm_medium=sms`, `utm_campaign={nazwa}`.
+- **Nazywaj kampanie SMS czytelnie** — domyślne „Wiadomość tekstowa - 28 lip 2026, 12:59" trafia do `utm_campaign` i jest bezużyteczne w raportach.
+- **Polskie znaki diakrytyczne podwajają koszt.** Jeden znak spoza GSM-7 (ł, ż, ą…) przełącza całego SMS-a na UCS-2: 67 znaków na segment zamiast 153. Przy prefiksie organizacji + linku informacyjnym + formule opt-out to ok. 2× wyższy koszt wysyłki. Albo konsekwentnie bez ogonków, albo świadomie z nimi — nie mieszać.
+- **Dedykowany kod rabatowy per kanał** (np. `SMS15`, nie współdzielony `LATO`) — jedyna atrybucja niezależna od cookies przy obecnej konfiguracji Pandectes.
+
 ## Brand Guidelines
 
 | Element | Value |
@@ -346,10 +359,14 @@ See `genactiv-online/.env.example` for full list. Key groups:
 - **Meta Ads MCP — locally use `npx -y meta-ads-mcp` (Node), NOT the Python package.** The PyPI `meta-ads-mcp` pins `mcp==1.23.0`, which conflicts with `fastmcp 3.x` and breaks the root-venv servers (klaviyo-segments). Do NOT `pip install meta-ads-mcp` into the root `venv/`. Works on Railway (installed globally there, isolated from the root venv).
 - **Root `venv/` must stay on `fastmcp==3.4.2` + `mcp==1.27.2`** (required by `klaviyo-segments`, run via `venv/bin/fastmcp run klaviyo-mcp/server.py`). Symptom if broken: `/doctor` → "1 setup issue: MCP", klaviyo-segments "Failed to connect", ImportError on `streamable_http_client` / "FastMCP client support is not installed". Fix: `./venv/bin/pip install fastmcp==3.4.2 mcp==1.27.2` then `./venv/bin/pip uninstall -y meta-ads-mcp`; verify with `./venv/bin/pip check`. Pinned in `setup-claude.sh` and `klaviyo-mcp/requirements.txt`. Restart Claude Code after fixing (MCP connections are cached at startup).
 - **Railway CLI** reads token from `~/.railway/config.json`, but `RAILWAY_TOKEN` env var overrides it. Always `unset RAILWAY_TOKEN` before CLI use.
+- **Senuto JWT wygasa po 30 dniach.** Bieżący klucz: exp **2026-09-17** (konto id 25830), ustawiony w `.env`, `.mcp.json` i na Railway. Po wygaśnięciu API zwraca puste `404 {"success":false}` na wszystkich endpointach z danymi — nie 401. Nowy klucz: app.senuto.com → ustawienia API; potem `./setup-claude.sh` (lokalnie) + `railway variables --set "SENUTO_API_KEY=…"` i `railway redeploy`. `getCountriesList` jest publiczny — nie nadaje się do weryfikacji klucza; użyj `getDomainStatistics`.
+- **`senuto-mcp` potrafi się wysypać przez popsuty cache npx** (`ERR_MODULE_NOT_FOUND … @modelcontextprotocol/sdk/…/ajv-provider.js`) niezależnie od klucza. Fix: `rm -rf ~/.npm/_npx/<hash>` i ponowne `npx -y senuto-mcp`.
 - **Pandectes consent banner** `cookiesBlockedByDefault=7` blocks all optional cookies by default, causing low attribution rates. Config in Shopify theme: `assets/pandectes-settings.json`, `snippets/pandectes-rules.liquid`.
 - **Shopify Order API** does NOT store `gclid` — only UTM params.
 - **UpPromote auto-discount nadpisuje kody afiliacyjne.** UpPromote JS (`uppromote.js`) auto-aplikuje kody rabatowe przez ukryty iframe ładujący `/discount/CODE`. Shopify pozwala na jeden kod per zamówienie (last-write-wins). Jeśli UpPromote ma "Defined coupon" (jeden wspólny kod dla wszystkich afiliacji), nadpisze indywidualne kody influencerów. Fix: UpPromote → Programs → zmień z "Defined coupon" na "Affiliate coupon". Revy Upsell (`upsell.js`) też potrafi nadpisywać kody przy checkout — sprawdź Revy przy każdym problemie z kodami.
 - **Shopify Discounts API — brak scope.** Nasz token (`Claude MCP`) nie ma `read_discounts` / `write_discounts`. Kody rabatowe i automatic discounts można zarządzać TYLKO przez Shopify Admin UI. Dotyczy to też sekcji Combinations.
+- **Shopify Admin API oddaje tylko ostatnie 60 dni zamówień** — brakuje scope `read_all_orders`. Zapytanie o dłuższy zakres nie zwraca błędu, po prostu milcząco ucina wyniki. To realnie wywróciło analizę: `reports/analiza-promocji-12m.csv` opisany jako „12 miesięcy" zawiera ok. 2–3 miesiące, przez co program afiliacyjny raportowaliśmy ~6× za mały (207 tys. PLN vs realne ~1,45 mln PLN rocznie). **Zawsze weryfikuj rzeczywisty zakres dat w zwróconych danych** zanim nazwiesz zbiór „rocznym", i sprawdzaj spójność z bazą przychodu z roadmapy H2 (222 tys. PLN/mc).
+- **Tag `UpPromote_order` to jedyne twarde rozróżnienie afiliacji.** Kod jest albo w 100% obsługiwany przez UpPromote, albo w 0% — nie ma przypadków pośrednich. Pobieraj zamówienia z kodami rabatowymi **i** tagami jednocześnie, inaczej nie odróżnisz kodów w narzędziu od ręcznie wydanych kuponów Shopify. Stan na 17.08.2026: 15 z 63 kodów afiliacyjnych jest w UpPromote (62% przychodu afiliacyjnego); 48 kodów działa poza jakimkolwiek trackingiem. Szczegóły: `reports/nota-afiliacja-uppromote-2026-08-17.html`.
 
 ## Debugging Client Issues
 
@@ -379,6 +396,23 @@ Full plan: `reports/seo-geo-plan-wdrozenia.html`. Blocks A+B+C1 completed 2026-0
 
 **Remaining:** C2 (dateModified), C3 (robots.txt check — admin), C4-C7 (4 articles — copywriter + review). Audyt kolekcji (SEO) jeszcze nie uruchomiony.
 
+### A1 — Keyword research + gap analysis (2026-08-17)
+
+Status `needs-verify` (owner `CC+`, human gate). Full write-up: `sprint-2026-06/W1/A1/artefakty/README-A1.md`.
+
+| Artefakt | Zawartość |
+|----------|-----------|
+| `research/keyword-map-2026.csv` | 20 PDP × primary/secondary kw, volume, difficulty, CPC, nasza pozycja, luka, tag sezonowy |
+| `sprint-2026-06/W1/A1/artefakty/gap-analysis-2026-08-17.csv` | 882 luki: konkurent w TOP10, my poza TOP10 |
+| `…/fetch_senuto_positions.py` + `build_keyword_map.py` | Odtwarzalny pipeline (read-only, idempotentny). Cache `senuto-raw/` jest gitignored |
+
+**Brief A1 podawał błędnych konkurentów — zweryfikowane i poprawione:**
+- **Colostrigen to nasza własna marka** (produkt apteczny „Colostrum Genactiv (Colostrigen)", producent GENACTIV TRADE Sp. z o.o.), nie konkurent. Domeny `colostrigen.pl/.com/.eu` mają zerową widoczność.
+- **`immunolab.com.pl` to firma mikrobiologiczna** (rankuje na „podłoże agarowe", „salmonella serotypy") — zero pokrycia tematycznego, wykluczona.
+- Realny konkurent organiczny w naszej skali: **`genoscope.pl`** (widoczność 24 412 vs nasze 48 275, 134 wspólne frazy).
+
+**Wnioski operacyjne:** z 3 306 fraz w TOP50 tylko 181 prowadzi na PDP — widoczność robi blog i `/pages/`, nie karty produktowe. Fiberbiom (nr 1 wśród PDP: 15 566 sesji/90d) rankuje na 4 frazy, najlepsza pozycja 16 — cały ruch jest płatny/bezpośredni. Największe luki vs genoscope to treści, nie produkty: `ferrytyna` (74 000/mc), `siara` (3 600/mc), `colostrum kozie` (2 900/mc) — wchodzą w blok C4–C7.
+
 ### Shopify GraphQL SEOInput — CRITICAL
 
 When using `productUpdate` mutation with `seo` input, **always send both `title` AND `description`**. Omitting a field clears it to null — this is NOT a "keep existing" behavior. Example:
@@ -388,6 +422,14 @@ productUpdate(input: { id: "...", seo: { title: "new title" } })
 # CORRECT — preserves description:
 productUpdate(input: { id: "...", seo: { title: "new title", description: "existing desc" } })
 ```
+
+## GEO — monitoring cytowań w LLM
+
+`geo/llm-monitoring/` — zadanie VIII-A3, miesięczny pomiar czy GENACTIV jest wymieniany i linkowany w odpowiedziach wyszukiwarek AI. Metodyka i uruchomienie: `geo/llm-monitoring/README.md`, koszty API: `KOSZTY_API.md`.
+
+**`queries.json` jest w wersji `1.0 — ZAMROŻONY` (2026-08-17).** Set 20 zapytań kontrolnych; brzmienia istniejących zapytań **nie zmieniamy nigdy** — inaczej pomiary miesiąc do miesiąca przestają być porównywalne. Nowe zapytania dopisujemy na końcu z nowym `id` i datą `added`; wycofane oznaczamy `"retired": "YYYY-MM"` zamiast usuwać.
+
+`priority` (1..20) pochodzi z realnego popytu Google: zapytanie do LLM nie ma własnego wolumenu, więc każdemu przypisano frazy-proxy (stała `PROXY` w `senuto_priority.py`), a `demand_volume` to suma TOP-20 fraz z Senuto. Przeliczenie: `python3 geo/llm-monitoring/senuto_priority.py [--write]`.
 
 ## A/B Test: GEN-6 vs NOTOAGENCY (June 2026) — COMPLETED
 
@@ -409,10 +451,22 @@ Experiment ID: `1c371ad8-5826-4c21-abdb-7d0d68390e81`. API: `api.intelligems.io/
 
 **Goal:** +50% e-commerce revenue (PLN 222K/mo → PLN 334K/mo average). Full roadmap: `reports/roadmapa-H2-2026.tsv`. Key milestones: Sub launch (Aug), Referral launch (Sep), Pre-BF +2K subs (Oct), BF PLN 400K+ (Nov), Loyalty launch (Dec).
 
+Subscription launch — plan wdrożenia zweryfikowany na danych produkcyjnych: `reports/subscription-plan-wdrozenia-2026-08-17.html` (źródła: `reports/subscription-technical-audit-2026-07-17.md`, `subscription-model-final-recommendation-2026-07-17.md`, `reorder-interval-analysis-2026-07-17.md`).
+
 ## Reports
 
 Report generators in `reports/` directory. Run with `source venv/bin/activate && python3 reports/<script>.py`.
 Key report: `reports/REMARKETING_AUDIT_2025-01-23.md` — attribution analysis (1% → 38.8% improvement).
+
+Ostatnie deliverables (lipiec–sierpień 2026):
+
+| Plik | Co zawiera |
+|------|------------|
+| `reports/one-pager-sierpien-2026.html` | Czy sierpień performuje — ruch rośnie, sprzedaż spada; punkt zwrotny 17.07, nie 01.08 |
+| `reports/subscription-plan-wdrozenia-2026-08-17.html` | Model subskrypcyjny: plan wdrożenia, pracochłonność, harmonogram, decyzje podjęte i otwarte |
+| `reports/nota-afiliacja-uppromote-2026-08-17.html` | Nota decyzyjna: ~1/3 afiliacji działa poza jakimkolwiek narzędziem (struktura kodów, 61 dni) |
+| `reports/raport_sms_klaviyo_2026-08-11.md` | Kanał SMS w Klaviyo — 30 dni, realnie 1 wysyłka produkcyjna (151 odbiorców) |
+| `reports/zakres-uslug-lipiec-2026.html` | Zakres wykonanych usług — lipiec 2026 (deliverable dla klienta) |
 
 ## Key Documentation
 
@@ -422,3 +476,7 @@ Key report: `reports/REMARKETING_AUDIT_2025-01-23.md` — attribution analysis (
 - `docs/AB_TEST_RAPORT.md` — A/B test GEN-6 vs NOTOAGENCY (full report)
 - `docs/REKOMENDACJE_KARTA_PRODUKTU_MENU.md` — Product card + menu rebuild specs (9 priorities)
 - `google-ads-mcp/google-ads-mcp-server/README.md` — Google Ads MCP setup
+- `seo/CLAUDE.md` — Directory-scoped rules for the `seo/` archive (which scripts are destructive, SEOInput hazard)
+- `genactiv-seo/CLAUDE.md` — Live SEO agent framework (12 specialists, `/seo-audit`, BEFORE/AFTER protocol)
+- `sprint-2026-06/W1/A1/artefakty/README-A1.md` — Keyword research + gap analysis + competitor verification
+- `geo/llm-monitoring/README.md` — LLM citation monitoring methodology (frozen query set)
