@@ -2,7 +2,9 @@
 
 **Data:** 2026-08-31
 **Zakres:** szablon `XnCJxJ` („Koszyk mail 1 — WHY"), trzy flow koszykowe, 12 szablonów
-**Status:** sekcja gotowa i opublikowana; naprawa 12 szablonów gotowa, **czeka na ręczne podpięcie w Klaviyo**
+**Status:** sekcja gotowa i opublikowana (`WL2W37`); naprawa 12 szablonów gotowa
+(`[NAPRAWIONY 2026-08-31] …`). **Wszystko czeka na ręczne podpięcie w edytorze
+Klaviyo — API nie zapisze szablonu w flow.**
 
 Dokumentacja techniczna snippetu: `templates/snippets/README-koszyk.md`
 
@@ -241,43 +243,137 @@ Cztery poprawki w każdym, bez ruszania treści, układu i stylów:
 CTA i dwa linki produktowe → `genactiv.pl/cart`, `Categories.2` → `Variant Name`,
 `alt` dla logo i grafiki stopki.
 
-## 8. Następne kroki
+### Dodatkowo naprawione w całym mailu (po weryfikacji renderem)
+
+Render pełnego szablonu na prawdziwych zdarzeniach ujawnił dwa problemy poza
+samą sekcją koszyka:
+
+1. **Grafiki „Dokończ zamówienie" i „Wróć do koszyka" nie były klikalne.**
+   W `XnCJxJ` żaden obrazek nie miał linku — wyglądały jak przyciski, ale
+   kliknięcie nie robiło nic. Obie prowadzą teraz do koszyka. Mail ma
+   **3 drogi powrotu do koszyka zamiast jednej**.
+2. **Siedem grafik nie miało `alt`.** Mail to niemal same obrazki, więc przy
+   zablokowanych grafikach odbiorca widział pustą białą kolumnę.
+
+Stan `WL2W37` po zmianach: 12/12 obrazków z `alt`, 2 grafiki-przyciski
+w odnośniku, 5 linków do koszyka, 0 pustych `href`.
+
+### Potwierdzona kolejność bloków w `WL2W37`
+
+```
+1. logo GENACTIV
+2. 250+ / Dokończ zamówienie
+3. *** SEKCJA KOSZYKA ***      ← zgodnie z ustaleniem
+4. ↓70% / bariera jelitowa
+5. ekspert
+6. Wróć do koszyka
+7. opakowania
+8. liofilizowane / skuteczność
+```
+
+### Weryfikacja dynamiki — obie gałęzie `{% if %}`
+
+Przez `POST /api/template-render` na prawdziwych zdarzeniach Added to Cart:
+
+| Wariant | Zdarzenie | Wynik |
+|---------|-----------|-------|
+| z promocją | COLOSTRUM JUNIOR, płyn 300 ml, 289 / 338 zł | cena, przekreślona regularna, „Oszczędzasz 49 zł" |
+| bez promocji | COLOSTRUM GENACTIV 60 kapsułek, 105 zł | sama cena |
+
+W obu: zero surowych tagów, zero pustych `href`, nazwa/wariant/zdjęcie z eventu.
+
+## 8. Ograniczenie narzędzi: nie da się wysłać maila z grafikami
+
+**Gmail MCP usuwa wszystkie znaczniki `<img>` z wysyłanej wiadomości.**
+Potwierdzone testem minimalnym — wysłano:
+
+```html
+<p>Przed obrazkiem.</p><img src="...cloudfront..."/><p>Po obrazku.</p><img src="...shopify..."/><p>Koniec.</p>
+```
+
+Do skrzynki dotarło:
+
+```html
+<p>Przed obrazkiem.</p><p>Po obrazku.</p><p>Koniec.</p>
+```
+
+Tekst nienaruszony, oba obrazki wycięte, 1,1 KB. **To nie jest kwestia rozmiaru
+maila ani struktury HTML** — obrazki znikają zawsze, niezależnie od źródła
+(cloudfront i `cdn.shopify.com` tak samo).
+
+Konsekwencje:
+
+- Trzy wysyłki testowe w trakcie prac były pod względem wizualnym bezużyteczne:
+  brakowało w nich wszystkich grafik, łącznie z miniaturą produktu.
+- Wczesna diagnoza była błędna — zakładano blokadę obrazów po stronie odbiorcy,
+  a przyczyna leżała w narzędziu wysyłkowym. Kosztowało to trzy rundy wysyłek.
+- **Do testów wizualnych służą dwie drogi:** pliki HTML otwierane lokalnie
+  (`templates/snippets/PELNY-MAIL-*.html`, komplet 12 grafik) albo wysyłka
+  testowa z Klaviyo. Tylko ta druga jest miarodajna dla trybu ciemnego
+  i renderowania na telefonie.
+
+## 9. Następne kroki
+
+Wszystko poniżej wymaga edytora Klaviyo — API nie zapisze szablonu przypiętego
+do flow ani szablonu drag&drop (patrz 6.1).
 
 ### Priorytet 1 — żywy flow wysyła maile z martwym przyciskiem
 
-W Klaviyo, dla każdej z czterech wiadomości flow **Abandoned Cart Reminder**:
-`Edit content` → `Copy from existing template` → wybrać `[NAPRAWIONY 2026-08-31] live-mailN`.
+Flow **Abandoned Cart Reminder** jest `live` i od 19.11.2025 wysyła cztery maile,
+w których główny przycisk nie prowadzi nigdzie. To jedyne zadanie wpływające na
+wiadomości wysyłane w tej chwili.
 
-To jedyne zadanie, które ma wpływ na obecnie wysyłane maile. Reszta może poczekać.
+Dla każdej z czterech wiadomości: `Edit content` → `Copy from existing template`
+→ wybrać odpowiedni `[NAPRAWIONY 2026-08-31] live-mailN` (mapowanie w sekcji 7).
 
 ### Priorytet 2 — przed startem testu A/B
 
 To samo dla ośmiu wiadomości w draftach `_COLOSTRUM` i `_FIBERBIOM`. Bez tego
-test A/B porówna dwie wersje, z których obie mają martwe CTA.
+test A/B porówna dwie wersje, z których **obie** mają martwe CTA, więc wynik
+nie powie nic o testowanej zmianie.
 
-### Priorytet 3 — sekcja koszyka
+### Priorytet 3 — wysyłka testowa sekcji koszyka z Klaviyo
 
-1. Podpiąć `WL2W37` do właściwej wiadomości flow (którą — decyzja biznesowa).
-2. Usunąć ze starego `XnCJxJ` nieaktualną sekcję **oraz osierocony blok tekstowy**
-   zawierający komentarz zaczynający się od `GENACTIV — sekcja`. To pozostałość
-   po wklejeniu wcześniejszej wersji; API tego nie usunie.
+Szablon `WL2W37` → `Edytuj szablon` → **Wyślij testowy e-mail**.
 
-### Priorytet 4 — weryfikacja, której nie da się zrobić zdalnie
+To jedyna droga do miarodajnego sprawdzenia, bo maile wysyłane narzędziami
+asystenta **nie zawierają grafik** (sekcja 8). Do sprawdzenia:
 
-- **Dark mode na telefonie** — czy nagłówek i napis na przycisku są białe.
-  Wysłano dwa maile testowe na `oleksiakpiotrrafal@gmail.com`
-  i `doperacz1935@gmail.com`; wynik nieznany.
-- **Miniatura produktu w Gmailu** — w pierwszym teście kolumna była pusta.
-  Nie ustalono, czy to blokada obrazów po stronie odbiorcy, czy błąd.
-  W drugim teście zdjęcia idą z `cdn.shopify.com` (URL-e odpowiadają 200).
+- czy miniatura produktu i pozostałe grafiki się wyświetlają,
+- tryb ciemny na telefonie: czy nagłówek „Ten produkt czeka w Twoim koszyku"
+  i napis „Wróć po niego" są białe,
+- czy obie grafiki-przyciski („Dokończ zamówienie", „Wróć do koszyka")
+  otwierają koszyk.
 
-### Priorytet 5 — dług techniczny z audytu
+Podgląd bez wysyłki: `templates/snippets/PELNY-MAIL-z-promocja.html`
+i `…-bez-promocji.html` — otwierane w przeglądarce, komplet 12 grafik.
+
+### Priorytet 4 — podpięcie sekcji koszyka do flow
+
+Zdecydować, do której wiadomości flow trafia `WL2W37`, i podpiąć ją w edytorze.
+Decyzja biznesowa: czy zastępuje obecny mail 1, czy wchodzi jako nowy wariant
+do testu A/B.
+
+### Priorytet 5 — sprzątanie w `XnCJxJ`
+
+Usunąć z niego nieaktualną sekcję koszyka **oraz osierocony blok tekstowy**
+zawierający komentarz zaczynający się od `GENACTIV — sekcja`. To pozostałość po
+wklejeniu wcześniejszej wersji; API tego nie usunie.
+
+W koncie pojawił się też szablon `VhCmhk` („Koszyk mail 1 — WHY_original",
+utworzony 31.08 15:21) — wygląda na kopię oryginału zrobioną po stronie klienta.
+Warto ustalić, czy ma zostać, żeby nie mnożyć wariantów tego samego maila.
+
+### Priorytet 6 — dług techniczny z audytu
 
 23 szablony z obrazkami bez `alt`, 8 z angielską stopką, 5 bez
-`{% unsubscribe %}` (w tym dwa w żywych flow — `Uv8LFX`, `Sr7CMm`).
-Skrypt audytowy generuje pełną listę.
+`{% unsubscribe %}` — w tym dwa w żywych flow: `Shopify newsletter - welcome`
+(`Uv8LFX`) i `Back In Stock Flow - Standard` (`Sr7CMm`).
 
-## 9. Narzędzia
+Pełna lista: `reports/audyt-szablonow-flow.csv`. Ponowny audyt:
+`python3 templates/snippets/audyt_szablonow_flow.py`.
+
+## 10. Narzędzia
 
 | Skrypt | Zastosowanie |
 |--------|--------------|
@@ -287,7 +383,7 @@ Skrypt audytowy generuje pełną listę.
 
 Wyniki audytu: `reports/audyt-szablonow-flow.csv`.
 
-## 10. Wnioski na przyszłość
+## 11. Wnioski na przyszłość
 
 - **Nie minifikować HTML maili.** Regex usuwający komentarze zjada zamknięcie
   warunkowego komentarza `<!--[if !mso]><!-->`, przez co `<meta charset>` ląduje
@@ -301,3 +397,11 @@ Wyniki audytu: `reports/audyt-szablonow-flow.csv`.
 - **Zawsze sprawdzać, czym są pola zdarzenia,** zanim się je wstawi do szablonu.
   Trzy z czterech błędów w tych mailach to użycie pola, które w danej metryce
   albo nie istnieje, albo znaczy co innego, niż sugeruje nazwa.
+- **Sprawdzaj, co faktycznie dotarło, a nie co wysłałeś.** Trzy rundy maili
+  testowych nie pokazały ani jednej grafiki, bo narzędzie wysyłkowe usuwa
+  `<img>`. Pierwsza hipoteza (blokada obrazów u odbiorcy) była błędna
+  i utrzymała się przez dwie wysyłki. Pobranie wysłanej wiadomości przez API
+  i sprawdzenie jej treści zajęło minutę i rozstrzygnęło sprawę od razu.
+- **Minimalny test bije spekulację.** Jeden mail z dwoma obrazkami i trzema
+  akapitami dowiódł, że rzecz nie zależy od rozmiaru ani struktury HTML —
+  czego nie dało się orzec, patrząc na 28-kilobajtowy szablon.

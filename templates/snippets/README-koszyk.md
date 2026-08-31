@@ -288,3 +288,26 @@ pozbawionymi prefiksu `$` (Klaviyo widzi `$extra` jako `event.extra`).
 
 W obu: zero surowych tagów, zero pustych `href`, nazwa/wariant/zdjęcie z eventu.
 To potwierdza, że `{% if %}` działa w obie strony, a `|minus` liczy poprawnie.
+
+## Nie da się wysłać maila z grafikami przez asystenta
+
+`mcp__claude_ai_Gmail__send_message` **usuwa wszystkie `<img>`**. Test minimalny
+(2026-08-31) — wysłano:
+
+```html
+<p>Przed obrazkiem.</p><img src="…cloudfront…"/><p>Po obrazku.</p><img src="…shopify…"/><p>Koniec.</p>
+```
+
+dotarło:
+
+```html
+<p>Przed obrazkiem.</p><p>Po obrazku.</p><p>Koniec.</p>
+```
+
+Nie zależy to od rozmiaru maila ani od źródła obrazków. Trzy wysyłki testowe
+w trakcie tych prac były przez to wizualnie bezużyteczne — brakowało w nich
+także miniatury produktu.
+
+**Do podglądu:** `PELNY-MAIL-z-promocja.html` i `PELNY-MAIL-bez-promocji.html`
+(pełny render z Klaviyo, po 12 grafik) otwierane w przeglądarce.
+**Do testu w kliencie pocztowym:** `WL2W37` → Edytuj szablon → Wyślij testowy e-mail.
