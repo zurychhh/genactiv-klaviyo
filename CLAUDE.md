@@ -339,6 +339,25 @@ Szablony drag&drop i szablony w wiadomościach flow są przez API **tylko do odc
 - **`event.extra.checkout_url` w Added to Cart NIE ISTNIEJE** (`$extra` ma tylko klucz `standard`). To pole z Checkout Started. Użyte w CTA → pusty `href`.
 - Ceny są typu float, więc `|floatformat:0` jest wymagany; gałąź `{% else %}` (bez promocji) to przypadek domyślny.
 
+### Wysyłka testowa maili — Gmail MCP usuwa `<img>`
+
+**Nie da się wysłać maila z grafikami przez `mcp__claude_ai_Gmail__send_message`.**
+Potwierdzone 2026-08-31 testem minimalnym: HTML `<p>…</p><img …/><p>…</p><img …/><p>…</p>`
+dotarł do skrzynki jako `<p>…</p><p>…</p><p>…</p>` — tekst nienaruszony, oba obrazki
+wycięte. Niezależnie od rozmiaru maila (2 obrazki w 200 B i 12 obrazków w 28 KB
+tak samo) i od źródła (cloudfront, `cdn.shopify.com`).
+
+Konsekwencja: mail wysłany tą drogą **nigdy nie pokaże miniatury produktu ani
+grafik szablonu**. Nie diagnozuj tego jako blokady obrazów u odbiorcy.
+
+Do testów wizualnych: pliki HTML otwierane lokalnie albo **wysyłka testowa
+z Klaviyo** (szablon → Edytuj szablon → Wyślij testowy e-mail). Klaviyo API nie
+ma endpointu do test-send — jedyne co ma to `campaign-send-jobs`, czyli wysyłka
+do **całej listy**; nie używać do testów.
+
+Weryfikując wysyłkę, sprawdzaj co **dotarło** (`get_message` z `FULL_CONTENT`),
+a nie co zostało wysłane.
+
 ### Dark mode w mailach
 
 Gmail odwraca kolory — biały nagłówek i biały napis na przycisku robią się czarne na czerwonym tle. Obrona: **jawne `bgcolor` + `background-color` na każdym `td` z białym tekstem** (Gmail nie odwraca tekstu na zadeklarowanym tle) plus `@media (prefers-color-scheme: dark)` z `!important` dla Apple Mail i Outlooka.
@@ -417,7 +436,17 @@ Obowiązuje od 27.08.2026 (ustalony przy pasku darmowej dostawy). Szczegóły i 
 - **Shopify Order API** does NOT store `gclid` — only UTM params.
 - **UpPromote auto-discount nadpisuje kody afiliacyjne.** UpPromote JS (`uppromote.js`) auto-aplikuje kody rabatowe przez ukryty iframe ładujący `/discount/CODE`. Shopify pozwala na jeden kod per zamówienie (last-write-wins). Jeśli UpPromote ma "Defined coupon" (jeden wspólny kod dla wszystkich afiliacji), nadpisze indywidualne kody influencerów. Fix: UpPromote → Programs → zmień z "Defined coupon" na "Affiliate coupon". Revy Upsell (`upsell.js`) też potrafi nadpisywać kody przy checkout — sprawdź Revy przy każdym problemie z kodami.
 - **Shopify Discounts API — brak scope.** Nasz token (`Claude MCP`) nie ma `read_discounts` / `write_discounts`. Kody rabatowe i automatic discounts można zarządzać TYLKO przez Shopify Admin UI. Dotyczy to też sekcji Combinations.
-- **Brak scope na przekierowania, publikacje i nawigację** (sprawdzone 2026-08-31): `urlRedirects` → ACCESS_DENIED (`write_online_store_pages`), `publications` → wymaga `read_publications`, `menus` → ACCESS_DENIED (`read_online_store_navigation`). Konsekwencja: **301, depublikacja kolekcji z kanału i audyt linków w menu są wykonalne wyłącznie w Admin UI.** Do sprawdzenia, czy strona jest realnie indeksowalna, użyj `curl` na storefroncie — niepublikowane kolekcje zwracają 404, mimo że Admin API zwraca je normalnie.
+- **ACCESS_DENIED w GraphQL nie znaczy „nie da się" — sprawdź REST** (2026-08-31). GraphQL `urlRedirects`, `publications` i `menus` zwracają ACCESS_DENIED, ale te same operacje przechodzą po REST, bo opierają się o inne scope'y:
+
+  | Operacja | GraphQL | REST | Scope |
+  |----------|---------|------|-------|
+  | Przekierowania 301 | `urlRedirects` → DENIED | `redirects.json` → **działa** | `write_content` ✓ |
+  | Depublikacja kolekcji | `publications` → DENIED | `custom_collections/{id}` pole `published` → **działa** | `write_products` ✓ |
+  | Menu / nawigacja | `menus` → DENIED | brak odpowiednika | `read_online_store_navigation` ✗ |
+
+  Pełną listę scope'ów tokenu daje `GET /admin/oauth/access_scopes.json` — **zacznij od tego zamiast wnioskować z jednego 403.** Token ma 12 scope'ów; realnie brakuje `read/write_publications`, `read_online_store_navigation`, `read_discounts`, `read_all_orders`. Depublikacja przez REST działa tylko na kolekcjach zwykłych (`ruleSet: null`); smart collections wymagają innej ścieżki.
+
+- **Niepublikowana kolekcja nadal wychodzi z Admin API.** `get-seo-audit` nie sprawdza statusu publikacji, więc raportuje braki metadanych dla stron zwracających 404 na storefroncie (np. 3 kolekcje `omnibus-label-*`). Zawsze zweryfikuj `curl`-em, zanim zaczniesz „naprawiać". Uwaga przy weryfikacji przekierowań: Shopify oddaje **200 na `HEAD`**, a 301 dopiero na `GET` — testuj `GET`-em.
 - **Shopify Admin API oddaje tylko ostatnie 60 dni zamówień** — brakuje scope `read_all_orders`. Zapytanie o dłuższy zakres nie zwraca błędu, po prostu milcząco ucina wyniki. To realnie wywróciło analizę: `reports/analiza-promocji-12m.csv` opisany jako „12 miesięcy" zawiera ok. 2–3 miesiące, przez co program afiliacyjny raportowaliśmy ~6× za mały (207 tys. PLN vs realne ~1,45 mln PLN rocznie). **Zawsze weryfikuj rzeczywisty zakres dat w zwróconych danych** zanim nazwiesz zbiór „rocznym", i sprawdzaj spójność z bazą przychodu z roadmapy H2 (222 tys. PLN/mc).
 - **Tag `UpPromote_order` to jedyne twarde rozróżnienie afiliacji.** Kod jest albo w 100% obsługiwany przez UpPromote, albo w 0% — nie ma przypadków pośrednich. Pobieraj zamówienia z kodami rabatowymi **i** tagami jednocześnie, inaczej nie odróżnisz kodów w narzędziu od ręcznie wydanych kuponów Shopify. Stan na 17.08.2026: 15 z 63 kodów afiliacyjnych jest w UpPromote (62% przychodu afiliacyjnego); 48 kodów działa poza jakimkolwiek trackingiem. Szczegóły: `reports/nota-afiliacja-uppromote-2026-08-17.html`.
 
