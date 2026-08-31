@@ -232,3 +232,59 @@ w edytorze flow podpina się przez „Copy from existing template" zamiast wklej
 
 Każdy naprawiony zweryfikowany renderem na realnym zdarzeniu Added to Cart:
 **pustych `href` = 0** (przed naprawą: 1).
+
+## Dwie naprawy w całym mailu (2026-08-31, po weryfikacji renderem)
+
+Weryfikacja pełnego szablonu przez `POST /api/template-render` na prawdziwych
+zdarzeniach ujawniła dwa problemy poza samą sekcją koszyka:
+
+### 1. Grafiki-przyciski nie były klikalne
+
+`6d4a1ba8…` („Dokończ zamówienie") i `489c06ca…` („Wróć do koszyka") to grafiki
+**wyglądające jak przyciski**, ale w `XnCJxJ` żaden obrazek nie miał linku
+(`href: null`). Kliknięcie nie robiło nic.
+
+Teraz obie są owinięte w odnośnik do koszyka — `link_button_images()`
+w `build_koszyk_mail1.py`. Mail ma dzięki temu **3 miejsca prowadzące do
+koszyka** zamiast jednego.
+
+### 2. Siedem grafik bez `alt`
+
+Mail składa się niemal wyłącznie z obrazków, więc przy zablokowanych grafikach
+odbiorca widział pustą białą kolumnę. `add_base_alt()` uzupełnia opisy —
+wszystkie oparte na tym, co faktycznie jest na grafice:
+
+| Grafika | `alt` |
+|---------|-------|
+| `8b069ddc` | GENACTIV |
+| `6d4a1ba8` | 250+ aktywnych substancji w 1 suplemencie — Dokończ zamówienie |
+| `2faa82e1` | Colostrum uszczelnia barierę jelitową… nawet o 70% |
+| `96d71fb0` | Colostrum okiem eksperta — mgr Monika Stromkie-Złomaniec |
+| `489c06ca` | Wróć do koszyka |
+| `c1f72600` | Produkty GENACTIV Colostrum |
+| `50bfc1e4` | Liofilizowane, potwierdzona skuteczność, szybko pobierane |
+
+Stan `WL2W37` po `PATCH`: **12/12 obrazków z `alt`**, 2 grafiki-przyciski
+w odnośniku, 5 linków do koszyka, 0 pustych `href`.
+
+`PATCH` na `WL2W37` **działa**, bo to szablon biblioteczny typu `CODE` — inaczej
+niż szablony w flow i inaczej niż drag&drop `XnCJxJ`.
+
+## Weryfikacja dynamiki na prawdziwych zdarzeniach
+
+Zamiast podstawiać dane własnym skryptem, cały szablon renderuje Klaviyo:
+
+```
+POST /api/template-render  {data:{type:"template",attributes:{id:"WL2W37",context:{event:{…}}}}}
+```
+
+Kontekst = `event_properties` prawdziwego zdarzenia Added to Cart, z kluczami
+pozbawionymi prefiksu `$` (Klaviyo widzi `$extra` jako `event.extra`).
+
+| Wariant | Zdarzenie | Wynik |
+|---------|-----------|-------|
+| z promocją | COLOSTRUM JUNIOR…, płyn 300 ml, 289 / 338 zł | cena, przekreślona regularna, „Oszczędzasz 49 zł" |
+| bez promocji | COLOSTRUM GENACTIV 60 kapsułek, 105 zł | sama cena, bez chipa i przekreślenia |
+
+W obu: zero surowych tagów, zero pustych `href`, nazwa/wariant/zdjęcie z eventu.
+To potwierdza, że `{% if %}` działa w obie strony, a `|minus` liczy poprawnie.

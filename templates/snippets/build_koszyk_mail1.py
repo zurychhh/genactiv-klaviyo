@@ -184,6 +184,64 @@ def insert_section(html, section):
     return html[:at] + section.rstrip() + "\n" + html[at:]
 
 
+# Grafiki odziedziczone z XnCJxJ - zadna nie miala alt.
+# Mail jest zlozony niemal wylacznie z obrazkow, wiec przy zablokowanych
+# obrazach odbiorca widzi pusta biala kolumne.
+BASE_ALT = {
+    "8b069ddc-4efd-4ef0-93ff-f44baf4a297e": "GENACTIV",
+    "6d4a1ba8-5f55-42bf-b716-8d63a323156c":
+        "250+ aktywnych substancji w 1 suplemencie — Dokończ zamówienie",
+    "2faa82e1-15cf-44fc-9c73-aadcc5147175":
+        "Colostrum uszczelnia barierę jelitową, zmniejszając jej przepuszczalność nawet o 70%",
+    "96d71fb0-4063-4a81-891d-e25739ce7a47":
+        "Colostrum okiem eksperta — mgr Monika Stromkie-Złomaniec, dietetyk kliniczny",
+    "489c06ca-7eb0-4f03-8a98-7ec22f1a5ad7": "Wróć do koszyka",
+    "c1f72600-bdf1-4617-bc1f-242f2c9f1a82": "Produkty GENACTIV Colostrum",
+    "50bfc1e4-b86e-46d0-a7df-27a0c44ad802":
+        "Liofilizowane, potwierdzona skuteczność, szybko pobierane",
+}
+
+# Dwie grafiki UDAJA przyciski ("Dokoncz zamowienie", "Wroc do koszyka"),
+# ale w XnCJxJ nie mialy zadnego linku - klikniecie nic nie robilo.
+BUTTON_IMAGES = [
+    "6d4a1ba8-5f55-42bf-b716-8d63a323156c",
+    "489c06ca-7eb0-4f03-8a98-7ec22f1a5ad7",
+]
+CART_URL = "https://genactiv.pl/cart"
+
+
+def add_base_alt(html):
+    """Uzupelnia alt w grafikach odziedziczonych z XnCJxJ."""
+    n = 0
+    for frag, alt in BASE_ALT.items():
+        def add(m):
+            tag = m.group(0)
+            return tag if "alt=" in tag else tag.replace("<img ", f'<img alt="{alt}" ', 1)
+        html, k = re.subn(r"<img (?![^>]*\balt=)[^>]*" + re.escape(frag) + r"[^>]*>",
+                          add, html)
+        n += k
+    return html, n
+
+
+def link_button_images(html):
+    """Owija grafiki-przyciski w odnosnik do koszyka."""
+    n = 0
+    for frag in BUTTON_IMAGES:
+        m = re.search(r"<img\b[^>]*" + re.escape(frag) + r"[^>]*>", html)
+        if not m:
+            continue
+        tag = m.group(0)
+        # jesli tuz przed obrazkiem jest otwarty <a>, to juz jest odnosnikiem
+        before = html[max(0, m.start() - 200):m.start()]
+        if before.rfind("<a ") > before.rfind("</a>"):
+            continue
+        html = html.replace(
+            tag, f'<a href="{CART_URL}" style="text-decoration:none;" '
+                 f'target="_blank">{tag}</a>', 1)
+        n += 1
+    return html, n
+
+
 def polish_footer(html):
     """Stopka XnCJxJ jest po angielsku, a unsubscribe bez polskiej etykiety."""
     old = ("No longer want to receive these emails? {% unsubscribe %}.")
@@ -285,6 +343,12 @@ def main():
     merged, fixed = polish_footer(merged)
     if fixed:
         print("Stopka: angielski tekst + gole {% unsubscribe %} -> wersja polska")
+    merged, n_alt = add_base_alt(merged)
+    if n_alt:
+        print(f"Alt uzupelniony w {n_alt} grafikach odziedziczonych z XnCJxJ")
+    merged, n_btn = link_button_images(merged)
+    if n_btn:
+        print(f"Grafiki-przyciski owiniete w link do koszyka: {n_btn}")
     if merged.count(END_MARK) != 1:
         sys.exit(f"BLAD: sekcja wystepuje {merged.count(END_MARK)}x zamiast 1 - przerywam.")
     io.open(OUT_FULL, "w", encoding="utf-8").write(merged)
