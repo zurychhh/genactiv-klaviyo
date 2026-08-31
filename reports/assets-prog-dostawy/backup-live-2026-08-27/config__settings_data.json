@@ -1,0 +1,2453 @@
+{
+  "current": {
+    "color_text": "#1a1818",
+    "color_body_text": "#1a1818",
+    "color_sale_text": "#6a6566",
+    "color_button": "#f5333f",
+    "color_small_button_text_border": "#f5333f",
+    "color_text_field_text": "#1a1818",
+    "color_text_field_border": "#bbbbbb",
+    "color_image_overlay": "#ffada6",
+    "image_overlay_opacity": 50,
+    "color_borders": "#f5333f",
+    "color_body_bg": "#ffffff",
+    "color_social_accounts_icon": "#f5333f",
+    "type_header_base_size": 30,
+    "type_base_size": 14,
+    "custom_type_header_font": "Branding",
+    "custom_type_body_font": "Branding",
+    "social_facebook_link": "https:\/\/www.facebook.com\/Genactiv",
+    "social_instagram_link": "https:\/\/www.instagram.com\/genactiv_colostrum\/",
+    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCITuRZBlEG_nxbH9Bnc-gLA",
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "enable_ajax": true,
+    "mq_phone": 767,
+    "container_size": 1280,
+    "section_spacing": 40,
+    "section_spacing_small": 24,
+    "border_radius": 5,
+    "payment_icons": "Przelewy24, blik, Visa, Mastercard",
+    "delivery_icons": "DHL, InPost",
+    "cart_free_shipping_threshold": "300",
+    "free_shipping_title": "300",
+    "free_shipping_message": "GRATULACJE MASZ DARMOWĄ DOSTAWĘ",
+    "cart_summary_title": "PODSUMOWANIE ZAMÓWIENIA",
+    "cart_note_title": "Uwagi",
+    "cart_notes_enable": true,
+    "checkbox_label": "<p>Akceptuję <a href=\"https:\/\/genactiv.pl\/pages\/regulamin-sklepu-internetowego-2026\" target=\"_blank\" title=\"https:\/\/genactiv.pl\/pages\/regulamin-sklepu-internetowego-2026\">regulamin<\/a> sklepu oraz jego postanowienia. Zapoznałem się z <a href=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\" title=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\">polityką prywatności.<\/a><\/p>",
+    "cart_background": "#efefef",
+    "experts": "Jon, Tom",
+    "comments_info": "<p>Opinie są weryfikowane na podstawie dokonanych zakupów w sklepie <a href=\"http:\/\/genactiv.pl\/\" title=\"http:\/\/genactiv.pl\">genactiv.pl<\/a>. Szczegóły możesz przeczytać w<a href=\"https:\/\/genactiv.pl\/pages\/regulaminy\" title=\"https:\/\/genactiv.pl\/pages\/regulaminy\"> regulaminie<\/a>.<\/p>",
+    "checkout_logo_image": "shopify:\/\/shop_images\/logo_c9d50121-a1f3-4792-9c49-d68893f648eb.png",
+    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_accent_color": "#f5333f",
+    "checkout_button_color": "#f5333f",
+    "checkout_error_color": "#ff0000",
+    "use_branding_font": true,
+    "sections": {
+      "header": {
+        "type": "header",
+        "custom_css": [
+          ".site-header__favourite {display: none;}"
+        ],
+        "settings": {
+          "align_logo": "left",
+          "logo": "shopify:\/\/shop_images\/logo_new2.png",
+          "logo_max_width": 70,
+          "main_linklist": "main-menu",
+          "message": true,
+          "home_page_only": false,
+          "message_text": "- 20 % z kodem BACK2SCHOOL na produkty dla dzieci. Tylko do 31\/08!",
+          "message_text_mobile": "- 20 % z kodem BACK2SCHOOL na produkty dla dzieci. Tylko do 31\/08!",
+          "button_label": "",
+          "button_link": "shopify:\/\/products\/colostrum-z-brzoskwinia-proszek-60-g",
+          "color_bg": "#f5333f",
+          "color_text": "#ffffff",
+          "search_mobile_background": "#f5f5f5"
+        }
+      },
+      "feature-row": {
+        "type": "feature-row",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Colostrum_45_b15a4e25-d6ca-41ee-9fe1-3c7832b119f7.jpg",
+          "layout": "left",
+          "title": "Jesteśmy tu dla Ciebie",
+          "text": "<p><strong>Informacje dotyczące zamówień i obsługi sklepu online:<\/strong><\/p><p>Przesyłka nie dotarła na czas? Problem z płatnością<br\/>Towar niedostępny? Chcesz zamówić nasze produkty przez telefon?<\/p><p><\/p><p><strong>Skontaktuj się z nami<\/strong><\/p><p>tel:<a href=\"tel:+48 786 868 047\" target=\"_blank\" title=\"tel:+48 786 868 047\">+48 786 868 047<\/a><\/p><p><a href=\"mailto:sklep@genactiv.pl\" title=\"mailto:sklep@genactiv.pl\">sklep@genactiv.pl<\/a><\/p><p>Czekamy na twój telefon<br\/>od poniedziałku do piątku<br\/>w godzinach 8:00 - 15:00<\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "feature-columns": {
+        "type": "feature-columns",
+        "blocks": {
+          "feature-columns-0": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "title": "Add a title or tagline"
+            }
+          },
+          "feature-columns-1": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "title": "Add a title or tagline"
+            }
+          },
+          "feature-columns-2": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "title": "Add a title or tagline"
+            }
+          }
+        },
+        "block_order": [
+          "feature-columns-0",
+          "feature-columns-1",
+          "feature-columns-2"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "collection": {
+        "type": "collection",
+        "settings": {
+          "title": "Featured collection",
+          "collection": "",
+          "grid": 4,
+          "rows": 2,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "quotes": {
+        "type": "quotes",
+        "blocks": {
+          "quotes-0": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+              "author": "Author's name"
+            }
+          },
+          "quotes-1": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+              "author": "Author's name"
+            }
+          },
+          "quotes-2": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>",
+              "author": "Author's name"
+            }
+          }
+        },
+        "block_order": [
+          "quotes-0",
+          "quotes-1",
+          "quotes-2"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "image-bar": {
+        "type": "image-bar",
+        "blocks": {
+          "image-bar-0": {
+            "type": "image",
+            "settings": {
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image-bar-1": {
+            "type": "image",
+            "settings": {
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image-bar-2": {
+            "type": "image",
+            "settings": {
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "image-bar-0",
+          "image-bar-1",
+          "image-bar-2"
+        ],
+        "settings": {
+          "section_height": "medium"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "0f64db3e-5c98-4888-89fc-2ac256ab1ec9": {
+            "type": "logo",
+            "settings": {
+              "show_social_icons": "tablet-phone",
+              "align_logo": "left",
+              "logo": "shopify:\/\/shop_images\/logo_new2.png",
+              "logo_max_width": 130,
+              "text": "<p><strong>Genactiv Spółka z o.o.<\/strong><br\/><a href=\"https:\/\/www.google.com\/maps\/place\/Popiela+17,+61-619+Pozna%C5%84\/data=!4m2!3m1!1s0x47045cb45c847be3:0x6fcbf6d1694b056c?sa=X&ved=2ahUKEwjz8Y7P59DyAhVLsKQKHep8D5wQ8gF6BAgPEAE\" title=\"ul. Popiela 17A 61-615 Poznań\">ul. <\/a>Polna 13\/3<a href=\"https:\/\/www.google.com\/maps\/place\/Popiela+17,+61-619+Pozna%C5%84\/data=!4m2!3m1!1s0x47045cb45c847be3:0x6fcbf6d1694b056c?sa=X&ved=2ahUKEwjz8Y7P59DyAhVLsKQKHep8D5wQ8gF6BAgPEAE\" title=\"ul. Popiela 17A 61-615 Poznań\"><br\/><\/a>62-070 Dąbrówka<\/p><p><strong>Kontakt<\/strong><br\/><a href=\"mailto:sklep@genactiv.eu\" title=\"sklep@genactiv.eu\">sklep@genactiv.pl<\/a><br\/><a href=\"tel:+48508008513\" title=\"+48 508 008 513\">+48 <\/a>786 868 047<\/p><p><strong>Dane rejestrowe<\/strong><br\/>NIP: 9721202218<\/p><p><strong>Numer konta do wpłat<\/strong><br\/>79 1140 1124 0000 5659 0300 1001<\/p>",
+              "color_text": "#f5333f",
+              "block_separator": "all"
+            }
+          },
+          "866a7140-7a8d-45f8-ac64-8a5ead79f404": {
+            "type": "link_list",
+            "settings": {
+              "title": "GENACTIV",
+              "nofollow": false,
+              "menu": "genactiv",
+              "block_separator": "phone"
+            }
+          },
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "title": "Obsługa klienta",
+              "nofollow": true,
+              "menu": "obs-uga-klienta",
+              "block_separator": "phone"
+            }
+          },
+          "footer-1": {
+            "type": "newsletter",
+            "settings": {
+              "show_social_icons": "desktop",
+              "title": "Dowiedz się więcej o naszych produktach",
+              "text": "<p>Zapisz się do newslettera, aby otrzymywać aktualne informacje o nowościach oraz promocjach COLOSTRUM GENACTIV.<\/p>",
+              "block_separator": "all",
+              "checkbox_title": "agreement",
+              "checkbox_text": "<p>Zapoznałem\/am się z<a href=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\" title=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\"> polityką prywatności <\/a>i akceptuję jej postanowienia.<\/p>",
+              "checkbox_text_size": 11,
+              "checkbox_required": true,
+              "checkbox_second_title": "agreement2",
+              "checkbox_second_text": "<p>Wyrażam zgodę na otrzymywanie od Genactiv Spółka z o.o. za pomocą środków komunikacji elektronicznej (np. za pośrednictwem poczty elektronicznej), informacji handlowych w rozumieniu przepisu art. 2 pkt 2 ustawy z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (t.j.: Dz.U. 2019, poz. 123 ze zm.).<\/p>",
+              "checkbox_second_text_size": 11,
+              "checkbox_second_required": true
+            }
+          }
+        },
+        "block_order": [
+          "0f64db3e-5c98-4888-89fc-2ac256ab1ec9",
+          "866a7140-7a8d-45f8-ac64-8a5ead79f404",
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "container_size": 1470,
+          "show_delivery_icons": true,
+          "show_payment_icons": true,
+          "color_footer_bg": "#ffffff",
+          "color_footer_header": "#f5333f",
+          "color_footer_text": "#1a1818",
+          "color_footer_icons_bg": "#fdfcfc",
+          "show_locale_selector": true,
+          "show_currency_selector": true
+        }
+      },
+      "cookies": {
+        "type": "cookies",
+        "settings": {
+          "show_section": "all",
+          "text_cookies": "<p>Strona korzysta z plików cookies w celu realizacji usług zgodnie z Polityką plików cookies. Więcej informacji Preferencje plików cookie.<\/p>",
+          "font_size": 14,
+          "color_cookies_bg": "#f5333f",
+          "color_cookies_text": "#ffffff",
+          "version": "#000000"
+        }
+      },
+      "1631794297d9450ab0": {
+        "type": "slideshow-ultimate",
+        "blocks": {
+          "image_F7iD3e": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Slider_B2S_1.png",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/SLIDER_MOBILE_B2S_1.png",
+              "show_overlay_second": false,
+              "alignment": "left center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "",
+              "slide_title": "",
+              "subheading": "<p>Początek roku szkolnego nie musi oznaczać początku infekcji! <\/p><p>Uprzedź sezon na gila - teraz <strong>-20%<\/strong><\/p><p>na cały dziecięcy asortyment z kodem BACK2SCHOOL<strong> ☀️<br\/><\/strong><br\/>*Promocja nie łączy się z innymi rabatami<\/p>",
+              "text_size": "large",
+              "button_label": "Kup teraz",
+              "button_link": "https:\/\/genactiv.pl\/collections\/back2school",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#ffffff",
+              "slide_button_text_color": "#f5333f",
+              "slide_button_border_color": "#f5333f",
+              "content_alignment": "left top",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          },
+          "image_gPGVTa": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Fiberbiom_Pure_slider.jpg",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/slider-mobile-fiberbiom-pure.jpg",
+              "show_overlay_second": false,
+              "alignment": "center center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "Nowość w linii FIBERBIOM",
+              "slide_title": "<p>Fiberbiom PURE<\/p>",
+              "subheading": "<p>100% arabinogalaktan - <br\/>Błonnik rozpuszczalny w najczystszej postaci.<\/p>",
+              "text_size": "medium",
+              "button_label": "ODKRYJ",
+              "button_link": "shopify:\/\/products\/fiberbiom-pure-proszek-60-g",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#f5333f",
+              "slide_button_text_color": "#ffffff",
+              "slide_button_border_color": "#f5333f",
+              "content_alignment": "right center",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          },
+          "image_tnRi6F": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/slider_stary_ecom_07150008-ca34-4cbf-9028-9d55ca5d2cf4.png",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/mobile_stary_ecom_nowosc.png",
+              "show_overlay_second": false,
+              "alignment": "center center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "",
+              "slide_title": "",
+              "subheading": "<p><strong>Fiberbiom, teraz w dwóch nowych smakach!<\/strong>  <br\/>Zacznij dzień od słonecznego ananasa albo sięgnij po głęboką, <br\/>wyrazistą czarną porzeczkę. <\/p>",
+              "text_size": "medium",
+              "button_label": "ODKRYJ",
+              "button_link": "shopify:\/\/collections\/blonnik",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#f5333f",
+              "slide_button_text_color": "#ffffff",
+              "slide_button_border_color": "#f5333f",
+              "content_alignment": "right center",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          },
+          "9dfe27c4-6a74-41e5-a027-a3e292e32f77": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Slider_www_desktop_pure_4.png",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/Slider_www_mobile_pure_1.png",
+              "show_overlay_second": false,
+              "alignment": "center center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "",
+              "slide_title": "<p>Genactiv® Colostrum<\/p><p>na dobry początek dnia.<\/p><p>Zacznij poranek od naturalnej rutyny.<\/p>",
+              "subheading": "",
+              "text_size": "medium",
+              "button_label": "Zaczynam",
+              "button_link": "https:\/\/genactiv.pl\/collections\/zdrowe-jelita",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#f5333f",
+              "slide_button_text_color": "#ffffff",
+              "slide_button_border_color": "#ffffff",
+              "content_alignment": "left center",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          },
+          "6d74b422-2230-4e10-b646-0e2e7ed901a3": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/slider_genactiv_zooggies.png",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/mobile-slider-ga-zooggies.png",
+              "show_overlay_second": false,
+              "alignment": "center center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "",
+              "slide_title": "<p>MEGA PROMOCJA<\/p><p>-70 % na linię <strong>ZOOGGIES<\/strong>!<\/p>",
+              "subheading": "",
+              "text_size": "large",
+              "button_label": "SPRAWDŹ",
+              "button_link": "shopify:\/\/collections\/colostrum-dla-zwierzat",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#ffffff",
+              "slide_button_text_color": "#f5333f",
+              "slide_button_border_color": "#f5333f",
+              "content_alignment": "left center",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          },
+          "image_HdcqEe": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/slider_A2.png",
+              "show_overlay": false,
+              "image_second": "shopify:\/\/shop_images\/slider_a2_mobile.png",
+              "show_overlay_second": false,
+              "alignment": "center center",
+              "video_link": "",
+              "video_link_phone": "",
+              "slide_introduction": "",
+              "slide_title": "<p>COLOSTRUM A2<br\/>Pierwotna moc natury. Zapisana w DNA.<\/p>",
+              "subheading": "<p><strong>Nie każde colostrum jest takie samo.\u2028 Różnice zaczynają się dużo<br\/> wcześniej niż na etapie produkcji – na poziomie genetycznym krowy.<\/strong><\/p>",
+              "text_size": "large",
+              "button_label": "Odkryj",
+              "button_link": "https:\/\/genactiv.pl\/collections\/colostrum-a2",
+              "slide_introduction_color": "#ffffff",
+              "slide_title_color": "#ffffff",
+              "slide_subheading_color": "#ffffff",
+              "slide_background_color": "rgba(0,0,0,0)",
+              "slide_background_overlay": 0.5,
+              "slide_button_color": "#f5333f",
+              "slide_button_text_color": "#ffffff",
+              "slide_button_border_color": "#f5333f",
+              "content_alignment": "left top",
+              "text_alignment": "left",
+              "pagination_title_header": "Slajd obrazu"
+            }
+          }
+        },
+        "block_order": [
+          "image_F7iD3e",
+          "image_gPGVTa",
+          "image_tnRi6F",
+          "9dfe27c4-6a74-41e5-a027-a3e292e32f77",
+          "6d74b422-2230-4e10-b646-0e2e7ed901a3",
+          "image_HdcqEe"
+        ],
+        "settings": {
+          "slideshow_height": "adapt",
+          "slideshow_style": "arrows",
+          "autorotate": true,
+          "autorotate_speed": 9,
+          "show_btn_pause": "none",
+          "show_btns_arrow": "all",
+          "show_scrollbar": "none",
+          "show_pagination": "desktop",
+          "show_section": "all",
+          "color_controls_bg": "rgba(0,0,0,0)",
+          "color_controls_text": "#ffffff"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "show_quantity_selector": true,
+          "show_vendor": true,
+          "enable_payment_button": false,
+          "show_share_buttons": false,
+          "media_size": "medium",
+          "enable_image_zoom": false,
+          "enable_video_looping": false,
+          "color_controls_text": "#1a1818",
+          "table_borders": "#efefef",
+          "table_background": "#fdfcfc",
+          "section_background": "#fdfcfc"
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": false,
+          "heading": "Może Ci się spodobać również",
+          "show_vendor": false
+        }
+      },
+      "1632472592b76026c3": {
+        "type": "searchanise-recommendations",
+        "blocks": {
+          "c0eafa59-e45e-4106-bfcd-edf809e6f0fd": {
+            "type": "code",
+            "settings": {
+              "title": "Bestsellery",
+              "code": "<div class=\"searchanise-recommendations\" id=\"0T8L9K0M0R6V6P9\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "c0eafa59-e45e-4106-bfcd-edf809e6f0fd"
+        ],
+        "settings": {}
+      },
+      "16327352107f7a0954": {
+        "type": "rich-text",
+        "settings": {
+          "full_width": false,
+          "section_title": "Genactiv® Colostrum.",
+          "section_title_h1": true,
+          "text": "<p>﻿Czyste, nieprzetworzone, bez dodatków i w 100% wierne naturze. Takie jest nasze Genactiv® Colostrum. ﻿﻿250 składników aktywnych zamkniętych w jednej Substancji. Jedyne na rynku colostrum dostępne w tylu formach podania i smakach. Polecane przez mamy i lubiane przez dzieci.<\/p><p><strong>GENACTIV®. Twój plan na zdrowie.<\/strong><\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "large"
+        }
+      },
+      "1632736434793b9373": {
+        "type": "logo-bar",
+        "blocks": {
+          "1632736434793b9373-0": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ikona_smak-02.png",
+              "title": "",
+              "text": "<p><strong>SMAK<\/strong><\/p>",
+              "link": ""
+            }
+          },
+          "1632736434793b9373-1": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ikona_naturalnosc.png",
+              "title": "",
+              "text": "<p><strong>NATURALNOŚĆ<\/strong><\/p><p><\/p>",
+              "link": ""
+            }
+          },
+          "1632736434793b9373-2": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ikona_forma-02.png",
+              "title": "",
+              "text": "<p><strong>FORMY PODANIA<\/strong><\/p>",
+              "link": ""
+            }
+          },
+          "1632736434793b9373-3": {
+            "type": "logo_image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ikona_skutecznosc-02.png",
+              "title": "",
+              "text": "<p><strong>SKUTECZNOŚĆ<\/strong><\/p>",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1632736434793b9373-0",
+          "1632736434793b9373-1",
+          "1632736434793b9373-2",
+          "1632736434793b9373-3"
+        ],
+        "settings": {
+          "title": "Za co pokochasz nasze Colostrum?",
+          "color_bg": "",
+          "color_title": "#1a1818",
+          "color_text": "",
+          "three_per_row": false
+        }
+      },
+      "1632750841cd1c6f40": {
+        "type": "banner",
+        "disabled": true,
+        "settings": {
+          "title": "Dopasuj odpowiedni suplement do Twoich potrzeb",
+          "text": "Sprawdź jaki suplement będzie najlepszy dla Twojego organizmu.",
+          "button_label": "DOPASUJ COLOSTRUM",
+          "button_link": "shopify:\/\/pages\/co-to-jest-colostrum",
+          "color_bg": "#f5333f",
+          "color_text": "#ffffff",
+          "image_desktop": "shopify:\/\/shop_images\/baner_1.jpg",
+          "image_tablet": "shopify:\/\/shop_images\/banner_1_t.jpg",
+          "image_phone": "shopify:\/\/shop_images\/baner_1.jpg",
+          "layout": "left",
+          "icon_desktop": "shopify:\/\/shop_images\/banner_1_icon_a7b14940-1b8b-48a4-bc72-92004674db87.png",
+          "icon_phone": "shopify:\/\/shop_images\/icon_1p.png"
+        }
+      },
+      "1632751589659b29db": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/GENACTIVE_20258868_Sredni.jpg",
+          "layout": "left",
+          "title": "Twój plan na zdrowie",
+          "text": "<p>Nasze Colostrum i Mleko klaczy, to produkty najwyższej próby. Czyste, nieprzetworzone i w 100% wierne naturze. Poddane delikatnej metodzie suszenia - liofilizacji - dzięki czemu zachowują właściwości produktu świeżego. <\/p><p>Genactiv®Colostrum i  Genactiv®Mleko Klaczy, to doskonały wybór dla tych, którzy poszukują naturalnego sposobu, tak aby móc realizować ważne, życiowe plany. <br\/><\/p>",
+          "code": "",
+          "button_label": "DOWIEDZ SIĘ WIĘCEJ",
+          "button_link": "shopify:\/\/pages\/co-to-jest-colostrum",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "16327515975d3d96a4": {
+        "type": "feature-row",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Studio_Session-701_268a0007-37f5-4cbb-a959-752babda8436_600x600_2x-min.webp",
+          "layout": "left",
+          "title": "Twój plan na zdrową skórę i włosy",
+          "text": "<p>W naszej linii DERMO wykorzystujemy dary matki natury, takie jak colostrum bovinum i mleko klaczy. Dzięki synergii tych dwóch dobroczynnych substancji, otrzymujemy kosmetyki, które doskonale sprawdzają się zarówno dla cery dojrzałej, problematycznej i podrażnionej.  Starannie opracowana i opatentowana procedura pozyskiwania surowca oraz zaawansowana technologia procesu liofilizacji sprawia, że otrzymane colostrum bovinum i mleko od klaczy zachowują swoje naturalne właściwości oraz są bogate w witaminy i minerały.<br\/><br\/>Kosmetyki z Genactiv®Colostrum. Twój plan na zdrową skórę i włosy<\/p>",
+          "code": "",
+          "button_label": "DOWIEDZ SIĘ WIĘCEJ",
+          "button_link": "shopify:\/\/collections\/all",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "rgba(0,0,0,0)",
+          "color_text": "rgba(0,0,0,0)"
+        }
+      },
+      "1632821678235b094f": {
+        "type": "video-file",
+        "disabled": true,
+        "settings": {
+          "section_title": "Colostrum Genactiv",
+          "image": "shopify:\/\/shop_images\/video_1.jpg",
+          "image_position": "center center",
+          "video_local": "https:\/\/cdn.shopify.com\/s\/files\/1\/0584\/6184\/7726\/files\/Siegnij_po_prawdziwe_colostrum_genactiv_3_2.mp4?v=1636562968",
+          "show_overlay": true,
+          "height": "medium"
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "blocks": {
+          "e37f0202-788d-4132-8a6a-4b965e551bb7": {
+            "type": "text",
+            "settings": {
+              "blog": "badania",
+              "title": "Badania",
+              "image_desktop": "shopify:\/\/shop_images\/image.png"
+            }
+          },
+          "4dde40f6-c767-4edc-90e3-4d5493466156": {
+            "type": "text",
+            "settings": {
+              "blog": "poradnik",
+              "title": "Poradnik",
+              "image_desktop": "shopify:\/\/shop_images\/slider_poradnik.png",
+              "image_tablet": "shopify:\/\/shop_images\/slider_poradnikpng.png",
+              "image_phone": "shopify:\/\/shop_images\/slider_poradnikpng.png"
+            }
+          },
+          "523f7452-2eb8-439c-9cd9-5c31d7b03002": {
+            "type": "text",
+            "settings": {
+              "blog": "webinary",
+              "title": "Webinary",
+              "image_desktop": "shopify:\/\/shop_images\/LIVE.png"
+            }
+          },
+          "a0b2bd7e-7697-4dfc-b871-bc56133ea64c": {
+            "type": "text",
+            "settings": {
+              "blog": "biblioteka-video",
+              "title": "Biblioteka Video",
+              "image_desktop": "shopify:\/\/shop_images\/slider_video.png",
+              "image_tablet": "shopify:\/\/shop_images\/slider_video.png"
+            }
+          }
+        },
+        "block_order": [
+          "e37f0202-788d-4132-8a6a-4b965e551bb7",
+          "4dde40f6-c767-4edc-90e3-4d5493466156",
+          "523f7452-2eb8-439c-9cd9-5c31d7b03002",
+          "a0b2bd7e-7697-4dfc-b871-bc56133ea64c"
+        ],
+        "settings": {
+          "layout": "grid",
+          "blog_show_author": true,
+          "blog_show_date": true
+        }
+      },
+      "1633690018bca2a5f1": {
+        "type": "slide-of-boxes",
+        "blocks": {
+          "c3a838b3-859c-4ead-852f-81f7580bd852": {
+            "type": "header",
+            "settings": {
+              "title": "O Colostrum"
+            }
+          },
+          "657c7ac4-ec05-4413-8501-dc3f99cc1a78": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/co_to_jest_colostrum360x360.png",
+              "text": "Co to jest colostrum?",
+              "link": "https:\/\/genactiv.pl\/pages\/co-to-jest-colostrum"
+            }
+          },
+          "95536237-caa9-458b-a29f-ad8a0e2f2e6c": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/badania360x360.png",
+              "text": "Badania",
+              "link": "shopify:\/\/pages\/badania-genactiv-colostrum"
+            }
+          },
+          "d70bc767-be46-45f0-8936-4b87af6b1cab": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/jak_stosowac_360x360_a2a68876-909e-493f-abb7-b01623afab06.png",
+              "text": "Kiedy i jak stosować colostrum?",
+              "link": ""
+            }
+          },
+          "9856efbd-0ab1-4dd7-8f31-38b4d113c245": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/slowniczek360x360.png",
+              "text": "Słowniczek",
+              "link": ""
+            }
+          },
+          "33764255-2ef2-413f-a562-fb24ee84e6dd": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/najczestsze360x360.png",
+              "text": "Najczęstsze pytania",
+              "link": ""
+            }
+          },
+          "818787f5-5654-41be-99cc-7a897237adc5": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/test_img3.jpg",
+              "text": "Tekst banera",
+              "link": ""
+            }
+          },
+          "b47c3855-0ffa-496d-b58d-7ba93eab3e61": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/test_img3.jpg",
+              "text": "Tekst banera",
+              "link": ""
+            }
+          },
+          "97cf5493-8880-4c55-aa1e-ada19ec1e605": {
+            "type": "header",
+            "disabled": true,
+            "settings": {
+              "title": "O Mleku Klaczy"
+            }
+          },
+          "4328608e-639d-43dd-accf-89349f5a449b": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/cotomleko360x360.png",
+              "text": "Co to jest mleko klaczy?",
+              "link": ""
+            }
+          },
+          "d9d7ca45-24fb-45f4-a863-9188d8469fa3": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/kiedymleko360x360.png",
+              "text": "Kiedy i jak stosować mleko klaczy?",
+              "link": ""
+            }
+          },
+          "b57c20f9-d3f9-487e-8481-a29dcab79a4a": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/badania.mleko360x360.png",
+              "text": "Badania",
+              "link": ""
+            }
+          },
+          "6e764b5a-7bef-48ce-8697-db4e656326d8": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/slowniczek.png",
+              "text": "Słowniczek",
+              "link": ""
+            }
+          },
+          "8ac059b7-c664-4bef-8ec2-f11461a8eb5a": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/najczestszemleko360x360.png",
+              "text": "Najczęstsze pytania",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "c3a838b3-859c-4ead-852f-81f7580bd852",
+          "657c7ac4-ec05-4413-8501-dc3f99cc1a78",
+          "95536237-caa9-458b-a29f-ad8a0e2f2e6c",
+          "d70bc767-be46-45f0-8936-4b87af6b1cab",
+          "9856efbd-0ab1-4dd7-8f31-38b4d113c245",
+          "33764255-2ef2-413f-a562-fb24ee84e6dd",
+          "818787f5-5654-41be-99cc-7a897237adc5",
+          "b47c3855-0ffa-496d-b58d-7ba93eab3e61",
+          "97cf5493-8880-4c55-aa1e-ada19ec1e605",
+          "4328608e-639d-43dd-accf-89349f5a449b",
+          "d9d7ca45-24fb-45f4-a863-9188d8469fa3",
+          "b57c20f9-d3f9-487e-8481-a29dcab79a4a",
+          "6e764b5a-7bef-48ce-8697-db4e656326d8",
+          "8ac059b7-c664-4bef-8ec2-f11461a8eb5a"
+        ],
+        "disabled": true,
+        "settings": {
+          "text": "<p><strong>Chcesz dowiedzieć się więcej, poczytaj o naszym Colostrum.<\/strong><\/p>",
+          "button_label": "SPRAWDŹ",
+          "button_link": "shopify:\/\/pages\/co-to-jest-colostrum"
+        }
+      },
+      "16341356649571f89e": {
+        "type": "experts",
+        "blocks": {
+          "16341356649571f89e-1": {
+            "type": "person",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ekspert_monika.png",
+              "name": "Monika Stromkie-Złomaniec",
+              "position": "Dietetyk",
+              "button_label": "DOWIEDZ SIĘ WIĘCEJ",
+              "button_link": "shopify:\/\/pages\/monika-stromkie-zlomaniec",
+              "form_button_label": ""
+            }
+          },
+          "16341356649571f89e-0": {
+            "type": "person",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ekperci_halasa.png",
+              "name": "dr hab. n. med. Maciej Hałasa",
+              "position": "Specjalista immunolog",
+              "button_label": "DOWIEDZ SIĘ WIĘCEJ",
+              "button_link": "https:\/\/genactiv.pl\/pages\/dr-hab-n-med-maciej-halasa",
+              "form_button_label": ""
+            }
+          },
+          "16341356649571f89e-2": {
+            "type": "person",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/ekperci_circle-magda.png",
+              "name": "Magdalena Szymczak-Kępka",
+              "position": "Psycholog diagnosta, trycholog",
+              "button_label": "DOWIEDZ SIĘ WIĘCEJ",
+              "button_link": "shopify:\/\/pages\/ekspert-nr-2",
+              "form_button_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "16341356649571f89e-1",
+          "16341356649571f89e-0",
+          "16341356649571f89e-2"
+        ],
+        "settings": {
+          "title": "Eksperci",
+          "text": "",
+          "button_label": "SPRAWDŹ",
+          "button_link": ""
+        }
+      },
+      "16342015467900dce3": {
+        "type": "quotes",
+        "blocks": {
+          "16342015467900dce3-2": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Produkt wart swojej ceny. Sprawdzone działanie wzmacniające odporność. Od czasu kiedy wnuki przyjmują Colostrum nie chorują.<\/p>",
+              "author": "Joasia",
+              "company": ""
+            }
+          },
+          "16342015467900dce3-0": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Poleciła mi go pani doktor na odporność dla 3 latka i działa. Syn czesto chorował a od czasu przyjmowania colostrum nic, nawet kataru..<\/p>",
+              "author": "Tomasz",
+              "company": ""
+            }
+          },
+          "16342015467900dce3-1": {
+            "type": "quote",
+            "settings": {
+              "quote": "<p>Produkt pierwsza klasa polecam!!! Super promocje. Odporność dzieci na 100 % dzięki saszetkom colostrum!!<\/p>",
+              "author": "Natalia",
+              "company": ""
+            }
+          }
+        },
+        "block_order": [
+          "16342015467900dce3-2",
+          "16342015467900dce3-0",
+          "16342015467900dce3-1"
+        ],
+        "disabled": true,
+        "settings": {
+          "title": "OPINIE O COLOSTRUM GENACTIV",
+          "color_text": "#ffffff",
+          "color_bg": "#f5333f"
+        }
+      },
+      "1634205336ccb379f5": {
+        "type": "logo-slider",
+        "blocks": {
+          "f49bd50e-700c-496e-99cd-2aecb4cd961b": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/zdrowietvn.png",
+              "text": "<p>\"Już od wielu lat wskazuje się na pozytywny wpływ suplementacji colostrum na stan przewodu pokarmowego również u sportowców. Zwiększona przepuszczalność bariery jelitowej związana jest silnie z ekstremalnym wysiłkiem, dlatego rozpoczęto <a href=\"https:\/\/genactiv.pl\/blogs\/badania\" title=\"https:\/\/genactiv.pl\/blogs\/badania\"><span style=\"text-decoration:underline\">badania<\/span><\/a>, w których wprowadzano suplementację colostrum przed intensywnymi ćwiczeniami. Dzięki temu sprawdzono, że colostrum może przywracać i wspierać właściwy stan i funkcje bariery jelitowej. Głównie poprzez redukcję poziomu fizjologicznego regulatora przepuszczalności bariery jelitowej - zonuliny. Również, dzięki temu, że colostrum posiada właściwości przeciwzapalne, może przerwać procesy uszkadzające śluzówkę.\" <\/p>"
+            }
+          },
+          "17c985b6-6a3d-445d-a7dd-df2bec16ccf5": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/logo_1.png",
+              "text": "<p>\"Osoby suplementujące się colostrum zapewniają dodatkowe wsparcie rozwoju i prawidłowe działanie układu immunologicznego oraz całego organizmu. Stanowi ono dodatkowy, cenny element podnoszący sprawność mechanizmów obronnych. Stojąc przed wyborem czy suplementować, czy nie, należy odpowiedzieć sobie na pytanie, czy mogę zrobić coś więcej dla siebie, aby zachować zdrowie. Nauka cały czas stara się udzielić odpowiedzi na pytanie, czy zalecać colostrum jako suplement z uwagi na złożone mechanizmy jego działania. Cały czas toczą się badania oraz dyskusje ekspertów o zastosowaniach colostrum.\"<\/p>"
+            }
+          },
+          "ad04fa4b-9aee-4530-803a-64d216807c59": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/medonet_8f253e90-c87d-4b7e-a31b-f01e7a4cea22.png",
+              "text": "<p><br\/>\"Zastosowanie colostrum jako środka zabezpieczającego przed wirusowymi infekcjami dróg oddechowych i przewodu pokarmowego zostało w przeszłości przebadane. Udowodniono, że suplementacja colostrum przed sezonem jesienno-zimowym skutecznie zmniejsza częstość i ciężkość przebiegu typowych infekcji wirusami występującymi sezonowo.\"<\/p>"
+            }
+          },
+          "81253ce4-e0e1-4e7d-8ef7-23161dc7dad7": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/rodzicepl.png",
+              "text": "<p>\"Badania przeprowadzone przez dr n. med. Macieja Hałasę, potwierdziły, że składniki zawarte w siarze bydlęcej wzmacniają barierę jelitową i mogą ograniczyć rozwój chorób, a także skrócić czas trwania niektórych infekcji. Ma to ogromne znaczenie w okresie jesiennym, kiedy dzieci wracają do szkoły i są bardziej narażone na różnego rodzaju szkodliwe drobnoustroje. Warto wtedy postawić na naturalny sposób na budowanie odporności - czyli colostrum bovinum. Działanie colostrum jest niezwykle wszechstronne. Suplementacja siarą bydlęcą, to sposób nie tylko na poprawę odporności i szczelności jelit, ale również na zwiększenie wytrzymałości fizycznej i witalności, poprawę samopoczucia i procesów poznawczych (przez zawartość białka PRP), wsparcie organizmu po chorobie i antybiotykoterapii.\"<\/p>"
+            }
+          },
+          "5718ef5c-1e9a-4edf-8ef7-0a4b7ba786bf": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/foodforum.png",
+              "text": "<p>\"Ponieważ najpoważniejsze konsekwencje infekcji płuc w przebiegu COVID-19 związane są z piorunującym i masywnym rozwojem zapalenia, należy wskazać, że spośród wielu opisywanych działań colostrum bovinum jednym z najczęściej podnoszonych jest m.in. łagodzenie zapaleń. Złagodzenie zapalenia może mieć kapitalne znaczenie dla redukcji zniszczeń tkankowych powstających w przebiegu m.in. zapalenia płuc w COVID-19. Jednym z takich działań chroniących przed skutkami zapaleń jest wpływ antyoksydacyjny colostrum bovinum [6].\"<\/p>"
+            }
+          },
+          "f9c67c63-f0af-467a-9d5b-668d3408d1aa": {
+            "type": "logo_image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/wyborcza_01c29b1b-c97f-4a14-9e42-bd8a0db44284.png",
+              "text": "<p>\"W jaki sposób colostrum reguluje i wspiera odporność?<br\/>Przede wszystkim pozwala aktywować, rozwinąć i prawidłowo funkcjonować<br\/>układowi odpornościowemu. Jak to możliwe? Głównie przez to, że na wielu poziomach reguluje ono homeostazę jelit – m.in. uszczelnia barierę jelitową,<br\/>dzięki czemu redukuje ryzyko rozwoju lokalnych stanów zapalnych oraz poprawia stan mikrobioty jelitowej, co usprawnia wchłanianie składników pokarmowych. Zachowanie homeostazy<br\/>jelitowej ma ponadto zbawienny wpływ na przebieg funkcji immunologicznych, ponieważ zdrowe jelita to również lepsza<br\/>odporność swoista całego organizmu, bo to właśnie w nich znajduje się większość odpowiedzialnych za nią komórek – limfocytów.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "f49bd50e-700c-496e-99cd-2aecb4cd961b",
+          "17c985b6-6a3d-445d-a7dd-df2bec16ccf5",
+          "ad04fa4b-9aee-4530-803a-64d216807c59",
+          "81253ce4-e0e1-4e7d-8ef7-23161dc7dad7",
+          "5718ef5c-1e9a-4edf-8ef7-0a4b7ba786bf",
+          "f9c67c63-f0af-467a-9d5b-668d3408d1aa"
+        ],
+        "disabled": true,
+        "settings": {
+          "title": "Colostrum w mediach"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
+          "cart_drawer_title": "Koszyk",
+          "cart_go_to_basket": "PRZEJDŹ DO KOSZYKA",
+          "background_overlay": "#685858",
+          "overlay_opacity": 40,
+          "background_color": "#ffffff"
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
+          "cart_ajax_enable": true,
+          "title": "Polecane produkty",
+          "code": "<div class=\"searchanise-recommendations\" id=\"3M0F8Q5A1Q2Z5Q5\"><\/div>"
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "show_collection_image": true,
+          "uppercase": false,
+          "header_base_size": 300,
+          "filters": "Filtruj",
+          "sort": "Sortuj",
+          "read_more": "Czytaj więcej",
+          "read_less": "Czytaj mniej"
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "title": "Polecane artykuły",
+          "blog_show_author": true,
+          "blog_show_date": true,
+          "show_share_buttons": false
+        }
+      },
+      "163802370420c13824": {
+        "type": "video-youtube",
+        "disabled": true,
+        "settings": {
+          "section_title": "Poznaj Colostrum Genactiv",
+          "image": "shopify:\/\/shop_images\/Group_1015_2048_7x_315e7dbb-dd29-4c2f-89eb-ef4646ff2385.png",
+          "image_position": "center center",
+          "video_link": "https:\/\/www.youtube.com\/watch?v=-0YPtxG1j1w",
+          "show_overlay": true,
+          "height": "medium"
+        }
+      },
+      "163803346066a7a96a": {
+        "type": "rich-text",
+        "disabled": true,
+        "settings": {
+          "full_width": false,
+          "section_title": "INFORMACJA DLA KLIENTÓW",
+          "section_title_h1": true,
+          "text": "<p>Drodzy Klienci, bardzo cieszy nas Wasze ogromne zainteresowanie produktami Genactiv.<\/p><p>Colostrum Genactiv i Mleko Klaczy Genactiv to substancje jedyne w swoim rodzaju. W pełni naturalne i wysokiej jakości. Proces produkcji wymaga szczególnej dbałości przez co mamy ograniczone możliwości produkcyjne. Prosimy Was o cierpliwość w sytuacji czasowego ograniczenia dostępności niektórych towarów, a w zamian gwarantujemy, że otrzymacie produkty unikalne, spełniające Wasze wymagania.<\/p><p><em><strong>Matka Natura daje początek temu, co najważniejsze, a Genactiv temu co najlepsze.<\/strong><\/em><\/p><p>Suplement i kosmetyki marki Genactiv poza naszym sklepem internetowym są jeszcze dostępne u naszych dystrybutorów. Zapraszamy do odwiedzenia:<\/p><p>1) <a href=\"https:\/\/www.aptekagemini.pl\/znajdz?query=genactiv\"><span style=\"text-decoration:underline\">https:\/\/www.aptekagemini.pl\/znajdz?query=genactiv,<\/span><\/a><\/p><p>2) <a href=\"https:\/\/www.superpharm.pl\/marki\/genactiv.html\"><span style=\"text-decoration:underline\">https:\/\/www.superpharm.pl\/marki\/genactiv.html,<\/span><\/a><\/p><p>3) <a href=\"https:\/\/www.wapteka.pl\/produkt\/proste-wyszukianie?szukaj=genactiv&pf-size=36&pf-page=1\" target=\"_blank\">https:\/\/www.wapteka.pl\/produkt\/proste-wyszukianie?szukaj=genactiv&pf-size=36&pf-page=1,<\/a>﻿<\/p><p>4) <a href=\"https:\/\/www.izielnik.pl\/s?q=Genactiv\" target=\"_blank\">https:\/\/www.izielnik.pl\/s?q=Genactiv<\/a>﻿,<\/p><p>5) <a href=\"https:\/\/www.nowafarmacja.pl\/s?q=genactiv\" target=\"_blank\">https:\/\/www.nowafarmacja.pl\/s?q=genactiv,<\/a>﻿<\/p><p>6) <a href=\"https:\/\/aptekazawiszy.pl\/strony\/wyszukiwanie.html?name=Genactiv&pf-size=32&pf-page=1\" target=\"_blank\">https:\/\/aptekazawiszy.pl\/strony\/wyszukiwanie.html?name=Genactiv&pf-size=32&pf-page=1,<\/a>﻿<\/p><p>7) <a href=\"https:\/\/www.allecco.pl\/search?name=Genactiv&pf-size=32&pf-page=1\" target=\"_blank\">https:\/\/www.allecco.pl\/search?name=Genactiv&pf-size=32&pf-page=1<\/a><\/p><p>Odwiedzajcie naszą stronę internetową i profile ….., Zespół Genactiv jest do Waszej dyspozycji.<\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "medium"
+        }
+      },
+      "alphabet": {
+        "type": "alphabet",
+        "blocks": {
+          "b2cdb837-6a22-48c1-8cfe-05d61dd013df": {
+            "type": "text_block",
+            "settings": {
+              "page": "immunomodulatory"
+            }
+          },
+          "9e185f41-fe50-4753-8722-f388daf3c975": {
+            "type": "text_block",
+            "settings": {
+              "page": "laktoferyna"
+            }
+          },
+          "b779f8f5-e302-49bd-89e2-40f0fe313c57": {
+            "type": "text_block",
+            "settings": {
+              "page": "flora-jelitowa"
+            }
+          },
+          "95e6b941-6a0d-43d0-ad76-b63e12c68732": {
+            "type": "text_block",
+            "settings": {
+              "page": "choroba-lesniowskiego-crohna"
+            }
+          },
+          "79318688-eb92-4193-bdd3-b0c06f23d0ab": {
+            "type": "text_block",
+            "settings": {
+              "page": "igf-1-co-to-jest-i-jaka-funkcje-pelni-w-organizmie"
+            }
+          },
+          "f69e248c-c6e8-4ce7-89da-f05f8d2fc495": {
+            "type": "text_block",
+            "settings": {
+              "page": "siara"
+            }
+          },
+          "6b09bd01-1a93-48e2-8829-b9a57ae85c54": {
+            "type": "text_block",
+            "settings": {
+              "page": "lizozym"
+            }
+          },
+          "aef7f688-a1e7-4f48-ade7-17ce12846d4b": {
+            "type": "text_block",
+            "settings": {
+              "page": "tradzik"
+            }
+          },
+          "97bc27c6-801a-46e6-a755-3902274aa4dd": {
+            "type": "text_block",
+            "settings": {
+              "page": "zespol-nieszczelnego-jelita"
+            }
+          },
+          "65fcb131-4229-4fcf-9cc0-4d95d3d3478c": {
+            "type": "text_block",
+            "settings": {
+              "page": "limfocyty"
+            }
+          },
+          "64b84e51-6b34-435f-9b12-9c9b871ce8e6": {
+            "type": "text_block",
+            "settings": {
+              "page": "uklad-immunologiczny"
+            }
+          },
+          "016c1ba7-9e00-4c75-92ec-aa4751bea285": {
+            "type": "text_block",
+            "settings": {
+              "page": "colostrum-bovinum-2h"
+            }
+          },
+          "d25f0f77-a448-4364-add3-d7c04d24fe9a": {
+            "type": "text_block",
+            "settings": {
+              "page": "immunoglobuliny-m-i-g"
+            }
+          },
+          "5a01ad5f-af30-4ad3-9671-88169bdbb820": {
+            "type": "text_block",
+            "settings": {
+              "page": "liofilizacja-co-to-znaczy"
+            }
+          },
+          "4384ebcb-f03e-46b2-8338-961e90ff3240": {
+            "type": "text_block",
+            "settings": {
+              "page": "kolostrynina"
+            }
+          },
+          "5f2ebc54-46c6-4123-adb1-8b2471490e5d": {
+            "type": "text_block",
+            "settings": {
+              "page": "polipeptydy"
+            }
+          },
+          "04f163cb-a73f-4430-8a25-5d5de56df6bc": {
+            "type": "text_block",
+            "settings": {
+              "page": "probiotyki"
+            }
+          },
+          "4670756a-c481-4c67-abd6-82dac6bee610": {
+            "type": "text_block",
+            "settings": {
+              "page": "sibo"
+            }
+          },
+          "7a8c6971-b9c0-4c32-89a7-c8310be9cec3": {
+            "type": "text_block",
+            "settings": {
+              "page": "zespol-jelita-drazliwego"
+            }
+          },
+          "77614b2d-dc5b-483e-8910-1ac70ff12c7c": {
+            "type": "text_block",
+            "settings": {
+              "page": "patogen"
+            }
+          },
+          "d2c0d8d2-0828-4d41-99d5-2d018f84057c": {
+            "type": "text_block",
+            "settings": {
+              "page": "badania-histopatologiczne"
+            }
+          },
+          "9a80d140-7114-4dea-822e-7c5ab874499b": {
+            "type": "text_block",
+            "settings": {
+              "page": "rekonwalescencja"
+            }
+          },
+          "7140f1e4-91ec-4a49-bef8-bd2711dd9fa2": {
+            "type": "text_block",
+            "settings": {
+              "page": "flora-bakteryjna"
+            }
+          },
+          "b60ddcfe-b85e-46ee-a3fb-46a97c9a3f4e": {
+            "type": "text_block",
+            "settings": {
+              "page": "dermokosmetyki"
+            }
+          },
+          "58fd0191-bfbb-4ce9-8eeb-c0f7a3389d18": {
+            "type": "text_block",
+            "settings": {
+              "page": "cera"
+            }
+          },
+          "d3879940-a794-4f1c-9206-1979322148be": {
+            "type": "text_block",
+            "settings": {
+              "page": "egf-naskorkowy-czynnik-wzrostu"
+            }
+          },
+          "5e721b2d-6925-42ad-9ff9-7b29d191b134": {
+            "type": "text_block",
+            "settings": {
+              "page": "kwas-hialuronowy"
+            }
+          },
+          "e7b33588-347b-43e2-bc3b-99dd6f821051": {
+            "type": "text_block",
+            "settings": {
+              "page": "aminokwasy"
+            }
+          },
+          "02a6f38b-e945-4999-ade1-1298e56c3ee3": {
+            "type": "text_block",
+            "settings": {
+              "page": "ph-skory"
+            }
+          },
+          "279e6b2c-73b6-4963-a237-0f7138ef46c2": {
+            "type": "text_block",
+            "settings": {
+              "page": "skladniki-siary-bydlecej"
+            }
+          },
+          "deb97502-271e-49a5-beb7-759a1348664b": {
+            "type": "text_block",
+            "settings": {
+              "page": "kazeina"
+            }
+          },
+          "88bdccbd-2954-4aa3-95f8-58c85fc27235": {
+            "type": "text_block",
+            "settings": {
+              "page": "lecytyna"
+            }
+          },
+          "38c265d2-4066-40a7-9191-891814074065": {
+            "type": "text_block",
+            "settings": {
+              "page": "leukocyty-czym-sa-jakie-sa-objawy-niedoboru-i-nadmiaru"
+            }
+          },
+          "8056f095-c565-4820-9563-c7d6283fc39f": {
+            "type": "text_block",
+            "settings": {
+              "page": "zonulina"
+            }
+          },
+          "72710054-4ac2-45fe-ba1d-42fcd9bdc76a": {
+            "type": "text_block",
+            "settings": {
+              "page": "dysbioza-jelitowa"
+            }
+          },
+          "c69a776b-be8a-4a43-9dcf-b0e8a6bacb3e": {
+            "type": "text_block",
+            "settings": {
+              "page": "witamina-d3-charakterystyka-norma-niedobor-nadmiar"
+            }
+          },
+          "601270f1-58fd-4704-94e6-6f2d60e06850": {
+            "type": "text_block",
+            "settings": {
+              "page": "witamina-e-wlasciwosci-skutki-nadmiaru-i-niedoboru"
+            }
+          },
+          "d7f472af-8d00-47c8-a3c0-0cfb89240f93": {
+            "type": "text_block",
+            "settings": {
+              "page": "witamina-a-wlasciwosci-skutki-nadmiaru-i-niedoboru"
+            }
+          },
+          "e9998923-29a7-4469-8e44-1d3b9eeb3f55": {
+            "type": "text_block",
+            "settings": {
+              "page": "tauryna-dzialanie-wlasciwosci-dawkowanie-cena"
+            }
+          },
+          "9e4802fb-9548-4dfb-b371-29f5fb6df57d": {
+            "type": "text_block",
+            "settings": {
+              "page": "ltryptofan-i-tryptofan-wlasciwosci-niedobor-dawkowanie"
+            }
+          },
+          "41f1eef8-1511-4008-bfa8-880bf600a571": {
+            "type": "text_block",
+            "settings": {
+              "page": "witamina-c-kwas-askorbinowy"
+            }
+          },
+          "474886d8-aca3-48a2-aac5-86b565bcc9e4": {
+            "type": "text_block",
+            "settings": {
+              "page": "witamina-b2-ryboflawina"
+            }
+          },
+          "f140ca8e-e5c7-4ec1-a17a-251430373ef5": {
+            "type": "text_block",
+            "settings": {
+              "page": "alfa-laktoalbumina"
+            }
+          },
+          "63142525-3b19-4826-a34a-ec30c3247a23": {
+            "type": "text_block",
+            "settings": {
+              "page": "celiakia-co-to-jest-objawy-przyczyny"
+            }
+          },
+          "02527aad-0035-40c6-a27c-9f8a65767294": {
+            "type": "text_block",
+            "settings": {
+              "page": "biegunka-rozwolnienie-przyczyny-objawy-i-leczenie"
+            }
+          },
+          "53589558-8852-41ca-927f-88610d6b6a1d": {
+            "type": "text_block",
+            "settings": {
+              "page": "zapalenie-jelit-przyczyny-objawy-leczenie"
+            }
+          },
+          "text_block_rRpJcW": {
+            "type": "text_block",
+            "settings": {
+              "page": "reumatoidalne-zapalenie-stawow"
+            }
+          },
+          "text_block_GdfgeY": {
+            "type": "text_block",
+            "settings": {
+              "page": "mikrobiota-jelitowa-co-to-jest-i-jej-wplyw-na-organizm-czlowieka"
+            }
+          },
+          "text_block_HWQJxg": {
+            "type": "text_block",
+            "settings": {
+              "page": "czarny-bez"
+            }
+          },
+          "text_block_AQD4yd": {
+            "type": "text_block",
+            "settings": {
+              "page": "ferrytyna"
+            }
+          }
+        },
+        "block_order": [
+          "b2cdb837-6a22-48c1-8cfe-05d61dd013df",
+          "9e185f41-fe50-4753-8722-f388daf3c975",
+          "b779f8f5-e302-49bd-89e2-40f0fe313c57",
+          "95e6b941-6a0d-43d0-ad76-b63e12c68732",
+          "79318688-eb92-4193-bdd3-b0c06f23d0ab",
+          "f69e248c-c6e8-4ce7-89da-f05f8d2fc495",
+          "6b09bd01-1a93-48e2-8829-b9a57ae85c54",
+          "aef7f688-a1e7-4f48-ade7-17ce12846d4b",
+          "97bc27c6-801a-46e6-a755-3902274aa4dd",
+          "65fcb131-4229-4fcf-9cc0-4d95d3d3478c",
+          "64b84e51-6b34-435f-9b12-9c9b871ce8e6",
+          "016c1ba7-9e00-4c75-92ec-aa4751bea285",
+          "d25f0f77-a448-4364-add3-d7c04d24fe9a",
+          "5a01ad5f-af30-4ad3-9671-88169bdbb820",
+          "4384ebcb-f03e-46b2-8338-961e90ff3240",
+          "5f2ebc54-46c6-4123-adb1-8b2471490e5d",
+          "04f163cb-a73f-4430-8a25-5d5de56df6bc",
+          "4670756a-c481-4c67-abd6-82dac6bee610",
+          "7a8c6971-b9c0-4c32-89a7-c8310be9cec3",
+          "77614b2d-dc5b-483e-8910-1ac70ff12c7c",
+          "d2c0d8d2-0828-4d41-99d5-2d018f84057c",
+          "9a80d140-7114-4dea-822e-7c5ab874499b",
+          "7140f1e4-91ec-4a49-bef8-bd2711dd9fa2",
+          "b60ddcfe-b85e-46ee-a3fb-46a97c9a3f4e",
+          "58fd0191-bfbb-4ce9-8eeb-c0f7a3389d18",
+          "d3879940-a794-4f1c-9206-1979322148be",
+          "5e721b2d-6925-42ad-9ff9-7b29d191b134",
+          "e7b33588-347b-43e2-bc3b-99dd6f821051",
+          "02a6f38b-e945-4999-ade1-1298e56c3ee3",
+          "279e6b2c-73b6-4963-a237-0f7138ef46c2",
+          "deb97502-271e-49a5-beb7-759a1348664b",
+          "88bdccbd-2954-4aa3-95f8-58c85fc27235",
+          "38c265d2-4066-40a7-9191-891814074065",
+          "8056f095-c565-4820-9563-c7d6283fc39f",
+          "72710054-4ac2-45fe-ba1d-42fcd9bdc76a",
+          "c69a776b-be8a-4a43-9dcf-b0e8a6bacb3e",
+          "601270f1-58fd-4704-94e6-6f2d60e06850",
+          "d7f472af-8d00-47c8-a3c0-0cfb89240f93",
+          "e9998923-29a7-4469-8e44-1d3b9eeb3f55",
+          "9e4802fb-9548-4dfb-b371-29f5fb6df57d",
+          "41f1eef8-1511-4008-bfa8-880bf600a571",
+          "474886d8-aca3-48a2-aac5-86b565bcc9e4",
+          "f140ca8e-e5c7-4ec1-a17a-251430373ef5",
+          "63142525-3b19-4826-a34a-ec30c3247a23",
+          "02527aad-0035-40c6-a27c-9f8a65767294",
+          "53589558-8852-41ca-927f-88610d6b6a1d",
+          "text_block_rRpJcW",
+          "text_block_GdfgeY",
+          "text_block_HWQJxg",
+          "text_block_AQD4yd"
+        ],
+        "settings": {
+          "title": "Słowniczek"
+        }
+      },
+      "rich-text": {
+        "type": "rich-text",
+        "settings": {
+          "full_width": false,
+          "section_title": "Kontakt",
+          "section_title_h1": true,
+          "text": "<p>Jesteśmy tu dla Ciebie! <\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "medium"
+        }
+      },
+      "feature-row-for-contact": {
+        "type": "feature-row-for-contact",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Group_453.png",
+          "layout": "right",
+          "title": "Informacje dotyczące colostrum bovinum i mleka klaczy",
+          "text": "<p>Masz pytanie dot. tego, czym jest Colostrum, jaka jest różnica pomiędzy siarą krowią, a mlekiem od klaczy? Nie wiesz, jak stosować lub dawkować nasze produkty? Chcesz dowiedzieć się, czym różni się Colostrum Genactiv od innych dostępnych na rynku?<\/p><p><\/p><p><strong>Porozmawiaj z naszym specjalistą<\/strong><\/p><p>+48 786 868 047<\/p><p>Czekamy na twój telefon<br\/>od poniedziałku do piątku<br\/>w godzinach:  8:00 - 15:00<\/p><p><\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "rich-text-for-contact": {
+        "type": "rich-text-for-contact",
+        "settings": {
+          "full_width": false,
+          "section_title": "",
+          "section_title_h1": false,
+          "text": "",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "medium"
+        }
+      },
+      "rich-text-for-contact-2": {
+        "type": "rich-text-for-contact-2",
+        "settings": {
+          "full_width": false,
+          "section_title": "Skontaktuj się z Biurem Obsługi Klienta",
+          "section_title_h1": false,
+          "text": "<ul><li>Sprawy administracyjne:<\/li><li>biuro@genactiv.pl<\/li><\/ul><p><\/p><ul><li>Dział rozliczeń: <\/li><li>rozliczenia@genactiv.pl<\/li><\/ul><p><\/p><ul><li>Adres biura:<\/li><li>Polska 114, 60-401 Poznań<\/li><\/ul>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "medium"
+        }
+      },
+      "map-poland": {
+        "type": "map-poland",
+        "blocks": {
+          "f862cab9-8fc9-4aff-8b41-d09af968a338": {
+            "type": "group",
+            "settings": {
+              "color": "#f5333f"
+            }
+          },
+          "75a31a35-8612-47da-b739-f55db4225acf": {
+            "type": "WLKP",
+            "settings": {
+              "title": "Wielkopolska",
+              "text": "<p>Przedstawiciel Medyczny<\/p><p>Ewelina Maternowska<\/p><p>tel: 530276870<\/p><p>email: <a href=\"mailto:e.maternowska@genactiv.pl\" target=\"_blank\">e.maternowska@genactiv.pl<\/a><\/p>"
+            }
+          },
+          "f171162b-2040-4e31-90e1-87a3b01533e2": {
+            "type": "KP",
+            "settings": {
+              "title": "Kujawsko-pomorskie",
+              "text": ""
+            }
+          },
+          "a067842d-1471-474a-90e5-b9868eaa9f64": {
+            "type": "group",
+            "settings": {
+              "color": "#0e6dc0"
+            }
+          },
+          "4efe97be-6e7b-4f07-b454-6f6d13ff2bf6": {
+            "type": "ZPM",
+            "settings": {
+              "title": "Zachodniopomorskie",
+              "text": ""
+            }
+          },
+          "42e68321-0be1-45b6-8c52-d7fad7ce2729": {
+            "type": "group",
+            "settings": {
+              "color": "#679bce"
+            }
+          },
+          "0fce051f-87de-4369-9606-ad22e7c1d25d": {
+            "type": "POM",
+            "settings": {
+              "title": "Pomorskie",
+              "text": "<p>Kierownik ds. Sprzedaży<\/p><p>Sebastian Górski<\/p><p>tel: 512 794 805<\/p><p>email: s.gorski@genactiv.pl <\/p>"
+            }
+          },
+          "bd030877-9bf8-4b8a-a28d-fc214b2ffd5a": {
+            "type": "WM",
+            "settings": {
+              "title": "Warmińsko-mazurskie",
+              "text": ""
+            }
+          },
+          "24ec1bab-125c-4bbd-b003-c7f01406dbe8": {
+            "type": "group",
+            "settings": {
+              "color": "#ffada6"
+            }
+          },
+          "90832efc-4322-43dd-aafd-305c716e9357": {
+            "type": "LDZ",
+            "settings": {
+              "title": "Łódzkie",
+              "text": "<p>Specjalista ds. Kluczowych Klientów<\/p><p>Ewa Sasin<\/p><p>tel: 797983694<\/p><p>mail: e.sasin@genactiv.pl<\/p>"
+            }
+          },
+          "601a4410-5c13-41d4-9083-0bb07a3d9b4a": {
+            "type": "group",
+            "settings": {
+              "color": "#f61187"
+            }
+          },
+          "780ae1a0-203c-4e71-a00e-568c6133872b": {
+            "type": "LBU",
+            "settings": {
+              "title": "Lubuskie",
+              "text": "<p>Starszy Przedstawiciel Medyczny<\/p><p>Kamil Figielski<\/p><p>tel: 501476127<\/p><p>email: k.figielski@genactiv.pl<\/p>"
+            }
+          },
+          "25a4646b-2ddd-4b17-aeee-3814b088334a": {
+            "type": "DSL",
+            "settings": {
+              "title": "Dolnośląskie",
+              "text": ""
+            }
+          },
+          "26b4f7cc-b3f1-48ae-a3ce-4552f28e7c7d": {
+            "type": "OPO",
+            "settings": {
+              "title": "Opolskie",
+              "text": ""
+            }
+          },
+          "ef88d154-d4fd-4c85-aff9-fc35dcec7c4c": {
+            "type": "group",
+            "settings": {
+              "color": "#f057fc"
+            }
+          },
+          "b28e4ee0-8a41-4b6f-a628-f02d70a1176f": {
+            "type": "SL",
+            "settings": {
+              "title": "Śląskie",
+              "text": "<p>Przedstawiciel Medyczny<\/p><p>Patrycja Grzesik<\/p><p>tel: 690532201<\/p><p>email: p.grzesik@genactiv.pl<\/p>"
+            }
+          },
+          "0db24e63-5284-4399-a625-c2fa8bdb8b25": {
+            "type": "group",
+            "settings": {
+              "color": "#23b09b"
+            }
+          },
+          "5285d263-8d72-4e11-b170-1a6ddcf4e4a6": {
+            "type": "MLP",
+            "settings": {
+              "title": "Małopolskie",
+              "text": "<p>Kierownik ds. Sprzedaży<\/p><p>Iwona Smitka<\/p><p>tel: 505097246<\/p><p>email: iwona@genactiv.pl<\/p><p>Przedstawiciel Medyczny<\/p><p>Wioletta Rogozik<\/p><p>tel: 690 602 629<\/p><p>email: w.rogozik@genactiv.pl<\/p><p><\/p>"
+            }
+          },
+          "eadc9117-500b-407a-9f1e-7d94a8a5f975": {
+            "type": "PKR",
+            "settings": {
+              "title": "Podkarpackie",
+              "text": ""
+            }
+          },
+          "e304cb50-5b9e-4838-a773-cc192e21d3f5": {
+            "type": "SW",
+            "settings": {
+              "title": "Świętokrzyskie",
+              "text": ""
+            }
+          },
+          "42848794-6963-4ea0-b463-1247736e2902": {
+            "type": "group",
+            "settings": {
+              "color": "#c8ed0a"
+            }
+          },
+          "0f68fc3e-21bd-4da9-be91-ebd0f79c03d9": {
+            "type": "LBL",
+            "settings": {
+              "title": "Lubelskie",
+              "text": "<p>Przedstawiciel Medyczny<\/p><p>Monika Rusinek<\/p><p>tel: 451 260 180<\/p><p>email: m.rusinek@genactiv.pl <\/p>"
+            }
+          },
+          "a02465f8-b168-4c6e-86ab-bd35fb4e40ee": {
+            "type": "group",
+            "settings": {
+              "color": "#60097e"
+            }
+          },
+          "b381adde-d206-4703-84a1-8b03c22f9259": {
+            "type": "PDL",
+            "settings": {
+              "title": "Podlaskie",
+              "text": ""
+            }
+          },
+          "cdc49a1d-6308-4a7d-b0a8-826e1d044530": {
+            "type": "group",
+            "settings": {
+              "color": "#f4ce8f"
+            }
+          },
+          "c57e5231-efce-4844-b392-7f69434d105f": {
+            "type": "MAZ",
+            "settings": {
+              "title": "Mazowieckie",
+              "text": "<p>Przedstawiciel medyczny<\/p><p>Paulina Bukowska, <\/p><p>tel: 451095050, <\/p><p>email: p.bukowska@genactiv.pl<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "f862cab9-8fc9-4aff-8b41-d09af968a338",
+          "75a31a35-8612-47da-b739-f55db4225acf",
+          "f171162b-2040-4e31-90e1-87a3b01533e2",
+          "a067842d-1471-474a-90e5-b9868eaa9f64",
+          "4efe97be-6e7b-4f07-b454-6f6d13ff2bf6",
+          "42e68321-0be1-45b6-8c52-d7fad7ce2729",
+          "0fce051f-87de-4369-9606-ad22e7c1d25d",
+          "bd030877-9bf8-4b8a-a28d-fc214b2ffd5a",
+          "24ec1bab-125c-4bbd-b003-c7f01406dbe8",
+          "90832efc-4322-43dd-aafd-305c716e9357",
+          "601a4410-5c13-41d4-9083-0bb07a3d9b4a",
+          "780ae1a0-203c-4e71-a00e-568c6133872b",
+          "25a4646b-2ddd-4b17-aeee-3814b088334a",
+          "26b4f7cc-b3f1-48ae-a3ce-4552f28e7c7d",
+          "ef88d154-d4fd-4c85-aff9-fc35dcec7c4c",
+          "b28e4ee0-8a41-4b6f-a628-f02d70a1176f",
+          "0db24e63-5284-4399-a625-c2fa8bdb8b25",
+          "5285d263-8d72-4e11-b170-1a6ddcf4e4a6",
+          "eadc9117-500b-407a-9f1e-7d94a8a5f975",
+          "e304cb50-5b9e-4838-a773-cc192e21d3f5",
+          "42848794-6963-4ea0-b463-1247736e2902",
+          "0f68fc3e-21bd-4da9-be91-ebd0f79c03d9",
+          "a02465f8-b168-4c6e-86ab-bd35fb4e40ee",
+          "b381adde-d206-4703-84a1-8b03c22f9259",
+          "cdc49a1d-6308-4a7d-b0a8-826e1d044530",
+          "c57e5231-efce-4844-b392-7f69434d105f"
+        ],
+        "settings": {
+          "title": "Kontakt dla aptek, lekarzy i sklepów",
+          "text": "<p>Jesteś zainteresowany naszymi produktami?<br\/>Chciałbyś rozszerzyć swoją ofertę o colostrum najwyższej jakości?<br\/>Chciałbyś rozpocząć współpracę z liderem rynku colostrum?<br\/><br\/><strong>Skontaktuj się z jednym z naszych przedstawicieli regionalnych<\/strong><\/p>"
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "9f228684-90e4-4770-9d1d-57dc7a86e6b9": {
+            "type": "text_block",
+            "settings": {
+              "checkbox_title": "Zgoda",
+              "checkbox_text": "<p>*Zapoznałem\/am się z<a href=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\" title=\"https:\/\/genactiv.pl\/pages\/polityka-prywatnosci-2026\"> <strong>Polityką prywatności<\/strong>i <\/a>akceptuję jej postanowienia.<\/p>",
+              "checkbox_required": true
+            }
+          },
+          "text_block_6PxxwH": {
+            "type": "text_block",
+            "settings": {
+              "checkbox_title": "",
+              "checkbox_text": "",
+              "checkbox_required": false
+            }
+          },
+          "c71a2a36-fe51-4bcb-8489-a099004f57ac": {
+            "type": "text_block",
+            "settings": {
+              "checkbox_title": "zgoda2",
+              "checkbox_text": "<p>* Wyrażam zgodę na przetwarzanie moich danych osobowych podanych w formularzu, przez Genactiv Spółka z o.o. w celu obsługi mojego zgłoszenia złożonego za pośrednictwem formularza. Rozumiem, że moje dane przetwarzać będzie Genactiv Spółka z o.o. oraz że w każdej chwili mogę wycofać zgodę na przetwarzanie danych osobowych, ale cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania, którego dokonano na jej podstawie przed wycofaniem.<\/p>",
+              "checkbox_required": true
+            }
+          }
+        },
+        "block_order": [
+          "9f228684-90e4-4770-9d1d-57dc7a86e6b9",
+          "text_block_6PxxwH",
+          "c71a2a36-fe51-4bcb-8489-a099004f57ac"
+        ],
+        "settings": {
+          "title": "Kontakt",
+          "text": "<p>Jeżeli na naszej stronie nie znalazłeś odpowiedzi na jakieś pytanie skontaktuj się z nami, z przyjemnością na nie odpowiemy.<\/p>"
+        }
+      },
+      "banner": {
+        "type": "banner",
+        "settings": {
+          "title": "FAQ Najczęściej zadawane pytania",
+          "text": "Sprawdź jakie pytania najszczęściej zadają nam klienci",
+          "button_label": "Dowiedz się więcej",
+          "button_link": "shopify:\/\/pages\/faq",
+          "color_bg": "#f5333f",
+          "color_text": "#ffffff",
+          "image_desktop": "shopify:\/\/shop_images\/baner_1.jpg",
+          "layout": "left",
+          "icon_desktop": "shopify:\/\/shop_images\/banner_1_icon_a7b14940-1b8b-48a4-bc72-92004674db87.png"
+        }
+      },
+      "banner-for-contact": {
+        "type": "banner-for-contact",
+        "settings": {
+          "title": "Gdzie kupić?",
+          "text": "Sprawdź lokalizację naszych suplementów w sklepach tacjonarnych",
+          "button_label": "Gdzie kupić",
+          "button_link": "shopify:\/\/pages\/gdzie-kupic",
+          "color_bg": "#f5333f",
+          "color_text": "#ffffff",
+          "image_desktop": "shopify:\/\/shop_images\/banner_2.jpg",
+          "layout": "left"
+        }
+      },
+      "1644513295d8c2a2a1": {
+        "type": "video-youtube",
+        "disabled": true,
+        "settings": {
+          "section_title": "Genactiv. Twój plan na zdrowie.",
+          "image": "shopify:\/\/shop_images\/miniaturka_yt.png",
+          "image_position": "center center",
+          "video_link": "https:\/\/www.youtube.com\/watch?v=xCuVcq2aO54",
+          "show_overlay": true,
+          "height": "medium"
+        }
+      },
+      "5fbd6c47-3535-4e10-8f34-70fbb94281f1": {
+        "type": "video-with-text",
+        "blocks": {
+          "5a4d9edc-9098-4227-8432-936586d4a1cd": {
+            "type": "text",
+            "settings": {
+              "title": "Nieszczelna Bariera Jelitowa",
+              "text": "<p>Podstawowym zadaniem barier nabłonkowych w organizmie jest aktywne utrzymywanie polaryzacji, czyli zróżnicowanych środowisk po obu stronach.<br\/><br\/><a href=\"\/pages\/bariera-jelitowa\" target=\"_blank\" title=\"Bariera jelitowa\">Bariera jelitowa<\/a> odgrywa wyjątkową rolę, ponieważ odpowiada za to co przedostaje się do naszego krwiobiegu. Kiedy nasza bariera jelitowa jest nieszczelna - do krwiobiegu dostają się duże fragmenty pokarmu, bakterie i alergeny. W efekcie mogą wywołać zapalenie lub mieć toksyczny wpływ na tkanki jelita. Zmienia się wtedy również równowaga mikrobiologiczna. <br\/><br\/>Colostrum bovinum ma udowodniony duży wpływ na przywracanie szczelności bariery jelitowej. Jest to możliwe, ponieważ uruchamia mechanizmy związane z redukcją zapalenia i przywracania właściwej mikrobioty.<\/p><p>1)Oral Supplementation with Bovine Colostrum Decreases Intestinal Permeability and Stool Concentrations of Zonulin in Athletes<\/p><p>2)Maciej Hałasa, Dominika Maciejewska, Magdalena Baśkiewicz-Hałasa, Bogusław Machaliński, Krzysztof Safranow and Ewa Stachowska.<\/p>",
+              "video_position": "first",
+              "video_local": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/898d04d9a125431c9753497656ea2424.mov"
+            }
+          }
+        },
+        "block_order": [
+          "5a4d9edc-9098-4227-8432-936586d4a1cd"
+        ],
+        "disabled": true,
+        "settings": {
+          "block_position": "horizontally"
+        }
+      },
+      "c35c89fb-38b7-40bd-bb9f-0f0f7e85a163": {
+        "type": "feature-row",
+        "blocks": {
+          "text_block_AQ7GfB": {
+            "type": "text_block",
+            "settings": {
+              "button_label": "",
+              "button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "text_block_AQ7GfB"
+        ],
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/GENACTIVE_20254242_Sredni.jpg",
+          "layout": "left",
+          "title": "Super mamy polecają!",
+          "text": "<p>Nawet super mama czasem potrzebuje wsparcia!  <\/p><p>Na pomoc przychodzi Genactiv®Colostrum,  które wyróżnia się wieloma formami podania i smakami. <\/p><p>Genactiv®Colostrum świetnie sprawdza się w suplementacji dla najmłodszych. Zobacz co inne mamy mówią o Genactiv®Colostrum i wybierz najlepszy produkt dla swojego dziecka.<\/p>",
+          "code": "",
+          "button_label": "Sprawdź",
+          "button_link": "shopify:\/\/pages\/opinie-o-colostrum",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "b4f44650-3dd1-465c-89b5-3acef83d2eaa": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify:\/\/shop_images\/jelita_-_benefity.png",
+          "layout": "left",
+          "title": "Jak działa bariera jelitowa?",
+          "text": "<p>Podstawowym zadaniem barier nabłonkowych w organizmie jest aktywne utrzymywanie polaryzacji, czyli zróżnicowanych środowisk po obu stronach.<br\/><br\/><a href=\"\/pages\/bariera-jelitowa\" target=\"_blank\" title=\"Bariera jelitowa\">Bariera jelitowa<\/a> odgrywa wyjątkową rolę, ponieważ odpowiada za to co przedostaje się do naszego krwiobiegu. Kiedy nasza bariera jelitowa jest nieszczelna - do krwiobiegu dostają się duże fragmenty pokarmu, bakterie i alergeny. W efekcie mogą wywołać zapalenie lub mieć toksyczny wpływ na tkanki jelita. Zmienia się wtedy również równowaga mikrobiologiczna. <br\/><br\/>Colostrum bovinum ma udowodniony duży wpływ na przywracanie szczelności bariery jelitowej. Jest to możliwe, ponieważ uruchamia mechanizmy związane z redukcją zapalenia i przywracania właściwej mikrobioty.<\/p><p>1)Oral Supplementation with Bovine Colostrum Decreases Intestinal Permeability and Stool Concentrations of Zonulin in Athletes<\/p><p>2)Maciej Hałasa, Dominika Maciejewska, Magdalena Baśkiewicz-Hałasa, Bogusław Machaliński, Krzysztof Safranow and Ewa Stachowska.<\/p>",
+          "code": "",
+          "button_label": "Dowiedz się więcej",
+          "button_link": "https:\/\/genactiv.pl\/pages\/jelita",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "feature_row_CdGYkP": {
+        "type": "feature-row",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/GA-social-raport-default-1080x1080_v2.png",
+          "layout": "right",
+          "title": "Mimo że coraz więcej mówi się o zdrowiu, temat jelit wciąż bywa tabu...",
+          "text": "<p>A przecież to od nich zależy nasza odporność, samopoczucie i energia każdego dnia! <\/p><p>W Genactiv chcemy to zmienić. Dlatego stworzyliśmy raport <strong>„Stan jelit Polaków”<\/strong> - o tym, jak naprawdę wygląda kondycja jelit i dlaczego warto o nie zadbać. <\/p><p>To nie tylko liczby i fakty, ale realny krok w kierunku większej świadomości zdrowotnej.<br\/>Bo zdrowe jelita = zdrowy Ty. Przeczytaj raport i dowiedz się więcej!<\/p>",
+          "code": "",
+          "button_label": "Więcej",
+          "button_link": "shopify:\/\/pages\/raport-o-stanie-jelit-polakow",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "rich_text_KaPqgQ": {
+        "type": "rich-text",
+        "name": "Tekst sformatowany",
+        "settings": {
+          "full_width": false,
+          "section_title": "Bibliografia (do Arabinogalaktanu i bariery jelitowej)",
+          "section_title_h1": false,
+          "text": "<p>Chen, O., Sudakaran, S., Blonquist, T., Mah, E., Durkee, S., & Bellamine, A. (2021). <em>Effect of arabinogalactan on the gut microbiome: A randomized, double-blind, placebo-controlled, crossover trial in healthy adults.<\/em> <em>Nutrition<\/em>, 90, 111273.<\/p><p>Zheng, J., Gong, S., & Han, J. (2023). <em>Arabinogalactan Alleviates Lipopolysaccharide-Induced Intestinal Epithelial Barrier Damage through Adenosine Monophosphate-Activated Protein Kinase\/Silent Information Regulator 1\/Nuclear Factor Kappa-B Signaling Pathways in Caco-2 Cells.International Journal of Molecular Sciences<\/em>, 24(20), 15337.<\/p>",
+          "code": "",
+          "button_label": "",
+          "button_link": "",
+          "color_bg": "#ffffff",
+          "color_title": "#1a1818",
+          "color_text": "#1a1818",
+          "color_button": "#f5333f",
+          "backgound-button": "#ffffff",
+          "text_size": "medium"
+        }
+      },
+      "feature_row_nXRHKX": {
+        "type": "feature-row",
+        "name": "Obraz z tekstem",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/Fiberbiom_www_8.jpg",
+          "layout": "left",
+          "title": "Poznaj Genactiv® Fiberbiom",
+          "text": "<p>Fiberbiom to unikalne połączenie rozpuszczalnego błonnika z kory modrzewia i Genactiv® Colostrum. Ta synergiczna formuła wspiera mikrobiotę i barierę jelitową oraz pozwala zachować komfort trawienny.<\/p>",
+          "code": "",
+          "button_label": "ODKRYJ",
+          "button_link": "shopify:\/\/products\/fiberbiom",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "feature_row_mRrDUy": {
+        "type": "feature-row",
+        "name": "Obraz z tekstem",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/ZOOGGIES_SESJA_WIZERUNKOWA4482.jpg",
+          "layout": "right",
+          "title": "Powered by Genactiv® Colostrum",
+          "text": "<p>Z doświadczenia Genactiv w suplementach na bazie colostrum narodziła się marka <strong>ZOOGGIES<\/strong>. Stworzona z miłości do zwierząt, oparta na tej samej jakości i nauce, co produkty, którym zaufały już tysiące ludzi.\u2028 Bo zdrowie Twojego pupila zaczyna się tak samo - od natury.<br\/>ZOOGGIES to nie tylko bogaty suplement, pełen colostrum i kolagenu. To również świetny “dosmaczacz” do karmy. <br\/>Jeśli więc masz niejadka, który odmawia jedzenia.. <br\/>Po prostu posyp. I gotowe!<\/p>",
+          "code": "",
+          "button_label": "ODKRYJ",
+          "button_link": "https:\/\/genactiv.pl\/collections\/colostrum-dla-zwierzat?_gl=1*1gbzb1j*_ga*MTU0Mzc3MTc3MC4xNzYyMzI0Njgy*_ga_KE8T99MGMJ*czE3NjIzMjQ2ODIkbzEkZzAkdDE3NjIzMjQ2ODIkajYwJGwwJGgxNjA3NTA3MzQy*_gcl_au*MTg1MzA5NDMzMi4xNzYyMzI0Njgz",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "feature_row_nyTHGe": {
+        "type": "feature-row",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/photo_nr_1_colostrum_1.png",
+          "layout": "right",
+          "title": "Colostrum nr 1 w aptekach w Polsce w kategorii: na odporność*",
+          "text": "<p>Jesteśmy numerem 1 w aptekach w kategorii odporność – i to dzięki Wam! Colostrum Genactiv to wybór tysięcy osób, które zaufały sile natury i postawiły na skuteczność. Wasze zaufanie to nasza największa motywacja i potwierdzenie, że robimy to dobrze. Dziękujemy, że jesteście z nami!<br\/><br\/>*Źródło: IQVIA Poland Pharmascope za okres MAT 12\/2024; OTC3: 05F1 IMMUNOSTIMULANT PREPARATI, Molecule: Colostrum, Ilości i Wartości, odzwierciedlające szacunki rzeczywistej aktywności rynkowej. Prawa autorskie IQVIA. Wszelkie prawa zastrzeżone.<\/p>",
+          "code": "",
+          "button_label": "Kup teraz",
+          "button_link": "shopify:\/\/collections\/colostrum",
+          "big_img": false,
+          "color_bg_full": "",
+          "color_bg": "",
+          "color_text": ""
+        }
+      },
+      "searchanise_recommendations_a43pN6": {
+        "type": "searchanise-recommendations",
+        "blocks": {
+          "code_hmiagQ": {
+            "type": "code",
+            "settings": {
+              "title": "Wypróbuj smak lata z Fiberbiom!",
+              "code": "<div class=\"searchanise-recommendations\" id=\"3M0F8Q5A1Q2Z5Q5\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "code_hmiagQ"
+        ],
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "1631794297d9450ab0",
+      "16327352107f7a0954",
+      "searchanise_recommendations_a43pN6",
+      "feature_row_nXRHKX",
+      "1632736434793b9373",
+      "1632472592b76026c3",
+      "b4f44650-3dd1-465c-89b5-3acef83d2eaa",
+      "feature_row_nyTHGe",
+      "c35c89fb-38b7-40bd-bb9f-0f0f7e85a163",
+      "1644513295d8c2a2a1",
+      "1633690018bca2a5f1",
+      "1632750841cd1c6f40",
+      "163803346066a7a96a",
+      "5fbd6c47-3535-4e10-8f34-70fbb94281f1",
+      "16327515975d3d96a4",
+      "feature_row_mRrDUy",
+      "1632751589659b29db",
+      "16342015467900dce3",
+      "feature_row_CdGYkP",
+      "163802370420c13824",
+      "16341356649571f89e",
+      "1632821678235b094f",
+      "1634205336ccb379f5",
+      "rich_text_KaPqgQ"
+    ],
+    "blocks": {
+      "6097499278999377719": {
+        "type": "shopify:\/\/apps\/mega-menu\/blocks\/app-embed\/7a00835e-fe40-45a5-a615-2eb4ab697b58",
+        "disabled": false,
+        "settings": {}
+      },
+      "16881471024131275657": {
+        "type": "shopify:\/\/apps\/searchanise-search-filter\/blocks\/app-embed\/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+        "disabled": true,
+        "settings": {}
+      },
+      "56386910018448370000": {
+        "type": "shopify:\/\/apps\/gdpr-cookie-consent\/blocks\/banner\/58c0baa2-6cc1-480c-9ea6-38d6d559556a",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "15796953133730294439": {
+        "type": "shopify:\/\/apps\/growave-loyalty-wishlist\/blocks\/block.embed.socialshopwave-helper\/b3d2efbe-110a-4e27-84a8-1f2ed63996a4",
+        "disabled": false,
+        "settings": {
+          "disable_shadow_root_globally": false
+        }
+      },
+      "3138269044488530766": {
+        "type": "shopify:\/\/apps\/uppromote-affiliate\/blocks\/core-script\/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": false,
+        "settings": {}
+      },
+      "9005256451184024879": {
+        "type": "shopify:\/\/apps\/uppromote-affiliate\/blocks\/customer-referral\/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": false,
+        "settings": {}
+      },
+      "16133342861412372001": {
+        "type": "shopify:\/\/apps\/seo-king\/blocks\/seo-king-404-monitor\/4aa30173-495d-4e49-b377-c5ee4024262f",
+        "disabled": false,
+        "settings": {}
+      },
+      "1005670201854246023": {
+        "type": "shopify:\/\/apps\/seo-king\/blocks\/seo-king-404-redirect\/4aa30173-495d-4e49-b377-c5ee4024262f",
+        "disabled": false,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify:\/\/apps\/triplewhale\/blocks\/triple_pixel_snippet\/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      },
+      "1877152918344802950": {
+        "type": "shopify:\/\/apps\/intelligems-a-b-testing\/blocks\/intelligems-script\/fa83b64c-0c77-4c0c-b4b2-b94b42f5ef19",
+        "disabled": false,
+        "settings": {}
+      },
+      "2567389343055140935": {
+        "type": "shopify:\/\/apps\/microsoft-clarity\/blocks\/clarity_js\/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": false,
+        "settings": {}
+      },
+      "14327677521557774844": {
+        "type": "shopify:\/\/apps\/simprosys-google-shopping-feed\/blocks\/core_settings_block\/1f0b859e-9fa6-4007-97e8-4513aff5ff3b",
+        "disabled": false,
+        "settings": {}
+      },
+      "10077418179866729617": {
+        "type": "shopify:\/\/apps\/hidepay\/blocks\/hidepay-frontend\/ced40b5a-eb19-49dc-a57f-5e5a6bca7bf9",
+        "disabled": false,
+        "settings": {
+          "drawerId": "additional-checkout-buttons"
+        }
+      },
+      "1792281811906624321": {
+        "type": "shopify:\/\/apps\/unlimited-smart-upsell-offers\/blocks\/app-embed-block\/a5bd0e15-ca06-4f5c-9df9-a37857b468c9",
+        "disabled": false,
+        "settings": {}
+      },
+      "2200952712151285029": {
+        "type": "shopify:\/\/apps\/microsoft-clarity\/blocks\/brandAgents_js\/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": true,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "hero-1": {
+          "type": "hero",
+          "settings": {
+            "hero_size": "large",
+            "text_size": "large"
+          }
+        },
+        "feature-row": {
+          "type": "feature-row",
+          "settings": {}
+        },
+        "feature-columns": {
+          "type": "feature-columns",
+          "blocks": {
+            "feature-columns-0": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-1": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-2": {
+              "type": "text_block",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-columns-0",
+            "feature-columns-1",
+            "feature-columns-2"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "collection": {
+          "type": "collection",
+          "settings": {
+            "grid": 4
+          }
+        },
+        "hero-2": {
+          "type": "hero",
+          "settings": {
+            "text_size": "large"
+          }
+        },
+        "quotes": {
+          "type": "quotes",
+          "blocks": {
+            "quotes-0": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-1": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-2": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "quotes-0",
+            "quotes-1",
+            "quotes-2"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "image-bar": {
+          "type": "image-bar",
+          "blocks": {
+            "image-bar-0": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-1": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-2": {
+              "type": "image",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "image-bar-0",
+            "image-bar-1",
+            "image-bar-2"
+          ],
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "footer-0": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "footer-1": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "footer-0",
+            "footer-1"
+          ],
+          "settings": {
+            "show_payment_icons": true
+          }
+        }
+      },
+      "content_for_index": [
+        "hero-1",
+        "feature-row",
+        "feature-columns",
+        "collection",
+        "hero-2",
+        "quotes",
+        "image-bar"
+      ]
+    },
+    "Light": {
+      "color_text": "#162950",
+      "color_body_text": "#6d6d6d",
+      "color_sale_text": "#DA2F0C",
+      "color_borders": "#e4e4e4",
+      "color_button": "#DA2F0C",
+      "color_button_text": "#ffffff",
+      "color_small_button_text_border": "#162950",
+      "color_text_field": "#ffffff",
+      "color_text_field_text": "#162950",
+      "color_text_field_border": "#909090",
+      "color_image_overlay_text": "#ffffff",
+      "color_image_overlay": "#3d3d3d",
+      "image_overlay_opacity": 40,
+      "color_body_bg": "#f8f8f8",
+      "type_header_font": "muli_n6",
+      "type_header_base_size": 26,
+      "type_base_font": "muli_n4",
+      "type_base_size": 18,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#e8f3f6",
+      "checkout_heading_font": "Roboto",
+      "checkout_body_font": "Source Sans Pro",
+      "checkout_accent_color": "#1990c6",
+      "checkout_button_color": "#23314e",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "align_logo": "left",
+            "logo": "",
+            "logo_max_width": 135,
+            "main_linklist": "main-menu",
+            "message": true,
+            "color_bg": "#162950",
+            "color_text": "#ffffff"
+          }
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "alignment": "center",
+            "hero_size": "x-large",
+            "text_size": "large"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center center"
+              }
+            },
+            "1492095993817": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "1492095993817"
+          ],
+          "settings": {
+            "slideshow_height": "medium",
+            "text_size": "medium",
+            "autorotate": false,
+            "autorotate_speed": 5
+          }
+        },
+        "featured-collections": {
+          "type": "collection",
+          "settings": {
+            "grid": 3,
+            "rows": 1,
+            "show_vendor": true,
+            "show_view_all": true
+          }
+        },
+        "product-template": {
+          "type": "product-template",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_vendor": false,
+            "show_share_buttons": true,
+            "media_size": "medium",
+            "enable_image_zoom": true,
+            "enable_video_looping": false
+          }
+        },
+        "collection-template": {
+          "type": "collection-template",
+          "settings": {
+            "show_collection_image": true
+          }
+        },
+        "1492033809691": {
+          "type": "map",
+          "settings": {}
+        },
+        "1492033877875": {
+          "type": "quotes",
+          "blocks": {
+            "1492033877875-0": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492033877875-0"
+          ],
+          "settings": {}
+        },
+        "1492033924902": {
+          "type": "custom-content",
+          "blocks": {
+            "1492033924902-0": {
+              "type": "text",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "align_text": "center"
+              }
+            }
+          },
+          "block_order": [
+            "1492033924902-0"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "1492096252560": {
+          "type": "collection-list",
+          "blocks": {
+            "1492096252560-0": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-1": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-2": {
+              "type": "featured_collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492096252560-0",
+            "1492096252560-1",
+            "1492096252560-2"
+          ],
+          "settings": {
+            "grid": 3
+          }
+        },
+        "blog-template": {
+          "type": "blog-template",
+          "settings": {
+            "layout": "grid",
+            "blog_show_author": true,
+            "blog_show_date": false
+          }
+        },
+        "article-template": {
+          "type": "article-template",
+          "settings": {
+            "blog_show_author": true,
+            "blog_show_date": true,
+            "show_share_buttons": true
+          }
+        },
+        "cart-template": {
+          "type": "cart-template",
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "link_list": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "link_list",
+            "text",
+            "newsletter"
+          ],
+          "settings": {
+            "color_footer_bg": "#f8f8f8",
+            "color_footer_text": "#6d6d6d"
+          }
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "featured-collections",
+        "slideshow",
+        "1492033924902",
+        "1492096252560",
+        "1492033877875",
+        "1492033809691"
+      ]
+    }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".price__unit {display: none !important;}"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+{%- comment -%}
+  GenActiv — rekomendacje dopasowane do brakującej kwoty w koszyku
+  ================================================================
+  Podpowiada produkty, które REALNIE domykają lukę do progu darmowej
+  dostawy. Pokazuje wyłącznie pozycje w cenie >= brakującej kwoty, więc
+  obietnica "dodaj i masz dostawę gratis" jest zawsze prawdziwa.
+
+  ZALEŻNOŚĆ: działa razem z `genactiv-free-shipping.liquid` — czyta z niego
+  aktualną lukę (ten sam MutationObserver na bloku motywu). Bez niego się
+  nie renderuje.
+
+  INSTALACJA:
+    1. Wgraj jako  snippets/genactiv-cart-boost.liquid
+    2. W  sections/cart-template.liquid  dodaj zaraz PO
+       {% include 'genactiv-free-shipping' %}:
+         {% include 'genactiv-cart-boost' %}
+    3. W  sections/cart-drawer.liquid  pod blokiem
+       <div class="cart__shipping rte">…</div>  (nad ikonami płatności):
+         {% include 'genactiv-cart-boost', compact: true %}
+
+  PULA PRODUKTÓW: kolekcja `bestsellery` (genactiv.pl/collections/bestsellery),
+  z odfiltrowaniem karm dla zwierząt i książek. Żeby zmienić pulę, podmień
+  `ga_boost_pool` niżej — klient kuratoruje kolekcję w Shopify bez dotykania kodu.
+
+  KOLEJNOŚĆ: jeśli wśród pasujących produktów jest zestaw wielosztukowy
+  (dwupak, trójpak…), najtańszy taki zestaw ląduje na pierwszym miejscu;
+  pozostałe sloty wypełniają najtańsze pasujące pozycje.
+
+  Zestaw rozpoznajemy dwutorowo:
+    · `ga_multipack_words`   — słowa kluczowe w tytule (dwupak, trójpak…)
+    · `ga_multipack_handles` — jawna lista uchwytów produktów, które są
+      zestawem, ale nie mówią tego w tytule (np. komplet dwóch RÓŻNYCH
+      produktów). Tu trzeba dopisywać ręcznie.
+
+  Celowo NIE rozpoznajemy zestawu po znaku "+" w tytule — złapałoby to
+  `FIBERBIOM - Błonnik + Colostrum`, który jest jednym produktem.
+{%- endcomment -%}
+
+{%- assign ga_boost_pool = 'bestsellery' -%}
+{%- assign ga_boost_threshold = settings.cart_free_shipping_threshold | plus: 0 -%}
+{%- assign ga_excluded_types = 'Karma uzupełniająca,Książki' | split: ',' -%}
+{%- assign ga_multipack_words = 'dwupak,trójpak,trojpak,trzypak,czteropak,zestaw,pakiet' | split: ',' -%}
+{%- comment -%} zestawy, ktore nie maja tego w tytule — po uchwycie produktu {%- endcomment -%}
+{%- assign ga_multipack_handles = 'colostrum-od-juniora-do-seniora-zawiesina' | split: ',' -%}
+
+{%- if ga_boost_threshold > 0 -%}
+{%- capture ga_boost_json -%}
+[
+{%- assign sep = '' -%}
+{%- for p in collections[ga_boost_pool].products -%}
+  {%- assign v = p.selected_or_first_available_variant -%}
+  {%- assign is_excluded = false -%}
+  {%- for bad in ga_excluded_types -%}
+    {%- if p.type contains bad -%}{%- assign is_excluded = true -%}{%- endif -%}
+  {%- endfor -%}
+  {%- comment -%} zestaw wielosztukowy? -> pierwszenstwo w kolejnosci {%- endcomment -%}
+  {%- assign title_lc = p.title | downcase -%}
+  {%- assign is_multi = false -%}
+  {%- for w in ga_multipack_words -%}
+    {%- if title_lc contains w -%}{%- assign is_multi = true -%}{%- endif -%}
+  {%- endfor -%}
+  {%- for h in ga_multipack_handles -%}
+    {%- if p.handle == h -%}{%- assign is_multi = true -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if v and v.available and is_excluded == false -%}
+    {{ sep }}{
+      "id": {{ v.id }},
+      "price": {{ v.price | divided_by: 100.0 }},
+      "title": {{ p.title | json }},
+      "url": {{ p.url | json }},
+      "img": {{ p.featured_image | image_url: width: 160 | json }},
+      "multi": {{ is_multi }},
+      "pid": {{ p.id }}
+    }
+    {%- assign sep = ',' -%}
+  {%- endif -%}
+{%- endfor -%}
+]
+{%- endcapture -%}
+
+{%- comment -%}
+  compact: true  → wariant do koszyka bocznego (wąski panel):
+  jedna kolumna, 2 pozycje zamiast 3. Wywołanie:
+    {% include 'genactiv-cart-boost', compact: true %}
+{%- endcomment -%}
+<div class="ga-boost{% if compact %} ga-boost--compact{% endif %}"
+     data-ga-boost data-ga-boost-max="{% if compact %}2{% else %}3{% endif %}" hidden>
+  <p class="ga-boost__lead" data-ga-boost-lead></p>
+  <div class="ga-boost__grid" data-ga-boost-grid></div>
+</div>
+
+<style>
+  .ga-boost { margin: -8px 0 22px; }
+  .ga-boost[hidden] { display: none; }
+  .ga-boost__lead { margin: 0 0 10px; font-size: 13px; color: #6b6764; letter-spacing: .01em; }
+  .ga-boost__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 749px) { .ga-boost__grid { grid-template-columns: 1fr; } }
+
+  /* koszyk boczny: waski panel -> zawsze jedna kolumna, niezaleznie od viewportu */
+  .ga-boost--compact { margin: 16px 0 18px; }
+  .ga-boost--compact .ga-boost__grid { grid-template-columns: 1fr; gap: 8px; }
+
+  .ga-boost__card { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+    border: 1px solid #e3ded8; border-radius: 8px; background: #fff; min-width: 0; }
+  .ga-boost__img { flex: 0 0 auto; width: 44px; height: 44px; object-fit: contain;
+    border-radius: 4px; background: #f4f1ee; }
+  .ga-boost__body { flex: 1 1 auto; min-width: 0; }
+  .ga-boost__title { display: block; font-size: 12px; line-height: 1.3; color: #1C1B1B;
+    text-decoration: none; overflow: hidden; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .ga-boost__title:hover { text-decoration: underline; }
+  .ga-boost__price { display: block; margin-top: 3px; font-size: 13px; font-weight: 700; color: #1C1B1B; }
+  .ga-boost__add { flex: 0 0 auto; border: 1px solid #F5333F; background: #fff; color: #F5333F;
+    font: inherit; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    padding: 7px 12px; border-radius: 4px; cursor: pointer; white-space: nowrap;
+    transition: background .15s ease, color .15s ease; }
+  .ga-boost__add:hover:not(:disabled) { background: #F5333F; color: #fff; }
+  .ga-boost__add:disabled { opacity: .55; cursor: default; }
+</style>
+
+<script>
+(function () {
+  var POOL = {{ ga_boost_json }};
+
+  function money(n) { return Math.round(n) + ' zł'; }
+
+  function init(root) {
+    var maxCards = parseInt(root.getAttribute('data-ga-boost-max'), 10) || 3;
+    // Na stronie koszyka moga istniec DWIE instancje (szablon + koszyk boczny).
+    // Bierzemy blok zrodlowy z tej samej sekcji, a dopiero potem globalny.
+    var scope = root.closest('form, .cart-drawer, [data-section-id]') || document;
+    var src = scope.querySelector('.cart__free-shipping')
+           || document.querySelector('.cart__free-shipping');
+    if (!src || !POOL.length) return;
+    var srcAmount = src.querySelector('.cart__free-shipping-from');
+    var lead = root.querySelector('[data-ga-boost-lead]');
+    var grid = root.querySelector('[data-ga-boost-grid]');
+
+    function inCartIds() {
+      // pozycje juz w koszyku — nie proponujemy ich ponownie
+      return Array.prototype.map.call(
+        document.querySelectorAll('[data-cart-item]'),
+        function (el) { return el.getAttribute('data-cart-item-url') || ''; }
+      ).join('|');
+    }
+
+    function render() {
+      var done = !src.classList.contains('cart__free-shipping--active');
+      if (done) { root.hidden = true; return; }
+
+      var raw = (srcAmount && srcAmount.textContent || '').replace(/[^\d.,-]/g, '').replace(',', '.');
+      var gap = parseFloat(raw);
+      if (isNaN(gap) || gap <= 0) { root.hidden = true; return; }
+
+      var cartUrls = inCartIds();
+      // tylko to, co NAPRAWDE domyka luke -> obietnica zawsze prawdziwa
+      var fits = POOL.filter(function (p) {
+        return p.price >= gap && cartUrls.indexOf(p.url) === -1;
+      }).sort(function (a, b) { return a.price - b.price; });
+
+      if (!fits.length) { root.hidden = true; return; }
+
+      // Zestaw wielosztukowy (dwupak/trojpak) idzie na pierwsze miejsce —
+      // najtanszy z pasujacych. Reszte slotow wypelniamy najtansza pozycja,
+      // zeby obok drozszego zestawu zostala tez opcja tansza.
+      var picks = [];
+      for (var i = 0; i < fits.length; i++) {
+        if (fits[i].multi) { picks.push(fits[i]); break; }
+      }
+      for (var j = 0; j < fits.length && picks.length < maxCards; j++) {
+        if (picks.indexOf(fits[j]) === -1) picks.push(fits[j]);
+      }
+
+      lead.textContent = 'Dodaj jedną z tych pozycji i dostawa jest gratis:';
+      grid.innerHTML = '';
+      picks.forEach(function (p) {
+        var card = document.createElement('div');
+        card.className = 'ga-boost__card';
+        var img = p.img
+          ? '<img class="ga-boost__img" src="' + p.img + '" alt="" loading="lazy" width="44" height="44">'
+          : '<span class="ga-boost__img"></span>';
+        card.innerHTML = img +
+          '<div class="ga-boost__body">' +
+            '<a class="ga-boost__title" href="' + p.url + '">' + p.title + '</a>' +
+            '<span class="ga-boost__price">' + money(p.price) + '</span>' +
+          '</div>' +
+          '<button type="button" class="ga-boost__add" data-id="' + p.id + '">Dodaj</button>';
+        grid.appendChild(card);
+      });
+      root.hidden = false;
+    }
+
+    grid.addEventListener('click', function (e) {
+      var btn = e.target.closest('.ga-boost__add');
+      if (!btn) return;
+      btn.disabled = true;
+      btn.textContent = 'Dodaję…';
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: Number(btn.getAttribute('data-id')), quantity: 1 })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('add failed');
+        // pelne przeladowanie: motyw ma wlasna logike koszyka, nie wchodzimy jej w droge
+        window.location.href = '/cart';
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Spróbuj ponownie';
+      });
+    });
+
+    render();
+    new MutationObserver(render).observe(src, {
+      childList: true, subtree: true, characterData: true,
+      attributes: true, attributeFilter: ['class']
+    });
+  }
+
+  function boot() { document.querySelectorAll('[data-ga-boost]').forEach(init); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else { boot(); }
+})();
+</script>
+{%- endif -%}

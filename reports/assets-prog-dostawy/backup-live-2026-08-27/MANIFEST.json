@@ -1,0 +1,21 @@
+{
+ "theme_id": 199333609804,
+ "pobrano": "2026-08-27T14:18:03",
+ "pliki": {
+  "sections/cart-template.liquid": {
+   "updated_at": "2026-05-20T13:07:50+02:00",
+   "bytes": 35903,
+   "checksum": "09799eab2b20213bd302655ae6fd8194"
+  },
+  "sections/cart-drawer.liquid": {
+   "updated_at": "2026-05-20T13:07:50+02:00",
+   "bytes": 33455,
+   "checksum": "6b83f6d66d6572a3b1f63b6a18905ce3"
+  },
+  "config/settings_data.json": {
+   "updated_at": "2026-08-27T09:41:12+02:00",
+   "bytes": 100271,
+   "checksum": "64f2bd27866c65080f80e4ce7be2451a"
+  }
+ }
+}
