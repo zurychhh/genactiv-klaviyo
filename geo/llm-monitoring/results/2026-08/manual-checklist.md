@@ -17,51 +17,51 @@ Data pomiaru: `____-__-__`  ·  Wykonał(a): `____________`
 
 | ID | Zapytanie | Wymieniony? | Zalinkowany? | Jaki URL | Konkurenci w odpowiedzi | Uwagi |
 |---|---|---|---|---|---|---|
-| Q01 | skąd biorą się wzdęcia brzucha | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q02 | co robić na wzdęcia po jedzeniu | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q03 | wzdęty brzuch i uczucie ciężkości co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q04 | czy błonnik pomaga na wzdęcia | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q05 | jaki suplement na wzdęcia i gazy | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q06 | jak poprawić regularne wypróżnianie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q07 | domowe sposoby na zaparcia u dorosłych | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q08 | co jeść żeby jelita pracowały lepiej | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q09 | suplement na leniwe jelita ranking | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q10 | jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q11 | arabinogalaktan co to jest i jak działa | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q12 | najlepszy błonnik rozpuszczalny w proszku | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q13 | ile błonnika dziennie suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q14 | błonnik z kory modrzewia opinie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q15 | niska ferrytyna objawy co robić | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q16 | jak podnieść ferrytynę naturalnie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q01 | skąd biorą się wzdęcia brzucha | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q03 | wzdęty brzuch i uczucie ciężkości co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q17 | laktoferyna a ferrytyna suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q18 | jak wybrać dobre colostrum bovinum | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q19 | colostrum w proszku czy w kapsułkach co lepsze | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q10 | jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q02 | co robić na wzdęcia po jedzeniu | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q06 | jak poprawić regularne wypróżnianie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q16 | jak podnieść ferrytynę naturalnie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q05 | jaki suplement na wzdęcia i gazy | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q13 | ile błonnika dziennie suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q09 | suplement na leniwe jelita ranking | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q11 | arabinogalaktan co to jest i jak działa | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q04 | czy błonnik pomaga na wzdęcia | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q20 | colostrum dla dorosłych na co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q18 | jak wybrać dobre colostrum bovinum | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q08 | co jeść żeby jelita pracowały lepiej | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q19 | colostrum w proszku czy w kapsułkach co lepsze | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q12 | najlepszy błonnik rozpuszczalny w proszku | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q14 | błonnik z kory modrzewia opinie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 
 ## Google AI Overviews
 
 | ID | Zapytanie | Wymieniony? | Zalinkowany? | Jaki URL | Konkurenci w odpowiedzi | Uwagi |
 |---|---|---|---|---|---|---|
-| Q01 | skąd biorą się wzdęcia brzucha | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q02 | co robić na wzdęcia po jedzeniu | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q03 | wzdęty brzuch i uczucie ciężkości co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q04 | czy błonnik pomaga na wzdęcia | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q05 | jaki suplement na wzdęcia i gazy | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q06 | jak poprawić regularne wypróżnianie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q07 | domowe sposoby na zaparcia u dorosłych | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q08 | co jeść żeby jelita pracowały lepiej | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q09 | suplement na leniwe jelita ranking | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q10 | jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q11 | arabinogalaktan co to jest i jak działa | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q12 | najlepszy błonnik rozpuszczalny w proszku | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q13 | ile błonnika dziennie suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q14 | błonnik z kory modrzewia opinie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q15 | niska ferrytyna objawy co robić | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q16 | jak podnieść ferrytynę naturalnie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q01 | skąd biorą się wzdęcia brzucha | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q03 | wzdęty brzuch i uczucie ciężkości co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q17 | laktoferyna a ferrytyna suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q18 | jak wybrać dobre colostrum bovinum | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
-| Q19 | colostrum w proszku czy w kapsułkach co lepsze | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q10 | jaki błonnik wybrać rozpuszczalny czy nierozpuszczalny | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q02 | co robić na wzdęcia po jedzeniu | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q06 | jak poprawić regularne wypróżnianie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q16 | jak podnieść ferrytynę naturalnie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q05 | jaki suplement na wzdęcia i gazy | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q13 | ile błonnika dziennie suplementacja | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q09 | suplement na leniwe jelita ranking | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q11 | arabinogalaktan co to jest i jak działa | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q04 | czy błonnik pomaga na wzdęcia | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 | Q20 | colostrum dla dorosłych na co pomaga | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q18 | jak wybrać dobre colostrum bovinum | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q08 | co jeść żeby jelita pracowały lepiej | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q19 | colostrum w proszku czy w kapsułkach co lepsze | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q12 | najlepszy błonnik rozpuszczalny w proszku | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
+| Q14 | błonnik z kory modrzewia opinie | ☐ TAK ☐ NIE | ☐ TAK ☐ NIE |  |  |  |
 
 ---
 
