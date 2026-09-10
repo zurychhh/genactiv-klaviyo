@@ -1,0 +1,11 @@
+prio,klucz,segment,razem,z_lp,z_produktu,opis
+1,junior,JUNIOR | Rodzic dziecka 3-7 lat,9141,274,8867,"Rodzic kupujacy dla dziecka. Odpornosc, sezon infekcji, przedszkole."
+2,wlosy,WŁOSY | Wypadanie i skóra głowy,2711,50,2661,"Wypadanie wlosow, swedzenie i suchosc skory glowy, trychologia."
+3,glow,"GLOW | Kosmetyki do twarzy, nawilżenie",3578,23,3555,"Matowa, odwodniona, wrazliwa skora twarzy. Efekt glow, kremy i maseczki."
+4,skingut,SKIN&GUT | Skóra od środka,90,90,0,"Zdrowa skora zaczyna sie w jelitach. Suplement (nie kosmetyk) na cere, wlosy i paznokcie przez os jelito-skora."
+5,silversi,"SILVERSI | 50+, mleko klaczy",1901,18,1883,"Osoby 50+, zmieniona praca jelit, nietolerancja mleka krowiego, lagodne formuly z mlekiem klaczy."
+6,odchudzanie,ODCHUDZANIE | Fiberbiom w redukcji,65,65,0,"Dieta i deficyt kaloryczny, napady glodu, sytosc, zaparcia przy redukcji."
+7,plaski_brzuch,PŁASKI BRZUCH | Wzdęcia,170,170,0,"Wzdecia po posilkach, gazy, uczucie napietego brzucha."
+8,regularnosc,REGULARNOŚĆ | Wypróżnianie,2657,176,2481,"Zaparcia, dni bez wyproznienia, naturalny rytm jelit."
+9,gutfixer,GUT FIXER | Bariera jelitowa,12914,290,12624,"Nieszczelna bariera jelitowa, stany zapalne, mikrobiota, stres i trawienie."
+10,rez_zwierzeta,REZ | Zwierzęta (Furever),223,0,223,"Colostrum dla psow, kotow i koni. Zupelnie inny odbiorca i przekaz."

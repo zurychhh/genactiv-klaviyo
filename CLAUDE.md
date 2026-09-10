@@ -328,6 +328,24 @@ Szablony drag&drop i szablony w wiadomościach flow są przez API **tylko do odc
 
 **`POST /api/template-render`** — jedyny sposób weryfikacji logiki Django (`{% if %}`, `|minus`, `|lookup`) bez wysyłania maila. Wymaga `data.type = "template"` i `attributes.id` (nie `template_id`); nie przyjmuje inline HTML. Potwierdzono tak, że filtr `|minus` działa i że `CompareAtPrice > Price` porównuje się poprawnie (oba pola to float).
 
+### Segmenty — czego API nie potrafi (sprawdzone 2026-09-10)
+
+**Nie da się wykluczyć segmentu z segmentu.** Warunek `profile-group-membership`
+z `is_member: false` przyjmuje wyłącznie **listy**; podanie ID segmentu zwraca
+`400 "Group <id> does not exist for company"`. Konsekwencja: nie zbudujesz regułami
+ani łańcucha wykluczeń („nie należy do segmentów 1–4"), ani segmentu dopełniającego.
+Rozłączny podział bazy (MECE) trzeba oprzeć o **jedną właściwość profilu** liczoną
+poza Klaviyo — właściwość ma z definicji jedną wartość. Wzorzec: `klaviyo-mcp/persona_step*.py`.
+
+Dodatkowo: `ProfileNoGroupMembershipCondition` nie przyjmuje pola `timeframe_filter`
+(400) — w odróżnieniu od wariantu `is_member: true`.
+
+**`Active on Site` (`SHkgBz`) niesie `page` z pełnym URL-em** — to jedyny sposób
+segmentowania po odwiedzonej podstronie (landing page, kolekcja, artykuł).
+Filtr: `{"property":"page","filter":{"type":"string","operator":"contains","value":"/pages/…"}}`.
+`Ordered Product` (`X6tAVW`) ma `SKU` + `Collections`, `Viewed Product` (`Wic3Cx`)
+ma `URL` + `Categories` — uwaga, nazwy pól różnią się między tymi metrykami.
+
 **Mapowanie flow → szablony** (3 poziomy, niżej się nie da): `GET /api/flows?include=flow-actions` → `GET /api/flow-actions/{id}/flow-messages` → `GET /api/flow-messages/{id}/template`. Pułapki: `fields[flow-action]` → 400; `include=template` na flow-messages → 400; `include` NIE łączy się z `additional-fields[flow]=definition` → 400 (metryka triggera osobnym zapytaniem). Limit niski — bez pauzy i backoffu leci 429. **Cisza po serii 400/429 to nie ustalenie** — skrypt musi liczyć błędy osobno. Gotowiec: `templates/snippets/audyt_szablonow_flow.py`.
 
 ### Metryka Added to Cart — pola (150 realnych zdarzeń, 2026-08-31)
@@ -420,7 +438,7 @@ Obowiązuje od 27.08.2026 (ustalony przy pasku darmowej dostawy). Szczegóły i 
 - Skrypt wdrożeniowy: domyślnie dry-run, idempotentny, z `--rollback`, przerywa gdy kotwica nie wystąpi dokładnie raz.
 - Token ma `write_themes`, ale **nie ma scope do rabatów** — kody i automatic discounts tylko przez Admin UI.
 
-**Stan koszyka (31.08.2026):** na produkcji jest pasek postępu (`snippets/genactiv-free-shipping.liquid`, od 27.08). Rekomendacje dopasowane do luki (`snippets/genactiv-cart-boost.liquid`) siedzą na kopii motywu **204468388172** i czekają na zgodę. Reguły doboru zatwierdzone przez klienta 31.08: pula = kolekcja `bestsellery`, filtr cena ≥ luka + dostępność + nie-w-koszyku + wykluczone typy, kolejność = najtańszy zestaw wielosztukowy na pierwszym miejscu (jeden slot), reszta najtańsze rosnąco.
+**Stan koszyka (08.09.2026):** oba elementy na produkcji — pasek postępu (`snippets/genactiv-free-shipping.liquid`) od 27.08, rekomendacje (`snippets/genactiv-cart-boost.liquid`) od 01.09 (drawer) i 03.09 (strona koszyka). Reguły doboru zatwierdzone 31.08: pula = kolekcja `bestsellery`, filtr cena ≥ luka + dostępność + nie-w-koszyku + wykluczone typy, kolejność = najtańszy zestaw wielosztukowy na pierwszym miejscu (jeden slot), reszta najtańsze rosnąco. Pomiar efektu **nierozstrzygający** — patrz `reports/assets-prog-dostawy/README.md` §6.6.
 
 ## Known Issues
 
@@ -447,6 +465,8 @@ Obowiązuje od 27.08.2026 (ustalony przy pasku darmowej dostawy). Szczegóły i 
   Pełną listę scope'ów tokenu daje `GET /admin/oauth/access_scopes.json` — **zacznij od tego zamiast wnioskować z jednego 403.** Token ma 12 scope'ów; realnie brakuje `read/write_publications`, `read_online_store_navigation`, `read_discounts`, `read_all_orders`. Depublikacja przez REST działa tylko na kolekcjach zwykłych (`ruleSet: null`); smart collections wymagają innej ścieżki.
 
 - **Niepublikowana kolekcja nadal wychodzi z Admin API.** `get-seo-audit` nie sprawdza statusu publikacji, więc raportuje braki metadanych dla stron zwracających 404 na storefroncie (np. 3 kolekcje `omnibus-label-*`). Zawsze zweryfikuj `curl`-em, zanim zaczniesz „naprawiać". Uwaga przy weryfikacji przekierowań: Shopify oddaje **200 na `HEAD`**, a 301 dopiero na `GET` — testuj `GET`-em.
+- **GA4 `view_cart` — skok tagowania ~17.08.2026.** Sesje z `view_cart` wzrosły z ~11/dzień (pierwsza połowa sierpnia) do ~200/dzień, przy wzroście zamówień tylko ~1,6×; we wrześniu spadły do ~130/dzień. To zmiana tagowania, nie zachowania — przyczyna nierozpoznana. **Nie licz konwersji koszyka jako `purchase / view_cart` przez granicę 17.08**, bo mianownik jest nieporównywalny (a i po tej dacie chwiejny). GA4 łapie ~56% zamówień (225 vs 399 w Shopify, 02–07.09) — efekt zgody Pandectes.
+- **`subtotalPriceSet` w Shopify jest PO rabatach.** Zweryfikowane: zamówienie z kodem −20% ma pozycje 378 zł, a `subtotalPrice` 302,40 zł. Przy porównaniach „udział zamówień ≥300 zł" okres z promocją ma sztucznie zaniżone subtotale — nie zestawiaj okresu promocyjnego z niepromocyjnym bez korekty.
 - **Shopify Admin API oddaje tylko ostatnie 60 dni zamówień** — brakuje scope `read_all_orders`. Zapytanie o dłuższy zakres nie zwraca błędu, po prostu milcząco ucina wyniki. To realnie wywróciło analizę: `reports/analiza-promocji-12m.csv` opisany jako „12 miesięcy" zawiera ok. 2–3 miesiące, przez co program afiliacyjny raportowaliśmy ~6× za mały (207 tys. PLN vs realne ~1,45 mln PLN rocznie). **Zawsze weryfikuj rzeczywisty zakres dat w zwróconych danych** zanim nazwiesz zbiór „rocznym", i sprawdzaj spójność z bazą przychodu z roadmapy H2 (222 tys. PLN/mc).
 - **Tag `UpPromote_order` to jedyne twarde rozróżnienie afiliacji.** Kod jest albo w 100% obsługiwany przez UpPromote, albo w 0% — nie ma przypadków pośrednich. Pobieraj zamówienia z kodami rabatowymi **i** tagami jednocześnie, inaczej nie odróżnisz kodów w narzędziu od ręcznie wydanych kuponów Shopify. Stan na 17.08.2026: 15 z 63 kodów afiliacyjnych jest w UpPromote (62% przychodu afiliacyjnego); 48 kodów działa poza jakimkolwiek trackingiem. Szczegóły: `reports/nota-afiliacja-uppromote-2026-08-17.html`.
 
@@ -578,6 +598,7 @@ Ostatnie deliverables (lipiec–sierpień 2026):
 - `genactiv-seo/CLAUDE.md` — Live SEO agent framework (12 specialists, `/seo-audit`, BEFORE/AFTER protocol)
 - `sprint-2026-06/W1/A1/artefakty/README-A1.md` — Keyword research + gap analysis + competitor verification
 - `docs/KLAVIYO_PORZUCONY_KOSZYK_2026-08-31.md` — Porzucony koszyk: co zrobiono, ograniczenia Klaviyo API, następne kroki
+- `docs/KLAVIYO_PERSONY_LP_2026-09-10.md` — Persony LP → segmenty MECE: reguła przypisania, priorytety, ograniczenia API, jak przeliczyć ponownie
 - `templates/snippets/README-koszyk.md` — Sekcja koszyka: pola Added to Cart, RWD, dark mode, pułapki
 - `geo/llm-monitoring/README.md` — LLM citation monitoring methodology (frozen query set)
 - `WYMAGANIA_SENUTO_BING.md` — Client-facing connector status: Senuto live since 2026-08-17 (**token expires 2026-09-17, rotation is manual**), Bing Ads still awaiting credentials
