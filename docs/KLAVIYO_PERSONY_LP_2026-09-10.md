@@ -218,19 +218,80 @@ tak jak zakup Fiberbiomu.
 
 ---
 
-## 7. Jak to przeliczyć ponownie
+## 7. Jak często nowe profile trafiają do person
 
-Przypisanie jest **migawką**, nie regułą żywą — to cena za gwarantowane MECE.
-Rekomendacja: przeliczać raz w miesiącu.
+Trzy warstwy o różnej szybkości. Segmenty-SYGNAŁY (`SYG | …`) są **żywe** —
+Klaviyo przelicza je sam, w praktyce w kilka minut od zdarzenia. Wolne jest
+tylko przepisanie tego na właściwość `persona_lp`.
+
+### Warstwa 1 — przyrostowa, co 15 minut (podstawowa)
+
+`klaviyo-mcp/persona_step4_incremental.py` pobiera z segmentów-sygnałów
+**wyłącznie profile, które dołączyły w ostatnim oknie** (filtr
+`joined_group_at`). Zmierzony czas przebiegu: **~6 sekund**.
 
 ```bash
-python3 klaviyo-mcp/persona_step1_signals.py --live    # idempotentne, pomija istniejące
-python3 klaviyo-mcp/persona_step2_assign.py --refresh --live
-python3 klaviyo-mcp/persona_step3_segments.py --counts # kontrola sumy
+python3 klaviyo-mcp/persona_step4_incremental.py --lookback-minutes 45 --live
 ```
 
-Zmiana priorytetów albo dodanie persony: wyłącznie w `persona_config.py`,
-potem ponowne uruchomienie kroku 2 i 3.
+Harmonogram: `.github/workflows/persony-lp-incremental.yml`, cron `*/15`.
+**Wymaga dodania sekretu `KLAVIYO_API_KEY` w ustawieniach repozytorium**
+(Settings → Secrets and variables → Actions). Bez tego workflow kończy się błędem.
+
+Okno 45 minut przy cronie co 15 minut daje trzykrotny zapas — pominięcie dwóch
+przebiegów z rzędu niczego nie gubi, a nadmiarowe trafienia są nieszkodliwe,
+bo skrypt zapisuje wyłącznie rzeczywiste zmiany.
+
+**Reguła przyrostowa nigdy nie degraduje przypisania:**
+1. sygnał LP bije każdy sygnał produktowy,
+2. wśród sygnałów tego samego rodzaju wygrywa niższy `prio`,
+3. przypisanie ze źródła `lp` nie zostanie nadpisane sygnałem produktowym.
+
+Realny czas od zdarzenia do segmentu: **kilka minut** (ocena segmentu przez
+Klaviyo) **+ do 15 minut** (cron) **+ ~1 minuta** (kolejka bulk import).
+Praktycznie: **poniżej 20 minut**.
+
+### Warstwa 2 — pełna rekoncyliacja, raz w miesiącu
+
+Wyłapuje zmiany, których warstwa przyrostowa nie widzi (np. korekta priorytetów,
+nowy produkt w katalogu, profile scalone).
+
+```bash
+python3 klaviyo-mcp/persona_step1_signals.py --live      # idempotentne
+python3 klaviyo-mcp/persona_step2_assign.py --refresh --live
+python3 klaviyo-mcp/persona_step3_segments.py --counts   # kontrola sumy
+```
+
+Uwaga: krok 2 pobiera pełne członkostwo (~55 tys. rekordów) i trwa **~15 minut**.
+
+### Warstwa 3 — czas rzeczywisty dla wizyt na LP (opcjonalna, ręczna)
+
+Klaviyo ma akcję flow **„Update profile property"** z wartością wpisaną na sztywno
+— dokładnie to, czego tu trzeba. Flow wyzwalany metryką `Active on Site`
+z warunkiem `page contains /pages/gutfixer` może ustawić `persona_lp = gutfixer`
+w kilka minut, bez czekania na cron.
+
+Koszt: **9 flowów do zbudowania ręcznie w UI** (API Klaviyo nie tworzy flowów).
+Zysk względem warstwy 1: kilkanaście minut. Wolumen znikomy — wszystkich wizyt
+na LP jest ~1 156 rocznie.
+
+Jeśli to robić, przyjmij dla tej warstwy regułę **„ostatnia wizyta na LP wygrywa"**
+(bez conditional splitów) — jest prostsza i sensowniejsza dla świeżej deklaracji
+intencji niż statyczny priorytet. Warstwa 1 tego nie cofnie, bo nie degraduje
+przypisań ze źródłem `lp`.
+
+### Ważne: do wyzwalania automatyzacji nie potrzebujesz tej właściwości
+
+Jeśli chodzi o to, żeby ktoś, kto **właśnie** wszedł na LP Gut Fixera, dostał
+odpowiedni przekaz — wyzwalaj flow bezpośrednio zdarzeniem `Active on Site`
+z warunkiem na `page`. To działa natychmiast. Właściwość `persona_lp` i segmenty
+MECE służą do **targetowania kampanii i raportowania**, gdzie kwadrans opóźnienia
+nie ma znaczenia.
+
+### Zmiana konfiguracji
+
+Priorytety, sygnały i nazwy: wyłącznie w `persona_config.py`. Potem krok 2 (pełne
+przeliczenie) i krok 3.
 
 ---
 
@@ -256,9 +317,17 @@ wszystkie przetrwały). Paczka do 10 000 profili / 5 MB; obiekt profilu przyjmuj
 
 ## 8. Ograniczenia
 
-- **Migawka, nie reguła żywa.** Nowy profil nie wpadnie sam do persony — dopiero
-  po kolejnym przeliczeniu. Segmenty-SYGNAŁY (`SYG | …`) pozostają żywe i mogą
-  służyć jako podgląd bieżącego ruchu.
+- **Właściwość nie aktualizuje się sama** — robi to cron co 15 minut (§7).
+  Jeśli workflow nie działa (brak sekretu, wyłączone Actions), nowe profile
+  zostają w `REZ | Bez sygnału` i nikt tego nie zauważy. Segmenty-SYGNAŁY
+  (`SYG | …`) są żywe zawsze i nadają się na kontrolę: rosnący `SYG` przy
+  stojącym `PERSONA` oznacza, że cron nie chodzi.
+- **`joined_group_at` liczy się od wejścia do segmentu, nie od zdarzenia.**
+  W dniu utworzenia segmentu wszyscy jego członkowie mają ten sam
+  `joined_group_at`, więc pierwszy przebieg przyrostowy z szerokim oknem
+  pobiera całą bazę i trwa kilkanaście minut zamiast sekund. Po pierwszej
+  godzinie problem znika. To samo zdarzy się po każdym odtworzeniu segmentu
+  `SYG | …` — nie odtwarzaj ich bez potrzeby (krok 1 jest idempotentny).
 - **Okno 365 dni na wizytę na LP.** Starsze wizyty nie liczą się jako sygnał.
 - **Atrybucja onsite zależy od zgody cookie.** Przy konfiguracji Pandectes
   (`cookiesBlockedByDefault=7`) część ruchu na LP nie generuje `Active on Site` —

@@ -53,3 +53,4 @@ reports/raw-orders-shipping-threshold.json
 
 # Persony LP — cache czlonkostwa segmentow (ID profili, nie commitowac)
 klaviyo-mcp/persona_members_cache.json
+klaviyo-mcp/persona_incremental_state.json
