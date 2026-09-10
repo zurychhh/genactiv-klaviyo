@@ -312,6 +312,75 @@ Source CSV: `research/sprint-czerwiec-2026-tasks.csv`. Scaffold: `python3 script
 
 ### Reusable Snippets
 - `templates/snippets/product-card-abandoned-cart.html` — Product card with price comparison
+- `templates/snippets/porzucony-koszyk-jeden-produkt.html` — Sekcja „Ten produkt czeka w Twoim koszyku" (Added to Cart). Dokumentacja: `templates/snippets/README-koszyk.md`
+
+### Klaviyo API — czego NIE da się zapisać (sprawdzone 2026-08-31)
+
+| Próba | Wynik |
+|-------|-------|
+| `PATCH /api/templates/{id}` na `SYSTEM_DRAGGABLE` | **400** „Unsupported template type" |
+| `PATCH /api/templates/{id}` na szablonie przypiętym do flow | **404** „does not exist" |
+| `PATCH /api/flow-messages/{id}` | **405** Method Not Allowed |
+
+Szablony drag&drop i szablony w wiadomościach flow są przez API **tylko do odczytu** (`GET` działa, więc backup zrobisz). Zapis wyłącznie przez edytor Klaviyo albo przez utworzenie **nowego szablonu bibliotecznego** (`POST /api/templates`, `editor_type: CODE`) i podpięcie go w UI przez „Copy from existing template".
+
+**Pułapka:** klon (`POST /api/template-clone`) trafia **do biblioteki**, więc `PATCH` na klonie przechodzi. Zielony test na klonie NIE dowodzi, że zapis na oryginale zadziała.
+
+**`POST /api/template-render`** — jedyny sposób weryfikacji logiki Django (`{% if %}`, `|minus`, `|lookup`) bez wysyłania maila. Wymaga `data.type = "template"` i `attributes.id` (nie `template_id`); nie przyjmuje inline HTML. Potwierdzono tak, że filtr `|minus` działa i że `CompareAtPrice > Price` porównuje się poprawnie (oba pola to float).
+
+### Segmenty — czego API nie potrafi (sprawdzone 2026-09-10)
+
+**Nie da się wykluczyć segmentu z segmentu.** Warunek `profile-group-membership`
+z `is_member: false` przyjmuje wyłącznie **listy**; podanie ID segmentu zwraca
+`400 "Group <id> does not exist for company"`. Konsekwencja: nie zbudujesz regułami
+ani łańcucha wykluczeń („nie należy do segmentów 1–4"), ani segmentu dopełniającego.
+Rozłączny podział bazy (MECE) trzeba oprzeć o **jedną właściwość profilu** liczoną
+poza Klaviyo — właściwość ma z definicji jedną wartość. Wzorzec: `klaviyo-mcp/persona_step*.py`.
+
+Dodatkowo: `ProfileNoGroupMembershipCondition` nie przyjmuje pola `timeframe_filter`
+(400) — w odróżnieniu od wariantu `is_member: true`.
+
+**`Active on Site` (`SHkgBz`) niesie `page` z pełnym URL-em** — to jedyny sposób
+segmentowania po odwiedzonej podstronie (landing page, kolekcja, artykuł).
+Filtr: `{"property":"page","filter":{"type":"string","operator":"contains","value":"/pages/…"}}`.
+`Ordered Product` (`X6tAVW`) ma `SKU` + `Collections`, `Viewed Product` (`Wic3Cx`)
+ma `URL` + `Categories` — uwaga, nazwy pól różnią się między tymi metrykami.
+
+**Mapowanie flow → szablony** (3 poziomy, niżej się nie da): `GET /api/flows?include=flow-actions` → `GET /api/flow-actions/{id}/flow-messages` → `GET /api/flow-messages/{id}/template`. Pułapki: `fields[flow-action]` → 400; `include=template` na flow-messages → 400; `include` NIE łączy się z `additional-fields[flow]=definition` → 400 (metryka triggera osobnym zapytaniem). Limit niski — bez pauzy i backoffu leci 429. **Cisza po serii 400/429 to nie ustalenie** — skrypt musi liczyć błędy osobno. Gotowiec: `templates/snippets/audyt_szablonow_flow.py`.
+
+### Metryka Added to Cart — pola (150 realnych zdarzeń, 2026-08-31)
+
+`ImageURL` 100%, `Product Name` 100%, **`Variant Name` 99%**, `Price` 100% (float), `Quantity` 100% (float), **`CompareAtPrice` tylko 17%**.
+
+- **Do formy/wielkości opakowania używaj `Variant Name`**, nie `Categories.2` — ta druga zwraca nazwy kolekcji („Colostrum dla mamy").
+- **`event.URL` prowadzi na `genactiv.myshopify.com`** (150/150) — nie nadaje się do linkowania. Używaj stałego `https://genactiv.pl/cart`.
+- **`event.extra.checkout_url` w Added to Cart NIE ISTNIEJE** (`$extra` ma tylko klucz `standard`). To pole z Checkout Started. Użyte w CTA → pusty `href`.
+- Ceny są typu float, więc `|floatformat:0` jest wymagany; gałąź `{% else %}` (bez promocji) to przypadek domyślny.
+
+### Wysyłka testowa maili — Gmail MCP usuwa `<img>`
+
+**Nie da się wysłać maila z grafikami przez `mcp__claude_ai_Gmail__send_message`.**
+Potwierdzone 2026-08-31 testem minimalnym: HTML `<p>…</p><img …/><p>…</p><img …/><p>…</p>`
+dotarł do skrzynki jako `<p>…</p><p>…</p><p>…</p>` — tekst nienaruszony, oba obrazki
+wycięte. Niezależnie od rozmiaru maila (2 obrazki w 200 B i 12 obrazków w 28 KB
+tak samo) i od źródła (cloudfront, `cdn.shopify.com`).
+
+Konsekwencja: mail wysłany tą drogą **nigdy nie pokaże miniatury produktu ani
+grafik szablonu**. Nie diagnozuj tego jako blokady obrazów u odbiorcy.
+
+Do testów wizualnych: pliki HTML otwierane lokalnie albo **wysyłka testowa
+z Klaviyo** (szablon → Edytuj szablon → Wyślij testowy e-mail). Klaviyo API nie
+ma endpointu do test-send — jedyne co ma to `campaign-send-jobs`, czyli wysyłka
+do **całej listy**; nie używać do testów.
+
+Weryfikując wysyłkę, sprawdzaj co **dotarło** (`get_message` z `FULL_CONTENT`),
+a nie co zostało wysłane.
+
+### Dark mode w mailach
+
+Gmail odwraca kolory — biały nagłówek i biały napis na przycisku robią się czarne na czerwonym tle. Obrona: **jawne `bgcolor` + `background-color` na każdym `td` z białym tekstem** (Gmail nie odwraca tekstu na zadeklarowanym tle) plus `@media (prefers-color-scheme: dark)` z `!important` dla Apple Mail i Outlooka.
+
+**Nie minifikuj HTML maili.** Regex usuwający komentarze zjada zamknięcie `<!--[if !mso]><!-->`, przez co `<meta charset>` ląduje w niedomkniętym komentarzu i polskie znaki stają się „199 zĹ".
 
 ### Klaviyo SMS — konfiguracja (audyt 2026-08-11)
 
@@ -353,7 +422,27 @@ See `genactiv-online/.env.example` for full list. Key groups:
 - `TEAMS_WEBHOOK_URL` — Teams webhook for daily agent notifications (optional)
 - `BUDGET` — Max daily agent API spend in USD (default: 5)
 
+## Wdrożenia w motywie Shopify — protokół
+
+Obowiązuje od 27.08.2026 (ustalony przy pasku darmowej dostawy). Szczegóły i skrypt: `reports/assets-prog-dostawy/`.
+
+1. **Backup plików, które zmieniasz** — bajt w bajt, lokalnie, z manifestem (`updated_at` + checksumy).
+2. **Kopia motywu przez `themeDuplicate`** → wdrożenie tam → walidacja na `?preview_theme_id=<id>`.
+3. **Łatka na żywym motywie w miejscu — NIE publikowanie kopii.** Publikacja kopii kasuje cudze zmiany zrobione po duplikacji i zmienia theme ID (rozjeżdża tagowanie `theme_id` w Clarity).
+4. **Pre-flight przed produkcją:** porównaj pliki live z backupem. Żywy motyw bywa równolegle edytowany w Dostosuj — 27.08 o 09:41 ktoś zapisywał `config/settings_data.json`.
+5. **Nie ruszaj produkcji bez wyraźnej zgody**, nawet gdy pada „odpalamy zaraz". Zgoda osobna, po pokazaniu podglądu.
+
+**Zasady projektowe wyniesione z tego wdrożenia:**
+- Nie modyfikuj skompilowanego `assets/theme-dist.js`. Zamiast tego zostaw oryginalny blok motywu w DOM (ukryty CSS-em) i czytaj z niego przez `MutationObserver` — przeliczanie przy zmianie koszyka działa wtedy bez ingerencji w logikę.
+- Projektuj tak, żeby nie dotykać `config/settings_data.json` — to jedyny realnie sporny plik. Logika w snippecie ma sama radzić sobie ze złymi wartościami w ustawieniach, zamiast wymagać ich poprawienia.
+- Skrypt wdrożeniowy: domyślnie dry-run, idempotentny, z `--rollback`, przerywa gdy kotwica nie wystąpi dokładnie raz.
+- Token ma `write_themes`, ale **nie ma scope do rabatów** — kody i automatic discounts tylko przez Admin UI.
+
+**Stan koszyka (08.09.2026):** oba elementy na produkcji — pasek postępu (`snippets/genactiv-free-shipping.liquid`) od 27.08, rekomendacje (`snippets/genactiv-cart-boost.liquid`) od 01.09 (drawer) i 03.09 (strona koszyka). Reguły doboru zatwierdzone 31.08: pula = kolekcja `bestsellery`, filtr cena ≥ luka + dostępność + nie-w-koszyku + wykluczone typy, kolejność = najtańszy zestaw wielosztukowy na pierwszym miejscu (jeden slot), reszta najtańsze rosnąco. Pomiar efektu **nierozstrzygający** — patrz `reports/assets-prog-dostawy/README.md` §6.6.
+
 ## Known Issues
+
+- **Flow „Abandoned Cart Reminder" (live) wysyła maile z martwym przyciskiem.** Wszystkie 4 szablony (`SXcBja`, `WeKAHD`, `Rf5XM2`, `UQquNm`) budują CTA z `{{ event.extra.checkout_url }}`, a flow stoi na **Added to Cart**, gdzie tego pola nie ma → pusty `href`. Stan od 19.11.2025. To samo w draftach `_COLOSTRUM` i `_FIBERBIOM` (po 4 szablony, idą na test A/B). Naprawione wersje są w bibliotece jako `[NAPRAWIONY 2026-08-31] …` — **wymagają ręcznego podpięcia w edytorze flow**, API nie zapisze szablonu w flow. Mapowanie ID i kroki: `docs/KLAVIYO_PORZUCONY_KOSZYK_2026-08-31.md`.
 
 - **Google OAuth tokens** expire in 7 days when Google Cloud consent screen is in "Testing" mode. After publication, tokens don't expire. Regenerate with `python generate_refresh_token.py` (Ads) or `python generate_ga4_token.py` (GA4).
 - **Meta Ads MCP — locally use `npx -y meta-ads-mcp` (Node), NOT the Python package.** The PyPI `meta-ads-mcp` pins `mcp==1.23.0`, which conflicts with `fastmcp 3.x` and breaks the root-venv servers (klaviyo-segments). Do NOT `pip install meta-ads-mcp` into the root `venv/`. Works on Railway (installed globally there, isolated from the root venv).
@@ -365,6 +454,19 @@ See `genactiv-online/.env.example` for full list. Key groups:
 - **Shopify Order API** does NOT store `gclid` — only UTM params.
 - **UpPromote auto-discount nadpisuje kody afiliacyjne.** UpPromote JS (`uppromote.js`) auto-aplikuje kody rabatowe przez ukryty iframe ładujący `/discount/CODE`. Shopify pozwala na jeden kod per zamówienie (last-write-wins). Jeśli UpPromote ma "Defined coupon" (jeden wspólny kod dla wszystkich afiliacji), nadpisze indywidualne kody influencerów. Fix: UpPromote → Programs → zmień z "Defined coupon" na "Affiliate coupon". Revy Upsell (`upsell.js`) też potrafi nadpisywać kody przy checkout — sprawdź Revy przy każdym problemie z kodami.
 - **Shopify Discounts API — brak scope.** Nasz token (`Claude MCP`) nie ma `read_discounts` / `write_discounts`. Kody rabatowe i automatic discounts można zarządzać TYLKO przez Shopify Admin UI. Dotyczy to też sekcji Combinations.
+- **ACCESS_DENIED w GraphQL nie znaczy „nie da się" — sprawdź REST** (2026-08-31). GraphQL `urlRedirects`, `publications` i `menus` zwracają ACCESS_DENIED, ale te same operacje przechodzą po REST, bo opierają się o inne scope'y:
+
+  | Operacja | GraphQL | REST | Scope |
+  |----------|---------|------|-------|
+  | Przekierowania 301 | `urlRedirects` → DENIED | `redirects.json` → **działa** | `write_content` ✓ |
+  | Depublikacja kolekcji | `publications` → DENIED | `custom_collections/{id}` pole `published` → **działa** | `write_products` ✓ |
+  | Menu / nawigacja | `menus` → DENIED | brak odpowiednika | `read_online_store_navigation` ✗ |
+
+  Pełną listę scope'ów tokenu daje `GET /admin/oauth/access_scopes.json` — **zacznij od tego zamiast wnioskować z jednego 403.** Token ma 12 scope'ów; realnie brakuje `read/write_publications`, `read_online_store_navigation`, `read_discounts`, `read_all_orders`. Depublikacja przez REST działa tylko na kolekcjach zwykłych (`ruleSet: null`); smart collections wymagają innej ścieżki.
+
+- **Niepublikowana kolekcja nadal wychodzi z Admin API.** `get-seo-audit` nie sprawdza statusu publikacji, więc raportuje braki metadanych dla stron zwracających 404 na storefroncie (np. 3 kolekcje `omnibus-label-*`). Zawsze zweryfikuj `curl`-em, zanim zaczniesz „naprawiać". Uwaga przy weryfikacji przekierowań: Shopify oddaje **200 na `HEAD`**, a 301 dopiero na `GET` — testuj `GET`-em.
+- **GA4 `view_cart` — skok tagowania ~17.08.2026.** Sesje z `view_cart` wzrosły z ~11/dzień (pierwsza połowa sierpnia) do ~200/dzień, przy wzroście zamówień tylko ~1,6×; we wrześniu spadły do ~130/dzień. To zmiana tagowania, nie zachowania — przyczyna nierozpoznana. **Nie licz konwersji koszyka jako `purchase / view_cart` przez granicę 17.08**, bo mianownik jest nieporównywalny (a i po tej dacie chwiejny). GA4 łapie ~56% zamówień (225 vs 399 w Shopify, 02–07.09) — efekt zgody Pandectes.
+- **`subtotalPriceSet` w Shopify jest PO rabatach.** Zweryfikowane: zamówienie z kodem −20% ma pozycje 378 zł, a `subtotalPrice` 302,40 zł. Przy porównaniach „udział zamówień ≥300 zł" okres z promocją ma sztucznie zaniżone subtotale — nie zestawiaj okresu promocyjnego z niepromocyjnym bez korekty.
 - **Shopify Admin API oddaje tylko ostatnie 60 dni zamówień** — brakuje scope `read_all_orders`. Zapytanie o dłuższy zakres nie zwraca błędu, po prostu milcząco ucina wyniki. To realnie wywróciło analizę: `reports/analiza-promocji-12m.csv` opisany jako „12 miesięcy" zawiera ok. 2–3 miesiące, przez co program afiliacyjny raportowaliśmy ~6× za mały (207 tys. PLN vs realne ~1,45 mln PLN rocznie). **Zawsze weryfikuj rzeczywisty zakres dat w zwróconych danych** zanim nazwiesz zbiór „rocznym", i sprawdzaj spójność z bazą przychodu z roadmapy H2 (222 tys. PLN/mc).
 - **Tag `UpPromote_order` to jedyne twarde rozróżnienie afiliacji.** Kod jest albo w 100% obsługiwany przez UpPromote, albo w 0% — nie ma przypadków pośrednich. Pobieraj zamówienia z kodami rabatowymi **i** tagami jednocześnie, inaczej nie odróżnisz kodów w narzędziu od ręcznie wydanych kuponów Shopify. Stan na 17.08.2026: 15 z 63 kodów afiliacyjnych jest w UpPromote (62% przychodu afiliacyjnego); 48 kodów działa poza jakimkolwiek trackingiem. Szczegóły: `reports/nota-afiliacja-uppromote-2026-08-17.html`.
 
@@ -447,6 +549,18 @@ Test closed — GEN-6 at 100%. NOTO CR was **-20.9%** (p=0.025), root cause: var
 
 Experiment ID: `1c371ad8-5826-4c21-abdb-7d0d68390e81`. API: `api.intelligems.io/v25-10-beta`, header `intelligems-access-token`. MCP server at `https://ai.intelligems.io/mcp` (OAuth2, not yet connected). Clarity custom tags (`ab_theme_variant`, `theme_id`) are NOT available via Clarity API — only in Clarity UI.
 
+Zainstalowany i aktywny na storefroncie: app embed `shopify://apps/intelligems-a-b-testing/blocks/intelligems-script/…` → `cdn.intelligems.io/esm/…/bundle.js`. **Ale konfiguracja tylko ręcznie w panelu** — endpointy `/experiments`, `/tests`, `/campaigns`, `/config`, `/me`, `/shop` zwracają `404` na kluczu `ig_live_…` (sprawdzone 31.08.2026).
+
+### Testy A/B — czego Shopify NIE ma
+
+**Shopify nie ma natywnego mechanizmu A/B ani dla motywów, ani wewnątrz motywu.** Introspekcja schematu Admin API `2025-01`: zero typów/query/mutacji zawierających `experiment`, `abtest`, `split`, `bucket`, `personaliz`. Mutacje motywów to wyłącznie CRUD + `themePublish`. Typ `Audience` dotyczy strony statusu zamówienia, nie testów. Jeden opublikowany motyw = jedno doświadczenie dla wszystkich.
+
+Opcje realne: (1) Intelligems — ręcznie w panelu, (2) własny gate w snippecie + istniejące tagowanie `ab_theme_variant` z `layout/theme.liquid` (blok „A/B Test Theme Identifier", 2026-06-12) pchające do dataLayer / GA4 user property / Clarity.
+
+**Brakujące scope'y tokenu przy diagnostyce apek:** `read_pixels` (`webPixel` → ACCESS_DENIED) i `read_script_tags` (403, „requires merchant approval"). Do wykrycia, co wstrzykuje JS, zostaje czytanie `layout/theme.liquid` + `config/settings_data.json` przez Theme API i grep po storefroncie.
+
+**Moc testu przy obecnym ruchu** (GA4, 30 dni do 30.08.2026): 2 953 sesje z `view_cart` = **98/dzień**. Przy 50/50 i baseline koszyk→zakup ~40% wykrycie +5% wymaga ~192 dni, +10% ~48 dni, +15% ~22 dni. Przy 90/10 kontrola jest wąskim gardłem — te same efekty to odpowiednio 534 / 134 / 60 dni. **Split 10/90 nie nadaje się do pomiaru, tylko jako holdout bezpieczeństwa.** Wyliczenia i zastrzeżenia: `reports/assets-prog-dostawy/README.md` §6.
+
 ## H2 2026 Roadmap (Strategic Context)
 
 **Goal:** +50% e-commerce revenue (PLN 222K/mo → PLN 334K/mo average). Full roadmap: `reports/roadmapa-H2-2026.tsv`. Key milestones: Sub launch (Aug), Referral launch (Sep), Pre-BF +2K subs (Oct), BF PLN 400K+ (Nov), Loyalty launch (Dec).
@@ -462,6 +576,10 @@ Ostatnie deliverables (lipiec–sierpień 2026):
 
 | Plik | Co zawiera |
 |------|------------|
+| `docs/KLAVIYO_PORZUCONY_KOSZYK_2026-08-31.md` | **Porzucony koszyk** — sekcja wizualizacji, audyt 58 wiadomości w 13 flowach, martwe CTA w żywym flow, ograniczenia API, następne kroki |
+| `reports/audyt-szablonow-flow.csv` | Audyt: flow → szablon → problemy (puste linki, myshopify, zmienne vs trigger, alt, unsubscribe) |
+| `reports/assets-prog-dostawy/README.md` | **Próg darmowej dostawy** — analiza, decyzja (zostaje 300), kod produkcyjny, testy, rollback, moc testu A/B. Stan 31.08: pasek postępu na produkcji, rekomendacje gotowe na kopii 204468388172 i czekają na zgodę |
+| `reports/analiza-prog-dostawy-250-2026-08-24.html` | Ekonomika obniżki 300→250: break-even 75% (marża 25%) / 163% (20%) — nieopłacalne |
 | `reports/one-pager-sierpien-2026.html` | Czy sierpień performuje — ruch rośnie, sprzedaż spada; punkt zwrotny 17.07, nie 01.08 |
 | `reports/subscription-plan-wdrozenia-2026-08-17.html` | Model subskrypcyjny: plan wdrożenia, pracochłonność, harmonogram, decyzje podjęte i otwarte |
 | `reports/nota-afiliacja-uppromote-2026-08-17.html` | Nota decyzyjna: ~1/3 afiliacji działa poza jakimkolwiek narzędziem (struktura kodów, 61 dni) |
@@ -479,5 +597,8 @@ Ostatnie deliverables (lipiec–sierpień 2026):
 - `seo/CLAUDE.md` — Directory-scoped rules for the `seo/` archive (which scripts are destructive, SEOInput hazard)
 - `genactiv-seo/CLAUDE.md` — Live SEO agent framework (12 specialists, `/seo-audit`, BEFORE/AFTER protocol)
 - `sprint-2026-06/W1/A1/artefakty/README-A1.md` — Keyword research + gap analysis + competitor verification
+- `docs/KLAVIYO_PORZUCONY_KOSZYK_2026-08-31.md` — Porzucony koszyk: co zrobiono, ograniczenia Klaviyo API, następne kroki
+- `docs/KLAVIYO_PERSONY_LP_2026-09-10.md` — Persony LP → segmenty MECE: reguła przypisania, priorytety, ograniczenia API, jak przeliczyć ponownie
+- `templates/snippets/README-koszyk.md` — Sekcja koszyka: pola Added to Cart, RWD, dark mode, pułapki
 - `geo/llm-monitoring/README.md` — LLM citation monitoring methodology (frozen query set)
 - `WYMAGANIA_SENUTO_BING.md` — Client-facing connector status: Senuto live since 2026-08-17 (**token expires 2026-09-17, rotation is manual**), Bing Ads still awaiting credentials

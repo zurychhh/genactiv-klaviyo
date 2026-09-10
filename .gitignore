@@ -47,3 +47,10 @@ Thumbs.db
 !templates/**/*.png
 google-ads-mcp/google_ads_credentials.json
 .tiktok-shop.env
+
+# Cache surowych danych Shopify (analiza progu dostawy) — zawiera ID klientow
+reports/raw-orders-shipping-threshold.json
+
+# Persony LP — cache czlonkostwa segmentow (ID profili, nie commitowac)
+klaviyo-mcp/persona_members_cache.json
+klaviyo-mcp/persona_incremental_state.json

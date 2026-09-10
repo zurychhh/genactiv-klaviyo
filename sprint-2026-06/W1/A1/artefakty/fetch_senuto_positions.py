@@ -51,6 +51,9 @@ def trim(row):
         "cpc": (st.get("cpc") or {}).get("current"),
         "snippets": (st.get("snippets") or {}).get("current") or [],
         "trends": (st.get("trends") or {}).get("history") or [],
+        # Dodane 2026-09-01 na potrzeby analizy striking distance / AI Overviews.
+        # build_keyword_map.py ignoruje nadmiarowe klucze, wiec pole jest addytywne.
+        "intentions": st.get("intentions") or {},
     }
 
 
@@ -89,9 +92,16 @@ def main():
     if not api_key:
         sys.exit("Brak SENUTO_API_KEY w .env")
 
+    # Bez argumentow: wszystkie domeny (zachowanie oryginalne).
+    # Z argumentami: tylko wskazane, np. `... fetch_senuto_positions.py genactiv.pl`.
+    wanted = sys.argv[1:] or DOMAINS
+    unknown = [d for d in wanted if d not in DOMAINS]
+    if unknown:
+        sys.exit(f"Nieznane domeny: {unknown}. Dostepne: {DOMAINS}")
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
-    for domain in DOMAINS:
+    for domain in wanted:
         print(f"Pobieram {domain}...", flush=True)
         rows = fetch_domain(session, domain, api_key)
         out = OUT_DIR / f"{domain}.json"

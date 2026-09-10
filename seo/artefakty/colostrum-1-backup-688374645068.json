@@ -1,0 +1,16 @@
+{
+  "pobrano": "2026-08-31T22:24:05.845180",
+  "custom_collection": {
+    "id": 688374645068,
+    "handle": "colostrum-1",
+    "title": "Colostrum",
+    "updated_at": "2026-08-31T13:10:42+02:00",
+    "body_html": "<p>COLOSTRUM</p>",
+    "published_at": "2026-07-28T15:12:05+02:00",
+    "sort_order": "most-relevant",
+    "template_suffix": null,
+    "products_count": 54,
+    "published_scope": "web",
+    "admin_graphql_api_id": "gid://shopify/Collection/688374645068"
+  }
+}

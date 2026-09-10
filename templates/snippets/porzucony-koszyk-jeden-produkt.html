@@ -1,0 +1,119 @@
+<!-- GC-CART-SECTION:START — dokumentacja: README-koszyk.md -->
+<div class="mj-column-per-100 mj-outlook-group-fix component-wrapper" style="font-size:0px;text-align:left;direction:ltr;vertical-align:top;width:100%;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;" width="100%">
+<tbody>
+<tr>
+<td class="gc-cart-pad" style="background-color:#F03642;vertical-align:top;padding:34px 26px 38px 26px;">
+
+<!-- ---------- naglowek ---------- -->
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;" width="100%">
+<tbody>
+<tr>
+<td align="center" bgcolor="#F03642" class="gc-cart-h" style="background-color:#F03642;padding:0 0 26px 0;font-family:'Branding-medium',Helvetica,Arial,sans-serif;font-size:30px;line-height:1.2;font-weight:700;color:#FFFFFF;">
+Ten produkt czeka<br/>w Twoim koszyku!
+</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ---------- biala karta produktu ---------- -->
+<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" class="gc-card" role="presentation" style="width:100%;background-color:#FFFFFF;border-radius:18px;" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#FFFFFF" class="gc-card-pad" style="background-color:#FFFFFF;padding:18px;">
+<!-- table-layout:fixed — kolumny trzymaja proporcje niezaleznie od
+     dlugosci nazwy produktu; bez tego tabela rozpycha sie poza 600px -->
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;table-layout:fixed;" width="100%">
+<tbody>
+<tr>
+
+<!-- miniatura -->
+<td class="gc-cart-thumb" valign="top" width="21%" style="width:21%;padding-right:14px;">
+<a href="https://genactiv.pl/cart" style="text-decoration:none;" target="_blank">
+<img alt="{{ event|lookup:'Product Name'|default:'Produkt w Twoim koszyku' }}" src="{{ event.ImageURL|default:'' }}" style="display:block;width:100%;max-width:112px;height:auto;border:0;outline:none;text-decoration:none;border-radius:12px;background-color:#ECECEC;"/>
+</a>
+</td>
+
+<!-- opis + ceny -->
+<td class="gc-cart-body" valign="top" width="62%" style="width:62%;font-family:'Helvetica Neue',Arial,sans-serif;word-break:break-word;overflow-wrap:break-word;">
+
+<!-- nazwa — prosto z karty produktowej Shopify -->
+<div class="gc-cart-title" style="font-family:'Branding-medium',Helvetica,Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#1C1B1B;padding-bottom:3px;">
+<a href="https://genactiv.pl/cart" style="color:#1C1B1B;text-decoration:none;" target="_blank">{{ event|lookup:'Product Name'|default:'Twój produkt' }}</a>
+</div>
+
+<!-- forma i wielkosc opakowania -->
+<div class="gc-cart-variant" style="font-size:13px;line-height:1.35;color:#F03642;padding-bottom:10px;">
+{{ event|lookup:'Variant Name'|default:'' }}
+</div>
+
+<!-- ilosc: na mobile tutaj, na desktopie w prawej kolumnie -->
+<div class="mobile-only" style="display:none;font-size:12px;color:#7A7A7A;padding-bottom:8px;">
+{{ event.Quantity|floatformat:0|default:'1' }} szt.
+</div>
+
+{% if event.CompareAtPrice and event.CompareAtPrice > event.Price %}
+<!-- ---- z promocja: cena po obnizce + regularna + oszczednosc ---- -->
+<div style="padding-bottom:8px;">
+<span class="gc-cart-price" style="font-family:'Branding-medium',Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#F03642;">{{ event.Price|floatformat:0 }} zł</span>
+<span class="gc-cart-old" style="font-size:15px;color:#9B9B9B;text-decoration:line-through;padding-left:9px;">{{ event.CompareAtPrice|floatformat:0 }} zł</span>
+</div>
+<table bgcolor="#E7F5EC" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;">
+<tbody>
+<tr>
+<td bgcolor="#E7F5EC" class="gc-cart-save" style="background-color:#E7F5EC;border-radius:5px;padding:5px 10px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;line-height:1.35;color:#1E7A45;">
+Oszczędzasz {{ event.CompareAtPrice|minus:event.Price|floatformat:0 }} zł
+</td>
+</tr>
+</tbody>
+</table>
+{% else %}
+<!-- ---- bez promocji: sama cena (to jest przypadek domyslny, 83%) ---- -->
+<div>
+<span class="gc-cart-price" style="font-family:'Branding-medium',Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#F03642;">{{ event.Price|floatformat:0 }} zł</span>
+</div>
+{% endif %}
+
+</td>
+
+<!-- ilosc (desktop) -->
+<td align="right" class="desktop-only gc-cart-qty" valign="top" width="17%" style="width:17%;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.3;color:#1C1B1B;">
+{{ event.Quantity|floatformat:0|default:'1' }} szt.
+</td>
+
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ---------- CTA — odsuniete od karty ---------- -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;margin:0 auto;" width="100%">
+<tbody>
+<tr>
+<td align="center" bgcolor="#F03642" class="gc-cta-space" style="background-color:#F03642;padding-top:30px;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;margin:0 auto;">
+<tbody>
+<tr>
+<td align="center" bgcolor="#F03642" class="gc-cta-cell" style="border:2px solid #FFFFFF;border-radius:50px;cursor:auto;background:#F03642;background-color:#F03642;mso-padding-alt:17px 46px 17px 46px;" valign="middle">
+<a class="gc-cta-link" href="https://genactiv.pl/cart" style="display:inline-block;color:#FFFFFF;text-decoration:none;font-family:'Branding-medium',Helvetica,Arial,sans-serif;font-size:17px;font-weight:700;line-height:100%;letter-spacing:0;margin:0;padding:17px 46px 17px 46px;mso-padding-alt:0;border-radius:50px;" target="_blank">
+Wróć po niego
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- =============== KONIEC sekcji porzuconego koszyka =============== -->
+<!-- GC-CART-SECTION:END -->

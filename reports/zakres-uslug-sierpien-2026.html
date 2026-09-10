@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zakres Wykonanych Usług — Sierpień 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --purple: #6C3FA0;
+    --purple-light: #8B5FBF;
+    --purple-dark: #4A2875;
+    --purple-bg: #F5F0FA;
+    --navy: #1A1F36;
+    --navy-light: #2D3250;
+    --text: #333340;
+    --text-light: #6B7094;
+    --bg: #FAFAFC;
+    --white: #FFFFFF;
+    --border: #E4E6EF;
+    --green: #10B981;
+    --amber: #F59E0B;
+    --red: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 48px 56px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    background: var(--purple);
+    opacity: 0.15;
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+  }
+  .doc-type {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span { color: var(--purple-light); }
+  .header .subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── INFO BAR ─── */
+  .info-bar {
+    background: var(--purple);
+    color: #fff;
+    padding: 20px 56px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    padding: 40px 56px 48px;
+  }
+
+  /* ─── SUMMARY BOX ─── */
+  .summary-box {
+    background: var(--purple-bg);
+    border-left: 4px solid var(--purple);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    border-radius: 0 8px 8px 0;
+  }
+  .summary-box h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 12px;
+  }
+  .summary-box p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .summary-stats {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: nowrap;
+  }
+  .summary-stat {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 12px 8px;
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .summary-stat .num {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1.1;
+  }
+  .summary-stat .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 52px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--purple);
+    break-after: avoid;
+  }
+  .section-num {
+    background: var(--purple);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .tag-new { background: #ECFDF5; color: #059669; }
+  .tag-analysis { background: #EFF6FF; color: #2563EB; }
+  .tag-infra { background: #FFF7ED; color: #D97706; }
+  .tag-design { background: #FDF2F8; color: #DB2777; }
+  .tag-live { background: #FEF2F2; color: #DC2626; }
+
+  /* ─── ITEMS ─── */
+  .items {
+    list-style: none;
+    padding: 0;
+  }
+  .items li {
+    position: relative;
+    padding: 13px 0 13px 28px;
+    font-size: 13.5px;
+    line-height: 1.72;
+    border-bottom: 1px solid #F1F2F7;
+    break-inside: avoid;
+  }
+  .items li:last-child { border-bottom: none; }
+  .items li::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 21px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--purple-light);
+  }
+  .items li strong:first-child {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .items li strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .items .sub {
+    color: var(--text-light);
+    font-size: 12.5px;
+  }
+
+  /* ─── INLINE CODE ─── */
+  code {
+    font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 0.84em;
+    background: #F2EFF8;
+    color: var(--purple-dark);
+    padding: 1px 5px;
+    border-radius: 3px;
+    word-break: break-word;
+  }
+  .del-table code { background: #EEEBF5; }
+
+  /* ─── DELIVERABLES TABLE ─── */
+  .del-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin: 16px 0 10px;
+    break-inside: avoid;
+  }
+  .del-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .del-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .del-table tr:nth-child(even) td { background: #FAFAFC; }
+  .del-table .count {
+    font-weight: 700;
+    color: var(--purple);
+    text-align: center;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    padding: 20px 56px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ─── SEPARATOR ─── */
+  .sep {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* ─── PRINT ─── */
+  @page { margin: 14mm 12mm; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; max-width: 100%; }
+    .header { padding: 32px 40px 28px; }
+    .info-bar { padding: 16px 40px; }
+    .content { padding: 32px 40px 36px; }
+    .footer { padding: 16px 40px; }
+    .section { break-inside: auto; margin-bottom: 46px; }
+    .section-header { break-after: avoid; }
+    .items li { break-inside: avoid; }
+    .del-table { break-inside: avoid; }
+    .summary-box { break-inside: avoid; }
+    /* kazda sekcja merytoryczna zaczyna sie na nowej stronie */
+    .section.pb { break-before: page; }
+    .pb-box { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-text">Oleksiak Consult</div>
+      <div class="doc-type">Zalacznik do faktury</div>
+    </div>
+    <h1>Zakres Wykonanych <span>Uslug</span></h1>
+    <div class="subtitle">Ekonomika dostawy i wdrozenie w koszyku, program afiliacyjny, subskrypcje, SEO/GEO, marketing automation</div>
+  </div>
+
+  <!-- ═══ INFO BAR ═══ -->
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">Klient</div>
+      <div class="info-value">GenActiv Sp. z o.o.</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Okres</div>
+      <div class="info-value">Sierpien 2026</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Pakiet</div>
+      <div class="info-value">20h / miesiac</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Platformy</div>
+      <div class="info-value">Shopify, Klaviyo, GA4, Senuto, Google Ads</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ SUMMARY ═══ -->
+    <div class="summary-box">
+      <h3>Zakres realizacji pakietu 20h</h3>
+      <p>
+        Sierpien byl miesiacem decyzji opartych na danych produkcyjnych, nie na zalozeniach. Cztery z osmiu przygotowanych analiz <strong>zmienily lub uniewaznily wczesniejsze rekomendacje</strong> &mdash; wlasnie dlatego, ze policzono je na zywych zamowieniach, a nie na benchmarkach. Glowne obszary: (1)&nbsp;ekonomika progu darmowej dostawy &mdash; 3&nbsp;668 zamowien, faktura DHL, 14 segmentow, wynik odwracajacy wczesniejsza rekomendacje obnizki progu, (2)&nbsp;wdrozenie na LIVE naprawionego komunikatu o darmowej dostawie wraz z paskiem postepu, (3)&nbsp;program afiliacyjny &mdash; ustalenie, ze jest ok. 6&times; wiekszy niz raportowano i ze 1/3 dziala poza jakimkolwiek narzedziem, (4)&nbsp;diagnoza spadku sprzedazy: punkt zwrotny to 17 lipca i miks kanalow, nie sierpien, (5)&nbsp;plan wdrozenia subskrypcji zweryfikowany na produkcji &mdash; z trzema lukami, ktorych nie mial zaden z 5 lipcowych audytow, (6)&nbsp;uruchomienie konektora Senuto i pierwsze zadania SEO/GEO na realnych danych.
+      </p>
+      <div class="summary-stats">
+        <div class="summary-stat">
+          <div class="num">8</div>
+          <div class="lbl">Analiz i not decyzyjnych</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">1</div>
+          <div class="lbl">Wdrozenie na LIVE</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">4</div>
+          <div class="lbl">Skorygowane rekomendacje</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">882</div>
+          <div class="lbl">Luki SEO zmapowane</div>
+        </div>
+        <div class="summary-stat">
+          <div class="num">7</div>
+          <div class="lbl">Skryptow odtwarzalnych</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 1. PROG DOSTAWY — ANALIZA ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Ekonomika progu darmowej dostawy 300 &rarr; 250 PLN</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>Nota decyzyjna</strong> (<code>reports/analiza-prog-dostawy-250-2026-08-24.html</code>, 24.08) &mdash; pelen model ekonomiczny obnizenia progu, policzony na <strong>3&nbsp;668 zamowieniach pobranych z Shopify</strong> (3&nbsp;618 po filtrach, okno 25.06&ndash;24.08). Wniosek: <strong>obnizka do 250 PLN jest nierentowna strukturalnie</strong>, nie „na styk"</li>
+        <li><strong>Weryfikacja kosztu wysylki na fakturze, nie na zalozeniu</strong> &mdash; faktura DHL 1107107021 (208 przesylek, 08&ndash;14.08). Srednia wazona dla przesylek krajowych do 3 kg: <strong>11,42 PLN netto</strong>, z opakowaniem 15,00 PLN &mdash; dokladnie tyle, ile zakladal brief. Zalozenie klienta potwierdzone, nie trzeba go korygowac</li>
+        <li><strong>Rozbicie na dwa przeciwstawne efekty</strong>, oba policzone osobno:
+          <table class="del-table">
+            <thead><tr><th>Efekt</th><th>Zamowien / 61 dni</th><th>Wplyw</th></tr></thead>
+            <tbody>
+              <tr><td>Kanibalizacja &mdash; pasmo 250&ndash;300 PLN, dostaje dostawe gratis bez zmiany zachowania</td><td class="count">268 (15,3%)</td><td>&minus;3&nbsp;118 PLN, natychmiast i pewnie</td></tr>
+              <tr><td>Dociagniecie &mdash; pasmo 150&ndash;250 PLN, moze dolozyc produkt</td><td class="count">562 (32,0%)</td><td>zalezne od upliftu, odroczone i niepewne</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Wynik netto w siatce zalozen</strong> zamiast jednej liczby &mdash; przy marzy 25% break-even wymaga <strong>75,4% skutecznosci dociagniecia</strong>, przy marzy 20% wynosi 163% i jest matematycznie nieosiagalny (realny uplift w takich testach to 10&ndash;25%)</li>
+        <li><strong>Rozbieznosc marzy zgloszona zamiast przemilczana</strong> &mdash; podane zalozenie 25% jest sprzeczne z briefem, ktory mowi „suplementy ~76% brutto". Policzono <strong>wszystkie trzy warianty</strong> i jawnie zaznaczono, ze przy 76% rekomendacja sie odwraca (break-even 11,6%). To jedyna otwarta zmienna w modelu i wymaga rozstrzygniecia po stronie klienta</li>
+        <li><strong>Test hipotezy „prog 250 da koszyki 400"</strong> &mdash; trzy niezalezne testy, wszystkie negatywne. Kluczowe ustalenie: pik 139 zamowien tuz nad progiem 300 PLN <strong>nie jest zachowaniem klienta</strong>, tylko arytmetyka cennika &mdash; 100 ze 100 tych zamowien to dwupak hero z kodem rabatowym (179&times;2 &minus;15% = 304,30 PLN)</li>
+        <li><strong>Dlaczego prog 300 jest dobrze postawiony</strong> &mdash; lezy w luce miedzy „jeden drogi produkt" (299 i 340 PLN po rabacie = 254&ndash;289 PLN) a „dwie sztuki hero" (304&ndash;358 PLN). Dziala wiec jako prog „kup druga sztuke". Obnizenie do 250 PLN przenosi go ponizej strefy zakupu jednoproduktowego &mdash; 232 zamowienia na 485 w tym pasmie to czysty prezent bez zmiany zachowania</li>
+        <li><strong>Skan 14 segmentow</strong> pod katem break-even upliftu (nowi, powracajacy, &ge;3 / &ge;5 / &ge;10 zamowien, bez kodu rabatowego, nigdy nieprzekraczajacy progu i inne). <strong>Zaden nie schodzi do poziomu osiagalnego.</strong> Wzorzec biegnie odwrotnie do intuicji: im lojalniejszy klient, tym gorzej (przy &ge;10 zamowieniach break-even to 123%)</li>
+        <li><strong>Alternatywa, ktora wygrywa w kazdym scenariuszu marzy</strong> &mdash; zostawic prog 300 PLN i dolozyc cross-sell w koszyku. Zero kanibalizacji, wieksza pula (830 zamowien vs 562) i drozszy dokladany produkt (103 vs 79 PLN). Roznica wobec obnizki progu: <strong>ok. 4&nbsp;500 PLN / 61 dni, ok. 28&nbsp;000 PLN rocznie</strong></li>
+        <li><strong>Korekta wczesniejszej rekomendacji</strong> &mdash; analiza uniewaznia rekomendacje #2 z <code>analiza-promocji-12m.csv</code> (obnizka progu do 250), ktora nie liczyla ani kanibalizacji, ani marzy. Rekomendacja #7 z tamtego dokumentu (cross-sell) sie broni</li>
+        <li><strong>Skrypty odtwarzalne</strong> &mdash; <code>reports/fetch_orders_shipping_threshold.py</code> (pobranie zamowien) i <code>reports/analiza_prog_dostawy_250.py</code> (247 linii, caly model z parametrami kosztowymi w jednym miejscu). Analize da sie powtorzyc po sezonie bez odtwarzania jej od zera</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 2. WDROZENIE LIVE ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Komunikat o darmowej dostawie + pasek postepu &mdash; wdrozenie na LIVE (27.08)</div>
+        <span class="section-tag tag-live">Wdrozenie LIVE</span>
+      </div>
+      <ul class="items">
+        <li><strong>Blad znaleziony przy okazji audytu technicznego</strong> &mdash; mechanizm progu w koszyku istnieje i dziala logicznie (przelicza sie przy kazdej zmianie koszyka), ale <strong>wyswietla bezsensowny tekst</strong>. Klient z koszykiem 159 zl widzial: <code>300 141 zl PLN</code></li>
+        <li><strong>Dwie przyczyny, obie w ustawieniach motywu</strong> &mdash; w pole etykiety <code>free_shipping_title</code> wpisano liczbe „300" zamiast tekstu, a JS sklejal wartosc z formatem waluty, dajac podwojna walute „141 zl PLN" (w dodatku bez polskiego znaku). Do tego element siedzial <strong>pod przyciskiem Google Pay, ponizej linii zalamania</strong>, szarym drobnym drukiem</li>
+        <li><strong>Wniosek o zgode z dowodem wizualnym</strong> (<code>reports/prog-dostawy-przed-po-2026-08-26.html</code>) &mdash; zrzuty PRZED/PO z zywego sklepu, wykonane jako podmiana lokalna w przegladarce, <strong>bez dotykania produkcji</strong>. Klient zobaczyl efekt zanim cokolwiek zostalo wgrane. Dokument zawiera jawna wycene (1&ndash;2 h z testami), liste plikow, ocene ryzyka i zakres „czego NIE ruszamy"</li>
+        <li><strong>Co dokladnie zmienil komunikat:</strong>
+          <table class="del-table">
+            <thead><tr><th>Element</th><th>Przed</th><th>Po</th></tr></thead>
+            <tbody>
+              <tr><td>Tresc</td><td><code>300 141 zl PLN</code></td><td>„Do darmowej dostawy brakuje Ci 141 zl"</td></tr>
+              <tr><td>Po przekroczeniu progu</td><td>„GRATULACJE MASZ DARMOWA DOSTAWE" (wersaliki)</td><td>„Masz darmowa dostawe!" (zielone tlo)</td></tr>
+              <tr><td>Pasek postepu</td><td>brak</td><td>wypelnienie proporcjonalne do koszyka, kolor marki</td></tr>
+              <tr><td>Miejsce</td><td>ostatni element panelu, pod Google Pay</td><td>pod „Suma czesciowa", nad „DO KASY"</td></tr>
+              <tr><td>Waluta</td><td>141 zl PLN (podwojna, bez ogonka)</td><td>141 zl</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Wdrozone na aktywnym motywie GEN-6</strong> (ID 199333609804) &mdash; snippet <code>snippets/genactiv-free-shipping.liquid</code> (150 linii) podpiety w <code>cart-template.liquid</code> i <code>cart-drawer.liquid</code>. Potwierdzone na zywym sklepie: oba pliki zaktualizowane 27.08, snippet obecny w obu</li>
+        <li><strong>Rozwiazanie techniczne bez ingerencji w bundle</strong> &mdash; snippet celowo nie modyfikuje skompilowanego <code>theme-dist.js</code>. Czyta wartosc z oryginalnego bloku motywu przez <code>MutationObserver</code>, dzieki czemu logika przeliczania pozostaje nietknieta, a wycofanie zmiany nie wymaga odbudowy motywu</li>
+        <li><strong>Protokol wdrozeniowy zachowany</strong> &mdash; backup 3 plikow produkcyjnych przed zmiana (<code>reports/assets-prog-dostawy/backup-live-2026-08-27/</code> z manifestem: checksumy MD5, rozmiary, daty modyfikacji). Deployer <code>deploy.py</code> jest idempotentny i ma tryby <code>--live</code> oraz <code>--rollback</code> &mdash; wycofanie to jedna komenda</li>
+        <li><strong>Dlaczego kolejnosc ma znaczenie</strong> &mdash; dopoki komunikat byl nieczytelny, kazdy test wysokosci progu mierzylby skutecznosc napisu, ktorego klient nie czyta. Naprawa komunikatu jest warunkiem wstepnym dla jakiejkolwiek pozniejszej decyzji o progu &mdash; i sama w sobie nic nie kosztuje. W pasmie 150&ndash;300 zl siedzi 830 zamowien powracajacych na 61 dni; przy marzy 25% kazde 10% z nich, ktore dolozy produkt, to ok. <strong>+1&nbsp;100 zl / 61 dni</strong></li>
+      </ul>
+    </div>
+
+    <!-- ═══ 3. AFILIACJA ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Program afiliacyjny &mdash; nota decyzyjna i korekta wczesniejszych liczb</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>Nota decyzyjna</strong> (<code>reports/nota-afiliacja-uppromote-2026-08-17.html</code>) &mdash; 3&nbsp;281 oplaconych zamowien, 831&nbsp;428 PLN, okno 18.06&ndash;17.08. Ustalenie glowne: <strong>UpPromote obsluguje 62% przychodu afiliacyjnego, pozostale 48 kodow dziala poza jakimkolwiek narzedziem</strong> &mdash; bez trackingu, bez raportu, bez automatycznego rozliczenia prowizji</li>
+        <li><strong>Metoda dajaca twarde rozroznienie</strong> &mdash; zamowienia pobrane z kodami rabatowymi <strong>i tagami jednoczesnie</strong>, czego wczesniejsza analiza nie miala. Tag <code>UpPromote_order</code> rozdziela kody w 100% albo 0%, bez przypadkow spornych</li>
+        <li><strong>Struktura 63 kodow afiliacyjnych</strong> &mdash; 15 w UpPromote (610 zamowien, 151&nbsp;001 PLN), 48 poza narzedziem (329 zamowien, <strong>91&nbsp;883 PLN w 61 dni, ok. 550 tys. PLN rocznie</strong>). Najwiekszy afiliant spoza narzedzia zrobil 67 zamowien i 22&nbsp;740 PLN &mdash; to trzeci najwiekszy kod w firmie i nie widzi go zaden system</li>
+        <li><strong>Korekta wlasnych, wczesniej wyslanych liczb</strong> &mdash; plik opisany jako „12 miesiecy" zawieral realnie 2&ndash;3 miesiace, bo Shopify Admin API bez uprawnienia <code>read_all_orders</code> <strong>cicho ucina wyniki do 60 dni</strong> zamiast zwrocic blad. Program afiliacyjny jest ok. <strong>6&times; wiekszy</strong> niz raportowano: bylo 207&nbsp;685 PLN rocznie, jest ~1,45 mln PLN. Bledna liczba zostala wskazana wprost, wraz z rekomendacja wyslania korekty do klienta</li>
+        <li><strong>Rozstrzygniecie zgloszenia o „przejmowaniu kodow"</strong> &mdash; zgloszenie bylo prawdziwe, ale skala znikoma: <strong>7 przypadkow na 3&nbsp;281 zamowien (0,2%)</strong>. 105 zamowien wygladajacych na przejecie to zwykle stackowanie kodu produktowego na afiliacyjny. Rekomendacja: <strong>nie wylaczac kodu „Pieknewlosy"</strong> &mdash; wylaczenie kosztuje 25&nbsp;158 PLN realnej sprzedazy w 61 dni, a naprawia 0,2% zamowien</li>
+        <li><strong>Trzy opcje z kosztem i konsekwencja</strong> &mdash; A: zostawic jak jest (0 PLN, ~550 tys. PLN rocznie bez rozliczenia), B: migracja 48 kodow do UpPromote (rzedu 26 tys. PLN rocznie przy modelu prowizyjnym), C: <strong>najpierw inwentaryzacja, potem wybor narzedzia</strong> (rekomendacja &mdash; migracja 63 kodow do zlego narzedzia kosztuje wiecej niz tydzien zwloki)</li>
+        <li><strong>Jawna lista decyzji z przypisanym wlascicielem</strong> &mdash; 4 pytania z zaznaczeniem, kto decyduje (klient / my) i co blokuje kazda zwloka, w tym zgoda na dodanie uprawnienia <code>read_all_orders</code> (ok. 15 minut pracy, odblokowuje analizy roczne zamiast 60-dniowych)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 4. ONE-PAGER ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Ocena okresu &mdash; diagnoza spadku sprzedazy</div>
+        <span class="section-tag tag-analysis">Analiza</span>
+      </div>
+      <ul class="items">
+        <li><strong>One-pager „czy sierpien performuje"</strong> (<code>reports/one-pager-sierpien-2026.html</code>, 17.08) &mdash; odpowiedz na pytanie klienta, oparta na trzech zrodlach jednoczesnie (Shopify, GA4, Google Ads) i trzech porownaniach: miesiac do miesiaca, rok do roku i indeks sezonowy</li>
+        <li><strong>Werdykt korygujacy percepcje</strong> &mdash; sierpien jest w normie, tylko wypada gorzej od <strong>wyjatkowego</strong> lipca. Rok do roku rosnie o +31&ndash;43%, a indeks sezonowy wzgledem czerwca jest identyczny jak rok temu (1,20 vs 1,18). Spadek m/m to normalizacja po anomalii, nie zalamanie</li>
+        <li><strong>Wskazanie realnego punktu zwrotnego: 17 lipca, nie 1 sierpnia</strong> &mdash; konwersja calego sklepu spadla z 4,09% do 2,7&ndash;2,9% w polowie lipca i nie wrocila, mimo ze ruchu jest o 12,5% wiecej. Ocenianie sierpnia przez pryzmat calego lipca zawyzalo skale problemu</li>
+        <li><strong>Diagnoza przyczyny: rozwodnienie miksu kanalow, nie pogorszenie sklepu</strong> &mdash; rosnie ruch o najnizszej konwersji, kurczy sie ruch o najwyzszej:
+          <table class="del-table">
+            <thead><tr><th>Kanal</th><th>Sesje m/m</th><th>Konwersja</th></tr></thead>
+            <tbody>
+              <tr><td>Cross-network (PMax)</td><td>&uarr; 66,6%</td><td>0,89% (rok temu 2,59%)</td></tr>
+              <tr><td>Paid Social</td><td>&uarr; 220%</td><td>0,69%</td></tr>
+              <tr><td>Unassigned</td><td>&uarr; 159%</td><td>0,77%</td></tr>
+              <tr><td>E-mail</td><td>&darr; 84,1%</td><td><strong>6,54% &mdash; najwyzsza w sklepie</strong></td></tr>
+              <tr><td>Organic Search</td><td>&darr; 8,5%</td><td>1,84% (&uarr; 0,16 p.p.)</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Namierzenie zdarzenia w Google Ads</strong> &mdash; dokladnie 17 lipca liczba klikniec skoczyla o +125% przy CPC nizszym o 46%, a konwersje spadly z 394 do 340. To sygnatura przesuniecia budzetu w tani, szeroki ruch. Kampanie pozostaja rentowne w ROAS, ale kazda kolejna zlotowka kupuje coraz gorszy ruch</li>
+        <li><strong>Rekomendacje uszeregowane wg spodziewanego zwrotu w tym miesiacu</strong> &mdash; najwieksza i najtansza dziura to wstrzymany e-mail (673 &rarr; 107 sesji m/m przy najwyzszej konwersji): odtworzenie lipcowego wolumenu to ok. +9 tys. PLN w GA4 na 16 dni, realnie ok. dwa razy tyle w Shopify</li>
+        <li><strong>Rzetelnosc pomiaru zadeklarowana wprost</strong> &mdash; jawnie opisano, ze GA4 przypisuje tylko 53&ndash;55% przychodu widocznego w Shopify (efekt bannera zgod), ze konwersja jest liczona krzyzowo (zamowienia Shopify / sesje GA4) i ze <strong>Meta Ads nie zostala uwzgledniona, bo token wygasl 29.03</strong> &mdash; zamiast pomijac te luke po cichu</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 5. SMS ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Kanal SMS w Klaviyo &mdash; audyt pomiaru</div>
+        <span class="section-tag tag-analysis">Audyt</span>
+      </div>
+      <ul class="items">
+        <li><strong>Raport kanalu SMS</strong> (<code>reports/raport_sms_klaviyo_2026-08-11.md</code>) &mdash; 30 dni, weryfikacja krzyzowa w trzech systemach: Klaviyo API, GA4 i Shopify customer journey (462 zamowienia). Ustalenie: kanal jest <strong>technicznie nieopomiarowany i praktycznie nieuzywany</strong> &mdash; jedna realna wysylka do 6,6% dostepnej bazy w miesiac</li>
+        <li><strong>Znaleziona przyczyna zrodlowa</strong> &mdash; <code>shorten_links: false</code> zabija caly tracking. Bez skracania linkow nie ma ani click-trackingu, ani doklejania UTM, wiec <code>add_tracking_params: true</code> nic nie daje. To wyjasnia CTR 0,00% przy jednoczesnych konwersjach raportowanych przez Klaviyo</li>
+        <li><strong>Potwierdzenie w dwoch niezaleznych zrodlach</strong> &mdash; GA4: <strong>0 sesji z <code>medium = sms</code></strong> w calym oknie. Shopify: ani jednego zamowienia przypisanego do SMS (wszystkie 3 zamowienia z <code>utm_source=klaviyo</code> pochodza z kampanii mailowych). Analiza godzinowa strony docelowej: po wysylce o 19:59 zero sesji direct, jedyna transakcja tego dnia byla <strong>przed</strong> wysylka</li>
+        <li><strong>Uczciwe zamkniecie benchmarku</strong> &mdash; nominalnie SMS wypada 3,6&times; lepiej od e-maila na odbiorce, ale raport <strong>odmawia wyciagniecia z tego wniosku</strong> i podaje trzy powody: n = 2 konwersje (przedzial ufnosci 0,2&ndash;4,8%), nierowne populacje (cieply segment vs cala lista) i brak weryfikacji zewnetrznej</li>
+        <li><strong>Ustalenie kosztowe</strong> &mdash; polskie znaki diakrytyczne przelaczaja SMS-a z GSM-7 na UCS-2 (67 znakow na segment zamiast 153). Obecna tresc miesza „Uzupelnij / juz" z reszta pisana bez ogonkow, co przy prefiksie organizacji i formule opt-out oznacza <strong>ok. 2&times; wyzszy koszt wysylki</strong></li>
+        <li><strong>8 rekomendacji w kolejnosci wdrozenia</strong> &mdash; P0 naprawa pomiaru (shorten links, <code>custom_tracking_params</code>, czytelne nazwy kampanii, dedykowany kod <code>SMS15</code> zamiast wspoldzielonego), P1 koszt i skala (2&nbsp;289 profili ze zgoda zamiast 151), P2 pomiar efektu z jawnie policzona minimalna wielkoscia proby (1&nbsp;000+ odbiorcow)</li>
+        <li><strong>Zalacznik z zapytaniami</strong> &mdash; wszystkie 8 uzytych wywolan API wypisane doslownie, zeby analiza byla odtwarzalna przez kogokolwiek</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 6. SUBSKRYPCJE ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Model subskrypcyjny &mdash; plan wdrozenia zweryfikowany na produkcji</div>
+        <span class="section-tag tag-new">Plan wdrozenia</span>
+      </div>
+      <ul class="items">
+        <li><strong>Plan wdrozenia z wycena pracochlonnosci</strong> (<code>reports/subscription-plan-wdrozenia-2026-08-17.html</code>) &mdash; przelozenie 5 lipcowych audytow na wykonalny harmonogram: <strong>126&ndash;148h do soft launchu, 190&ndash;210h pelny program R1</strong>, z rozbiciem na 13 blokow i przypisaniem wykonawcy do kazdego (CC / DEV / QA / prawnik)</li>
+        <li><strong>Weryfikacja stanu sklepu na danych produkcyjnych</strong> &mdash; ustalono, ze sklep <strong>ma juz rail kartowy przez Stripe</strong>, a Apple Pay i Google Pay sa aktywne. To usuwa z zakresu uruchamianie bramki, KYC i przebudowe rozliczen (~20&ndash;40h oszczednosci wobec pierwotnej estymaty)</li>
+        <li><strong>Empiryczne potwierdzenie kluczowego zalozenia</strong> &mdash; lipcowy audyt szacowal dostepny rynek subskrypcji na 25&ndash;30% kupujacych (tylko karta, bo P24 i BLIK nie obsluguja platnosci cyklicznych). Pomiar na 1&nbsp;500 zamowieniach: <strong>27,9% zamowien / 29,1% przychodu kartowe</strong>. Baza do projekcji jest solidna, nie zalozona</li>
+        <li><strong>Trzy luki, ktorych nie mial zaden z 5 audytow</strong> &mdash; wykryte dopiero przy przekladaniu planu na wykonanie:
+          <table class="del-table">
+            <thead><tr><th>Luka</th><th>Dlaczego to problem</th><th>Naklad</th></tr></thead>
+            <tbody>
+              <tr><td>Baselinker / ERP</td><td>Kazdy cykl tworzy nowe zamowienie Shopify; <code>sync_payment_id.py</code> byl pisany pod platnosci jednorazowe</td><td class="count">12&ndash;20h</td></tr>
+              <tr><td>KSeF &mdash; e-faktura per cykl</td><td>Okres przejsciowy konczy sie 31.12.2026; launch bez tego = reczne fakturowanie do konca roku</td><td class="count">wlasciciel</td></tr>
+              <tr><td>Warstwa prawna</td><td>Regulamin, Digital Fairness Act (anulowanie tak proste jak zapis), zgoda na zmiane ceny, 14 dni od kazdej dostawy</td><td class="count">8&ndash;12h prawnik</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li><strong>Jasno zakomunikowana brama GO / NO-GO</strong> &mdash; jedno sprawdzenie (vaulting Stripe w Shopify Admin, ok. 30 min) decyduje o calym harmonogramie: TAK &rarr; ~130h, NIE &rarr; aktywacja Shopify Payments, +40&ndash;60h i +4&ndash;6 tygodni. Zaznaczono tez ograniczenie: <strong>tej weryfikacji nie da sie zrobic przez API</strong>, wymaga czlowieka w panelu</li>
+        <li><strong>Obsuniecie zgloszone wprost</strong> &mdash; roadmapa zakladala start Fazy 0 w lipcu; na 17.08 nie ruszyla (zero flow subskrypcyjnych, zero selling planow). Obsuniecie ~4&ndash;5 tygodni, realny soft launch przesuniety na przelom wrzesnia i pazdziernika &mdash; z jednoczesnym wskazaniem, ze <strong>13h zaleglych prac w Klaviyo nie zalezy od decyzji o narzedziu</strong> i moze ruszyc od razu</li>
+        <li><strong>Rozbieznosc w zrodlowym raporcie zgloszona</strong> &mdash; tabela Fazy 0 sumuje sie do 22h, a podsumowanie podaje 16h. Drobiazg, ale odnotowany zamiast przeniesiony dalej</li>
+        <li><strong>4 decyzje do rozstrzygniecia</strong>, kazda z wlascicielem i konsekwencja zwloki &mdash; vaulting (DEV), wlasciciel KSeF (biznes), zgoda na koszt Appstle (de facto $0 na starcie), zlecenie prawnikowi regulaminu (sciezka krytyczna)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 7. SEO A1 ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">SEO &mdash; mapa fraz dla 20 kart produktowych + gap analysis</div>
+        <span class="section-tag tag-analysis">SEO</span>
+      </div>
+      <ul class="items">
+        <li><strong>Mapa fraz kluczowych</strong> (<code>research/keyword-map-2026.csv</code>) &mdash; 20 kart produktowych &times; fraza glowna i 4 poboczne, z wolumenem, trudnoscia, CPC, nasza pozycja, luka konkurencyjna i tagiem sezonowym. Pelny opis metody: <code>sprint-2026-06/W1/A1/artefakty/README-A1.md</code></li>
+        <li><strong>Gap analysis</strong> (<code>gap-analysis-2026-08-17.csv</code>) &mdash; <strong>882 luki</strong>: frazy, na ktorych konkurent jest w TOP10, a my poza TOP10, z wolumenem, trudnoscia i URL-em konkurenta</li>
+        <li><strong>Brief zadania byl bledny &mdash; zweryfikowane i poprawione.</strong> Zadanie kazalo robic analize „vs colostrigen.pl i immunolab". Sprawdzenie w Senuto i w sieci wykazalo, ze <strong>Colostrigen to wlasna marka klienta</strong> (produkt apteczny „Colostrum Genactiv (Colostrigen)", producent GENACTIV TRADE Sp. z o.o.), a <code>immunolab.com.pl</code> to firma mikrobiologiczna rankujaca na „podloze agarowe" i „salmonella serotypy". Obie wykluczone, slad weryfikacji zachowany w kodzie</li>
+        <li><strong>Realny konkurent organiczny ustalony z danych</strong> &mdash; <code>genoscope.pl</code>: widocznosc 24&nbsp;412 wobec naszej 48&nbsp;275, 134 wspolne frazy. Jedyny gracz w naszej skali; pozostale marki colostrum maja widocznosc rzedu 178&ndash;406</li>
+        <li><strong>Wniosek strukturalny: karty produktowe praktycznie nie istnieja w organicu</strong> &mdash; z 3&nbsp;306 fraz w TOP50 tylko <strong>181 prowadzi na PDP</strong> (27 unikalnych kart). Cala reszte widocznosci robi blog i strony <code>/pages/</code></li>
+        <li><strong>Najwieksza pojedyncza dziura: Fiberbiom</strong> &mdash; nr 1 wsrod kart pod wzgledem ruchu (15&nbsp;566 sesji / 90 dni), a rankuje na <strong>4 frazy, wszystkie o „arabinogalaktanie", najlepsza pozycja 16</strong>. Caly ruch na te karte jest platny lub bezposredni; frazy blonnikowe sa niezagospodarowane</li>
+        <li><strong>Luki wobec genoscope to tresc, nie produkty</strong> &mdash; <code>ferrytyna</code> (74&nbsp;000/mc), <code>masc na blizny</code> (14&nbsp;800/mc), <code>siara</code> (3&nbsp;600/mc &mdash; synonim naszego rdzenia produktowego, na ktorym w ogole nie jestesmy), <code>colostrum kozie</code> (2&nbsp;900/mc). 1&nbsp;864 z 2&nbsp;446 fraz konkurenta to blog</li>
+        <li><strong>Sezonowosc policzona z danych, nie z zalozen</strong> &mdash; tag pochodzi z 12-miesiecznych trendow (udzial pazdziernika&ndash;marca w rocznym wolumenie). Potwierdza hipoteze odpornosciowa (<code>colostrum dla dzieci</code> szczyt w grudniu), ale ujawnia tez, ze <strong>frazy proszkowe sa wiosenno-letnie</strong> &mdash; proszki sprzedaja sie w innym cyklu niz kapsulki</li>
+        <li><strong>Pipeline odtwarzalny</strong> &mdash; <code>fetch_senuto_positions.py</code> + <code>build_keyword_map.py</code>, read-only i idempotentne, z cache surowych odpowiedzi API. Ograniczenia danych opisane wprost (puste pole trudnosci = brak danych, nie zero; wolumeny to zaokraglone kubelki Google)</li>
+        <li><strong>Status <code>needs-verify</code></strong> &mdash; zadanie ma brame ludzka; wynik nie zostal automatycznie wdrozony na sklep</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 8. GEO ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">GEO &mdash; system pomiaru cytowan GENACTIV w wyszukiwarkach AI</div>
+        <span class="section-tag tag-new">Nowy system</span>
+      </div>
+      <ul class="items">
+        <li><strong>Metodyka i automat pomiarowy</strong> (<code>geo/llm-monitoring/</code>) &mdash; miesieczny, powtarzalny pomiar tego, czy marka jest wymieniana i linkowana w odpowiedziach AI. Bez tego cel H2 „widocznosc w LLM" pozostawal niemierzalny</li>
+        <li><strong>Set 20 zapytan kontrolnych, zamrozony w wersji 1.0</strong> (17.08) &mdash; piec klastrow tematycznych (wzdecia, regularnosc, wybor blonnika, ferrytyna, wybor colostrum). Zasada nadrzedna zapisana w metodyce: <strong>brzmienia zapytan nie zmieniamy nigdy</strong>, nowe dopisujemy z data, wycofane oznaczamy zamiast usuwac &mdash; inaczej pomiary miesiac do miesiaca przestaja byc porownywalne</li>
+        <li><strong>Priorytet zapytan wyliczony z realnego popytu</strong> (<code>senuto_priority.py</code>) &mdash; zapytanie do LLM nie ma wlasnego wolumenu, wiec kazdemu przypisano frazy-proxy w Google i zsumowano popyt z Senuto. Mapowanie jest jawne w kazdym rekordzie, zeby dalo sie je zakwestionowac przy przegladzie kwartalnym. Czolowka: zaparcia 66&nbsp;200/mc, ferrytyna 64&nbsp;560/mc, wzdecia 29&nbsp;100/mc</li>
+        <li><strong>Skrypt pomiarowy</strong> (<code>run.py</code>) &mdash; odpytuje silniki z API, wykrywa wzmianki marki (lacznie z literowkami typu „genaktiv", „gen activ"), sprawdza czy w zrodlach jest link do naszej domeny, kategoryzuje konkurentow i generuje CSV + raport Markdown z <strong>sekcja „Luki"</strong>: zapytania bez GENACTIV wraz z tym, kto pojawil sie zamiast nas. To jest lista robocza dla contentu</li>
+        <li><strong>Rozdzielenie wzmianki od linku</strong> &mdash; celowe: wzmianka bez linku liczy sie jako „wymieniony", ale nie „zalinkowany", bo ruch daje dopiero link. Surowe odpowiedzi zapisywane do <code>raw/</code>, bez nich nie da sie pozniej odroznic zmiany widocznosci od zmiany zachowania modelu</li>
+        <li><strong>Checklista pomiaru recznego</strong> dla ChatGPT i Google AI Overviews (brak API zwracajacego cytowania) &mdash; ta sama tabela co automat, z protokolem: incognito, lokalizacja PL, zapytanie wklejane doslownie, brak bloku AIO tez jest wynikiem, caly pomiar robi jedna osoba tego samego dnia</li>
+        <li><strong>Brama kosztowa</strong> (<code>KOSZTY_API.md</code>) &mdash; zgodnie z zadaniem nie kupiono niczego samodzielnie. Perplexity: ok. <strong>0,45 PLN/mies</strong> (5,40 PLN rocznie). Gemini: pierwotne zalozenie „free tier wystarczy" <strong>nie potwierdzilo sie po tescie na zywym kluczu</strong> &mdash; grounding zwraca HTTP 429 na darmowym tierze, darmowa pula wyszukiwan dotyczy tieru platnego. Analiza zostala skorygowana po weryfikacji, nie pozostawiona z bledna teza</li>
+        <li><strong>Ograniczenia opisane przed wynikami, nie po</strong> &mdash; niedeterminizm odpowiedzi LLM (pojedynczy pomiar to probka, trend liczy sie w miesiacach), Gemini grounding &ne; AI Overviews (inny system rankingowy, nie raportowac zamiennie), brak danych o pozycji i CTR do czasu podlaczenia Google Search Console</li>
+      </ul>
+    </div>
+
+    <!-- ═══ 9. INFRASTRUKTURA I TRESCI ═══ -->
+    <div class="section pb">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <div class="section-title">Infrastruktura, baza wiedzy i dokumentacja</div>
+        <span class="section-tag tag-infra">Infrastruktura</span>
+      </div>
+      <ul class="items">
+        <li><strong>Konektor Senuto uruchomiony</strong> (17.08) &mdash; klucz podstawiony lokalnie i na Railway, z redeployem. Ustalono przy okazji, ze <strong>w terminalu produkcyjnym konektor byl nieczynny od 08.05</strong> (martwy klucz), o czym nikt nie wiedzial &mdash; bo wygasly token Senuto zwraca puste <code>404</code>, a nie blad autoryzacji. Terminal odpowiadal „brak danych" zamiast zglosic problem</li>
+        <li><strong>Dwie pulapki Senuto zidentyfikowane i zapisane w konfiguracji</strong> &mdash; (1) <code>country_id</code> rozni sie miedzy modulami: widocznosc i pozycje wymagaja „200", keyword explorer „1", gdzie „200" zwraca blad; (2) keyword explorer <strong>nigdy nie zwraca samej frazy-seeda</strong> (dla „ferrytyna" dostajemy „ferrytyna normy", ale nie „ferrytyna", mimo 74&nbsp;000/mc). Obie zaszyte w prompcie systemowym terminala, zeby nie raportowal tego jako „brak danych"</li>
+        <li><strong>Status konektorow dla klienta zaktualizowany</strong> (<code>WYMAGANIA_SENUTO_BING.md</code>) &mdash; z jawnym ostrzezeniem, ze <strong>rotacja tokena Senuto jest reczna i token wygasa 17.09</strong>, wraz z dwiema sciezkami do wyboru: recznie ~15 min miesiecznie albo jednorazowe ~4h na auto-odnawianie (wymaga danych logowania). Bing Ads &mdash; lista wymagan gotowa, czeka na dostepy</li>
+        <li><strong>Baza wiedzy compliance dla niszy YMYL</strong> (<code>health-claims-pl.md</code>) &mdash; reguly oparte na rozporzadzeniach (WE) 1924/2006 i (UE) 432/2012, z twardym ustaleniem: <strong>colostrum nie ma ani jednego dopuszczonego oswiadczenia zdrowotnego w UE</strong>. Tabela sformulowan zakazanych, wzorce dopuszczalne, zasada „przy watpliwosci wpisujemy DO WERYFIKACJI PRAWNEJ i zostawiamy czlowiekowi"</li>
+        <li><strong>Szablon artykulu w standardzie GEO</strong> (<code>article-template-geo.md</code>) &mdash; struktura odtworzona z opublikowanego i przepuszczonego przez QA artykulu klienta, nie wymyslona od zera. Reguly pod cytowalnosc w AI: odpowiedz w pierwszym zdaniu, H2 jako pytania, jeden akapit = jedna mysl, podmiot nazwany wprost, sekcja FAQ. Odblokowuje zadania contentowe C4&ndash;C7</li>
+        <li><strong>Reorganizacja dokumentacji projektu</strong> &mdash; glowny <code>CLAUDE.md</code> skompresowany (183 linie zmian) i uzupelniony o ustalenia sierpnia; nowy <code>seo/CLAUDE.md</code> z regulami dla archiwum SEO (ktore skrypty sa destrukcyjne, pulapka <code>SEOInput</code>). Cel: kolejna osoba wchodzaca w projekt nie powtarza bledow, ktore juz raz kosztowaly czas</li>
+        <li><strong>Zapis pulapek, ktore realnie wywrocily analize</strong> &mdash; udokumentowano, ze Shopify Admin API bez <code>read_all_orders</code> cicho ucina zamowienia do 60 dni (przyczyna 6-krotnego zanizenia afiliacji) oraz ze tag <code>UpPromote_order</code> to jedyne twarde rozroznienie afiliacji. Zapisane w dokumentacji z jawnym poleceniem weryfikowania rzeczywistego zakresu dat przed nazwaniem zbioru „rocznym"</li>
+      </ul>
+    </div>
+
+    <!-- ═══ DELIVERABLES COUNT ═══ -->
+    <div class="summary-box pb-box" style="border-left-color: var(--navy);">
+      <h3>Podsumowanie deliverables — Sierpien 2026</h3>
+      <table class="del-table" style="margin-top:0;">
+        <thead>
+          <tr>
+            <th style="width:45%">Kategoria</th>
+            <th style="width:35%">Deliverable</th>
+            <th style="width:20%; text-align:center;">Ilosc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Wdrozenie LIVE</td><td>Komunikat + pasek postepu darmowej dostawy (motyw GEN-6)</td><td class="count">1</td></tr>
+          <tr><td>Wdrozenie LIVE</td><td>Pliki motywu zmodyfikowane (snippet + 2 sekcje)</td><td class="count">3</td></tr>
+          <tr><td>Analizy decyzyjne</td><td>Prog dostawy (ekonomika + wniosek o zgode z PRZED/PO)</td><td class="count">2</td></tr>
+          <tr><td>Analizy decyzyjne</td><td>Afiliacja, ocena okresu, SMS, subskrypcje</td><td class="count">4</td></tr>
+          <tr><td>Korekty rekomendacji</td><td>Wczesniejsze wnioski uniewaznione lub poprawione na danych</td><td class="count">4</td></tr>
+          <tr><td>SEO</td><td>Mapa fraz 20 PDP + gap analysis (882 luki)</td><td class="count">2</td></tr>
+          <tr><td>GEO</td><td>Metodyka, set 20 zapytan v1.0, automat, checklista, brama kosztowa</td><td class="count">5</td></tr>
+          <tr><td>Baza wiedzy</td><td>Compliance YMYL + szablon artykulu GEO</td><td class="count">2</td></tr>
+          <tr><td>Skrypty</td><td>Odtwarzalne skrypty analityczne i wdrozeniowe</td><td class="count">7</td></tr>
+          <tr><td>Zabezpieczenia</td><td>Backup motywu z manifestem + tryb rollback</td><td class="count">1</td></tr>
+          <tr><td>Infrastruktura</td><td>Konektor Senuto (lokalnie + produkcja) i naprawa promptu</td><td class="count">1</td></tr>
+          <tr><td>Dokumentacja</td><td>CLAUDE.md, seo/CLAUDE.md, status konektorow, zakres uslug VII</td><td class="count">4</td></tr>
+          <tr><td>Dane zrodlowe</td><td>Zamowienia przeanalizowane (prog dostawy, afiliacja, subskrypcje)</td><td class="count">8 400+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ ZAKRES NIEWYKONANY ═══ -->
+    <div class="section pb" style="margin-top:0;">
+      <div class="section-header">
+        <div class="section-num">i</div>
+        <div class="section-title">Zakres przeniesiony na kolejny okres</div>
+        <span class="section-tag tag-infra">Status</span>
+      </div>
+      <ul class="items">
+        <li><strong>Cross-sell w koszyku</strong> &mdash; modul rekomendacji dopasowanych do brakujacej kwoty jest <strong>napisany i gotowy</strong> (<code>genactiv-cart-boost.liquid</code>, 173 linie, pokazuje wylacznie produkty realnie domykajace luke), ale nie zostal wdrozony na produkcje. Czeka na osobna zgode &mdash; to sciezka o najwyzszym zwrocie z analizy progu dostawy</li>
+        <li><strong>Pierwszy pomiar GEO</strong> &mdash; system jest gotowy, set zamrozony, checklista wygenerowana, ale pomiar nie zostal uruchomiony: wymaga <strong>decyzji o zalozeniu kont API</strong> (Perplexity ok. 0,45 PLN/mies, Gemini wymaga podpiecia billingu). Brama zgodnie z definicja zadania &mdash; nie kupujemy nic samodzielnie</li>
+        <li><strong>Rozstrzygniecie marzy produktowej</strong> &mdash; wynik analizy progu dostawy zalezy od jednej liczby, co do ktorej istnieje rozbieznosc miedzy podanym zalozeniem (25%) a briefem (76%). Do potwierdzenia po stronie klienta</li>
+        <li><strong>Uprawnienie <code>read_all_orders</code></strong> &mdash; ok. 15 minut w Shopify Admin, odblokowuje analizy roczne zamiast 60-dniowych. Do czasu dodania kazda analiza historyczna jest z definicji obcieta</li>
+        <li><strong>Inwentaryzacja 48 kodow afiliacyjnych</strong> spoza UpPromote &mdash; wymaga wiedzy po stronie klienta (kto stoi za kodami i na jakich warunkach). Bez tego wybor narzedzia jest zgadywaniem</li>
+        <li><strong>Subskrypcje &mdash; brama GO / NO-GO</strong>: weryfikacja vaultingu Stripe (30 min w Shopify Admin, nie da sie przez API), wlasciciel tematu KSeF, zlecenie prawnikowi regulaminu. Zalegla Faza 0 w Klaviyo (13h) moze ruszyc niezaleznie od tych decyzji</li>
+        <li><strong>Rotacja tokena Senuto przed 17.09</strong> &mdash; nowy token od klienta albo dane logowania do zbudowania auto-odnawiania</li>
+        <li><strong>Token Meta Ads</strong> &mdash; wygasl 29.03; do czasu odnowienia kazda ocena kanalow platnych jest niepelna (brak wydatku i ROAS na Meta)</li>
+        <li><strong>Z lipca, nadal otwarte</strong> &mdash; C2 (<code>dateModified</code> w schema), C3 (robots.txt pod crawlery AI, wymaga dostepu admin), C4&ndash;C7 (4 artykuly &mdash; szablon i bramka compliance sa juz gotowe, brakuje copywritera i review merytorycznego), audyt SEO kolekcji</li>
+      </ul>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <div>&copy; 2026 Oleksiak Consult. Dokument poufny.</div>
+    <div>GenActiv Sp. z o.o. | Sierpien 2026</div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

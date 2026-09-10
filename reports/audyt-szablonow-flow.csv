@@ -1,0 +1,59 @@
+flow,status,trigger,wiadomosc,template_id,template_name,problemy,uzyte_zmienne_event
+Cross-sell_19_05_2026,live,Ordered Product,(bez nazwy),T2ux6d,2026-05-19 08:21 1 dzień wiosny,8/12 obrazkow bez alt; angielska stopka,
+Cross-sell_19_05_2026,live,Ordered Product,(bez nazwy),XEVCwq,2026-05-19 08:28 Fiberbiom 3 znaki,5/9 obrazkow bez alt; angielska stopka,
+Cross-sell_19_05_2026,live,Ordered Product,(bez nazwy),V7xrLG,"2026-05-19 08:32 Daj swojej skórze prezent, który poczuje od razu – teraz -20%",6/10 obrazkow bez alt; angielska stopka,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),WuFLGL,Onboarding NUR | Krok 1 | Welcome (Bold) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),WMbMVP,Onboarding NUR | Krok 5 | Last Call (Editorial) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),XqcQys,Onboarding NUR | Krok 5 | Last Call (Bold) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),TPm5xu,Onboarding NUR | Krok 4 | Reminder (Editorial) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),Usn8a7,Onboarding NUR | Krok 4 | Reminder (Bold) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),RDMUsy,Onboarding NUR | Krok 1 | Welcome (Editorial) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),Va2r88,Onboarding NUR | Krok 2 | Education (Editorial) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),ScbGHM,Onboarding NUR | Krok 2 | Education (Bold) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),WjrfZY,Onboarding NUR | Krok 3 | Social Proof (Bold) v3,,
+Newsletter Nurture Onboarding v3,draft,Added to List,(bez nazwy),VGqdpm,Onboarding NUR | Krok 3 | Social Proof (Editorial) v3,,
+Review request,live,Ready to review,(bez nazwy),VpRPLe,Review request template,1/12 obrazkow bez alt,"product.title, review_link, structured_product.image_url, structured_product.title, structured_product.variant_name"
+Review request,live,Ready to review,(bez nazwy),R7mKMf,Review request template,1/12 obrazkow bez alt,"product.title, review_link, structured_product.image_url, structured_product.title, structured_product.variant_name"
+Shopify newsletter - welcome,live,Added to List,(bez nazwy),Uv8LFX,[automation] [Trimmed] Newsletter #1 (Images & Text),1/5 obrazkow bez alt; brak {% unsubscribe %},
+Dzień Mamy,draft,Added to List,(bez nazwy),WwnJ2B,2026-05-25 06:48 ZAPIS DZIEŃ MAMY 2026,brak {% unsubscribe %},
+Abandoned Cart Reminder_COLOSTRUM,draft,Added to Cart,(bez nazwy),Uxdz9q,2025-11-19 08:07 ac-mail2-no-free-shipping - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_COLOSTRUM,draft,Added to Cart,(bez nazwy),VGCq3g,2025-11-19 08:18 ac-mail4-no-free-shipping-shiping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_COLOSTRUM,draft,Added to Cart,(bez nazwy),S7LD2i,2025-11-19 08:13 ac-mail3-free-shipping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_COLOSTRUM,draft,Added to Cart,(bez nazwy),RznQK5,2025-11-19 07:03 porzucony-koszyk-mail1-18.11 - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),UbDR48,Onboarding | Krok 1 | Welcome (Bold) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),RLcUV2,Onboarding | Krok 1 | Welcome (Editorial) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),SVBKNS,Onboarding | Krok 2 | Ritual (Bold) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),SiAHcf,Onboarding | Krok 2 | Ritual (Editorial) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),WrQgus,Onboarding | Krok 3 | Effects (Editorial) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),VgrrAA,Onboarding | Krok 3 | Effects (Bold) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),TpnhJH,Onboarding | Krok 4 | Cross-sell (Editorial) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),VNPdRP,Onboarding | Krok 4 | Cross-sell (Bold) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),VJbXwr,Onboarding | Krok 5 | Loyalty (Editorial) v3,,
+Post-Purchase Onboarding v3,draft,Placed Order,(bez nazwy),Wmd294,Onboarding | Krok 5 | Loyalty (Bold) v3,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),TEZtMg,2026-06-21 13:09 Onboarding | Krok 1 | Welcome (Bold) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),SG3DEU,2026-06-21 13:11 Onboarding | Krok 1 | Welcome (Editorial) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),R5hXMt,2026-06-22 07:00 Onboarding | Krok 2 | Ritual (Bold) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),XwSGNu,2026-06-22 07:03 Onboarding | Krok 2 | Ritual (Editorial) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),S8xibM,2026-06-22 07:06 Onboarding | Krok 3 | Effects (Editorial) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),UFsYSB,2026-06-22 07:05 Onboarding | Krok 3 | Effects (Bold) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),W6SkN7,2026-06-22 07:09 Onboarding | Krok 4 | Cross-sell (Editorial) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),UTFKMb,2026-06-22 07:07 Onboarding | Krok 4 | Cross-sell (Bold) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),UfHH4L,2026-06-22 07:15 Onboarding | Krok 5 | Loyalty (Editorial) v2,,
+ROC_Onboarding_draft,draft,Added to List,(bez nazwy),SZyRQ4,2026-06-22 07:11 Onboarding | Krok 5 | Loyalty (Bold) v2,,
+Newsletter Nurture Onboarding v3_Jedna ścieżka,live,Added to List,(bez nazwy),SbwuDT,2026-07-20 07:36 Odbierz kod powitalny -15% ❤️,angielska stopka,
+Newsletter Nurture Onboarding v3_Jedna ścieżka,live,Added to List,(bez nazwy),XdHmui,2026-07-20 08:30 Twój kod −15% wciąż czeka (48h) ⏰,1/13 obrazkow bez alt; angielska stopka,
+Newsletter Nurture Onboarding v3_Jedna ścieżka,live,Added to List,(bez nazwy),XdJmie,2026-07-20 09:03 Ostatnie wezwanie do rabatu ✈️ -15% na wszystko w Genactiv,2/10 obrazkow bez alt; angielska stopka,
+Newsletter Nurture Onboarding v3_Jedna ścieżka,live,Added to List,(bez nazwy),StxZQ4,2026-07-20 07:39 Dlaczego Colostrum? 🐄,2/18 obrazkow bez alt; angielska stopka,
+Newsletter Nurture Onboarding v3_Jedna ścieżka,live,Added to List,(bez nazwy),SvhFdi,2026-07-28 09:02 Przywitaj się z Colostrum nr 1 💕 -15% specjalnie dla Ciebie🔥,2/10 obrazkow bez alt; angielska stopka,
+Browse_test_10_12,draft,Viewed Product,(bez nazwy),RMy7DA,2025-12-10 08:21 Browse Abandonment - GenActiv Style v2,,"ImageURL, Name, Price, URL"
+Browse_test_10_12,draft,Viewed Product,(bez nazwy),UcVZxm,2026-01-08 08:58 abandonbrowse_mostviewed,brak {% unsubscribe %},
+Browse_test_10_12,draft,Viewed Product,(bez nazwy),WZgXdt,2026-01-08 08:59 abandonbrowse_mostpurchased,brak {% unsubscribe %},
+Back In Stock Flow - Standard,live,Subscribed to Back in Stock,(bez nazwy),Sr7CMm,,2/2 obrazkow bez alt; brak {% unsubscribe %},VariantId
+Abandoned Cart Reminder_FIBERBIOM,draft,Added to Cart,(bez nazwy),TnUJRq,2025-11-19 08:07 ac-mail2-no-free-shipping - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_FIBERBIOM,draft,Added to Cart,(bez nazwy),VHJqD8,2025-11-19 08:18 ac-mail4-no-free-shipping-shiping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_FIBERBIOM,draft,Added to Cart,(bez nazwy),QXtNJi,2025-11-19 08:13 ac-mail3-free-shipping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder_FIBERBIOM,draft,Added to Cart,(bez nazwy),VNmEYw,2025-11-19 07:03 porzucony-koszyk-mail1-18.11 - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder,live,Added to Cart,(bez nazwy),UQquNm,2025-11-19 08:18 ac-mail4-no-free-shipping-shiping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder,live,Added to Cart,(bez nazwy),SXcBja,2025-11-19 07:03 porzucony-koszyk-mail1-18.11 - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder,live,Added to Cart,(bez nazwy),Rf5XM2,2025-11-19 08:13 ac-mail3-free-shipping-coupon - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
+Abandoned Cart Reminder,live,Added to Cart,(bez nazwy),WeKAHD,2025-11-19 08:07 ac-mail2-no-free-shipping - FINAL,"2/7 obrazkow bez alt; CTA linkuje przez event.extra.checkout_url -> bedzie pusty; uzywa event.extra.checkout_url, a Added to Cart tego nie niesie","Categories.2, CompareAtPrice, ImageURL, Price, Product Name, Quantity, URL, extra.checkout_url"
