@@ -147,11 +147,14 @@ def main() -> None:
             continue                                        # nie lepsze niz obecne
         if cur_key == cand_key and cur_src == cand_src:
             continue                                        # bez zmiany
-        changes.append((pid, cand_key, cand_src, cur_key))
+        changes.append((pid, cand_key, cand_src, cur_key, cur_src))
 
     print(f"Rzeczywistych zmian: {len(changes)}")
-    for pid, k, s, old in changes[:15]:
-        print(f"    {pid}  {old or '(brak)'} -> {k} [{s}]")
+    for pid, k, s, old_k, old_s in changes[:15]:
+        # Pokazujemy tez zrodlo, inaczej awans `junior [produkt]` -> `junior [lp]`
+        # wyglada w logu jak bezsensowny zapis tej samej wartosci.
+        was = f"{old_k} [{old_s}]" if old_k else "(brak)"
+        print(f"    {pid}  {was} -> {k} [{s}]")
     if len(changes) > 15:
         print(f"    … i {len(changes) - 15} wiecej")
 
@@ -162,7 +165,7 @@ def main() -> None:
     today = time.strftime("%Y-%m-%d")
     batch = [{"type": "profile", "id": pid, "attributes": {"properties": {
         PROPERTY: k, PROPERTY_SOURCE: s, PROPERTY_DATE: today}}}
-        for pid, k, s, _ in changes]
+        for pid, k, s, _old_k, _old_s in changes]
     sent = 0
     for i in range(0, len(batch), 3000):
         chunk = batch[i:i + 3000]
