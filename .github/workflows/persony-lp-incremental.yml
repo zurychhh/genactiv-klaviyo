@@ -1,0 +1,56 @@
+name: Persony LP — przyrostowe domykanie
+
+# Przypisuje nowe profile do person LP. Przebieg trwa kilka sekund, bo pobiera
+# z segmentow-sygnalow wylacznie profile, ktore dolaczyly w ostatnim oknie
+# (filtr `joined_group_at`).
+#
+# Okno 45 min przy harmonogramie co 15 min = trzykrotny zapas. Pominiecie
+# przebiegu niczego nie gubi, a nadmiarowe trafienia sa nieszkodliwe —
+# skrypt zapisuje wylacznie rzeczywiste zmiany przypisania.
+#
+# WYMAGA sekretu repozytorium: KLAVIYO_API_KEY (klucz prywatny pk_...,
+# scope: profiles:write, segments:read).
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      lookback_minutes:
+        description: "Okno wstecz w minutach"
+        required: false
+        default: "45"
+      dry_run:
+        description: "true = tylko podglad, bez zapisu"
+        required: false
+        default: "false"
+
+concurrency:
+  group: persony-lp-incremental
+  cancel-in-progress: false
+
+jobs:
+  przypisz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Przyrostowe przypisanie person
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+        run: |
+          if [ -z "$KLAVIYO_API_KEY" ]; then
+            echo "::error::Brak sekretu KLAVIYO_API_KEY w repozytorium."
+            exit 1
+          fi
+          LOOKBACK="${{ github.event.inputs.lookback_minutes || '45' }}"
+          FLAGS="--lookback-minutes $LOOKBACK"
+          if [ "${{ github.event.inputs.dry_run }}" != "true" ]; then
+            FLAGS="$FLAGS --live"
+          fi
+          python3 klaviyo-mcp/persona_step4_incremental.py $FLAGS
